@@ -1,9 +1,10 @@
-// M-Pesewa Service Worker
-// Version: 1.0.0
+// M-pesewa Service Worker
+// Version: 2.0.0
 
-const CACHE_NAME = 'mpesewa-cache-v1';
+const CACHE_NAME = 'mpesewa-v2.0.0';
 const OFFLINE_URL = '/offline.html';
 
+// Assets to cache immediately on install
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
@@ -61,7 +62,7 @@ const PRECACHE_ASSETS = [
   '/pages/countries/rwanda.html',
   '/pages/countries/burundi.html',
   '/pages/countries/somalia.html',
-  '/pages/countries/south-sudana.html',
+  '/pages/countries/south-sudan.html',
   '/pages/countries/ethiopia.html',
   '/pages/countries/drc.html',
   '/pages/countries/nigeria.html',
@@ -116,6 +117,29 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Handle API requests differently
+  if (event.request.url.includes('/api/')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Cache successful API responses
+          if (response.ok) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => {
+                cache.put(event.request, responseClone);
+              });
+          }
+          return response;
+        })
+        .catch(() => {
+          // If network fails, try cache
+          return caches.match(event.request);
+        })
+    );
+    return;
+  }
+
   // For HTML pages, try network first, then cache
   if (event.request.headers.get('Accept').includes('text/html')) {
     event.respondWith(
@@ -159,6 +183,7 @@ self.addEventListener('fetch', event => {
             });
           return cachedResponse;
         }
+
         // Not in cache, fetch from network
         return fetch(event.request)
           .then(response => {
@@ -174,20 +199,30 @@ self.addEventListener('fetch', event => {
             // If request fails and it's an image, return a placeholder
             if (event.request.destination === 'image') {
               return new Response(
-                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#F3E5F5"/><text x="100" y="100" text-anchor="middle" fill="#512DA8" font-family="sans-serif" font-size="16">M-Pesewa</text></svg>',
+                '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#EAF1FF"/><text x="100" y="100" text-anchor="middle" fill="#0A65FC" font-family="sans-serif" font-size="16">M-pesewa</text></svg>',
                 { headers: { 'Content-Type': 'image/svg+xml' } }
               );
             }
-            return new Response('Network error', { status: 408 });
           });
       })
   );
 });
 
+// Background sync for form submissions
+self.addEventListener('sync', event => {
+  if (event.tag === 'submit-loan-request') {
+    event.waitUntil(
+      // Get pending submissions from IndexedDB
+      // and attempt to sync with server
+      syncPendingSubmissions()
+    );
+  }
+});
+
 // Push notification event
 self.addEventListener('push', event => {
   const options = {
-    body: event.data ? event.data.text() : 'New notification from M-Pesewa',
+    body: event.data ? event.data.text() : 'New notification from M-pesewa',
     icon: '/assets/images/icons/icon-192x192.png',
     badge: '/assets/images/icons/icon-72x72.png',
     vibrate: [100, 50, 100],
@@ -208,7 +243,7 @@ self.addEventListener('push', event => {
   };
 
   event.waitUntil(
-    self.registration.showNotification('M-Pesewa', options)
+    self.registration.showNotification('M-pesewa', options)
   );
 });
 
@@ -238,12 +273,68 @@ self.addEventListener('notificationclick', event => {
   );
 });
 
+// Periodic sync for updates
+self.addEventListener('periodicsync', event => {
+  if (event.tag === 'update-content') {
+    event.waitUntil(
+      updateCachedContent()
+    );
+  }
+});
+
+// Helper function to sync pending submissions
+async function syncPendingSubmissions() {
+  // This would interact with IndexedDB
+  // For now, we'll just log
+  console.log('[Service Worker] Syncing pending submissions...');
+}
+
+// Helper function to update cached content
+async function updateCachedContent() {
+  console.log('[Service Worker] Updating cached content...');
+  const cache = await caches.open(CACHE_NAME);
+  const requests = await cache.keys();
+  
+  for (const request of requests) {
+    // Don't update API requests in background sync
+    if (request.url.includes('/api/')) {
+      continue;
+    }
+    
+    try {
+      const response = await fetch(request);
+      if (response.ok) {
+        await cache.put(request, response);
+      }
+    } catch (error) {
+      console.log(`[Service Worker] Failed to update: ${request.url}`, error);
+    }
+  }
+}
+
 // Handle message events from the main thread
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+  
   if (event.data && event.data.type === 'CLEAR_CACHE') {
     caches.delete(CACHE_NAME);
   }
+  
+  if (event.data && event.data.type === 'GET_CACHE_STATUS') {
+    event.ports[0].postMessage({
+      cacheName: CACHE_NAME,
+      cacheSize: 'Unknown' // Would need to calculate
+    });
+  }
+});
+
+// Error handling
+self.addEventListener('error', event => {
+  console.error('[Service Worker] Error:', event.error);
+});
+
+self.addEventListener('unhandledrejection', event => {
+  console.error('[Service Worker] Unhandled rejection:', event.reason);
 });
