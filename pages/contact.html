@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - M-Pesewa</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/forms.css">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#512DA8">
+    <meta name="description" content="Contact M-Pesewa support. Email and form only.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa Logo">
+                    <span>M-Pesewa</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/countries/index.html">Countries</a></li>
+                    <li><a href="/pages/groups.html">Groups</a></li>
+                    <li><a href="/pages/lending.html">Lend</a></li>
+                    <li><a href="/pages/borrowing.html">Borrow</a></li>
+                    <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                    <li><a href="/pages/ledger.html">Ledger</a></li>
+                    <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                    <li><a href="/pages/debt-collectors.html">Collectors</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/qa.html">Q&A</a></li>
+                    <li><a href="/pages/contact.html" class="active">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-outline">Lender Dashboard</a>
+                    <a href="/pages/dashboard/borrower-dashboard.html" class="btn btn-primary">Borrower Dashboard</a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="section section-hero">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="hero-title">Contact Us</h1>
+                    <p class="hero-subtitle">Have questions, comments, or grievances? Fill out the form below and we'll get back to you.</p>
+                    <div class="alert alert-info">
+                        <div class="alert-icon">📧</div>
+                        <div class="alert-content">
+                            <p><strong>Email Only:</strong> This contact page accepts email and form submissions only. We do not list phone numbers publicly for security reasons.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div>
+                        <h2 class="section-title">Send a Message</h2>
+                        <form id="contact-form" class="form-layout">
+                            <div class="form-group">
+                                <label for="name" class="form-label form-label-required">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label form-label-required">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="you@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="form-label">Country</label>
+                                <select id="country" class="form-control">
+                                    <option value="">Select your country</option>
+                                    <option value="Kenya">Kenya</option>
+                                    <option value="Uganda">Uganda</option>
+                                    <option value="Tanzania">Tanzania</option>
+                                    <option value="Rwanda">Rwanda</option>
+                                    <option value="Burundi">Burundi</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="South Sudan">South Sudan</option>
+                                    <option value="Ethiopia">Ethiopia</option>
+                                    <option value="DRC">DRC</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="Ghana">Ghana</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="form-label form-label-required">Subject</label>
+                                <select id="subject" class="form-control" required>
+                                    <option value="">Choose a topic</option>
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Borrower Support">Borrower Support</option>
+                                    <option value="Lender Support">Lender Support</option>
+                                    <option value="Group Issues">Group Issues</option>
+                                    <option valueSubscription Issues">Subscription Issues</option>
+                                    <option value="Blacklist Appeal">Blacklist Appeal</option>
+                                    <option value="Debt Collector Report">Debt Collector Report</option>
+                                    <option value="Platform Feedback">Platform Feedback</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label form-label-required">Message</label>
+                                <textarea id="message" class="form-control" rows="6" placeholder="Describe your question, comment, or grievance in detail..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkbox-custom"></span>
+                                    <span>I agree to the <a href="#" class="text-primary">Privacy Policy</a> and consent to being contacted via email.</span>
+                                </label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="reset" class="btn btn-outline">Clear Form</button>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div>
+                        <h2 class="section-title">Contact Information</h2>
+                        <div class="space-y-6">
+                            <div class="card">
+                                <h3 class="card-title">Email Support</h3>
+                                <p>For general inquiries, borrower/lender support, and platform feedback:</p>
+                                <p class="mt-2"><strong>📧 support@mpesewa.com</strong></p>
+                                <p class="text-sm text-gray-600 mt-2">We aim to respond within 24 hours on business days.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card-title">Country-Specific Contacts</h3>
+                                <p>Each country has its own contact page with local email and form. Visit the country dashboard for details.</p>
+                                <a href="/pages/countries/index.html" class="btn btn-outline btn-sm mt-4">View Country Pages</a>
+                            </div>
+                            <div class="card">
+                                <h3 class="card-title">Social Media</h3>
+                                <p>Follow us for updates, success stories, and community announcements.</p>
+                                <div class="flex gap-4 mt-4">
+                                    <a href="#" aria-label="Facebook" class="text-primary hover:underline">Facebook</a>
+                                    <a href="#" aria-label="Twitter" class="text-primary hover:underline">Twitter</a>
+                                    <a href="#" aria-label="Instagram" class="text-primary hover:underline">Instagram</a>
+                                    <a href="#" aria-label="LinkedIn" class="text-primary hover:underline">LinkedIn</a>
+                                    <a href="#" aria-label="YouTube" class="text-primary hover:underline">YouTube</a>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <h3 class="card-title">Platform Administration</h3>
+                                <p>For blacklist appeals, ledger overrides, and debt collector validation, contact the Platform Admin via the dedicated admin portal.</p>
+                                <p class="text-sm text-gray-600 mt-2">Admin access is restricted and requires separate credentials.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>M-Pesewa</h4>
+                    <p>Emergency micro‑lending in trusted circles across Africa.</p>
+                    <div class="country-flags">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇧🇮</span><span>🇸🇴</span>
+                        <span>🇸🇸</span><span>🇪🇹</span><span>🇨🇩</span><span>🇳🇬</span><span>🇿🇦</span><span>🇬🇭</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Countries</h4>
+                    <ul>
+                        <li><a href="/pages/countries/kenya.html">Kenya</a></li>
+                        <li><a href="/pages/countries/uganda.html">Uganda</a></li>
+                        <li><a href="/pages/countries/tanzania.html">Tanzania</a></li>
+                        <li><a href="/pages/countries/rwanda.html">Rwanda</a></li>
+                        <li><a href="/pages/countries/burundi.html">Burundi</a></li>
+                        <li><a href="/pages/countries/somalia.html">Somalia</a></li>
+                        <li><a href="/pages/countries/south-sudan.html">South Sudan</a></li>
+                        <li><a href="/pages/countries/ethiopia.html">Ethiopia</a></li>
+                        <li><a href="/pages/countries/DRC.html">DRC</a></li>
+                        <li><a href="/pages/countries/nigeria.html">Nigeria</a></li>
+                        <li><a href="/pages/countries/south-africa.html">South Africa</a></li>
+                        <li><a href="/pages/countries/ghana.html">Ghana</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="/pages/about.html">About Us</a></li>
+                        <li><a href="/pages/qa.html">Q&A</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                        <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                        <li><a href="/pages/debt-collectors.html">Debt Collectors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@mpesewa.com</li>
+                        <li>
+                            <a href="#" aria-label="Facebook">Facebook</a> |
+                            <a href="#" aria-label="Twitter">Twitter</a> |
+                            <a href="#" aria-label="Instagram">Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> M-Pesewa. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/contact.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Simple form submission handling (frontend only)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent. We will respond via email shortly.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

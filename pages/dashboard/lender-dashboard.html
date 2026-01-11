@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lender Dashboard - M-PESEWA</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/icons/icon-72x72.png">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">L</div>
+                    <div class="sidebar-user-info">
+                        <h4>Sarah Lender</h4>
+                        <p>Lender • Premium</p>
+                        <span class="sidebar-role subscription-status active">Active</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="lender-dashboard.html" class="sidebar-nav-item active">
+                    <span class="sidebar-nav-icon">📊</span>
+                    <span class="sidebar-nav-text">Dashboard</span>
+                </a>
+                <a href="../lending.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">👁️</span>
+                    <span class="sidebar-nav-text">View Borrowers</span>
+                    <span class="sidebar-nav-badge">12</span>
+                </a>
+                <a href="../ledger.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">📒</span>
+                    <span class="sidebar-nav-text">My Ledgers</span>
+                    <span class="sidebar-nav-badge">5</span>
+                </a>
+                <a href="../groups.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">👥</span>
+                    <span class="sidebar-nav-text">My Groups</span>
+                </a>
+                <a href="../subscriptions.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">💎</span>
+                    <span class="sidebar-nav-text">Subscription</span>
+                </a>
+                <a href="../blacklist.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">⚫</span>
+                    <span class="sidebar-nav-text">Blacklist</span>
+                </a>
+                <a href="../debt-collectors.html" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">🛡️</span>
+                    <span class="sidebar-nav-text">Debt Collectors</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="sidebar-stat">
+                        <span>Active Ledgers</span>
+                        <span class="sidebar-stat-value">5</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span>Total Lent</span>
+                        <span class="sidebar-stat-value">₵ 8,250</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span>ROI</span>
+                        <span class="sidebar-stat-value">12.5%</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="dashboard-content">
+            <header class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Lender Dashboard</h1>
+                    <p class="dashboard-subtitle">Manage your lending portfolio and earn returns</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary" onclick="location.href='../lending.html'">
+                        👁️ Browse Borrowers
+                    </button>
+                    <button class="btn btn-outline" onclick="location.href='../subscriptions.html'">
+                        💎 Upgrade Plan
+                    </button>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-primary">
+                        💰
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 8,250</div>
+                        <div class="stat-label">Total Lent</div>
+                        <div class="stat-trend trend-up">
+                            ↑ 15% this month
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-success">
+                        📈
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 1,032</div>
+                        <div class="stat-label">Earned Interest</div>
+                        <div class="stat-trend trend-up">
+                            ↑ ₵ 205 this week
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-warning">
+                        ⏳
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 2,100</div>
+                        <div class="stat-label">Pending Repayment</div>
+                        <div class="stat-trend trend-down">
+                            Due in 5 days
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-danger">
+                        🚫
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Defaults</div>
+                        <div class="stat-trend">
+                            All good
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Active Ledgers</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-sm btn-outline" onclick="viewAllLedgers()">
+                            View All
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="createNewLedger()">
+                            + New Ledger
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Borrower</th>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Interest</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">JD</div>
+                                        <div>
+                                            <div>John Doe</div>
+                                            <div class="text-sm text-muted">Family Group</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Transport</td>
+                                <td>₵ 500</td>
+                                <td>Dec 28, 2024</td>
+                                <td>₵ 50</td>
+                                <td><span class="badge badge-warning">Due soon</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="markRepaid(1)">
+                                            Mark Repaid
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLedger(1)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">MS</div>
+                                        <div>
+                                            <div>Mary Smith</div>
+                                            <div class="text-sm text-muted">Work Group</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Data</td>
+                                <td>₵ 300</td>
+                                <td>Jan 5, 2025</td>
+                                <td>₵ 30</td>
+                                <td><span class="badge badge-success">On track</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="markRepaid(2)">
+                                            Mark Repaid
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLedger(2)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Borrower Cart from Your Groups</h2>
+                    <p class="section-subtitle">Select borrowers to lend to based on their rating and exposure</p>
+                </div>
+                <div class="loan-applications">
+                    <div class="loan-application">
+                        <div class="application-header">
+                            <div class="application-user">
+                                <div class="application-avatar">TK</div>
+                                <div class="application-info">
+                                    <h4>Thomas Kariuki</h4>
+                                    <div class="application-rating">★★★★☆ 4.2</div>
+                                </div>
+                            </div>
+                            <span class="badge badge-success">Low exposure</span>
+                        </div>
+                        <div class="application-details">
+                            <div class="application-detail">
+                                <span class="application-detail-label">Category:</span>
+                                <span class="application-detail-value">Cooking Gas</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Amount:</span>
+                                <span class="application-detail-value">₵ 800</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Group:</span>
+                                <span class="application-detail-value">Family Group</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Other loans:</span>
+                                <span class="application-detail-value">1 active</span>
+                            </div>
+                        </div>
+                        <div class="application-actions">
+                            <button class="btn btn-sm btn-primary" onclick="lendToBorrower(1)">
+                                Lend Now
+                            </button>
+                            <button class="btn btn-sm btn-outline" onclick="viewBorrowerProfile(1)">
+                                Profile
+                            </button>
+                        </div>
+                    </div>
+                    <div class="loan-application">
+                        <div class="application-header">
+                            <div class="application-user">
+                                <div class="application-avatar">LN</div>
+                                <div class="application-info">
+                                    <h4>Lucy Njoroge</h4>
+                                    <div class="application-rating">★★★★★ 4.8</div>
+                                </div>
+                            </div>
+                            <span class="badge badge-warning">2 other loans</span>
+                        </div>
+                        <div class="application-details">
+                            <div class="application-detail">
+                                <span class="application-detail-label">Category:</span>
+                                <span class="application-detail-value">School Fees</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Amount:</span>
+                                <span class="application-detail-value">₵ 1,500</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Group:</span>
+                                <span class="application-detail-value">Church Group</span>
+                            </div>
+                            <div class="application-detail">
+                                <span class="application-detail-label">Other loans:</span>
+                                <span class="application-detail-value">2 active</span>
+                            </div>
+                        </div>
+                        <div class="application-actions">
+                            <button class="btn btn-sm btn-primary" onclick="lendToBorrower(2)">
+                                Lend Now
+                            </button>
+                            <button class="btn btn-sm btn-outline" onclick="viewBorrowerProfile(2)">
+                                Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Subscription Status</h2>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Premium Plan</div>
+                        <span class="subscription-status active">Active</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Your subscription allows you to lend up to <strong>₵ 5,000 per week</strong>.</p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 65%;"></div>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span>₵ 3,250 lent this week</span>
+                            <span>₵ 5,000 limit</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Renews on: <strong>Jan 28, 2025</strong></span>
+                        <button class="btn btn-sm btn-outline" onclick="location.href='../subscriptions.html'">
+                            Upgrade
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/roles.js"></script>
+    <script src="../../assets/js/lending.js"></script>
+    <script>
+        function viewAllLedgers() {
+            window.location.href = '../ledger.html';
+        }
+
+        function createNewLedger() {
+            alert('Creating new ledger...');
+        }
+
+        function markRepaid(ledgerId) {
+            alert('Marking ledger #' + ledgerId + ' as repaid');
+        }
+
+        function viewLedger(ledgerId) {
+            alert('Viewing ledger #' + ledgerId);
+        }
+
+        function lendToBorrower(borrowerId) {
+            alert('Initiating loan to borrower #' + borrowerId);
+        }
+
+        function viewBorrowerProfile(borrowerId) {
+            alert('Showing profile for borrower #' + borrowerId);
+        }
+    </script>
+</body>
+</html>

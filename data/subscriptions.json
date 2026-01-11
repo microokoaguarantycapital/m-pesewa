@@ -1,0 +1,112 @@
+{
+  "tiers": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "description": "For starting lenders",
+      "weeklyLimit": 1500,
+      "limits": {
+        "perLoan": 1500,
+        "perWeek": 1500,
+        "perMonth": 6000
+      },
+      "pricing": {
+        "monthly": 50,
+        "biAnnual": 250,
+        "annual": 500
+      },
+      "features": [
+        "Up to KSh 1,500 per loan",
+        "Basic lender dashboard",
+        "Email support",
+        "No CRB check required"
+      ],
+      "color": "primary",
+      "icon": "💰",
+      "crbRequired": false,
+      "borrowerSubscription": false
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "description": "For growing lenders",
+      "weeklyLimit": 5000,
+      "limits": {
+        "perLoan": 10000,
+        "perWeek": 5000,
+        "perMonth": 20000
+      },
+      "pricing": {
+        "monthly": 250,
+        "biAnnual": 1500,
+        "annual": 2500
+      },
+      "features": [
+        "Up to KSh 5,000 per week",
+        "Advanced analytics",
+        "Priority support",
+        "Group management tools",
+        "No CRB check required"
+      ],
+      "color": "success",
+      "icon": "💎",
+      "crbRequired": false,
+      "borrowerSubscription": true
+    },
+    {
+      "id": "super",
+      "name": "Super",
+      "description": "For professional lenders",
+      "weeklyLimit": 20000,
+      "limits": {
+        "perLoan": 20000,
+        "perWeek": 20000,
+        "perMonth": 80000
+      },
+      "pricing": {
+        "monthly": 1000,
+        "biAnnual": 5000,
+        "annual": 8500
+      },
+      "features": [
+        "Up to KSh 20,000 per week",
+        "CRB check included",
+        "Dedicated account manager",
+        "Advanced risk assessment",
+        "Custom reporting"
+      ],
+      "color": "warning",
+      "icon": "🚀",
+      "crbRequired": true,
+      "borrowerSubscription": true
+    },
+    {
+      "id": "lender-of-lenders",
+      "name": "Lender of Lenders",
+      "description": "For institutional lenders",
+      "weeklyLimit": 50000,
+      "limits": {
+        "perLoan": 50000,
+        "perWeek": 50000,
+        "perMonth": 200000
+      },
+      "pricing": {
+        "monthly": 3500,
+        "biAnnual": 6500,
+        "annual": 8500
+      },
+      "features": [
+        "Up to KSh 50,000 per week",
+        "Lend to other lenders",
+        "Custom interest rates",
+        "Monthly repayment terms",
+        "Enterprise features"
+      ],
+      "color": "danger",
+      "icon": "🏦",
+      "crbRequired": true,
+      "borrowerSubscription": true,
+      "isLenderOfLenders": true
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending - M-PESEWA</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/images/icons/icon-72x72.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA Logo" height="40">
+                    <span>M-PESEWA</span>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="./dashboard/lender-dashboard.html">Dashboard</a>
+                    <a href="./lending.html" class="active">Lending</a>
+                    <a href="./borrowing.html">Borrowing</a>
+                    <a href="./groups.html">Groups</a>
+                    <a href="./countries/index.html">Countries</a>
+                    <a href="./subscriptions.html">Subscriptions</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-outline" onclick="location.href='./dashboard/lender-dashboard.html'">
+                        Lender Dashboard
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-2">
+        <div class="page-header">
+            <h1 class="page-title">Lending Marketplace</h1>
+            <p class="page-subtitle">Browse borrower requests and lend to trusted individuals in your groups</p>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+                <div class="alert-title">Lending Rules</div>
+                <p>You can only lend to borrowers within your groups. Each borrower's rating, blacklist status, and exposure across groups are shown to help you decide.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Available Borrowers in Your Groups</h2>
+                <div class="section-actions">
+                    <select class="form-control form-control-sm" onchange="filterByGroup(this.value)">
+                        <option value="">All Groups</option>
+                        <option value="family">Family Group</option>
+                        <option value="work">Work Group</option>
+                        <option value="church">Church Group</option>
+                    </select>
+                    <select class="form-control form-control-sm" onchange="filterByCategory(this.value)">
+                        <option value="">All Categories</option>
+                        <option value="transport">Transport</option>
+                        <option value="data">Data/Airtime</option>
+                        <option value="food">Food</option>
+                        <option value="gas">Cooking Gas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="loan-applications">
+                <div class="loan-application">
+                    <div class="application-header">
+                        <div class="application-user">
+                            <div class="application-avatar">JD</div>
+                            <div class="application-info">
+                                <h4>John Doe</h4>
+                                <div class="application-rating">★★★★☆ 4.2</div>
+                            </div>
+                        </div>
+                        <div class="application-badges">
+                            <span class="badge badge-success">Low exposure</span>
+                            <span class="badge badge-primary">Family Group</span>
+                        </div>
+                    </div>
+                    <div class="application-details">
+                        <div class="application-detail">
+                            <span class="application-detail-label">Loan Category:</span>
+                            <span class="application-detail-value">Transport Fare</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Amount Requested:</span>
+                            <span class="application-detail-value">₵ 500</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Repayment Term:</span>
+                            <span class="application-detail-value">7 days (10% interest)</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Other Active Loans:</span>
+                            <span class="application-detail-value">1 (₵ 300 in Work Group)</span>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn btn-primary" onclick="lendToBorrower(1)">
+                            Lend Now
+                        </button>
+                        <button class="btn btn-outline" onclick="viewBorrowerProfile(1)">
+                            View Full Profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="loan-application">
+                    <div class="application-header">
+                        <div class="application-user">
+                            <div class="application-avatar">MS</div>
+                            <div class="application-info">
+                                <h4>Mary Smith</h4>
+                                <div class="application-rating">★★★★★ 4.8</div>
+                            </div>
+                        </div>
+                        <div class="application-badges">
+                            <span class="badge badge-warning">2 other loans</span>
+                            <span class="badge badge-primary">Work Group</span>
+                        </div>
+                    </div>
+                    <div class="application-details">
+                        <div class="application-detail">
+                            <span class="application-detail-label">Loan Category:</span>
+                            <span class="application-detail-value">Mobile Data</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Amount Requested:</span>
+                            <span class="application-detail-value">₵ 300</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Repayment Term:</span>
+                            <span class="application-detail-value">7 days (10% interest)</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Other Active Loans:</span>
+                            <span class="application-detail-value">2 (₵ 1,200 total)</span>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn btn-primary" onclick="lendToBorrower(2)">
+                            Lend Now
+                        </button>
+                        <button class="btn btn-outline" onclick="viewBorrowerProfile(2)">
+                            View Full Profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="loan-application">
+                    <div class="application-header">
+                        <div class="application-user">
+                            <div class="application-avatar">TK</div>
+                            <div class="application-info">
+                                <h4>Thomas Kariuki</h4>
+                                <div class="application-rating">★★★☆☆ 3.5</div>
+                            </div>
+                        </div>
+                        <div class="application-badges">
+                            <span class="badge badge-danger">High exposure</span>
+                            <span class="badge badge-primary">Church Group</span>
+                        </div>
+                    </div>
+                    <div class="application-details">
+                        <div class="application-detail">
+                            <span class="application-detail-label">Loan Category:</span>
+                            <span class="application-detail-value">Cooking Gas</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Amount Requested:</span>
+                            <span class="application-detail-value">₵ 800</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Repayment Term:</span>
+                            <span class="application-detail-value">7 days (10% interest)</span>
+                        </div>
+                        <div class="application-detail">
+                            <span class="application-detail-label">Other Active Loans:</span>
+                            <span class="application-detail-value">3 (₵ 2,500 total)</span>
+                        </div>
+                    </div>
+                    <div class="application-actions">
+                        <button class="btn btn-primary" onclick="lendToBorrower(3)" disabled>
+                            Lend Now
+                        </button>
+                        <span class="text-danger text-sm">High exposure - lending not recommended</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Lending Summary</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-primary">
+                        💰
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 8,250</div>
+                        <div class="stat-label">Total Lent</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-success">
+                        📈
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 1,032</div>
+                        <div class="stat-label">Earned Interest</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-warning">
+                        ⏳
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">₵ 2,100</div>
+                        <div class="stat-label">Pending Repayment</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-danger">
+                        🚫
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">Defaults</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">How Lending Works</div>
+            </div>
+            <div class="card-body">
+                <ol class="list-decimal pl-5">
+                    <li>Borrowers in your groups post loan requests to a shared cart.</li>
+                    <li>You see their rating, exposure across groups, and blacklist status.</li>
+                    <li>Choose borrowers you trust and click "Lend Now".</li>
+                    <li>Money is transferred off-platform (M-Pesa, bank, etc.).</li>
+                    <li>A ledger is automatically created under your account.</li>
+                    <li>Borrower repays within 7 days with 10% interest.</li>
+                    <li>You mark repayments in the ledger; platform enforces penalties for late payment.</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>M-PESEWA</h4>
+                    <p>Emergency micro-lending in trusted circles across Africa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Countries</h4>
+                    <div class="country-flags">
+                        <span>🇰🇪 Kenya</span>
+                        <span>🇺🇬 Uganda</span>
+                        <span>🇹🇿 Tanzania</span>
+                        <span>🇷🇼 Rwanda</span>
+                        <span>🇧🇮 Burundi</span>
+                        <span>🇸🇴 Somalia</span>
+                        <span>🇸🇸 South Sudan</span>
+                        <span>🇪🇹 Ethiopia</span>
+                        <span>🇨🇩 DRC</span>
+                        <span>🇳🇬 Nigeria</span>
+                        <span>🇿🇦 South Africa</span>
+                        <span>🇬🇭 Ghana</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@mpesewa.com</p>
+                    <p>+254 700 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 M-PESEWA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/lending.js"></script>
+    <script>
+        function filterByGroup(group) {
+            alert('Filtering by group: ' + group);
+        }
+
+        function filterByCategory(category) {
+            alert('Filtering by category: ' + category);
+        }
+
+        function lendToBorrower(id) {
+            alert('Initiating loan to borrower #' + id);
+        }
+
+        function viewBorrowerProfile(id) {
+            alert('Showing full profile for borrower #' + id);
+        }
+    </script>
+</body>
+</html>

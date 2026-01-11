@@ -1,0 +1,63 @@
+{
+  "collectors": [
+    {
+      "id": "DC001",
+      "name": "Alpha Recovery Agency",
+      "type": "company",
+      "country": "Kenya",
+      "city": "Nairobi",
+      "specialization": "Corporate",
+      "rating": 4,
+      "casesResolved": 1250,
+      "successRate": 92.5,
+      "experienceYears": 12,
+      "contact": {
+        "phone": "+254 700 111 222",
+        "email": "info@alpharecovery.co.ke",
+        "website": "www.alpharecovery.co.ke",
+        "address": "Moi Avenue, Nairobi"
+      },
+      "services": ["Corporate debt recovery", "Legal proceedings", "Asset tracing"],
+      "languages": ["English", "Swahili"],
+      "fees": {
+        "type": "percentage",
+        "amount": "25-30%"
+      },
+      "verification": {
+        "verified": true,
+        "verifiedDate": "2023-05-15",
+        "verifiedBy": "M-Pesewa Admin"
+      },
+      "status": "active"
+    },
+    {
+      "id": "DC002",
+      "name": "John Mwangi",
+      "type": "individual",
+      "country": "Kenya",
+      "city": "Mombasa",
+      "specialization": "Individual",
+      "rating": 5,
+      "casesResolved": 890,
+      "successRate": 95.2,
+      "experienceYears": 8,
+      "contact": {
+        "phone": "+254 722 333 444",
+        "email": "jmwangi@email.com",
+        "address": "Nyali, Mombasa"
+      },
+      "services": ["Personal debt collection", "Negotiation", "Payment plans"],
+      "languages": ["English", "Swahili"],
+      "fees": {
+        "type": "fixed",
+        "amount": "KSh 15000"
+      },
+      "verification": {
+        "verified": true,
+        "verifiedDate": "2023-08-22",
+        "verifiedBy": "M-Pesewa Admin"
+      },
+      "status": "active"
+    }
+  ]
+}

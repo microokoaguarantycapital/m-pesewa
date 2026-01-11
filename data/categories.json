@@ -1,0 +1,116 @@
+{
+  "categories": [
+    {
+      "id": "fare",
+      "name": "M-pesewa Fare",
+      "icon": "🚌",
+      "tagline": "Move on, don't stall—borrow for your journey.",
+      "description": "Transportation costs for emergencies"
+    },
+    {
+      "id": "data",
+      "name": "M-pesewa Data",
+      "icon": "📱",
+      "tagline": "Stay connected, stay informed—borrow when your bundle runs out.",
+      "description": "Mobile data and airtime"
+    },
+    {
+      "id": "cooking-gas",
+      "name": "M-pesewa Cooking Gas",
+      "icon": "🔥",
+      "tagline": "Cook with confidence—borrow when your gas is low.",
+      "description": "Cooking gas refills"
+    },
+    {
+      "id": "food",
+      "name": "M-pesewa Food",
+      "icon": "🍲",
+      "tagline": "Don't sleep hungry when paycheck is delayed—borrow and eat today.",
+      "description": "Emergency food supplies"
+    },
+    {
+      "id": "credo",
+      "name": "M-pesewa Credo",
+      "icon": "🛠️",
+      "tagline": "Fix it fast—borrow for urgent repairs or tools.",
+      "description": "Tools and urgent repairs"
+    },
+    {
+      "id": "water-bill",
+      "name": "M-pesewa Water Bill",
+      "icon": "💧",
+      "tagline": "Stay hydrated—borrow for water needs or bills.",
+      "description": "Water bills and supplies"
+    },
+    {
+      "id": "fuel",
+      "name": "M-pesewa Bike Car Tuktuk Fuel",
+      "icon": "⛽",
+      "tagline": "Keep moving—borrow for fuel, no matter your ride.",
+      "description": "Vehicle fuel"
+    },
+    {
+      "id": "repair",
+      "name": "M-pesewa Bike Car Tuktuk Repair",
+      "icon": "🔧",
+      "tagline": "Fix it quick—borrow for minor repairs and keep going.",
+      "description": "Vehicle repairs"
+    },
+    {
+      "id": "medicine",
+      "name": "M-pesewa Medicine",
+      "icon": "💊",
+      "tagline": "Health first—borrow for urgent medicines.",
+      "description": "Medical expenses"
+    },
+    {
+      "id": "electricity",
+      "name": "M-pesewa Electricity Tokens",
+      "icon": "💡",
+      "tagline": "Stay lit, stay powered—borrow tokens when you need it.",
+      "description": "Electricity tokens"
+    },
+    {
+      "id": "school-fees",
+      "name": "M-pesewa School Fees",
+      "icon": "🎓",
+      "tagline": "Education first—borrow for school fees.",
+      "description": "School and education fees"
+    },
+    {
+      "id": "tv-subscription",
+      "name": "M-pesewa TV Subscription",
+      "icon": "📺",
+      "tagline": "Stay informed—borrow for TV subscriptions.",
+      "description": "TV and entertainment subscriptions"
+    },
+    {
+      "id": "wifi",
+      "name": "M-pesewa Wifi",
+      "icon": "🌐",
+      "tagline": "Stay online—borrow for internet access.",
+      "description": "WiFi and internet bills"
+    },
+    {
+      "id": "advance",
+      "name": "M-pesewa Advance",
+      "icon": "💰",
+      "tagline": "Bridge the gap—borrow for salary advances.",
+      "description": "Salary advances"
+    },
+    {
+      "id": "daily-sales-advance",
+      "name": "M-Pesa Daily Sales Advance",
+      "icon": "🛒",
+      "tagline": "Small loan advance for everyday business.",
+      "description": "Daily business capital"
+    },
+    {
+      "id": "working-capital-advance",
+      "name": "M-Pesa Working Capital Advance",
+      "icon": "🏢",
+      "tagline": "Working capital when your business needs it.",
+      "description": "Business working capital"
+    }
+  ]
+}

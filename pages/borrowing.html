@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowing - M-PESEWA</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/images/icons/icon-72x72.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA Logo" height="40">
+                    <span>M-PESEWA</span>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="./dashboard/borrower-dashboard.html">Dashboard</a>
+                    <a href="./lending.html">Lending</a>
+                    <a href="./borrowing.html" class="active">Borrowing</a>
+                    <a href="./groups.html">Groups</a>
+                    <a href="./countries/index.html">Countries</a>
+                    <a href="./subscriptions.html">Subscriptions</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-outline" onclick="location.href='./dashboard/borrower-dashboard.html'">
+                        Borrower Dashboard
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-2">
+        <div class="page-header">
+            <h1 class="page-title">Borrowing Marketplace</h1>
+            <p class="page-subtitle">Request emergency loans from trusted lenders in your groups</p>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+                <div class="alert-title">Borrowing Rules</div>
+                <p>You can request one loan per group at a time. Lenders in that group will see your request and choose to fund it based on your rating and exposure.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Select Loan Category</h2>
+                <p class="section-subtitle">Choose one emergency need per group</p>
+            </div>
+            <div class="loan-categories-grid">
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-transport" checked>
+                    <label for="cat-transport" class="loan-category-label">
+                        <span class="loan-category-icon">🚌</span>
+                        <span class="loan-category-name">Transport Fare</span>
+                        <span class="loan-category-desc">Move on, don't stall</span>
+                    </label>
+                </div>
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-data">
+                    <label for="cat-data" class="loan-category-label">
+                        <span class="loan-category-icon">📱</span>
+                        <span class="loan-category-name">Data/Airtime</span>
+                        <span class="loan-category-desc">Stay connected</span>
+                    </label>
+                </div>
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-gas">
+                    <label for="cat-gas" class="loan-category-label">
+                        <span class="loan-category-icon">🔥</span>
+                        <span class="loan-category-name">Cooking Gas</span>
+                        <span class="loan-category-desc">Cook with confidence</span>
+                    </label>
+                </div>
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-food">
+                    <label for="cat-food" class="loan-category-label">
+                        <span class="loan-category-icon">🍲</span>
+                        <span class="loan-category-name">Food</span>
+                        <span class="loan-category-desc">Don't sleep hungry</span>
+                    </label>
+                </div>
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-medicine">
+                    <label for="cat-medicine" class="loan-category-label">
+                        <span class="loan-category-icon">💊</span>
+                        <span class="loan-category-name">Medicine</span>
+                        <span class="loan-category-desc">Health first</span>
+                    </label>
+                </div>
+                <div class="loan-category-option">
+                    <input type="radio" name="loan-category" id="cat-electricity">
+                    <label for="cat-electricity" class="loan-category-label">
+                        <span class="loan-category-icon">💡</span>
+                        <span class="loan-category-name">Electricity Tokens</span>
+                        <span class="loan-category-desc">Stay powered</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Select Group & Amount</h2>
+            </div>
+            <div class="form-layout form-layout-2col">
+                <div class="form-group">
+                    <label class="form-label">Choose Group</label>
+                    <select class="form-control" id="group-select">
+                        <option value="">-- Select a group --</option>
+                        <option value="family">Family Group (2 lenders, 15 borrowers)</option>
+                        <option value="work">Work Group (5 lenders, 30 borrowers)</option>
+                        <option value="church">Church Group (3 lenders, 25 borrowers)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Loan Amount (₵)</label>
+                    <input type="range" class="form-control" id="amount-slider" min="50" max="5000" value="500" oninput="updateAmount(this.value)">
+                    <div class="flex justify-between text-sm">
+                        <span>₵ 50</span>
+                        <span id="amount-display">₵ 500</span>
+                        <span>₵ 5,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Loan Summary</h2>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="repayment-breakdown">
+                        <div class="repayment-item">
+                            <span class="repayment-item-label">Principal Amount</span>
+                            <span class="repayment-item-value">₵ 500</span>
+                        </div>
+                        <div class="repayment-item">
+                            <span class="repayment-item-label">Interest (10%)</span>
+                            <span class="repayment-item-value">₵ 50</span>
+                        </div>
+                        <div class="repayment-item">
+                            <span class="repayment-item-label">Repayment Period</span>
+                            <span class="repayment-item-value">7 days</span>
+                        </div>
+                        <div class="repayment-item">
+                            <span class="repayment-item-label">Daily Repayment</span>
+                            <span class="repayment-item-value">₵ 78.57</span>
+                        </div>
+                        <div class="repayment-item">
+                            <span class="repayment-item-label">Total Repayable</span>
+                            <span class="repayment-item-value" style="font-size: 1.25rem; color: #388E3C;">₵ 550</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" onclick="addToCart()">
+                        Add to Group Cart
+                    </button>
+                    <button class="btn btn-outline" onclick="viewCart()">
+                        View My Cart (1 item)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Current Loan Cart</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Group</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <span class="loan-category-icon">🚌</span>
+                                    <span>Transport Fare</span>
+                                </div>
+                            </td>
+                            <td>Family Group</td>
+                            <td>₵ 500</td>
+                            <td><span class="badge badge-warning">Pending lender selection</span></td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn btn-sm btn-danger" onclick="removeFromCart(1)">
+                                        Remove
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="editRequest(1)">
+                                        Edit
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-warning mt-3">
+                <div class="alert-icon">⏳</div>
+                <div class="alert-content">
+                    <div class="alert-title">Waiting for Lenders</div>
+                    <p>Your loan request is visible to all lenders in <strong>Family Group</strong>. Lenders will review your rating (4.5★) and exposure (1 active loan) before choosing to fund your request.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">How Borrowing Works</div>
+            </div>
+            <div class="card-body">
+                <ol class="list-decimal pl-5">
+                    <li>Select an emergency loan category and amount.</li>
+                    <li>Choose a group where you want to borrow (max 4 groups total).</li>
+                    <li>Add the request to that group's cart. Lenders in that group see it.</li>
+                    <li>Lenders choose which requests to fund based on your rating and exposure.</li>
+                    <li>If a lender selects you, money is sent off-platform (M-Pesa, bank, etc.).</li>
+                    <li>Repay within 7 days with 10% interest. Daily partial payments allowed.</li>
+                    <li>After repayment, you can borrow again in the same or different category.</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>M-PESEWA</h4>
+                    <p>Emergency micro-lending in trusted circles across Africa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Countries</h4>
+                    <div class="country-flags">
+                        <span>🇰🇪 Kenya</span>
+                        <span>🇺🇬 Uganda</span>
+                        <span>🇹🇿 Tanzania</span>
+                        <span>🇷🇼 Rwanda</span>
+                        <span>🇧🇮 Burundi</span>
+                        <span>🇸🇴 Somalia</span>
+                        <span>🇸🇸 South Sudan</span>
+                        <span>🇪🇹 Ethiopia</span>
+                        <span>🇨🇩 DRC</span>
+                        <span>🇳🇬 Nigeria</span>
+                        <span>🇿🇦 South Africa</span>
+                        <span>🇬🇭 Ghana</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@mpesewa.com</p>
+                    <p>+254 700 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 M-PESEWA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/borrowing.js"></script>
+    <script>
+        function updateAmount(value) {
+            document.getElementById('amount-display').textContent = '₵ ' + value;
+        }
+
+        function addToCart() {
+            const category = document.querySelector('input[name="loan-category"]:checked').nextElementSibling.querySelector('.loan-category-name').textContent;
+            const group = document.getElementById('group-select').value;
+            const amount = document.getElementById('amount-slider').value;
+            if (!group) {
+                alert('Please select a group.');
+                return;
+            }
+            alert('Added ' + category + ' loan of ₵ ' + amount + ' to ' + group + ' cart.');
+        }
+
+        function viewCart() {
+            alert('Viewing your loan cart');
+        }
+
+        function removeFromCart(id) {
+            if (confirm('Remove this loan request from cart?')) {
+                alert('Loan request #' + id + ' removed.');
+            }
+        }
+
+        function editRequest(id) {
+            alert('Editing loan request #' + id);
+        }
+    </script>
+</body>
+</html>

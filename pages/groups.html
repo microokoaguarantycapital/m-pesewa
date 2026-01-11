@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups - M-PESEWA</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/images/icons/icon-72x72.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA Logo" height="40">
+                    <span>M-PESEWA</span>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="./dashboard/borrower-dashboard.html">Dashboard</a>
+                    <a href="./lending.html">Lending</a>
+                    <a href="./borrowing.html">Borrowing</a>
+                    <a href="./groups.html" class="active">Groups</a>
+                    <a href="./countries/index.html">Countries</a>
+                    <a href="./subscriptions.html">Subscriptions</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-primary" onclick="location.href='#create-group'">
+                        + Create Group
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-2">
+        <div class="page-header">
+            <h1 class="page-title">Trusted Groups</h1>
+            <p class="page-subtitle">Join or create trusted circles for emergency lending and borrowing</p>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+                <div class="alert-title">Group Rules</div>
+                <p>Groups are country-locked, referral-only, and have 5–1000 members. You can belong to max 4 groups. Lenders only lend within their group.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Groups</h2>
+                <div class="section-actions">
+                    <button class="btn btn-sm btn-outline" onclick="refreshGroups()">
+                        Refresh
+                    </button>
+                </div>
+            </div>
+            <div class="groups-grid">
+                <div class="card group-card">
+                    <div class="card-header">
+                        <div class="card-title">Family Group</div>
+                        <span class="badge badge-primary">Admin</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="group-stats">
+                            <div class="group-stat">
+                                <span class="group-stat-label">Country:</span>
+                                <span class="group-stat-value">🇰🇪 Kenya</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Members:</span>
+                                <span class="group-stat-value">45 / 1000</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Lenders:</span>
+                                <span class="group-stat-value">12</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Active Loans:</span>
+                                <span class="group-stat-value">₵ 3,500</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Repayment Rate:</span>
+                                <span class="group-stat-value">98.5%</span>
+                            </div>
+                        </div>
+                        <p class="group-description">A trusted family circle for emergency support.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-primary" onclick="viewGroup(1)">
+                            View Group
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="inviteMembers(1)">
+                            Invite
+                        </button>
+                    </div>
+                </div>
+                <div class="card group-card">
+                    <div class="card-header">
+                        <div class="card-title">Work Group</div>
+                        <span class="badge badge-success">Member</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="group-stats">
+                            <div class="group-stat">
+                                <span class="group-stat-label">Country:</span>
+                                <span class="group-stat-value">🇰🇪 Kenya</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Members:</span>
+                                <span class="group-stat-value">120 / 1000</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Lenders:</span>
+                                <span class="group-stat-value">25</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Active Loans:</span>
+                                <span class="group-stat-value">₵ 8,200</span>
+                            </div>
+                            <div class="group-stat">
+                                <span class="group-stat-label">Repayment Rate:</span>
+                                <span class="group-stat-value">99.2%</span>
+                            </div>
+                        </div>
+                        <p class="group-description">Professional colleagues supporting each other.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-sm btn-primary" onclick="viewGroup(2)">
+                            View Group
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="leaveGroup(2)">
+                            Leave
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-muted">You are in 2 out of 4 allowed groups.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section" id="create-group">
+            <div class="section-header">
+                <h2 class="section-title">Create New Group</h2>
+                <p class="section-subtitle">Start a trusted circle in your country</p>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form class="form-layout">
+                        <div class="form-group">
+                            <label class="form-label">Group Name</label>
+                            <input type="text" class="form-control" placeholder="e.g., Family Support Group">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Country</label>
+                            <select class="form-control">
+                                <option value="kenya">🇰🇪 Kenya</option>
+                                <option value="uganda">🇺🇬 Uganda</option>
+                                <option value="tanzania">🇹🇿 Tanzania</option>
+                                <option value="rwanda">🇷🇼 Rwanda</option>
+                                <option value="burundi">🇧🇮 Burundi</option>
+                                <option value="somalia">🇸🇴 Somalia</option>
+                                <option value="southsudan">🇸🇸 South Sudan</option>
+                                <option value="ethiopia">🇪🇹 Ethiopia</option>
+                                <option value="drc">🇨🇩 DRC</option>
+                                <option value="nigeria">🇳🇬 Nigeria</option>
+                                <option value="southafrica">🇿🇦 South Africa</option>
+                                <option value="ghana">🇬🇭 Ghana</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Group Type</label>
+                            <select class="form-control">
+                                <option value="family">Family</option>
+                                <option value="church">Church</option>
+                                <option value="professional">Professional</option>
+                                <option value="local">Local Community</option>
+                                <option value="social">Social</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Invite First 5 Members (by phone)</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter phone numbers separated by commas"></textarea>
+                            <div class="form-help">These members will receive referral invites.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" onclick="createGroup()">
+                        Create Group
+                    </button>
+                    <button class="btn btn-outline" onclick="resetForm()">
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Discover Groups in Your Country</h2>
+                <div class="section-actions">
+                    <input type="text" class="form-control form-control-sm" placeholder="Search groups...">
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Group Name</th>
+                            <th>Country</th>
+                            <th>Type</th>
+                            <th>Members</th>
+                            <th>Lenders</th>
+                            <th>Active Loans</th>
+                            <th>Repayment Rate</th>
+                            <th>Join</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar-group">CG</div>
+                                    <div>
+                                        <div>Church Group</div>
+                                        <div class="text-sm text-muted">Nairobi, Kenya</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>🇰🇪 Kenya</td>
+                            <td><span class="badge badge-primary">Church</span></td>
+                            <td>85 / 1000</td>
+                            <td>18</td>
+                            <td>₵ 5,600</td>
+                            <td>
+                                <div class="flex items-center gap-1">
+                                    <span>99.0%</span>
+                                    <span class="text-success">↑</span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="requestJoin(1)">
+                                    Request Join
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar-group">VG</div>
+                                    <div>
+                                        <div>Village Group</div>
+                                        <div class="text-sm text-muted">Kisumu, Kenya</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>🇰🇪 Kenya</td>
+                            <td><span class="badge badge-success">Local</span></td>
+                            <td>210 / 1000</td>
+                            <td>42</td>
+                            <td>₵ 12,500</td>
+                            <td>
+                                <div class="flex items-center gap-1">
+                                    <span>97.8%</span>
+                                    <span class="text-warning">→</span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="requestJoin(2)">
+                                    Request Join
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar-group">PG</div>
+                                    <div>
+                                        <div>Professionals Group</div>
+                                        <div class="text-sm text-muted">Kampala, Uganda</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>🇺🇬 Uganda</td>
+                            <td><span class="badge badge-warning">Professional</span></td>
+                            <td>150 / 1000</td>
+                            <td>35</td>
+                            <td>₵ 9,800</td>
+                            <td>
+                                <div class="flex items-center gap-1">
+                                    <span>99.5%</span>
+                                    <span class="text-success">↑</span>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="requestJoin(3)">
+                                    Request Join
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-warning mt-3">
+                <div class="alert-icon">🔒</div>
+                <div class="alert-content">
+                    <div class="alert-title">Referral-Only Join</div>
+                    <p>You need a referral from at least 2 existing members or an invite from the group admin to join.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Group Hierarchy & Rules</div>
+            </div>
+            <div class="card-body">
+                <ul class="list-disc pl-5">
+                    <li><strong>Country → Group → Lender → Borrower/Ledger</strong> – strict hierarchy.</li>
+                    <li>Groups are <strong>country-locked</strong> – no cross-country members.</li>
+                    <li>Minimum 5 members, maximum 1000 per group.</li>
+                    <li>Each group has one <strong>Admin/Founder</strong> who moderates.</li>
+                    <li>Lenders only lend within their group.</li>
+                    <li>Borrowers can belong to max 4 groups (good rating required).</li>
+                    <li>All loan requests are visible to lenders in the group via a shared cart.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>M-PESEWA</h4>
+                    <p>Emergency micro-lending in trusted circles across Africa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Countries</h4>
+                    <div class="country-flags">
+                        <span>🇰🇪 Kenya</span>
+                        <span>🇺🇬 Uganda</span>
+                        <span>🇹🇿 Tanzania</span>
+                        <span>🇷🇼 Rwanda</span>
+                        <span>🇧🇮 Burundi</span>
+                        <span>🇸🇴 Somalia</span>
+                        <span>🇸🇸 South Sudan</span>
+                        <span>🇪🇹 Ethiopia</span>
+                        <span>🇨🇩 DRC</span>
+                        <span>🇳🇬 Nigeria</span>
+                        <span>🇿🇦 South Africa</span>
+                        <span>🇬🇭 Ghana</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@mpesewa.com</p>
+                    <p>+254 700 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 M-PESEWA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/groups.js"></script>
+    <script>
+        function refreshGroups() {
+            alert('Refreshing your groups...');
+        }
+
+        function viewGroup(id) {
+            alert('Viewing group #' + id);
+        }
+
+        function inviteMembers(id) {
+            alert('Inviting members to group #' + id);
+        }
+
+        function leaveGroup(id) {
+            if (confirm('Leave this group? You will lose access to its lending/borrowing.')) {
+                alert('Left group #' + id);
+            }
+        }
+
+        function createGroup() {
+            alert('Creating new group...');
+        }
+
+        function resetForm() {
+            document.querySelector('#create-group form').reset();
+        }
+
+        function requestJoin(id) {
+            alert('Requesting to join group #' + id + '. You need a referral.');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+{
+  "users": [
+    {
+      "id": "USR001",
+      "name": "James Kamau",
+      "role": "lender",
+      "email": "james@email.com",
+      "phone": "+254 712 345 678",
+      "country": "KE",
+      "location": "Nairobi",
+      "national_id": "12345678",
+      "guarantors": [
+        {"name": "Mary Wanjiku", "phone": "+254 723 456 789"},
+        {"name": "Peter Kariuki", "phone": "+254 734 567 890"}
+      ],
+      "rating": 4.8,
+      "groups": ["GRP001"],
+      "subscription": {
+        "tier": "premium",
+        "status": "active",
+        "expiry": "2024-04-28",
+        "amount": 250
+      },
+      "blacklisted": false,
+      "status": "active"
+    },
+    {
+      "id": "USR002",
+      "name": "Sarah Auma",
+      "role": "lender",
+      "email": "sarah@email.com",
+      "phone": "+254 722 987 654",
+      "country": "KE",
+      "location": "Nairobi",
+      "national_id": "87654321",
+      "guarantors": [
+        {"name": "David Ochieng", "phone": "+254 733 888 999"},
+        {"name": "Grace Akinyi", "phone": "+254 744 777 666"}
+      ],
+      "rating": 4.9,
+      "groups": ["GRP001"],
+      "subscription": {
+        "tier": "basic",
+        "status": "active",
+        "expiry": "2024-04-28",
+        "amount": 50
+      },
+      "blacklisted": false,
+      "status": "active"
+    },
+    {
+      "id": "USR003",
+      "name": "Michael Odhiambo",
+      "role": "borrower",
+      "email": "michael@email.com",
+      "phone": "+254 711 222 333",
+      "country": "KE",
+      "location": "Nairobi",
+      "national_id": "11223344",
+      "guarantors": [
+        {"name": "Jane Atieno", "phone": "+254 722 333 444"},
+        {"name": "Paul Okoth", "phone": "+254 733 444 555"}
+      ],
+      "rating": 4.5,
+      "groups": ["GRP001"],
+      "blacklisted": false,
+      "status": "active",
+      "active_loans": ["LNG001"]
+    },
+    {
+      "id": "USR004",
+      "name": "Linda Chebet",
+      "role": "borrower",
+      "email": "linda@email.com",
+      "phone": "+254 744 555 666",
+      "country": "KE",
+      "location": "Nairobi",
+      "national_id": "55667788",
+      "guarantors": [
+        {"name": "Samuel Kirui", "phone": "+254 755 666 777"},
+        {"name": "Ruth Jepkorir", "phone": "+254 766 777 888"}
+      ],
+      "rating": 4.2,
+      "groups": ["GRP001"],
+      "blacklisted": false,
+      "status": "active",
+      "active_loans": ["LNG002"]
+    },
+    {
+      "id": "USR010",
+      "name": "Robert Mwangi",
+      "role": "borrower",
+      "email": "robert@email.com",
+      "phone": "+254 777 888 999",
+      "country": "KE",
+      "location": "Nairobi",
+      "national_id": "99887766",
+      "guarantors": [
+        {"name": "Esther Wambui", "phone": "+254 788 999 000"},
+        {"name": "Joseph Karanja", "phone": "+254 799 000 111"}
+      ],
+      "rating": 3.8,
+      "groups": ["GRP002"],
+      "blacklisted": false,
+      "status": "active",
+      "active_loans": ["LNG003"]
+    },
+    {
+      "id": "USR012",
+      "name": "David Okello",
+      "role": "lender",
+      "email": "david@email.com",
+      "phone": "+256 777 123 456",
+      "country": "UG",
+      "location": "Kampala",
+      "national_id": "UG123456",
+      "guarantors": [
+        {"name": "Alice Nakato", "phone": "+256 788 234 567"},
+        {"name": "Thomas Ssekito", "phone": "+256 799 345 678"}
+      ],
+      "rating": 4.7,
+      "groups": ["GRP003"],
+      "subscription": {
+        "tier": "super",
+        "status": "active",
+        "expiry": "2024-04-28",
+        "amount": 1000
+      },
+      "blacklisted": false,
+      "status": "active"
+    },
+    {
+      "id": "USR014",
+      "name": "Maria Nalwanga",
+      "role": "borrower",
+      "email": "maria@email.com",
+      "phone": "+256 711 456 789",
+      "country": "UG",
+      "location": "Kampala",
+      "national_id": "UG654321",
+      "guarantors": [
+        {"name": "John Ssebaduka", "phone": "+256 722 567 890"},
+        {"name": "Susan Namukasa", "phone": "+256 733 678 901"}
+      ],
+      "rating": 4.0,
+      "groups": ["GRP003"],
+      "blacklisted": false,
+      "status": "active",
+      "active_loans": ["LNG004"]
+    }
+  ]
+}

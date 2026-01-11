@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#000000"/>
+  <polygon points="0,0 900,0 0,600" fill="#DE3831"/>
+  <polygon points="0,0 900,0 0,600" fill="#002395" transform="translate(0,0) rotate(33.7,450,300)"/>
+  <polygon points="0,0 900,0 0,600" fill="#FFFFFF" transform="translate(0,0) rotate(56.3,450,300)"/>
+  <polygon points="0,0 900,0 0,600" fill="#007A4D" transform="translate(0,0) rotate(78.9,450,300)"/>
+  <polygon points="0,0 900,0 0,600" fill="#FFB81C" transform="translate(0,0) rotate(101.5,450,300)"/>
+</svg>

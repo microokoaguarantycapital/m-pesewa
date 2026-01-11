@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A - M-Pesewa</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
+</head>
+<body class="bg-light">
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa" height="40">
+                    <span class="brand-text">M-PESEWA</span>
+                </a>
+                <button class="navbar-toggler" id="navbarToggler">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="navbar-collapse" id="navbarMenu">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/pages/lending.html" class="nav-link">Lend</a>
+                    <a href="/pages/borrowing.html" class="nav-link">Borrow</a>
+                    <a href="/pages/groups.html" class="nav-link">Groups</a>
+                    <a href="/pages/ledger.html" class="nav-link">Ledger</a>
+                    <a href="/pages/subscriptions.html" class="nav-link">Subscriptions</a>
+                    <a href="/pages/blacklist.html" class="nav-link">Blacklist</a>
+                    <a href="/pages/debt-collectors.html" class="nav-link">Collectors</a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline dropdown-toggle">Countries</button>
+                        <div class="dropdown-menu">
+                            <a href="/pages/countries/index.html" class="dropdown-item">All Countries</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/pages/countries/kenya.html" class="dropdown-item">Kenya</a>
+                            <a href="/pages/countries/uganda.html" class="dropdown-item">Uganda</a>
+                            <a href="/pages/countries/tanzania.html" class="dropdown-item">Tanzania</a>
+                            <a href="/pages/countries/rwanda.html" class="dropdown-item">Rwanda</a>
+                            <a href="/pages/countries/burundi.html" class="dropdown-item">Burundi</a>
+                            <a href="/pages/countries/somalia.html" class="dropdown-item">Somalia</a>
+                            <a href="/pages/countries/south-sudan.html" class="dropdown-item">South Sudan</a>
+                            <a href="/pages/countries/ethiopia.html" class="dropdown-item">Ethiopia</a>
+                            <a href="/pages/countries/DRC.html" class="dropdown-item">DRC</a>
+                            <a href="/pages/countries/nigeria.html" class="dropdown-item">Nigeria</a>
+                            <a href="/pages/countries/south-africa.html" class="dropdown-item">South Africa</a>
+                            <a href="/pages/countries/ghana.html" class="dropdown-item">Ghana</a>
+                        </div>
+                    </div>
+                    <a href="/pages/about.html" class="nav-link">About</a>
+                    <a href="/pages/qa.html" class="nav-link active">Q&A</a>
+                    <a href="/pages/contact.html" class="nav-link">Contact</a>
+                    <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-primary">Dashboard</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <div class="page-header text-center mb-5">
+            <h1 class="page-title">Frequently Asked Questions</h1>
+            <p class="page-subtitle">Find answers about borrowing, lending, groups, and more</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="qaAccordion">
+                    <!-- Borrowing -->
+                    <div class="accordion-item">
+                        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#borrowingSection">
+                            Borrowing
+                        </button>
+                        <div class="accordion-collapse collapse show" id="borrowingSection">
+                            <div class="accordion-body">
+                                <div class="qa-item">
+                                    <h4>How do I borrow on M‑Pesewa?</h4>
+                                    <p>Register as a borrower, join a group, select an emergency loan category, add it to your cart. Lenders in your group will see your request and may offer to lend. You cannot choose a lender—lenders choose you based on your rating and trustworthiness.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>What loan categories are available?</h4>
+                                    <p>There are 16 emergency categories: Transport (Fare), Data/Airtime, Cooking Gas, Food, Urgent Repairs (Credo), Water Bill, Fuel, Vehicle Repair, Medicine, Electricity Tokens, School Fees, TV Subscription, Daily Sales Advance, Working Capital Advance, Wifi, and Advance Loan.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>What are the loan terms?</h4>
+                                    <p>Maximum 7 days repayment, 10% interest per week. Daily partial repayments allowed. After 7 days, a 5% daily penalty applies on the outstanding balance. Default occurs after 2 months of non‑payment.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Can I borrow from multiple groups?</h4>
+                                    <p>Yes, you can belong to up to 4 groups (with good rating) and borrow one loan per group at a time, in different categories.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Do borrowers pay subscription fees?</h4>
+                                    <p>No. Borrowers pay no subscription fees (except in higher tiers where a small borrower fee may apply for access to larger loans).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lending -->
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#lendingSection">
+                            Lending
+                        </button>
+                        <div class="accordion-collapse collapse" id="lendingSection">
+                            <div class="accordion-body">
+                                <div class="qa-item">
+                                    <h4>How do I become a lender?</h4>
+                                    <p>Register as a lender, choose a subscription tier (Basic, Premium, Super, or Lender of Lenders), pay the subscription fee via M‑Pesa Till, then join a group. Once your subscription is active, you can view borrower loan requests in your group and select whom to lend to.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>What are the subscription tiers?</h4>
+                                    <p>Basic (≤ 1,500/week), Premium (≤ 5,000/week), Super (≤ 20,000/week), Lender of Lenders (≤ 50,000/week). Each has monthly, bi‑annual, and annual payment options. Subscriptions expire on the 28th of each month.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How do I get repaid?</h4>
+                                    <p>Repayments happen off‑platform (M‑Pesa, bank, cash). Borrowers send you money directly. You then manually update the ledger in your dashboard to reflect the repayment.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Can I lend across groups or countries?</h4>
+                                    <p>No. Lending is strictly within your group and country. No cross‑group or cross‑country lending is allowed.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>What if a borrower defaults?</h4>
+                                    <p>After 2 months of non‑payment, the borrower is automatically blacklisted. You can report the default, but only the Platform Admin can remove the blacklist after full repayment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Groups -->
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#groupsSection">
+                            Groups
+                        </button>
+                        <div class="accordion-collapse collapse" id="groupsSection">
+                            <div class="accordion-body">
+                                <div class="qa-item">
+                                    <h4>What is a group?</h4>
+                                    <p>A group is a trusted circle of people (family, church, profession, community) within one country. Groups have 5‑1000 members, one Admin/Founder, and are invitation‑only.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How do I join a group?</h4>
+                                    <p>You must be invited by the group Admin or referred by at least two existing members (guarantors). You cannot join a group without an invitation or referral.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Can I create a group?</h4>
+                                    <p>Yes, any registered user can create a group. You become the Admin/Founder and must invite the first 5 members to activate the group.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How many groups can I join?</h4>
+                                    <p>Borrowers can join up to 4 groups (with good rating). Lenders can join unlimited groups but can only lend within each group separately.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Are groups country‑locked?</h4>
+                                    <p>Yes. A group exists only in one country and cannot include members from other countries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ledgers & Reputation -->
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#ledgerSection">
+                            Ledgers & Reputation
+                        </button>
+                        <div class="accordion-collapse collapse" id="ledgerSection">
+                            <div class="accordion-body">
+                                <div class="qa-item">
+                                    <h4>What is a ledger?</h4>
+                                    <p>A ledger is an active loan record. When you lend to a borrower, a ledger is automatically created under your lender profile. It tracks borrower details, amount, dates, interest, penalties, and status.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Who updates the ledger?</h4>
+                                    <p>Lenders update ledgers manually when repayments are received. Platform Admin can override entries if needed.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How does the rating system work?</h4>
+                                    <p>Lenders rate borrowers (1‑5 stars) after loan repayment. The average rating is visible on the borrower’s profile and affects their ability to join more groups and get selected for loans.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>What is the blacklist?</h4>
+                                    <p>Borrowers who default for 2+ months are blacklisted. The blacklist badge appears on their profile across all groups, blocking new loans and group joins. Only Platform Admin can remove it after full repayment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- General -->
+                    <div class="accordion-item">
+                        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#generalSection">
+                            General
+                        </button>
+                        <div class="accordion-collapse collapse" id="generalSection">
+                            <div class="accordion-body">
+                                <div class="qa-item">
+                                    <h4>Which countries are supported?</h4>
+                                    <p>Kenya, Uganda, Tanzania, Rwanda, Burundi, Somalia, South Sudan, Ethiopia, DRC, Nigeria, South Africa, Ghana.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Does M‑Pesewa handle money?</h4>
+                                    <p>No. All loans are disbursed and repaid off‑platform (M‑Pesa, bank, cash). M‑Pesewa only manages trust, groups, ledgers, reputation, and subscriptions.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How does the platform make money?</h4>
+                                    <p>Only from lender subscriptions. Borrowers pay no fees (except in higher tiers where a small borrower fee may apply).</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>Is there a mobile app?</h4>
+                                    <p>This is a Progressive Web App (PWA). You can install it on your phone’s home screen for an app‑like experience. It works offline and sends push notifications.</p>
+                                </div>
+                                <div class="qa-item">
+                                    <h4>How do I contact support?</h4>
+                                    <p>Use the contact form on the Contact page. Each country also has specific contact details in its country page footer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-5">
+                    <div class="card-body text-center">
+                        <h3>Still have questions?</h3>
+                        <p>Reach out to our support team for personalized assistance.</p>
+                        <a href="/pages/contact.html" class="btn btn-primary">Contact Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h5>M-PESEWA</h5>
+                    <p>Emergency micro-lending within trusted circles across Africa.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Countries</h5>
+                    <div class="country-list">
+                        <span>Kenya</span> <span>Uganda</span> <span>Tanzania</span> <span>Rwanda</span>
+                        <span>Burundi</span> <span>Somalia</span> <span>South Sudan</span> <span>Ethiopia</span>
+                        <span>DRC</span> <span>Nigeria</span> <span>South Africa</span> <span>Ghana</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Contact</h5>
+                    <p>Email: support@mpesewa.com</p>
+                    <p>Phone: +254 700 000000</p>
+                    <p>Hours: Mon-Fri, 8am-6pm EAT</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Legal</h5>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Compliance</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 M-Pesewa. All rights reserved. | Emergency Micro-Lending in Trusted Circles</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/app.js"></script>
+</body>
+</html>
