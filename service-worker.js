@@ -1,29 +1,49 @@
-const CACHE_NAME = 'mpesewa-v1.0.0';
+const CACHE_NAME = 'mpesewa-v1.0';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/manifest.json',
   '/assets/css/main.css',
   '/assets/css/components.css',
   '/assets/css/animations.css',
+  '/assets/css/dashboard.css',
+  '/assets/css/forms.css',
+  '/assets/css/tables.css',
   '/assets/js/app.js',
-  '/assets/js/auth.js',
   '/assets/js/utils.js',
+  '/assets/js/auth.js',
+  '/assets/js/roles.js',
+  '/assets/js/groups.js',
+  '/assets/js/lending.js',
+  '/assets/js/borrowing.js',
+  '/assets/js/ledger.js',
+  '/assets/js/blacklist.js',
+  '/assets/js/subscriptions.js',
+  '/assets/js/countries.js',
+  '/assets/js/collectors.js',
+  '/assets/js/calculator.js',
+  '/assets/js/pwa.js',
   '/assets/images/logo.svg',
-  '/manifest.json'
+  '/data/countries.json',
+  '/data/subscriptions.json',
+  '/data/categories.json',
+  '/data/collectors.json',
+  '/data/demo-groups.json',
+  '/data/demo-users.json',
+  '/data/demo-ledgers.json'
 ];
 
-// Install event - cache core files
+// Install event
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         return cache.addAll(urlsToCache);
       })
-      .then(() => self.skipWaiting())
   );
 });
 
-// Activate event - clean up old caches
+// Activate event
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -34,115 +54,39 @@ self.addEventListener('activate', event => {
           }
         })
       );
-    }).then(() => self.clients.claim())
-  );
-});
-
-// Fetch event - serve from cache, fallback to network
-self.addEventListener('fetch', event => {
-  // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) {
-    return;
-  }
-
-  // Skip non-GET requests
-  if (event.request.method !== 'GET') {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request)
-      .then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        return fetch(event.request)
-          .then(response => {
-            // Check if we received a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // Clone the response
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          })
-          .catch(error => {
-            console.error('Fetch failed:', error);
-            // Return offline page for HTML requests
-            if (event.request.headers.get('accept').includes('text/html')) {
-              return caches.match('/offline.html');
-            }
-          });
-      })
-  );
-});
-
-// Handle push notifications
-self.addEventListener('push', event => {
-  if (!event.data) return;
-
-  const data = event.data.json();
-  const options = {
-    body: data.body || 'M-Pesewa Notification',
-    icon: '/assets/images/icons/icon-192x192.png',
-    badge: '/assets/images/icons/badge-72x72.png',
-    tag: data.tag || 'mpesewa-notification',
-    data: {
-      url: data.url || '/'
-    }
-  };
-
-  event.waitUntil(
-    self.registration.showNotification(data.title || 'M-Pesewa', options)
-  );
-});
-
-// Handle notification clicks
-self.addEventListener('notificationclick', event => {
-  event.notification.close();
-
-  const urlToOpen = event.notification.data.url || '/';
-
-  event.waitUntil(
-    clients.matchAll({
-      type: 'window',
-      includeUncontrolled: true
-    }).then(windowClients => {
-      // Check if there's already a window/tab open
-      for (let client of windowClients) {
-        if (client.url === urlToOpen && 'focus' in client) {
-          return client.focus();
-        }
-      }
-      
-      // If not, open a new window/tab
-      if (clients.openWindow) {
-        return clients.openWindow(urlToOpen);
-      }
     })
   );
 });
 
-// Handle background sync
-self.addEventListener('sync', event => {
-  if (event.tag === 'sync-data') {
-    event.waitUntil(syncData());
-  }
+// Fetch event
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
+        });
+      }).catch(() => {
+        // If both cache and network fail, show offline page
+        return caches.match('/offline.html');
+      })
+  );
 });
 
-async function syncData() {
-  try {
-    // In a real app, this would sync pending operations
-    console.log('Background sync completed');
-  } catch (error) {
-    console.error('Background sync failed:', error);
+// Message event for updating cache
+self.addEventListener('message', event => {
+  if (event.data.action === 'skipWaiting') {
+    self.skipWaiting();
   }
-}
+});
