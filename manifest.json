@@ -1,7 +1,7 @@
 {
   "name": "M-Pesewa",
   "short_name": "M-Pesewa",
-  "description": "Emergency micro-lending platform built on trusted social groups",
+  "description": "Emergency micro-lending platform built on trusted social groups in Africa",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7FAFC",
@@ -50,18 +50,6 @@
     }
   ],
   "categories": ["finance", "social", "productivity"],
-  "shortcuts": [
-    {
-      "name": "Borrower Dashboard",
-      "short_name": "Borrow",
-      "description": "Access your borrower dashboard",
-      "url": "/pages/dashboard/borrower-dashboard.html"
-    },
-    {
-      "name": "Lender Dashboard",
-      "short_name": "Lend",
-      "description": "Access your lender dashboard",
-      "url": "/pages/dashboard/lender-dashboard.html"
-    }
-  ]
+  "lang": "en",
+  "dir": "ltr"
 }
