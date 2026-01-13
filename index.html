@@ -8,14 +8,15 @@
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
     <meta name="theme-color" content="#512DA8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Favicon -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/main.css">
@@ -23,10 +24,7 @@
     <link rel="stylesheet" href="assets/css/animations.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -59,7 +57,7 @@
                         <option value="somalia">🇸🇴 Somalia</option>
                         <option value="south-sudan">🇸🇸 South Sudan</option>
                         <option value="ethiopia">🇪🇹 Ethiopia</option>
-                        <option value="drc">🇨🇩 DRC</option>
+                        <option value="DRC">🇨🇩 DRC</option>
                         <option value="nigeria">🇳🇬 Nigeria</option>
                         <option value="south-africa">🇿🇦 South Africa</option>
                         <option value="ghana">🇬🇭 Ghana</option>
@@ -98,6 +96,7 @@
             <a href="pages/borrowing.html" class="mobile-nav-link">Borrow</a>
             <a href="pages/about.html" class="mobile-nav-link">About</a>
             <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+            <a href="pages/qa.html" class="mobile-nav-link">Q&A</a>
             <a href="pages/blacklist.html" class="mobile-nav-link">Blacklist</a>
             <a href="pages/debt-collectors.html" class="mobile-nav-link">Debt Collectors</a>
             <a href="pages/ledger.html" class="mobile-nav-link">Ledger</a>
@@ -146,7 +145,7 @@
             <div class="hero-actions">
                 <a href="#registration" class="btn btn-primary btn-large">Get Started</a>
                 <a href="#how-it-works" class="btn btn-outline btn-large">Learn More</a>
-                <a href="pages/dashboard/borrower-dashboard.html" class="btn btn-secondary btn-large">Go to Dashboard</a>
+                <a href="pages/dashboard/lender-dashboard.html" class="btn btn-secondary btn-large">Go to Dashboard</a>
             </div>
         </div>
     </section>
@@ -193,119 +192,119 @@
             <div class="categories-grid">
                 <!-- Category 1 -->
                 <div class="category-card floating-card" data-category="fare">
-                    <div class="category-icon"><i class="fas fa-bus"></i></div>
-                    <h3 class="category-title">M-Pesewa Fare</h3>
+                    <div class="category-icon">🚌</div>
+                    <h3 class="category-title">M-pesewa Fare</h3>
                     <p class="category-description">Move on, don't stall—borrow for your journey.</p>
                     <div class="category-tag">Transport</div>
                 </div>
                 
                 <!-- Category 2 -->
                 <div class="category-card floating-card" data-category="data">
-                    <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3 class="category-title">M-Pesewa Data</h3>
+                    <div class="category-icon">📱</div>
+                    <h3 class="category-title">M-pesewa Data</h3>
                     <p class="category-description">Stay connected, stay informed—borrow when your bundle runs out.</p>
                     <div class="category-tag">Data/Airtime</div>
                 </div>
                 
                 <!-- Category 3 -->
                 <div class="category-card floating-card" data-category="gas">
-                    <div class="category-icon"><i class="fas fa-fire"></i></div>
-                    <h3 class="category-title">M-Pesewa Cooking Gas</h3>
+                    <div class="category-icon">🔥</div>
+                    <h3 class="category-title">M-pesewa Cooking Gas</h3>
                     <p class="category-description">Cook with confidence—borrow when your gas is low.</p>
                     <div class="category-tag">Cooking Gas</div>
                 </div>
                 
                 <!-- Category 4 -->
                 <div class="category-card floating-card" data-category="food">
-                    <div class="category-icon"><i class="fas fa-utensils"></i></div>
-                    <h3 class="category-title">M-Pesewa Food</h3>
+                    <div class="category-icon">🍲</div>
+                    <h3 class="category-title">M-pesewa Food</h3>
                     <p class="category-description">Don't sleep hungry when paycheck is delayed—borrow and eat today.</p>
                     <div class="category-tag">Food</div>
                 </div>
                 
                 <!-- Category 5 -->
                 <div class="category-card floating-card" data-category="advance">
-                    <div class="category-icon"><i class="fas fa-calendar-day"></i></div>
-                    <h3 class="category-title">M-Pesewa Advance</h3>
+                    <div class="category-icon">📅</div>
+                    <h3 class="category-title">M-pesewa Advance</h3>
                     <p class="category-description">Bridge the gap when salary is delayed.</p>
                     <div class="category-tag">Salary Advance</div>
                 </div>
                 
                 <!-- Category 6 -->
                 <div class="category-card floating-card" data-category="wifi">
-                    <div class="category-icon"><i class="fas fa-wifi"></i></div>
-                    <h3 class="category-title">M-Pesewa Wifi</h3>
+                    <div class="category-icon">🌐</div>
+                    <h3 class="category-title">M-pesewa Wifi</h3>
                     <p class="category-description">Stay connected with reliable internet access.</p>
                     <div class="category-tag">Internet</div>
                 </div>
                 
                 <!-- Category 7 -->
                 <div class="category-card floating-card" data-category="credo">
-                    <div class="category-icon"><i class="fas fa-tools"></i></div>
-                    <h3 class="category-title">M-Pesewa Credo</h3>
+                    <div class="category-icon">🛠️</div>
+                    <h3 class="category-title">M-pesewa Credo</h3>
                     <p class="category-description">Fix it fast—borrow for urgent repairs or tools.</p>
                     <div class="category-tag">Auto Repairs</div>
                 </div>
                 
                 <!-- Category 8 -->
                 <div class="category-card floating-card" data-category="water">
-                    <div class="category-icon"><i class="fas fa-tint"></i></div>
-                    <h3 class="category-title">M-Pesewa Water Bill</h3>
+                    <div class="category-icon">💧</div>
+                    <h3 class="category-title">M-pesewa Water Bill</h3>
                     <p class="category-description">Stay hydrated—borrow for water needs or bills.</p>
                     <div class="category-tag">Water Bill</div>
                 </div>
                 
                 <!-- Category 9 -->
                 <div class="category-card floating-card" data-category="fuel">
-                    <div class="category-icon"><i class="fas fa-gas-pump"></i></div>
-                    <h3 class="category-title">M-Pesewa Bike Car Tuktuk Fuel</h3>
+                    <div class="category-icon">⛽</div>
+                    <h3 class="category-title">M-pesewa Bike Car Tuktuk Fuel</h3>
                     <p class="category-description">Keep moving—borrow for fuel, no matter your ride.</p>
                     <div class="category-tag">Vehicle Fuel</div>
                 </div>
                 
                 <!-- Category 10 -->
                 <div class="category-card floating-card" data-category="repair">
-                    <div class="category-icon"><i class="fas fa-wrench"></i></div>
-                    <h3 class="category-title">M-Pesewa Bike Car Tuktuk Repair</h3>
+                    <div class="category-icon">🔧</div>
+                    <h3 class="category-title">M-pesewa Bike Car Tuktuk Repair</h3>
                     <p class="category-description">Fix it quick—borrow for minor repairs and keep going.</p>
                     <div class="category-tag">Vehicle Repair</div>
                 </div>
                 
                 <!-- Category 11 -->
                 <div class="category-card floating-card" data-category="medicine">
-                    <div class="category-icon"><i class="fas fa-pills"></i></div>
-                    <h3 class="category-title">M-Pesewa Medicine</h3>
+                    <div class="category-icon">💊</div>
+                    <h3 class="category-title">M-pesewa Medicine</h3>
                     <p class="category-description">Health first—borrow for urgent medicines.</p>
                     <div class="category-tag">Medicine</div>
                 </div>
                 
                 <!-- Category 12 -->
                 <div class="category-card floating-card" data-category="electricity">
-                    <div class="category-icon"><i class="fas fa-bolt"></i></div>
-                    <h3 class="category-title">M-Pesewa Electricity Tokens</h3>
+                    <div class="category-icon">💡</div>
+                    <h3 class="category-title">M-pesewa Electricity Tokens</h3>
                     <p class="category-description">Stay lit, stay powered—borrow tokens when you need it.</p>
                     <div class="category-tag">Electricity</div>
                 </div>
                 
                 <!-- Category 13 -->
                 <div class="category-card floating-card" data-category="school">
-                    <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3 class="category-title">M-Pesewa School Fees</h3>
+                    <div class="category-icon">🎓</div>
+                    <h3 class="category-title">M-pesewa School Fees</h3>
                     <p class="category-description">Education first—borrow for urgent school fees.</p>
                     <div class="category-tag">School Fees</div>
                 </div>
                 
                 <!-- Category 14 -->
                 <div class="category-card floating-card" data-category="tv">
-                    <div class="category-icon"><i class="fas fa-tv"></i></div>
-                    <h3 class="category-title">M-Pesewa TV Subscription</h3>
+                    <div class="category-icon">📺</div>
+                    <h3 class="category-title">M-pesewa TV Subscription</h3>
                     <p class="category-description">Stay informed—borrow for TV subscriptions.</p>
                     <div class="category-tag">TV Subscription</div>
                 </div>
                 
                 <!-- Category 15 -->
                 <div class="category-card floating-card" data-category="daily-sales">
-                    <div class="category-icon"><i class="fas fa-store"></i></div>
+                    <div class="category-icon">💰</div>
                     <h3 class="category-title">M-Pesa Daily Sales Advance</h3>
                     <p class="category-description">Small Loan advance for everyday business.</p>
                     <div class="category-tag">Business</div>
@@ -313,7 +312,7 @@
                 
                 <!-- Category 16 -->
                 <div class="category-card floating-card" data-category="working-capital">
-                    <div class="category-icon"><i class="fas fa-industry"></i></div>
+                    <div class="category-icon">🏢</div>
                     <h3 class="category-title">M-Pesa Working Capital Advance</h3>
                     <p class="category-description">Working capital when your business needs it.</p>
                     <div class="category-tag">Business Capital</div>
@@ -373,7 +372,7 @@
                                 <option value="somalia">Somalia</option>
                                 <option value="south-sudan">South Sudan</option>
                                 <option value="ethiopia">Ethiopia</option>
-                                <option value="drc">DRC</option>
+                                <option value="DRC">DRC</option>
                                 <option value="nigeria">Nigeria</option>
                                 <option value="south-africa">South Africa</option>
                                 <option value="ghana">Ghana</option>
@@ -471,7 +470,7 @@
                                 <option value="somalia">Somalia</option>
                                 <option value="south-sudan">South Sudan</option>
                                 <option value="ethiopia">Ethiopia</option>
-                                <option value="drc">DRC</option>
+                                <option value="DRC">DRC</option>
                                 <option value="nigeria">Nigeria</option>
                                 <option value="south-africa">South Africa</option>
                                 <option value="ghana">Ghana</option>
@@ -607,67 +606,67 @@
                         <div class="categories-checkbox">
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat1" name="lenderCategories" value="fare" checked>
-                                <label for="lcat1">M-Pesewa Fare (Transport)</label>
+                                <label for="lcat1">🚌 M-pesewa Fare (Transport)</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat2" name="lenderCategories" value="data" checked>
-                                <label for="lcat2">M-Pesewa Data (Data/Airtime)</label>
+                                <label for="lcat2">📱 M-pesewa Data (Data/Airtime)</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat3" name="lenderCategories" value="gas" checked>
-                                <label for="lcat3">M-Pesewa Cooking Gas</label>
+                                <label for="lcat3">🔥 M-pesewa Cooking Gas</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat4" name="lenderCategories" value="food" checked>
-                                <label for="lcat4">M-Pesewa Food</label>
+                                <label for="lcat4">🍲 M-pesewa Food</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat5" name="lenderCategories" value="repair" checked>
-                                <label for="lcat5">M-Pesewa Credo (Repairs)</label>
+                                <label for="lcat5">🛠️ M-pesewa Credo (Repairs)</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat6" name="lenderCategories" value="water" checked>
-                                <label for="lcat6">M-Pesewa Water Bill</label>
+                                <label for="lcat6">💧 M-pesewa Water Bill</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat7" name="lenderCategories" value="fuel" checked>
-                                <label for="lcat7">M-Pesewa Bike Car Tuktuk Fuel</label>
+                                <label for="lcat7">⛽ M-pesewa Bike Car Tuktuk Fuel</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat8" name="lenderCategories" value="vehicle-repair" checked>
-                                <label for="lcat8">M-Pesewa Bike Car Tuktuk Repair</label>
+                                <label for="lcat8">🔧 M-pesewa Bike Car Tuktuk Repair</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat9" name="lenderCategories" value="medicine" checked>
-                                <label for="lcat9">M-Pesewa Medicine</label>
+                                <label for="lcat9">💊 M-pesewa Medicine</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat10" name="lenderCategories" value="electricity" checked>
-                                <label for="lcat10">M-Pesewa Electricity Tokens</label>
+                                <label for="lcat10">💡 M-pesewa Electricity Tokens</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat11" name="lenderCategories" value="school" checked>
-                                <label for="lcat11">M-Pesewa School Fees</label>
+                                <label for="lcat11">🎓 M-pesewa School Fees</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat12" name="lenderCategories" value="tv" checked>
-                                <label for="lcat12">M-Pesewa TV Subscription</label>
+                                <label for="lcat12">📺 M-pesewa TV Subscription</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat13" name="lenderCategories" value="advance" checked>
-                                <label for="lcat13">M-Pesewa Advance</label>
+                                <label for="lcat13">📅 M-pesewa Advance</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat14" name="lenderCategories" value="wifi" checked>
-                                <label for="lcat14">M-Pesewa Wifi</label>
+                                <label for="lcat14">🌐 M-pesewa Wifi</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat15" name="lenderCategories" value="daily-sales" checked>
-                                <label for="lcat15">M-Pesa Daily Sales Advance</label>
+                                <label for="lcat15">💰 M-Pesa Daily Sales Advance</label>
                             </div>
                             <div class="checkbox-item">
                                 <input type="checkbox" id="lcat16" name="lenderCategories" value="working-capital" checked>
-                                <label for="lcat16">M-Pesa Working Capital Advance</label>
+                                <label for="lcat16">🏢 M-Pesa Working Capital Advance</label>
                             </div>
                         </div>
                     </div>
@@ -684,16 +683,6 @@
                         <button type="submit" class="btn btn-primary btn-large">Register as Lender</button>
                     </div>
                 </form>
-            </div>
-            
-            <!-- Both Registration Form -->
-            <div class="registration-form" id="bothForm">
-                <h3>Register as Both Borrower and Lender</h3>
-                <p class="form-help">You will need to complete both registration forms separately. Please log out and register again for the second role.</p>
-                <div class="both-options">
-                    <button class="btn btn-outline btn-large" id="registerAsBorrowerFirst">Register as Borrower First</button>
-                    <button class="btn btn-outline btn-large" id="registerAsLenderFirst">Register as Lender First</button>
-                </div>
             </div>
         </div>
     </section>
@@ -751,6 +740,84 @@
                         <li>Blacklist for defaulters</li>
                         <li>Cross-group borrowing up to 4 groups</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Calculator Section -->
+    <section class="calculator-section">
+        <div class="section-container">
+            <h2 class="section-title">Loan Calculator</h2>
+            <p class="section-subtitle">Calculate your loan repayment with 10% weekly interest</p>
+            
+            <div class="calculator-container">
+                <div class="calculator-inputs">
+                    <div class="form-group">
+                        <label for="calcAmount">Loan Amount</label>
+                        <input type="range" id="calcAmount" min="100" max="50000" value="5000" step="100">
+                        <div class="input-display">
+                            <span id="amountDisplay">5,000</span>
+                            <div class="input-actions">
+                                <button class="btn-amount" data-amount="1000">1,000</button>
+                                <button class="btn-amount" data-amount="5000">5,000</button>
+                                <button class="btn-amount" data-amount="10000">10,000</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calcDays">Repayment Days (Max 7)</label>
+                        <input type="range" id="calcDays" min="1" max="7" value="7">
+                        <div class="input-display">
+                            <span id="daysDisplay">7 days</span>
+                            <div class="input-actions">
+                                <button class="btn-days" data-days="1">1 day</button>
+                                <button class="btn-days" data-days="3">3 days</button>
+                                <button class="btn-days" data-days="7">7 days</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-selection">
+                        <label>Select Tier for Max Amount:</label>
+                        <div class="tier-buttons">
+                            <button class="tier-btn" data-tier="basic" data-max="1500">Basic (1,500)</button>
+                            <button class="tier-btn active" data-tier="premium" data-max="5000">Premium (5,000)</button>
+                            <button class="tier-btn" data-tier="super" data-max="20000">Super (20,000)</button>
+                            <button class="tier-btn" data-tier="lender-of-lenders" data-max="50000">Lender of Lenders (50,000)</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="result-card">
+                        <div class="result-label">Principal Amount</div>
+                        <div class="result-value" id="principalAmount">5,000</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Weekly Interest (10%)</div>
+                        <div class="result-value" id="interestAmount">500</div>
+                    </div>
+                    
+                    <div class="result-card highlight">
+                        <div class="result-label">Total Repayment</div>
+                        <div class="result-value" id="totalRepayment">5,500</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-label">Daily Repayment</div>
+                        <div class="result-value" id="dailyRepayment">786</div>
+                    </div>
+                    
+                    <div class="penalty-notice">
+                        <div class="notice-icon">⚠️</div>
+                        <div class="notice-content">
+                            <h5>Late Payment Penalty</h5>
+                            <p>After 7 days: 5% daily penalty on remaining balance. Default after 2 months.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1140,7 +1207,7 @@
                             <option value="somalia">Somalia</option>
                             <option value="south-sudan">South Sudan</option>
                             <option value="ethiopia">Ethiopia</option>
-                            <option value="drc">DRC</option>
+                            <option value="DRC">DRC</option>
                             <option value="nigeria">Nigeria</option>
                             <option value="south-africa">South Africa</option>
                             <option value="ghana">Ghana</option>
@@ -1206,6 +1273,8 @@
     <!-- JavaScript Files -->
     <script src="assets/js/app.js"></script>
     <script src="assets/js/auth.js"></script>
+    <script src="assets/js/calculator.js"></script>
+    <script src="assets/js/pwa.js"></script>
     <script src="assets/js/utils.js"></script>
 </body>
 </html>
