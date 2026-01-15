@@ -5,23 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M-Pesewa - Emergency Micro-Lending in Trusted Circles</title>
     <meta name="description" content="M-Pesewa connects trusted communities across Africa for peer-to-peer emergency micro-lending. Borrow for urgent needs from people you know. Earn 10% weekly interest by lending to your community.">
-
     <!-- PWA Configuration -->
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <meta name="theme-color" content="#512DA8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
-    <link rel="stylesheet" href="/assets/css/animations.css">
-
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
 </head>
 <body>
     <!-- Header -->
@@ -32,13 +37,13 @@
                 <h1 class="logo-text">M-<span class="logo-highlight">Pesewa</span></h1>
             </div>
             <nav class="main-nav">
-                <a href="/" class="nav-link active">Home</a>
-                <a href="/pages/countries/index.html" class="nav-link">Countries</a>
-                <a href="/pages/groups.html" class="nav-link">Groups</a>
-                <a href="/pages/lending.html" class="nav-link">Lend</a>
-                <a href="/pages/borrowing.html" class="nav-link">Borrow</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
-                <a href="/pages/contact.html" class="nav-link">Contact</a>
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="pages/countries/index.html" class="nav-link">Countries</a>
+                <a href="pages/groups.html" class="nav-link">Groups</a>
+                <a href="pages/lending.html" class="nav-link">Lend</a>
+                <a href="pages/borrowing.html" class="nav-link">Borrow</a>
+                <a href="pages/about.html" class="nav-link">About</a>
+                <a href="pages/contact.html" class="nav-link">Contact</a>
             </nav>
             <div class="header-actions">
                 <div class="country-selector">
@@ -81,18 +86,18 @@
             <button class="close-menu" id="closeMenuBtn">&times;</button>
         </div>
         <nav class="mobile-nav">
-            <a href="/" class="mobile-nav-link active">Home</a>
-            <a href="/pages/countries/index.html" class="mobile-nav-link">Countries</a>
-            <a href="/pages/groups.html" class="mobile-nav-link">Groups</a>
-            <a href="/pages/lending.html" class="mobile-nav-link">Lend</a>
-            <a href="/pages/borrowing.html" class="mobile-nav-link">Borrow</a>
-            <a href="/pages/about.html" class="mobile-nav-link">About</a>
-            <a href="/pages/contact.html" class="mobile-nav-link">Contact</a>
-            <a href="/pages/qa.html" class="mobile-nav-link">Q&A</a>
-            <a href="/pages/blacklist.html" class="mobile-nav-link">Blacklist</a>
-            <a href="/pages/debt-collectors.html" class="mobile-nav-link">Debt Collectors</a>
-            <a href="/pages/ledger.html" class="mobile-nav-link">Ledger</a>
-            <a href="/pages/subscriptions.html" class="mobile-nav-link">Subscriptions</a>
+            <a href="index.html" class="mobile-nav-link active">Home</a>
+            <a href="pages/countries/index.html" class="mobile-nav-link">Countries</a>
+            <a href="pages/groups.html" class="mobile-nav-link">Groups</a>
+            <a href="pages/lending.html" class="mobile-nav-link">Lend</a>
+            <a href="pages/borrowing.html" class="mobile-nav-link">Borrow</a>
+            <a href="pages/about.html" class="mobile-nav-link">About</a>
+            <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+            <a href="pages/qa.html" class="mobile-nav-link">Q&A</a>
+            <a href="pages/blacklist.html" class="mobile-nav-link">Blacklist</a>
+            <a href="pages/debt-collectors.html" class="mobile-nav-link">Debt Collectors</a>
+            <a href="pages/ledger.html" class="mobile-nav-link">Ledger</a>
+            <a href="pages/subscriptions.html" class="mobile-nav-link">Subscriptions</a>
         </nav>
         <div class="mobile-auth">
             <button class="btn btn-outline btn-block" id="mobileLoginBtn">Login</button>
@@ -133,7 +138,7 @@
             <div class="hero-actions">
                 <a href="#registration" class="btn btn-primary btn-large">Get Started</a>
                 <a href="#how-it-works" class="btn btn-outline btn-large">Learn More</a>
-                <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-secondary btn-large">Go to Dashboard</a>
+                <a href="pages/dashboard/lender-dashboard.html" class="btn btn-secondary btn-large">Go to Dashboard</a>
             </div>
         </div>
     </section>
@@ -302,7 +307,6 @@
                 <button class="role-tab" data-role="lender">Lender Registration</button>
                 <button class="role-tab" data-role="both">Register as Both</button>
             </div>
-
             <!-- Borrower Registration Form -->
             <div class="registration-form active" id="borrowerForm">
                 <h3>Borrower Registration Form</h3>
@@ -390,7 +394,6 @@
                     </div>
                 </form>
             </div>
-
             <!-- Lender Registration Form -->
             <div class="registration-form" id="lenderForm">
                 <h3>Lender Registration Form</h3>
@@ -761,7 +764,7 @@
             <h2 class="section-title">Select Your Country to Login</h2>
             <p class="section-subtitle">Access local groups and join by referral in your country</p>
             <div class="countries-grid">
-                <a href="/pages/countries/kenya.html" class="country-card">
+                <a href="pages/countries/kenya.html" class="country-card">
                     <div class="country-flag">🇰🇪</div>
                     <h3 class="country-name">Kenya</h3>
                     <p class="country-currency">KSh (Kenyan Shilling)</p>
@@ -770,7 +773,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/uganda.html" class="country-card">
+                <a href="pages/countries/uganda.html" class="country-card">
                     <div class="country-flag">🇺🇬</div>
                     <h3 class="country-name">Uganda</h3>
                     <p class="country-currency">UGX (Ugandan Shilling)</p>
@@ -779,7 +782,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/tanzania.html" class="country-card">
+                <a href="pages/countries/tanzania.html" class="country-card">
                     <div class="country-flag">🇹🇿</div>
                     <h3 class="country-name">Tanzania</h3>
                     <p class="country-currency">TZS (Tanzanian Shilling)</p>
@@ -788,7 +791,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/rwanda.html" class="country-card">
+                <a href="pages/countries/rwanda.html" class="country-card">
                     <div class="country-flag">🇷🇼</div>
                     <h3 class="country-name">Rwanda</h3>
                     <p class="country-currency">RWF (Rwandan Franc)</p>
@@ -797,7 +800,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/ghana.html" class="country-card">
+                <a href="pages/countries/ghana.html" class="country-card">
                     <div class="country-flag">🇬🇭</div>
                     <h3 class="country-name">Ghana</h3>
                     <p class="country-currency">GHS (Ghanaian Cedi)</p>
@@ -806,7 +809,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/nigeria.html" class="country-card">
+                <a href="pages/countries/nigeria.html" class="country-card">
                     <div class="country-flag">🇳🇬</div>
                     <h3 class="country-name">Nigeria</h3>
                     <p class="country-currency">NGN (Nigerian Naira)</p>
@@ -815,7 +818,7 @@
                         <span>Active Now</span>
                     </div>
                 </a>
-                <a href="/pages/countries/index.html" class="country-card view-all">
+                <a href="pages/countries/index.html" class="country-card view-all">
                     <div class="country-flag">🌍</div>
                     <h3 class="country-name">View All Countries</h3>
                     <p class="country-currency">13 African Countries</p>
@@ -1024,23 +1027,23 @@
                 <div class="footer-section">
                     <h4 class="footer-title">Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/pages/countries/index.html">Countries</a></li>
-                        <li><a href="/pages/groups.html">Groups</a></li>
-                        <li><a href="/pages/lending.html">Lending</a></li>
-                        <li><a href="/pages/borrowing.html">Borrowing</a></li>
-                        <li><a href="/pages/about.html">About Us</a></li>
-                        <li><a href="/pages/qa.html">Q&A</a></li>
-                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/countries/index.html">Countries</a></li>
+                        <li><a href="pages/groups.html">Groups</a></li>
+                        <li><a href="pages/lending.html">Lending</a></li>
+                        <li><a href="pages/borrowing.html">Borrowing</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/qa.html">Q&A</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4 class="footer-title">Platform Sections</h4>
                     <ul class="footer-links">
-                        <li><a href="/pages/blacklist.html">Blacklist</a></li>
-                        <li><a href="/pages/debt-collectors.html">Debt Collectors</a></li>
-                        <li><a href="/pages/ledger.html">Ledger Management</a></li>
-                        <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                        <li><a href="pages/blacklist.html">Blacklist</a></li>
+                        <li><a href="pages/debt-collectors.html">Debt Collectors</a></li>
+                        <li><a href="pages/ledger.html">Ledger Management</a></li>
+                        <li><a href="pages/subscriptions.html">Subscriptions</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -1176,10 +1179,10 @@
     </div>
 
     <!-- JavaScript Files -->
-    <script src="/assets/js/utils.js"></script>
-    <script src="/assets/js/app.js"></script>
-    <script src="/assets/js/auth.js"></script>
-    <script src="/assets/js/calculator.js"></script>
-    <script src="/assets/js/pwa.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/calculator.js"></script>
+    <script src="assets/js/pwa.js"></script>
+    <script src="assets/js/utils.js"></script>
 </body>
 </html>
