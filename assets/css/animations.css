@@ -1,0 +1,826 @@
+/* assets/css/animations.css - Animations and transitions for M-Pesewa PWA */
+
+/* ====== FLOATING CARD ANIMATIONS ====== */
+/* Main floating animation for emergency cards */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translateY(-15px) rotate(1deg) scale(1.02);
+    }
+    50% {
+        transform: translateY(-5px) rotate(-0.5deg) scale(1.01);
+    }
+    75% {
+        transform: translateY(-10px) rotate(0.5deg) scale(1.015);
+    }
+}
+
+/* Subtle pulse animation for active/important cards */
+@keyframes pulse-subtle {
+    0%, 100% {
+        box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.1),
+                    0 5px 10px -5px rgba(30, 58, 138, 0.04);
+    }
+    50% {
+        box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.15),
+                    0 10px 20px -5px rgba(30, 58, 138, 0.08);
+    }
+}
+
+/* Money aura effect for loan category cards */
+@keyframes money-aura {
+    0%, 100% {
+        border-color: rgba(30, 58, 138, 0.1);
+        background-position: 0% 0%;
+    }
+    25% {
+        border-color: rgba(22, 163, 74, 0.15);
+        background-position: 100% 0%;
+    }
+    50% {
+        border-color: rgba(245, 158, 11, 0.15);
+        background-position: 100% 100%;
+    }
+    75% {
+        border-color: rgba(30, 58, 138, 0.15);
+        background-position: 0% 100%;
+    }
+}
+
+/* Shimmer effect for premium/important elements */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ====== PAGE TRANSITIONS ====== */
+/* Page fade in */
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide up */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide down */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== MODAL ANIMATIONS ====== */
+/* Modal backdrop fade in */
+@keyframes modalBackdropFade {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(4px);
+    }
+}
+
+/* Modal content scale in */
+@keyframes modalContentScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modal content slide up */
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== BUTTON ANIMATIONS ====== */
+/* Button press effect */
+@keyframes buttonPress {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Button ripple effect */
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Success checkmark */
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 50;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ====== LOADING ANIMATIONS ====== */
+/* Spinner rotation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulse animation for loading dots */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+}
+
+/* Loading bar animation */
+@keyframes loadingBar {
+    0% {
+        left: -35%;
+        right: 100%;
+    }
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+    100% {
+        left: 100%;
+        right: -90%;
+    }
+}
+
+/* Skeleton loading */
+@keyframes skeletonLoading {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+/* ====== NOTIFICATION ANIMATIONS ====== */
+/* Toast notification slide in */
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Toast notification slide out */
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Banner notification slide down */
+@keyframes bannerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== FORM ANIMATIONS ====== */
+/* Shake animation for form errors */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Input focus glow */
+@keyframes inputGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2),
+                    0 0 20px rgba(37, 99, 235, 0.1);
+    }
+}
+
+/* Success check animation */
+@keyframes successCheck {
+    0% {
+        stroke-dashoffset: 100;
+        opacity: 0;
+    }
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+}
+
+/* ====== CARD ANIMATIONS ====== */
+/* Card hover lift */
+@keyframes cardLift {
+    from {
+        transform: translateY(0);
+        box-shadow: var(--shadow-md);
+    }
+    to {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+}
+
+/* Card selection pulse */
+@keyframes cardSelectPulse {
+    0%, 100% {
+        border-color: var(--border-light);
+    }
+    50% {
+        border-color: var(--primary-blue);
+    }
+}
+
+/* ====== PROGRESS ANIMATIONS ====== */
+/* Progress bar fill */
+@keyframes progressFill {
+    from {
+        width: 0%;
+    }
+    to {
+        width: var(--progress-width);
+    }
+}
+
+/* Progress pulse */
+@keyframes progressPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ====== COUNT-UP ANIMATIONS ====== */
+/* Counter animation */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== MENU & NAVIGATION ANIMATIONS ====== */
+/* Mobile menu slide in */
+@keyframes mobileMenuSlideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile menu slide out */
+@keyframes mobileMenuSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+/* Dropdown menu fade in */
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ====== SPECIAL EFFECTS ====== */
+/* Confetti animation */
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Celebration fireworks */
+@keyframes fireworks {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-100px) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-200px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* ====== TABLE ANIMATIONS ====== */
+/* Table row highlight */
+@keyframes tableRowHighlight {
+    0% {
+        background-color: rgba(22, 163, 74, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* Table row slide in */
+@keyframes tableRowSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====== UTILITY CLASSES ====== */
+/* Animation delay classes */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1000 { animation-delay: 1000ms; }
+
+/* Animation duration classes */
+.duration-100 { animation-duration: 100ms; }
+.duration-200 { animation-duration: 200ms; }
+.duration-300 { animation-duration: 300ms; }
+.duration-400 { animation-duration: 400ms; }
+.duration-500 { animation-duration: 500ms; }
+.duration-600 { animation-duration: 600ms; }
+.duration-700 { animation-duration: 700ms; }
+.duration-800 { animation-duration: 800ms; }
+.duration-900 { animation-duration: 900ms; }
+.duration-1000 { animation-duration: 1000ms; }
+.duration-1500 { animation-duration: 1500ms; }
+.duration-2000 { animation-duration: 2000ms; }
+
+/* Animation timing functions */
+.ease-linear { animation-timing-function: linear; }
+.ease-ease { animation-timing-function: ease; }
+.ease-ease-in { animation-timing-function: ease-in; }
+.ease-ease-out { animation-timing-function: ease-out; }
+.ease-ease-in-out { animation-timing-function: ease-in-out; }
+.ease-cubic-bezier { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Animation fill modes */
+.fill-none { animation-fill-mode: none; }
+.fill-forwards { animation-fill-mode: forwards; }
+.fill-backwards { animation-fill-mode: backwards; }
+.fill-both { animation-fill-mode: both; }
+
+/* Animation iteration counts */
+.iteration-once { animation-iteration-count: 1; }
+.iteration-infinite { animation-iteration-count: infinite; }
+.iteration-twice { animation-iteration-count: 2; }
+.iteration-thrice { animation-iteration-count: 3; }
+
+/* Animation direction */
+.direction-normal { animation-direction: normal; }
+.direction-reverse { animation-direction: reverse; }
+.direction-alternate { animation-direction: alternate; }
+.direction-alternate-reverse { animation-direction: alternate-reverse; }
+
+/* ====== TRANSITION CLASSES ====== */
+/* Quick transitions */
+.transition-fast {
+    transition: all var(--transition-fast);
+}
+
+.transition-normal {
+    transition: all var(--transition-normal);
+}
+
+.transition-slow {
+    transition: all var(--transition-slow);
+}
+
+/* Specific property transitions */
+.transition-transform {
+    transition: transform var(--transition-normal);
+}
+
+.transition-opacity {
+    transition: opacity var(--transition-normal);
+}
+
+.transition-colors {
+    transition: color var(--transition-normal),
+                background-color var(--transition-normal),
+                border-color var(--transition-normal);
+}
+
+.transition-shadow {
+    transition: box-shadow var(--transition-normal);
+}
+
+/* ====== ANIMATION APPLICATIONS ====== */
+/* Apply to emergency cards */
+.emergency-card {
+    animation: float 6s ease-in-out infinite;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.98) 100%);
+}
+
+.emergency-card:hover {
+    animation: float 3s ease-in-out infinite,
+               money-aura 4s ease-in-out infinite;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 1) 100%);
+}
+
+/* Apply to loading states */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+.loading-pulse {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loading-skeleton {
+    animation: skeletonLoading 1.5s infinite linear;
+}
+
+/* Apply to success states */
+.success-check {
+    animation: checkmark 0.5s ease-out forwards;
+}
+
+/* Apply to error states */
+.error-shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Apply to page elements */
+.page-fade-in {
+    animation: pageFadeIn 0.5s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+/* Apply to modal elements */
+.modal-backdrop {
+    animation: modalBackdropFade 0.3s ease-out;
+}
+
+.modal-content-scale {
+    animation: modalContentScale 0.3s ease-out;
+}
+
+.modal-slide-up {
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+/* Apply to notifications */
+.toast-slide-in {
+    animation: toastSlideIn 0.3s ease-out;
+}
+
+.toast-slide-out {
+    animation: toastSlideOut 0.3s ease-out;
+}
+
+.banner-slide-down {
+    animation: bannerSlideDown 0.3s ease-out;
+}
+
+/* Apply to progress elements */
+.progress-animate {
+    animation: progressFill 1s ease-out forwards;
+}
+
+/* Apply to table rows */
+.table-row-highlight {
+    animation: tableRowHighlight 2s ease-out;
+}
+
+.table-row-slide-in {
+    animation: tableRowSlideIn 0.3s ease-out;
+}
+
+/* ====== PERFORMANCE OPTIMIZATIONS ====== */
+/* Hardware acceleration for smooth animations */
+.hardware-accelerate {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Will-change for elements that will animate */
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+.will-change-all {
+    will-change: transform, opacity;
+}
+
+/* ====== REDUCED MOTION SUPPORT ====== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .emergency-card {
+        animation: none !important;
+    }
+    
+    .floating-card {
+        animation: none !important;
+    }
+}
+
+/* ====== ANIMATION STATES ====== */
+/* Pause animations when needed */
+.pause-animation {
+    animation-play-state: paused;
+}
+
+/* Running animations */
+.running-animation {
+    animation-play-state: running;
+}
+
+/* ====== CUSTOM ANIMATION PROPERTIES ====== */
+/* Define CSS variables for animation timing */
+:root {
+    --animation-float-duration: 6s;
+    --animation-float-delay: 0s;
+    --animation-pulse-duration: 2s;
+    --animation-spin-duration: 1s;
+    --animation-slide-duration: 0.5s;
+    --animation-fade-duration: 0.3s;
+}
+
+/* ====== ANIMATION MIXINS (CSS Custom Properties) ====== */
+/* These can be used with CSS custom properties for dynamic animations */
+.animated-property {
+    animation: var(--animation-name, none) 
+               var(--animation-duration, 1s) 
+               var(--animation-timing, ease) 
+               var(--animation-delay, 0s) 
+               var(--animation-iteration, 1) 
+               var(--animation-direction, normal) 
+               var(--animation-fill, forwards);
+}
+
+/* ====== SPECIAL CASE ANIMATIONS ====== */
+/* For the 20 floating cards - staggered delays */
+.floating-card:nth-child(1) { animation-delay: 0s; }
+.floating-card:nth-child(2) { animation-delay: 0.2s; }
+.floating-card:nth-child(3) { animation-delay: 0.4s; }
+.floating-card:nth-child(4) { animation-delay: 0.6s; }
+.floating-card:nth-child(5) { animation-delay: 0.8s; }
+.floating-card:nth-child(6) { animation-delay: 1s; }
+.floating-card:nth-child(7) { animation-delay: 1.2s; }
+.floating-card:nth-child(8) { animation-delay: 1.4s; }
+.floating-card:nth-child(9) { animation-delay: 1.6s; }
+.floating-card:nth-child(10) { animation-delay: 1.8s; }
+.floating-card:nth-child(11) { animation-delay: 2s; }
+.floating-card:nth-child(12) { animation-delay: 2.2s; }
+.floating-card:nth-child(13) { animation-delay: 2.4s; }
+.floating-card:nth-child(14) { animation-delay: 2.6s; }
+.floating-card:nth-child(15) { animation-delay: 2.8s; }
+.floating-card:nth-child(16) { animation-delay: 3s; }
+.floating-card:nth-child(17) { animation-delay: 3.2s; }
+.floating-card:nth-child(18) { animation-delay: 3.4s; }
+.floating-card:nth-child(19) { animation-delay: 3.6s; }
+.floating-card:nth-child(20) { animation-delay: 3.8s; }
+
+/* ====== INTERACTIVE ANIMATIONS ====== */
+/* Button press animation on click */
+.btn:active {
+    animation: buttonPress 0.2s ease;
+}
+
+/* Ripple effect for buttons */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%, -50%);
+    transform-origin: 50% 50%;
+}
+
+.ripple:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+/* ====== SCROLL-BASED ANIMATIONS ====== */
+/* Fade in when scrolled into view */
+@keyframes fadeInOnScroll {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ====== GRADIENT ANIMATIONS ====== */
+/* Animated gradient background */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient {
+    background: linear-gradient(-45deg, 
+        var(--primary-blue), 
+        var(--primary-blue-dark), 
+        var(--secondary-green), 
+        var(--cta-orange));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
