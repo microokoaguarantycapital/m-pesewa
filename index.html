@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="M-Pesewa – Emergency micro-lending platform built around trusted social groups. Borrow and lend short-term loans within verified groups in 13 African countries."> <title>M-Pesewa – Emergency Micro-Lending in Trusted Groups</title> <link rel="manifest" href="manifest.json"> <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> <link rel="stylesheet" href="assets/css/main.css"> <link rel="stylesheet" href="assets/css/components.css"> <link rel="stylesheet" href="assets/css/animations.css"> </head> <body class="body-home"> <!-- Sticky Header --> <header class="sticky-header"> <div class="container header-container"> <a href="index.html" class="logo"> <img src="assets/img/logo.svg" alt="M-Pesewa Logo" width="140" height="40"> </a> <nav class="main-nav"> <ul> <li><a href="index.html" class="active">Home</a></li> <li><a href="pages/about.html">About</a></li> <li class="dropdown"> <a href="#" class="dropdown-toggle">Countries <i class="fas fa-chevron-down"></i></a> <div class="dropdown-menu countries-dropdown"> <div class="dropdown-grid"> <a href="pages/countries/kenya.html" class="country-option"> <img src="assets/img/flags/ke.svg" alt="Kenya" width="24" height="24"> <span>Kenya (KSh)</span> <small>+254709219000</small> </a> <a href="pages/countries/uganda.html" class="country-option"> <img src="assets/img/flags/ug.svg" alt="Uganda" width="24" height="24"> <span>Uganda (UGX)</span> <small>+256392175546</small> </a> <a href="pages/countries/tanzania.html" class="country-option"> <img src="assets/img/flags/tz.svg" alt="Tanzania" width="24" height="24"> <span>Tanzania (TZS)</span> <small>+255659073010</small> </a> <a href="pages/countries/rwanda.html" class="country-option"> <img src="assets/img/flags/rw.svg" alt="Rwanda" width="24" height="24"> <span>Rwanda (RWF)</span> <small>+250791590801</small> </a> <a href="pages/countries/burundi.html" class="country-option"> <img src="assets/img/flags/bi.svg" alt="Burundi" width="24" height="24"> <span>Burundi (BIF)</span> <small>+25779000000</small> </a> <a href="pages/countries/somalia.html" class="country-option"> <img src="assets/img/flags/so.svg" alt="Somalia" width="24" height="24"> <span>Somalia (SOS)</span> <small>+252630000000</small> </a> <a href="pages/countries/south-sudan.html" class="country-option"> <img src="assets/img/flags/ss.svg" alt="South Sudan" width="24" height="24"> <span>South Sudan (SSP)</span> <small>+27112000000</small> </a> <a href="pages/countries/ethiopia.html" class="country-option"> <img src="assets/img/flags/et.svg" alt="Ethiopia" width="24" height="24"> <span>Ethiopia (ETB)</span> <small>+25191000000</small> </a> <a href="pages/countries/drc.html" class="country-option"> <img src="assets/img/flags/cd.svg" alt="DRC" width="24" height="24"> <span>DRC (CDF)</span> <small>+243810000000</small> </a> <a href="pages/countries/nigeria.html" class="country-option"> <img src="assets/img/flags/ng.svg" alt="Nigeria" width="24" height="24"> <span>Nigeria (NGN)</span> <small>+2348000000000</small> </a> <a href="pages/countries/ghana.html" class="country-option"> <img src="assets/img/flags/gh.svg" alt="Ghana" width="24" height="24"> <span>Ghana (GHS)</span> <small>+233240000000</small> </a> <a href="pages/countries/south-africa.html" class="country-option"> <img src="assets/img/flags/za.svg" alt="South Africa" width="24" height="24"> <span>South Africa (ZAR)</span> <small>+27110000000</small> </a> </div> </div> </li> <li><a href="pages/qa.html">Q&A</a></li> <li><a href="pages/blacklist.html">Blacklist</a></li> <li><a href="pages/debt-collectors.html">Debt Collectors</a></li> <li><a href="pages/contact.html">Contact</a></li> </ul> </nav> <div class="header-actions"> <a href="pages/auth.html?mode=login" class="btn btn-outline">Sign In</a> <a href="pages/auth.html?mode=register" class="btn btn-primary">Get Started</a> </div> <button class="mobile-menu-toggle" aria-label="Toggle menu"> <i class="fas fa-bars"></i> </button> </div> </header> <!-- Hero Section -->
+<section class="hero">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">Emergency Support from People You Trust</h1>
+            <p class="hero-subtitle">Borrow and lend short-term emergency loans inside verified social groups. No algorithms, just trust.</p>
+            <div class="hero-actions">
+                <a href="pages/auth.html?mode=register&role=borrower" class="btn btn-primary btn-large">
+                    <i class="fas fa-hand-holding-usd"></i> Borrow Now
+                </a>
+                <a href="pages/auth.html?mode=register&role=lender" class="btn btn-secondary btn-large">
+                    <i class="fas fa-user-tie"></i> Become a Lender
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Active Groups</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Repayment Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1.2B+</span>
+                    <span class="stat-label">Total Lent</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">700,000+</span>
+                    <span class="stat-label">Families Uplifted</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-cards-container" id="emergencyCards">
+                <!-- 20 emergency categories as floating cards -->
+                <!-- Cards will be injected by JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-how-it-works">
+    <div class="container">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Four simple steps to get emergency support or earn returns.</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Select Country & Register</h3>
+                <p class="step-description">Choose your country, provide your details and two guarantors. Start as a borrower (free) or lender (subscription required).</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Join or Create a Group</h3>
+                <p class="step-description">Get invited to a trusted group (family, church, professional) or start your own. Groups are country-locked and referral-only.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Shop & Add to Group Cart</h3>
+                <p class="step-description">Borrowers select from 20 emergency categories, add loan requests to the group cart. Lenders do not see individual borrowers.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Lenders Select & Disburse</h3>
+                <p class="step-description">Lenders with active subscriptions view the cart, check borrower profiles, and select loans to fund. All money moves off-platform.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Borrower Benefits -->
+<section class="section-benefits section-borrower">
+    <div class="container">
+        <h2 class="section-title">Benefits for Borrowers</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-user-friends"></i>
+                </div>
+                <h3 class="benefit-title">No Need to Ask for Favors</h3>
+                <p class="benefit-text">Post your loan request in your group and receive offers based on your trust rating.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="benefit-title">Borrow Faster from Known People</h3>
+                <p class="benefit-text">Get funds quickly from group members who already know and trust you.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="benefit-title">Transparent & Voluntary</h3>
+                <p class="benefit-text">Lending is voluntary and transparent—no favors owed.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <h3 class="benefit-title">Fair Interest Rates</h3>
+                <p class="benefit-text">Agree on fair rates with friends and family. Fixed 10% for 7 days.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3 class="benefit-title">One Request, Many Lenders</h3>
+                <p class="benefit-text">Share your request within the group and reach multiple potential lenders.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-lock-open"></i>
+                </div>
+                <h3 class="benefit-title">No Subscription Fees</h3>
+                <p class="benefit-text">Borrowers pay nothing for basic access. Only higher UI tiers require a small yearly fee.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Lender Benefits -->
+<section class="section-benefits section-lender">
+    <div class="container">
+        <h2 class="section-title">Benefits for Lenders</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="benefit-title">Earn Passive Income</h3>
+                <p class="benefit-text">Start earning from day one with returns up to 10% weekly.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="benefit-title">Lend with Confidence</h3>
+                <p class="benefit-text">Base your lending decisions on borrower ratings and group trust.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h3 class="benefit-title">Start Small, Grow Big</h3>
+                <p class="benefit-text">Begin lending with as little as 0.1$ equivalent. No pressure to lend large amounts.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-filter"></i>
+                </div>
+                <h3 class="benefit-title">Choose Your Categories</h3>
+                <p class="benefit-text">Select specific emergency categories you want to support via checkboxes.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="benefit-title">Support People You Trust</h3>
+                <p class="benefit-text">Help trusted group members while earning returns.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="benefit-title">Subscription-Gated Access</h3>
+                <p class="benefit-text">Tiered subscriptions (Basic, Premium, Super) with clear limits and expiry on the 28th.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories -->
+<section class="section-success-stories">
+    <div class="container">
+        <h2 class="section-title">Success Stories</h2>
+        <p class="section-subtitle">Real loans, real impact, real trust.</p>
+        <div class="carousel" id="successCarousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="story-card">
+                        <div class="story-quote">"M-Pesewa helped me get cooking gas when I had nothing. I repaid in 7 days with 10% interest. My family ate because of my group."</div>
+                        <div class="story-author">
+                            <img src="assets/img/avatars/mama-jimmy.jpg" alt="Mama Jimmy" width="50" height="50">
+                            <div>
+                                <h4>Mama Jimmy</h4>
+                                <p class="story-meta">Gas Loan • KSh 1,200 • Repaid in 7 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="story-card">
+                        <div class="story-quote">"I needed transport to a job interview. My group lent me KSh 250. I got the job and repaid the same week. Trust builds opportunity."</div>
+                        <div class="story-author">
+                            <img src="assets/img/avatars/john-kimani.jpg" alt="John Kimani" width="50" height="50">
+                            <div>
+                                <h4>John Kimani</h4>
+                                <p class="story-meta">Transport Loan • KSh 250 • Repaid in 7 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="story-card">
+                        <div class="story-quote">"As a pastor, I needed data to stream services. My church group lent me KSh 1,000. The connection kept our community together."</div>
+                        <div class="story-author">
+                            <img src="assets/img/avatars/pastor-ndungu.jpg" alt="Pastor Ndungu" width="50" height="50">
+                            <div>
+                                <h4>Pastor Ndungu</h4>
+                                <p class="story-meta">Data Loan • KSh 1,000 • Repaid in 7 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="story-card">
+                        <div class="story-quote">"My boda-boda ran out of fuel. I borrowed KSh 500 from my riders' group, completed my journeys, and repaid on time. Trust moves us forward."</div>
+                        <div class="story-author">
+                            <img src="assets/img/avatars/ibrahim.jpg" alt="Ibrahim" width="50" height="50">
+                            <div>
+                                <h4>Ibrahim</h4>
+                                <p class="story-meta">Fuel Loan • KSh 500 • Repaid in 7 days</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control prev" aria-label="Previous story">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next" aria-label="Next story">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="carousel-dots">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section-cta">
+    <div class="container">
+        <h2 class="cta-title">Ready to Join a Trusted Circle?</h2>
+        <p class="cta-subtitle">Emergency support, community trust, and financial empowerment across Africa.</p>
+        <div class="cta-actions">
+            <a href="pages/auth.html?mode=register&role=borrower" class="btn btn-primary btn-xlarge">
+                <i class="fas fa-user-plus"></i> Register as Borrower
+            </a>
+            <a href="pages/auth.html?mode=register&role=lender" class="btn btn-secondary btn-xlarge">
+                <i class="fas fa-user-tie"></i> Register as Lender
+            </a>
+        </div>
+        <p class="cta-note">Already have an account? <a href="pages/auth.html?mode=login">Sign in here</a>.</p>
+    </div>
+</section>
+
+<!-- Sticky Footer -->
+<footer class="sticky-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 class="footer-title">M-Pesewa</h3>
+                <p class="footer-description">Emergency micro-lending platform built around trusted social groups. We manage trust, not money.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/mpesewa" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/mpesewa" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/mpesewa" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/mpesewa" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://tiktok.com/@mpesewa" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://youtube.com/@mpesewa" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Countries</h3>
+                <div class="country-list">
+                    <a href="pages/countries/kenya.html">Kenya (KSh)</a>
+                    <a href="pages/countries/uganda.html">Uganda (UGX)</a>
+                    <a href="pages/countries/tanzania.html">Tanzania (TZS)</a>
+                    <a href="pages/countries/rwanda.html">Rwanda (RWF)</a>
+                    <a href="pages/countries/burundi.html">Burundi (BIF)</a>
+                    <a href="pages/countries/somalia.html">Somalia (SOS)</a>
+                    <a href="pages/countries/south-sudan.html">South Sudan (SSP)</a>
+                    <a href="pages/countries/ethiopia.html">Ethiopia (ETB)</a>
+                    <a href="pages/countries/drc.html">DRC (CDF)</a>
+                    <a href="pages/countries/nigeria.html">Nigeria (NGN)</a>
+                    <a href="pages/countries/ghana.html">Ghana (GHS)</a>
+                    <a href="pages/countries/south-africa.html">South Africa (ZAR)</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Contact</h3>
+                <p class="contact-info">
+                    <strong>General Inquiries:</strong><br>
+                    <a href="mailto:info@m-pesewa.com">info@m-pesewa.com</a>
+                </p>
+                <p class="contact-info">
+                    <strong>Support:</strong><br>
+                    <a href="mailto:support@mpesewa.com">support@mpesewa.com</a>
+                </p>
+                <p class="contact-info">
+                    <strong>Legal:</strong><br>
+                    <a href="mailto:legal@mpesewa.com">legal@mpesewa.com</a>
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">Legal</h3>
+                <ul class="legal-links">
+                    <li><a href="pages/terms.html">Terms & Conditions</a></li>
+                    <li><a href="pages/privacy.html">Privacy Policy</a></li>
+                    <li><a href="pages/contact.html">Contact Us</a></li>
+                    <li><a href="pages/qa.html">Help & Q&A</a></li>
+                    <li><a href="pages/blacklist.html">Blacklist Registry</a></li>
+                    <li><a href="pages/debt-collectors.html">Debt Collectors</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2026 M-Pesewa. All rights reserved. M-Pesewa is not a bank, not a lender, and does not hold user funds. All money moves off-platform.</p>
+            <p class="disclaimer">Use of this platform is at your own risk. M-Pesewa is not liable for financial losses, defaults, disputes, or data loss.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/pwa.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+    // Initialize the home page
+    Mpesewa.Home.init();
+</script>
