@@ -1,90 +1,119 @@
-// FILE: service-worker.js
-const CACHE_NAME = 'mpesewa-pwa-v1.0';
-const ASSETS_TO_CACHE = [
+/* =====================================================
+   M-Pesewa Service Worker
+   FinTech PWA – Safe, Offline-First (Static Assets Only)
+   ===================================================== */
+
+const CACHE_NAME = 'mpesewa-v1.0.0';
+
+/* ---- Files safe to cache (STATIC ONLY) ---- */
+const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+
+  /* CSS */
   '/assets/css/main.css',
   '/assets/css/components.css',
-  '/assets/css/dashboard.css',
-  '/assets/css/forms.css',
-  '/assets/css/tables.css',
   '/assets/css/animations.css',
-  '/assets/js/app.js',
-  '/assets/js/pwa.js',
-  '/assets/js/utils.js',
-  '/assets/js/auth.js',
-  '/assets/js/roles.js',
-  '/assets/js/groups.js',
-  '/assets/js/lending.js',
-  '/assets/js/borrowing.js',
-  '/assets/js/ledger.js',
-  '/assets/js/blacklist.js',
-  '/assets/js/subscriptions.js',
-  '/assets/js/countries.js',
-  '/assets/js/collectors.js',
-  '/assets/js/calculator.js',
-  '/assets/img/logo.svg',
-  '/assets/img/favicon.svg',
-  '/assets/img/icon-192x192.png',
-  '/assets/img/icon-512x512.png'
+
+  /* Images / Icons */
+  '/assets/images/favicon.ico',
+  '/assets/images/logo.png',
+
+  /* Pages (static only) */
+  '/pages/about.html',
+  '/pages/contact.html',
+  '/pages/qa.html'
 ];
 
-// Install event
-self.addEventListener('install', (event) => {
+/* =====================================================
+   INSTALL
+   ===================================================== */
+self.addEventListener('install', event => {
+  console.log('[Service Worker] Installing');
+
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        return cache.addAll(ASSETS_TO_CACHE);
-      })
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(STATIC_ASSETS);
+    })
   );
+
+  self.skipWaiting();
 });
 
-// Activate event
-self.addEventListener('activate', (event) => {
+/* =====================================================
+   ACTIVATE
+   ===================================================== */
+self.addEventListener('activate', event => {
+  console.log('[Service Worker] Activating');
+
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(keys => {
       return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })
   );
+
+  self.clients.claim();
 });
 
-// Fetch event
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
+/* =====================================================
+   FETCH STRATEGY
+   - Cache First for static assets
+   - Network Only for APIs / auth / payments
+   ===================================================== */
+self.addEventListener('fetch', event => {
+  const request = event.request;
+  const url = new URL(request.url);
+
+  /* ---- DO NOT CACHE API / AUTH / PAYMENTS ---- */
+  if (
+    url.pathname.startsWith('/api') ||
+    url.pathname.includes('auth') ||
+    url.pathname.includes('login') ||
+    url.pathname.includes('payment')
+  ) {
+    return;
+  }
+
+  /* ---- Only handle GET requests ---- */
+  if (request.method !== 'GET') return;
 
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
+    caches.match(request).then(cachedResponse => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
 
-        return fetch(event.request).then((response) => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
+      return fetch(request)
+        .then(networkResponse => {
+          if (
+            !networkResponse ||
+            networkResponse.status !== 200 ||
+            networkResponse.type !== 'basic'
+          ) {
+            return networkResponse;
           }
 
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
+          const responseClone = networkResponse.clone();
 
-          return response;
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(request, responseClone);
+          });
+
+          return networkResponse;
+        })
+        .catch(() => {
+          /* Optional offline fallback */
+          if (request.headers.get('accept')?.includes('text/html')) {
+            return caches.match('/index.html');
+          }
         });
-      }).catch(() => {
-        // If offline and not in cache, return offline page
-        if (event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('/');
-        }
-      })
+    })
   );
 });
