@@ -1,117 +1,94 @@
 /* =====================================================
    M-Pesewa Service Worker
-   FinTech PWA – Safe, Offline-First (Static Assets Only)
-   ===================================================== */
+   Production PWA – GitHub Pages Compatible
+===================================================== */
 
-const CACHE_NAME = 'mpesewa-v1.0.0';
+const CACHE_NAME = "mpesewa-v1.0.0";
 
-/* ---- Files safe to cache (STATIC ONLY) ---- */
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/assets/css/main.css",
+  "/assets/css/components.css",
+  "/assets/css/animations.css",
+  "/assets/js/app.js",
+  "/assets/js/pwa.js",
+  "/assets/images/favicon.ico",
 
-  /* CSS */
-  '/assets/css/main.css',
-  '/assets/css/components.css',
-  '/assets/css/animations.css',
-
-  /* Images / Icons */
-  '/assets/images/favicon.ico',
-  '/assets/images/logo.png',
-
-  /* Pages (static only) */
-  '/pages/about.html',
-  '/pages/contact.html',
-  '/pages/qa.html'
+  /* Icons */
+  "/assets/icons/icon-72x72.png",
+  "/assets/icons/icon-96x96.png",
+  "/assets/icons/icon-128x128.png",
+  "/assets/icons/icon-144x144.png",
+  "/assets/icons/icon-152x152.png",
+  "/assets/icons/icon-192x192.png",
+  "/assets/icons/icon-384x384.png",
+  "/assets/icons/icon-512x512.png"
 ];
 
-/* =====================================================
+/* ===============================
    INSTALL
-   ===================================================== */
-self.addEventListener('install', event => {
-  console.log('[Service Worker] Installing');
-
+================================ */
+self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(STATIC_ASSETS);
     })
   );
-
   self.skipWaiting();
 });
 
-/* =====================================================
+/* ===============================
    ACTIVATE
-   ===================================================== */
-self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activating');
-
+================================ */
+self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
       );
     })
   );
-
   self.clients.claim();
 });
 
-/* =====================================================
-   FETCH STRATEGY
-   - Cache First for static assets
-   - Network Only for APIs / auth / payments
-   ===================================================== */
-self.addEventListener('fetch', event => {
-  const request = event.request;
-  const url = new URL(request.url);
-
-  /* ---- DO NOT CACHE API / AUTH / PAYMENTS ---- */
-  if (
-    url.pathname.startsWith('/api') ||
-    url.pathname.includes('auth') ||
-    url.pathname.includes('login') ||
-    url.pathname.includes('payment')
-  ) {
-    return;
-  }
-
-  /* ---- Only handle GET requests ---- */
-  if (request.method !== 'GET') return;
+/* ===============================
+   FETCH
+   Cache First → Network Fallback
+================================ */
+self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(request).then(cachedResponse => {
+    caches.match(event.request).then(cachedResponse => {
       if (cachedResponse) {
         return cachedResponse;
       }
 
-      return fetch(request)
+      return fetch(event.request)
         .then(networkResponse => {
           if (
             !networkResponse ||
             networkResponse.status !== 200 ||
-            networkResponse.type !== 'basic'
+            networkResponse.type !== "basic"
           ) {
             return networkResponse;
           }
 
           const responseClone = networkResponse.clone();
-
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(request, responseClone);
+            cache.put(event.request, responseClone);
           });
 
           return networkResponse;
         })
         .catch(() => {
-          /* Optional offline fallback */
-          if (request.headers.get('accept')?.includes('text/html')) {
-            return caches.match('/index.html');
+          // Offline fallback (optional)
+          if (event.request.destination === "document") {
+            return caches.match("/index.html");
           }
         });
     })
