@@ -1,13 +1,13 @@
-# M-pesewa PWA Project Structure
+# M-Pesewa PWA
 
-## Project Overview
-M-pesewa is a Progressive Web Application (PWA) for emergency micro-lending within trusted social circles across Africa. This platform enables individuals within the same country and group to lend and borrow short-term consumption loans.
+M-Pesewa is a Progressive Web App (PWA) for emergency micro-lending in trusted circles across Africa. This platform enables individuals within the same country and group to lend and borrow short-term consumption loans.
 
-## Core Architecture
-- **Framework**: Vanilla JavaScript, HTML5, CSS3
-- **PWA Features**: Installable, Offline-capable, Push Notifications
-- **Deployment**: GitHub Pages ready
-- **Responsive**: Mobile-first design
+## 🌍 Live Demo
+[https://microokoaguarantycapital.github.io/m-pesewa/](https://microokoaguarantycapital.github.io/m-pesewa/)
+
+## 📋 Features
+
+### Core Hierarchy
 
 ## Directory Structure
 /m-pesewa/
@@ -194,5 +194,6 @@ Complete UI/UX: Modern design with all 20 emergency loan categories, success sto
 Responsive Design: Mobile-first approach with hamburger menu and adaptive layouts
 
 Production-Ready Code: Form validations, animations, micro-interactions, and proper file structure
+
 
 GitHub Pages Ready: All files structured for immediate deployment
