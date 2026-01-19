@@ -1,293 +1,319 @@
-// service-worker.js
-const CACHE_NAME = 'mpesewa-v1.0.0';
-const urlsToCache = [
+const CACHE_NAME = 'm-pesewa-v1.0.0';
+const STATIC_CACHE = 'static-v1';
+const DYNAMIC_CACHE = 'dynamic-v1';
+
+// Static assets to cache on install
+const STATIC_ASSETS = [
   '/m-pesewa/',
   '/m-pesewa/index.html',
   '/m-pesewa/manifest.json',
-  
-  // CSS Files
   '/m-pesewa/assets/css/main.css',
   '/m-pesewa/assets/css/components.css',
   '/m-pesewa/assets/css/animations.css',
-  
-  // JS Files
   '/m-pesewa/assets/js/app.js',
+  '/m-pesewa/assets/js/auth.js',
+  '/m-pesewa/assets/js/calculator.js',
   '/m-pesewa/assets/js/pwa.js',
   '/m-pesewa/assets/js/utils.js',
-  
-  // Images
   '/m-pesewa/assets/images/logo.svg',
-  '/m-pesewa/assets/images/icons/icon-192.png',
-  '/m-pesewa/assets/images/icons/icon-512.png',
-  
-  // Pages
-  '/m-pesewa/pages/lending.html',
-  '/m-pesewa/pages/borrowing.html',
-  '/m-pesewa/pages/groups.html',
-  '/m-pesewa/pages/ledger.html',
-  '/m-pesewa/pages/about.html',
-  '/m-pesewa/pages/qa.html',
-  '/m-pesewa/pages/contact.html',
-  
-  // Country Pages
-  '/m-pesewa/pages/countries/index.html',
-  '/m-pesewa/pages/countries/kenya.html'
+  '/m-pesewa/assets/images/icons/icon-72x72.png',
+  '/m-pesewa/assets/images/icons/icon-96x96.png',
+  '/m-pesewa/assets/images/icons/icon-128x128.png',
+  '/m-pesewa/assets/images/icons/icon-144x144.png',
+  '/m-pesewa/assets/images/icons/icon-152x152.png',
+  '/m-pesewa/assets/images/icons/icon-192x192.png',
+  '/m-pesewa/assets/images/icons/icon-512x512.png',
+  'https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap'
 ];
 
-// Install Event
+// Install event - cache static assets
 self.addEventListener('install', event => {
+  console.log('[Service Worker] Installing...');
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches.open(STATIC_CACHE)
       .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        console.log('[Service Worker] Caching static assets');
+        return cache.addAll(STATIC_ASSETS);
       })
-      .then(() => self.skipWaiting())
+      .then(() => {
+        console.log('[Service Worker] Skip waiting');
+        return self.skipWaiting();
+      })
   );
 });
 
-// Activate Event
+// Activate event - clean up old caches
 self.addEventListener('activate', event => {
+  console.log('[Service Worker] Activating...');
   event.waitUntil(
-    caches.keys().then(cacheNames => {
+    caches.keys().then(keys => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
+        keys.map(key => {
+          if (key !== STATIC_CACHE && key !== DYNAMIC_CACHE) {
+            console.log('[Service Worker] Removing old cache:', key);
+            return caches.delete(key);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    }).then(() => {
+      console.log('[Service Worker] Claiming clients');
+      return self.clients.claim();
+    })
   );
 });
 
-// Fetch Event with Network First Strategy for dynamic content
+// Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
-  // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) {
-    return;
-  }
-  
-  // Handle API requests with network first strategy
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') return;
+
+  // Skip chrome-extension requests
+  if (event.request.url.startsWith('chrome-extension://')) return;
+
+  // Handle API requests differently
   if (event.request.url.includes('/api/')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          // Cache the API response if successful
-          if (response.status === 200) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, responseClone);
-            });
-          }
-          return response;
-        })
-        .catch(() => {
-          // If network fails, try cache
-          return caches.match(event.request);
-        })
-    );
+    event.respondWith(networkFirst(event.request));
     return;
   }
-  
-  // For HTML pages, use network first strategy
-  if (event.request.headers.get('Accept').includes('text/html')) {
-    event.respondWith(
-      fetch(event.request)
-        .then(response => {
-          const responseClone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseClone);
-          });
-          return response;
-        })
-        .catch(() => {
-          return caches.match(event.request)
-            .then(response => {
-              if (response) {
-                return response;
-              }
-              // Return offline page if no cache
-              return caches.match('/m-pesewa/offline.html');
-            });
-        })
-    );
-    return;
-  }
-  
-  // For static assets (CSS, JS, images), use cache first strategy
+
+  // For static assets, use cache-first strategy
   event.respondWith(
     caches.match(event.request)
       .then(response => {
         if (response) {
           return response;
         }
-        
-        return fetch(event.request)
+
+        // Clone the request
+        const fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest)
           .then(response => {
-            // Don't cache if not a successful response
+            // Check if valid response
             if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
-            
+
+            // Clone the response
             const responseToCache = response.clone();
-            caches.open(CACHE_NAME)
+
+            // Cache the response
+            caches.open(DYNAMIC_CACHE)
               .then(cache => {
                 cache.put(event.request, responseToCache);
               });
-            
+
             return response;
           })
-          .catch(() => {
-            // Return placeholder for images if offline
-            if (event.request.destination === 'image') {
-              return caches.match('/m-pesewa/assets/images/placeholder.png');
+          .catch(error => {
+            console.log('[Service Worker] Fetch failed:', error);
+            
+            // Return offline page for HTML requests
+            if (event.request.headers.get('accept').includes('text/html')) {
+              return caches.match('/m-pesewa/index.html');
             }
-            return new Response('Network error happened', {
-              status: 408,
-              headers: { 'Content-Type': 'text/plain' }
-            });
+            
+            // Return fallback for other requests
+            return fallbackResponse(event.request);
           });
       })
   );
 });
 
-// Background Sync for offline actions
-self.addEventListener('sync', event => {
-  if (event.tag === 'sync-loan-requests') {
-    event.waitUntil(syncLoanRequests());
+// Network-first strategy for API requests
+function networkFirst(request) {
+  return fetch(request)
+    .then(response => {
+      const responseClone = response.clone();
+      caches.open(DYNAMIC_CACHE)
+        .then(cache => {
+          cache.put(request, responseClone);
+        });
+      return response;
+    })
+    .catch(() => {
+      return caches.match(request);
+    });
+}
+
+// Generate fallback response
+function fallbackResponse(request) {
+  if (request.url.includes('.css')) {
+    return new Response('/* Fallback CSS */', {
+      headers: { 'Content-Type': 'text/css' }
+    });
   }
-});
-
-// Push Notifications
-self.addEventListener('push', event => {
-  const options = {
-    body: event.data ? event.data.text() : 'New update from M-pesewa',
-    icon: '/m-pesewa/assets/images/icons/icon-192.png',
-    badge: '/m-pesewa/assets/images/icons/badge-72.png',
-    vibrate: [100, 50, 100],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: 1
-    },
-    actions: [
-      {
-        action: 'open',
-        title: 'Open App'
-      },
-      {
-        action: 'close',
-        title: 'Close'
-      }
-    ]
-  };
-
-  event.waitUntil(
-    self.registration.showNotification('M-pesewa', options)
-  );
-});
-
-// Notification Click Handler
-self.addEventListener('notificationclick', event => {
-  event.notification.close();
-
-  if (event.action === 'open') {
-    event.waitUntil(
-      clients.openWindow('/m-pesewa/')
-    );
-  }
-});
-
-// Sync function for offline loan requests
-async function syncLoanRequests() {
-  const db = await openDatabase();
-  const offlineRequests = await getAllOfflineRequests(db);
   
-  for (const request of offlineRequests) {
-    try {
-      const response = await fetch('/api/loan-requests', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(request.data)
-      });
-      
-      if (response.ok) {
-        await deleteOfflineRequest(db, request.id);
+  if (request.url.includes('.js')) {
+    return new Response('// Fallback JS', {
+      headers: { 'Content-Type': 'application/javascript' }
+    });
+  }
+  
+  if (request.url.includes('.json')) {
+    return new Response(JSON.stringify({ error: 'Offline' }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  
+  return new Response('Offline', {
+    headers: { 'Content-Type': 'text/plain' }
+  });
+}
+
+// Background sync for offline form submissions
+self.addEventListener('sync', event => {
+  console.log('[Service Worker] Background sync:', event.tag);
+  
+  if (event.tag === 'sync-forms') {
+    event.waitUntil(syncForms());
+  }
+});
+
+async function syncForms() {
+  try {
+    const db = await openDatabase();
+    const pendingForms = await getAllPendingForms(db);
+    
+    for (const form of pendingForms) {
+      try {
+        const response = await fetch(form.endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form.data)
+        });
+        
+        if (response.ok) {
+          await deletePendingForm(db, form.id);
+          console.log('[Service Worker] Synced form:', form.id);
+        }
+      } catch (error) {
+        console.error('[Service Worker] Sync failed for form:', form.id, error);
       }
-    } catch (error) {
-      console.error('Failed to sync request:', error);
     }
+  } catch (error) {
+    console.error('[Service Worker] Sync error:', error);
   }
 }
 
-// IndexedDB helper functions
+// Database helpers for background sync
 function openDatabase() {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open('mpesewa-offline', 1);
+    const request = indexedDB.open('m-pesewa-offline', 1);
     
-    request.onupgradeneeded = event => {
+    request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      if (!db.objectStoreNames.contains('loanRequests')) {
-        db.createObjectStore('loanRequests', { keyPath: 'id' });
+      if (!db.objectStoreNames.contains('pending-forms')) {
+        db.createObjectStore('pending-forms', { keyPath: 'id' });
       }
     };
     
-    request.onsuccess = event => resolve(event.target.result);
-    request.onerror = event => reject(event.target.error);
+    request.onsuccess = (event) => resolve(event.target.result);
+    request.onerror = (event) => reject(event.target.error);
   });
 }
 
-function getAllOfflineRequests(db) {
+function getAllPendingForms(db) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(['loanRequests'], 'readonly');
-    const store = transaction.objectStore('loanRequests');
-    const requests = [];
+    const transaction = db.transaction(['pending-forms'], 'readonly');
+    const store = transaction.objectStore('pending-forms');
+    const request = store.getAll();
     
-    store.openCursor().onsuccess = event => {
-      const cursor = event.target.result;
-      if (cursor) {
-        requests.push(cursor.value);
-        cursor.continue();
-      } else {
-        resolve(requests);
-      }
-    };
-    
-    transaction.onerror = event => reject(event.target.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
   });
 }
 
-function deleteOfflineRequest(db, id) {
+function deletePendingForm(db, id) {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(['loanRequests'], 'readwrite');
-    const store = transaction.objectStore('loanRequests');
+    const transaction = db.transaction(['pending-forms'], 'readwrite');
+    const store = transaction.objectStore('pending-forms');
     const request = store.delete(id);
     
     request.onsuccess = () => resolve();
-    request.onerror = event => reject(event.target.error);
+    request.onerror = () => reject(request.error);
   });
 }
 
-// Periodic Sync for background updates
-self.addEventListener('periodicsync', event => {
-  if (event.tag === 'update-cache') {
-    event.waitUntil(updateCache());
-  }
+// Push notifications
+self.addEventListener('push', event => {
+  console.log('[Service Worker] Push received');
+  
+  const data = event.data ? event.data.json() : {};
+  const title = data.title || 'M-Pesewa';
+  const options = {
+    body: data.body || 'You have a new notification',
+    icon: '/m-pesewa/assets/images/icons/icon-192x192.png',
+    badge: '/m-pesewa/assets/images/icons/icon-72x72.png',
+    data: data,
+    actions: data.actions || [],
+    tag: data.tag || 'default',
+    renotify: data.renotify || false,
+    requireInteraction: data.requireInteraction || false
+  };
+  
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
 });
 
-async function updateCache() {
-  const cache = await caches.open(CACHE_NAME);
-  for (const url of urlsToCache) {
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-        await cache.put(url, response);
-      }
-    } catch (error) {
-      console.log('Failed to update:', url);
+// Notification click handler
+self.addEventListener('notificationclick', event => {
+  console.log('[Service Worker] Notification clicked');
+  
+  event.notification.close();
+  
+  const urlToOpen = event.notification.data?.url || '/m-pesewa/';
+  
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then(clientList => {
+        // Check if there's already a window/tab open with the target URL
+        for (const client of clientList) {
+          if (client.url === urlToOpen && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        
+        // If not, open a new window/tab
+        if (clients.openWindow) {
+          return clients.openWindow(urlToOpen);
+        }
+      })
+  );
+});
+
+// Periodic sync (if supported)
+if ('periodicSync' in self.registration) {
+  self.addEventListener('periodicsync', event => {
+    if (event.tag === 'update-content') {
+      event.waitUntil(updateContent());
     }
-  }
+  });
 }
+
+async function updateContent() {
+  console.log('[Service Worker] Periodic sync: updating content');
+  
+  // Update cached content in the background
+  const cache = await caches.open(DYNAMIC_CACHE);
+  
+  // Add logic to update dynamic content
+  // For example, fetch latest loan categories, groups, etc.
+}
+
+// Message handler for communication with client
+self.addEventListener('message', event => {
+  console.log('[Service Worker] Message received:', event.data);
+  
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    caches.delete(STATIC_CACHE);
+    caches.delete(DYNAMIC_CACHE);
+  }
+});
