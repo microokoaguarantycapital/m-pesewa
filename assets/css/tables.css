@@ -1,0 +1,187 @@
+/* =====================================================
+   M-Pesewa – Tables Styles
+   FinTech UI (i2iFunding-Inspired)
+   ===================================================== */
+
+/* -------------------------------
+   TABLE WRAPPER
+-------------------------------- */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* -------------------------------
+   TABLE BASE
+-------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+th, td {
+  padding: 0.85rem 1.2rem;
+  text-align: left;
+}
+
+th {
+  font-weight: 600;
+  background-color: #f1f5f9;
+  color: #0a3d62;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+td {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* -------------------------------
+   TABLE ROW STATES
+-------------------------------- */
+tr:hover {
+  background-color: #f8fafc;
+}
+
+tr.active {
+  background-color: #e0f2fe;
+}
+
+tr.blacklisted {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* -------------------------------
+   BADGES / LABELS
+-------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.badge.active {
+  background-color: #0a3d62;
+  color: #ffffff;
+}
+
+.badge.cleared {
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+.badge.overdue {
+  background-color: #facc15;
+  color: #1e293b;
+}
+
+.badge.blacklisted {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+/* -------------------------------
+   TABLE ACTION BUTTONS
+-------------------------------- */
+.table-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.table-actions .btn {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.table-actions .btn.view {
+  background-color: #0a3d62;
+  color: #ffffff;
+}
+
+.table-actions .btn.edit {
+  background-color: #fbbf24;
+  color: #1e293b;
+}
+
+.table-actions .btn.delete {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+/* -------------------------------
+   RESPONSIVE TABLE
+-------------------------------- */
+@media (max-width: 768px) {
+  th, td {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .table-actions {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+}
+
+/* -------------------------------
+   SPECIAL TABLES
+-------------------------------- */
+
+/* LEDGER TABLE */
+.ledger-table th,
+.ledger-table td {
+  text-align: center;
+}
+
+.ledger-table th:first-child,
+.ledger-table td:first-child {
+  text-align: left;
+}
+
+.ledger-table td.amount {
+  font-weight: 600;
+}
+
+/* SUBSCRIPTION TABLE */
+.subscription-table th,
+.subscription-table td {
+  text-align: center;
+}
+
+/* DEBT COLLECTORS TABLE */
+.collectors-table th,
+.collectors-table td {
+  text-align: left;
+}
+
+.collectors-table td.contact {
+  font-weight: 500;
+  color: #0a3d62;
+  font-size: 0.88rem;
+}
+
+/* BLACKLIST TABLE */
+.blacklist-table th,
+.blacklist-table td {
+  text-align: left;
+}
+
+.blacklist-table td.amount-overdue {
+  color: #dc2626;
+  font-weight: 600;
+}
