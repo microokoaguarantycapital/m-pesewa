@@ -1,109 +1,85 @@
 {
-  "name": "M-pesewa",
-  "short_name": "M-pesewa",
-  "description": "Emergency Micro-Lending in Trusted Circles - Borrow or lend short-term emergency loans inside verified groups across Africa",
+  "name": "M-Pesewa",
+  "short_name": "M-Pesewa",
+  "description": "Emergency micro-lending in trusted circles across Africa",
   "start_url": "/m-pesewa/",
-  "display": "standalone",
-  "background_color": "#2b1d4f",
-  "theme_color": "#3a2b6f",
-  "orientation": "portrait",
   "scope": "/m-pesewa/",
-  "categories": ["finance", "business", "social"],
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#2b1d4f",
+  "theme_color": "#2b1d4f",
   "icons": [
     {
-      "src": "assets/images/icons/icon-72.png",
+      "src": "assets/images/icons/icon-72x72.png",
       "sizes": "72x72",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-96.png",
+      "src": "assets/images/icons/icon-96x96.png",
       "sizes": "96x96",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-128.png",
+      "src": "assets/images/icons/icon-128x128.png",
       "sizes": "128x128",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-144.png",
+      "src": "assets/images/icons/icon-144x144.png",
       "sizes": "144x144",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-152.png",
+      "src": "assets/images/icons/icon-152x152.png",
       "sizes": "152x152",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-192.png",
+      "src": "assets/images/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-384.png",
+      "src": "assets/images/icons/icon-384x384.png",
       "sizes": "384x384",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icons/icon-512.png",
+      "src": "assets/images/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "assets/images/screenshots/mobile-screenshot.png",
-      "sizes": "375x667",
-      "type": "image/png",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "assets/images/screenshots/desktop-screenshot.png",
-      "sizes": "1920x1080",
-      "type": "image/png",
-      "form_factor": "wide"
-    }
-  ],
+  "categories": ["finance", "business", "social"],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "shortcuts": [
     {
-      "name": "Borrow Now",
+      "name": "Borrow Emergency Loan",
       "short_name": "Borrow",
-      "description": "Request an emergency loan",
-      "url": "/m-pesewa/auth.html?type=register&role=borrower",
-      "icons": [
-        {
-          "src": "assets/images/icons/borrow-icon.png",
-          "sizes": "96x96"
-        }
-      ]
+      "description": "Request an emergency loan from your trusted group",
+      "url": "/m-pesewa/pages/borrowing.html"
     },
     {
-      "name": "Start Lending",
+      "name": "Lend to Group",
       "short_name": "Lend",
-      "description": "Become a lender",
-      "url": "/m-pesewa/auth.html?type=register&role=lender",
-      "icons": [
-        {
-          "src": "assets/images/icons/lend-icon.png",
-          "sizes": "96x96"
-        }
-      ]
+      "description": "Lend to trusted members in your group",
+      "url": "/m-pesewa/pages/lending.html"
     },
     {
       "name": "Dashboard",
       "short_name": "Dashboard",
-      "description": "View your account",
-      "url": "/m-pesewa/pages/dashboard/lender-dashboard.html",
-      "icons": [
-        {
-          "src": "assets/images/icons/dashboard-icon.png",
-          "sizes": "96x96"
-        }
-      ]
+      "description": "Access your lending/borrowing dashboard",
+      "url": "/m-pesewa/pages/dashboard/"
     }
-  ],
-  "prefer_related_applications": false,
-  "related_applications": []
+  ]
 }
