@@ -1,813 +1,522 @@
-/* ============================================
-   M-PESEWA - MAIN APPLICATION JS
-   Core functionality, routing, and PWA features
-   ============================================ */
+// M-PESEWA - Main JavaScript File
+// Core PWA functionality and application logic
 
-// ============================================
-// 1. APP CONFIGURATION & STATE
-// ============================================
-const Mpesewa = {
-    config: {
-        appName: 'M-PESEWA',
-        version: '1.0.0',
-        apiBase: 'https://api.mpesewa.com/v1',
-        countryCode: null,
-        currency: 'KES',
-        userRole: null,
-        userData: null
-    },
-
-    state: {
-        isOnline: navigator.onLine,
-        isInstalled: false,
-        currentPage: null,
-        authToken: localStorage.getItem('auth_token') || null,
-        userSubscription: localStorage.getItem('user_subscription') || null,
-        countryLock: localStorage.getItem('country_lock') || null
-    },
-
-    // ============================================
-    // 2. INITIALIZATION
-    // ============================================
-    init: function() {
-        console.log(`${this.config.appName} v${this.config.version} initializing...`);
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registered with scope:', registration.scope);
         
-        // Initialize core modules
-        this.initPWA();
-        this.initOfflineDetection();
-        this.initRouting();
-        this.initAuth();
-        this.initUI();
-        
-        // Set up event listeners
-        this.setupEventListeners();
-        
-        console.log(`${this.config.appName} initialized successfully.`);
-    },
-
-    // ============================================
-    // 3. PWA FUNCTIONALITY
-    // ============================================
-    initPWA: function() {
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered:', registration);
-                        this.state.isInstalled = true;
-                        this.updateInstallButton();
-                    })
-                    .catch(error => {
-                        console.log('Service Worker registration failed:', error);
-                    });
-            });
-        }
-
-        // Check if app is installed
-        window.addEventListener('appinstalled', (event) => {
-            console.log('App installed successfully');
-            this.state.isInstalled = true;
-            this.updateInstallButton();
-        });
-
-        // Show install prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (event) => {
-            event.preventDefault();
-            deferredPrompt = event;
-            this.showInstallPrompt();
-        });
-    },
-
-    showInstallPrompt: function() {
-        const installBtn = document.getElementById('install-pwa');
-        if (installBtn) {
-            installBtn.style.display = 'block';
-            installBtn.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('User accepted install');
-                        } else {
-                            console.log('User dismissed install');
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            });
-        }
-    },
-
-    updateInstallButton: function() {
-        const installBtn = document.getElementById('install-pwa');
-        if (installBtn) {
-            if (this.state.isInstalled) {
-                installBtn.style.display = 'none';
+        // Check for updates
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          console.log('New service worker found:', newWorker);
+          
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New content is available, show update notification
+              showUpdateNotification();
             }
-        }
-    },
-
-    // ============================================
-    // 4. OFFLINE DETECTION
-    // ============================================
-    initOfflineDetection: function() {
-        window.addEventListener('online', () => {
-            this.state.isOnline = true;
-            this.showToast('You are back online', 'success');
-            document.body.classList.remove('offline');
+          });
         });
+      })
+      .catch(error => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
+}
 
-        window.addEventListener('offline', () => {
-            this.state.isOnline = false;
-            this.showToast('You are offline. Some features may be limited.', 'warning');
-            document.body.classList.add('offline');
-        });
+// PWA Install Prompt
+let deferredPrompt;
+const installButton = document.getElementById('install-button');
 
-        // Initial state
-        if (!this.state.isOnline) {
-            document.body.classList.add('offline');
-            this.showToast('You are offline. Some features may be limited.', 'warning');
-        }
-    },
-
-    // ============================================
-    // 5. ROUTING & NAVIGATION
-    // ============================================
-    initRouting: function() {
-        // Get current page from URL
-        const path = window.location.pathname;
-        this.state.currentPage = path.split('/').pop() || 'index.html';
-        
-        // Update active navigation
-        this.updateActiveNav();
-        
-        // Handle internal navigation for smooth transitions
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (link && link.href && link.href.startsWith(window.location.origin)) {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('#') && !href.includes('mailto:') && !href.includes('tel:')) {
-                    e.preventDefault();
-                    this.navigateTo(href);
-                }
-            }
-        });
-
-        // Handle browser navigation
-        window.addEventListener('popstate', () => {
-            this.loadPage(window.location.pathname, false);
-        });
-    },
-
-    navigateTo: function(url, pushState = true) {
-        if (pushState) {
-            window.history.pushState({}, '', url);
-        }
-        this.loadPage(url);
-    },
-
-    loadPage: function(url) {
-        // Show loading indicator
-        this.showLoading();
-        
-        // Update current page state
-        this.state.currentPage = url.split('/').pop() || 'index.html';
-        this.updateActiveNav();
-        
-        // Hide loading indicator after a delay
-        setTimeout(() => {
-            this.hideLoading();
-            window.scrollTo(0, 0);
-        }, 300);
-    },
-
-    updateActiveNav: function() {
-        // Remove active class from all nav links
-        document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
-            link.classList.remove('active');
-        });
-        
-        // Add active class to current page link
-        const currentPath = window.location.pathname;
-        document.querySelectorAll('.nav-links a, .mobile-nav a').forEach(link => {
-            if (link.getAttribute('href') === currentPath || 
-                (currentPath.includes(link.getAttribute('href')) && link.getAttribute('href') !== 'index.html')) {
-                link.classList.add('active');
-            }
-        });
-    },
-
-    // ============================================
-    // 6. AUTHENTICATION
-    // ============================================
-    initAuth: function() {
-        // Check for existing auth
-        if (this.state.authToken) {
-            this.loadUserData();
-        }
-        
-        // Check subscription status
-        if (this.state.userSubscription) {
-            this.checkSubscriptionStatus();
-        }
-        
-        // Check country lock
-        if (this.state.countryLock) {
-            this.config.countryCode = this.state.countryLock;
-            this.updateCountryDisplay();
-        }
-    },
-
-    loadUserData: function() {
-        // Simulate API call
-        setTimeout(() => {
-            this.config.userData = {
-                id: 'user_123',
-                name: 'John Doe',
-                role: 'lender',
-                groups: ['family_group', 'church_group'],
-                rating: 4.5,
-                blacklisted: false
-            };
-            this.config.userRole = this.config.userData.role;
-            this.updateUserUI();
-        }, 500);
-    },
-
-    updateUserUI: function() {
-        const userElements = document.querySelectorAll('.user-name, .user-role');
-        userElements.forEach(el => {
-            if (el.classList.contains('user-name') && this.config.userData) {
-                el.textContent = this.config.userData.name;
-            }
-            if (el.classList.contains('user-role') && this.config.userRole) {
-                el.textContent = this.config.userRole.charAt(0).toUpperCase() + this.config.userRole.slice(1);
-            }
-        });
-    },
-
-    checkSubscriptionStatus: function() {
-        const subscription = JSON.parse(this.state.userSubscription);
-        const expiryDate = new Date(subscription.expires);
-        const today = new Date();
-        
-        if (expiryDate < today) {
-            this.showToast('Your subscription has expired. Please renew to continue lending.', 'warning');
-            document.body.classList.add('subscription-expired');
-        }
-    },
-
-    // ============================================
-    // 7. COUNTRY MANAGEMENT
-    // ============================================
-    selectCountry: function(countryCode, currency) {
-        this.config.countryCode = countryCode;
-        this.config.currency = currency;
-        this.state.countryLock = countryCode;
-        
-        localStorage.setItem('country_lock', countryCode);
-        
-        this.updateCountryDisplay();
-        this.showToast(`Country set to ${this.getCountryName(countryCode)}`, 'success');
-    },
-
-    getCountryName: function(code) {
-        const countries = {
-            'ke': 'Kenya',
-            'ug': 'Uganda',
-            'tz': 'Tanzania',
-            'rw': 'Rwanda',
-            'bi': 'Burundi',
-            'so': 'Somalia',
-            'ss': 'South Sudan',
-            'et': 'Ethiopia',
-            'cd': 'DR Congo',
-            'ng': 'Nigeria',
-            'gh': 'Ghana',
-            'za': 'South Africa'
-        };
-        return countries[code] || code;
-    },
-
-    updateCountryDisplay: function() {
-        const countryElements = document.querySelectorAll('.country-display, .currency-display');
-        countryElements.forEach(el => {
-            if (el.classList.contains('country-display') && this.config.countryCode) {
-                el.textContent = this.getCountryName(this.config.countryCode);
-                el.style.display = 'inline-block';
-            }
-            if (el.classList.contains('currency-display') && this.config.currency) {
-                el.textContent = this.config.currency;
-            }
-        });
-    },
-
-    // ============================================
-    // 8. UI COMPONENTS & INTERACTIONS
-    // ============================================
-    initUI: function() {
-        // Initialize mobile menu
-        this.initMobileMenu();
-        
-        // Initialize modals
-        this.initModals();
-        
-        // Initialize dropdowns
-        this.initDropdowns();
-        
-        // Initialize tabs
-        this.initTabs();
-        
-        // Initialize forms
-        this.initForms();
-        
-        // Initialize tooltips
-        this.initTooltips();
-        
-        // Initialize notifications
-        this.initNotifications();
-    },
-
-    initMobileMenu: function() {
-        const menuToggle = document.querySelector('.mobile-menu-toggle');
-        const mobileNav = document.querySelector('.mobile-nav');
-        
-        if (menuToggle && mobileNav) {
-            menuToggle.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                mobileNav.classList.toggle('active');
-                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-            });
-            
-            // Close menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
-                    menuToggle.classList.remove('active');
-                    mobileNav.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-    },
-
-    initModals: function() {
-        // Open modal
-        document.addEventListener('click', (e) => {
-            const openBtn = e.target.closest('[data-modal]');
-            if (openBtn) {
-                const modalId = openBtn.getAttribute('data-modal');
-                this.openModal(modalId);
-            }
-            
-            // Close modal
-            if (e.target.classList.contains('modal-overlay') || 
-                e.target.classList.contains('modal-close') ||
-                e.target.closest('.modal-close')) {
-                this.closeModal();
-            }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closeModal();
-            }
-        });
-    },
-
-    openModal: function(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    },
-
-    closeModal: function() {
-        document.querySelectorAll('.modal-overlay.active').forEach(modal => {
-            modal.classList.remove('active');
-        });
-        document.body.style.overflow = '';
-    },
-
-    initDropdowns: function() {
-        document.addEventListener('click', (e) => {
-            const dropdownToggle = e.target.closest('.dropdown-toggle');
-            if (dropdownToggle) {
-                const dropdown = dropdownToggle.closest('.dropdown');
-                dropdown.classList.toggle('active');
-            } else {
-                // Close all dropdowns when clicking outside
-                document.querySelectorAll('.dropdown.active').forEach(dropdown => {
-                    dropdown.classList.remove('active');
-                });
-            }
-        });
-    },
-
-    initTabs: function() {
-        document.addEventListener('click', (e) => {
-            const tab = e.target.closest('.tab');
-            if (tab && !tab.classList.contains('active')) {
-                const tabContainer = tab.closest('.tabs');
-                const tabContentId = tab.getAttribute('data-tab');
-                
-                // Update active tab
-                tabContainer.querySelectorAll('.tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                tab.classList.add('active');
-                
-                // Update active content
-                const tabContentContainer = document.querySelector(tab.getAttribute('data-tabs'));
-                if (tabContentContainer) {
-                    tabContentContainer.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    const activeContent = tabContentContainer.querySelector(`#${tabContentId}`);
-                    if (activeContent) {
-                        activeContent.classList.add('active');
-                    }
-                }
-            }
-        });
-    },
-
-    initForms: function() {
-        // Form validation
-        document.addEventListener('submit', (e) => {
-            const form = e.target;
-            if (form.classList.contains('needs-validation')) {
-                e.preventDefault();
-                if (this.validateForm(form)) {
-                    form.submit();
-                }
-            }
-        });
-        
-        // Real-time validation
-        document.addEventListener('input', (e) => {
-            const input = e.target;
-            if (input.classList.contains('form-control')) {
-                this.validateInput(input);
-            }
-        });
-    },
-
-    validateForm: function(form) {
-        let isValid = true;
-        const inputs = form.querySelectorAll('.form-control[required]');
-        
-        inputs.forEach(input => {
-            if (!this.validateInput(input)) {
-                isValid = false;
-            }
-        });
-        
-        if (isValid) {
-            form.classList.remove('was-validated');
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent Chrome 67 and earlier from automatically showing the prompt
+  e.preventDefault();
+  // Stash the event so it can be triggered later
+  deferredPrompt = e;
+  
+  // Show install button if it exists
+  if (installButton) {
+    installButton.style.display = 'flex';
+    installButton.addEventListener('click', () => {
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
         } else {
-            form.classList.add('was-validated');
+          console.log('User dismissed the install prompt');
         }
-        
-        return isValid;
-    },
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+      });
+    });
+  }
+});
 
-    validateInput: function(input) {
-        const value = input.value.trim();
-        let isValid = true;
-        let errorMessage = '';
-        
-        // Required validation
-        if (input.required && !value) {
-            isValid = false;
-            errorMessage = 'This field is required';
-        }
-        
-        // Email validation
-        if (input.type === 'email' && value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                isValid = false;
-                errorMessage = 'Please enter a valid email address';
-            }
-        }
-        
-        // Password validation
-        if (input.type === 'password' && value) {
-            if (value.length < 8) {
-                isValid = false;
-                errorMessage = 'Password must be at least 8 characters';
-            }
-        }
-        
-        // Phone validation
-        if (input.type === 'tel' && value) {
-            const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
-            if (!phoneRegex.test(value)) {
-                isValid = false;
-                errorMessage = 'Please enter a valid phone number';
-            }
-        }
-        
-        // Update UI
-        if (isValid) {
-            input.classList.remove('error');
-            input.classList.add('success');
-            this.clearInputError(input);
-        } else {
-            input.classList.remove('success');
-            input.classList.add('error');
-            this.showInputError(input, errorMessage);
-        }
-        
-        return isValid;
-    },
+// Show update notification
+function showUpdateNotification() {
+  const notification = document.createElement('div');
+  notification.className = 'update-notification';
+  notification.innerHTML = `
+    <div class="update-content">
+      <p>New version available! Refresh for updates.</p>
+      <button id="refresh-button" class="btn btn-primary btn-sm">Refresh</button>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  document.getElementById('refresh-button').addEventListener('click', () => {
+    window.location.reload();
+  });
+  
+  // Auto-hide after 10 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 10000);
+}
 
-    showInputError: function(input, message) {
-        this.clearInputError(input);
-        
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'form-text error';
-        errorDiv.textContent = message;
-        
-        input.parentNode.appendChild(errorDiv);
-    },
+// Offline Detection
+window.addEventListener('online', () => {
+  showToast('You are back online', 'success');
+  // Sync any pending operations
+  syncPendingOperations();
+});
 
-    clearInputError: function(input) {
-        const existingError = input.parentNode.querySelector('.form-text.error');
-        if (existingError) {
-            existingError.remove();
-        }
-    },
+window.addEventListener('offline', () => {
+  showToast('You are offline. Some features may be limited.', 'warning');
+});
 
-    initTooltips: function() {
-        // Tooltips are handled by CSS
-        // This function can be extended for dynamic tooltips
-    },
+// Toast Notification System
+function showToast(message, type = 'info') {
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <div class="toast-content">
+      <span class="toast-message">${message}</span>
+      <button class="toast-close">&times;</button>
+    </div>
+  `;
+  
+  document.body.appendChild(toast);
+  
+  // Add close functionality
+  const closeButton = toast.querySelector('.toast-close');
+  closeButton.addEventListener('click', () => {
+    toast.remove();
+  });
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    toast.remove();
+  }, 5000);
+  
+  // Add CSS for toast if not already present
+  if (!document.querySelector('#toast-styles')) {
+    const style = document.createElement('style');
+    style.id = 'toast-styles';
+    style.textContent = `
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        min-width: 300px;
+        max-width: 400px;
+        background: white;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        border-left: 4px solid var(--gold);
+        animation: slideIn 0.3s ease-out;
+      }
+      .toast-success { border-left-color: var(--green); }
+      .toast-warning { border-left-color: var(--yellow); }
+      .toast-danger { border-left-color: var(--red); }
+      .toast-info { border-left-color: var(--blue); }
+      .toast-content {
+        padding: var(--spacing-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-md);
+      }
+      .toast-message {
+        flex: 1;
+        font-size: 0.875rem;
+      }
+      .toast-close {
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: var(--gray-600);
+        cursor: pointer;
+        padding: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+      }
+      .toast-close:hover {
+        background-color: var(--gray-100);
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
 
-    initNotifications: function() {
-        // Notification system setup
-    },
+// Sync pending operations when back online
+function syncPendingOperations() {
+  const pending = JSON.parse(localStorage.getItem('pendingOperations') || '[]');
+  if (pending.length > 0) {
+    showToast('Syncing pending operations...', 'info');
+    // In a real app, this would sync with backend
+    setTimeout(() => {
+      localStorage.removeItem('pendingOperations');
+      showToast('All operations synced successfully', 'success');
+    }, 2000);
+  }
+}
 
-    // ============================================
-    // 9. UTILITY FUNCTIONS
-    // ============================================
-    showLoading: function() {
-        let loader = document.getElementById('global-loader');
-        if (!loader) {
-            loader = document.createElement('div');
-            loader.id = 'global-loader';
-            loader.className = 'global-loader';
-            loader.innerHTML = '<div class="loading"></div>';
-            document.body.appendChild(loader);
-        }
-        loader.classList.add('active');
-    },
-
-    hideLoading: function() {
-        const loader = document.getElementById('global-loader');
-        if (loader) {
-            loader.classList.remove('active');
-        }
-    },
-
-    showToast: function(message, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
-        toast.innerHTML = `
-            <div class="toast-content">
-                <div class="toast-icon">${this.getToastIcon(type)}</div>
-                <div class="toast-message">${message}</div>
-                <button class="toast-close">&times;</button>
-            </div>
-        `;
-        
-        document.body.appendChild(toast);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            toast.classList.add('fade-out');
-            setTimeout(() => toast.remove(), 300);
-        }, 5000);
-        
-        // Close on click
-        toast.querySelector('.toast-close').addEventListener('click', () => {
-            toast.classList.add('fade-out');
-            setTimeout(() => toast.remove(), 300);
-        });
-    },
-
-    getToastIcon: function(type) {
-        const icons = {
-            success: '✓',
-            error: '✗',
-            warning: '⚠',
-            info: 'ℹ'
-        };
-        return icons[type] || icons.info;
-    },
-
-    formatCurrency: function(amount, currency = null) {
-        const curr = currency || this.config.currency;
-        const formatter = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: curr,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2
-        });
-        return formatter.format(amount);
-    },
-
-    formatDate: function(date, format = 'medium') {
-        const d = new Date(date);
-        const options = {
-            short: {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            },
-            medium: {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            },
-            long: {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }
-        };
-        
-        return d.toLocaleDateString('en-US', options[format] || options.medium);
-    },
-
-    // ============================================
-    // 10. EVENT LISTENERS SETUP
-    // ============================================
-    setupEventListeners: function() {
-        // Country selection
-        document.addEventListener('click', (e) => {
-            const countryBtn = e.target.closest('.country-select');
-            if (countryBtn) {
-                const countryCode = countryBtn.getAttribute('data-country');
-                const currency = countryBtn.getAttribute('data-currency');
-                this.selectCountry(countryCode, currency);
-            }
-        });
-        
-        // Role selection (borrower/lender)
-        document.addEventListener('click', (e) => {
-            const roleBtn = e.target.closest('.role-select');
-            if (roleBtn) {
-                const role = roleBtn.getAttribute('data-role');
-                this.selectRole(role);
-            }
-        });
-        
-        // Logout
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.logout-btn')) {
-                this.logout();
-            }
-        });
-        
-        // Theme toggle
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('.theme-toggle')) {
-                this.toggleTheme();
-            }
-        });
-    },
-
-    selectRole: function(role) {
-        this.config.userRole = role;
-        localStorage.setItem('user_role', role);
-        this.showToast(`Role set to ${role}`, 'success');
-        
-        // Redirect to appropriate dashboard
-        if (role === 'borrower') {
-            this.navigateTo('pages/dashboard/borrower-dashboard.html');
-        } else if (role === 'lender') {
-            this.navigateTo('pages/dashboard/lender-dashboard.html');
-        }
-    },
-
-    logout: function() {
-        this.state.authToken = null;
-        this.config.userData = null;
-        this.config.userRole = null;
-        
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('user_data');
-        
-        this.showToast('Logged out successfully', 'success');
-        setTimeout(() => {
-            this.navigateTo('index.html');
-        }, 1000);
-    },
-
-    toggleTheme: function() {
-        const isDark = document.body.classList.toggle('dark-theme');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        
-        // Update theme toggle button
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            themeToggle.innerHTML = isDark ? '☀️' : '🌙';
-        }
-    },
-
-    // ============================================
-    // 11. ERROR HANDLING
-    // ============================================
-    handleError: function(error, context = '') {
-        console.error(`Error in ${context}:`, error);
-        
-        let userMessage = 'An error occurred. Please try again.';
-        
-        if (error.message) {
-            userMessage = error.message;
-        }
-        
-        this.showToast(userMessage, 'error');
-        
-        // Log to error tracking service
-        this.logError(error, context);
-    },
-
-    logError: function(error, context) {
-        // In production, this would send to error tracking service
-        const errorData = {
-            timestamp: new Date().toISOString(),
-            context: context,
-            error: error.toString(),
-            stack: error.stack,
-            userAgent: navigator.userAgent,
-            url: window.location.href
-        };
-        
-        console.log('Error logged:', errorData);
-        
-        // Store locally for debugging
-        const errors = JSON.parse(localStorage.getItem('app_errors') || '[]');
-        errors.push(errorData);
-        if (errors.length > 50) errors.shift(); // Keep only last 50 errors
-        localStorage.setItem('app_errors', JSON.stringify(errors));
-    },
-
-    // ============================================
-    // 12. CLEANUP & DESTRUCTION
-    // ============================================
-    cleanup: function() {
-        // Clean up event listeners and resources
-        console.log('Cleaning up application...');
-        
-        // Remove event listeners
-        document.removeEventListener('click', this.handleClick);
-        window.removeEventListener('online', this.handleOnline);
-        window.removeEventListener('offline', this.handleOffline);
-        
-        // Clear intervals and timeouts
-        // (You should store timeout/interval IDs if you create any)
+// Modal System
+class Modal {
+  constructor(modalId) {
+    this.modal = document.getElementById(modalId);
+    this.init();
+  }
+  
+  init() {
+    // Close modal when clicking outside
+    this.modal.addEventListener('click', (e) => {
+      if (e.target === this.modal) {
+        this.hide();
+      }
+    });
+    
+    // Close modal with escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.modal.classList.contains('show')) {
+        this.hide();
+      }
+    });
+    
+    // Close button
+    const closeBtn = this.modal.querySelector('.modal-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => this.hide());
     }
+  }
+  
+  show() {
+    this.modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  hide() {
+    this.modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+// Initialize all modals on page
+document.addEventListener('DOMContentLoaded', () => {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    new Modal(modal.id);
+  });
+  
+  // Mobile navigation toggle
+  const navbarToggle = document.querySelector('.navbar-toggle');
+  const navbarNav = document.querySelector('.navbar-nav');
+  
+  if (navbarToggle && navbarNav) {
+    navbarToggle.addEventListener('click', () => {
+      navbarNav.classList.toggle('show');
+    });
+    
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navbarToggle.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove('show');
+      }
+    });
+  }
+  
+  // Initialize tooltips
+  const tooltips = document.querySelectorAll('[data-tooltip]');
+  tooltips.forEach(element => {
+    element.addEventListener('mouseenter', () => {
+      const tooltipText = element.getAttribute('data-tooltip');
+      if (tooltipText) {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip-text';
+        tooltip.textContent = tooltipText;
+        element.appendChild(tooltip);
+      }
+    });
+    
+    element.addEventListener('mouseleave', () => {
+      const tooltip = element.querySelector('.tooltip-text');
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+  });
+  
+  // Initialize tabs
+  const tabLinks = document.querySelectorAll('.tab-link');
+  tabLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const tabId = link.getAttribute('data-tab');
+      const tabContent = document.getElementById(tabId);
+      
+      if (tabContent) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Remove active class from all tab links
+        document.querySelectorAll('.tab-link').forEach(tabLink => {
+          tabLink.classList.remove('active');
+        });
+        
+        // Show selected tab
+        tabContent.classList.add('active');
+        link.classList.add('active');
+      }
+    });
+  });
+  
+  // Initialize dropdowns
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const dropdown = toggle.closest('.dropdown');
+      const menu = dropdown.querySelector('.dropdown-menu');
+      menu.classList.toggle('show');
+    });
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+      menu.classList.remove('show');
+    });
+  });
+  
+  // Form validation
+  const forms = document.querySelectorAll('form[data-validate]');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      if (!validateForm(form)) {
+        e.preventDefault();
+      }
+    });
+  });
+});
+
+// Form validation function
+function validateForm(form) {
+  let isValid = true;
+  const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+  
+  inputs.forEach(input => {
+    const errorElement = input.nextElementSibling?.classList.contains('error-message') 
+      ? input.nextElementSibling 
+      : null;
+    
+    if (!input.value.trim()) {
+      showInputError(input, 'This field is required', errorElement);
+      isValid = false;
+    } else if (input.type === 'email' && !isValidEmail(input.value)) {
+      showInputError(input, 'Please enter a valid email address', errorElement);
+      isValid = false;
+    } else if (input.type === 'tel' && !isValidPhone(input.value)) {
+      showInputError(input, 'Please enter a valid phone number', errorElement);
+      isValid = false;
+    } else if (input.hasAttribute('data-min-length')) {
+      const minLength = parseInt(input.getAttribute('data-min-length'));
+      if (input.value.length < minLength) {
+        showInputError(input, `Minimum ${minLength} characters required`, errorElement);
+        isValid = false;
+      }
+    } else if (input.hasAttribute('data-match')) {
+      const matchField = document.querySelector(input.getAttribute('data-match'));
+      if (matchField && input.value !== matchField.value) {
+        showInputError(input, 'Values do not match', errorElement);
+        isValid = false;
+      }
+    } else {
+      clearInputError(input, errorElement);
+    }
+  });
+  
+  return isValid;
+}
+
+function showInputError(input, message, errorElement = null) {
+  input.classList.add('error');
+  
+  if (!errorElement) {
+    errorElement = document.createElement('div');
+    errorElement.className = 'error-message';
+    input.parentNode.insertBefore(errorElement, input.nextSibling);
+  }
+  
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+}
+
+function clearInputError(input, errorElement = null) {
+  input.classList.remove('error');
+  
+  if (errorElement) {
+    errorElement.style.display = 'none';
+  }
+}
+
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function isValidPhone(phone) {
+  const re = /^[\+]?[1-9][\d]{0,15}$/;
+  return re.test(phone.replace(/[\s\-\(\)]/g, ''));
+}
+
+// Currency formatting
+function formatCurrency(amount, currency = 'KES') {
+  return new Intl.NumberFormat('en-KE', {
+    style: 'currency',
+    currency: currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(amount);
+}
+
+// Date formatting
+function formatDate(date, format = 'short') {
+  const d = new Date(date);
+  const options = {
+    short: {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    },
+    long: {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    },
+    time: {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    }
+  };
+  
+  return d.toLocaleDateString('en-KE', options[format] || options.short);
+}
+
+// Calculate days between dates
+function daysBetween(date1, date2) {
+  const diff = Math.abs(new Date(date2) - new Date(date1));
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}
+
+// Calculate loan interest and penalties
+function calculateLoanDetails(principal, interestRate = 10, penaltyRate = 5, overdueDays = 0) {
+  const interest = (principal * interestRate) / 100;
+  const totalWithoutPenalty = principal + interest;
+  const penalty = overdueDays > 0 ? (totalWithoutPenalty * penaltyRate * overdueDays) / 100 : 0;
+  const totalDue = totalWithoutPenalty + penalty;
+  
+  return {
+    principal,
+    interest,
+    penalty,
+    totalDue,
+    overdueDays
+  };
+}
+
+// Local storage helper
+const Storage = {
+  set(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+      return false;
+    }
+  },
+  
+  get(key) {
+    try {
+      const value = localStorage.getItem(key);
+      return value ? JSON.parse(value) : null;
+    } catch (error) {
+      console.error('Error reading from localStorage:', error);
+      return null;
+    }
+  },
+  
+  remove(key) {
+    localStorage.removeItem(key);
+  },
+  
+  clear() {
+    localStorage.clear();
+  }
 };
 
-// ============================================
-// 13. INITIALIZE APP ON DOM CONTENT LOADED
-// ============================================
-document.addEventListener('DOMContentLoaded', function() {
-    Mpesewa.init();
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            themeToggle.innerHTML = '☀️';
-        }
-    }
-});
+// Session management
+const Session = {
+  setUser(user) {
+    Storage.set('currentUser', user);
+  },
+  
+  getUser() {
+    return Storage.get('currentUser');
+  },
+  
+  clear() {
+    Storage.remove('currentUser');
+  },
+  
+  isLoggedIn() {
+    return !!this.getUser();
+  },
+  
+  getUserRole() {
+    const user = this.getUser();
+    return user ? user.role : null;
+  }
+};
 
-// ============================================
-// 14. GLOBAL ERROR HANDLING
-// ============================================
-window.addEventListener('error', function(event) {
-    Mpesewa.handleError(event.error, 'Global error');
-});
-
-window.addEventListener('unhandledrejection', function(event) {
-    Mpesewa.handleError(event.reason, 'Unhandled promise rejection');
-});
-
-// ============================================
-// 15. EXPORT FOR MODULES
-// ============================================
-// Export for module system if needed
+// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Mpesewa;
+  module.exports = {
+    Modal,
+    validateForm,
+    formatCurrency,
+    formatDate,
+    calculateLoanDetails,
+    Storage,
+    Session,
+    showToast
+  };
 }
