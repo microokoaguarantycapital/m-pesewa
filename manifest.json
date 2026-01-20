@@ -1,7 +1,7 @@
 {
   "name": "M-PESEWA",
   "short_name": "M-PESEWA",
-  "description": "Emergency Micro-Lending Platform - Helping friends, families, and communities support each other with small emergency loans transparently, safely, and without exploitation.",
+  "description": "Emergency Micro-Lending Platform for African Communities",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#2B1D4F",
@@ -10,7 +10,7 @@
   "scope": "./",
   "lang": "en",
   "dir": "ltr",
-  "categories": ["finance", "business", "lending"],
+  "categories": ["finance", "business", "social"],
   "icons": [
     {
       "src": "./assets/images/icon-72x72.png",
@@ -63,18 +63,18 @@
   ],
   "screenshots": [
     {
-      "src": "./assets/images/screenshots/desktop.png",
+      "src": "./assets/images/screenshot1.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "M-PESEWA Desktop Dashboard"
+      "label": "M-PESEWA Landing Page"
     },
     {
-      "src": "./assets/images/screenshots/mobile.png",
+      "src": "./assets/images/screenshot2.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow",
-      "label": "M-PESEWA Mobile App"
+      "label": "M-PESEWA Mobile Dashboard"
     }
   ],
   "shortcuts": [
@@ -82,79 +82,22 @@
       "name": "Get Emergency Loan",
       "short_name": "Borrow",
       "description": "Request an emergency loan from your trusted group",
-      "url": "./pages/borrowing.html",
-      "icons": [
-        {
-          "src": "./assets/images/shortcuts/borrow.png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "./pages/borrowing.html"
     },
     {
       "name": "Start Lending",
       "short_name": "Lend",
-      "description": "Lend to trusted borrowers in your group",
-      "url": "./pages/lending.html",
-      "icons": [
-        {
-          "src": "./assets/images/shortcuts/lend.png",
-          "sizes": "96x96"
-        }
-      ]
+      "description": "Lend to people in your trusted groups",
+      "url": "./pages/lending.html"
     },
     {
-      "name": "View Ledger",
-      "short_name": "Ledger",
-      "description": "View your lending ledger and track repayments",
-      "url": "./pages/ledger.html",
-      "icons": [
-        {
-          "src": "./assets/images/shortcuts/ledger.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Borrower Dashboard",
-      "short_name": "My Loans",
-      "description": "View your active loans and repayment status",
-      "url": "./pages/dashboard/borrower-dashboard.html",
-      "icons": [
-        {
-          "src": "./assets/images/shortcuts/borrower.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "Lender Dashboard",
-      "short_name": "My Ledgers",
-      "description": "Manage your lending activity and subscriptions",
-      "url": "./pages/dashboard/lender-dashboard.html",
-      "icons": [
-        {
-          "src": "./assets/images/shortcuts/lender.png",
-          "sizes": "96x96"
-        }
-      ]
-    }
-  ],
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.mpesewa.app",
-      "id": "com.mpesewa.app"
-    },
-    {
-      "platform": "itunes",
-      "url": "https://apps.apple.com/app/m-pesewa/id1234567890"
+      "name": "My Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your lending or borrowing dashboard",
+      "url": "./pages/dashboard/lender-dashboard.html"
     }
   ],
   "prefer_related_applications": false,
-  "protocol_handlers": [
-    {
-      "protocol": "web+mpesewa",
-      "url": "./index.html?uri=%s"
-    }
-  ]
+  "related_applications": [],
+  "protocol_handlers": []
 }
