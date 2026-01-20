@@ -1,6 +1,13 @@
 /* M-PESEWA - Main CSS File (STRICT CORRECTED VERSION) */
 /* Global typography, layout, responsive */
 
+/* BASE FIX: Prevent horizontal scrolling on mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 /* CSS Reset and Base Styles */
 * {
   margin: 0;
@@ -79,14 +86,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* FIX 1: Ensure High Contrast Text Visibility */
+/* FIX 2: Specific Visibility for Hero Text against Animations */
+.hero-section h1, 
+.hero-section p {
+  color: var(--white) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* FIX 3: Floating Card Text Fix */
+.hero-card {
+  position: relative;
+  background: var(--white);
+  z-index: 5;
+}
+
+.hero-card span, 
+.hero-card p {
+  color: var(--primary-blue-dark) !important;
+  z-index: 20;
+  opacity: 1 !important;
+}
+
 /* VISIBILITY FIX: Ensuring Headings are always on top and visible */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--spacing-md);
   color: var(--gray-900);
-  position: relative; /* Fix for visibility */
-  z-index: 10;        /* Fix for layering */
+  position: relative;
+  z-index: 10;
 }
 
 h1 { font-size: 2.5rem; }
@@ -110,7 +140,7 @@ a:hover {
   color: var(--primary-blue-dark);
 }
 
-/* Container System */
+/* Container System - Ensure padding is consistent on mobile */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -128,12 +158,55 @@ a:hover {
 .section-sm { padding: var(--spacing-xl) 0; }
 .section-lg { padding: var(--spacing-3xl) 0; }
 
-/* Grid System */
-.grid { display: grid; gap: var(--spacing-lg); }
+/* Grid System - The Core Fix for Mobile/Tablet Visibility */
+.grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+/* Desktop Defaults */
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* RESPONSIVE OVERRIDES - Fixes Phone and Tablet visibility */
+
+/* TABLET VIEW (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .grid-4, .grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* PHONE VIEW (max-width: 768px) */
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-5 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Fix for Hero Section text size on phones */
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  
+  /* Ensure floating cards don't fly off-screen */
+  .float {
+    animation: none;
+    transform: none !important;
+  }
+  
+  /* Make tables scrollable on mobile so data isn't hidden */
+  .table-container {
+    overflow-x: auto;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Responsive adjustments for consistency */
+  .container { padding: 0 var(--spacing-md); }
+  h3 { font-size: 1.25rem; }
+  .section { padding: var(--spacing-2xl) 0; }
+}
 
 /* Flex System */
 .flex { display: flex; }
@@ -187,20 +260,25 @@ a:hover {
 .p-4 { padding: var(--spacing-lg); }
 .p-5 { padding: var(--spacing-xl); }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .container { padding: 0 var(--spacing-md); }
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.25rem; }
-  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
-  .section { padding: var(--spacing-2xl) 0; }
+/* PWA STICKY NAV FIX */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  width: 100%;
 }
 
 /* Animations - OPTIMIZED FOR VISIBILITY */
 @keyframes fadeIn {
-  from { opacity: 0.1; transform: translateY(10px); } /* Start at 0.1 to prevent total invisibility */
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0.1; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
 @keyframes float {
@@ -208,7 +286,10 @@ a:hover {
   50% { transform: translateY(-10px); }
 }
 
-.fade-in { animation: fadeIn var(--transition-normal) ease-out forwards; }
+.fade-in { 
+  animation: fadeIn var(--transition-normal) ease-out forwards; 
+}
+
 .float { 
   animation: float 3s ease-in-out infinite;
   z-index: 5; /* Keep cards below text layers */
