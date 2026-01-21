@@ -177,12 +177,6 @@ a:hover {
   .grid-4, .grid-5 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Fix process steps on tablet */
-  .process-steps .grid-4,
-  .process-steps .grid-3 {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* PHONE VIEW (max-width: 768px) */
@@ -206,14 +200,6 @@ a:hover {
     overflow-x: auto;
     display: block;
     -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Fix footer text visibility on mobile */
-  .footer-links a,
-  .legal-text p,
-  .legal-text small {
-    opacity: 1;
-    color: #d6d2e8 !important;
   }
   
   /* Responsive adjustments for consistency */
@@ -307,6 +293,59 @@ a:hover {
 .float { 
   animation: float 3s ease-in-out infinite;
   z-index: 5; /* Keep cards below text layers */
+}
+
+/* FOOTER TEXT VISIBILITY FIX - CRITICAL */
+footer.bg-dark,
+.footer.bg-dark {
+  background-color: var(--black) !important;
+}
+
+footer .text-gray-400,
+footer .legal-text p,
+footer .footer-links a {
+  color: #d6d2e8 !important;
+  opacity: 1 !important;
+}
+
+footer .footer-title {
+  color: var(--white) !important;
+  opacity: 1 !important;
+}
+
+footer .legal-text .text-sm {
+  color: #b8b5cc !important;
+}
+
+/* MOBILE NAVIGATION IMPROVEMENTS */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: wrap;
+  }
+  
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    margin-top: var(--spacing-md);
+  }
+  
+  .navbar-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+  }
+}
+
+/* TABLET IMPROVEMENTS */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .plan-card.featured {
+    order: -1;
+  }
 }
 
 /* Print Styles */
