@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzania - M-PESEWA Emergency Lending Platform</title>
+    <meta name="description" content="Emergency micro-lending in Tanzania. Join trusted groups in Tanzania for emergency loans.">
+    <meta name="theme-color" content="#2B1D4F">
+    
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/x-icon" href="../../assets/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="../../assets/images/icons/icon-192.png">
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <span>✔ Not a bank</span>
+            <span>✔ No money held</span>
+            <span>✔ No commissions</span>
+            <span>✔ Group-based trust</span>
+            <span>✔ Country-isolated system</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="../../index.html">
+                    <img src="../../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../../index.html#how-it-works">How It Works</a>
+                <a href="../borrowing.html">Borrow</a>
+                <a href="../lending.html">Lend</a>
+                <a href="../groups.html">Groups</a>
+                <a href="index.html">Countries</a>
+                <a href="../subscriptions.html">Subscriptions</a>
+                <a href="../about.html">About</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="../borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Country Hero -->
+    <section class="country-hero section" style="background: linear-gradient(135deg, #2B1D4F, #3A2B6F);">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="../../index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="index.html" class="breadcrumb-link">Countries</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Tanzania</span>
+            </div>
+            
+            <div class="country-header">
+                <div class="country-flag-title">
+                    <span class="country-flag-large">🇹🇿</span>
+                    <h1 class="hero-title">M-PESEWA Tanzania</h1>
+                </div>
+                <p class="hero-subtitle">
+                    Emergency lending within trusted Tanzanian groups. No cross-border lending. Currency: Tanzanian Shilling (TZS)
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Stats -->
+    <section class="country-stats section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon primary">🇹🇿</div>
+                        <div class="stat-content">
+                            <div class="stat-value">127</div>
+                            <div class="stat-label">Active Groups</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon success">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value">4,892</div>
+                            <div class="stat-label">Active Borrowers</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon warning">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-value">1,234</div>
+                            <div class="stat-label">Active Lenders</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon info">📈</div>
+                        <div class="stat-content">
+                            <div class="stat-value">TZS 189M</div>
+                            <div class="stat-label">Total Lent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Rules -->
+    <section class="country-rules section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tanzania Lending Rules</h2>
+                <p class="section-subtitle">Strict country-specific rules that apply to all Tanzanian operations</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="rule-card">
+                    <div class="rule-icon">🌍</div>
+                    <h4>Country Isolation</h4>
+                    <p>No cross-border lending. All operations stay within Tanzania.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <div class="rule-icon">💱</div>
+                    <h4>Currency Locked</h4>
+                    <p>All transactions in Tanzanian Shilling (TZS) only.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <div class="rule-icon">👥</div>
+                    <h4>Group Focus</h4>
+                    <p>Lending only within Tanzanian-registered groups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Groups -->
+    <section class="popular-groups section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Groups in Tanzania</h2>
+                <p class="section-subtitle">Join trusted lending groups in your community</p>
+            </div>
+            
+            <div class="group-cards">
+                <div class="group-card">
+                    <div class="group-header">
+                        <h3 class="group-name">Dar es Salaam Family Trust</h3>
+                        <span class="group-type">Family</span>
+                    </div>
+                    <p class="group-description">Family-based lending group in Dar es Salaam</p>
+                    <div class="group-stats">
+                        <div class="group-stat">
+                            <span class="group-stat-value">48</span>
+                            <span class="group-stat-label">Members</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">TZS 12M</span>
+                            <span class="group-stat-label">Lent</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">98%</span>
+                            <span class="group-stat-label">Repay Rate</span>
+                        </div>
+                    </div>
+                    <div class="group-footer">
+                        <div class="group-country">📍 Dar es Salaam</div>
+                        <a href="../groups.html" class="btn primary small">View Group</a>
+                    </div>
+                </div>
+                
+                <div class="group-card">
+                    <div class="group-header">
+                        <h3 class="group-name">Arusha Business Circle</h3>
+                        <span class="group-type">Professional</span>
+                    </div>
+                    <p class="group-description">Professional lending group in Arusha region</p>
+                    <div class="group-stats">
+                        <div class="group-stat">
+                            <span class="group-stat-value">64</span>
+                            <span class="group-stat-label">Members</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">TZS 18M</span>
+                            <span class="group-stat-label">Lent</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">96%</span>
+                            <span class="group-stat-label">Repay Rate</span>
+                        </div>
+                    </div>
+                    <div class="group-footer">
+                        <div class="group-country">📍 Arusha</div>
+                        <a href="../groups.html" class="btn primary small">View Group</a>
+                    </div>
+                </div>
+                
+                <div class="group-card">
+                    <div class="group-header">
+                        <h3 class="group-name">Mwanza Community Fund</h3>
+                        <span class="group-type">Community</span>
+                    </div>
+                    <p class="group-description">Community-based lending around Lake Victoria</p>
+                    <div class="group-stats">
+                        <div class="group-stat">
+                            <span class="group-stat-value">89</span>
+                            <span class="group-stat-label">Members</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">TZS 15M</span>
+                            <span class="group-stat-label">Lent</span>
+                        </div>
+                        <div class="group-stat">
+                            <span class="group-stat-value">97%</span>
+                            <span class="group-stat-label">Repay Rate</span>
+                        </div>
+                    </div>
+                    <div class="group-footer">
+                        <div class="group-country">📍 Mwanza</div>
+                        <a href="../groups.html" class="btn primary small">View Group</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Categories -->
+    <section class="country-categories section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Common Emergency Needs in Tanzania</h2>
+                <p class="section-subtitle">What people borrow for in Tanzania</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">🚌</div>
+                    <h4>Dala-dala Fare</h4>
+                    <p>Emergency transport money for dala-dala</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🍲</div>
+                    <h4>Food & Supplies</h4>
+                    <p>Emergency food and household needs</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">💊</div>
+                    <h4>Medical Bills</h4>
+                    <p>Emergency medical treatment costs</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">🏫</div>
+                    <h4>School Fees</h4>
+                    <p>Emergency school fee payments</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">⚡</div>
+                    <h4>Electricity Bills</h4>
+                    <p>Emergency TANESCO token purchases</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">📶</div>
+                    <h4>Mobile Data</h4>
+                    <p>Emergency mobile data bundles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Join -->
+    <section class="join-section section">
+        <div class="container">
+            <div class="grid-2">
+                <div class="join-content">
+                    <h2>How to Join M-PESEWA Tanzania</h2>
+                    <ol class="join-steps">
+                        <li>
+                            <strong>Select Tanzania</strong>
+                            <p>Choose Tanzania as your country during registration</p>
+                        </li>
+                        <li>
+                            <strong>Verify Identity</strong>
+                            <p>Provide valid Tanzanian identification</p>
+                        </li>
+                        <li>
+                            <strong>Join a Group</strong>
+                            <p>Join or create a trusted group in Tanzania</p>
+                        </li>
+                        <li>
+                            <strong>Start Lending/Borrowing</strong>
+                            <p>Begin participating in emergency lending</p>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="join-actions">
+                    <div class="action-card">
+                        <h3>Ready to Join?</h3>
+                        <p>Start your emergency lending journey in Tanzania today</p>
+                        <div class="action-buttons">
+                            <a href="../borrowing.html" class="btn primary gold">Borrow in Tanzania</a>
+                            <a href="../lending.html" class="btn outline">Lend in Tanzania</a>
+                        </div>
+                        <p class="note">Note: Once you select Tanzania, you cannot switch countries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country FAQ -->
+    <section class="country-faq section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Tanzania-Specific FAQs</h2>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">Can I lend to someone in Kenya?</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>No. M-PESEWA enforces strict country isolation. You can only lend to people within Tanzanian-registered groups.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">What currency is used?</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>All transactions in Tanzania are conducted in Tanzanian Shilling (TZS).</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">Can I join groups in other countries?</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>No. Once you register in Tanzania, you can only participate in Tanzanian groups.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Tanzania Operations</h4>
+                    <ul>
+                        <li><a href="#stats">Tanzania Statistics</a></li>
+                        <li><a href="#groups">Tanzania Groups</a></li>
+                        <li><a href="#rules">Tanzania Rules</a></li>
+                        <li><a href="#join">Join Tanzania</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Emergency Loans</h4>
+                    <ul>
+                        <li><a href="../borrowing.html">Borrow in Tanzania</a></li>
+                        <li><a href="../borrowing.html">Emergency Categories</a></li>
+                        <li><a href="../borrowing.html">How to Apply</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="../lending.html">Lend in Tanzania</a></li>
+                        <li><a href="../subscriptions.html">Subscription Plans</a></li>
+                        <li><a href="../ledger.html">Ledger Management</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="../contact.html">Tanzania Support</a></li>
+                        <li><a href="../qa.html">FAQ</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="legal-text">
+                    © 2016–2026, M-PESEWA Tanzania Operations — All Rights Reserved
+                </div>
+                <div class="legal-text">
+                    M-PESEWA is a technology coordination platform only. We do not hold money.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../assets/js/utils.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        function showLoginModal() {
+            alert('Login functionality would be implemented here.');
+            // In production, this would show a modal
+        }
+    </script>
+</body>
+</html>

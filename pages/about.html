@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About M-PESEWA | Emergency Micro-Lending Platform</title>
+    <meta name="description" content="Learn about M-PESEWA's mission, philosophy, and how we're transforming emergency lending in Africa through trusted groups.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/images/icons/icon-192.png">
+    
+    <!-- PWA Script -->
+    <script src="../assets/js/pwa.js" defer></script>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <span>✔ Not a bank</span>
+            <span>✔ No money held</span>
+            <span>✔ No commissions</span>
+            <span>✔ Group-based trust</span>
+            <span>✔ Country-isolated system</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html#how-it-works">How It Works</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="groups.html">Groups</a>
+                <a href="countries/">Countries</a>
+                <a href="subscriptions.html">Subscriptions</a>
+                <a href="about.html">About</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="section">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="../index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">About M-PESEWA</span>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1>About M-PESEWA</h1>
+                <p class="section-subtitle">
+                    Emergency loans from people who know you. Inside trusted groups. Inside your country.
+                </p>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Our Mission</h2>
+                </div>
+                <div class="card-body">
+                    <p class="hero-subtitle">
+                        M-PESEWA exists to solve emergency consumer pain points by enabling friends to help friends, 
+                        creating income opportunities for lenders, putting idle money to productive use, reducing 
+                        reliance on predatory lending, and building trust-based financial ecosystems across Africa.
+                    </p>
+                </div>
+            </div>
+
+            <!-- What is M-PESEWA -->
+            <div class="section-header">
+                <h2>What is M-PESEWA?</h2>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <div class="philosophy-card">
+                        <div class="icon-circle">💡</div>
+                        <h4>Our Vision</h4>
+                        <p>To be Africa's most trusted platform for emergency micro-lending within communities.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="philosophy-card">
+                        <div class="icon-circle">🎯</div>
+                        <h4>Our Purpose</h4>
+                        <p>To provide immediate financial relief for real emergencies through trusted relationships.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What We Are NOT -->
+            <div class="section-header">
+                <h3>What We Are NOT</h3>
+            </div>
+
+            <div class="grid-4">
+                <div class="philosophy-card">
+                    <div class="icon-circle">🏦</div>
+                    <h4>Not a Bank</h4>
+                    <p>We don't take deposits or give loans from our own capital.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="icon-circle">💰</div>
+                    <h4>Not a Lender</h4>
+                    <p>We don't lend money. We connect trusted people who do.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="icon-circle">👤</div>
+                    <h4>Not a Borrower</h4>
+                    <p>We don't borrow money. We facilitate connections.</p>
+                </div>
+                <div class="philosophy-card">
+                    <div class="icon-circle">🔒</div>
+                    <h4>Not a Custodian</h4>
+                    <p>We never hold money. All transactions happen directly.</p>
+                </div>
+            </div>
+
+            <!-- Core Philosophy -->
+            <div class="trust-safety section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Core Philosophy</h2>
+                        <p class="section-subtitle">The principles that guide everything we do</p>
+                    </div>
+                    
+                    <div class="grid-3">
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">🤝</div>
+                            <h4>Trust-Based</h4>
+                            <p>Lending happens only within established trust circles where people know each other.</p>
+                        </div>
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">🌍</div>
+                            <h4>Country-Focused</h4>
+                            <p>Each country operates independently with its own currency and regulations.</p>
+                        </div>
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">🛡️</div>
+                            <h4>Safety First</h4>
+                            <p>Strong reputation systems and blacklist enforcement protect all participants.</p>
+                        </div>
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">🚨</div>
+                            <h4>Emergency Focus</h4>
+                            <p>Designed for real emergency needs, not luxury or investment.</p>
+                        </div>
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">📊</div>
+                            <h4>Transparent</h4>
+                            <p>Clear terms, no hidden fees, and complete ledger transparency.</p>
+                        </div>
+                        <div class="benefit-card lender">
+                            <div class="benefit-icon">⚖️</div>
+                            <h4>Fair & Ethical</h4>
+                            <p>Interest rates agreed willingly between trusted parties.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Law -->
+            <div class="section-header">
+                <h2>System Law & Hierarchy</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Strict Hierarchy (Non-Negotiable)</h3>
+                </div>
+                <div class="card-body">
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div style="background: var(--primary-purple); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <strong>Global</strong>
+                        </div>
+                        <div style="font-size: 1.5rem; margin: 1rem 0;">↓</div>
+                        <div style="background: var(--primary-purple-light); color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <strong>Country (Isolated Economy)</strong>
+                        </div>
+                        <div style="font-size: 1.5rem; margin: 1rem 0;">↓</div>
+                        <div style="background: var(--primary-gold); color: black; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                            <strong>Group (Trust Container)</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-around; margin-top: 1rem;">
+                            <div style="background: var(--success); color: white; padding: 0.8rem; border-radius: 8px; width: 45%;">
+                                <strong>Lenders</strong><br>↓<br>Ledgers
+                            </div>
+                            <div style="background: var(--info); color: white; padding: 0.8rem; border-radius: 8px; width: 45%;">
+                                <strong>Borrowers</strong><br>(Default State)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div>
+                            <h4>Enforced Rules</h4>
+                            <ul>
+                                <li>❌ No cross-country lending or borrowing</li>
+                                <li>❌ No cross-group lending</li>
+                                <li>✅ Borrower: max 4 groups (good rating required)</li>
+                                <li>❌ Lenders blocked when subscription expires (28th monthly)</li>
+                                <li>❌ Borrower with active loan cannot request another in same group</li>
+                                <li>❌ Default > 2 months → platform-wide blacklist</li>
+                                <li>✅ Admin can override ledgers & blacklist</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Why This Structure?</h4>
+                            <ul>
+                                <li>Prevents fraud across borders</li>
+                                <li>Builds trust through existing relationships</li>
+                                <li>Reduces risk through group accountability</li>
+                                <li>Ensures compliance with local regulations</li>
+                                <li>Creates sustainable financial ecosystems</li>
+                                <li>Protects both lenders and borrowers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difference vs Traditional -->
+            <div class="section-header">
+                <h2>Difference vs Traditional Platforms</h2>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional P2P Lending</th>
+                            <th>M-PESEWA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Trust Model</strong></td>
+                            <td>Algorithmic scoring, credit checks</td>
+                            <td>Group-based trust, personal relationships</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Geography</strong></td>
+                            <td>Global marketplace</td>
+                            <td>Country-isolated, group-scoped</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Money Handling</strong></td>
+                            <td>Platform custody, escrow accounts</td>
+                            <td>Off-platform, direct between users</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loan Purpose</strong></td>
+                            <td>Any purpose, often business/investment</td>
+                            <td>Emergency consumption only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Revenue Model</strong></td>
+                            <td>Commission on loans</td>
+                            <td>Lender subscriptions only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recovery</strong></td>
+                            <td>Platform-managed collections</td>
+                            <td>Group accountability, blacklist system</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk Management</strong></td>
+                            <td>Diversification across many loans</td>
+                            <td>Lend only to people you know</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Impact & Success Metrics -->
+            <div class="section-header">
+                <h2>Impact & Success Metrics</h2>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon primary">🎯</div>
+                        <div class="stat-content">
+                            <div class="stat-value">99%</div>
+                            <div class="stat-label">Target Repayment Rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon success">📈</div>
+                        <div class="stat-content">
+                            <div class="stat-value">25</div>
+                            <div class="stat-label">African Countries</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon info">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value">10,000+</div>
+                            <div class="stat-label">Target Groups</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon warning">💸</div>
+                        <div class="stat-content">
+                            <div class="stat-value">0%</div>
+                            <div class="stat-label">Borrower Fees</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="section-header">
+                <h2>Advisory Board & Team</h2>
+            </div>
+
+            <div class="grid-4">
+                <div class="card" style="text-align: center;">
+                    <div class="avatar large" style="margin: 0 auto 1rem;">JD</div>
+                    <h4>John Doe</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Chairman & Founder</p>
+                    <p style="font-size: 0.85rem;">Former microfinance executive with 20+ years experience</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="avatar large" style="margin: 0 auto 1rem;">JS</div>
+                    <h4>Jane Smith</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Technology Director</p>
+                    <p style="font-size: 0.85rem;">Fintech expert with focus on African markets</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="avatar large" style="margin: 0 auto 1rem;">AM</div>
+                    <h4>Ahmed Mohammed</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Legal Advisor</p>
+                    <p style="font-size: 0.85rem;">Regulatory compliance specialist across Africa</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="avatar large" style="margin: 0 auto 1rem;">FC</div>
+                    <h4>Fatou Camara</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Community Relations</p>
+                    <p style="font-size: 0.85rem;">Expert in community banking and group dynamics</p>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="cta-strip section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>Want to learn more or partner with us?</h2>
+                        <div class="cta-actions">
+                            <a href="contact.html" class="btn primary gold large">Contact Us</a>
+                            <a href="qa.html" class="btn outline-white large">Read FAQs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Get Emergency Loan</h4>
+                    <ul>
+                        <li><a href="borrowing.html">Online Personal Loan</a></li>
+                        <li><a href="borrowing.html">Why Borrow</a></li>
+                        <li><a href="borrowing.html">How to Apply</a></li>
+                        <li><a href="blacklist.html">Active Lenders</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="lending.html">Smart Lending</a></li>
+                        <li><a href="lending.html">Why Lend</a></li>
+                        <li><a href="lending.html">How to Lend</a></li>
+                        <li><a href="blacklist.html">Active Borrowers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>How It Works</h4>
+                    <ul>
+                        <li><a href="../index.html#how-it-works">P2P Explained</a></li>
+                        <li><a href="about.html">Our Role</a></li>
+                        <li><a href="#">Platform Performance</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html">Team</a></li>
+                        <li><a href="about.html">Advisory Board</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="contact.html">Career</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Others</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Channel Partner T&C</a></li>
+                        <li><a href="qa.html">Referral T&C</a></li>
+                        <li><a href="qa.html">Grievance Policy</a></li>
+                        <li><a href="qa.html">Fair Practices Code</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+                
+                <div class="flags-marquee-small">
+                    <div class="marquee-track-small">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇳🇬</span>
+                        <span>🇬🇭</span><span>🇿🇦</span><span>🇪🇬</span><span>🇪🇹</span><span>🇸🇳</span>
+                    </div>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to M-PESEWA</h3>
+                <button class="modal-close" onclick="closeLoginModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username or Email</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Login</button>
+                </form>
+                <div class="login-options">
+                    <p>Or login with:</p>
+                    <button class="btn google-login">Google</button>
+                </div>
+                <div class="login-links">
+                    <a href="#">Forgot Password?</a>
+                    <a href="#">Register as Borrower</a>
+                    <a href="#">Register as Lender</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Login modal functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('loginModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
