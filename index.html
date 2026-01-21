@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="M-PESEWA - Emergency Micro-Lending Platform for Trusted Groups in Africa">
+    <title>M-PESEWA - Emergency Micro-Lending Platform</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="assets/images/icon-192x192.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2B1D4F">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header / Top Navigation -->
+    <header class="navbar sticky-nav">
+        <div class="container navbar-container">
+            <!-- Logo -->
+            <a href="/" class="navbar-brand">
+                <span class="navbar-logo">M-PESEWA</span>
+            </a>
+            
+            <!-- Navigation Toggle for Mobile -->
+            <button class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Main Navigation -->
+            <nav>
+                <ul class="navbar-nav">
+                    <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="pages/borrowing.html" class="nav-link">Borrow</a></li>
+                    <li><a href="pages/lending.html" class="nav-link">Lend</a></li>
+                    <li><a href="pages/groups.html" class="nav-link">Groups</a></li>
+                    <li><a href="pages/countries/index.html" class="nav-link">Countries</a></li>
+                    <li><a href="pages/subscriptions.html" class="nav-link">Subscriptions</a></li>
+                    <li><a href="pages/debt-collectors.html" class="nav-link">Debt Collectors</a></li>
+                    <li><a href="pages/about.html" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Header Actions -->
+            <div class="navbar-actions">
+                <a href="#login" class="btn btn-secondary">Login</a>
+                <a href="#get-loan" class="btn btn-primary">Get Emergency Loan</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero section bg-primary">
+        <div class="container grid grid-2">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Emergency Loans From People Who Know You.<br>
+                    <span class="text-gold">Inside Trusted Groups. Inside Your Country.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    M-Pesewa is not a bank. It is a technology platform that helps friends, families, and communities support each other with small emergency loans — transparently, safely, and without exploitation.
+                </p>
+                <div class="hero-actions flex gap-md">
+                    <a href="#get-loan" class="btn btn-primary btn-lg">
+                        <i class="fas fa-hand-holding-usd"></i> Get Emergency Loan
+                    </a>
+                    <a href="#start-lending" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-coins"></i> Start Lending
+                    </a>
+                </div>
+                <div class="trust-strip mt-4">
+                    <div class="flex flex-wrap gap-md">
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle text-gold"></i> Not a bank
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle text-gold"></i> No money held
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle text-gold"></i> No commissions
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle text-gold"></i> Group-based trust
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle text-gold"></i> Country-isolated system
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="visual-container">
+                    <div class="visual-card">
+                        <div class="visual-content">
+                            <h3 class="text-center">Emergency Loan Categories</h3>
+                            <div class="visual-grid">
+                                <div class="visual-item">
+                                    <i class="fas fa-bus"></i>
+                                    <span>Fare</span>
+                                </div>
+                                <div class="visual-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <span>Food</span>
+                                </div>
+                                <div class="visual-item">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Gas</span>
+                                </div>
+                                <div class="visual-item">
+                                    <i class="fas fa-pills"></i>
+                                    <span>Medicine</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Loan Categories Grid -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-3">What People Actually Borrow For In Real Life</h2>
+            <p class="text-center mb-5">
+                Real emergencies. Real needs. Small amounts. Fast help — from people you trust.
+            </p>
+            
+            <div class="categories-grid">
+                <div class="grid grid-5">
+                    <!-- Category 1 -->
+                    <div class="category-card">
+                        <div class="category-icon">🚌</div>
+                        <h4 class="category-title">Fare</h4>
+                        <p class="category-tagline">M-pesewa Fare loan: move on, don't stall—borrow for your journey to work or hospital</p>
+                    </div>
+                    
+                    <!-- Category 2 -->
+                    <div class="category-card">
+                        <div class="category-icon">🍲</div>
+                        <h4 class="category-title">Food</h4>
+                        <p class="category-tagline">M-pesewa Food loan: don't sleep hungry when paycheck is delayed—borrow and eat today</p>
+                    </div>
+                    
+                    <!-- Category 3 -->
+                    <div class="category-card">
+                        <div class="category-icon">⛽</div>
+                        <h4 class="category-title">Gas</h4>
+                        <p class="category-tagline">M-pesewa cooking gas loan: Cook with confidence—borrow when your gas is finished</p>
+                    </div>
+                    
+                    <!-- Category 4 -->
+                    <div class="category-card">
+                        <div class="category-icon">💊</div>
+                        <h4 class="category-title">Medicine</h4>
+                        <p class="category-tagline">M-pesewa medicine loan: Health first—borrow for urgent medicines</p>
+                    </div>
+                    
+                    <!-- Category 5 -->
+                    <div class="category-card">
+                        <div class="category-icon">⛽</div>
+                        <h4 class="category-title">Fuel</h4>
+                        <p class="category-tagline">M-pesewa bike car tuktuk fuel loan: Keep moving—borrow for fuel, no matter your journey</p>
+                    </div>
+                    
+                    <!-- Category 6 -->
+                    <div class="category-card">
+                        <div class="category-icon">🎓</div>
+                        <h4 class="category-title">School Fees</h4>
+                        <p class="category-tagline">Urgent school payment</p>
+                    </div>
+                    
+                    <!-- Category 7 -->
+                    <div class="category-card">
+                        <div class="category-icon">🏪</div>
+                        <h4 class="category-title">Kibanda loan</h4>
+                        <p class="category-tagline">M-Pesewa kidandaski loan- Kibanda/stall loan when you need it</p>
+                    </div>
+                    
+                    <!-- Category 8 -->
+                    <div class="category-card">
+                        <div class="category-icon">🛒</div>
+                        <h4 class="category-title">M-Pesewa hawker loan</h4>
+                        <p class="category-tagline">Be a Street smart, cash flow all time</p>
+                    </div>
+                    
+                    <!-- Category 9 -->
+                    <div class="category-card">
+                        <div class="category-icon">💰</div>
+                        <h4 class="category-title">M-fuliziwa Loan</h4>
+                        <p class="category-tagline">Your fuliza is not enough, topup here for more Mobile money overdraft</p>
+                    </div>
+                    
+                    <!-- Category 10 -->
+                    <div class="category-card">
+                        <div class="category-icon">💡</div>
+                        <h4 class="category-title">M-pesewa electricity tokens</h4>
+                        <p class="category-tagline">Stay lit, stay powered—borrow tokens when you need it</p>
+                    </div>
+                    
+                    <!-- Category 11 -->
+                    <div class="category-card">
+                        <div class="category-icon">💸</div>
+                        <h4 class="category-title">M-pesewa salary advance loan</h4>
+                        <p class="category-tagline">Dont stress, get salary adnace when you needs it</p>
+                    </div>
+                    
+                    <!-- Category 12 -->
+                    <div class="category-card">
+                        <div class="category-icon">🚰</div>
+                        <h4 class="category-title">M-pesewa Water Bill</h4>
+                        <p class="category-tagline">Stay hydrated—borrow for water needs or bills</p>
+                    </div>
+                    
+                    <!-- Category 13 -->
+                    <div class="category-card">
+                        <div class="category-icon">📺</div>
+                        <h4 class="category-title">M-pesewa TV Subscription loan</h4>
+                        <p class="category-tagline">Your behind your tv programs due to finished tv subscription, borrow her</p>
+                    </div>
+                    
+                    <!-- Category 14 -->
+                    <div class="category-card">
+                        <div class="category-icon">🏠</div>
+                        <h4 class="category-title">M-pesewa Rent loan</h4>
+                        <p class="category-tagline">House rent emergency, borrow friend and pay with one week</p>
+                    </div>
+                    
+                    <!-- Category 15 -->
+                    <div class="category-card">
+                        <div class="category-icon">🔧</div>
+                        <h4 class="category-title">M-pesewa bike car tuktuk repair loan</h4>
+                        <p class="category-tagline">Fix it quick—borrow for minor repairs and keep going</p>
+                    </div>
+                    
+                    <!-- Category 16 -->
+                    <div class="category-card">
+                        <div class="category-icon">📱</div>
+                        <h4 class="category-title">M-pesewa airtime/credo loan</h4>
+                        <p class="category-tagline">You have run out on airtime, borrow here and make agent calls</p>
+                    </div>
+                    
+                    <!-- Category 17 -->
+                    <div class="category-card">
+                        <div class="category-icon>📡<div>
+                        <h4 class="category-title">M-pesewa Wifi loan</h4>
+                        <p class="category-tagline">Wifi subscription is over and you dont have money, borrow here and pay</p>
+                    </div>
+                    
+                    <!-- Category 18 -->
+                    <div class="category-card">
+                        <div class="category-icon">🎁</div>
+                        <h4 class="category-title">M-Pesewa Soko Loan</h4>
+                        <p class="category-tagline">Market money when you need stock</p>
+                    </div>
+                    
+                    <!-- Category 19 -->
+                    <div class="category-card">
+                        <div class="category-icon">📚</div>
+                        <h4 class="category-title">M-pesewa school fees </h4>
+                        <p class="category-tagline">Educational materials or fee when you are low</p>
+                    </div>
+                    
+                    <!-- Category 20 -->
+                    <div class="category-card">
+                        <div class="category-icon">🛠️</div>
+                        <h4 class="category-title">M-Pesa Daily Sales Advance</h4>
+                        <p class="category-tagline">Small Loan advance for everyday business</p>
+                    </div>
+                    
+                    <!-- Category 21 -->
+                    <div class="category-card">
+                        <div class="category-icon">🚑</div>
+                        <h4 class="category-title">M-pesewa Ambulance transport laon</h4>
+                        <p class="category-tagline">Emergency hospital transport</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Philosophy Section -->
+    <section class="section bg-white">
+        <div class="container">
+            <h2 class="text-center mb-3">A Different Kind of Lending Platform</h2>
+            <p class="text-center mb-5">Built on trust, transparency, and community support</p>
+            
+            <div class="grid grid-3">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-exclamation-triangle text-gold"></i>
+                    </div>
+                    <h4>Emergency Consumption Only</h4>
+                    <p>We only facilitate emergency consumption loans, not business or investment loans.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-users text-gold"></i>
+                    </div>
+                    <h4>Friends Lend to Friends</h4>
+                    <p>Lending happens only within trusted groups where people know each other.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-money-bill-wave text-gold"></i>
+                    </div>
+                    <h4>Subscription-Based Revenue</h4>
+                    <p>Platform earns only from lender subscriptions, not from loan commissions.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-gavel text-gold"></i>
+                    </div>
+                    <h4>Strong Reputation System</h4>
+                    <p>Comprehensive rating and blacklist enforcement for accountability.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-ban text-gold"></i>
+                    </div>
+                    <h4>No Cross-Border Lending</h4>
+                    <p>Lending never crosses country borders or group boundaries.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-vault text-gold"></i>
+                    </div>
+                    <h4>No Money Custody</h4>
+                    <p>M-Pesewa never holds money. All transactions happen outside the platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section bg-light" id="how-it-works">
+        <div class="container">
+            <h2 class="text-center mb-3">How It Works</h2>
+            <p class="text-center mb-5">Simple, transparent process for emergency lending</p>
+            
+            <div class="process-steps">
+                <div class="grid grid-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Join Your Country</h4>
+                        <p>Select your country to join the M-Pesewa ecosystem. Each country operates independently.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Join or Create a Group</h4>
+                        <p>Join an existing trusted group or create your own with friends, family, or community.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Borrowers Post Requests</h4>
+                        <p>Borrowers post emergency loan requests with category, amount, and purpose.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Lenders Offer Terms</h4>
+                        <p>Lenders in the same group review requests and offer lending terms.</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-3 mt-5">
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h4>Money Sent Outside Platform</h4>
+                        <p>Once terms are agreed, money is sent directly between users outside M-Pesewa.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h4>Ledger & Reputation Tracking</h4>
+                        <p>M-Pesewa tracks the ledger and updates reputation scores for both parties.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">7</div>
+                        <h4>Repayment & Closure</h4>
+                        <p>Borrower repays within 7 days. Loan is marked as cleared in the ledger.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-container text-center mt-5">
+                <span class="badge badge-primary badge-lg">
+                    <i class="fas fa-shield-alt"></i> M-Pesewa does not hold money. Ever.
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Borrower Benefits -->
+    <section class="section bg-white">
+        <div class="container">
+            <h2 class="text-center mb-3">Borrower Benefits</h2>
+            <p class="text-center mb-5">Emergency relief when you need it most</p>
+            
+            <div class="grid grid-4">
+                <div class="benefit-card">
+                    <i class="fas fa-hands-helping text-gold"></i>
+                    <h4>No Need to Beg</h4>
+                    <p>Post once and reach many potential lenders in your trusted group.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-user-friends text-gold"></i>
+                    <h4>Borrow From Trust</h4>
+                    <p>Get loans from people who know you and understand your situation.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-handshake text-gold"></i>
+                    <h4>Fair Interest</h4>
+                    <p>Interest rates are agreed willingly between both parties.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-bolt text-gold"></i>
+                    <h4>Faster Than Banks</h4>
+                    <p>Get emergency funds within hours, not days or weeks.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-clock text-gold"></i>
+                    <h4>Money When Needed</h4>
+                    <p>Access funds exactly when you have an emergency need.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-balance-scale text-gold"></i>
+                    <h4>No Favors Owed</h4>
+                    <p>Clear financial agreement without personal obligations.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-users text-gold"></i>
+                    <h4>Group Accountability</h4>
+                    <p>Your reputation within the group ensures fair dealing.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-tags text-gold"></i>
+                    <h4>Always Free</h4>
+                    <p>Borrowers never pay subscription fees or platform commissions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lender Benefits -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-3">Lender Benefits</h2>
+            <p class="text-center mb-5">Control, safety, and income opportunities</p>
+            
+            <div class="grid grid-4">
+                <div class="benefit-card">
+                    <i class="fas fa-chart-line text-gold"></i>
+                    <h4>Earn Passive Income</h4>
+                    <p>Generate returns by lending to trusted borrowers in your group.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-coins text-gold"></i>
+                    <h4>Start Small</h4>
+                    <p>Begin lending with as little as $0.10 or equivalent local currency.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-user-check text-gold"></i>
+                    <h4>Lend to Trusted People</h4>
+                    <p>Only lend to people you know within your trusted circles.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-hand-pointer text-gold"></i>
+                    <h4>Choose Who to Support</h4>
+                    <p>Select specific borrowers and causes you want to support.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-percentage text-gold"></i>
+                    <h4>Set Your Own Interest</h4>
+                    <p>Negotiate interest rates directly with borrowers (max 10%).</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-seedling text-gold"></i>
+                    <h4>Grow at Your Pace</h4>
+                    <p>Scale your lending activities as you gain confidence and capital.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-users text-gold"></i>
+                    <h4>Unlimited Borrowers</h4>
+                    <p>No limits on how many borrowers you can support.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <i class="fas fa-book text-gold"></i>
+                    <h4>Full Ledger Tracking</h4>
+                    <p>Comprehensive digital ledger for all your lending activities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans -->
+    <section class="section bg-white" id="subscriptions">
+        <div class="container">
+            <h2 class="text-center mb-3">Lenders Operate By Subscription — Not Commission</h2>
+            <p class="text-center mb-5">Choose the plan that matches your lending goals</p>
+            
+            <div class="grid grid-4">
+                <!-- Basic Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Basic</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">50</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">For occasional lenders</p>
+                    </div>
+                    <div class="plan-body">
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check text-gold"></i> ≤ loan 1,500/week limit</li>
+                            <li><i class="fas fa-check text-gold"></i> 250/bi-annual</li>
+                            <li><i class="fas fa-check text-gold"></i> 500/annual</li>
+                            <li><i class="fas fa-times text-gray-400"></i> No CRB check</li>
+                            <li><i class="fas fa-check text-gold"></i> Ledgers ≤ 1,500</li>
+                        </ul>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="#subscribe" class="btn btn-outline btn-block">Choose Basic</a>
+                    </div>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="plan-card featured">
+                    <div class="plan-badge">Most Popular</div>
+                    <div class="plan-header">
+                        <h3 class="plan-title">Premium</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">250</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">For regular lenders</p>
+                    </div>
+                    <div class="plan-body">
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check text-gold"></i> ≤ loan 5,000/week limit</li>
+                            <li><i class="fas fa-check text-gold"></i> 1,500/bi-annual</li>
+                            <li><i class="fas fa-check text-gold"></i> 2,500/annual</li>
+                            <li><i class="fas fa-times text-gray-400"></i> No CRB check</li>
+                            <li><i class="fas fa-check text-gold"></i> Ledgers ≤ 10,000</li>
+                        </ul>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="#subscribe" class="btn btn-primary btn-block">Choose Premium</a>
+                    </div>
+                </div>
+                
+                <!-- Super Plan -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Super</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">1,000</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">For serious lenders</p>
+                    </div>
+                    <div class="plan-body">
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check text-gold"></i> ≤ loan 20,000/week limit</li>
+                            <li><i class="fas fa-check text-gold"></i> 5,000/bi-annual</li>
+                            <li><i class="fas fa-check text-gold"></i> 8,500/annual</li>
+                            <li><i class="fas fa-check text-gold"></i> CRB check required</li>
+                            <li><i class="fas fa-check text-gold"></i> Ledgers ≤ 20,000</li>
+                        </ul>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="#subscribe" class="btn btn-outline btn-block">Choose Super</a>
+                    </div>
+                </div>
+                
+                <!-- Lender of Lenders -->
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-title">Lender of Lenders</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">500</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">For institutional lenders</p>
+                    </div>
+                    <div class="plan-body">
+                        <ul class="plan-features">
+                            <li><i class="fas fa-check text-gold"></i> ≤ loan 50,000/week limit</li>
+                            <li><i class="fas fa-check text-gold"></i> 3,500/bi-annual</li>
+                            <li><i class="fas fa-check text-gold"></i> 6,500/annual</li>
+                            <li><i class="fas fa-check text-gold"></i> CRB required</li>
+                            <li><i class="fas fa-check text-gold"></i> Custom terms</li>
+                        </ul>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="#subscribe" class="btn btn-outline btn-block">Choose LoL</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="badge-container text-center mt-5">
+                <span class="badge badge-success badge-lg">
+                    <i class="fas fa-check-circle"></i> Borrowers always use M-PESEWA for FREE.
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Safety Section -->
+    <section class="section bg-dark">
+        <div class="container">
+            <h2 class="text-center mb-3 text-white">Trust & Safety</h2>
+            <p class="text-center mb-5 text-gray-300">Understanding our role and your responsibilities</p>
+            
+            <div class="grid grid-2">
+                <div class="trust-card">
+                    <h4 class="text-gold">Platform Role</h4>
+                    <ul class="trust-list">
+                        <li class="text-white"><i class="fas fa-times-circle text-gold"></i> Not a bank</li>
+                        <li class="text-white"><i class="fas fa-times-circle text-gold"></i> Not a lender</li>
+                        <li class="text-white"><i class="fas fa-times-circle text-gold"></i> Not a borrower</li>
+                        <li class="text-white"><i class="fas fa-times-circle text-gold"></i> Not holding money</li>
+                        <li class="text-white"><i class="fas fa-times-circle text-gold"></i> Not deposit required</li>
+                        <li class="text-white"><i class="fas fa-check-circle text-gold"></i> Technology platform only</li>
+                        <li class="text-white"><i class="fas fa-check-circle text-gold"></i> Ledger & reputation tracking</li>
+                        <li class="text-white"><i class="fas fa-check-circle text-gold"></i> Group coordination</li>
+                    </ul>
+                </div>
+                
+                <div class="trust-card">
+                    <h4 class="text-gold">Risk Disclaimer</h4>
+                    <div class="alert alert-warning">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h5 class="alert-title">Important Notice</h5>
+                            <p class="alert-message">
+                                All lending involves risk. M-Pesewa provides no guarantees of repayment. 
+                                Default risk is managed through group enforcement, reputation systems, 
+                                and blacklisting. Lenders must conduct their own due diligence within 
+                                their trusted groups.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mt-3">
+                        The platform's role is limited to facilitating connections, tracking agreements, 
+                        and maintaining reputation systems. All financial transactions occur directly 
+                        between users outside the platform.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Coverage -->
+    <section class="section bg-white">
+        <div class="container">
+            <h2 class="text-center mb-3">Serving 25 African Countries</h2>
+            <p class="text-center mb-5">But Lending Never Crosses Borders</p>
+            
+            <div class="flags-marquee">
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <!-- Country Flags - First Set -->
+                        <div class="flag-item">
+                            <span class="flag-icon">🇰🇪</span>
+                            <span class="flag-name">Kenya</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇺🇬</span>
+                            <span class="flag-name">Uganda</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇹🇿</span>
+                            <span class="flag-name">Tanzania</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇷🇼</span>
+                            <span class="flag-name">Rwanda</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇧🇮</span>
+                            <span class="flag-name">Burundi</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇸🇴</span>
+                            <span class="flag-name">Somalia</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇸🇸</span>
+                            <span class="flag-name">South Sudan</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇪🇹</span>
+                            <span class="flag-name">Ethiopia</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇨🇩</span>
+                            <span class="flag-name">DR Congo</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇳🇬</span>
+                            <span class="flag-name">Nigeria</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇿🇦</span>
+                            <span class="flag-name">South Africa</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇬🇭</span>
+                            <span class="flag-name">Ghana</span>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="flag-item">
+                            <span class="flag-icon">🇰🇪</span>
+                            <span class="flag-name">Kenya</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇺🇬</span>
+                            <span class="flag-name">Uganda</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇹🇿</span>
+                            <span class="flag-name">Tanzania</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇷🇼</span>
+                            <span class="flag-name">Rwanda</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇧🇮</span>
+                            <span class="flag-name">Burundi</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇸🇴</span>
+                            <span class="flag-name">Somalia</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇸🇸</span>
+                            <span class="flag-name">South Sudan</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇪🇹</span>
+                            <span class="flag-name">Ethiopia</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇨🇩</span>
+                            <span class="flag-name">DR Congo</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇳🇬</span>
+                            <span class="flag-name">Nigeria</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇿🇦</span>
+                            <span class="flag-name">South Africa</span>
+                        </div>
+                        <div class="flag-item">
+                            <span class="flag-icon">🇬🇭</span>
+                            <span class="flag-name">Ghana</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center mt-5">
+                Each country operates as an isolated economy. Lending and borrowing never crosses country borders. 
+                All groups and transactions are locked to their respective countries and currencies.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mid-Page CTA -->
+    <section class="section bg-secondary">
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2 class="text-white mb-3">
+                    Need emergency help today?<br>
+                    Or want to earn by helping people you trust?
+                </h2>
+                <div class="cta-actions flex justify-center gap-md mt-4">
+                    <a href="#get-loan" class="btn btn-primary btn-lg">
+                        <i class="fas fa-hand-holding-usd"></i> Get Emergency Loan
+                    </a>
+                    <a href="#start-lending" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-coins"></i> Start Lending
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Objectives & Target Users -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="objectives-card">
+                    <h3 class="mb-4">Platform Objectives</h3>
+                    <ul class="objectives-list">
+                        <li class="objective-item">
+                            <i class="fas fa-bolt text-gold"></i>
+                            <span>Provide emergency access to funds</span>
+                        </li>
+                        <li class="objective-item">
+                            <i class="fas fa-shield-alt text-gold"></i>
+                            <span>Reduce predatory lending practices</span>
+                        </li>
+                        <li class="objective-item">
+                            <i class="fas fa-money-bill-wave text-gold"></i>
+                            <span>Monetize via subscriptions only</span>
+                        </li>
+                        <li class="objective-item">
+                            <i class="fas fa-sitemap text-gold"></i>
+                            <span>Enforce hierarchy & isolation</span>
+                        </li>
+                        <li class="objective-item">
+                            <i class="fas fa-users text-gold"></i>
+                            <span>Build group accountability systems</span>
+                        </li>
+                        <li class="objective-item">
+                            <i class="fas fa-chart-line text-gold"></i>
+                            <span>Create sustainable community finance</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="users-card">
+                    <h3 class="mb-4">Target Users</h3>
+                    <ul class="users-list">
+                        <li class="user-item">
+                            <i class="fas fa-user text-gold"></i>
+                            <span>Individuals with emergency needs</span>
+                        </li>
+                        <li class="user-item">
+                            <i class="fas fa-user-tie text-gold"></i>
+                            <span>Informal & professional lenders</span>
+                        </li>
+                        <li class="user-item">
+                            <i class="fas fa-church text-gold"></i>
+                            <span>Churches, families, social groups</span>
+                        </li>
+                        <li class="user-item">
+                            <i class="fas fa-hands-helping text-gold"></i>
+                            <span>Community lenders & ROSCAs</span>
+                        </li>
+                        <li class="user-item">
+                            <i class="fas fa-store-alt text-gold"></i>
+                            <span>Small business support networks</span>
+                        </li>
+                        <li class="user-item">
+                            <i class="fas fa-globe-africa text-gold"></i>
+                            <span>African diaspora communities</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Positioning -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="legal-notice">
+                <h3 class="text-center mb-4">Legal Positioning</h3>
+                <div class="legal-content text-center">
+                    <p class="mb-4">
+                        M-Pesewa is a technology coordination and record-keeping platform only.<br>
+                        All loans are private agreements between users.
+                    </p>
+                    <a href="pages/terms.html" class="btn btn-outline">
+                        <i class="fas fa-file-contract"></i> Read Full Terms & Conditions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="section bg-dark">
+        <div class="container">
+            <div class="grid grid-4">
+                <!-- Column 1: M-Pesewa -->
+                <div class="footer-column">
+                    <h4 class="footer-title">M-Pesewa</h4>
+                    <ul class="footer-links">
+                        <li><a href="#get-loan">Get Emergency Loan</a></li>
+                        <li><a href="#online-loan">Online Personal Loan</a></li>
+                        <li><a href="#why-borrow">Why Borrow</a></li>
+                        <li><a href="#how-to-apply">How to Apply</a></li>
+                        <li><a href="#active-lenders">Active Lenders</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 2: Lending -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Lending</h4>
+                    <ul class="footer-links">
+                        <li><a href="#smart-lending">Smart Lending</a></li>
+                        <li><a href="#why-lend">Why Lend</a></li>
+                        <li><a href="#how-to-lend">How to Lend</a></li>
+                        <li><a href="#active-borrowers">Active Borrowers</a></li>
+                        <li><a href="#risk-management">Risk Management</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: How It Works & About -->
+                <div class="footer-column">
+                    <h4 class="footer-title">How It Works</h4>
+                    <ul class="footer-links">
+                        <li><a href="#p2p-explained">P2P Explained</a></li>
+                        <li><a href="#our-role">Our Role</a></li>
+                        <li><a href="#platform-performance">Platform Performance</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#about-us">About Us</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#advisory-board">Advisory Board</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#career">Career</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Others -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Others</h4>
+                    <ul class="footer-links">
+                        <li><a href="pages/terms.html">Terms & Conditions</a></li>
+                        <li><a href="#privacy-policy">Privacy Policy</a></li>
+                        <li><a href="#channel-partner">Channel Partner T&C</a></li>
+                        <li><a href="#referral">Referral T&C</a></li>
+                        <li><a href="#grievance">Grievance Policy</a></li>
+                        <li><a href="#fair-practices">Fair Practices Code</a></li>
+                        <li><a href="#sitemap">Sitemap</a></li>
+                        <li><a href="pages/debt-collectors.html">Debt Collectors</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Social Icons -->
+            <div class="social-section text-center mt-5">
+                <h4 class="footer-title mb-3">Connect With Us</h4>
+                <div class="social-icons flex justify-center gap-md">
+                    <a href="#facebook" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#twitter" class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#linkedin" class="social-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#youtube" class="social-icon">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="#instagram" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Country Flags Marquee -->
+            <div class="flags-footer mt-5">
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <!-- Repeated flags for footer -->
+                        <span class="flag-icon-small">🇰🇪</span>
+                        <span class="flag-icon-small">🇺🇬</span>
+                        <span class="flag-icon-small">🇹🇿</span>
+                        <span class="flag-icon-small">🇷🇼</span>
+                        <span class="flag-icon-small">🇧🇮</span>
+                        <span class="flag-icon-small">🇸🇴</span>
+                        <span class="flag-icon-small">🇸🇸</span>
+                        <span class="flag-icon-small">🇪🇹</span>
+                        <span class="flag-icon-small">🇨🇩</span>
+                        <span class="flag-icon-small">🇳🇬</span>
+                        <span class="flag-icon-small">🇿🇦</span>
+                        <span class="flag-icon-small">🇬🇭</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Legal Text -->
+            <div class="legal-text text-center mt-5">
+                <p class="text-gray-400">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </p>
+                <p class="text-gray-400 text-sm mt-2">
+                    M-Pesewa is a technology platform for coordinating emergency loans within trusted groups.
+                    We do not hold money, lend money, or borrow money. All financial transactions occur directly
+                    between users outside our platform.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Install PWA Button (Hidden by default) -->
+    <div id="install-button" class="install-pwa" style="display: none;">
+        <button class="btn btn-primary">
+            <i class="fas fa-download"></i> Install M-PESEWA App
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    
+    <style>
+        /* Additional styles for landing page */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.9;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .visual-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .visual-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+        
+        .visual-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .visual-item i {
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .visual-item span {
+            font-size: 0.875rem;
+            color: white;
+        }
+        
+        .categories-grid {
+            margin-top: var(--spacing-xl);
+        }
+        
+        .philosophy-card {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .philosophy-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--gold);
+        }
+        
+        .process-steps {
+            margin-top: var(--spacing-xl);
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: var(--spacing-lg);
+            position: relative;
+        }
+        
+        .step-number {
+            width: 3rem;
+            height: 3rem;
+            background: var(--gold);
+            color: var(--gray-900);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .benefit-card {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .benefit-card i {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--gold);
+        }
+        
+        .plan-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--gray-200);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+        
+        .plan-card.featured {
+            border-color: var(--gold);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--gold);
+            color: var(--gray-900);
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-bottom-left-radius: var(--radius-md);
+        }
+        
+        .plan-header {
+            padding: var(--spacing-lg);
+            text-align: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .plan-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .plan-price {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        
+        .price-period {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+        
+        .plan-description {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+        
+        .plan-body {
+            padding: var(--spacing-lg);
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .plan-features li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .plan-footer {
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .trust-card {
+            padding: var(--spacing-lg);
+        }
+        
+        .trust-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .trust-list li {
+            padding: var(--spacing-sm) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .flags-marquee {
+            overflow: hidden;
+            position: relative;
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .marquee-content {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+        
+        .flag-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 var(--spacing-xl);
+            min-width: 100px;
+        }
+        
+        .flag-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .flag-name {
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .objectives-list, .users-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .objective-item, .user-item {
+            padding: var(--spacing-md) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .objective-item:last-child, .user-item:last-child {
+            border-bottom: none;
+        }
+        
+        .footer-column {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .footer-title {
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-links a {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all var(--transition-fast);
+        }
+        
+        .social-icon:hover {
+            background: var(--gold);
+            color: var(--gray-900);
+            transform: translateY(-2px);
+        }
+        
+        .flags-footer .marquee-content {
+            animation: marquee-footer 20s linear infinite;
+        }
+        
+        .flag-icon-small {
+            font-size: 1.5rem;
+            margin: 0 var(--spacing-md);
+        }
+        
+        @keyframes marquee-footer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .install-pwa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .plan-card.featured {
+                transform: none;
+            }
+            
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links a,
+            .legal-text p,
+            .legal-text small {
+                opacity: 1;
+                color: #d6d2e8;
+            }
+        }
+        
+        /* Tablet responsive fixes */
+        @media (max-width: 1024px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps .grid-4,
+            .process-steps .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>
