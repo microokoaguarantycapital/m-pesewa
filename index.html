@@ -29,7 +29,7 @@
 </head>
 <body>
     <!-- Header / Top Navigation -->
-    <header class="navbar">
+    <header class="navbar sticky-nav">
         <div class="container navbar-container">
             <!-- Logo -->
             <a href="/" class="navbar-brand">
@@ -968,8 +968,8 @@
                         <li><a href="#referral">Referral T&C</a></li>
                         <li><a href="#grievance">Grievance Policy</a></li>
                         <li><a href="#fair-practices">Fair Practices Code</a></li>
-                        <li><a href="pages/debt-collectors.html">Debt Collectors</a></li>
                         <li><a href="#sitemap">Sitemap</a></li>
+                        <li><a href="pages/debt-collectors.html">Debt Collectors</a></li>
                     </ul>
                 </div>
             </div>
@@ -1058,7 +1058,7 @@
             font-size: 1.125rem;
             line-height: 1.6;
             margin-bottom: var(--spacing-xl);
-            opacity: 1;
+            opacity: 0.9;
         }
         
         .trust-item {
@@ -1066,7 +1066,7 @@
             align-items: center;
             gap: var(--spacing-xs);
             font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.95);
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .visual-card {
@@ -1339,7 +1339,7 @@
         }
         
         .footer-links a {
-            color: #d6d2e8;
+            color: var(--gray-400);
             font-size: 0.875rem;
             transition: color var(--transition-fast);
         }
@@ -1387,42 +1387,37 @@
             z-index: 1000;
         }
         
-        /* Mobile Responsive Fixes */
-        @media (max-width: 1024px) {
-            .grid-4, .grid-5 {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .plan-card.featured {
-                transform: none;
-            }
-        }
-        
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 1.75rem;
             }
             
-            .grid-2, .grid-3, .grid-4, .grid-5 {
-                grid-template-columns: 1fr;
+            .plan-card.featured {
+                transform: none;
             }
             
             .visual-grid {
                 grid-template-columns: 1fr;
             }
             
-            .footer-column {
-                margin-bottom: var(--spacing-lg);
+            .footer-links a,
+            .legal-text p,
+            .legal-text small {
+                opacity: 1;
+                color: #d6d2e8;
+            }
+        }
+        
+        /* Tablet responsive fixes */
+        @media (max-width: 1024px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .navbar-nav {
-                flex-direction: column;
-                gap: var(--spacing-sm);
-            }
-            
-            .navbar-actions {
-                flex-direction: column;
-                gap: var(--spacing-sm);
+            .process-steps .grid-4,
+            .process-steps .grid-3 {
+                grid-template-columns: 1fr;
             }
         }
     </style>
