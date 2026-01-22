@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | M-PESEWA Support</title>
+    <meta name="description" content="Contact M-PESEWA support team for assistance with emergency lending platform.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/images/icons/icon-192.png">
+    
+    <!-- PWA Script -->
+    <script src="../assets/js/pwa.js" defer></script>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <span>✔ Not a bank</span>
+            <span>✔ No money held</span>
+            <span>✔ No commissions</span>
+            <span>✔ Group-based trust</span>
+            <span>✔ Country-isolated system</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html#how-it-works">How It Works</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="groups.html">Groups</a>
+                <a href="countries/">Countries</a>
+                <a href="subscriptions.html">Subscriptions</a>
+                <a href="about.html">About</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="section">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="../index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">Contact Us</span>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1>Contact M-PESEWA</h1>
+                <p class="section-subtitle">
+                    Get in touch with our support team for assistance
+                </p>
+            </div>
+
+            <!-- Contact Methods -->
+            <div class="grid-3">
+                <div class="card" style="text-align: center;">
+                    <div class="icon-circle" style="margin: 0 auto 1rem;">📧</div>
+                    <h3>Email Support</h3>
+                    <p>For general inquiries and support</p>
+                    <a href="mailto:support@m-pesewa.com" class="btn outline" style="margin-top: 1rem;">support@m-pesewa.com</a>
+                    <p style="font-size: 0.9rem; color: var(--neutral-gray); margin-top: 0.5rem;">Response time: 24 hours</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="icon-circle" style="margin: 0 auto 1rem;">⚖️</div>
+                    <h3>Legal & Compliance</h3>
+                    <p>For legal matters and compliance</p>
+                    <a href="mailto:legal@m-pesewa.com" class="btn outline" style="margin-top: 1rem;">legal@m-pesewa.com</a>
+                    <p style="font-size: 0.9rem; color: var(--neutral-gray); margin-top: 0.5rem;">For official correspondence</p>
+                </div>
+                
+                <div class="card" style="text-align: center;">
+                    <div class="icon-circle" style="margin: 0 auto 1rem;">🤝</div>
+                    <h3>Business & Partnerships</h3>
+                    <p>For partnerships and business</p>
+                    <a href="mailto:partners@m-pesewa.com" class="btn outline" style="margin-top: 1rem;">partners@m-pesewa.com</a>
+                    <p style="font-size: 0.9rem; color: var(--neutral-gray); margin-top: 0.5rem;">For collaboration inquiries</p>
+                </div>
+            </div>
+
+            <!-- Country Selection -->
+            <div class="section-header">
+                <h2>Country-Specific Support</h2>
+                <p class="section-subtitle">Select your country for localized contact information</p>
+            </div>
+
+            <div class="country-selector">
+                <div class="country-option" onclick="selectCountry('Kenya')">
+                    <div class="country-flag">🇰🇪</div>
+                    <div class="country-name">Kenya</div>
+                    <div class="country-currency">KES</div>
+                </div>
+                
+                <div class="country-option" onclick="selectCountry('Uganda')">
+                    <div class="country-flag">🇺🇬</div>
+                    <div class="country-name">Uganda</div>
+                    <div class="country-currency">UGX</div>
+                </div>
+                
+                <div class="country-option" onclick="selectCountry('Tanzania')">
+                    <div class="country-flag">🇹🇿</div>
+                    <div class="country-name">Tanzania</div>
+                    <div class="country-currency">TZS</div>
+                </div>
+                
+                <div class="country-option" onclick="selectCountry('Rwanda')">
+                    <div class="country-flag">🇷🇼</div>
+                    <div class="country-name">Rwanda</div>
+                    <div class="country-currency">RWF</div>
+                </div>
+                
+                <div class="country-option" onclick="selectCountry('Nigeria')">
+                    <div class="country-flag">🇳🇬</div>
+                    <div class="country-name">Nigeria</div>
+                    <div class="country-currency">NGN</div>
+                </div>
+                
+                <div class="country-option" onclick="selectCountry('Ghana')">
+                    <div class="country-flag">🇬🇭</div>
+                    <div class="country-name">Ghana</div>
+                    <div class="country-currency">GHS</div>
+                </div>
+            </div>
+
+            <!-- Selected Country Info -->
+            <div class="card" id="country-info" style="display: none;">
+                <div class="card-header">
+                    <h3 class="card-title" id="country-title">Country Support Information</h3>
+                </div>
+                <div class="card-body">
+                    <div class="grid-2">
+                        <div>
+                            <h4>Local Support</h4>
+                            <p id="local-support">Contact information will appear here</p>
+                            <div id="support-details"></div>
+                        </div>
+                        <div>
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 6:00 PM (Local Time)</p>
+                            <p>Saturday: 9:00 AM - 1:00 PM (Local Time)</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="section-header">
+                <h2>Send Us a Message</h2>
+            </div>
+
+            <div class="form-container">
+                <form id="contactForm" onsubmit="submitContactForm(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name <span class="form-required">*</span></label>
+                            <input type="text" class="form-control" id="contact-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address <span class="form-required">*</span></label>
+                            <input type="email" class="form-control" id="contact-email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" id="contact-phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Country <span class="form-required">*</span></label>
+                            <select class="form-control select" id="contact-country" required>
+                                <option value="">Select Country</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Uganda">Uganda</option>
+                                <option value="Tanzania">Tanzania</option>
+                                <option value="Rwanda">Rwanda</option>
+                                <option value="Nigeria">Nigeria</option>
+                                <option value="Ghana">Ghana</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="Ethiopia">Ethiopia</option>
+                                <option value="Senegal">Senegal</option>
+                                <option value="Morocco">Morocco</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Inquiry Type <span class="form-required">*</span></label>
+                        <select class="form-control select" id="contact-type" required>
+                            <option value="">Select Type</option>
+                            <option value="General">General Inquiry</option>
+                            <option value="Technical">Technical Support</option>
+                            <option value="Borrowing">Borrowing Assistance</option>
+                            <option value="Lending">Lending Assistance</option>
+                            <option value="Subscription">Subscription Issue</option>
+                            <option value="Report">Report Fraud/Abuse</option>
+                            <option value="Default">Default/Blacklist Issue</option>
+                            <option value="Group">Group Management</option>
+                            <option value="Legal">Legal Matter</option>
+                            <option value="Partnership">Partnership Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Subject <span class="form-required">*</span></label>
+                        <input type="text" class="form-control" id="contact-subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Message <span class="form-required">*</span></label>
+                        <textarea class="form-control" id="contact-message" rows="6" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="contact-consent" required>
+                            <label for="contact-consent" class="checkbox-label">
+                                I agree to the terms and consent to M-PESEWA processing my data
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="reset" class="btn secondary">Clear Form</button>
+                        <button type="submit" class="btn primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="section-header">
+                <h2>Emergency & Special Contacts</h2>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h4>🔄 Report Fraud</h4>
+                    <p>Immediate reporting of fraudulent activity</p>
+                    <a href="mailto:fraud@m-pesewa.com" class="btn outline small">fraud@m-pesewa.com</a>
+                    <p class="form-help">Include evidence if available</p>
+                </div>
+                
+                <div class="card">
+                    <h4>🚨 Report Default</h4>
+                    <p>Reporting borrowers in default (>60 days)</p>
+                    <a href="mailto:default@m-pesewa.com" class="btn outline small">default@m-pesewa.com</a>
+                    <p class="form-help">Include ledger ID and details</p>
+                </div>
+                
+                <div class="card">
+                    <h4>👥 Report Group Abuse</h4>
+                    <p>Reporting unethical group behavior</p>
+                    <a href="mailto:groups@m-pesewa.com" class="btn outline small">groups@m-pesewa.com</a>
+                    <p class="form-help">For group moderation issues</p>
+                </div>
+            </div>
+
+            <!-- Response Times -->
+            <div class="alert alert-info">
+                <div class="alert-icon">⏰</div>
+                <div class="alert-content">
+                    <h3 class="alert-title">Response Time Expectations</h3>
+                    <p class="alert-message">
+                        <strong>General Inquiries:</strong> 24-48 hours • 
+                        <strong>Technical Support:</strong> 12-24 hours • 
+                        <strong>Fraud Reports:</strong> 2-6 hours • 
+                        <strong>Default Reports:</strong> 4-8 hours • 
+                        <strong>Weekend Responses:</strong> Delayed until next business day
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ Link -->
+            <div class="card" style="text-align: center;">
+                <h3>Before Contacting Support</h3>
+                <p>Check if your question is already answered in our FAQ section</p>
+                <a href="qa.html" class="btn primary" style="margin-top: 1rem;">Visit FAQ Center</a>
+            </div>
+
+            <!-- Physical Address -->
+            <div class="section-header">
+                <h2>Registered Office</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">M-PESEWA Technology Pvt. Ltd.</h3>
+                </div>
+                <div class="card-body">
+                    <div class="grid-2">
+                        <div>
+                            <h4>Headquarters</h4>
+                            <p>Nairobi Business Park</p>
+                            <p>Mombasa Road, Nairobi</p>
+                            <p>Kenya</p>
+                            <p>P.O. Box 12345-00100</p>
+                        </div>
+                        <div>
+                            <h4>Regional Offices</h4>
+                            <p><strong>East Africa:</strong> Kampala, Dar es Salaam, Kigali</p>
+                            <p><strong>West Africa:</strong> Lagos, Accra, Dakar</p>
+                            <p><strong>Southern Africa:</strong> Johannesburg</p>
+                            <p><strong>North Africa:</strong> Casablanca, Cairo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="section-header">
+                <h2>Connect With Us</h2>
+            </div>
+
+            <div class="social-icons" style="justify-content: center; margin-bottom: 3rem;">
+                <a href="#" class="btn secondary" style="font-size: 1.2rem; padding: 1rem;">📘 Facebook</a>
+                <a href="#" class="btn secondary" style="font-size: 1.2rem; padding: 1rem;">🐦 Twitter</a>
+                <a href="#" class="btn secondary" style="font-size: 1.2rem; padding: 1rem;">📺 YouTube</a>
+                <a href="#" class="btn secondary" style="font-size: 1.2rem; padding: 1rem;">📸 Instagram</a>
+                <a href="#" class="btn secondary" style="font-size: 1.2rem; padding: 1rem;">💼 LinkedIn</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Get Emergency Loan</h4>
+                    <ul>
+                        <li><a href="borrowing.html">Online Personal Loan</a></li>
+                        <li><a href="borrowing.html">Why Borrow</a></li>
+                        <li><a href="borrowing.html">How to Apply</a></li>
+                        <li><a href="blacklist.html">Active Lenders</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="lending.html">Smart Lending</a></li>
+                        <li><a href="lending.html">Why Lend</a></li>
+                        <li><a href="lending.html">How to Lend</a></li>
+                        <li><a href="blacklist.html">Active Borrowers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>How It Works</h4>
+                    <ul>
+                        <li><a href="../index.html#how-it-works">P2P Explained</a></li>
+                        <li><a href="about.html">Our Role</a></li>
+                        <li><a href="#">Platform Performance</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html">Team</a></li>
+                        <li><a href="about.html">Advisory Board</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="contact.html">Career</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Others</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Channel Partner T&C</a></li>
+                        <li><a href="qa.html">Referral T&C</a></li>
+                        <li><a href="qa.html">Grievance Policy</a></li>
+                        <li><a href="qa.html">Fair Practices Code</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+                
+                <div class="flags-marquee-small">
+                    <div class="marquee-track-small">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇳🇬</span>
+                        <span>🇬🇭</span><span>🇿🇦</span><span>🇪🇬</span><span>🇪🇹</span><span>🇸🇳</span>
+                    </div>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to M-PESEWA</h3>
+                <button class="modal-close" onclick="closeLoginModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username or Email</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Login</button>
+                </form>
+                <div class="login-options">
+                    <p>Or login with:</p>
+                    <button class="btn google-login">Google</button>
+                </div>
+                <div class="login-links">
+                    <a href="#">Forgot Password?</a>
+                    <a href="#">Register as Borrower</a>
+                    <a href="#">Register as Lender</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Message Sent Successfully!</h3>
+                <button class="modal-close" onclick="closeSuccessModal()">×</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                <h4>Thank you for contacting M-PESEWA</h4>
+                <p>Your message has been received. Our support team will respond within 24 hours.</p>
+                <button class="btn primary" onclick="closeSuccessModal()" style="margin-top: 1rem;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Login modal functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // Country selection
+        let selectedCountry = null;
+        
+        function selectCountry(country) {
+            // Remove selection from all options
+            document.querySelectorAll('.country-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selection to clicked option
+            event.currentTarget.classList.add('selected');
+            selectedCountry = country;
+            
+            // Show country info
+            const countryInfo = document.getElementById('country-info');
+            const countryTitle = document.getElementById('country-title');
+            const localSupport = document.getElementById('local-support');
+            const supportDetails = document.getElementById('support-details');
+            
+            countryInfo.style.display = 'block';
+            countryTitle.textContent = `${country} Support`;
+            
+            // Country-specific information
+            const countryData = {
+                'Kenya': {
+                    support: 'support-ke@m-pesewa.com',
+                    phone: '+254 20 1234567',
+                    address: 'Nairobi Business Park, Mombasa Road'
+                },
+                'Uganda': {
+                    support: 'support-ug@m-pesewa.com',
+                    phone: '+256 41 1234567',
+                    address: 'Kampala Business Center, Entebbe Road'
+                },
+                'Tanzania': {
+                    support: 'support-tz@m-pesewa.com',
+                    phone: '+255 22 1234567',
+                    address: 'Dar es Salaam Financial Hub'
+                },
+                'Rwanda': {
+                    support: 'support-rw@m-pesewa.com',
+                    phone: '+250 78 1234567',
+                    address: 'Kigali Innovation City'
+                },
+                'Nigeria': {
+                    support: 'support-ng@m-pesewa.com',
+                    phone: '+234 1 1234567',
+                    address: 'Lagos Business District'
+                },
+                'Ghana': {
+                    support: 'support-gh@m-pesewa.com',
+                    phone: '+233 30 1234567',
+                    address: 'Accra Financial Center'
+                }
+            };
+            
+            if (countryData[country]) {
+                localSupport.textContent = `For ${country}-specific support:`;
+                supportDetails.innerHTML = `
+                    <p><strong>Email:</strong> ${countryData[country].support}</p>
+                    <p><strong>Phone:</strong> ${countryData[country].phone}</p>
+                    <p><strong>Address:</strong> ${countryData[country].address}</p>
+                `;
+            }
+            
+            // Update contact form country selection
+            document.getElementById('contact-country').value = country;
+        }
+
+        // Contact form submission
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const country = document.getElementById('contact-country').value;
+            const type = document.getElementById('contact-type').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Validate
+            if (!name || !email || !country || !type || !subject || !message) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            // In a real application, this would be an API call
+            console.log('Contact form submitted:', {
+                name, email, country, type, subject, message
+            });
+            
+            // Show success modal
+            document.getElementById('successModal').style.display = 'block';
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modals when clicking outside
+            window.onclick = function(event) {
+                const loginModal = document.getElementById('loginModal');
+                const successModal = document.getElementById('successModal');
+                
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (event.target === successModal) {
+                    successModal.style.display = 'none';
+                }
+            };
+            
+            // Auto-select Kenya by default
+            setTimeout(() => {
+                selectCountry('Kenya');
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | M-PESEWA - Emergency Micro-Lending Platform</title>
+    <meta name="description" content="Register for M-PESEWA to borrow emergency loans or start lending to trusted community members. Join thousands in Africa's trusted lending network.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    
+    <style>
+        /* Registration page specific styles */
+        .registration-hero {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        .registration-hero h1 {
+            color: white;
+            margin-bottom: 16px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        
+        .registration-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1px;
+            background: var(--border-light);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 500px;
+            margin: 0 auto 48px;
+        }
+        
+        .registration-tab {
+            flex: 1;
+            padding: 20px;
+            background: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+        
+        .registration-tab:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .registration-tab.active {
+            background: var(--primary-purple);
+            color: white;
+        }
+        
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .registration-form {
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 48px;
+            margin-bottom: 64px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            color: var(--primary-purple);
+        }
+        
+        .form-section-number {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .required::after {
+            content: ' *';
+            color: var(--danger);
+        }
+        
+        .password-requirements {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .requirement.valid {
+            color: var(--success);
+        }
+        
+        .requirement.invalid {
+            color: var(--text-secondary);
+        }
+        
+        .requirement-check {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--border-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        
+        .requirement.valid .requirement-check {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        
+        .subscription-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .subscription-option {
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .subscription-option:hover {
+            border-color: var(--primary-purple);
+            background: rgba(43, 29, 79, 0.02);
+        }
+        
+        .subscription-option.selected {
+            border-color: var(--primary-purple);
+            background: rgba(43, 29, 79, 0.05);
+        }
+        
+        .subscription-option h4 {
+            margin: 0 0 8px 0;
+            color: var(--text-primary);
+        }
+        
+        .subscription-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+        
+        .country-flag {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .already-have-account {
+            text-align: center;
+            margin-top: 32px;
+            color: var(--text-secondary);
+        }
+        
+        .registration-benefits {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 48px;
+            margin-top: 64px;
+        }
+        
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 32px;
+        }
+        
+        .benefit-item {
+            text-align: center;
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        
+        .benefit-item h4 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .benefit-item p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .validation-message {
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+        }
+        
+        .validation-message.error {
+            color: var(--danger);
+            display: block;
+        }
+        
+        .validation-message.success {
+            color: var(--success);
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .registration-form {
+                padding: 32px 24px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .registration-benefits {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-indicators">
+                <span class="trust-indicator"><span class="check">✔</span> Not a bank</span>
+                <span class="trust-indicator"><span class="check">✔</span> No money held</span>
+                <span class="trust-indicator"><span class="check">✔</span> No commissions</span>
+                <span class="trust-indicator"><span class="check">✔</span> Group-based trust</span>
+                <span class="trust-indicator"><span class="check">✔</span> Country-isolated system</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                <span class="logo-text">M-PESEWA</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="subscriptions.html">Subscriptions</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="login.html" class="btn secondary">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <nav class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="32">
+                <span>M-PESEWA</span>
+            </div>
+            <button class="mobile-menu-close" aria-label="Close menu">×</button>
+        </div>
+        <div class="mobile-menu-content">
+            <a href="../index.html">Home</a>
+            <a href="borrowing.html">Borrow</a>
+            <a href="lending.html">Lend</a>
+            <a href="subscriptions.html">Subscriptions</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <div class="mobile-menu-actions">
+                <a href="login.html" class="btn secondary">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Hero -->
+    <section class="registration-hero">
+        <div class="container">
+            <h1>Join M-PESEWA</h1>
+            <p class="hero-subtitle">
+                Register to borrow emergency loans from trusted community members or start lending to people you know. 
+                Join Africa's trusted micro-lending network.
+            </p>
+            
+            <div class="registration-tabs">
+                <button class="registration-tab active" id="borrowerTab" onclick="switchRole('borrower')">
+                    Register as Borrower
+                </button>
+                <button class="registration-tab" id="lenderTab" onclick="switchRole('lender')">
+                    Register as Lender
+                </button>
+            </div>
+            
+            <div class="badge large" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                ⭐ Borrowers always use M-PESEWA for FREE
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section class="section">
+        <div class="container">
+            <div class="registration-container">
+                <form class="registration-form" id="registrationForm" onsubmit="handleRegistration(event)">
+                    
+                    <!-- Role Selection (hidden but important) -->
+                    <input type="hidden" id="userRole" name="userRole" value="borrower">
+                    
+                    <!-- Section 1: Personal Information -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-number">1</div>
+                            <h3>Personal Information</h3>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName" class="required">
+                                    <span>👤</span>
+                                    <span>Full Legal Name</span>
+                                </label>
+                                <input type="text" 
+                                       id="fullName" 
+                                       name="fullName" 
+                                       class="form-control" 
+                                       placeholder="Enter your full name as per ID"
+                                       required
+                                       minlength="3">
+                                <div class="validation-message" id="nameValidation"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phoneNumber" class="required">
+                                    <span>📱</span>
+                                    <span>Phone Number</span>
+                                </label>
+                                <input type="tel" 
+                                       id="phoneNumber" 
+                                       name="phoneNumber" 
+                                       class="form-control" 
+                                       placeholder="e.g., +254700123456"
+                                       required
+                                       pattern="^\+[0-9]{10,15}$">
+                                <div class="validation-message" id="phoneValidation"></div>
+                                <small style="display: block; margin-top: 4px; color: var(--text-secondary);">
+                                    Format: +[country code][number]. Example: +254700123456
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="required">
+                                    <span>📧</span>
+                                    <span>Email Address</span>
+                                </label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email" 
+                                       class="form-control" 
+                                       placeholder="your.email@example.com"
+                                       required>
+                                <div class="validation-message" id="emailValidation"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dateOfBirth" class="required">
+                                    <span>🎂</span>
+                                    <span>Date of Birth</span>
+                                </label>
+                                <input type="date" 
+                                       id="dateOfBirth" 
+                                       name="dateOfBirth" 
+                                       class="form-control" 
+                                       required
+                                       max="2008-01-01">
+                                <div class="validation-message" id="dobValidation"></div>
+                                <small style="display: block; margin-top: 4px; color: var(--text-secondary);">
+                                    Must be 18 years or older
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nationalId" class="required">
+                                <span>🆔</span>
+                                <span>National ID Number</span>
+                            </label>
+                            <input type="text" 
+                                   id="nationalId" 
+                                   name="nationalId" 
+                                   class="form-control" 
+                                   placeholder="Enter your government ID number"
+                                   required
+                                   minlength="6">
+                            <div class="validation-message" id="idValidation"></div>
+                            <small style="display: block; margin-top: 4px; color: var(--text-secondary);">
+                                Required for verification. We use secure encryption to protect your data.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Section 2: Location & Country -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-number">2</div>
+                            <h3>Location & Country Selection</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country" class="required">
+                                <span>🌍</span>
+                                <span>Select Your Country</span>
+                            </label>
+                            <select id="country" name="country" class="form-control" required>
+                                <option value="" disabled selected>Choose your country</option>
+                                <option value="kenya">🇰🇪 Kenya</option>
+                                <option value="uganda">🇺🇬 Uganda</option>
+                                <option value="tanzania">🇹🇿 Tanzania</option>
+                                <option value="rwanda">🇷🇼 Rwanda</option>
+                                <option value="burundi">🇧🇮 Burundi</option>
+                                <option value="somalia">🇸🇴 Somalia</option>
+                                <option value="south-sudan">🇸🇸 South Sudan</option>
+                                <option value="ethiopia">🇪🇹 Ethiopia</option>
+                                <option value="drc">🇨🇩 Democratic Republic of Congo</option>
+                                <option value="nigeria">🇳🇬 Nigeria</option>
+                                <option value="ghana">🇬🇭 Ghana</option>
+                                <option value="south-africa">🇿🇦 South Africa</option>
+                                <option value="zambia">🇿🇲 Zambia</option>
+                                <option value="zimbabwe">🇿🇼 Zimbabwe</option>
+                                <option value="malawi">🇲🇼 Malawi</option>
+                                <option value="mozambique">🇲🇿 Mozambique</option>
+                                <option value="senegal">🇸🇳 Senegal</option>
+                                <option value="ivory-coast">🇨🇮 Ivory Coast</option>
+                                <option value="cameroon">🇨🇲 Cameroon</option>
+                                <option value="morocco">🇲🇦 Morocco</option>
+                                <option value="egypt">🇪🇬 Egypt</option>
+                                <option value="tunisia">🇹🇳 Tunisia</option>
+                                <option value="algeria">🇩🇿 Algeria</option>
+                                <option value="libya">🇱🇾 Libya</option>
+                            </select>
+                            <div class="validation-message" id="countryValidation"></div>
+                            <small style="display: block; margin-top: 4px; color: var(--text-secondary);">
+                                <strong>Important:</strong> You can only lend or borrow within your selected country. No cross-country operations allowed.
+                            </small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="city">
+                                <span>🏙️</span>
+                                <span>City/Town</span>
+                            </label>
+                            <input type="text" 
+                                   id="city" 
+                                   name="city" 
+                                   class="form-control" 
+                                   placeholder="Enter your city or town">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <span>📍</span>
+                                <span>Group Participation</span>
+                            </label>
+                            <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                                <p style="margin: 0 0 12px 0; color: var(--text-secondary);">
+                                    <strong>How groups work:</strong> After registration, you'll need to join or create a trusted group 
+                                    (family, church, professional, community) in your country. You can only transact with members 
+                                    of groups you belong to.
+                                </p>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="checkbox" id="understandGroups" name="understandGroups" required>
+                                    <label for="understandGroups" style="font-weight: normal; color: var(--text-secondary);">
+                                        I understand that lending/borrowing happens only within trusted groups
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section 3: Role-Specific Information -->
+                    <div class="form-section" id="borrowerSection">
+                        <div class="form-section-title">
+                            <div class="form-section-number">3</div>
+                            <h3>Borrower Information</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <span>💰</span>
+                                <span>Borrowing Preferences</span>
+                            </label>
+                            <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                                <p style="margin: 0 0 12px 0; color: var(--text-primary); font-weight: 500;">
+                                    As a borrower on M-PESEWA:
+                                </p>
+                                <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary);">
+                                    <li>You can join up to 4 groups (good rating required for additional groups)</li>
+                                    <li>Maximum 1 active loan per group at a time</li>
+                                    <li>Standard loan term: 7 days with 10% interest</li>
+                                    <li>5% daily penalty after 7 days overdue</li>
+                                    <li>Default after 2 months leads to global blacklisting</li>
+                                    <li><strong>No subscription fees - borrowing is FREE</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="employment">
+                                <span>💼</span>
+                                <span>Employment Status (Optional)</span>
+                            </label>
+                            <select id="employment" name="employment" class="form-control">
+                                <option value="" selected>Select employment status</option>
+                                <option value="employed">Employed</option>
+                                <option value="self-employed">Self-employed</option>
+                                <option value="student">Student</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="retired">Retired</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section" id="lenderSection" style="display: none;">
+                        <div class="form-section-title">
+                            <div class="form-section-number">3</div>
+                            <h3>Lender Information & Subscription</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <span>💳</span>
+                                <span>Select Subscription Plan</span>
+                                <span class="required"></span>
+                            </label>
+                            <p style="margin: 0 0 16px 0; color: var(--text-secondary);">
+                                Lenders operate by subscription. Choose a plan that matches your lending goals.
+                            </p>
+                            
+                            <div class="subscription-options">
+                                <div class="subscription-option" onclick="selectSubscription('basic')" id="basicOption">
+                                    <h4>Basic</h4>
+                                    <div class="subscription-price">KES 50/month</div>
+                                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 8px 0 0 0;">
+                                        ≤ KES 1,500/week • 5 ledgers max
+                                    </p>
+                                </div>
+                                
+                                <div class="subscription-option selected" onclick="selectSubscription('premium')" id="premiumOption">
+                                    <div style="background: var(--gold); color: var(--dark-purple); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; display: inline-block; margin-bottom: 8px;">
+                                        Most Popular
+                                    </div>
+                                    <h4>Premium</h4>
+                                    <div class="subscription-price">KES 250/month</div>
+                                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 8px 0 0 0;">
+                                        ≤ KES 5,000/week • 20 ledgers max
+                                    </p>
+                                </div>
+                                
+                                <div class="subscription-option" onclick="selectSubscription('super')" id="superOption">
+                                    <h4>Super</h4>
+                                    <div class="subscription-price">KES 1,000/month</div>
+                                    <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 8px 0 0 0;">
+                                        ≤ KES 20,000/week • 50 ledgers max
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" id="subscriptionPlan" name="subscriptionPlan" value="premium" required>
+                            
+                            <div style="margin-top: 16px; font-size: 0.875rem; color: var(--text-secondary);">
+                                <p><strong>Note:</strong> All subscriptions auto-renew on the 28th of each month. 
+                                You can upgrade or downgrade anytime. CRB check required for Super plan.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lenderType">
+                                <span>👥</span>
+                                <span>Lender Type</span>
+                            </label>
+                            <select id="lenderType" name="lenderType" class="form-control">
+                                <option value="" selected>Select your lender type</option>
+                                <option value="individual">Individual Lender</option>
+                                <option value="family">Family Group</option>
+                                <option value="church">Church/Religious Group</option>
+                                <option value="community">Community/SACCO</option>
+                                <option value="professional">Professional Association</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Section 4: Account Security -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-number">4</div>
+                            <h3>Account Security</h3>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="username" class="required">
+                                    <span>👤</span>
+                                    <span>Username</span>
+                                </label>
+                                <input type="text" 
+                                       id="username" 
+                                       name="username" 
+                                       class="form-control" 
+                                       placeholder="Choose a username"
+                                       required
+                                       minlength="3"
+                                       pattern="^[a-zA-Z0-9_]+$">
+                                <div class="validation-message" id="usernameValidation"></div>
+                                <small style="display: block; margin-top: 4px; color: var(--text-secondary);">
+                                    Letters, numbers, and underscores only. 3-20 characters.
+                                </small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="required">
+                                    <span>🔒</span>
+                                    <span>Password</span>
+                                </label>
+                                <input type="password" 
+                                       id="password" 
+                                       name="password" 
+                                       class="form-control" 
+                                       placeholder="Create a strong password"
+                                       required
+                                       minlength="8"
+                                       oninput="validatePassword()">
+                                <div class="validation-message" id="passwordValidation"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword" class="required">
+                                <span>✓</span>
+                                <span>Confirm Password</span>
+                            </label>
+                            <input type="password" 
+                                   id="confirmPassword" 
+                                   name="confirmPassword" 
+                                   class="form-control" 
+                                   placeholder="Re-enter your password"
+                                   required
+                                   oninput="validatePassword()">
+                            <div class="validation-message" id="confirmPasswordValidation"></div>
+                        </div>
+                        
+                        <div class="password-requirements">
+                            <p style="margin: 0 0 12px 0; font-weight: 500; color: var(--text-primary);">
+                                Password must contain:
+                            </p>
+                            <div class="requirement" id="lengthReq">
+                                <div class="requirement-check">!</div>
+                                <span>At least 8 characters</span>
+                            </div>
+                            <div class="requirement" id="uppercaseReq">
+                                <div class="requirement-check">!</div>
+                                <span>At least one uppercase letter</span>
+                            </div>
+                            <div class="requirement" id="lowercaseReq">
+                                <div class="requirement-check">!</div>
+                                <span>At least one lowercase letter</span>
+                            </div>
+                            <div class="requirement" id="numberReq">
+                                <div class="requirement-check">!</div>
+                                <span>At least one number</span>
+                            </div>
+                            <div class="requirement" id="specialReq">
+                                <div class="requirement-check">!</div>
+                                <span>At least one special character</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section 5: Terms & Conditions -->
+                    <div class="form-section">
+                        <div class="form-section-title">
+                            <div class="form-section-number">5</div>
+                            <h3>Terms & Conditions</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; max-height: 200px; overflow-y: auto; margin-bottom: 16px;">
+                                <h4 style="margin-top: 0;">M-PESEWA Platform Agreement</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                                    <strong>Important:</strong> M-PESEWA is a technology coordination platform only. We do not hold money, 
+                                    guarantee loans, or participate in financial transactions. All lending and borrowing happens 
+                                    directly between users within trusted groups.
+                                </p>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                                    By registering, you agree to:
+                                </p>
+                                <ul style="font-size: 0.875rem; color: var(--text-secondary); padding-left: 20px;">
+                                    <li>Lend/borrow only within your selected country</li>
+                                    <li>Operate only within trusted groups you belong to</li>
+                                    <li>Maintain accurate and truthful information</li>
+                                    <li>Report defaults after 2 months for blacklisting</li>
+                                    <li>Accept that M-PESEWA does not guarantee loan repayment</li>
+                                    <li>Understand that platform access may be suspended for violations</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                    <input type="checkbox" id="terms" name="terms" required style="margin-top: 4px;">
+                                    <label for="terms" style="font-weight: normal; color: var(--text-secondary);">
+                                        I have read and agree to the <a href="qa.html" target="_blank" style="color: var(--primary-purple);">Terms & Conditions</a> 
+                                        and <a href="qa.html" target="_blank" style="color: var(--primary-purple);">Privacy Policy</a>
+                                    </label>
+                                </div>
+                                
+                                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                    <input type="checkbox" id="platformRole" name="platformRole" required style="margin-top: 4px;">
+                                    <label for="platformRole" style="font-weight: normal; color: var(--text-secondary);">
+                                        I understand that M-PESEWA is a technology platform only, not a bank or financial institution, 
+                                        and does not hold money or guarantee loans
+                                    </label>
+                                </div>
+                                
+                                <div style="display: flex; align-items: flex-start; gap: 8px;">
+                                    <input type="checkbox" id="communication" name="communication">
+                                    <label for="communication" style="font-weight: normal; color: var(--text-secondary);">
+                                        I agree to receive platform updates, security alerts, and group notifications via email and SMS
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn outline" onclick="resetForm()">
+                            <span>🔄</span>
+                            <span>Clear Form</span>
+                        </button>
+                        
+                        <button type="submit" class="btn primary" style="padding: 16px 48px;">
+                            <span>🚀</span>
+                            <span>Create Account</span>
+                        </button>
+                    </div>
+                    
+                    <div class="already-have-account">
+                        <p style="margin: 0;">
+                            Already have an account? 
+                            <a href="login.html" style="color: var(--primary-purple); font-weight: 600;">Log in here</a>
+                        </p>
+                    </div>
+                </form>
+                
+                <!-- Registration Benefits -->
+                <div class="registration-benefits">
+                    <h3 style="text-align: center; color: var(--primary-purple); margin-bottom: 16px;">
+                        Why Register with M-PESEWA?
+                    </h3>
+                    <p style="text-align: center; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px;">
+                        Join thousands of Africans who trust M-PESEWA for emergency lending and borrowing within their communities.
+                    </p>
+                    
+                    <div class="benefit-grid">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🌍</div>
+                            <h4>Country Isolation</h4>
+                            <p>No cross-border risks. Operate securely within your country's ecosystem.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">👥</div>
+                            <h4>Group-Based Trust</h4>
+                            <p>Transact only with people you know in trusted family, church, or community groups.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">🔒</div>
+                            <h4>No Money Held</h4>
+                            <p>We never hold your money. All transactions happen directly between users.</p>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">📈</div>
+                            <h4>Clear Terms</h4>
+                            <p>Transparent lending terms: 7 days, 10% interest, 5% daily penalty after due date.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Lender Agreement</a></li>
+                        <li><a href="qa.html">Borrower Agreement</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="qa.html">Help Center</a></li>
+                        <li><a href="debt-collectors.html">Debt Collectors</a></li>
+                        <li><a href="blacklist.html">Report Default</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu functionality
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const closeBtn = document.querySelector('.mobile-menu-close');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Role switching
+        function switchRole(role) {
+            const borrowerTab = document.getElementById('borrowerTab');
+            const lenderTab = document.getElementById('lenderTab');
+            const borrowerSection = document.getElementById('borrowerSection');
+            const lenderSection = document.getElementById('lenderSection');
+            const userRoleField = document.getElementById('userRole');
+            
+            if (role === 'borrower') {
+                borrowerTab.classList.add('active');
+                lenderTab.classList.remove('active');
+                borrowerSection.style.display = 'block';
+                lenderSection.style.display = 'none';
+                userRoleField.value = 'borrower';
+                
+                // Make subscription optional for borrowers
+                document.getElementById('subscriptionPlan').required = false;
+            } else {
+                borrowerTab.classList.remove('active');
+                lenderTab.classList.add('active');
+                borrowerSection.style.display = 'none';
+                lenderSection.style.display = 'block';
+                userRoleField.value = 'lender';
+                
+                // Make subscription required for lenders
+                document.getElementById('subscriptionPlan').required = true;
+            }
+        }
+
+        // Subscription selection
+        function selectSubscription(plan) {
+            // Remove selected class from all options
+            document.querySelectorAll('.subscription-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            document.getElementById(plan + 'Option').classList.add('selected');
+            
+            // Update hidden field
+            document.getElementById('subscriptionPlan').value = plan;
+        }
+
+        // Password validation
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Check requirements
+            const lengthReq = document.getElementById('lengthReq');
+            const uppercaseReq = document.getElementById('uppercaseReq');
+            const lowercaseReq = document.getElementById('lowercaseReq');
+            const numberReq = document.getElementById('numberReq');
+            const specialReq = document.getElementById('specialReq');
+            
+            // Update requirement checks
+            lengthReq.classList.toggle('valid', password.length >= 8);
+            uppercaseReq.classList.toggle('valid', /[A-Z]/.test(password));
+            lowercaseReq.classList.toggle('valid', /[a-z]/.test(password));
+            numberReq.classList.toggle('valid', /\d/.test(password));
+            specialReq.classList.toggle('valid', /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password));
+            
+            // Update requirement check icons
+            const requirements = [lengthReq, uppercaseReq, lowercaseReq, numberReq, specialReq];
+            requirements.forEach(req => {
+                const check = req.querySelector('.requirement-check');
+                if (req.classList.contains('valid')) {
+                    check.textContent = '✓';
+                } else {
+                    check.textContent = '!';
+                }
+            });
+            
+            // Validate password match
+            const confirmValidation = document.getElementById('confirmPasswordValidation');
+            if (confirmPassword && password !== confirmPassword) {
+                confirmValidation.textContent = 'Passwords do not match';
+                confirmValidation.className = 'validation-message error';
+                return false;
+            } else if (confirmPassword && password === confirmPassword) {
+                confirmValidation.textContent = 'Passwords match';
+                confirmValidation.className = 'validation-message success';
+                return true;
+            }
+            
+            return password.length >= 8;
+        }
+
+        // Form validation
+        function validateField(fieldId, validationId, condition, errorMessage) {
+            const field = document.getElementById(fieldId);
+            const validation = document.getElementById(validationId);
+            
+            if (condition) {
+                validation.textContent = errorMessage;
+                validation.className = 'validation-message error';
+                field.style.borderColor = 'var(--danger)';
+                return false;
+            } else {
+                validation.textContent = '';
+                validation.className = 'validation-message';
+                field.style.borderColor = '';
+                return true;
+            }
+        }
+
+        // Validate email
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            validateField('email', 'emailValidation', !isValid && email, 'Please enter a valid email address');
+        });
+
+        // Validate phone
+        document.getElementById('phoneNumber').addEventListener('blur', function() {
+            const phone = this.value;
+            const isValid = /^\+[0-9]{10,15}$/.test(phone);
+            validateField('phoneNumber', 'phoneValidation', !isValid && phone, 'Format: +[country code][number] (10-15 digits)');
+        });
+
+        // Validate date of birth
+        document.getElementById('dateOfBirth').addEventListener('change', function() {
+            const dob = new Date(this.value);
+            const today = new Date();
+            const minAge = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            validateField('dateOfBirth', 'dobValidation', dob > minAge, 'You must be 18 years or older');
+        });
+
+        // Validate username
+        document.getElementById('username').addEventListener('blur', function() {
+            const username = this.value;
+            const isValid = /^[a-zA-Z0-9_]{3,20}$/.test(username);
+            validateField('username', 'usernameValidation', !isValid && username, '3-20 characters, letters, numbers, underscores only');
+        });
+
+        // Form submission
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const userRole = formData.get('userRole');
+            
+            // Validate all required fields
+            let isValid = true;
+            
+            // Check required fields
+            const requiredFields = ['fullName', 'email', 'phoneNumber', 'dateOfBirth', 'nationalId', 'country', 'username', 'password', 'confirmPassword'];
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    isValid = false;
+                    const validation = document.getElementById(fieldId + 'Validation');
+                    validation.textContent = 'This field is required';
+                    validation.className = 'validation-message error';
+                    field.style.borderColor = 'var(--danger)';
+                }
+            });
+            
+            // Validate password match
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (password !== confirmPassword) {
+                isValid = false;
+                const validation = document.getElementById('confirmPasswordValidation');
+                validation.textContent = 'Passwords do not match';
+                validation.className = 'validation-message error';
+            }
+            
+            // Validate password strength
+            if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/\d/.test(password)) {
+                isValid = false;
+                const validation = document.getElementById('passwordValidation');
+                validation.textContent = 'Password does not meet requirements';
+                validation.className = 'validation-message error';
+            }
+            
+            // Validate terms acceptance
+            if (!document.getElementById('terms').checked || !document.getElementById('platformRole').checked) {
+                isValid = false;
+                alert('You must accept the Terms & Conditions and understand the platform role.');
+            }
+            
+            // Validate subscription for lenders
+            if (userRole === 'lender' && !document.getElementById('subscriptionPlan').value) {
+                isValid = false;
+                alert('Please select a subscription plan for lending.');
+            }
+            
+            if (isValid) {
+                // Show loading state
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="loading"></span> Creating Account...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In production, this would be an actual API call
+                    console.log('Registration data:', Object.fromEntries(formData));
+                    
+                    // Show success message
+                    alert(`Account created successfully! Welcome to M-PESEWA. ${userRole === 'lender' ? 'Please complete your subscription payment to start lending.' : 'You can now join groups and request emergency loans.'}`);
+                    
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // In production, redirect to appropriate dashboard
+                    // if (userRole === 'borrower') {
+                    //     window.location.href = '../dashboard/borrower-dashboard.html';
+                    // } else {
+                    //     window.location.href = '../dashboard/lender-dashboard.html';
+                    // }
+                    
+                    // For demo, redirect to home
+                    window.location.href = '../index.html';
+                }, 2000);
+            } else {
+                alert('Please correct the errors in the form before submitting.');
+            }
+        }
+
+        // Form reset
+        function resetForm() {
+            if (confirm('Are you sure you want to clear the entire form?')) {
+                document.getElementById('registrationForm').reset();
+                document.querySelectorAll('.validation-message').forEach(el => {
+                    el.textContent = '';
+                    el.className = 'validation-message';
+                });
+                document.querySelectorAll('.form-control').forEach(el => {
+                    el.style.borderColor = '';
+                });
+                document.querySelectorAll('.requirement').forEach(el => {
+                    el.classList.remove('valid');
+                    el.querySelector('.requirement-check').textContent = '!';
+                });
+                switchRole('borrower');
+                selectSubscription('premium');
+            }
+        }
+
+        // Initialize form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date limit for 18+ years
+            const today = new Date();
+            const minDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            document.getElementById('dateOfBirth').max = minDate.toISOString().split('T')[0];
+            
+            // Initialize subscription selection
+            selectSubscription('premium');
+            
+            // Add real-time password validation
+            document.getElementById('password').addEventListener('input', validatePassword);
+            document.getElementById('confirmPassword').addEventListener('input', validatePassword);
+        });
+    </script>
+</body>
+</html>
