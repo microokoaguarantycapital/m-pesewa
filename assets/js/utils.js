@@ -1,727 +1,553 @@
-// assets/js/utils.js - Utilities & helpers
+/**
+ * M-PESEWA Utilities
+ * Common helper functions used across the application
+ */
 
-class M_PesewaUtils {
-    constructor() {
-        // Initialize any utilities needed
+// DOM Utilities
+const DomUtils = {
+  /**
+   * Create element with attributes
+   */
+  createElement(tag, attributes = {}, children = []) {
+    const element = document.createElement(tag);
+    
+    // Set attributes
+    Object.entries(attributes).forEach(([key, value]) => {
+      if (key === 'className') {
+        element.className = value;
+      } else if (key === 'textContent') {
+        element.textContent = value;
+      } else if (key === 'innerHTML') {
+        element.innerHTML = value;
+      } else if (key.startsWith('data-')) {
+        element.setAttribute(key, value);
+      } else if (key === 'style') {
+        Object.assign(element.style, value);
+      } else {
+        element.setAttribute(key, value);
+      }
+    });
+    
+    // Append children
+    children.forEach(child => {
+      if (typeof child === 'string') {
+        element.appendChild(document.createTextNode(child));
+      } else if (child instanceof Node) {
+        element.appendChild(child);
+      }
+    });
+    
+    return element;
+  },
+  
+  /**
+   * Show loading overlay
+   */
+  showLoading(message = 'Loading...') {
+    const overlay = document.createElement('div');
+    overlay.className = 'loading-overlay';
+    overlay.innerHTML = `
+      <div class="loading-content">
+        <div class="loading"></div>
+        <p>${message}</p>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    return overlay;
+  },
+  
+  /**
+   * Hide loading overlay
+   */
+  hideLoading(overlay) {
+    if (overlay && overlay.parentNode) {
+      overlay.parentNode.removeChild(overlay);
     }
-
-    // ===== STRING UTILITIES =====
-    capitalize(str) {
-        if (!str) return '';
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }
-
-    truncate(str, length = 50, suffix = '...') {
-        if (!str || str.length <= length) return str;
-        return str.substring(0, length) + suffix;
-    }
-
-    slugify(str) {
-        return str
-            .toLowerCase()
-            .replace(/[^\w\s-]/g, '') // Remove special characters
-            .replace(/\s+/g, '-') // Replace spaces with hyphens
-            .replace(/--+/g, '-') // Replace multiple hyphens with single hyphen
-            .trim();
-    }
-
-    // ===== NUMBER UTILITIES =====
-    formatNumber(num, decimals = 0) {
-        if (isNaN(num)) return '0';
-        return new Intl.NumberFormat('en-US', {
-            minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals
-        }).format(num);
-    }
-
-    formatCurrency(amount, country = 'Kenya') {
-        const currencies = {
-            'Kenya': { code: 'KES', symbol: 'KSh' },
-            'Uganda': { code: 'UGX', symbol: 'USh' },
-            'Tanzania': { code: 'TZS', symbol: 'TSh' },
-            'Rwanda': { code: 'RWF', symbol: 'RF' },
-            'Nigeria': { code: 'NGN', symbol: '₦' },
-            'Ghana': { code: 'GHS', symbol: 'GH₵' },
-            'South Africa': { code: 'ZAR', symbol: 'R' },
-            'Egypt': { code: 'EGP', symbol: 'E£' },
-            'Ethiopia': { code: 'ETB', symbol: 'Br' },
-            'Senegal': { code: 'XOF', symbol: 'CFA' }
-        };
-        
-        const currency = currencies[country] || { code: 'USD', symbol: '$' };
-        
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: currency.code,
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        }).format(amount);
-    }
-
-    calculateInterest(principal, interestRate = 10, days = 7) {
-        // Simple interest calculation
-        return (principal * interestRate * days) / (100 * 365);
-    }
-
-    calculatePenalty(principal, penaltyRate = 5, overdueDays = 0) {
-        if (overdueDays <= 0) return 0;
-        // Daily penalty calculation
-        return (principal * penaltyRate * overdueDays) / 100;
-    }
-
-    calculateTotalDue(principal, interestRate = 10, days = 7, overdueDays = 0, penaltyRate = 5) {
-        const interest = this.calculateInterest(principal, interestRate, days);
-        const penalty = this.calculatePenalty(principal, penaltyRate, overdueDays);
-        return principal + interest + penalty;
-    }
-
-    // ===== DATE UTILITIES =====
-    formatDate(date, format = 'medium') {
-        if (!date) return '';
-        
-        const dateObj = date instanceof Date ? date : new Date(date);
-        if (isNaN(dateObj.getTime())) return 'Invalid Date';
-        
-        const formats = {
-            'short': { year: 'numeric', month: 'short', day: 'numeric' },
-            'medium': { year: 'numeric', month: 'long', day: 'numeric' },
-            'long': { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' },
-            'time': { hour: '2-digit', minute: '2-digit' }
-        };
-        
-        return dateObj.toLocaleDateString('en-US', formats[format] || formats.medium);
-    }
-
-    formatDateTime(date) {
-        if (!date) return '';
-        const dateObj = new Date(date);
-        return dateObj.toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-
-    daysBetween(date1, date2) {
-        const d1 = new Date(date1);
-        const d2 = new Date(date2);
-        const diff = Math.abs(d2 - d1);
-        return Math.ceil(diff / (1000 * 60 * 60 * 24));
-    }
-
-    addDays(date, days) {
-        const result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    }
-
-    isPastDue(dueDate) {
-        return new Date(dueDate) < new Date();
-    }
-
-    getDaysOverdue(dueDate) {
-        if (!this.isPastDue(dueDate)) return 0;
-        return this.daysBetween(dueDate, new Date());
-    }
-
-    // ===== VALIDATION UTILITIES =====
-    validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    validatePhone(phone) {
-        // Basic phone validation - can be enhanced for specific countries
-        const re = /^[\+]?[1-9][\d]{0,15}$/;
-        return re.test(phone.replace(/\D/g, ''));
-    }
-
-    validatePassword(password) {
-        // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
-        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-        return re.test(password);
-    }
-
-    validateAmount(amount, min = 0, max = 1000000) {
-        const num = parseFloat(amount);
-        return !isNaN(num) && num >= min && num <= max;
-    }
-
-    // ===== ARRAY UTILITIES =====
-    sortBy(array, key, direction = 'asc') {
-        return [...array].sort((a, b) => {
-            let aValue = a[key];
-            let bValue = b[key];
-            
-            // Handle nested keys
-            if (key.includes('.')) {
-                aValue = this.getNestedValue(a, key);
-                bValue = this.getNestedValue(b, key);
-            }
-            
-            if (aValue < bValue) return direction === 'asc' ? -1 : 1;
-            if (aValue > bValue) return direction === 'asc' ? 1 : -1;
-            return 0;
-        });
-    }
-
-    filterBy(array, filters) {
-        return array.filter(item => {
-            return Object.entries(filters).every(([key, value]) => {
-                if (value === undefined || value === '') return true;
-                
-                let itemValue = item[key];
-                
-                // Handle nested keys
-                if (key.includes('.')) {
-                    itemValue = this.getNestedValue(item, key);
-                }
-                
-                if (typeof value === 'string') {
-                    return String(itemValue).toLowerCase().includes(value.toLowerCase());
-                }
-                
-                return itemValue === value;
-            });
-        });
-    }
-
-    groupBy(array, key) {
-        return array.reduce((groups, item) => {
-            const groupKey = item[key];
-            if (!groups[groupKey]) {
-                groups[groupKey] = [];
-            }
-            groups[groupKey].push(item);
-            return groups;
-        }, {});
-    }
-
-    uniqueBy(array, key) {
-        const seen = new Set();
-        return array.filter(item => {
-            const value = item[key];
-            if (seen.has(value)) {
-                return false;
-            }
-            seen.add(value);
-            return true;
-        });
-    }
-
-    // ===== OBJECT UTILITIES =====
-    getNestedValue(obj, path, defaultValue = undefined) {
-        const keys = path.split('.');
-        let result = obj;
-        
-        for (const key of keys) {
-            if (result && typeof result === 'object' && key in result) {
-                result = result[key];
-            } else {
-                return defaultValue;
-            }
+  },
+  
+  /**
+   * Show notification
+   */
+  showNotification(type, message, duration = 5000) {
+    const types = {
+      success: { icon: '✅', color: '#10B981' },
+      error: { icon: '❌', color: '#EF4444' },
+      warning: { icon: '⚠️', color: '#F59E0B' },
+      info: { icon: 'ℹ️', color: '#3B82F6' }
+    };
+    
+    const config = types[type] || types.info;
+    
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+      <div class="notification-header">
+        <h4 class="notification-title">${config.icon} ${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
+        <button class="notification-close">×</button>
+      </div>
+      <div class="notification-body">${message}</div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Add slide-in animation
+    setTimeout(() => {
+      notification.classList.add('notification-slide-in');
+    }, 10);
+    
+    // Close button handler
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+      notification.classList.remove('notification-slide-in');
+      notification.classList.add('notification-slide-out');
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
         }
-        
-        return result;
-    }
-
-    setNestedValue(obj, path, value) {
-        const keys = path.split('.');
-        let current = obj;
-        
-        for (let i = 0; i < keys.length - 1; i++) {
-            const key = keys[i];
-            if (!(key in current)) {
-                current[key] = {};
-            }
-            current = current[key];
+      }, 300);
+    });
+    
+    // Auto dismiss
+    if (duration > 0) {
+      setTimeout(() => {
+        if (notification.parentNode) {
+          closeBtn.click();
         }
-        
-        current[keys[keys.length - 1]] = value;
-        return obj;
+      }, duration);
     }
-
-    deepClone(obj) {
-        return JSON.parse(JSON.stringify(obj));
-    }
-
-    mergeObjects(...objects) {
-        return objects.reduce((merged, obj) => {
-            if (!obj) return merged;
-            
-            Object.keys(obj).forEach(key => {
-                if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-                    merged[key] = this.mergeObjects(merged[key] || {}, obj[key]);
-                } else {
-                    merged[key] = obj[key];
-                }
-            });
-            
-            return merged;
-        }, {});
-    }
-
-    // ===== DOM UTILITIES =====
-    createElement(tag, attributes = {}, children = []) {
-        const element = document.createElement(tag);
-        
-        // Set attributes
-        Object.entries(attributes).forEach(([key, value]) => {
-            if (key === 'className') {
-                element.className = value;
-            } else if (key === 'textContent') {
-                element.textContent = value;
-            } else if (key === 'innerHTML') {
-                element.innerHTML = value;
-            } else if (key.startsWith('on') && typeof value === 'function') {
-                element.addEventListener(key.substring(2).toLowerCase(), value);
-            } else {
-                element.setAttribute(key, value);
-            }
-        });
-        
-        // Append children
-        children.forEach(child => {
-            if (typeof child === 'string') {
-                element.appendChild(document.createTextNode(child));
-            } else if (child instanceof Node) {
-                element.appendChild(child);
-            }
-        });
-        
-        return element;
-    }
-
-    removeAllChildren(element) {
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
-    }
-
-    showElement(element, display = 'block') {
-        if (element) {
-            element.style.display = display;
-        }
-    }
-
-    hideElement(element) {
-        if (element) {
-            element.style.display = 'none';
-        }
-    }
-
-    toggleElement(element, display = 'block') {
-        if (element) {
-            element.style.display = element.style.display === 'none' ? display : 'none';
-        }
-    }
-
-    addClass(element, className) {
-        if (element) {
-            element.classList.add(className);
-        }
-    }
-
-    removeClass(element, className) {
-        if (element) {
-            element.classList.remove(className);
-        }
-    }
-
-    toggleClass(element, className) {
-        if (element) {
-            element.classList.toggle(className);
-        }
-    }
-
-    // ===== STORAGE UTILITIES =====
-    setStorage(key, value, ttl = null) {
-        const item = {
-            value: value,
-            expiry: ttl ? Date.now() + ttl : null
-        };
-        localStorage.setItem(key, JSON.stringify(item));
-    }
-
-    getStorage(key, defaultValue = null) {
-        const itemStr = localStorage.getItem(key);
-        
-        if (!itemStr) return defaultValue;
+    
+    return notification;
+  },
+  
+  /**
+   * Format currency
+   */
+  formatCurrency(amount, currency = 'KES') {
+    return new Intl.NumberFormat('en-KE', {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount);
+  },
+  
+  /**
+   * Format date
+   */
+  formatDate(date, format = 'medium') {
+    const dateObj = date instanceof Date ? date : new Date(date);
+    
+    const options = {
+      short: {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      },
+      medium: {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      },
+      long: {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      },
+      time: {
+        hour: '2-digit',
+        minute: '2-digit'
+      }
+    };
+    
+    return dateObj.toLocaleDateString('en-KE', options[format] || options.medium);
+  },
+  
+  /**
+   * Debounce function
+   */
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  },
+  
+  /**
+   * Throttle function
+   */
+  throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  },
+  
+  /**
+   * Copy to clipboard
+   */
+  copyToClipboard(text) {
+    return new Promise((resolve, reject) => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+          .then(resolve)
+          .catch(reject);
+      } else {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
         
         try {
-            const item = JSON.parse(itemStr);
-            
-            // Check if expired
-            if (item.expiry && Date.now() > item.expiry) {
-                localStorage.removeItem(key);
-                return defaultValue;
-            }
-            
-            return item.value;
-        } catch (error) {
-            console.error('Error parsing storage item:', error);
-            return defaultValue;
+          const successful = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          successful ? resolve() : reject(new Error('Copy failed'));
+        } catch (err) {
+          document.body.removeChild(textarea);
+          reject(err);
         }
-    }
+      }
+    });
+  }
+};
 
-    removeStorage(key) {
-        localStorage.removeItem(key);
+// Storage Utilities
+const StorageUtils = {
+  /**
+   * Get item from localStorage
+   */
+  get(key, defaultValue = null) {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
+    } catch (error) {
+      console.error('Storage get error:', error);
+      return defaultValue;
     }
-
-    clearStorage(pattern = null) {
-        if (pattern) {
-            Object.keys(localStorage).forEach(key => {
-                if (key.match(pattern)) {
-                    localStorage.removeItem(key);
-                }
-            });
-        } else {
-            localStorage.clear();
-        }
+  },
+  
+  /**
+   * Set item in localStorage
+   */
+  set(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.error('Storage set error:', error);
+      return false;
     }
-
-    // ===== API UTILITIES =====
-    async fetchWithTimeout(url, options = {}, timeout = 10000) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), timeout);
-        
-        try {
-            const response = await fetch(url, {
-                ...options,
-                signal: controller.signal
-            });
-            
-            clearTimeout(timeoutId);
-            return response;
-        } catch (error) {
-            clearTimeout(timeoutId);
-            throw error;
-        }
+  },
+  
+  /**
+   * Remove item from localStorage
+   */
+  remove(key) {
+    try {
+      localStorage.removeItem(key);
+      return true;
+    } catch (error) {
+      console.error('Storage remove error:', error);
+      return false;
     }
+  },
+  
+  /**
+   * Clear all items from localStorage
+   */
+  clear() {
+    try {
+      localStorage.clear();
+      return true;
+    } catch (error) {
+      console.error('Storage clear error:', error);
+      return false;
+    }
+  },
+  
+  /**
+   * Get session data
+   */
+  getSession(key, defaultValue = null) {
+    try {
+      const item = sessionStorage.getItem(key);
+      return item ? JSON.parse(item) : defaultValue;
+    } catch (error) {
+      console.error('Session get error:', error);
+      return defaultValue;
+    }
+  },
+  
+  /**
+   * Set session data
+   */
+  setSession(key, value) {
+    try {
+      sessionStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      console.error('Session set error:', error);
+      return false;
+    }
+  }
+};
 
-    async fetchJSON(url, options = {}) {
-        const response = await this.fetchWithTimeout(url, options);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
+// Validation Utilities
+const ValidationUtils = {
+  /**
+   * Validate email
+   */
+  isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  },
+  
+  /**
+   * Validate phone number (East Africa format)
+   */
+  isValidPhone(phone) {
+    const re = /^(\+?254|0)[17]\d{8}$/;
+    return re.test(phone);
+  },
+  
+  /**
+   * Validate password strength
+   */
+  isValidPassword(password) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+    
+    return {
+      isValid: password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers,
+      minLength: password.length >= minLength,
+      hasUpperCase,
+      hasLowerCase,
+      hasNumbers,
+      hasSpecialChar
+    };
+  },
+  
+  /**
+   * Validate amount
+   */
+  isValidAmount(amount) {
+    return !isNaN(amount) && amount > 0;
+  },
+  
+  /**
+   * Validate date
+   */
+  isValidDate(date) {
+    return date instanceof Date && !isNaN(date.getTime());
+  }
+};
+
+// API Utilities
+const ApiUtils = {
+  /**
+   * Make API request
+   */
+  async request(url, options = {}) {
+    const defaultOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      credentials: 'same-origin'
+    };
+    
+    const mergedOptions = {
+      ...defaultOptions,
+      ...options,
+      headers: {
+        ...defaultOptions.headers,
+        ...options.headers
+      }
+    };
+    
+    try {
+      const response = await fetch(url, mergedOptions);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
         return await response.json();
+      }
+      
+      return await response.text();
+    } catch (error) {
+      console.error('API request error:', error);
+      throw error;
     }
-
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function executedFunction(...args) {
-            if (!inThrottle) {
-                func(...args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-
-    // ===== FORM UTILITIES =====
-    serializeForm(form) {
-        const formData = new FormData(form);
-        const data = {};
-        
-        for (const [key, value] of formData.entries()) {
-            if (data[key]) {
-                if (!Array.isArray(data[key])) {
-                    data[key] = [data[key]];
-                }
-                data[key].push(value);
-            } else {
-                data[key] = value;
-            }
-        }
-        
-        return data;
-    }
-
-    validateForm(form, rules) {
-        const errors = {};
-        const formData = new FormData(form);
-        
-        for (const [field, rule] of Object.entries(rules)) {
-            const value = formData.get(field);
-            
-            if (rule.required && (!value || value.trim() === '')) {
-                errors[field] = rule.requiredMessage || 'This field is required';
-                continue;
-            }
-            
-            if (value && rule.pattern && !rule.pattern.test(value)) {
-                errors[field] = rule.patternMessage || 'Invalid format';
-                continue;
-            }
-            
-            if (value && rule.minLength && value.length < rule.minLength) {
-                errors[field] = rule.minLengthMessage || `Minimum ${rule.minLength} characters required`;
-                continue;
-            }
-            
-            if (value && rule.maxLength && value.length > rule.maxLength) {
-                errors[field] = rule.maxLengthMessage || `Maximum ${rule.maxLength} characters allowed`;
-                continue;
-            }
-            
-            if (value && rule.min && parseFloat(value) < rule.min) {
-                errors[field] = rule.minMessage || `Minimum value is ${rule.min}`;
-                continue;
-            }
-            
-            if (value && rule.max && parseFloat(value) > rule.max) {
-                errors[field] = rule.maxMessage || `Maximum value is ${rule.max}`;
-                continue;
-            }
-            
-            if (value && rule.custom && !rule.custom(value)) {
-                errors[field] = rule.customMessage || 'Invalid value';
-            }
-        }
-        
-        return {
-            isValid: Object.keys(errors).length === 0,
-            errors: errors
-        };
-    }
-
-    showFormErrors(form, errors) {
-        // Clear previous errors
-        form.querySelectorAll('.validation-message').forEach(el => el.remove());
-        form.querySelectorAll('.form-control.error').forEach(el => {
-            el.classList.remove('error');
+  },
+  
+  /**
+   * Mock API response for frontend development
+   */
+  mockResponse(data, delay = 500) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+          data,
+          timestamp: new Date().toISOString()
         });
-        
-        // Show new errors
-        Object.entries(errors).forEach(([field, message]) => {
-            const input = form.querySelector(`[name="${field}"]`);
-            if (input) {
-                input.classList.add('error');
-                
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'validation-message error';
-                errorDiv.innerHTML = `❌ ${message}`;
-                
-                input.parentNode.appendChild(errorDiv);
-            }
-        });
+      }, delay);
+    });
+  },
+  
+  /**
+   * Mock API error for frontend development
+   */
+  mockError(message = 'Something went wrong', delay = 500) {
+    return new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(new Error(message));
+      }, delay);
+    });
+  }
+};
+
+// Math Utilities
+const MathUtils = {
+  /**
+   * Calculate loan interest
+   */
+  calculateInterest(principal, rate, days = 7) {
+    const interest = (principal * rate * days) / 36500;
+    return Math.round(interest * 100) / 100;
+  },
+  
+  /**
+   * Calculate penalty
+   */
+  calculatePenalty(amount, overdueDays, penaltyRate = 5) {
+    const penalty = (amount * penaltyRate * overdueDays) / 100;
+    return Math.round(penalty * 100) / 100;
+  },
+  
+  /**
+   * Calculate total due
+   */
+  calculateTotalDue(principal, interest, penalty = 0) {
+    return principal + interest + penalty;
+  },
+  
+  /**
+   * Format number with commas
+   */
+  formatNumber(number, decimals = 2) {
+    return number.toLocaleString('en-KE', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  },
+  
+  /**
+   * Generate random number in range
+   */
+  randomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+};
+
+// Date Utilities
+const DateUtils = {
+  /**
+   * Add days to date
+   */
+  addDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  },
+  
+  /**
+   * Get days between dates
+   */
+  getDaysBetween(startDate, endDate) {
+    const timeDiff = endDate.getTime() - startDate.getTime();
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  },
+  
+  /**
+   * Check if date is overdue
+   */
+  isOverdue(dueDate) {
+    return new Date(dueDate) < new Date();
+  },
+  
+  /**
+   * Get overdue days
+   */
+  getOverdueDays(dueDate) {
+    const today = new Date();
+    const due = new Date(dueDate);
+    
+    if (due >= today) return 0;
+    
+    const timeDiff = today.getTime() - due.getTime();
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  },
+  
+  /**
+   * Format relative time
+   */
+  formatRelativeTime(date) {
+    const now = new Date();
+    const target = new Date(date);
+    const diffInSeconds = Math.floor((now - target) / 1000);
+    
+    const intervals = {
+      year: 31536000,
+      month: 2592000,
+      week: 604800,
+      day: 86400,
+      hour: 3600,
+      minute: 60,
+      second: 1
+    };
+    
+    for (const [unit, seconds] of Object.entries(intervals)) {
+      const interval = Math.floor(diffInSeconds / seconds);
+      if (interval >= 1) {
+        return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
+      }
     }
+    
+    return 'just now';
+  }
+};
 
-    // ===== COUNTRY-SPECIFIC UTILITIES =====
-    getCountryCurrency(country) {
-        const currencies = {
-            'Kenya': 'KES',
-            'Uganda': 'UGX',
-            'Tanzania': 'TZS',
-            'Rwanda': 'RWF',
-            'Nigeria': 'NGN',
-            'Ghana': 'GHS',
-            'South Africa': 'ZAR',
-            'Egypt': 'EGP',
-            'Ethiopia': 'ETB',
-            'Senegal': 'XOF'
-        };
-        return currencies[country] || 'USD';
-    }
+// Export all utilities
+window.MPUtils = {
+  Dom: DomUtils,
+  Storage: StorageUtils,
+  Validation: ValidationUtils,
+  Api: ApiUtils,
+  Math: MathUtils,
+  Date: DateUtils
+};
 
-    getFlagEmoji(country) {
-        const flagEmojis = {
-            'Kenya': '🇰🇪',
-            'Uganda': '🇺🇬',
-            'Tanzania': '🇹🇿',
-            'Rwanda': '🇷🇼',
-            'Nigeria': '🇳🇬',
-            'Ghana': '🇬🇭',
-            'South Africa': '🇿🇦',
-            'Egypt': '🇪🇬',
-            'Ethiopia': '🇪🇹',
-            'Senegal': '🇸🇳'
-        };
-        return flagEmojis[country] || '🏳️';
-    }
-
-    getCountryCode(country) {
-        const codes = {
-            'Kenya': 'KE',
-            'Uganda': 'UG',
-            'Tanzania': 'TZ',
-            'Rwanda': 'RW',
-            'Nigeria': 'NG',
-            'Ghana': 'GH',
-            'South Africa': 'ZA',
-            'Egypt': 'EG',
-            'Ethiopia': 'ET',
-            'Senegal': 'SN'
-        };
-        return codes[country] || '';
-    }
-
-    // ===== LOAN CALCULATION UTILITIES =====
-    generateLoanSchedule(principal, interestRate = 10, termDays = 7, startDate = new Date()) {
-        const schedule = [];
-        const dailyInterest = (principal * interestRate) / (100 * 365);
-        let remainingBalance = principal;
-        
-        for (let day = 1; day <= termDays; day++) {
-            const interestForDay = dailyInterest;
-            const paymentDate = this.addDays(startDate, day);
-            
-            schedule.push({
-                day: day,
-                date: paymentDate,
-                interest: interestForDay,
-                cumulativeInterest: dailyInterest * day,
-                remainingBalance: remainingBalance
-            });
-        }
-        
-        return schedule;
-    }
-
-    calculateEarlyRepayment(principal, interestRate, daysUsed, totalDays) {
-        if (daysUsed >= totalDays) {
-            return this.calculateTotalDue(principal, interestRate, totalDays);
-        }
-        
-        const interest = this.calculateInterest(principal, interestRate, daysUsed);
-        return principal + interest;
-    }
-
-    // ===== RATING UTILITIES =====
-    calculateBorrowerRating(repaymentRate, defaultRate, activeLoans, totalLoans) {
-        let score = 50; // Base score
-        
-        // Repayment rate contribution (0-30 points)
-        score += (repaymentRate / 100) * 30;
-        
-        // Default rate penalty (0-20 points deduction)
-        score -= (defaultRate / 100) * 20;
-        
-        // Active loans adjustment
-        if (activeLoans > 0 && totalLoans > 0) {
-            const completionRate = (totalLoans - activeLoans) / totalLoans;
-            score += completionRate * 20;
-        }
-        
-        // Ensure score is between 0 and 100
-        score = Math.max(0, Math.min(100, score));
-        
-        // Convert to star rating (1-5 stars)
-        const stars = Math.ceil((score / 100) * 5);
-        return {
-            score: Math.round(score),
-            stars: stars,
-            rating: '⭐'.repeat(stars) + '☆'.repeat(5 - stars)
-        };
-    }
-
-    // ===== SECURITY UTILITIES =====
-    sanitizeInput(input) {
-        if (typeof input !== 'string') return input;
-        
-        // Remove potentially dangerous characters
-        return input
-            .replace(/[<>]/g, '') // Remove < and >
-            .replace(/javascript:/gi, '') // Remove javascript: protocol
-            .replace(/on\w+="/gi, '') // Remove event handlers
-            .trim();
-    }
-
-    generateId(prefix = '') {
-        const timestamp = Date.now().toString(36);
-        const random = Math.random().toString(36).substring(2, 9);
-        return `${prefix}${timestamp}${random}`.toUpperCase();
-    }
-
-    generateLoanId(country, groupId, sequence) {
-        const countryCode = this.getCountryCode(country);
-        return `MP-${countryCode}-${groupId}-${sequence.toString().padStart(5, '0')}`;
-    }
-
-    // ===== ERROR HANDLING =====
-    handleError(error, context = '') {
-        console.error(`Error in ${context}:`, error);
-        
-        // Show user-friendly error message
-        let userMessage = 'An unexpected error occurred';
-        
-        if (error instanceof TypeError && error.message.includes('network')) {
-            userMessage = 'Network error. Please check your connection.';
-        } else if (error instanceof SyntaxError) {
-            userMessage = 'Data format error. Please try again.';
-        } else if (error.name === 'AbortError') {
-            userMessage = 'Request timed out. Please try again.';
-        } else if (error.message) {
-            userMessage = error.message;
-        }
-        
-        // Dispatch error event for global handling
-        const errorEvent = new CustomEvent('app-error', {
-            detail: { error, context, userMessage }
-        });
-        window.dispatchEvent(errorEvent);
-        
-        return userMessage;
-    }
-
-    // ===== PERFORMANCE UTILITIES =====
-    measurePerformance(name, func) {
-        const start = performance.now();
-        const result = func();
-        const end = performance.now();
-        
-        console.log(`${name} took ${(end - start).toFixed(2)}ms`);
-        return result;
-    }
-
-    lazyLoadImage(image, src) {
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        image.src = src;
-                        observer.unobserve(image);
-                    }
-                });
-            });
-            
-            observer.observe(image);
-        } else {
-            // Fallback for browsers without IntersectionObserver
-            image.src = src;
-        }
-    }
-}
-
-// Create global instance
-const utils = new M_PesewaUtils();
-
-// Make available globally
-window.utils = utils;
-
-// Export for module usage
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { M_PesewaUtils, utils };
-}
-
-// Add some global utility functions for convenience
-window.formatCurrency = (amount, country) => utils.formatCurrency(amount, country);
-window.formatDate = (date, format) => utils.formatDate(date, format);
-window.validateEmail = (email) => utils.validateEmail(email);
-window.generateId = (prefix) => utils.generateId(prefix);
+// Initialize utilities when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('M-PESEWA Utilities loaded');
+});
