@@ -1,0 +1,20 @@
+{
+  "country": "Egypt",
+  "currency": "EGP",
+  "collectors": [
+    {
+      "name": "Cairo Community Mediation Network",
+      "contact": "cairo@mpesewa.eg",
+      "location": "Cairo",
+      "rules": "Community-led mediation. No enforcement actions.",
+      "specialization": "Greater Cairo"
+    },
+    {
+      "name": "Alexandria Recovery Council",
+      "contact": "alexandria@mpesewa.eg",
+      "location": "Alexandria",
+      "rules": "Mediation only. No asset seizure.",
+      "specialization": "Coastal region"
+    }
+  ]
+}

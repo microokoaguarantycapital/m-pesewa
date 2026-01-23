@@ -1,0 +1,20 @@
+{
+  "country": "DRC",
+  "currency": "CDF",
+  "collectors": [
+    {
+      "name": "Kinshasa Community Mediation Panel",
+      "contact": "kinshasa@mpesewa.cd",
+      "location": "Kinshasa",
+      "rules": "Community-based recovery. No enforcement.",
+      "specialization": "Kinshasa province"
+    },
+    {
+      "name": "Lubumbashi Recovery Council",
+      "contact": "lubumbashi@mpesewa.cd",
+      "location": "Lubumbashi",
+      "rules": "Traditional mediation methods. No harassment.",
+      "specialization": "Haut-Katanga"
+    }
+  ]
+}

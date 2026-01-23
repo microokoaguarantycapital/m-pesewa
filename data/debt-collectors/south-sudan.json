@@ -1,0 +1,13 @@
+{
+  "country": "South Sudan",
+  "currency": "SSP",
+  "collectors": [
+    {
+      "name": "Juba Community Recovery Network",
+      "contact": "juba@mpesewa.ss",
+      "location": "Juba",
+      "rules": "Community-led mediation. Cultural sensitivity.",
+      "specialization": "Central Equatoria"
+    }
+  ]
+}
