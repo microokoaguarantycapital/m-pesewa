@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#003366">
+    <title>M-Pesewa | Emergency Micro-Lending in Trusted Circles</title>
+    
+    <!-- PWA Metadata -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="assets/images/logos/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/images/logos/apple-touch-icon.png">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/colors.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- App Shell -->
+    <div id="app-shell">
+        <!-- Header -->
+        <header class="main-header" id="main-header">
+            <div class="header-container">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <a href="index.html" class="logo-link">
+                        <span class="logo-text">M-Pesewa</span>
+                        <span class="logo-subtext">Trusted Circles Lending</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav" id="desktop-nav">
+                    <ul class="nav-list">
+                        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                        
+                        <!-- Lenders Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Lenders <span class="dropdown-arrow">▾</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="lender/dashboard.html" class="dropdown-item">Dashboard</a>
+                                <a href="lender/portfolio.html" class="dropdown-item">Portfolio</a>
+                                <a href="lender/history.html" class="dropdown-item">History</a>
+                                <a href="lender/rules.html" class="dropdown-item">Rules</a>
+                                <a href="lender/risk.html" class="dropdown-item">Risk</a>
+                            </div>
+                        </li>
+                        
+                        <!-- Borrowers Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Borrowers <span class="dropdown-arrow">▾</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="borrower/dashboard.html" class="dropdown-item">Dashboard</a>
+                                <a href="borrower/apply.html" class="dropdown-item">Apply for Loan</a>
+                                <a href="borrower/history.html" class="dropdown-item">Borrow History</a>
+                                <a href="borrower/repayments.html" class="dropdown-item">Repayments</a>
+                                <a href="borrower/disputes.html" class="dropdown-item">Disputes</a>
+                            </div>
+                        </li>
+                        
+                        <!-- Emergency Hub Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Emergency Hub <span class="dropdown-arrow">▾</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <div class="emergency-categories-grid">
+                                    <a href="emergency/transport.html" class="dropdown-item">🚌 Transport Fare</a>
+                                    <a href="emergency/data.html" class="dropdown-item">📶 Mobile Data</a>
+                                    <a href="emergency/gas.html" class="dropdown-item">🔥 Cooking Gas</a>
+                                    <a href="emergency/food.html" class="dropdown-item">🍲 Food</a>
+                                    <a href="emergency/wifi.html" class="dropdown-item">📡 WiFi Bills</a>
+                                    <a href="emergency/water.html" class="dropdown-item">🚰 Water Bill</a>
+                                    <a href="emergency/electricity.html" class="dropdown-item">⚡ Electricity</a>
+                                    <a href="emergency/tv.html" class="dropdown-item">📺 TV Subscription</a>
+                                    <a href="emergency/fuel.html" class="dropdown-item">⛽ Fuel</a>
+                                    <a href="emergency/repairs.html" class="dropdown-item">🔧 Repairs</a>
+                                    <a href="emergency/credo.html" class="dropdown-item">🛠️ Credo/Tools</a>
+                                    <a href="emergency/sales.html" class="dropdown-item">🧾 M-Pesa Sales</a>
+                                    <a href="emergency/capital.html" class="dropdown-item">🏪 Working Capital</a>
+                                    <a href="emergency/market.html" class="dropdown-item">🛒 Market Loan</a>
+                                    <a href="emergency/stall.html" class="dropdown-item">🏗️ Stall Money</a>
+                                    <a href="emergency/hawker.html" class="dropdown-item">🚶‍♂️ Hawker Loan</a>
+                                    <a href="emergency/fuliza.html" class="dropdown-item">🔄 M-Fuliza Top-up</a>
+                                    <a href="emergency/medicine.html" class="dropdown-item">💊 Medicine</a>
+                                    <a href="emergency/school.html" class="dropdown-item">🎓 School Fees</a>
+                                    <a href="emergency/advance.html" class="dropdown-item">💸 Cash Advance</a>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <!-- Subscription Plans Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Subscription Plans <span class="dropdown-arrow">▾</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="subscription/current.html" class="dropdown-item">Current Plan</a>
+                                <a href="subscription/upgrade.html" class="dropdown-item">Upgrade</a>
+                                <a href="subscription/history.html" class="dropdown-item">History</a>
+                                <a href="subscription/invoices.html" class="dropdown-item">Invoices</a>
+                            </div>
+                        </li>
+                        
+                        <!-- Country Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                Country <span class="dropdown-arrow">▾</span>
+                            </a>
+                            <div class="dropdown-menu country-menu">
+                                <a href="countries/kenya.html" class="dropdown-item">🇰🇪 Kenya</a>
+                                <a href="countries/uganda.html" class="dropdown-item">🇺🇬 Uganda</a>
+                                <a href="countries/tanzania.html" class="dropdown-item">🇹🇿 Tanzania</a>
+                                <a href="countries/rwanda.html" class="dropdown-item">🇷🇼 Rwanda</a>
+                                <a href="countries/drc.html" class="dropdown-item">🇨🇩 DRC</a>
+                                <a href="countries/burundi.html" class="dropdown-item">🇧🇮 Burundi</a>
+                                <a href="countries/nigeria.html" class="dropdown-item">🇳🇬 Nigeria</a>
+                                <a href="countries/ghana.html" class="dropdown-item">🇬🇭 Ghana</a>
+                                <a href="countries/south-sudan.html" class="dropdown-item">🇸🇸 South Sudan</a>
+                                <a href="countries/somalia.html" class="dropdown-item">🇸🇴 Somalia</a>
+                                <a href="countries/south-africa.html" class="dropdown-item">🇿🇦 South Africa</a>
+                                <a href="countries/ethiopia.html" class="dropdown-item">🇪🇹 Ethiopia</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Auth Buttons -->
+                <div class="auth-buttons">
+                    <a href="auth/login.html" class="btn btn-outline">Sign In</a>
+                    <a href="auth/register.html" class="btn btn-primary">Sign Up</a>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobile-nav">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-title">Menu</span>
+                <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">×</button>
+            </div>
+            <ul class="mobile-nav-list">
+                <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
+                
+                <!-- Lenders Mobile -->
+                <li class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">Lenders</button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="lender/dashboard.html" class="mobile-nav-link">Dashboard</a>
+                        <a href="lender/portfolio.html" class="mobile-nav-link">Portfolio</a>
+                        <a href="lender/history.html" class="mobile-nav-link">History</a>
+                        <a href="lender/rules.html" class="mobile-nav-link">Rules</a>
+                        <a href="lender/risk.html" class="mobile-nav-link">Risk</a>
+                    </div>
+                </li>
+                
+                <!-- Borrowers Mobile -->
+                <li class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">Borrowers</button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="borrower/dashboard.html" class="mobile-nav-link">Dashboard</a>
+                        <a href="borrower/apply.html" class="mobile-nav-link">Apply for Loan</a>
+                        <a href="borrower/history.html" class="mobile-nav-link">Borrow History</a>
+                        <a href="borrower/repayments.html" class="mobile-nav-link">Repayments</a>
+                        <a href="borrower/disputes.html" class="mobile-nav-link">Disputes</a>
+                    </div>
+                </li>
+                
+                <!-- Emergency Hub Mobile -->
+                <li class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">Emergency Hub</button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="emergency/transport.html" class="mobile-nav-link">🚌 Transport Fare</a>
+                        <a href="emergency/data.html" class="mobile-nav-link">📶 Mobile Data</a>
+                        <a href="emergency/gas.html" class="mobile-nav-link">🔥 Cooking Gas</a>
+                        <a href="emergency/food.html" class="mobile-nav-link">🍲 Food</a>
+                        <a href="emergency/wifi.html" class="mobile-nav-link">📡 WiFi Bills</a>
+                        <a href="emergency/water.html" class="mobile-nav-link">🚰 Water Bill</a>
+                        <a href="emergency/electricity.html" class="mobile-nav-link">⚡ Electricity</a>
+                        <a href="emergency/tv.html" class="mobile-nav-link">📺 TV Subscription</a>
+                        <a href="emergency/fuel.html" class="mobile-nav-link">⛽ Fuel</a>
+                        <a href="emergency/repairs.html" class="mobile-nav-link">🔧 Repairs</a>
+                        <a href="emergency/credo.html" class="mobile-nav-link">🛠️ Credo/Tools</a>
+                        <a href="emergency/sales.html" class="mobile-nav-link">🧾 M-Pesa Sales</a>
+                        <a href="emergency/capital.html" class="mobile-nav-link">🏪 Working Capital</a>
+                        <a href="emergency/market.html" class="mobile-nav-link">🛒 Market Loan</a>
+                        <a href="emergency/stall.html" class="mobile-nav-link">🏗️ Stall Money</a>
+                        <a href="emergency/hawker.html" class="mobile-nav-link">🚶‍♂️ Hawker Loan</a>
+                        <a href="emergency/fuliza.html" class="mobile-nav-link">🔄 M-Fuliza Top-up</a>
+                        <a href="emergency/medicine.html" class="mobile-nav-link">💊 Medicine</a>
+                        <a href="emergency/school.html" class="mobile-nav-link">🎓 School Fees</a>
+                        <a href="emergency/advance.html" class="mobile-nav-link">💸 Cash Advance</a>
+                    </div>
+                </li>
+                
+                <!-- Subscription Plans Mobile -->
+                <li class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">Subscription Plans</button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="subscription/current.html" class="mobile-nav-link">Current Plan</a>
+                        <a href="subscription/upgrade.html" class="mobile-nav-link">Upgrade</a>
+                        <a href="subscription/history.html" class="mobile-nav-link">History</a>
+                        <a href="subscription/invoices.html" class="mobile-nav-link">Invoices</a>
+                    </div>
+                </li>
+                
+                <!-- Country Mobile -->
+                <li class="mobile-nav-dropdown">
+                    <button class="mobile-nav-dropdown-toggle">Country</button>
+                    <div class="mobile-nav-dropdown-content">
+                        <a href="countries/kenya.html" class="mobile-nav-link">🇰🇪 Kenya</a>
+                        <a href="countries/uganda.html" class="mobile-nav-link">🇺🇬 Uganda</a>
+                        <a href="countries/tanzania.html" class="mobile-nav-link">🇹🇿 Tanzania</a>
+                        <a href="countries/rwanda.html" class="mobile-nav-link">🇷🇼 Rwanda</a>
+                        <a href="countries/drc.html" class="mobile-nav-link">🇨🇩 DRC</a>
+                        <a href="countries/burundi.html" class="mobile-nav-link">🇧🇮 Burundi</a>
+                        <a href="countries/nigeria.html" class="mobile-nav-link">🇳🇬 Nigeria</a>
+                        <a href="countries/ghana.html" class="mobile-nav-link">🇬🇭 Ghana</a>
+                        <a href="countries/south-sudan.html" class="mobile-nav-link">🇸🇸 South Sudan</a>
+                        <a href="countries/somalia.html" class="mobile-nav-link">🇸🇴 Somalia</a>
+                        <a href="countries/south-africa.html" class="mobile-nav-link">🇿🇦 South Africa</a>
+                        <a href="countries/ethiopia.html" class="mobile-nav-link">🇪🇹 Ethiopia</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="mobile-auth-buttons">
+                <a href="auth/login.html" class="btn btn-outline btn-block">Sign In</a>
+                <a href="auth/register.html" class="btn btn-primary btn-block">Sign Up</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section" style="background-color: #ffffff;">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1 class="hero-title" style="color: #003366;">Choose your path to financial flexibility.</h1>
+                        <p class="hero-subtitle" style="color: #003366;">
+                            Join Africa's trusted emergency micro-lending platform. Borrow in emergencies or lend to trusted circles.
+                        </p>
+                        
+                        <div class="hero-cards">
+                            <!-- Borrower Card -->
+                            <div class="hero-card">
+                                <div class="hero-card-icon">💰</div>
+                                <h3 class="hero-card-title">For Emergency Loans</h3>
+                                <p class="hero-card-description">
+                                    Get quick loans from trusted people in your circle for emergencies like transport, food, data, and more.
+                                </p>
+                                <a href="auth/register.html?role=borrower" class="btn btn-borrower" style="background-color: #f37021; color: #ffffff;">
+                                    Get Started as Borrower
+                                </a>
+                                <div class="hero-card-features">
+                                    <span>👤 No subscription fees</span>
+                                    <span>⭐ Up to 4 groups</span>
+                                    <span>⚡ 7-day repayment</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Lender Card -->
+                            <div class="hero-card">
+                                <div class="hero-card-icon">🌱</div>
+                                <h3 class="hero-card-title">To Start Lending</h3>
+                                <p class="hero-card-description">
+                                    Earn passive income by lending to trusted people in your groups. Start with as little as 0.1$.
+                                </p>
+                                <a href="auth/register.html?role=lender" class="btn btn-lender" style="background-color: #28a745; color: #ffffff;">
+                                    Start Now as Lender
+                                </a>
+                                <div class="hero-card-features">
+                                    <span>📈 Earn 10% weekly</span>
+                                    <span>🛡️ Group-only lending</span>
+                                    <span>📊 Unlimited ledgers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Problem Section -->
+            <section class="problem-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title" style="color: #003366;">The Emergency Financial Problem</h2>
+                        <p class="section-subtitle" style="color: #555555;">
+                            When unexpected needs arise and your wallet is empty, traditional options fail you.
+                        </p>
+                    </div>
+                    
+                    <div class="problem-cards">
+                        <!-- Problem Card 1 -->
+                        <div class="problem-card floating-card">
+                            <div class="problem-card-icon">⛽</div>
+                            <h3 class="problem-card-title" style="color: #003366;">Stranded Without Transport</h3>
+                            <p class="problem-card-description" style="color: #555555;">
+                                Got a job interview but no bus fare? Emergency transport needs can't wait for payday.
+                            </p>
+                        </div>
+                        
+                        <!-- Problem Card 2 -->
+                        <div class="problem-card floating-card">
+                            <div class="problem-card-icon">🔥</div>
+                            <h3 class="problem-card-title" style="color: #003366;">Cooking Without Gas</h3>
+                            <p class="problem-card-description" style="color: #555555;">
+                                Gas runs out while cooking dinner. Stores are closed, and you need an immediate solution.
+                            </p>
+                        </div>
+                        
+                        <!-- Problem Card 3 -->
+                        <div class="problem-card floating-card">
+                            <div class="problem-card-icon">📶</div>
+                            <h3 class="problem-card-title" style="color: #003366;">Disconnected Without Data</h3>
+                            <p class="problem-card-description" style="color: #555555;">
+                                Working online and data bundle expires. Can't afford to lose connectivity for work or communication.
+                            </p>
+                        </div>
+                        
+                        <!-- Problem Card 4 -->
+                        <div class="problem-card floating-card">
+                            <div class="problem-card-icon">💊</div>
+                            <h3 class="problem-card-title" style="color: #003366;">Medication Can't Wait</h3>
+                            <p class="problem-card-description" style="color: #555555;">
+                                Urgent medicine needed but pharmacy requires immediate payment. Health emergencies don't wait for funds.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Solution Section -->
+            <section class="solution-section" style="background-color: #f8f9fa;">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title" style="color: #003366;">The M-Pesewa Solution</h2>
+                        <p class="section-subtitle" style="color: #555555;">
+                            Trust-based lending within your circles for immediate emergency needs.
+                        </p>
+                    </div>
+                    
+                    <div class="solution-features">
+                        <div class="feature">
+                            <div class="feature-icon">👥</div>
+                            <h3 class="feature-title">Trusted Circles</h3>
+                            <p class="feature-description">
+                                Lend and borrow only within groups of people you know and trust—family, church, professional networks.
+                            </p>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">⚡</div>
+                            <h3 class="feature-title">Emergency Focus</h3>
+                            <p class="feature-description">
+                                20 specific emergency categories ensure loans are used for genuine immediate needs.
+                            </p>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">🛡️</div>
+                            <h3 class="feature-title">Group Isolation</h3>
+                            <p class="feature-description">
+                                Strict hierarchy: Global → Country → Groups → Lenders → Borrowers. No cross-group or cross-country lending.
+                            </p>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon">📊</div>
+                            <h3 class="feature-title">Transparent Ledgers</h3>
+                            <p class="feature-description">
+                                Every loan creates a ledger. Lenders track repayments, interest (10%), and penalties (5% daily after 7 days).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Categories Section -->
+            <section class="emergency-categories-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title" style="color: #003366;">20 Emergency Categories</h2>
+                        <p class="section-subtitle" style="color: #555555;">
+                            Borrow for specific, verified emergency needs within your trusted circles.
+                        </p>
+                    </div>
+                    
+                    <div class="categories-grid">
+                        <!-- Everyday Essentials -->
+                        <div class="category-group">
+                            <h3 class="category-group-title">🚀 Everyday Essentials</h3>
+                            <div class="category-cards">
+                                <a href="emergency/transport.html" class="category-card floating-card">
+                                    <span class="category-icon">🚌</span>
+                                    <h4 class="category-title">M-pesewa Fare</h4>
+                                    <p class="category-description">Move on, don't stall—borrow for your journey.</p>
+                                </a>
+                                
+                                <a href="emergency/data.html" class="category-card floating-card">
+                                    <span class="category-icon">📶</span>
+                                    <h4 class="category-title">M-pesewa Data</h4>
+                                    <p class="category-description">Stay connected, stay informed—borrow when your bundle runs out.</p>
+                                </a>
+                                
+                                <a href="emergency/gas.html" class="category-card floating-card">
+                                    <span class="category-icon">🔥</span>
+                                    <h4 class="category-title">M-pesewa Cooking Gas</h4>
+                                    <p class="category-description">Cook with confidence—borrow when your gas is low.</p>
+                                </a>
+                                
+                                <a href="emergency/food.html" class="category-card floating-card">
+                                    <span class="category-icon">🍲</span>
+                                    <h4 class="category-title">M-pesewa Food</h4>
+                                    <p class="category-description">Don't sleep hungry when paycheck is delayed—borrow and eat today.</p>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Utilities -->
+                        <div class="category-group">
+                            <h3 class="category-group-title">🏠 Home Utilities</h3>
+                            <div class="category-cards">
+                                <a href="emergency/wifi.html" class="category-card floating-card">
+                                    <span class="category-icon">📡</span>
+                                    <h4 class="category-title">M-pesewa WiFi</h4>
+                                    <p class="category-description">Stay connected at home when WiFi bills are due.</p>
+                                </a>
+                                
+                                <a href="emergency/water.html" class="category-card floating-card">
+                                    <span class="category-icon">🚰</span>
+                                    <h4 class="category-title">M-pesewa Water Bill</h4>
+                                    <p class="category-description">Stay hydrated—borrow for water needs or bills.</p>
+                                </a>
+                                
+                                <a href="emergency/electricity.html" class="category-card floating-card">
+                                    <span class="category-icon">⚡</span>
+                                    <h4 class="category-title">M-pesewa Electricity</h4>
+                                    <p class="category-description">Stay lit, stay powered—borrow tokens when you need it.</p>
+                                </a>
+                                
+                                <a href="emergency/tv.html" class="category-card floating-card">
+                                    <span class="category-icon">📺</span>
+                                    <h4 class="category-title">M-pesewa TV Subscription</h4>
+                                    <p class="category-description">Never miss your favorite shows when subscription lapses.</p>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Logistics & Repairs -->
+                        <div class="category-group">
+                            <h3 class="category-group-title">🛠️ Logistics & Repairs</h3>
+                            <div class="category-cards">
+                                <a href="emergency/fuel.html" class="category-card floating-card">
+                                    <span class="category-icon">⛽</span>
+                                    <h4 class="category-title">M-pesewa Fuel</h4>
+                                    <p class="category-description">Keep moving—borrow for fuel, no matter your ride.</p>
+                                </a>
+                                
+                                <a href="emergency/repairs.html" class="category-card floating-card">
+                                    <span class="category-icon">🔧</span>
+                                    <h4 class="category-title">M-pesewa Repair</h4>
+                                    <p class="category-description">Fix it quick—borrow for minor repairs and keep going.</p>
+                                </a>
+                                
+                                <a href="emergency/credo.html" class="category-card floating-card">
+                                    <span class="category-icon">🛠️</span>
+                                    <h4 class="category-title">M-pesewa Credo</h4>
+                                    <p class="category-description">Fix it fast—borrow for urgent repairs or tools.</p>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Business & Growth -->
+                        <div class="category-group">
+                            <h3 class="category-group-title">💼 Business & Growth</h3>
+                            <div class="category-cards">
+                                <a href="emergency/sales.html" class="category-card floating-card">
+                                    <span class="category-icon">🧾</span>
+                                    <h4 class="category-title">M-Pesa Daily Sales</h4>
+                                    <p class="category-description">Small Loan advance for everyday business needs.</p>
+                                </a>
+                                
+                                <a href="emergency/capital.html" class="category-card floating-card">
+                                    <span class="category-icon">🏪</span>
+                                    <h4 class="category-title">Working Capital</h4>
+                                    <p class="category-description">Working capital when your business needs it most.</p>
+                                </a>
+                                
+                                <a href="emergency/market.html" class="category-card floating-card">
+                                    <span class="category-icon">🛒</span>
+                                    <h4 class="category-title">Market Loan</h4>
+                                    <p class="category-description">Market money when you need it for inventory.</p>
+                                </a>
+                                
+                                <a href="emergency/stall.html" class="category-card floating-card">
+                                    <span class="category-icon">🏗️</span>
+                                    <h4 class="category-title">Stall Money</h4>
+                                    <p class="category-description">Kibanda/stall money when you need to restock.</p>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Categories -->
+                        <div class="category-group">
+                            <h3 class="category-group-title">🚶‍♂️ More Needs</h3>
+                            <div class="category-cards">
+                                <a href="emergency/hawker.html" class="category-card floating-card">
+                                    <span class="category-icon">🚶‍♂️</span>
+                                    <h4 class="category-title">Hawker Loan</h4>
+                                    <p class="category-description">Be street smart, maintain cash flow all time.</p>
+                                </a>
+                                
+                                <a href="emergency/fuliza.html" class="category-card floating-card">
+                                    <span class="category-icon">🔄</span>
+                                    <h4 class="category-title">M-Fuliza Top-up</h4>
+                                    <p class="category-description">Your fuliza limit not enough? Top up here.</p>
+                                </a>
+                                
+                                <a href="emergency/medicine.html" class="category-card floating-card">
+                                    <span class="category-icon">💊</span>
+                                    <h4 class="category-title">Medicine</h4>
+                                    <p class="category-description">Health first—borrow for urgent medicines.</p>
+                                </a>
+                                
+                                <a href="emergency/school.html" class="category-card floating-card">
+                                    <span class="category-icon">🎓</span>
+                                    <h4 class="category-title">School Fees</h4>
+                                    <p class="category-description">Secure education without delays or interruptions.</p>
+                                </a>
+                                
+                                <a href="emergency/advance.html" class="category-card floating-card">
+                                    <span class="category-icon">💸</span>
+                                    <h4 class="category-title">Cash Advance</h4>
+                                    <p class="category-description">Quick cash when you need it most for any emergency.</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Success Stories -->
+            <section class="success-stories-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title" style="color: #003366;">Success Stories</h2>
+                        <p class="section-subtitle" style="color: #555555;">
+                            Real people, real emergencies, real solutions through M-Pesewa.
+                        </p>
+                    </div>
+                    
+                    <div class="stories-grid">
+                        <div class="story-card floating-card">
+                            <div class="story-content">
+                                <div class="story-icon">👩‍🍳</div>
+                                <h3 class="story-title">Mama Jimmy</h3>
+                                <p class="story-description">
+                                    "Gas ended while cooking dinner. Borrowed KSh 1,200 through my church group, bought gas immediately, repaid in 7 days with 10% interest. Crisis averted!"
+                                </p>
+                                <div class="story-meta">
+                                    <span class="story-amount">KSh 1,200</span>
+                                    <span class="story-interest">10% interest</span>
+                                    <span class="story-duration">7 days</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="story-card floating-card">
+                            <div class="story-content">
+                                <div class="story-icon">💼</div>
+                                <h3 class="story-title">John Kimani</h3>
+                                <p class="story-description">
+                                    "Stranded at home with no transport to job interview. Borrowed KSh 250 from professional network group, got to interview on time, got the job! Repaid in 7 days."
+                                </p>
+                                <div class="story-meta">
+                                    <span class="story-amount">KSh 250</span>
+                                    <span class="story-interest">10% interest</span>
+                                    <span class="story-duration">7 days</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="story-card floating-card">
+                            <div class="story-content">
+                                <div class="story-icon">🙏</div>
+                                <h3 class="story-title">Pastor Ndungu</h3>
+                                <p class="story-description">
+                                    "Online ministry gig, ran out of data mid-session. Borrowed KSh 1,000 from family group, continued streaming, repaid after 7 days with 10% interest."
+                                </p>
+                                <div class="story-meta">
+                                    <span class="story-amount">KSh 1,000</span>
+                                    <span class="story-interest">10% interest</span>
+                                    <span class="story-duration">7 days</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="story-card floating-card">
+                            <div class="story-content">
+                                <div class="story-icon">🏍️</div>
+                                <h3 class="story-title">Ibrahim (Boda Rider)</h3>
+                                <p class="story-description">
+                                    "Motorbike ran out of fuel while transporting passenger. Borrowed KSh 500 from boda group, completed journey, earned fare, repaid same day with interest."
+                                </p>
+                                <div class="story-meta">
+                                    <span class="story-amount">KSh 500</span>
+                                    <span class="story-interest">10% interest</span>
+                                    <span class="story-duration">Same day</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trust Section -->
+            <section class="trust-section" style="background-color: #003366; color: #ffffff;">
+                <div class="container">
+                    <div class="trust-content">
+                        <div class="trust-stats">
+                            <div class="stat-card">
+                                <div class="stat-number" style="color: #28a745;">99%</div>
+                                <div class="stat-label">Repayment Rate</div>
+                                <div class="stat-description">Within trusted circles</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-number">13</div>
+                                <div class="stat-label">African Countries</div>
+                                <div class="stat-description">Fully supported</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-number">20</div>
+                                <div class="stat-label">Emergency Categories</div>
+                                <div class="stat-description">Specific needs covered</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <div class="stat-number">4</div>
+                                <div class="stat-label">Max Groups Per User</div>
+                                <div class="stat-description">With good rating</div>
+                            </div>
+                        </div>
+                        
+                        <div class="trust-objectives">
+                            <h2 class="trust-title">Our Platform Objectives</h2>
+                            <ul class="objectives-list">
+                                <li class="objective-item">
+                                    <span class="objective-check" style="color: #28a745;">✓</span>
+                                    Provide emergency access to small consumption loans
+                                </li>
+                                <li class="objective-item">
+                                    <span class="objective-check" style="color: #28a745;">✓</span>
+                                    Reduce reliance on predatory lending in communities
+                                </li>
+                                <li class="objective-item">
+                                    <span class="objective-check" style="color: #28a745;">✓</span>
+                                    Monetize through lender subscriptions only
+                                </li>
+                                <li class="objective-item">
+                                    <span class="objective-check" style="color: #28a745;">✓</span>
+                                    Enforce strict hierarchy & isolation rules
+                                </li>
+                                <li class="objective-item">
+                                    <span class="objective-check" style="color: #28a745;">✓</span>
+                                    Build trust through group-based accountability
+                                </li>
+                            </ul>
+                            
+                            <div class="target-users">
+                                <h3 class="target-title">Target Users</h3>
+                                <div class="user-tags">
+                                    <span class="user-tag">Individuals with emergency needs</span>
+                                    <span class="user-tag">Informal & professional lenders</span>
+                                    <span class="user-tag">Churches, families, social groups</span>
+                                    <span class="user-tag">Community lenders</span>
+                                    <span class="user-tag">Small business associations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Borrower & Lender Benefits -->
+            <section class="benefits-section">
+                <div class="container">
+                    <div class="benefits-grid">
+                        <!-- Borrower Benefits -->
+                        <div class="benefits-card">
+                            <div class="benefits-header" style="background-color: #f37021; color: #ffffff;">
+                                <h3 class="benefits-title">👤 For Borrowers</h3>
+                            </div>
+                            <div class="benefits-content">
+                                <ul class="benefits-list">
+                                    <li>✅ No need to ask for help or favors</li>
+                                    <li>✅ Post loan request in your group and receive offers</li>
+                                    <li>✅ Borrow faster from people who already know and trust you</li>
+                                    <li>✅ No favors owed — lending is transparent and voluntary</li>
+                                    <li>✅ Fair interest rates agreed willingly by friends and family</li>
+                                    <li>✅ One request reaches many lenders when shared within group</li>
+                                    <li>✅ Money when you need it — fast, easy, and affordable</li>
+                                    <li>✅ No subscription fees for borrowers</li>
+                                    <li>✅ Can join up to 4 groups with good rating</li>
+                                    <li>✅ Can also be a lender (dual role allowed)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Lender Benefits -->
+                        <div class="benefits-card">
+                            <div class="benefits-header" style="background-color: #28a745; color: #ffffff;">
+                                <h3 class="benefits-title">💼 For Lenders</h3>
+                            </div>
+                            <div class="benefits-content">
+                                <ul class="benefits-list">
+                                    <li>✅ Earn passive income from day one</li>
+                                    <li>✅ Lend confidently based on borrower ratings and group trust</li>
+                                    <li>✅ Start lending with as little as 0.1$</li>
+                                    <li>✅ No pressure to lend — you choose who to support</li>
+                                    <li>✅ Transparent interest rates you're comfortable with</li>
+                                    <li>✅ Support people you trust while earning returns</li>
+                                    <li>✅ No need to start big — grow at your own pace</li>
+                                    <li>✅ Unlimited ledgers per lender</li>
+                                    <li>✅ Lend only within your trusted groups</li>
+                                    <li>✅ 10% weekly interest on all loans</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2 class="cta-title" style="color: #003366;">Ready to Join Africa's Trusted Lending Circles?</h2>
+                        <p class="cta-description" style="color: #555555;">
+                            Whether you need emergency funds or want to earn from lending, M-Pesewa connects you with trusted circles in your community.
+                        </p>
+                        
+                        <div class="cta-buttons">
+                            <a href="auth/register.html?role=borrower" class="btn btn-lg btn-borrower" style="background-color: #f37021; color: #ffffff;">
+                                👤 Become a Borrower
+                            </a>
+                            <a href="auth/register.html?role=lender" class="btn btn-lg btn-lender" style="background-color: #28a745; color: #ffffff;">
+                                💼 Become a Lender
+                            </a>
+                        </div>
+                        
+                        <p class="cta-note">
+                            Already have an account? <a href="auth/login.html" style="color: #0099ff;">Sign in here</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer" style="background-color: #003366; color: #ffffff;">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- Column 1: Get Emergency Loan -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">Get Emergency Loan</h3>
+                        <ul class="footer-links">
+                            <li><a href="borrower/apply.html">Online Personal Loan</a></li>
+                            <li><a href="about.html">Why M-Pesewa?</a></li>
+                            <li><a href="how-it-works.html">How to Apply</a></li>
+                            <li><a href="lender/portfolio.html">Active Lenders</a></li>
+                            <li><a href="emergency/capital.html">Business Loan</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 2: Lending -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">Lending</h3>
+                        <ul class="footer-links">
+                            <li><a href="lender/dashboard.html">Smart Lending</a></li>
+                            <li><a href="lender/rules.html">Why lend at M-Pesewa?</a></li>
+                            <li><a href="lender/portfolio.html">How to lend</a></li>
+                            <li><a href="borrower/dashboard.html">Active Borrowers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 3: How It Works -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">How It Works</h3>
+                        <ul class="footer-links">
+                            <li><a href="how-it-works.html">P2P Lending Works</a></li>
+                            <li><a href="about.html#our-role">Our Role</a></li>
+                            <li><a href="subscription/plans.html">Subscriptions</a></li>
+                            <li><a href="blacklist/public.html">Blacklist</a></li>
+                            <li><a href="collectors.html">Debt collectors</a></li>
+                            <li><a href="faq.html">Blog / FAQs</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 4: About Us -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">About Us</h3>
+                        <ul class="footer-links">
+                            <li><a href="about.html">About M-Pesewa</a></li>
+                            <li><a href="about.html#team">Team / Advisory Board</a></li>
+                            <li><a href="press.html">News / Careers</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 5: Others -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">Others</h3>
+                        <ul class="footer-links">
+                            <li><a href="terms.html">Terms and Conditions</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                            <li><a href="contact.html#grievance">Grievance Redressal</a></li>
+                            <li><a href="terms.html#fair-practices">Fair Practices Code</a></li>
+                            <li><a href="contact.html#partner">Be a Partner</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 6: Countries -->
+                    <div class="footer-column">
+                        <h3 class="footer-column-title">Countries</h3>
+                        <div class="country-links">
+                            <a href="countries/kenya.html">🇰🇪 Kenya</a>
+                            <a href="countries/uganda.html">🇺🇬 Uganda</a>
+                            <a href="countries/tanzania.html">🇹🇿 Tanzania</a>
+                            <a href="countries/rwanda.html">🇷🇼 Rwanda</a>
+                            <a href="countries/drc.html">🇨🇩 DRC</a>
+                            <a href="countries/burundi.html">🇧🇮 Burundi</a>
+                            <a href="countries/nigeria.html">🇳🇬 Nigeria</a>
+                            <a href="countries/ghana.html">🇬🇭 Ghana</a>
+                            <a href="countries/south-sudan.html">🇸🇸 South Sudan</a>
+                            <a href="countries/somalia.html">🇸🇴 Somalia</a>
+                            <a href="countries/south-africa.html">🇿🇦 South Africa</a>
+                            <a href="countries/ethiopia.html">🇪🇹 Ethiopia</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Info by Country -->
+                <div class="footer-contact-info">
+                    <h4 class="contact-title">Country Contacts</h4>
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <strong>Kenya:</strong> +254 709 219 000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Uganda:</strong> +256 392 175 546 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Tanzania:</strong> +255 659 073 010 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Somalia:</strong> +252 63 0000000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Rwanda:</strong> +250 791 590 801 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>DRC:</strong> +243 81 000 0000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Burundi:</strong> +257 79 000 000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Nigeria:</strong> +234 800 000 0000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Ghana:</strong> +233 24 000 0000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>South Africa:</strong> +27 11 000 0000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>South Sudan:</strong> +211 900 000 000 | info@mpesewa.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Ethiopia:</strong> +251 11 000 0000 | info@mpesewa.com
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Media & Copyright -->
+                <div class="footer-bottom">
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                        <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        <a href="#" class="social-link" aria-label="YouTube">📺</a>
+                        <a href="#" class="social-link" aria-label="Instagram">📸</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
+                    </div>
+                    
+                    <div class="copyright">
+                        © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                    </div>
+                    
+                    <div class="footer-legal">
+                        <a href="privacy.html#cookies">Cookies</a> | 
+                        <a href="terms.html">Terms</a> | 
+                        <a href="privacy.html">Privacy</a> | 
+                        <a href="security.html">Security</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="core/app.js"></script>
+    <script src="core/bootstrap.js"></script>
+    <script src="state/store.js"></script>
+    <script src="router/router.js"></script>
+    <script src="navigation/menu-config.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
