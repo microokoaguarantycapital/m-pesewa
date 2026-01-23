@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrower Opportunities - Group-Scoped Emergency Loans | M-PESEWA</title>
+    <meta name="description" content="View trusted borrowers within your groups. Emergency loan requests from people you know. Group-scoped, country-isolated lending platform.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    
+    <style>
+        /* Page-specific styles */
+        .page-hero {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            position: relative;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" opacity="0.05"><path d="M0,0V600H1200V0ZM600,300A150,150,0,1,0,300,300,150,150,0,0,0,600,300Z" fill="%23FFFFFF"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            margin-top: 16px;
+            font-size: 0.875rem;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .borrower-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .borrower-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-purple);
+        }
+        
+        .borrower-card.expanded {
+            border-color: var(--gold);
+            background: rgba(255, 193, 7, 0.02);
+        }
+        
+        .borrower-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .borrower-basic-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .borrower-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+        
+        .borrower-details h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.125rem;
+        }
+        
+        .borrower-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .borrower-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .rating {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .rating-star {
+            color: var(--gray-300);
+            font-size: 1rem;
+        }
+        
+        .rating-star.filled {
+            color: var(--gold);
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-available {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+        
+        .status-funded {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--info);
+            border: 1px solid var(--info);
+        }
+        
+        .borrower-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .loan-request {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .loan-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .detail-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .borrower-profile {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .profile-item {
+            margin-bottom: 12px;
+        }
+        
+        .profile-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .profile-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+        
+        .profile-value {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+        
+        .funding-status {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .funding-progress {
+            margin-bottom: 12px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+        
+        .borrower-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .expand-details {
+            background: none;
+            border: none;
+            color: var(--primary-purple);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .expand-details:hover {
+            background: rgba(43, 29, 79, 0.1);
+        }
+        
+        .borrower-expanded-details {
+            display: none;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-light);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .expanded-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .detail-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .detail-section h4 {
+            margin: 0 0 16px 0;
+            color: var(--primary-purple);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .guarantor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .guarantor-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .guarantor-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-600) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            opacity: 0.3;
+            margin-bottom: 24px;
+        }
+        
+        .empty-state h3 {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        
+        .empty-state p {
+            color: var(--text-tertiary);
+            max-width: 400px;
+            margin: 0 auto 24px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 48px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-light);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .page-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-medium);
+        }
+        
+        .page-btn.active {
+            background: var(--primary-purple);
+            color: white;
+            border-color: var(--primary-purple);
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .borrower-content {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .borrower-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .borrower-status {
+                align-items: flex-start;
+            }
+            
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .borrower-actions {
+                flex-direction: column;
+            }
+            
+            .expanded-details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-indicators">
+                <span class="trust-indicator"><span class="check">✔</span> Group-Scoped Only</span>
+                <span class="trust-indicator"><span class="check">✔</span> No Cross-Country Lending</span>
+                <span class="trust-indicator"><span class="check">✔</span> Trusted Relationships</span>
+                <span class="trust-indicator"><span class="check">✔</span> Emergency Loans Only</span>
+                <span class="trust-indicator"><span class="check">✔</span> Real People You Know</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                <span class="logo-text">M-PESEWA</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="groups.html">Groups</a>
+                <a href="countries/">Countries</a>
+                <a href="subscriptions.html">Subscriptions</a>
+                <a href="about.html">About</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+                <a href="lending.html" class="btn outline-white">Start Lending</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <nav class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="32">
+                <span>M-PESEWA</span>
+            </div>
+            <button class="mobile-menu-close" aria-label="Close menu">×</button>
+        </div>
+        <div class="mobile-menu-content">
+            <a href="../index.html">Home</a>
+            <a href="borrowing.html">Borrow</a>
+            <a href="lending.html">Lend</a>
+            <a href="groups.html">Groups</a>
+            <a href="countries/">Countries</a>
+            <a href="subscriptions.html">Subscriptions</a>
+            <a href="about.html">About</a>
+            <div class="mobile-menu-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+                <a href="lending.html" class="btn outline">Start Lending</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="text-center">
+                <h1 style="color: white; margin-bottom: 16px;">Borrower Opportunities</h1>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto;">
+                    Emergency loan requests from trusted members within your groups. Adapted for real emergencies, 
+                    visible only to lenders in the same group. No strangers, just people you know.
+                </p>
+                <div class="hero-badge">
+                    <span>👥</span>
+                    <span>Showing borrowers from your groups only</span>
+                </div>
+                <div class="hero-badge">
+                    <span>🌍</span>
+                    <span>Country-isolated: Only Kenyan borrowers shown</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Group Context -->
+    <section class="section">
+        <div class="container">
+            <div class="card" style="border-color: var(--gold); background: linear-gradient(135deg, rgba(255,193,7,0.05) 0%, rgba(255,193,7,0.02) 100%);">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="margin-bottom: 8px;">Current Group Context</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 0;">
+                            You're viewing borrowers from groups you belong to. Switch groups to see different borrowers.
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div class="dropdown">
+                            <button class="dropdown-toggle">
+                                <span>👥 Family Trust Group</span>
+                                <span>▼</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">👥 Family Trust Group (12 borrowers)</a>
+                                <a href="#" class="dropdown-item">⛪ Church Support Group (8 borrowers)</a>
+                                <a href="#" class="dropdown-item">💼 Professional Network (6 borrowers)</a>
+                                <a href="#" class="dropdown-item">🏘️ Neighborhood Group (15 borrowers)</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="groups.html" class="dropdown-item">➕ Join New Group</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" style="margin-top: 24px;">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon primary">👥</div>
+                            <div class="stat-content">
+                                <div class="stat-value">41</div>
+                                <div class="stat-label">Total Group Members</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon success">💰</div>
+                            <div class="stat-content">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Active Borrowers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon info">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-value">98%</div>
+                                <div class="stat-label">Repayment Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon warning">🌡️</div>
+                            <div class="stat-content">
+                                <div class="stat-value">Low</div>
+                                <div class="stat-label">Group Risk Level</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="section">
+        <div class="container">
+            <div class="filter-section">
+                <h3 style="margin-bottom: 20px;">Filter Borrower Opportunities</h3>
+                
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="category">Loan Category</label>
+                        <select id="category" class="form-control">
+                            <option value="">All Categories</option>
+                            <option value="food">🍲 Food & Essentials</option>
+                            <option value="transport">🚌 Transport & Fare</option>
+                            <option value="medical">💊 Medical & Health</option>
+                            <option value="education">🎓 Education & School Fees</option>
+                            <option value="business">💼 Business & Working Capital</option>
+                            <option value="utilities">⚡ Utilities & Bills</option>
+                            <option value="emergency">🚨 Immediate Emergency</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="amount">Amount Range</label>
+                        <select id="amount" class="form-control">
+                            <option value="">Any Amount</option>
+                            <option value="0-1000">KES 0 - 1,000</option>
+                            <option value="1000-5000">KES 1,000 - 5,000</option>
+                            <option value="5000-10000">KES 5,000 - 10,000</option>
+                            <option value="10000+">KES 10,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="rating">Minimum Rating</label>
+                        <select id="rating" class="form-control">
+                            <option value="">Any Rating</option>
+                            <option value="5">★★★★★ (5 stars)</option>
+                            <option value="4">★★★★☆ (4+ stars)</option>
+                            <option value="3">★★★☆☆ (3+ stars)</option>
+                            <option value="2">★★☆☆☆ (2+ stars)</option>
+                            <option value="1">★☆☆☆☆ (1+ stars)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="duration">Loan Duration</label>
+                        <select id="duration" class="form-control">
+                            <option value="">Any Duration</option>
+                            <option value="7">7 days (Standard)</option>
+                            <option value="14">14 days</option>
+                            <option value="30">30 days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <div>
+                        <button class="btn secondary" onclick="resetFilters()">
+                            <span>🔄</span>
+                            <span>Reset Filters</span>
+                        </button>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.875rem; color: var(--text-secondary);">
+                            Showing <strong id="resultCount">8</strong> of 12 borrowers
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Borrower Listing -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Available Borrowers in Your Groups</h2>
+                <p class="section-subtitle">
+                    Trusted members with emergency loan requests. Each borrower is someone you know personally or through group connections.
+                </p>
+            </div>
+            
+            <!-- Borrower Cards -->
+            <div id="borrowerList">
+                <!-- Borrower 1 -->
+                <div class="borrower-card" id="borrower-1">
+                    <div class="borrower-header">
+                        <div class="borrower-basic-info">
+                            <div class="borrower-avatar">JW</div>
+                            <div class="borrower-details">
+                                <h3>Jane Wambui</h3>
+                                <div class="borrower-meta">
+                                    <span class="meta-item">👤 34 years</span>
+                                    <span class="meta-item">📍 Nairobi, Kenya</span>
+                                    <span class="meta-item">👥 Family Trust Group</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="borrower-status">
+                            <div class="rating">
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star">★</span>
+                                <span style="margin-left: 4px; font-size: 0.875rem; color: var(--text-secondary);">4.2</span>
+                            </div>
+                            <div class="status-badge status-available">Available for Funding</div>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-content">
+                        <div class="loan-request">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Loan Request Details</h4>
+                            <div class="loan-details-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Category</span>
+                                    <span class="detail-value">🍲 Food & Essentials</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount</span>
+                                    <span class="detail-value">KES 2,000</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Duration</span>
+                                    <span class="detail-value">7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Interest</span>
+                                    <span class="detail-value">10%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Penalty</span>
+                                    <span class="detail-value">5% daily after day 7</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Requested</span>
+                                    <span class="detail-value">2 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="borrower-profile">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Borrower Profile</h4>
+                            <div class="profile-item">
+                                <div class="profile-label">Employment</div>
+                                <div class="profile-value">Small Business Owner (Kibanda)</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Monthly Income</div>
+                                <div class="profile-value">KES 25,000 - 35,000</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Group Tenure</div>
+                                <div class="profile-value">8 months</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Previous Loans</div>
+                                <div class="profile-value">3 (All repaid on time)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="funding-status">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Funding Status</h4>
+                            <div class="funding-progress">
+                                <div class="progress-label">
+                                    <span>Progress</span>
+                                    <span>0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px;">
+                                Not yet funded. You can be the first lender.
+                            </p>
+                            <p style="font-size: 0.75rem; color: var(--text-tertiary);">
+                                ⚠️ Remember: Only one lender per loan in M-PESEWA
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-actions">
+                        <button class="btn secondary" onclick="viewBorrowerDetails('JW')">
+                            <span>👁️</span>
+                            <span>View Details</span>
+                        </button>
+                        <button class="btn outline" onclick="messageBorrower('JW')">
+                            <span>💬</span>
+                            <span>Message</span>
+                        </button>
+                        <button class="btn primary" onclick="fundLoan('borrower-1')">
+                            <span>💰</span>
+                            <span>Fund This Loan</span>
+                        </button>
+                        <button class="expand-details" onclick="toggleDetails('borrower-1')">
+                            <span>📋</span>
+                            <span>More Details</span>
+                            <span id="expand-icon-1">▼</span>
+                        </button>
+                    </div>
+                    
+                    <div class="borrower-expanded-details" id="details-borrower-1">
+                        <div class="expanded-details-grid">
+                            <div class="detail-section">
+                                <h4><span>🛡️</span> Guarantors</h4>
+                                <div class="guarantor-list">
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">PK</div>
+                                        <div>
+                                            <div style="font-weight: 600;">Peter Kamau</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Brother • Member for 1 year</div>
+                                        </div>
+                                    </div>
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">MW</div>
+                                        <div>
+                                            <div style="font-weight: 600;">Mary Wanjiru</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Group Admin • Member for 2 years</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📊</span> Loan History</h4>
+                                <div style="font-size: 0.875rem;">
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Loans:</strong> 3
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Borrowed:</strong> KES 8,500
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Repayment Rate:</strong> 100%
+                                    </div>
+                                    <div>
+                                        <strong>Average Repayment Time:</strong> 6.3 days
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📝</span> Loan Purpose Details</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">
+                                    "Need KES 2,000 for food supplies until Friday when I receive payment from my regular customers. 
+                                    My kibanda business had a slow week due to rains affecting customer visits."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Borrower 2 -->
+                <div class="borrower-card" id="borrower-2">
+                    <div class="borrower-header">
+                        <div class="borrower-basic-info">
+                            <div class="borrower-avatar">DO</div>
+                            <div class="borrower-details">
+                                <h3>David Ochieng</h3>
+                                <div class="borrower-meta">
+                                    <span class="meta-item">👤 28 years</span>
+                                    <span class="meta-item">📍 Kisumu, Kenya</span>
+                                    <span class="meta-item">👥 Church Support Group</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="borrower-status">
+                            <div class="rating">
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span style="margin-left: 4px; font-size: 0.875rem; color: var(--text-secondary);">5.0</span>
+                            </div>
+                            <div class="status-badge status-available">Available for Funding</div>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-content">
+                        <div class="loan-request">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Loan Request Details</h4>
+                            <div class="loan-details-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Category</span>
+                                    <span class="detail-value">🚌 Transport & Fare</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount</span>
+                                    <span class="detail-value">KES 1,500</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Duration</span>
+                                    <span class="detail-value">7 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Interest</span>
+                                    <span class="detail-value">8%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Penalty</span>
+                                    <span class="detail-value">5% daily after day 7</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Requested</span>
+                                    <span class="detail-value">5 hours ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="borrower-profile">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Borrower Profile</h4>
+                            <div class="profile-item">
+                                <div class="profile-label">Employment</div>
+                                <div class="profile-value">Boda Boda Rider</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Monthly Income</div>
+                                <div class="profile-value">KES 20,000 - 30,000</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Group Tenure</div>
+                                <div class="profile-value">1 year, 3 months</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Previous Loans</div>
+                                <div class="profile-value">5 (All repaid early)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="funding-status">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Funding Status</h4>
+                            <div class="funding-progress">
+                                <div class="progress-label">
+                                    <span>Progress</span>
+                                    <span>0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px;">
+                                Not yet funded. You can be the first lender.
+                            </p>
+                            <p style="font-size: 0.75rem; color: var(--text-tertiary);">
+                                ⭐ Top-rated borrower with perfect repayment history
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-actions">
+                        <button class="btn secondary" onclick="viewBorrowerDetails('DO')">
+                            <span>👁️</span>
+                            <span>View Details</span>
+                        </button>
+                        <button class="btn outline" onclick="messageBorrower('DO')">
+                            <span>💬</span>
+                            <span>Message</span>
+                        </button>
+                        <button class="btn primary" onclick="fundLoan('borrower-2')">
+                            <span>💰</span>
+                            <span>Fund This Loan</span>
+                        </button>
+                        <button class="expand-details" onclick="toggleDetails('borrower-2')">
+                            <span>📋</span>
+                            <span>More Details</span>
+                            <span id="expand-icon-2">▼</span>
+                        </button>
+                    </div>
+                    
+                    <div class="borrower-expanded-details" id="details-borrower-2">
+                        <div class="expanded-details-grid">
+                            <div class="detail-section">
+                                <h4><span>🛡️</span> Guarantors</h4>
+                                <div class="guarantor-list">
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">JO</div>
+                                        <div>
+                                            <div style="font-weight: 600;">John Otieno</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Church Elder • Member for 3 years</div>
+                                        </div>
+                                    </div>
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">SO</div>
+                                        <div>
+                                            <div style="font-weight: 600;">Sarah Otieno</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Sister • Member for 6 months</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📊</span> Loan History</h4>
+                                <div style="font-size: 0.875rem;">
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Loans:</strong> 5
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Borrowed:</strong> KES 12,500
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Repayment Rate:</strong> 100%
+                                    </div>
+                                    <div>
+                                        <strong>Average Repayment Time:</strong> 5.2 days (Always early)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📝</span> Loan Purpose Details</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">
+                                    "My motorcycle needs fuel and minor repairs to continue working this week. 
+                                    I'll repay from earnings by Friday when I receive weekly payments from my regular customers."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Borrower 3 (Partially Funded) -->
+                <div class="borrower-card" id="borrower-3">
+                    <div class="borrower-header">
+                        <div class="borrower-basic-info">
+                            <div class="borrower-avatar">SK</div>
+                            <div class="borrower-details">
+                                <h3>Susan Kariuki</h3>
+                                <div class="borrower-meta">
+                                    <span class="meta-item">👤 42 years</span>
+                                    <span class="meta-item">📍 Mombasa, Kenya</span>
+                                    <span class="meta-item">👥 Professional Network</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="borrower-status">
+                            <div class="rating">
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star filled">★</span>
+                                <span class="rating-star">★</span>
+                                <span class="rating-star">★</span>
+                                <span style="margin-left: 4px; font-size: 0.875rem; color: var(--text-secondary);">3.0</span>
+                            </div>
+                            <div class="status-badge status-funded">Funding in Progress</div>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-content">
+                        <div class="loan-request">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Loan Request Details</h4>
+                            <div class="loan-details-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Category</span>
+                                    <span class="detail-value">🎓 Education & School Fees</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Amount</span>
+                                    <span class="detail-value">KES 5,000</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Duration</span>
+                                    <span class="detail-value">14 days</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Interest</span>
+                                    <span class="detail-value">10%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Penalty</span>
+                                    <span class="detail-value">5% daily after day 14</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Requested</span>
+                                    <span class="detail-value">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="borrower-profile">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Borrower Profile</h4>
+                            <div class="profile-item">
+                                <div class="profile-label">Employment</div>
+                                <div class="profile-value">Primary School Teacher</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Monthly Income</div>
+                                <div class="profile-value">KES 35,000 - 40,000</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Group Tenure</div>
+                                <div class="profile-value">6 months</div>
+                            </div>
+                            <div class="profile-item">
+                                <div class="profile-label">Previous Loans</div>
+                                <div class="profile-value">1 (Repaid 2 days late)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="funding-status">
+                            <h4 style="margin: 0 0 16px 0; color: var(--primary-purple);">Funding Status</h4>
+                            <div class="funding-progress">
+                                <div class="progress-label">
+                                    <span>Progress</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px;">
+                                <strong>KES 3,000</strong> funded by another group member
+                            </p>
+                            <p style="font-size: 0.75rem; color: var(--text-tertiary);">
+                                ⚠️ Note: In M-PESEWA, only one lender completes funding
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="borrower-actions">
+                        <button class="btn secondary" onclick="viewBorrowerDetails('SK')">
+                            <span>👁️</span>
+                            <span>View Details</span>
+                        </button>
+                        <button class="btn outline" onclick="messageBorrower('SK')">
+                            <span>💬</span>
+                            <span>Message</span>
+                        </button>
+                        <button class="btn primary" onclick="fundRemaining('borrower-3')">
+                            <span>💰</span>
+                            <span>Fund Remaining KES 2,000</span>
+                        </button>
+                        <button class="expand-details" onclick="toggleDetails('borrower-3')">
+                            <span>📋</span>
+                            <span>More Details</span>
+                            <span id="expand-icon-3">▼</span>
+                        </button>
+                    </div>
+                    
+                    <div class="borrower-expanded-details" id="details-borrower-3">
+                        <div class="expanded-details-grid">
+                            <div class="detail-section">
+                                <h4><span>🛡️</span> Guarantors</h4>
+                                <div class="guarantor-list">
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">MK</div>
+                                        <div>
+                                            <div style="font-weight: 600;">Michael Kariuki</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Husband • Member for 1 year</div>
+                                        </div>
+                                    </div>
+                                    <div class="guarantor-item">
+                                        <div class="guarantor-avatar">RN</div>
+                                        <div>
+                                            <div style="font-weight: 600;">Rebecca Njoroge</div>
+                                            <div style="font-size: 0.75rem; color: var(--text-secondary);">Colleague • Member for 8 months</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📊</span> Loan History</h4>
+                                <div style="font-size: 0.875rem;">
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Loans:</strong> 1
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Total Borrowed:</strong> KES 3,000
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        <strong>Repayment Rate:</strong> 100%
+                                    </div>
+                                    <div>
+                                        <strong>Last Repayment:</strong> 2 days late (family emergency)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="detail-section">
+                                <h4><span>📝</span> Loan Purpose Details</h4>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin: 0;">
+                                    "Urgent school fees for my daughter's secondary school. The deadline is tomorrow, 
+                                    and my salary comes next week. I have partial funding from a colleague but need the balance."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results State (Hidden by default) -->
+            <div id="noResults" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">🔍</div>
+                <h3>No Borrowers Match Your Filters</h3>
+                <p>Try adjusting your filters or check other groups for more borrowing opportunities.</p>
+                <button class="btn outline" onclick="resetFilters()">
+                    <span>🔄</span>
+                    <span>Reset All Filters</span>
+                </button>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn" disabled>
+                    <span>«</span>
+                </button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">
+                    <span>»</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Notes -->
+    <section class="section" style="background: var(--neutral-light);">
+        <div class="container">
+            <div class="card">
+                <div class="section-header">
+                    <h2>Important Notes for Lenders</h2>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-content">
+                            <h4>Group-Scoped Only</h4>
+                            <p>You can only see borrowers from groups you belong to. No cross-group visibility to maintain trust networks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">💰</div>
+                        <div class="feature-content">
+                            <h4>One Lender Per Loan</h4>
+                            <p>Unlike other platforms, M-PESEWA allows only one lender per loan. You fund the entire amount or not at all.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-content">
+                            <h4>Trust-Based Assessment</h4>
+                            <p>Use your personal knowledge of borrowers. The platform provides data, but trust is your responsibility.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">📅</div>
+                        <div class="feature-content">
+                            <h4>7-Day Standard Term</h4>
+                            <p>Most emergency loans are for 7 days at 10% interest. Penalty of 5% daily applies after due date.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">⚠️</div>
+                        <div class="feature-content">
+                            <h4>Default Consequences</h4>
+                            <p>Default after 2 months leads to global blacklisting. Borrower cannot borrow from any group on the platform.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <div class="feature-content">
+                            <h4>Country Isolation</h4>
+                            <p>You only see borrowers from your selected country. No cross-border lending to prevent currency and regulatory issues.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert warning" style="margin-top: 32px;">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Platform Disclaimer</div>
+                        <div class="alert-message">
+                            M-PESEWA is a technology coordination platform only. We do not guarantee loan repayment, 
+                            participate in debt collection, or hold money. All lending decisions and risks are yours. 
+                            Lend only to people you trust within your groups.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-strip section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 style="color: white; margin-bottom: 16px;">Ready to Help Someone in Your Group?</h2>
+                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 32px;">
+                    Fund an emergency loan for a trusted group member. Earn fair interest while helping people you know.
+                </p>
+                <div class="cta-actions">
+                    <a href="#borrowerList" class="btn primary gold large">
+                        <span>💰</span>
+                        <span>Browse Available Borrowers</span>
+                    </a>
+                    <a href="subscriptions.html" class="btn outline-white large">
+                        <span>📊</span>
+                        <span>Check Subscription Status</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="borrower-listing.html">Browse Borrowers</a></li>
+                        <li><a href="lending.html">How to Lend</a></li>
+                        <li><a href="subscriptions.html">Subscription Plans</a></li>
+                        <li><a href="ledger.html">Ledger System</a></li>
+                        <li><a href="blacklist.html">Blacklist</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Lender Agreement</a></li>
+                        <li><a href="qa.html">Borrower Agreement</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="qa.html">Help Center</a></li>
+                        <li><a href="debt-collectors.html">Debt Collectors</a></li>
+                        <li><a href="blacklist.html">Report Default</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Funding Modal -->
+    <div id="fundingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Fund Emergency Loan</h3>
+                <button class="modal-close" onclick="closeFundingModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="fundingDetails">
+                    <!-- Funding details will be inserted here -->
+                </div>
+                
+                <div class="form-group">
+                    <label>Loan Amount to Fund</label>
+                    <input type="number" class="form-control" id="fundAmount" min="100" max="50000" step="100">
+                    <div class="form-text">Minimum KES 100, maximum based on your subscription limit</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Interest Rate (Standard is 10%)</label>
+                    <input type="number" class="form-control" id="interestRate" min="1" max="10" step="0.5" value="10">
+                    <div class="form-text">Maximum 10% for 7-day emergency loans</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Repayment Terms</label>
+                    <select class="form-control" id="repaymentTerms">
+                        <option value="7">7 days (Standard emergency loan)</option>
+                        <option value="14">14 days</option>
+                        <option value="30">30 days</option>
+                    </select>
+                </div>
+                
+                <div class="alert info">
+                    <div class="alert-icon">ℹ️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Important Notes</div>
+                        <div class="alert-message">
+                            • You will fund the entire loan amount<br>
+                            • Money transfer happens outside M-PESEWA<br>
+                            • You are responsible for collecting repayment<br>
+                            • A ledger will be automatically created for tracking
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn primary full-width" onclick="confirmFunding()">
+                    <span>✅</span>
+                    <span>Confirm & Create Ledger</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const closeBtn = document.querySelector('.mobile-menu-close');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Toggle borrower details
+        function toggleDetails(borrowerId) {
+            const details = document.getElementById(`details-${borrowerId}`);
+            const icon = document.getElementById(`expand-icon-${borrowerId.split('-')[1]}`);
+            const card = document.getElementById(borrowerId);
+            
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                icon.textContent = '▼';
+                card.classList.remove('expanded');
+            } else {
+                details.style.display = 'block';
+                icon.textContent = '▲';
+                card.classList.add('expanded');
+            }
+        }
+
+        // Filter functionality
+        function applyFilters() {
+            const category = document.getElementById('category').value;
+            const amount = document.getElementById('amount').value;
+            const rating = document.getElementById('rating').value;
+            const duration = document.getElementById('duration').value;
+            
+            let visibleCount = 0;
+            const borrowers = document.querySelectorAll('.borrower-card');
+            
+            borrowers.forEach(borrower => {
+                // In a real implementation, you would check borrower data against filters
+                // For this example, we'll just show a random subset
+                const show = Math.random() > 0.3; // Show ~70% of borrowers
+                
+                if (show) {
+                    borrower.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    borrower.style.display = 'none';
+                }
+            });
+            
+            document.getElementById('resultCount').textContent = visibleCount;
+            
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                document.getElementById('noResults').style.display = 'block';
+            } else {
+                document.getElementById('noResults').style.display = 'none';
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('category').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('rating').value = '';
+            document.getElementById('duration').value = '';
+            
+            // Show all borrowers
+            const borrowers = document.querySelectorAll('.borrower-card');
+            borrowers.forEach(borrower => {
+                borrower.style.display = 'block';
+            });
+            
+            document.getElementById('resultCount').textContent = borrowers.length;
+            document.getElementById('noResults').style.display = 'none';
+        }
+
+        // Set up filter event listeners
+        document.getElementById('category').addEventListener('change', applyFilters);
+        document.getElementById('amount').addEventListener('change', applyFilters);
+        document.getElementById('rating').addEventListener('change', applyFilters);
+        document.getElementById('duration').addEventListener('change', applyFilters);
+
+        // Funding functionality
+        function fundLoan(borrowerId) {
+            const borrowerCard = document.getElementById(borrowerId);
+            const name = borrowerCard.querySelector('h3').textContent;
+            const amount = borrowerCard.querySelector('.detail-item:nth-child(2) .detail-value').textContent;
+            const category = borrowerCard.querySelector('.detail-item:nth-child(1) .detail-value').textContent;
+            
+            document.getElementById('fundingDetails').innerHTML = `
+                <div class="alert info" style="margin-bottom: 20px;">
+                    <div class="alert-content">
+                        <div class="alert-title">Funding ${name}'s Loan</div>
+                        <div class="alert-message">
+                            <strong>Category:</strong> ${category}<br>
+                            <strong>Requested Amount:</strong> ${amount}<br>
+                            <strong>Group:</strong> Family Trust Group
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('fundAmount').value = amount.replace('KES ', '').replace(',', '');
+            document.getElementById('fundingModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fundRemaining(borrowerId) {
+            const borrowerCard = document.getElementById(borrowerId);
+            const name = borrowerCard.querySelector('h3').textContent;
+            const totalAmount = borrowerCard.querySelector('.detail-item:nth-child(2) .detail-value').textContent;
+            const fundedAmount = 3000; // From the example
+            const remainingAmount = parseInt(totalAmount.replace('KES ', '').replace(',', '')) - fundedAmount;
+            
+            document.getElementById('fundingDetails').innerHTML = `
+                <div class="alert info" style="margin-bottom: 20px;">
+                    <div class="alert-content">
+                        <div class="alert-title">Complete Funding for ${name}'s Loan</div>
+                        <div class="alert-message">
+                            <strong>Total Request:</strong> ${totalAmount}<br>
+                            <strong>Already Funded:</strong> KES 3,000<br>
+                            <strong>Remaining to Fund:</strong> KES ${remainingAmount.toLocaleString()}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('fundAmount').value = remainingAmount;
+            document.getElementById('fundingModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeFundingModal() {
+            document.getElementById('fundingModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function confirmFunding() {
+            const amount = document.getElementById('fundAmount').value;
+            const interest = document.getElementById('interestRate').value;
+            const terms = document.getElementById('repaymentTerms').value;
+            
+            // Show loading state
+            const submitBtn = document.querySelector('#fundingModal .btn.primary');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading"></span> Creating Ledger...';
+            submitBtn.disabled = true;
+            
+            // Simulate processing
+            setTimeout(() => {
+                closeFundingModal();
+                alert(`Success! Ledger created for KES ${amount} at ${interest}% interest for ${terms} days. Transfer funds to the borrower and update the ledger when done.`);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    if (modal.id === 'fundingModal') {
+                        closeFundingModal();
+                    }
+                }
+            });
+        };
+
+        // Other functions
+        function viewBorrowerDetails(borrowerInitials) {
+            alert(`Viewing detailed profile for borrower ${borrowerInitials}. In production, this would open a detailed profile page.`);
+        }
+
+        function messageBorrower(borrowerInitials) {
+            alert(`Opening chat with borrower ${borrowerInitials}. In production, this would open the messaging interface.`);
+        }
+
+        function showLoginModal() {
+            alert('Login functionality would appear here. In production, this would open a login modal.');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial result count
+            const borrowers = document.querySelectorAll('.borrower-card');
+            document.getElementById('resultCount').textContent = borrowers.length;
+            
+            // Add click handlers to expand details on card click
+            document.querySelectorAll('.borrower-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on buttons or links
+                    if (!e.target.closest('button') && !e.target.closest('a')) {
+                        const borrowerId = this.id;
+                        toggleDetails(borrowerId);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
