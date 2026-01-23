@@ -1,0 +1,355 @@
+# M-Pesewa Robots.txt
+# Last Updated: 2024-01-24
+# Website: https://m-pesewa.com
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /how-it-works.html
+Allow: /faq.html
+Allow: /contact.html
+Allow: /terms.html
+Allow: /privacy.html
+Allow: /countries/
+Allow: /emergency/
+Allow: /subscription/
+Allow: /auth/login.html
+Allow: /auth/register.html
+
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /admin-login.html
+Disallow: /auth/forgot.html
+Disallow: /auth/reset.html
+Disallow: /api/
+Disallow: /core/
+Disallow: /state/
+Disallow: /router/
+Disallow: /navigation/
+Disallow: /auth/session-expired.html
+Disallow: /auth/device-verification.html
+Disallow: /auth/risk-challenge.html
+
+# Disallow search query parameters
+Disallow: /*?*
+Disallow: /*&
+Disallow: /*=
+Disallow: /*?
+Disallow: /*.php$
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Allow specific query parameters for pagination and filters
+Allow: /borrower/history.html?page=
+Allow: /lender/history.html?page=
+Allow: /emergency/*?category=
+Allow: /countries/*?currency=
+
+# Sitemap location
+Sitemap: https://m-pesewa.com/sitemap.xml
+Sitemap: https://m-pesewa.com/sitemap-static.xml
+Sitemap: https://m-pesewa.com/sitemap-countries.xml
+Sitemap: https://m-pesewa.com/sitemap-emergency.xml
+
+# Crawl delay for search engines (3 seconds)
+Crawl-delay: 3
+
+# Preferred host (www or non-www)
+Host: https://m-pesewa.com
+
+# Site verification tokens for search engines
+# Google Search Console
+# Bing Webmaster Tools
+# Yandex Webmaster
+
+# Special rules for specific search engines
+
+# Googlebot (Google's main crawler)
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 1
+
+# Googlebot-Image (Google's image crawler)
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/images/logos/
+Allow: /assets/images/icons/
+Allow: /assets/images/illustrations/
+Disallow: /assets/images/screenshots/  # Screenshots might be temporary
+Disallow: /assets/images/placeholders/
+
+# Bingbot (Microsoft Bing)
+User-agent: bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# Yandex Bot
+User-agent: YandexBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 3
+Clean-param: ref /borrower/
+Clean-param: ref /lender/
+Clean-param: session /auth/
+
+# Applebot (Apple's crawler for Siri and Spotlight)
+User-agent: Applebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# Facebook External Hit
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Twitter Bot
+User-agent: Twitterbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# LinkedIn Bot
+User-agent: LinkedInBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Pinterest Bot
+User-agent: Pinterest
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Baidu Spider (Chinese search engine)
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Yandex Images
+User-agent: YandexImages
+Allow: /assets/images/
+Allow: /assets/images/logos/
+Allow: /assets/images/icons/
+Disallow: /assets/images/screenshots/
+
+# DuckDuckGo Bot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 3
+
+# Slack Bot
+User-agent: Slackbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Telegram Bot
+User-agent: TelegramBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# WhatsApp Bot
+User-agent: WhatsApp
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Block AI crawlers that might misuse content
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: Anthropic-ai
+Disallow: /
+
+# Block malicious bots and scrapers
+User-agent: MJ12bot
+Disallow: /
+User-agent: AhrefsBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
+User-agent: DotBot
+Disallow: /
+User-agent: MauiBot
+Disallow: /
+User-agent: PetalBot
+Disallow: /
+User-agent: BLEXBot
+Disallow: /
+User-agent: Sogou
+Disallow: /
+User-agent: Exabot
+Disallow: /
+User-agent: MegaIndex
+Disallow: /
+User-agent: MojeekBot
+Disallow: /
+User-agent: UptimeRobot
+Disallow: /
+User-agent: Uptimebot
+Disallow: /
+
+# Block SEO spam bots
+User-agent: ZoominfoBot
+Disallow: /
+User-agent: Barkrowler
+Disallow: /
+User-agent: BUbiNG
+Disallow: /
+User-agent: Qwantify
+Disallow: /
+User-agent: Applebot
+Disallow: /admin/
+Disallow: /api/
+
+# Allow archive.org for historical preservation
+User-agent: ia_archiver
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 10
+
+# Allow accessibility bots
+User-agent: a11ybot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 5
+
+# Allow monitoring bots
+User-agent: Pingdom
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Block aggressive crawlers
+User-agent: Slurp
+Crawl-delay: 10
+Disallow: /admin/
+Disallow: /api/
+
+# Additional security measures
+# Block paths with session IDs and other sensitive parameters
+Disallow: /*?session_id=
+Disallow: /*?token=
+Disallow: /*?password=
+Disallow: /*?secret=
+Disallow: /*?auth=
+Disallow: /*?key=
+
+# Allow JS and CSS for proper rendering
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /core/
+Allow: /state/
+Allow: /router/
+Allow: /navigation/
+
+# Block unnecessary file types
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.svg$
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.ico$
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.xls$
+Disallow: /*.xlsx$
+
+# But allow specific static assets for proper site rendering
+Allow: /assets/css/*.css$
+Allow: /assets/js/*.js$
+Allow: /assets/images/logos/*.png$
+Allow: /assets/images/logos/*.svg$
+Allow: /assets/images/icons/*.png$
+Allow: /assets/images/icons/*.svg$
+
+# Country-specific rules (if needed in future)
+# User-agent: *
+# Disallow: /countries/kenya/admin/
+# Disallow: /countries/uganda/admin/
+# Disallow: /countries/tanzania/admin/
+# Disallow: /countries/rwanda/admin/
+# Disallow: /countries/burundi/admin/
+# Disallow: /countries/somalia/admin/
+# Disallow: /countries/drc/admin/
+# Disallow: /countries/nigeria/admin/
+# Disallow: /countries/ghana/admin/
+# Disallow: /countries/south-africa/admin/
+# Disallow: /countries/south-sudan/admin/
+# Disallow: /countries/ethiopia/admin/
+
+# Emergency categories - all public
+Allow: /emergency/transport.html
+Allow: /emergency/data.html
+Allow: /emergency/gas.html
+Allow: /emergency/food.html
+Allow: /emergency/wifi.html
+Allow: /emergency/water.html
+Allow: /emergency/electricity.html
+Allow: /emergency/tv.html
+Allow: /emergency/fuel.html
+Allow: /emergency/repairs.html
+Allow: /emergency/credo.html
+Allow: /emergency/sales.html
+Allow: /emergency/capital.html
+Allow: /emergency/market.html
+Allow: /emergency/stall.html
+Allow: /emergency/hawker.html
+Allow: /emergency/fuliza.html
+Allow: /emergency/medicine.html
+Allow: /emergency/school.html
+Allow: /emergency/advance.html
+
+# Subscription pages - public information
+Allow: /subscription/plans.html
+Allow: /subscription/current.html
+Allow: /subscription/upgrade.html
+
+# Blacklist and collectors - public information
+Allow: /blacklist/public.html
+Allow: /collectors.html
+
+# Important: This robots.txt file should be placed at the root of your website
+# For development/testing, you might want to use a more permissive setting
+# For production, ensure proper restrictions are in place
+
+# Development/Staging environment detection
+# If the site is not on the main domain, be more restrictive
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+
+# End of robots.txt
