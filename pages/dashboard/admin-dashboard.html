@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - M-PESEWA</title>
+    <meta name="description" content="Platform administration and moderation">
+    <meta name="theme-color" content="#2B1D4F">
+    
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/icons/favicon.ico">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="../../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                    <span>Admin Dashboard</span>
+                </div>
+                
+                <div class="sidebar-user">
+                    <div class="user-avatar" style="background: var(--error);">AD</div>
+                    <div class="user-info">
+                        <h4>Admin User</h4>
+                        <p>Platform Administrator</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h5 class="nav-title">Platform</h5>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <span class="nav-icon">🏠</span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">👁️</span>
+                                <span>Platform Overview</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">📈</span>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                <span>System Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h5 class="nav-title">Moderation</h5>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="../blacklist.html" class="nav-link">
+                                <span class="nav-icon">🚫</span>
+                                <span>Blacklist</span>
+                                <span class="nav-badge">12</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">📒</span>
+                                <span>Ledger Overrides</span>
+                                <span class="nav-badge">5</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">⭐</span>
+                                <span>Rating Moderation</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">⚠️</span>
+                                <span>Disputes</span>
+                                <span class="nav-badge">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h5 class="nav-title">Compliance</h5>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🌍</span>
+                                <span>Country Compliance</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                <span>Group Audits</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../debt-collectors.html" class="nav-link">
+                                <span class="nav-icon">🛡️</span>
+                                <span>Collector Validation</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">📋</span>
+                                <span>Subscription Enforcement</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h5 class="nav-title">Users</h5>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                <span>User Management</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                <span>Role Management</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">📧</span>
+                                <span>Communications</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="../../index.html" class="btn secondary full-width">Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="page-title">Admin Dashboard</h1>
+                    <p class="section-subtitle">Platform Administration • Full System Access</p>
+                </div>
+                <div class="page-actions">
+                    <button class="mobile-menu-toggle">☰</button>
+                    <button class="btn primary" onclick="showSystemAlert()">System Alert</button>
+                </div>
+            </div>
+
+            <!-- System Alerts -->
+            <div class="dashboard-alert warning">
+                <div class="dashboard-alert-icon">⚠️</div>
+                <div class="dashboard-alert-content">
+                    <h4 class="dashboard-alert-title">5 Pending Blacklist Reviews</h4>
+                    <p class="dashboard-alert-message">Users have requested blacklist removal after repayment.</p>
+                    <div class="dashboard-alert-actions">
+                        <a href="../blacklist.html" class="btn small">Review Now</a>
+                        <a href="#" class="btn outline small">Schedule</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon primary">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value">5,248</div>
+                            <div class="stat-label">Total Users</div>
+                            <div class="stat-change positive">+128 this week</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon success">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-value">KES 2.4M</div>
+                            <div class="stat-label">Total Lent</div>
+                            <div class="stat-change positive">+12%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon warning">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-value">98.7%</div>
+                            <div class="stat-label">Repayment Rate</div>
+                            <div class="stat-change positive">+0.3%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stat-card error">
+                    <div class="stat-header">
+                        <div class="stat-icon error">🚫</div>
+                        <div class="stat-content">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Blacklisted</div>
+                            <div class="stat-change negative">+2 this month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout -->
+            <div class="dashboard-widgets">
+                <!-- Pending Actions -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Pending Actions</h3>
+                        <div class="widget-actions">
+                            <a href="#" class="btn small">Process All</a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>User</th>
+                                        <th>Country</th>
+                                        <th>Details</th>
+                                        <th>Requested</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="badge error">Blacklist</span>
+                                        </td>
+                                        <td>
+                                            <div class="table-avatar">
+                                                <div class="avatar-fallback">RB</div>
+                                                <div class="avatar-info">
+                                                    <div class="avatar-name">Robert Black</div>
+                                                    <div class="avatar-detail">Default: KES 5K</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>🇰🇪 Kenya</td>
+                                        <td>Requesting removal after repayment</td>
+                                        <td>2 hours ago</td>
+                                        <td class="table-cell-actions">
+                                            <div class="table-actions">
+                                                <button class="action-btn approve" title="Approve">✅</button>
+                                                <button class="action-btn delete" title="Reject">❌</button>
+                                                <button class="action-btn view" title="Review">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge warning">Ledger</span>
+                                        </td>
+                                        <td>
+                                            <div class="table-avatar">
+                                                <div class="avatar-fallback">LS</div>
+                                                <div class="avatar-info">
+                                                    <div class="avatar-name">Lender Smith</div>
+                                                    <div class="avatar-detail">Ledger #MP-KE-001</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>🇺🇬 Uganda</td>
+                                        <td>Correction request: payment amount</td>
+                                        <td>5 hours ago</td>
+                                        <td class="table-cell-actions">
+                                            <div class="table-actions">
+                                                <button class="action-btn approve" title="Approve">✅</button>
+                                                <button class="action-btn delete" title="Reject">❌</button>
+                                                <button class="action-btn view" title="Review">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge info">Rating</span>
+                                        </td>
+                                        <td>
+                                            <div class="table-avatar">
+                                                <div class="avatar-fallback">JB</div>
+                                                <div class="avatar-info">
+                                                    <div class="avatar-name">Jane Borrower</div>
+                                                    <div class="avatar-detail">Disputed 1-star</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>🇹🇿 Tanzania</td>
+                                        <td>Rating dispute: claims unfair rating</td>
+                                        <td>1 day ago</td>
+                                        <td class="table-cell-actions">
+                                            <div class="table-actions">
+                                                <button class="action-btn approve" title="Approve">✅</button>
+                                                <button class="action-btn delete" title="Reject">❌</button>
+                                                <button class="action-btn view" title="Review">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge-group">Group</span>
+                                        </td>
+                                        <td>
+                                            <div class="table-avatar">
+                                                <div class="avatar-fallback">FG</div>
+                                                <div class="avatar-info">
+                                                    <div class="avatar-name">Family Group</div>
+                                                    <div class="avatar-detail">New group creation</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>🇳🇬 Nigeria</td>
+                                        <td>Verification required: 15 members</td>
+                                        <td>2 days ago</td>
+                                        <td class="table-cell-actions">
+                                            <div class="table-actions">
+                                                <button class="action-btn approve" title="Approve">✅</button>
+                                                <button class="action-btn delete" title="Reject">❌</button>
+                                                <button class="action-btn view" title="Review">👁️</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platform Health -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Platform Health</h3>
+                        <div class="widget-actions">
+                            <span class="badge success">Stable</span>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="status-overview">
+                            <div class="status-item">
+                                <span class="status-count">25</span>
+                                <span class="status-label">Countries</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-count">1,248</span>
+                                <span class="status-label">Active Groups</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-count">99.2%</span>
+                                <span class="status-label">Uptime</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%;"></div>
+                        </div>
+                        <small>Subscription collection: 85% of lenders paid (28th deadline)</small>
+                        
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Today</div>
+                                <div class="timeline-content">
+                                    <p>System backup completed successfully</p>
+                                    <small>All data secured</small>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Jan 23, 2026</div>
+                                <div class="timeline-content">
+                                    <p>New country added: Senegal 🇸🇳</p>
+                                    <small>Now serving 25 African countries</small>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Jan 20, 2026</div>
+                                <div class="timeline-content">
+                                    <p>Platform update v2.1.0 deployed</p>
+                                    <small>Performance improvements</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Country Compliance -->
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Country Compliance Overview</h3>
+                    <div class="widget-actions">
+                        <a href="../countries/" class="btn small">View All Countries</a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Active Groups</th>
+                                    <th>Total Lent</th>
+                                    <th>Repayment Rate</th>
+                                    <th>Blacklisted</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="table-avatar">
+                                            <span class="country-flag">🇰🇪</span>
+                                            <div class="avatar-info">
+                                                <div class="avatar-name">Kenya</div>
+                                                <div class="avatar-detail">KES</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell-number">425</td>
+                                    <td class="table-cell-number">KES 850K</td>
+                                    <td class="table-cell-number">99.1%</td>
+                                    <td class="table-cell-number">3</td>
+                                    <td>
+                                        <span class="table-status status-success">Compliant</span>
+                                    </td>
+                                    <td class="table-cell-actions">
+                                        <div class="table-actions">
+                                            <a href="../countries/kenya.html" class="action-btn view" title="View">👁️</a>
+                                            <button class="action-btn edit" title="Edit">✏️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-avatar">
+                                            <span class="country-flag">🇺🇬</span>
+                                            <div class="avatar-info">
+                                                <div class="avatar-name">Uganda</div>
+                                                <div class="avatar-detail">UGX</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell-number">312</td>
+                                    <td class="table-cell-number">UGX 120M</td>
+                                    <td class="table-cell-number">98.5%</td>
+                                    <td class="table-cell-number">2</td>
+                                    <td>
+                                        <span class="table-status status-success">Compliant</span>
+                                    </td>
+                                    <td class="table-cell-actions">
+                                        <div class="table-actions">
+                                            <a href="../countries/uganda.html" class="action-btn view" title="View">👁️</a>
+                                            <button class="action-btn edit" title="Edit">✏️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-avatar">
+                                            <span class="country-flag">🇳🇬</span>
+                                            <div class="avatar-info">
+                                                <div class="avatar-name">Nigeria</div>
+                                                <div class="avatar-detail">NGN</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell-number">286</td>
+                                    <td class="table-cell-number">NGN 45M</td>
+                                    <td class="table-cell-number">97.8%</td>
+                                    <td class="table-cell-number">4</td>
+                                    <td>
+                                        <span class="table-status status-warning">Review Needed</span>
+                                    </td>
+                                    <td class="table-cell-actions">
+                                        <div class="table-actions">
+                                            <a href="../countries/nigeria.html" class="action-btn view" title="View">👁️</a>
+                                            <button class="action-btn edit" title="Edit">✏️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-avatar">
+                                            <span class="country-flag">🇹🇿</span>
+                                            <div class="avatar-info">
+                                                <div class="avatar-name">Tanzania</div>
+                                                <div class="avatar-detail">TZS</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell-number">198</td>
+                                    <td class="table-cell-number">TZS 320M</td>
+                                    <td class="table-cell-number">99.3%</td>
+                                    <td class="table-cell-number">1</td>
+                                    <td>
+                                        <span class="table-status status-success">Compliant</span>
+                                    </td>
+                                    <td class="table-cell-actions">
+                                        <div class="table-actions">
+                                            <a href="../countries/tanzania.html" class="action-btn view" title="View">👁️</a>
+                                            <button class="action-btn edit" title="Edit">✏️</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="widget">
+                <div class="widget-header">
+                    <h3 class="widget-title">Admin Tools</h3>
+                </div>
+                <div class="widget-body">
+                    <div class="quick-actions">
+                        <a href="../blacklist.html" class="quick-action">
+                            <div class="quick-action-icon">🚫</div>
+                            <span class="quick-action-label">Blacklist Mgmt</span>
+                        </a>
+                        <a href="#" class="quick-action" onclick="showLedgerOverride()">
+                            <div class="quick-action-icon">📒</div>
+                            <span class="quick-action-label">Ledger Override</span>
+                        </a>
+                        <a href="#" class="quick-action" onclick="showUserManagement()">
+                            <div class="quick-action-icon">👥</div>
+                            <span class="quick-action-label">User Management</span>
+                        </a>
+                        <a href="../debt-collectors.html" class="quick-action">
+                            <div class="quick-action-icon">🛡️</div>
+                            <span class="quick-action-label">Collector Validation</span>
+                        </a>
+                        <a href="#" class="quick-action" onclick="showSystemSettings()">
+                            <div class="quick-action-icon">⚙️</div>
+                            <span class="quick-action-label">System Settings</span>
+                        </a>
+                        <a href="#" class="quick-action" onclick="showReports()">
+                            <div class="quick-action-icon">📊</div>
+                            <span class="quick-action-label">Platform Reports</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Admin Modals -->
+    <div id="ledgerOverrideModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ledger Override</h3>
+                <button class="modal-close" onclick="closeModal('ledgerOverrideModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="ledgerOverrideForm">
+                    <div class="form-group">
+                        <label>Ledger ID</label>
+                        <input type="text" required placeholder="MP-KE-001">
+                    </div>
+                    <div class="form-group">
+                        <label>Override Type</label>
+                        <select class="form-control" required>
+                            <option value="">Select type</option>
+                            <option value="amount">Amount Correction</option>
+                            <option value="status">Status Change</option>
+                            <option value="dates">Date Correction</option>
+                            <option value="interest">Interest Adjustment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Reason for Override</label>
+                        <textarea class="form-control" required placeholder="Provide detailed reason..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Admin Password</label>
+                        <input type="password" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Execute Override</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.dashboard-sidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        });
+
+        // Close sidebar when clicking overlay
+        document.querySelector('.sidebar-overlay').addEventListener('click', function() {
+            document.querySelector('.dashboard-sidebar').classList.remove('active');
+            this.classList.remove('active');
+        });
+
+        // Modal functions
+        function showLedgerOverride() {
+            document.getElementById('ledgerOverrideModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function showSystemAlert() {
+            alert('This would send a system-wide notification to all users.');
+        }
+
+        function showUserManagement() {
+            alert('User management interface would open here.');
+        }
+
+        function showSystemSettings() {
+            alert('System settings panel would open here.');
+        }
+
+        function showReports() {
+            alert('Platform reports generator would open here.');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        };
+
+        // Handle form submissions
+        document.getElementById('ledgerOverrideForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Ledger override executed. This action is logged.');
+            closeModal('ledgerOverrideModal');
+        });
+
+        // Initialize tooltips
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                const title = this.getAttribute('title');
+                if (title) {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip-text';
+                    tooltip.textContent = title;
+                    this.appendChild(tooltip);
+                }
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                const tooltip = this.querySelector('.tooltip-text');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Plans | M-PESEWA - Lending Platform</title>
+    <meta name="description" content="Choose your lending subscription plan. Borrowers always use M-PESEWA for free. Select from Basic, Premium, Super, and Lender of Lenders plans with transparent pricing.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    
+    <style>
+        /* Additional inline styles for this page */
+        .subscription-hero {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding-top: 120px;
+            padding-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .subscription-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" opacity="0.1"><path d="M0,0V600H1200V0ZM600,300A150,150,0,1,0,300,300,150,150,0,0,0,600,300Z" fill="%23FFC107"/></svg>');
+            background-size: cover;
+            opacity: 0.1;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 193, 7, 0.2);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            padding: 12px 24px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .trust-indicators {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 32px;
+            opacity: 0.9;
+        }
+        
+        .trust-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .trust-indicator .check {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .subscription-feature-matrix {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 48px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
+        }
+        
+        .feature-content p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: 48px 0;
+        }
+        
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            background: var(--primary-purple);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+        
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            align-items: center;
+        }
+        
+        .comparison-row:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+        
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-highlight {
+            border: 2px solid var(--gold);
+            transform: scale(1.02);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .plan-highlight::before {
+            content: '🌟 MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: var(--dark-purple);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .renewal-notice {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+            border: 1px solid #91d5ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        
+        .renewal-notice h4 {
+            color: #1890ff;
+            margin-top: 0;
+        }
+        
+        .payment-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            margin: 24px 0;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .author-info h5 {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .author-info p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-header,
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .comparison-header div:not(:first-child),
+            .comparison-row div:not(:first-child) {
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .comparison-header div::before,
+            .comparison-row div::before {
+                content: attr(data-label);
+                font-weight: 600;
+            }
+            
+            .comparison-header div:first-child::before {
+                content: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-indicators">
+                <span class="trust-indicator"><span class="check">✔</span> Not a bank</span>
+                <span class="trust-indicator"><span class="check">✔</span> No money held</span>
+                <span class="trust-indicator"><span class="check">✔</span> No commissions</span>
+                <span class="trust-indicator"><span class="check">✔</span> Group-based trust</span>
+                <span class="trust-indicator"><span class="check">✔</span> Country-isolated system</span>
+                <span class="trust-indicator"><span class="check">✔</span> No deposit taking</span>
+                <span class="trust-indicator"><span class="check">✔</span> Technology platform only</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                <span class="logo-text">M-PESEWA</span>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html">Home</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="groups.html">Groups</a>
+                <a href="countries/">Countries</a>
+                <a href="subscriptions.html" class="active">Subscriptions</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+                <a href="lending.html" class="btn outline-white">Start Lending</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div>
+    <nav class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="../assets/images/logo.svg" alt="M-PESEWA" height="32">
+                <span>M-PESEWA</span>
+            </div>
+            <button class="mobile-menu-close" aria-label="Close menu">×</button>
+        </div>
+        <div class="mobile-menu-content">
+            <a href="../index.html">Home</a>
+            <a href="borrowing.html">Borrow</a>
+            <a href="lending.html">Lend</a>
+            <a href="groups.html">Groups</a>
+            <a href="countries/">Countries</a>
+            <a href="subscriptions.html" class="active">Subscriptions</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <div class="mobile-menu-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+                <a href="lending.html" class="btn outline">Start Lending</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero Section -->
+    <section class="subscription-hero section">
+        <div class="container">
+            <div class="text-center">
+                <h1 style="color: white; margin-bottom: 16px;">Lender Subscription Plans</h1>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto 24px; font-size: 1.25rem;">
+                    Choose the plan that matches your lending goals. All plans renew automatically on the 28th of each month. 
+                    Our subscription model ensures transparency - you know exactly what you're paying for.
+                </p>
+                <div class="hero-badge">
+                    <span>⭐</span>
+                    <span>Borrowers always use M-PESEWA for FREE - No hidden fees, ever!</span>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="quick-stats" style="display: flex; justify-content: center; gap: 48px; margin-top: 40px; flex-wrap: wrap;">
+                    <div class="stat" style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--gold);">4</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Subscription Plans</div>
+                    </div>
+                    <div class="stat" style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--gold);">25</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">African Countries</div>
+                    </div>
+                    <div class="stat" style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--gold);">28th</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Monthly Renewal Date</div>
+                    </div>
+                    <div class="stat" style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: 700; color: var(--gold);">0%</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Commission on Loans</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Subscription Status -->
+    <section class="section">
+        <div class="container">
+            <div class="card" style="border-color: var(--gold); background: linear-gradient(135deg, rgba(255,193,7,0.05) 0%, rgba(255,193,7,0.02) 100%);">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="margin-bottom: 8px;">Your Current Subscription Status</h3>
+                        <p class="mb-0" style="color: var(--text-secondary);">Track your usage, limits, and renewal date in real-time</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="status-indicator status-active">
+                            <span class="status-dot"></span>
+                            <span style="font-weight: 600;">Premium Plan - Active & Verified</span>
+                        </div>
+                        <p class="mb-0" style="margin-top: 8px; color: var(--text-secondary);">
+                            <strong>Renewal Date:</strong> 28th February 2026
+                            <span style="margin-left: 16px;">•</span>
+                            <span style="margin-left: 16px;"><strong>Auto-renew:</strong> Enabled</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="stats-grid" style="margin-top: 32px;">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon primary">
+                                💰
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">KES 15,000</div>
+                                <div class="stat-label">Weekly Limit Used</div>
+                                <div class="stat-subtext">Out of KES 20,000 weekly limit</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%; background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);"></div>
+                        </div>
+                        <div class="stat-change positive" style="margin-top: 8px;">
+                            <span style="font-weight: 600;">KES 5,000 remaining this week</span>
+                            <span style="margin-left: 8px; font-size: 0.875rem; opacity: 0.8;">• Resets every Monday</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon success">
+                                📊
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Active Ledgers</div>
+                                <div class="stat-subtext">Managing ongoing loans</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 40%; background: linear-gradient(90deg, var(--success) 0%, #34D399 100%);"></div>
+                        </div>
+                        <div class="stat-change" style="margin-top: 8px;">
+                            <span style="font-weight: 600;">12 slots available</span>
+                            <span style="margin-left: 8px; font-size: 0.875rem; opacity: 0.8;">• Max 20 active ledgers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon info">
+                                📅
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Days Remaining</div>
+                                <div class="stat-subtext">Until next renewal</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 43%; background: linear-gradient(90deg, var(--info) 0%, #60A5FA 100%);"></div>
+                        </div>
+                        <div class="stat-change warning" style="margin-top: 8px;">
+                            <span style="font-weight: 600;">Renews on 28th February</span>
+                            <span style="margin-left: 8px; font-size: 0.875rem; opacity: 0.8;">• Auto-charge via saved card</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subscription Management Actions -->
+                <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-light);">
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <button class="btn outline" onclick="upgradePlan()">
+                            <span>⬆️</span>
+                            <span>Upgrade Plan</span>
+                        </button>
+                        <button class="btn outline" onclick="manageAutoRenew()">
+                            <span>⚙️</span>
+                            <span>Manage Auto-renew</span>
+                        </button>
+                        <button class="btn outline" onclick="viewBillingHistory()">
+                            <span>🧾</span>
+                            <span>Billing History</span>
+                        </button>
+                        <button class="btn outline" onclick="downloadInvoice()">
+                            <span>📥</span>
+                            <span>Download Invoice</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Subscribe Section -->
+    <section class="section" style="background: var(--neutral-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Subscribe to M-PESEWA?</h2>
+                <p class="section-subtitle">Our subscription model is designed for transparency, fairness, and sustainable community lending</p>
+            </div>
+            
+            <div class="subscription-feature-matrix">
+                <div class="text-center" style="margin-bottom: 32px;">
+                    <h3 style="color: var(--primary-purple);">The M-PESEWA Difference</h3>
+                    <p>Unlike traditional lending platforms that charge commissions or hidden fees, we operate on a transparent subscription model</p>
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">💎</div>
+                        <div class="feature-content">
+                            <h4>No Commission Model</h4>
+                            <p>Keep 100% of your interest earnings. We never take a percentage of your loans.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-content">
+                            <h4>Predictable Costs</h4>
+                            <p>One fixed monthly fee regardless of how much you lend. Scale your lending without increasing platform costs.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-content">
+                            <h4>Unlimited Borrowers</h4>
+                            <p>Lend to as many trusted borrowers within your groups as you want. No per-borrower fees.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <div class="feature-content">
+                            <h4>Country Isolation</h4>
+                            <p>Your subscription is country-specific. No cross-border lending complications or fees.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-content">
+                            <h4>Risk Management Tools</h4>
+                            <p>Access to blacklist system, borrower ratings, and group trust metrics to make informed lending decisions.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-content">
+                            <h4>Professional Ledgers</h4>
+                            <p>Full ledger tracking, automated interest calculations, and repayment monitoring tools.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-content">
+                            <h4>Community Trust</h4>
+                            <p>Lend within trusted groups where you know borrowers personally. Reduced default rates through social accountability.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-content">
+                            <h4>Instant Activation</h4>
+                            <p>Start lending within 5 minutes of subscription payment. No lengthy approval processes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans -->
+    <section class="section" id="plans">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Perfect Subscription Plan</h2>
+                <p class="section-subtitle">All plans include full ledger tracking, group-based lending, country isolation, and 24/7 platform support</p>
+            </div>
+            
+            <!-- Plan Comparison Table -->
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div>Plan Features</div>
+                    <div data-label="Basic">Basic</div>
+                    <div data-label="Premium" style="background: var(--gold); color: var(--dark-purple);">Premium</div>
+                    <div data-label="Super">Super</div>
+                    <div data-label="Lender of Lenders">LOL</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Monthly Price">Monthly Subscription</div>
+                    <div data-label="Basic">KES 50<span style="font-size: 0.875rem; color: var(--text-secondary);">/month</span></div>
+                    <div data-label="Premium" style="font-weight: 600; color: var(--gold-dark);">KES 250<span style="font-size: 0.875rem; color: var(--text-secondary);">/month</span></div>
+                    <div data-label="Super">KES 1,000<span style="font-size: 0.875rem; color: var(--text-secondary);">/month</span></div>
+                    <div data-label="Lender of Lenders">KES 500<span style="font-size: 0.875rem; color: var(--text-secondary);">/month</span></div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Annual Price">Annual Subscription (Save 15-25%)</div>
+                    <div data-label="Basic">KES 500<span style="font-size: 0.875rem; color: var(--success); font-weight: 600;">/year</span></div>
+                    <div data-label="Premium">KES 2,500<span style="font-size: 0.875rem; color: var(--success); font-weight: 600;">/year</span></div>
+                    <div data-label="Super">KES 8,500<span style="font-size: 0.875rem; color: var(--success); font-weight: 600;">/year</span></div>
+                    <div data-label="Lender of Lenders">KES 6,500<span style="font-size: 0.875rem; color: var(--success); font-weight: 600;">/year</span></div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Weekly Limit">Weekly Lending Limit</div>
+                    <div data-label="Basic">≤ KES 1,500</div>
+                    <div data-label="Premium">≤ KES 5,000</div>
+                    <div data-label="Super">≤ KES 20,000</div>
+                    <div data-label="Lender of Lenders">≤ KES 50,000</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Ledger Limit">Max per Ledger</div>
+                    <div data-label="Basic">KES 1,500</div>
+                    <div data-label="Premium">KES 10,000</div>
+                    <div data-label="Super">KES 20,000</div>
+                    <div data-label="Lender of Lenders">Unlimited</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Active Ledgers">Max Active Ledgers</div>
+                    <div data-label="Basic">5</div>
+                    <div data-label="Premium">20</div>
+                    <div data-label="Super">50</div>
+                    <div data-label="Lender of Lenders">Unlimited</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="CRB Check">CRB Check Required</div>
+                    <div data-label="Basic">❌ No</div>
+                    <div data-label="Premium">❌ No</div>
+                    <div data-label="Super">✅ Required</div>
+                    <div data-label="Lender of Lenders">✅ Required</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Support">Customer Support</div>
+                    <div data-label="Basic">Email only (48h response)</div>
+                    <div data-label="Premium">Priority email (24h response)</div>
+                    <div data-label="Super">Phone & email (12h response)</div>
+                    <div data-label="Lender of Lenders">Dedicated manager</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Features">Advanced Features</div>
+                    <div data-label="Basic">Basic ledger only</div>
+                    <div data-label="Premium">Auto-reminders, reports</div>
+                    <div data-label="Super">Bulk operations, API access</div>
+                    <div data-label="Lender of Lenders">Custom terms, portfolio mgmt</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div data-label="Action"></div>
+                    <div data-label="Basic"><button class="btn outline full-width" onclick="selectPlan('basic')">Select Basic</button></div>
+                    <div data-label="Premium"><button class="btn primary full-width" onclick="selectPlan('premium')">Select Premium</button></div>
+                    <div data-label="Super"><button class="btn outline full-width" onclick="selectPlan('super')">Select Super</button></div>
+                    <div data-label="Lender of Lenders"><button class="btn outline full-width" onclick="selectPlan('lol')">Select LOL</button></div>
+                </div>
+            </div>
+            
+            <!-- Detailed Plan Cards -->
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Basic</h3>
+                        <div class="pricing-amount">KES 50<span>/month</span></div>
+                        <p style="color: var(--neutral-gray); font-size: var(--font-size-sm);">KES 500 / year (Save 16.7%)</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">
+                            <span class="feature-label">Weekly Limit:</span>
+                            <span class="feature-value">≤ KES 1,500</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Ledger Limit:</span>
+                            <span class="feature-value">KES 1,500 per ledger</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Max Ledgers:</span>
+                            <span class="feature-value">5 active</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">CRB Check:</span>
+                            <span class="feature-value badge no">No</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Support:</span>
+                            <span class="feature-value">Email only</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Renewal:</span>
+                            <span class="feature-value">28th monthly</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Best For:</span>
+                            <span class="feature-value">New lenders, testing</span>
+                        </div>
+                    </div>
+                    <div class="pricing-actions">
+                        <button class="btn outline full-width" onclick="selectPlan('basic')">Select Basic Plan</button>
+                        <p style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            Start with 5 loans, up to KES 1,500 each
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Premium</h3>
+                        <div class="pricing-amount">KES 250<span>/month</span></div>
+                        <p style="color: var(--neutral-gray); font-size: var(--font-size-sm);">KES 2,500 / year (Save 16.7%)</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">
+                            <span class="feature-label">Weekly Limit:</span>
+                            <span class="feature-value">≤ KES 5,000</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Ledger Limit:</span>
+                            <span class="feature-value">KES 10,000 per ledger</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Max Ledgers:</span>
+                            <span class="feature-value">20 active</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">CRB Check:</span>
+                            <span class="feature-value badge no">No</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Support:</span>
+                            <span class="feature-value">Priority email</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Renewal:</span>
+                            <span class="feature-value">28th monthly</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Best For:</span>
+                            <span class="feature-value">Active community lenders</span>
+                        </div>
+                    </div>
+                    <div class="pricing-actions">
+                        <button class="btn primary full-width" onclick="selectPlan('premium')">Select Premium Plan</button>
+                        <p style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            Perfect for managing 10-20 emergency loans
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Super</h3>
+                        <div class="pricing-amount">KES 1,000<span>/month</span></div>
+                        <p style="color: var(--neutral-gray); font-size: var(--font-size-sm);">KES 8,500 / year (Save 29.2%)</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">
+                            <span class="feature-label">Weekly Limit:</span>
+                            <span class="feature-value">≤ KES 20,000</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Ledger Limit:</span>
+                            <span class="feature-value">KES 20,000 per ledger</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Max Ledgers:</span>
+                            <span class="feature-value">50 active</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">CRB Check:</span>
+                            <span class="feature-value badge yes">Required</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Support:</span>
+                            <span class="feature-value">Phone & email</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Renewal:</span>
+                            <span class="feature-value">28th monthly</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Best For:</span>
+                            <span class="feature-value">Professional lenders</span>
+                        </div>
+                    </div>
+                    <div class="pricing-actions">
+                        <button class="btn outline full-width" onclick="selectPlan('super')">Select Super Plan</button>
+                        <p style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            For serious lenders with established groups
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Lender of Lenders</h3>
+                        <div class="pricing-amount">KES 500<span>/month</span></div>
+                        <p style="color: var(--neutral-gray); font-size: var(--font-size-sm);">KES 6,500 / year (Save 8.3%)</p>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="feature">
+                            <span class="feature-label">Weekly Limit:</span>
+                            <span class="feature-value">≤ KES 50,000</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Ledger Limit:</span>
+                            <span class="feature-value">Unlimited</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Max Ledgers:</span>
+                            <span class="feature-value">Unlimited</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">CRB Check:</span>
+                            <span class="feature-value badge yes">Required</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Support:</span>
+                            <span class="feature-value">Dedicated manager</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Min Tenure:</span>
+                            <span class="feature-value">30 days minimum</span>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-label">Best For:</span>
+                            <span class="feature-value">Institutions, groups</span>
+                        </div>
+                    </div>
+                    <div class="pricing-actions">
+                        <button class="btn outline full-width" onclick="selectPlan('lol')">Select LOL Plan</button>
+                        <p style="text-align: center; margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            For churches, SACCOs, and lending groups
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="renewal-notice">
+                <h4 style="margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                    <span>🔄</span>
+                    <span>Important Renewal Information</span>
+                </h4>
+                <p><strong>All subscriptions auto-renew on the 28th of each month.</strong> If payment fails, 
+                    lending access is temporarily blocked until payment is confirmed. No partial refunds for early cancellation. 
+                    You can upgrade or downgrade your plan at any time - changes take effect at your next billing cycle.</p>
+                <p style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                    <strong>Note:</strong> Weekly limits reset every Monday at 00:00 (local time). Ledger counts are based on active, non-defaulted loans.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Annual Savings -->
+    <section class="section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <div class="card" style="border: 2px solid var(--gold);">
+                <div class="section-header">
+                    <h2 style="color: var(--primary-purple);">Save Up to 29% with Annual Plans</h2>
+                    <p class="section-subtitle">Pay once per year and focus on lending, not monthly renewals. Annual plans offer significant savings and convenience.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="background: var(--bg-secondary);">Plan</th>
+                                <th style="background: var(--bg-secondary);">Monthly Cost</th>
+                                <th style="background: var(--bg-secondary);">Annual Cost</th>
+                                <th style="background: var(--bg-secondary);">Total Savings</th>
+                                <th style="background: var(--bg-secondary);">Effective Monthly</th>
+                                <th style="background: var(--bg-secondary);">Best Value</th>
+                                <th style="background: var(--bg-secondary);">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Basic</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">For new lenders</span></td>
+                                <td>KES 50 × 12<br>= <strong>KES 600/year</strong></td>
+                                <td style="background: rgba(16, 185, 129, 0.1);"><strong style="color: var(--success); font-size: 1.25rem;">KES 500/year</strong></td>
+                                <td class="table-cell-number"><span class="badge success">Save KES 100</span><br><span style="font-size: 0.875rem; color: var(--text-secondary);">16.7% discount</span></td>
+                                <td><strong>KES 41.67/month</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">vs KES 50 monthly</span></td>
+                                <td>⭐ Good value</td>
+                                <td><button class="btn small primary" onclick="selectAnnualPlan('basic')">Pay Annual</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Premium</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">Most popular</span></td>
+                                <td>KES 250 × 12<br>= <strong>KES 3,000/year</strong></td>
+                                <td style="background: rgba(16, 185, 129, 0.1);"><strong style="color: var(--success); font-size: 1.25rem;">KES 2,500/year</strong></td>
+                                <td class="table-cell-number"><span class="badge success">Save KES 500</span><br><span style="font-size: 0.875rem; color: var(--text-secondary);">16.7% discount</span></td>
+                                <td><strong>KES 208.33/month</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">vs KES 250 monthly</span></td>
+                                <td>⭐⭐ Best value</td>
+                                <td><button class="btn small primary" onclick="selectAnnualPlan('premium')">Pay Annual</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Super</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">Professional</span></td>
+                                <td>KES 1,000 × 12<br>= <strong>KES 12,000/year</strong></td>
+                                <td style="background: rgba(16, 185, 129, 0.1);"><strong style="color: var(--success); font-size: 1.25rem;">KES 8,500/year</strong></td>
+                                <td class="table-cell-number"><span class="badge success">Save KES 3,500</span><br><span style="font-size: 0.875rem; color: var(--text-secondary);">29.2% discount</span></td>
+                                <td><strong>KES 708.33/month</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">vs KES 1,000 monthly</span></td>
+                                <td>⭐⭐⭐ Maximum savings</td>
+                                <td><button class="btn small primary" onclick="selectAnnualPlan('super')">Pay Annual</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lender of Lenders</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">Institutional</span></td>
+                                <td>KES 500 × 12<br>= <strong>KES 6,000/year</strong></td>
+                                <td style="background: rgba(16, 185, 129, 0.1);"><strong style="color: var(--success); font-size: 1.25rem;">KES 6,500/year</strong></td>
+                                <td class="table-cell-number"><span class="badge success">Save KES 3,500</span><br><span style="font-size: 0.875rem; color: var(--text-secondary);">8.3% discount</span></td>
+                                <td><strong>KES 541.67/month</strong><br><span style="font-size: 0.875rem; color: var(--text-secondary);">vs KES 500 monthly</span></td>
+                                <td>⭐ Good value</td>
+                                <td><button class="btn small primary" onclick="selectAnnualPlan('lol')">Pay Annual</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 32px; padding: 24px; background: rgba(255, 193, 7, 0.1); border-radius: 12px;">
+                    <h4 style="display: flex; align-items: center; gap: 8px; margin-top: 0;">
+                        <span>💡</span>
+                        <span>Annual Plan Benefits</span>
+                    </h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                        <div>
+                            <strong>💰 One Payment</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem;">Pay once, lend all year without interruption</p>
+                        </div>
+                        <div>
+                            <strong>📈 Better Rates</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem;">Significant discounts compared to monthly</p>
+                        </div>
+                        <div>
+                            <strong>🔄 No Renewal Stress</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem;">Avoid monthly renewal reminders and potential interruptions</p>
+                        </div>
+                        <div>
+                            <strong>🎯 Focus on Lending</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem;">Spend more time finding borrowers, less on administration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Secure Payment Methods</h2>
+                <p class="section-subtitle">Multiple secure payment options processed via M-pesewa Till. All transactions protected by 256-bit SSL encryption.</p>
+            </div>
+            
+            <div class="grid-4">
+                <div class="philosophy-card">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #00A86B 0%, #00D68F 100%);">📱</div>
+                    <h4>M-Pesa</h4>
+                    <p>Instant payment via M-Pesa. Use Till number <strong>123456</strong> with your account number as reference.</p>
+                    <div style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                        <strong>Instructions:</strong><br>
+                        1. Go to M-Pesa<br>
+                        2. Select "Lipa na M-Pesa"<br>
+                        3. Enter Till: 123456<br>
+                        4. Enter amount
+                    </div>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);">🏦</div>
+                    <h4>Bank Transfer</h4>
+                    <p>Direct bank transfer to our corporate account. Processing time: 1-2 business hours.</p>
+                    <div style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                        <strong>Bank Details:</strong><br>
+                        Bank: Kenya Commercial Bank<br>
+                        Account: M-PESEWA Technology Ltd<br>
+                        Account: 1234567890<br>
+                        Branch: Nairobi CBD
+                    </div>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #9333EA 0%, #C084FC 100%);">💳</div>
+                    <h4>Card Payment</h4>
+                    <p>Visa, MasterCard, and American Express accepted. 3D Secure authentication for added safety.</p>
+                    <div style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                        <strong>Accepted Cards:</strong><br>
+                        • Visa (Credit/Debit)<br>
+                        • MasterCard<br>
+                        • American Express<br>
+                        • Virtual Cards
+                    </div>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="icon-circle" style="background: linear-gradient(135deg, #059669 0%, #10B981 100%);">🔒</div>
+                    <h4>Secure SSL</h4>
+                    <p>256-bit encryption for all transactions. PCI-DSS compliant. Your payment data is never stored on our servers.</p>
+                    <div style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                        <strong>Security Features:</strong><br>
+                        • 256-bit SSL Encryption<br>
+                        • PCI-DSS Compliant<br>
+                        • No Data Storage<br>
+                        • Fraud Protection
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Process Steps -->
+            <div style="margin-top: 48px;">
+                <h3 style="text-align: center; margin-bottom: 24px;">Simple 3-Step Payment Process</h3>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <div class="payment-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Select Your Plan</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem; color: var(--text-secondary);">Choose monthly or annual subscription for any plan</p>
+                        </div>
+                    </div>
+                    <div class="payment-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>Choose Payment Method</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem; color: var(--text-secondary);">M-Pesa, bank transfer, or card payment</p>
+                        </div>
+                    </div>
+                    <div class="payment-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Start Lending</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.875rem; color: var(--text-secondary);">Access activated within 5 minutes of payment confirmation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 48px;">
+                <div class="alert info" style="max-width: 800px; margin: 0 auto;">
+                    <div class="alert-icon">ℹ️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Payment Processing Information</div>
+                        <div class="alert-message">
+                            Payments are processed instantly via our secure payment gateway. Your lending access is activated within 5 minutes of payment confirmation.
+                            All payments are non-refundable except where required by law. Receipts are automatically generated and available in your account.
+                            For failed payments, contact support@m-pesewa.com or call +254 700 123 456.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: var(--neutral-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Lenders Say</h2>
+                <p class="section-subtitle">Join thousands of satisfied lenders who trust M-PESEWA for their community lending needs</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                    </div>
+                    <p>"I started with the Basic plan to test the waters. Within 3 months, I upgraded to Premium. The transparency and group-based system gave me confidence to lend to people I know."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JK</div>
+                        <div class="author-info">
+                            <h5>John Kamau</h5>
+                            <p>Premium Plan • 8 months</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                    </div>
+                    <p>"As a church treasurer, I manage loans for our members. The Lender of Lenders plan is perfect for us. We've helped 50+ members with emergency needs. The platform is worth every shilling."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SW</div>
+                        <div class="author-info">
+                            <h5>Sarah Wambui</h5>
+                            <p>Lender of Lenders • 1 year</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                        <span class="rating-star filled">★</span>
+                    </div>
+                    <p>"The annual Super plan saved me KES 3,500. I lend to my extended family across 3 groups. The ledger system keeps everything organized. No more excel sheets!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PO</div>
+                        <div class="author-info">
+                            <h5>Peter Ochieng</h5>
+                            <p>Super Plan • 6 months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Rules -->
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <div class="section-header">
+                    <h2>Subscription Rules & Terms</h2>
+                    <p class="section-subtitle">Clear rules for a transparent lending ecosystem. Understanding these ensures smooth operations for everyone.</p>
+                </div>
+                
+                <div class="grid-2">
+                    <div>
+                        <h4 style="display: flex; align-items: center; gap: 8px;">
+                            <span>📋</span>
+                            <span>Platform Rules</span>
+                        </h4>
+                        <ul class="objective-list">
+                            <li><strong>Automatic Renewal:</strong> All subscriptions renew automatically on the 28th of each month at 23:59 local time</li>
+                            <li><strong>Payment Failure:</strong> Failed payment blocks lending access immediately until payment is confirmed</li>
+                            <li><strong>Group Isolation:</strong> No cross-group lending - you can only lend to members of groups you belong to</li>
+                            <li><strong>Country Isolation:</strong> No cross-country lending - each country operates as an independent ecosystem</li>
+                            <li><strong>Borrower Freedom:</strong> Borrowers pay NO fees - ever. They use the platform for free</li>
+                            <li><strong>No Custody:</strong> Platform does NOT hold money at any time. All transactions are direct between users</li>
+                            <li><strong>Weekly Reset:</strong> Weekly lending limits reset every Monday at 00:00 local time</li>
+                            <li><strong>Plan Changes:</strong> You can upgrade anytime; downgrades take effect at next billing cycle</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 style="display: flex; align-items: center; gap: 8px;">
+                            <span>👨‍⚖️</span>
+                            <span>Lender Responsibilities</span>
+                        </h4>
+                        <ul class="objective-list">
+                            <li><strong>Borrower Selection:</strong> You choose who to lend to within your trusted groups</li>
+                            <li><strong>Interest Rates:</strong> You set interest rates (maximum 10% for standard 7-day loans)</li>
+                            <li><strong>Ledger Management:</strong> You manage repayments and update ledgers manually</li>
+                            <li><strong>Repayment Enforcement:</strong> You enforce repayment within your groups through social pressure</li>
+                            <li><strong>Borrower Rating:</strong> You rate borrowers after loan completion (1-5 stars)</li>
+                            <li><strong>Risk Assumption:</strong> You assume all lending risks - no platform guarantees on repayment</li>
+                            <li><strong>Default Reporting:</strong> You report defaults after 2 months for blacklisting</li>
+                            <li><strong>Group Dynamics:</strong> You maintain healthy group relationships for sustainable lending</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="alert warning" style="margin-top: 32px;">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Important Platform Disclaimer</div>
+                        <div class="alert-message">
+                            <p><strong>M-PESEWA is a technology coordination platform only.</strong> We provide the tools and framework for 
+                            trusted lending but do not participate in financial transactions, guarantee loan repayment, or hold money.</p>
+                            <p style="margin-top: 8px;">All loans are private agreements between users. Default after 2 months leads to global 
+                            blacklisting of the borrower. Debt collection is the responsibility of lenders, though we provide access to 
+                            vetted debt collectors as a separate service.</p>
+                            <p style="margin-top: 8px;"><strong>Remember:</strong> Lend only to people you trust within your groups. 
+                            Start small, build relationships, and scale gradually as you gain experience and confidence.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hierarchy Reminder -->
+                <div style="margin-top: 32px; padding: 24px; background: rgba(43, 29, 79, 0.05); border-radius: 12px; border-left: 4px solid var(--primary-purple);">
+                    <h4 style="display: flex; align-items: center; gap: 8px; margin-top: 0; color: var(--primary-purple);">
+                        <span>🌍</span>
+                        <span>Hierarchy Enforcement Reminder</span>
+                    </h4>
+                    <p style="margin-bottom: 12px;"><strong>Global → Country → Groups → Lenders → Borrowers (Ledgers)</strong></p>
+                    <p>This hierarchy is strictly enforced. Your subscription gives you access to lend within your selected country, 
+                    to borrowers in groups you belong to. No exceptions. This isolation protects you from cross-group and cross-country risks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frequently Asked Questions -->
+    <section class="section" style="background: var(--neutral-light);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p class="section-subtitle">Common questions about M-PESEWA subscriptions answered</p>
+            </div>
+            
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header">
+                        <span>When does my subscription renew?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>All subscriptions renew automatically on the 28th of each month at 23:59 (local time in your country). 
+                        You'll receive a reminder email 3 days before renewal. You can cancel auto-renewal at any time, 
+                        but your lending access will be blocked if your subscription expires.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>What happens if I exceed my weekly limit?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>If you reach your weekly lending limit, you cannot create new ledgers until the limit resets 
+                        (every Monday at 00:00). Existing ledgers continue unaffected. You can upgrade your plan at any 
+                        time to increase your limits, but the new limits take effect immediately.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Can I switch between monthly and annual billing?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, you can switch between monthly and annual billing at any time. When switching to annual, 
+                        you'll pay the annual price and your billing cycle changes to yearly. When switching to monthly, 
+                        the change takes effect at your next annual renewal date. Pro-rated refunds are not provided.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>What happens if a borrower defaults?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>If a borrower defaults (no repayment after 2 months), you should mark them as defaulted in their ledger. 
+                        They are automatically added to the global blacklist and cannot borrow from any group on M-PESEWA. 
+                        You can access our directory of vetted debt collectors, but debt collection is your responsibility. 
+                        The platform provides tools but does not participate in recovery.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Can I have multiple subscriptions for different groups?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>No, each lender account can have only one active subscription. However, you can join multiple groups 
+                        within your country (up to 4 as a borrower, unlimited as a lender) and lend to members across all your 
+                        groups using your single subscription. All lending counts toward your single set of limits.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>How do I cancel my subscription?</span>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>You can cancel auto-renewal in your account settings. Your subscription will remain active until 
+                        the end of your current billing period. After cancellation, you'll retain read-only access to your 
+                        ledgers but cannot create new loans. There are no refunds for unused time. To restart lending, 
+                        you'll need to purchase a new subscription.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-strip section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 style="color: white; margin-bottom: 16px;">Ready to Start Your Lending Journey?</h2>
+                <p style="color: rgba(255,255,255,0.9); max-width: 700px; margin: 0 auto 32px; font-size: 1.125rem;">
+                    Join thousands of lenders helping their communities with emergency loans. Choose your plan and start 
+                    earning while making a difference in people's lives. Remember: borrowers use M-PESEWA for free - your 
+                    subscription supports the platform that enables trusted community lending.
+                </p>
+                <div class="cta-actions">
+                    <a href="#plans" class="btn primary gold large" style="font-size: 1.125rem; padding: 16px 32px;">
+                        <span>💰</span>
+                        <span>View All Plans & Pricing</span>
+                    </a>
+                    <a href="lending.html" class="btn outline-white large" style="font-size: 1.125rem; padding: 16px 32px;">
+                        <span>📚</span>
+                        <span>Learn How Lending Works</span>
+                    </a>
+                </div>
+                <div style="margin-top: 32px;">
+                    <p style="color: rgba(255,255,255,0.8); font-size: 0.875rem;">
+                        Need help choosing? <a href="contact.html" style="color: var(--gold); text-decoration: underline;">Contact our sales team</a> 
+                        for personalized advice based on your lending goals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="subscriptions.html">Subscription Plans</a></li>
+                        <li><a href="lending.html">How to Lend</a></li>
+                        <li><a href="ledger.html">Ledger System</a></li>
+                        <li><a href="blacklist.html">Blacklist</a></li>
+                        <li><a href="debt-collectors.html">Debt Collectors</a></li>
+                        <li><a href="calculator.html">Loan Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Lender Agreement</a></li>
+                        <li><a href="qa.html">Borrower Agreement</a></li>
+                        <li><a href="qa.html">Channel Partner T&C</a></li>
+                        <li><a href="qa.html">Grievance Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Support</a></li>
+                        <li><a href="qa.html">Help Center</a></li>
+                        <li><a href="debt-collectors.html">Debt Collectors</a></li>
+                        <li><a href="blacklist.html">Report Default</a></li>
+                        <li><a href="security.html">Security</a></li>
+                        <li><a href="status.html">System Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Countries</h4>
+                    <ul>
+                        <li><a href="countries/kenya.html">Kenya</a></li>
+                        <li><a href="countries/uganda.html">Uganda</a></li>
+                        <li><a href="countries/tanzania.html">Tanzania</a></li>
+                        <li><a href="countries/rwanda.html">Rwanda</a></li>
+                        <li><a href="countries/nigeria.html">Nigeria</a></li>
+                        <li><a href="countries/ghana.html">Ghana</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Telegram</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+                
+                <div class="flags-marquee-small">
+                    <div class="marquee-track-small">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇳🇬</span>
+                        <span>🇬🇭</span><span>🇿🇦</span><span>🇪🇬</span><span>🇪🇹</span><span>🇸🇳</span>
+                    </div>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved<br>
+                    Registered in Kenya: CR123456 | Licensed under the Financial Technology Act 2024
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Complete Your Subscription Payment</h3>
+                <button class="modal-close" onclick="closePaymentModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="planDetails">
+                    <!-- Plan details will be inserted here -->
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Billing Cycle</label>
+                    <div style="display: flex; gap: 12px; margin-top: 8px;">
+                        <button id="monthlyBtn" class="btn outline" onclick="selectBillingCycle('monthly')" style="flex: 1;">Monthly</button>
+                        <button id="annualBtn" class="btn" onclick="selectBillingCycle('annual')" style="flex: 1;">Annual (Save 15-29%)</button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Payment Method</label>
+                    <select class="form-control" id="paymentMethod">
+                        <option value="mpesa">M-Pesa (Instant)</option>
+                        <option value="card">Credit/Debit Card (Secure)</option>
+                        <option value="bank">Bank Transfer (1-2 hours)</option>
+                    </select>
+                </div>
+                
+                <div id="mpesaDetails" class="payment-method-details">
+                    <div style="background: rgba(0, 168, 107, 0.1); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                        <p style="margin-top: 0; font-weight: 600; color: #00A86B;">M-Pesa Instructions:</p>
+                        <ol style="padding-left: 20px; margin-top: 8px;">
+                            <li>Go to M-Pesa on your phone</li>
+                            <li>Select <strong>"Lipa na M-Pesa"</strong></li>
+                            <li>Enter Till Number: <strong style="background: #00A86B; color: white; padding: 2px 8px; border-radius: 4px;">123456</strong></li>
+                            <li>Enter Amount: <strong id="mpesaAmount">KES 250</strong></li>
+                            <li>Enter your M-PESEWA Account Number as reference</li>
+                            <li>Enter your M-Pesa PIN and confirm</li>
+                        </ol>
+                        <p style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            <strong>Note:</strong> Activation within 5 minutes of successful payment.
+                        </p>
+                    </div>
+                </div>
+                
+                <div id="cardDetails" class="payment-method-details" style="display: none;">
+                    <div style="background: rgba(147, 51, 234, 0.1); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                        <p style="margin-top: 0; font-weight: 600; color: #9333EA;">Secure Card Payment</p>
+                        <p>Card payment integration powered by secure payment gateway. 3D Secure authentication required.</p>
+                        <div style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            <strong>Accepted Cards:</strong> Visa, MasterCard, American Express
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="bankDetails" class="payment-method-details" style="display: none;">
+                    <div style="background: rgba(30, 64, 175, 0.1); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                        <p style="margin-top: 0; font-weight: 600; color: #1E40AF;">Bank Transfer Details:</p>
+                        <div style="margin-top: 8px; font-size: 0.875rem;">
+                            <p><strong>Bank:</strong> Kenya Commercial Bank</p>
+                            <p><strong>Account Name:</strong> M-PESEWA Technology Ltd</p>
+                            <p><strong>Account Number:</strong> 1234567890</p>
+                            <p><strong>Branch:</strong> Nairobi CBD</p>
+                            <p><strong>Swift Code:</strong> KCBLKENX</p>
+                            <p><strong>Reference:</strong> Your M-PESEWA Account Number</p>
+                        </div>
+                        <p style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);">
+                            <strong>Processing Time:</strong> 1-2 business hours after transfer confirmation.
+                        </p>
+                    </div>
+                </div>
+                
+                <button class="btn primary full-width" onclick="processPayment()" style="margin-top: 24px; padding: 16px;">
+                    <span>🔒</span>
+                    <span>Secure Payment - KES <span id="finalAmount">250</span></span>
+                </button>
+                
+                <div class="alert warning" style="margin-top: 16px;">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Important Payment Terms</div>
+                        <div class="alert-message">
+                            All subscription payments are non-refundable. Choose your plan carefully. 
+                            Your subscription automatically renews on the 28th of each month unless cancelled. 
+                            You can upgrade anytime, downgrades take effect at next billing cycle.
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 16px; text-align: center;">
+                    <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                        By completing payment, you agree to our <a href="qa.html" style="color: var(--primary-purple);">Terms of Service</a> 
+                        and <a href="qa.html" style="color: var(--primary-purple);">Lender Agreement</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const closeBtn = document.querySelector('.mobile-menu-close');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Plan selection
+        let selectedPlan = '';
+        let selectedBillingCycle = 'monthly';
+        
+        function selectPlan(plan) {
+            selectedPlan = plan;
+            const planDetails = {
+                'basic': { 
+                    name: 'Basic', 
+                    monthly: 50, 
+                    annual: 500, 
+                    limit: 'KES 1,500/week',
+                    description: 'Perfect for new lenders testing the platform'
+                },
+                'premium': { 
+                    name: 'Premium', 
+                    monthly: 250, 
+                    annual: 2500, 
+                    limit: 'KES 5,000/week',
+                    description: 'Most popular choice for active community lenders'
+                },
+                'super': { 
+                    name: 'Super', 
+                    monthly: 1000, 
+                    annual: 8500, 
+                    limit: 'KES 20,000/week',
+                    description: 'For professional lenders with established groups'
+                },
+                'lol': { 
+                    name: 'Lender of Lenders', 
+                    monthly: 500, 
+                    annual: 6500, 
+                    limit: 'KES 50,000/week',
+                    description: 'For institutions, churches, and lending groups'
+                }
+            };
+            
+            const plan = planDetails[selectedPlan];
+            const savings = Math.round((1 - plan.annual/(plan.monthly*12))*100);
+            
+            document.getElementById('planDetails').innerHTML = `
+                <div class="alert info" style="margin-bottom: 20px;">
+                    <div class="alert-content">
+                        <div class="alert-title">${plan.name} Plan Selected</div>
+                        <div class="alert-message">
+                            <p style="margin-bottom: 8px;">${plan.description}</p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px;">
+                                <div>
+                                    <strong>Monthly:</strong> KES ${plan.monthly}
+                                </div>
+                                <div>
+                                    <strong>Annual:</strong> KES ${plan.annual} (Save ${savings}%)
+                                </div>
+                                <div>
+                                    <strong>Weekly Limit:</strong> ${plan.limit}
+                                </div>
+                                <div>
+                                    <strong>Activation:</strong> Within 5 minutes
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            updatePaymentAmount();
+            document.getElementById('paymentModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function selectAnnualPlan(plan) {
+            selectedPlan = plan;
+            selectedBillingCycle = 'annual';
+            selectPlan(plan);
+            selectBillingCycle('annual');
+        }
+
+        function selectBillingCycle(cycle) {
+            selectedBillingCycle = cycle;
+            document.getElementById('monthlyBtn').classList.remove('primary');
+            document.getElementById('monthlyBtn').classList.add('outline');
+            document.getElementById('annualBtn').classList.remove('primary');
+            document.getElementById('annualBtn').classList.add('outline');
+            
+            if (cycle === 'monthly') {
+                document.getElementById('monthlyBtn').classList.remove('outline');
+                document.getElementById('monthlyBtn').classList.add('primary');
+            } else {
+                document.getElementById('annualBtn').classList.remove('outline');
+                document.getElementById('annualBtn').classList.add('primary');
+            }
+            
+            updatePaymentAmount();
+        }
+
+        function updatePaymentAmount() {
+            const planDetails = {
+                'basic': { monthly: 50, annual: 500 },
+                'premium': { monthly: 250, annual: 2500 },
+                'super': { monthly: 1000, annual: 8500 },
+                'lol': { monthly: 500, annual: 6500 }
+            };
+            
+            if (selectedPlan && planDetails[selectedPlan]) {
+                const amount = selectedBillingCycle === 'monthly' 
+                    ? planDetails[selectedPlan].monthly 
+                    : planDetails[selectedPlan].annual;
+                
+                document.getElementById('mpesaAmount').textContent = `KES ${amount}`;
+                document.getElementById('finalAmount').textContent = amount;
+            }
+        }
+
+        // Payment method toggle
+        document.getElementById('paymentMethod').addEventListener('change', function() {
+            const method = this.value;
+            document.querySelectorAll('.payment-method-details').forEach(el => {
+                el.style.display = 'none';
+            });
+            document.getElementById(method + 'Details').style.display = 'block';
+        });
+
+        // Modal functions
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function processPayment() {
+            const planDetails = {
+                'basic': { name: 'Basic' },
+                'premium': { name: 'Premium' },
+                'super': { name: 'Super' },
+                'lol': { name: 'Lender of Lenders' }
+            };
+            
+            const planName = planDetails[selectedPlan]?.name || 'Selected';
+            const cycle = selectedBillingCycle === 'monthly' ? 'monthly' : 'annual';
+            
+            // Show loading state
+            const submitBtn = document.querySelector('#paymentModal .btn.primary');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading"></span> Processing Payment...';
+            submitBtn.disabled = true;
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                closePaymentModal();
+                alert(`Payment successful! Your ${planName} plan (${cycle}) has been activated. You can start lending immediately.`);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // In production, this would redirect to dashboard or confirmation page
+                // window.location.href = '../dashboard/lender-dashboard.html';
+            }, 2000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closePaymentModal();
+            }
+        };
+
+        // Login modal functions (from main page)
+        function showLoginModal() {
+            alert('Login functionality would appear here. In production, this would open a login modal or redirect to login page.');
+        }
+
+        // Additional subscription management functions
+        function upgradePlan() {
+            alert('Plan upgrade functionality would appear here. In production, this would open the plan selection modal.');
+        }
+
+        function manageAutoRenew() {
+            alert('Auto-renew management would appear here. In production, this would open account settings.');
+        }
+
+        function viewBillingHistory() {
+            alert('Billing history would appear here. In production, this would redirect to billing page.');
+        }
+
+        function downloadInvoice() {
+            alert('Invoice download would start here. In production, this would generate and download a PDF invoice.');
+        }
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Initialize payment method display
+        document.getElementById('paymentMethod').dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>

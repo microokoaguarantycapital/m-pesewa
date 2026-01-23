@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs & Help Center | M-PESEWA</title>
+    <meta name="description" content="Frequently asked questions about M-PESEWA emergency micro-lending platform.">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="../assets/images/icons/icon-192.png">
+    
+    <!-- PWA Script -->
+    <script src="../assets/js/pwa.js" defer></script>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <span>✔ Not a bank</span>
+            <span>✔ No money held</span>
+            <span>✔ No commissions</span>
+            <span>✔ Group-based trust</span>
+            <span>✔ Country-isolated system</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA" height="40">
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html#how-it-works">How It Works</a>
+                <a href="borrowing.html">Borrow</a>
+                <a href="lending.html">Lend</a>
+                <a href="groups.html">Groups</a>
+                <a href="countries/">Countries</a>
+                <a href="subscriptions.html">Subscriptions</a>
+                <a href="about.html">About</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn secondary" onclick="showLoginModal()">Login</a>
+                <a href="borrowing.html" class="btn primary gold">Get Emergency Loan</a>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="section">
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="../index.html" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current">FAQs & Help Center</span>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="section-header">
+                <h1>FAQs & Help Center</h1>
+                <p class="section-subtitle">
+                    Find answers to common questions about M-PESEWA platform
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar" style="max-width: 600px; margin: 0 auto 3rem;">
+                <input type="text" class="form-control" placeholder="Search for answers..." id="faq-search">
+                <div class="search-icon">🔍</div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-actions" style="margin-bottom: 3rem;">
+                <a href="#general" class="quick-action">
+                    <div class="quick-action-icon">❓</div>
+                    <div class="quick-action-label">General</div>
+                </a>
+                <a href="#borrowing" class="quick-action">
+                    <div class="quick-action-icon">💰</div>
+                    <div class="quick-action-label">Borrowing</div>
+                </a>
+                <a href="#lending" class="quick-action">
+                    <div class="quick-action-icon">📈</div>
+                    <div class="quick-action-label">Lending</div>
+                </a>
+                <a href="#groups" class="quick-action">
+                    <div class="quick-action-icon">👥</div>
+                    <div class="quick-action-label">Groups</div>
+                </a>
+                <a href="#subscriptions" class="quick-action">
+                    <div class="quick-action-icon">💳</div>
+                    <div class="quick-action-label">Subscriptions</div>
+                </a>
+                <a href="#safety" class="quick-action">
+                    <div class="quick-action-icon">🛡️</div>
+                    <div class="quick-action-label">Safety</div>
+                </a>
+            </div>
+
+            <!-- General FAQs -->
+            <div class="section-header" id="general">
+                <h2>General Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item active">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What is M-PESEWA?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>M-PESEWA is a technology platform that enables emergency micro-lending within trusted groups across Africa. We are NOT a bank, NOT a lender, NOT a borrower, and we NEVER hold money. We provide the technology infrastructure for friends, families, and communities to support each other with small emergency loans transparently and safely.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Who holds the money?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>NOT M-PESEWA.</strong> All money transfers happen directly between users outside our platform via their preferred method (mobile money, bank transfer, cash, etc.). We only provide record-keeping and coordination services. We never touch, hold, or control any funds.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How does M-PESEWA make money?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We charge subscription fees to lenders only. Borrowers use the platform for FREE. We have 4 subscription tiers (Basic, Premium, Super, Lender of Lenders) that provide different lending limits and features. We do NOT charge commissions on loans or take any percentage of loan amounts.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Is M-PESEWA regulated?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>M-PESEWA operates as a technology coordination and record-keeping platform, not as a financial institution. We comply with all relevant technology and data protection regulations in each country we operate in. Since we don't handle money, we don't require banking licenses. All loans are private agreements between users.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Borrowing FAQs -->
+            <div class="section-header" id="borrowing">
+                <h2>Borrowing Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How much can I borrow?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Loan amounts depend on your group, your rating, and what lenders in your group are willing to offer. There's no fixed maximum, but typical emergency loans range from $10 to $500 in local currency. Remember: these are for EMERGENCY needs, not large amounts.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What is the repayment period?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Standard loan tenure is 7 days. After 7 days, a 5% daily penalty applies to the outstanding balance. After 2 months (60 days) of non-payment, the loan is considered in default and the borrower is added to the global blacklist.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What interest rate do I pay?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The standard interest rate is 10% for 7 days. However, interest rates are agreed willingly between borrower and lender. The platform suggests 10% as a fair rate, but you can negotiate different terms with your lender.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Can I be both a borrower and lender?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, but you need separate accounts. You must register once as a borrower and once as a lender. You cannot use the same account for both roles. When switching roles, you must log out and log into the appropriate account.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How many groups can I join?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Borrowers can join up to 4 groups, but only with good ratings (4+ stars). New borrowers start with 1 group and can add more as their rating improves. This limit prevents over-borrowing and ensures responsible borrowing behavior.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lending FAQs -->
+            <div class="section-header" id="lending">
+                <h2>Lending Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Do I need a subscription to lend?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>YES.</strong> All lenders must have an active subscription. We offer 4 tiers: Basic (KES 50/month), Premium (KES 250/month), Super (KES 1,000/month), and Lender of Lenders (KES 500/month). Each tier has different weekly limits and features. Subscription expires on the 28th of each month.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What happens if my subscription expires?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Your lending access is immediately blocked. You can view your ledgers but cannot create new loans or interact with borrower requests. To restore access, you must renew your subscription. There's a 3-day grace period, after which your account is temporarily suspended.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Can I lend to anyone?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>NO. You can only lend to borrowers within your own groups. This ensures lending happens between people who know and trust each other. There's NO cross-group lending and NO cross-country lending.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What if a borrower doesn't repay?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>After 7 days, 5% daily penalty applies. After 2 months, borrower is blacklisted platform-wide. You can engage debt collectors (see our directory) at your own cost. M-PESEWA does not guarantee repayment - lending has inherent risk. This is why lending within trusted groups is crucial.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What is a ledger?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A ledger is a private accounting book that tracks a specific loan. When you approve a loan request, a ledger is automatically created under your account. It shows borrower details, loan terms, repayment schedule, and payment history. You can have unlimited ledgers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Groups FAQs -->
+            <div class="section-header" id="groups">
+                <h2>Groups Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What is a group?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>A group is a trusted circle of people who know each other - like family, church members, colleagues, or community members. Groups have 5-1,000 members, one admin/founder, and are country-locked. All lending happens ONLY within groups.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How do I join a group?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Groups are invitation or referral only. You must be invited by a group member or referred by someone they trust. This ensures groups remain trusted circles. You can request an invitation through the platform, but acceptance depends on group approval.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Can I create my own group?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes! You can create a group if you can mobilize at least 5 initial members. As the founder/admin, you'll invite the first members, set group rules, and moderate activity. Groups can be family groups, church groups, professional groups, etc.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Can groups have their own rules?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes! While the platform has core rules (7-day tenure, 10% interest, etc.), groups can set additional internal rules like minimum/maximum amounts, preferred loan categories, or special terms for members. The group admin enforces these rules.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscriptions FAQs -->
+            <div class="section-header" id="subscriptions">
+                <h2>Subscription Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Why 4 subscription tiers?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Different lenders have different capacities. Basic is for beginners (KES 1,500/week limit). Premium is for active lenders (KES 5,000/week). Super is for serious lenders (KES 20,000/week, CRB check required). Lender of Lenders is for professionals (KES 50,000/week, 30-day minimum tenure).</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Why expire on the 28th?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>The 28th aligns with typical month-end cycles in African markets. It gives lenders predictable billing and ensures platform revenue stability. You receive reminders on the 25th, 26th, and 27th. There's a 3-day grace period after the 28th.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">Can I upgrade/downgrade?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes, you can change tiers at any time. Upgrades take effect immediately. Downgrades take effect at your next billing cycle. Prorated refunds are not available. If you downgrade, ensure your active loans don't exceed your new tier's limits.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What payment methods do you accept?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We accept mobile money (M-Pesa, MTN Mobile Money, Airtel Money, etc.), bank transfers, and credit/debit cards. Payment processing is handled by third-party providers. Once payment is confirmed, your subscription is activated immediately.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety FAQs -->
+            <div class="section-header" id="safety">
+                <h2>Safety & Security Questions</h2>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How does the blacklist work?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Default after 2 months → automatic blacklist. Blacklisted borrowers cannot borrow anywhere on the platform and cannot join new groups. Removal requires: 1) Full repayment (principal + interest + penalties), 2) Admin approval. Blacklist is platform-wide, not just country or group.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What is the 5-star rating system?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Lenders rate borrowers after each loan (1-5 stars). Ratings affect: 1) How many groups you can join (max 4 requires 4+ stars), 2) Your borrowing limits, 3) Lenders' willingness to fund you. Ratings are visible to lenders in your groups.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">What about data privacy?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>We follow strict data protection principles. Your personal data is encrypted and only shared with group members. We never sell your data. Full details in our Privacy Policy. You control what information is visible to others in your groups.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <h3 class="accordion-title">How do you prevent fraud?</h3>
+                        <div class="accordion-icon">▼</div>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Multiple layers: 1) Group-based trust (you know who you're dealing with), 2) Country isolation (no cross-border fraud), 3) Rating system, 4) Blacklist system, 5) Manual verification for large loans, 6) Transaction monitoring for suspicious patterns.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still Have Questions -->
+            <div class="cta-strip section">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>Still have questions?</h2>
+                        <p>Can't find what you're looking for? Contact our support team.</p>
+                        <div class="cta-actions">
+                            <a href="contact.html" class="btn primary gold large">Contact Support</a>
+                            <a href="../index.html" class="btn outline-white large">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legal Documents -->
+            <div class="section-header">
+                <h2>Legal Documents</h2>
+            </div>
+
+            <div class="grid-4">
+                <a href="#" class="card" style="text-align: center; text-decoration: none;">
+                    <div class="icon-circle" style="background: var(--primary-purple); margin: 0 auto 1rem;">📄</div>
+                    <h4>Terms & Conditions</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Platform usage terms</p>
+                </a>
+                
+                <a href="#" class="card" style="text-align: center; text-decoration: none;">
+                    <div class="icon-circle" style="background: var(--primary-purple); margin: 0 auto 1rem;">🔒</div>
+                    <h4>Privacy Policy</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Data protection details</p>
+                </a>
+                
+                <a href="#" class="card" style="text-align: center; text-decoration: none;">
+                    <div class="icon-circle" style="background: var(--primary-purple); margin: 0 auto 1rem;">🤝</div>
+                    <h4>Partner T&C</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Channel partner terms</p>
+                </a>
+                
+                <a href="#" class="card" style="text-align: center; text-decoration: none;">
+                    <div class="icon-circle" style="background: var(--primary-purple); margin: 0 auto 1rem;">⚖️</div>
+                    <h4>Fair Practices Code</h4>
+                    <p style="color: var(--neutral-gray); font-size: 0.9rem;">Ethical guidelines</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>M-Pesewa</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Get Emergency Loan</h4>
+                    <ul>
+                        <li><a href="borrowing.html">Online Personal Loan</a></li>
+                        <li><a href="borrowing.html">Why Borrow</a></li>
+                        <li><a href="borrowing.html">How to Apply</a></li>
+                        <li><a href="blacklist.html">Active Lenders</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Lending</h4>
+                    <ul>
+                        <li><a href="lending.html">Smart Lending</a></li>
+                        <li><a href="lending.html">Why Lend</a></li>
+                        <li><a href="lending.html">How to Lend</a></li>
+                        <li><a href="blacklist.html">Active Borrowers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>How It Works</h4>
+                    <ul>
+                        <li><a href="../index.html#how-it-works">P2P Explained</a></li>
+                        <li><a href="about.html">Our Role</a></li>
+                        <li><a href="#">Platform Performance</a></li>
+                        <li><a href="qa.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html">Team</a></li>
+                        <li><a href="about.html">Advisory Board</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="contact.html">Career</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Others</h4>
+                    <ul>
+                        <li><a href="qa.html">Terms & Conditions</a></li>
+                        <li><a href="qa.html">Privacy Policy</a></li>
+                        <li><a href="qa.html">Channel Partner T&C</a></li>
+                        <li><a href="qa.html">Referral T&C</a></li>
+                        <li><a href="qa.html">Grievance Policy</a></li>
+                        <li><a href="qa.html">Fair Practices Code</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                    <a href="#" aria-label="Instagram">📸</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
+                </div>
+                
+                <div class="flags-marquee-small">
+                    <div class="marquee-track-small">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇳🇬</span>
+                        <span>🇬🇭</span><span>🇿🇦</span><span>🇪🇬</span><span>🇪🇹</span><span>🇸🇳</span>
+                    </div>
+                </div>
+                
+                <div class="legal-text">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to M-PESEWA</h3>
+                <button class="modal-close" onclick="closeLoginModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Username or Email</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" required>
+                    </div>
+                    <button type="submit" class="btn primary full-width">Login</button>
+                </form>
+                <div class="login-options">
+                    <p>Or login with:</p>
+                    <button class="btn google-login">Google</button>
+                </div>
+                <div class="login-links">
+                    <a href="#">Forgot Password?</a>
+                    <a href="#">Register as Borrower</a>
+                    <a href="#">Register as Lender</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Login modal functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = '0';
+                content.style.padding = '0 var(--spacing-lg)';
+                item.classList.remove('active');
+            } else {
+                // Close all other accordions
+                document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                    if (activeItem !== item) {
+                        activeItem.querySelector('.accordion-content').style.maxHeight = '0';
+                        activeItem.querySelector('.accordion-content').style.padding = '0 var(--spacing-lg)';
+                        activeItem.classList.remove('active');
+                    }
+                });
+                
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = 'var(--spacing-lg)';
+                item.classList.add('active');
+            }
+        }
+
+        // FAQ search functionality
+        document.getElementById('faq-search').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const title = item.querySelector('.accordion-title').textContent.toLowerCase();
+                const content = item.querySelector('.accordion-content').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    // Open matching items
+                    if (searchTerm && !item.classList.contains('active')) {
+                        toggleAccordion(item.querySelector('.accordion-header'));
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Initialize accordions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial max-height for open accordion
+            const activeAccordion = document.querySelector('.accordion-item.active');
+            if (activeAccordion) {
+                const content = activeAccordion.querySelector('.accordion-content');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.padding = 'var(--spacing-lg)';
+            }
+            
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('loginModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        });
+    </script>
+</body>
+</html>
