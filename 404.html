@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#003366">
+    <title>Page Not Found | M-Pesewa</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/colors.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 404 page specific styles */
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --orange: #f37021;
+            --green: #28a745;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --dark-text: #555555;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .notfound-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            line-height: 1;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .error-code::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-blue), var(--green));
+            border-radius: 2px;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .error-description {
+            font-size: 1.25rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0077cc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 153, 255, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--orange);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e55e1a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(243, 112, 33, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(0, 51, 102, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .suggestions {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .suggestions-title {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .suggestion-list {
+            list-style: none;
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .suggestion-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f1f3f5;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-icon {
+            color: var(--secondary-blue);
+            font-size: 1.25rem;
+            min-width: 24px;
+        }
+        
+        .suggestion-link {
+            color: var(--primary-blue);
+            font-weight: 500;
+            text-decoration: none;
+            flex: 1;
+        }
+        
+        .suggestion-link:hover {
+            color: var(--secondary-blue);
+            text-decoration: underline;
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            margin: 2rem auto;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-title {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .search-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background-color: #002244;
+        }
+        
+        .error-footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-link {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Animation for error code */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .error-code {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-description {
+                font-size: 1.1rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-input,
+            .search-btn {
+                width: 100%;
+            }
+            
+            .suggestion-list {
+                padding: 1rem;
+            }
+            
+            .suggestion-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .notfound-container {
+                padding: 1rem;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-title {
+                font-size: 1.75rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notfound-container">
+        <div class="error-code">404</div>
+        
+        <h1 class="error-title">Page Not Found</h1>
+        
+        <p class="error-description">
+            Oops! The page you're looking for seems to have gone on a little adventure of its own. 
+            It might have been moved, deleted, or never existed in the first place.
+        </p>
+        
+        <div class="error-actions">
+            <button onclick="window.location.href='index.html'" class="btn btn-primary">
+                🏠 Go to Homepage
+            </button>
+            
+            <button onclick="history.back()" class="btn btn-outline">
+                ↩️ Go Back
+            </button>
+            
+            <button onclick="window.location.href='contact.html'" class="btn btn-secondary">
+                📞 Contact Support
+            </button>
+        </div>
+        
+        <div class="search-box">
+            <h3 class="search-title">🔍 Search M-Pesewa</h3>
+            <form class="search-form" onsubmit="handleSearch(event)">
+                <input type="text" class="search-input" placeholder="What are you looking for?" id="searchQuery">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+        
+        <div class="suggestions">
+            <h3 class="suggestions-title">Popular Pages You Might Be Looking For</h3>
+            <ul class="suggestion-list">
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">🏠</span>
+                    <a href="index.html" class="suggestion-link">Homepage - M-Pesewa Main Landing</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">👤</span>
+                    <a href="borrower/dashboard.html" class="suggestion-link">Borrower Dashboard</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">💼</span>
+                    <a href="lender/dashboard.html" class="suggestion-link">Lender Dashboard</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">🚌</span>
+                    <a href="emergency/transport.html" class="suggestion-link">Emergency Transport Loans</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">📶</span>
+                    <a href="emergency/data.html" class="suggestion-link">Mobile Data Emergency Loans</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">🔥</span>
+                    <a href="emergency/gas.html" class="suggestion-link">Cooking Gas Emergency Loans</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">📋</span>
+                    <a href="subscription/plans.html" class="suggestion-link">Subscription Plans for Lenders</a>
+                </li>
+                <li class="suggestion-item">
+                    <span class="suggestion-icon">📞</span>
+                    <a href="contact.html" class="suggestion-link">Contact Support & Help Center</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1.5rem; background: #f0f8ff; border-radius: 10px; border-left: 4px solid #0099ff; max-width: 600px;">
+            <h3 style="color: #003366; margin-bottom: 0.5rem;">⚠️ Report This Issue</h3>
+            <p style="color: #555; margin-bottom: 1rem;">
+                If you believe this page should exist or found a broken link, please help us improve by reporting it.
+            </p>
+            <button onclick="reportIssue()" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                🐛 Report Broken Link
+            </button>
+        </div>
+    </div>
+    
+    <footer class="error-footer">
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="about.html" class="footer-link">About</a>
+            <a href="contact.html" class="footer-link">Contact</a>
+            <a href="terms.html" class="footer-link">Terms</a>
+            <a href="privacy.html" class="footer-link">Privacy</a>
+            <a href="faq.html" class="footer-link">FAQ</a>
+        </div>
+        <div class="copyright">
+            © 2016–2026 M-Pesewa.com | Emergency Micro-Lending Platform
+        </div>
+    </footer>
+    
+    <script>
+        // Handle search form submission
+        function handleSearch(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchQuery').value.trim();
+            if (query) {
+                // Simple search redirection (in a real app, this would go to a search results page)
+                const searchablePages = [
+                    'index.html',
+                    'borrower/dashboard.html',
+                    'lender/dashboard.html',
+                    'emergency/transport.html',
+                    'emergency/data.html',
+                    'emergency/gas.html',
+                    'emergency/food.html',
+                    'subscription/plans.html',
+                    'how-it-works.html',
+                    'faq.html'
+                ];
+                
+                // For demo purposes, redirect to homepage with search query
+                window.location.href = `index.html?search=${encodeURIComponent(query)}`;
+            }
+        }
+        
+        // Report issue function
+        function reportIssue() {
+            const currentUrl = window.location.href;
+            const referrer = document.referrer;
+            const userAgent = navigator.userAgent;
+            
+            // In a real implementation, this would send to an API
+            // For now, redirect to contact page with pre-filled form
+            const message = `Broken Link Report:\n\nURL: ${currentUrl}\nReferrer: ${referrer}\nBrowser: ${userAgent}\n\nPlease describe what you expected to find:`;
+            window.location.href = `contact.html?subject=Broken%20Link%20Report&message=${encodeURIComponent(message)}`;
+        }
+        
+        // Auto-focus search input
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchQuery');
+            if (searchInput) {
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 500);
+            }
+        });
+        
+        // Log 404 error for analytics
+        window.addEventListener('load', function() {
+            console.warn('404 Page Not Found:', window.location.href);
+            
+            // In a real implementation, send to analytics
+            // if (typeof gtag !== 'undefined') {
+            //     gtag('event', 'page_view', {
+            //         page_title: '404 Page',
+            //         page_location: window.location.href,
+            //         page_path: '/404.html'
+            //     });
+            // }
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Ctrl/Cmd + K for search
+            if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+                event.preventDefault();
+                const searchInput = document.getElementById('searchQuery');
+                if (searchInput) {
+                    searchInput.focus();
+                    searchInput.select();
+                }
+            }
+            
+            // Escape to clear search
+            if (event.key === 'Escape') {
+                const searchInput = document.getElementById('searchQuery');
+                if (searchInput && searchInput === document.activeElement) {
+                    searchInput.blur();
+                }
+            }
+        });
+        
+        // Create search hint
+        const style = document.createElement('style');
+        style.textContent = `
+            .search-hint {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #003366;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                opacity: 0.9;
+                z-index: 1000;
+                animation: fadeIn 0.5s ease;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 0.9; transform: translateY(0); }
+            }
+            
+            @media (max-width: 768px) {
+                .search-hint {
+                    display: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Add search hint after a delay
+        setTimeout(() => {
+            const hint = document.createElement('div');
+            hint.className = 'search-hint';
+            hint.innerHTML = '💡 Press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search';
+            document.body.appendChild(hint);
+            
+            // Remove hint after 10 seconds
+            setTimeout(() => {
+                hint.style.opacity = '0';
+                hint.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => hint.remove(), 500);
+            }, 10000);
+        }, 2000);
+    </script>
+</body>
+</html>

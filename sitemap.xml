@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    
+    <!-- M-Pesewa Sitemap -->
+    <!-- Generated: 2024-01-24 -->
+    <!-- Version: 2.0 -->
+    <!-- Website: https://m-pesewa.com -->
+    
+    <!-- Homepage - Highest Priority -->
+    <url>
+        <loc>https://m-pesewa.com/</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://m-pesewa.com/"/>
+        <xhtml:link rel="alternate" hreflang="sw" href="https://m-pesewa.com/sw/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://m-pesewa.com/fr/"/>
+        <image:image>
+            <image:loc>https://m-pesewa.com/assets/images/logos/logo-og.png</image:loc>
+            <image:title>M-Pesewa | Emergency Micro-Lending Platform</image:title>
+            <image:caption>Trust-based emergency loans within African communities</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Static Pages -->
+    <url>
+        <loc>https://m-pesewa.com/about.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/how-it-works.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/faq.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/contact.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/terms.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/privacy.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/trust.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/collectors.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/press.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/careers.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/roadmap.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/status.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Authentication Pages -->
+    <url>
+        <loc>https://m-pesewa.com/auth/login.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/auth/register.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/auth/forgot.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    
+    <!-- Borrower Pages -->
+    <url>
+        <loc>https://m-pesewa.com/borrower/dashboard.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/borrower/apply.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/borrower/history.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/borrower/repayments.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/borrower/disputes.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Lender Pages -->
+    <url>
+        <loc>https://m-pesewa.com/lender/dashboard.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/lender/portfolio.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/lender/history.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/lender/rules.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/lender/risk.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Subscription Pages -->
+    <url>
+        <loc>https://m-pesewa.com/subscription/plans.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/subscription/current.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/subscription/upgrade.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/subscription/history.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Blacklist Pages -->
+    <url>
+        <loc>https://m-pesewa.com/blacklist/public.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <!-- Country Pages -->
+    <url>
+        <loc>https://m-pesewa.com/countries/kenya.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-KE" href="https://m-pesewa.com/countries/kenya.html"/>
+        <xhtml:link rel="alternate" hreflang="sw" href="https://m-pesewa.com/countries/kenya.html?lang=sw"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/uganda.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-UG" href="https://m-pesewa.com/countries/uganda.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/tanzania.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-TZ" href="https://m-pesewa.com/countries/tanzania.html"/>
+        <xhtml:link rel="alternate" hreflang="sw" href="https://m-pesewa.com/countries/tanzania.html?lang=sw"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/rwanda.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-RW" href="https://m-pesewa.com/countries/rwanda.html"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://m-pesewa.com/countries/rwanda.html?lang=fr"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/drc.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr-CD" href="https://m-pesewa.com/countries/drc.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/burundi.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="fr-BI" href="https://m-pesewa.com/countries/burundi.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/nigeria.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-NG" href="https://m-pesewa.com/countries/nigeria.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/ghana.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-GH" href="https://m-pesewa.com/countries/ghana.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/south-sudan.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-SS" href="https://m-pesewa.com/countries/south-sudan.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/somalia.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="so-SO" href="https://m-pesewa.com/countries/somalia.html"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://m-pesewa.com/countries/somalia.html?lang=ar"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/south-africa.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en-ZA" href="https://m-pesewa.com/countries/south-africa.html"/>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/countries/ethiopia.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="am-ET" href="https://m-pesewa.com/countries/ethiopia.html"/>
+    </url>
+    
+    <!-- Emergency Hub Pages (20 Categories) -->
+    <url>
+        <loc>https://m-pesewa.com/emergency/transport.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <image:image>
+            <image:loc>https://m-pesewa.com/assets/images/emergency/transport-og.png</image:loc>
+            <image:title>Emergency Transport Loans | M-Pesewa</image:title>
+        </image:image>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/data.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/gas.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/food.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/wifi.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/water.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/electricity.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/tv.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/fuel.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/repairs.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/credo.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/sales.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/capital.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/market.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/stall.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/hawker.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/fuliza.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/medicine.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/school.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/emergency/advance.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- User Profile Pages -->
+    <url>
+        <loc>https://m-pesewa.com/user/profile.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/user/security.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/user/preferences.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <!-- Groups Pages -->
+    <url>
+        <loc>https://m-pesewa.com/groups/list.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/groups/create.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/groups/dashboard.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Ledger Pages -->
+    <url>
+        <loc>https://m-pesewa.com/ledger/list.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <url>
+        <loc>https://m-pesewa.com/ledger/view.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Offline Page -->
+    <url>
+        <loc>https://m-pesewa.com/offline.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
+    <!-- 404 Page -->
+    <url>
+        <loc>https://m-pesewa.com/404.html</loc>
+        <lastmod>2024-01-24</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    
+</urlset>

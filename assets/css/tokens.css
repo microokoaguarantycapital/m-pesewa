@@ -1,0 +1,222 @@
+/* Design Tokens for M-Pesewa PWA */
+:root {
+  /* Brand Colors - M-Pesewa Palette */
+  --color-primary-blue: #003366;
+  --color-secondary-blue: #0099ff;
+  --color-action-orange: #f37021;
+  --color-trust-green: #28a745;
+  --color-neutral-light: #f8f9fa;
+  --color-pure-white: #ffffff;
+  --color-dark-text: #555555;
+  --color-light-text: #777777;
+  
+  /* Semantic Colors */
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-info: #17a2b8;
+  
+  /* Background Colors */
+  --color-bg-primary: var(--color-pure-white);
+  --color-bg-secondary: var(--color-neutral-light);
+  --color-bg-dark: var(--color-primary-blue);
+  --color-bg-card: var(--color-pure-white);
+  
+  /* Text Colors */
+  --color-text-primary: var(--color-primary-blue);
+  --color-text-secondary: var(--color-dark-text);
+  --color-text-light: var(--color-light-text);
+  --color-text-on-dark: var(--color-pure-white);
+  --color-text-on-orange: var(--color-pure-white);
+  --color-text-on-green: var(--color-pure-white);
+  
+  /* Border Colors */
+  --color-border-light: #e9ecef;
+  --color-border-medium: #dee2e6;
+  --color-border-dark: #adb5bd;
+  
+  /* Shadow Colors */
+  --color-shadow-light: rgba(0, 51, 102, 0.1);
+  --color-shadow-medium: rgba(0, 51, 102, 0.15);
+  --color-shadow-dark: rgba(0, 51, 102, 0.2);
+  --color-glow-blue: rgba(0, 153, 255, 0.3);
+  
+  /* Spacing Scale */
+  --spacing-xxs: 0.25rem;    /* 4px */
+  --spacing-xs: 0.5rem;      /* 8px */
+  --spacing-sm: 0.75rem;     /* 12px */
+  --spacing-md: 1rem;        /* 16px */
+  --spacing-lg: 1.5rem;      /* 24px */
+  --spacing-xl: 2rem;        /* 32px */
+  --spacing-xxl: 3rem;       /* 48px */
+  --spacing-xxxl: 4rem;      /* 64px */
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;      /* 4px */
+  --radius-md: 0.5rem;       /* 8px */
+  --radius-lg: 0.75rem;      /* 12px */
+  --radius-xl: 1rem;         /* 16px */
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 var(--color-shadow-light);
+  --shadow-md: 0 4px 6px -1px var(--color-shadow-medium);
+  --shadow-lg: 0 10px 15px -3px var(--color-shadow-medium);
+  --shadow-xl: 0 20px 25px -5px var(--color-shadow-dark);
+  --shadow-glow: 0 0 20px var(--color-glow-blue);
+  
+  /* Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  
+  /* Z-index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+  
+  /* Container Widths */
+  --container-xs: 100%;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+  
+  /* Grid Columns */
+  --grid-columns: 12;
+  --grid-gutter: 1.5rem;
+  
+  /* Aspect Ratios */
+  --aspect-ratio-square: 1 / 1;
+  --aspect-ratio-video: 16 / 9;
+  --aspect-ratio-banner: 3 / 1;
+  --aspect-ratio-card: 4 / 3;
+  
+  /* Opacity */
+  --opacity-25: 0.25;
+  --opacity-50: 0.5;
+  --opacity-75: 0.75;
+  --opacity-100: 1;
+}
+
+/* Dark mode variables (future enhancement) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: #121826;
+    --color-bg-secondary: #1a2332;
+    --color-bg-card: #1e293b;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-border-light: #334155;
+    --color-border-medium: #475569;
+    --color-shadow-light: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Print mode variables */
+@media print {
+  :root {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #333333;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary-blue: #002244;
+    --color-secondary-blue: #0066cc;
+    --color-action-orange: #cc5500;
+    --color-trust-green: #1e7e34;
+    --color-border-light: #000000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-normal: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+
+/* Utility Classes */
+.text-primary-blue { color: var(--color-primary-blue); }
+.text-secondary-blue { color: var(--color-secondary-blue); }
+.text-action-orange { color: var(--color-action-orange); }
+.text-trust-green { color: var(--color-trust-green); }
+
+.bg-primary-blue { background-color: var(--color-primary-blue); }
+.bg-secondary-blue { background-color: var(--color-secondary-blue); }
+.bg-action-orange { background-color: var(--color-action-orange); }
+.bg-trust-green { background-color: var(--color-trust-green); }
+.bg-neutral-light { background-color: var(--color-neutral-light); }
+
+.border-primary-blue { border-color: var(--color-primary-blue); }
+.border-secondary-blue { border-color: var(--color-secondary-blue); }
+.border-action-orange { border-color: var(--color-action-orange); }
+.border-trust-green { border-color: var(--color-trust-green); }
+
+.shadow-glow { box-shadow: var(--shadow-glow); }
+.floating-card { 
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.floating-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}

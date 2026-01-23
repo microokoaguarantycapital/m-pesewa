@@ -1,0 +1,196 @@
+{
+  "name": "M-Pesewa | Emergency Micro-Lending",
+  "short_name": "M-Pesewa",
+  "description": "Emergency micro-lending in trusted circles. Borrow for emergencies or lend to trusted groups across Africa.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#003366",
+  "theme_color": "#003366",
+  "categories": [
+    "finance",
+    "business",
+    "lifestyle",
+    "social"
+  ],
+  "icons": [
+    {
+      "src": "assets/images/logos/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logos/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/home-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "M-Pesewa Desktop Homepage"
+    },
+    {
+      "src": "assets/images/screenshots/home-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "M-Pesewa Mobile Homepage"
+    },
+    {
+      "src": "assets/images/screenshots/dashboard-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Borrower Dashboard on Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Borrow Emergency Loan",
+      "short_name": "Borrow",
+      "description": "Apply for emergency loan in your trusted circles",
+      "url": "/borrower/apply.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/borrow-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Lender Dashboard",
+      "short_name": "Lend",
+      "description": "Manage your lending portfolio and ledgers",
+      "url": "/lender/dashboard.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/lend-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Emergency Categories",
+      "short_name": "Emergencies",
+      "description": "Browse 20 emergency loan categories",
+      "url": "/emergency/index.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/emergency-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Subscription Plans",
+      "short_name": "Plans",
+      "description": "View and upgrade subscription plans",
+      "url": "/subscription/plans.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/subscription-icon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "protocol_handlers": [
+    {
+      "protocol": "web+mpesewa",
+      "url": "/?protocol=%s"
+    }
+  ],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "share_target": {
+    "action": "/share.html",
+    "method": "GET",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link"
+    }
+  },
+  "file_handlers": [
+    {
+      "action": "/upload.html",
+      "accept": {
+        "application/json": [".json"],
+        "text/csv": [".csv"]
+      }
+    }
+  ],
+  "permissions": [
+    "clipboard-write",
+    "clipboard-read",
+    "notifications",
+    "geolocation"
+  ],
+  "id": "/",
+  "iarc_rating": "https://www.globalratings.com/iarcratings.pdf",
+  "features": [
+    "Cross Platform",
+    "fast",
+    "simple",
+    "secure",
+    "offline"
+  ],
+  "splash_pages": null
+}

@@ -1,0 +1,27 @@
+{
+  "country": "Nigeria",
+  "currency": "NGN",
+  "collectors": [
+    {
+      "name": "Lagos Community Recovery Network",
+      "contact": "lagos@mpesewa.ng",
+      "location": "Lagos",
+      "rules": "Community-based mediation. No harassment.",
+      "specialization": "Southwest Nigeria"
+    },
+    {
+      "name": "Abuja Mediation Center",
+      "contact": "abuja@mpesewa.ng",
+      "location": "Abuja",
+      "rules": "Formal mediation only. Documented agreements.",
+      "specialization": "Federal Capital Territory"
+    },
+    {
+      "name": "Kano Traditional Recovery Council",
+      "contact": "kano@mpesewa.ng",
+      "location": "Kano",
+      "rules": "Traditional council mediation. No enforcement.",
+      "specialization": "Northern Nigeria"
+    }
+  ]
+}
