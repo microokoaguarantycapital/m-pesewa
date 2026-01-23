@@ -1,0 +1,20 @@
+{
+  "country": "Zambia",
+  "currency": "ZMW",
+  "collectors": [
+    {
+      "name": "Lusaka Community Recovery Network",
+      "contact": "lusaka@mpesewa.zm",
+      "location": "Lusaka",
+      "rules": "Community elders mediation. Peaceful methods.",
+      "specialization": "Lusaka Province"
+    },
+    {
+      "name": "Copperbelt Mediation Center",
+      "contact": "copperbelt@mpesewa.zm",
+      "location": "Ndola",
+      "rules": "Industrial community mediation. No harassment.",
+      "specialization": "Copperbelt Province"
+    }
+  ]
+}

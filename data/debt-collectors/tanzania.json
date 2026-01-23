@@ -1,0 +1,20 @@
+{
+  "country": "Tanzania",
+  "currency": "TZS",
+  "collectors": [
+    {
+      "name": "Dar es Salaam Recovery Network",
+      "contact": "darecovery@mpesewa.tz",
+      "location": "Dar es Salaam",
+      "rules": "Network-based mediation. No enforcement actions.",
+      "specialization": "Coastal recovery"
+    },
+    {
+      "name": "Arusha Community Mediation",
+      "contact": "arusha@mpesewa.tz",
+      "location": "Arusha",
+      "rules": "Community elders mediation only.",
+      "specialization": "Northern Tanzania"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "country": "Malawi",
+  "currency": "MWK",
+  "collectors": [
+    {
+      "name": "Lilongwe Community Mediation Panel",
+      "contact": "lilongwe@mpesewa.mw",
+      "location": "Lilongwe",
+      "rules": "Traditional mediation. Community-based recovery.",
+      "specialization": "Central Region"
+    },
+    {
+      "name": "Blantyre Recovery Network",
+      "contact": "blantyre@mpesewa.mw",
+      "location": "Blantyre",
+      "rules": "Urban community mediation. No enforcement.",
+      "specialization": "Southern Region"
+    }
+  ]
+}

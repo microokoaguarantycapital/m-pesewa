@@ -1,0 +1,20 @@
+{
+  "country": "Rwanda",
+  "currency": "RWF",
+  "collectors": [
+    {
+      "name": "Kigali Community Recovery Panel",
+      "contact": "kigali@mpesewa.rw",
+      "location": "Kigali",
+      "rules": "Ubuntu-based recovery. Community mediation.",
+      "specialization": "Community-led recovery"
+    },
+    {
+      "name": "Eastern Province Mediation Group",
+      "contact": "east@mpesewa.rw",
+      "location": "Rwamagana",
+      "rules": "Traditional mediation methods only.",
+      "specialization": "Eastern region"
+    }
+  ]
+}

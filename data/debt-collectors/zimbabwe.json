@@ -1,0 +1,20 @@
+{
+  "country": "Zimbabwe",
+  "currency": "ZWL",
+  "collectors": [
+    {
+      "name": "Harare Community Recovery Council",
+      "contact": "harare@mpesewa.zw",
+      "location": "Harare",
+      "rules": "Community-based mediation. No harassment.",
+      "specialization": "Harare Province"
+    },
+    {
+      "name": "Bulawayo Traditional Mediation Group",
+      "contact": "bulawayo@mpesewa.zw",
+      "location": "Bulawayo",
+      "rules": "Traditional Ndebele mediation methods.",
+      "specialization": "Bulawayo Province"
+    }
+  ]
+}

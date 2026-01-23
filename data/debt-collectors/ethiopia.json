@@ -1,0 +1,20 @@
+{
+  "country": "Ethiopia",
+  "currency": "ETB",
+  "collectors": [
+    {
+      "name": "Addis Ababa Community Recovery Panel",
+      "contact": "addis@mpesewa.et",
+      "location": "Addis Ababa",
+      "rules": "Community elders mediation. Traditional methods.",
+      "specialization": "Addis Ababa region"
+    },
+    {
+      "name": "Dire Dawa Mediation Center",
+      "contact": "dire@mpesewa.et",
+      "location": "Dire Dawa",
+      "rules": "Local community mediation. No harassment.",
+      "specialization": "Eastern Ethiopia"
+    }
+  ]
+}
