@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F5F7FB"/>
+  <circle cx="200" cy="150" r="80" fill="#2B1D4F" opacity="0.1"/>
+  
+  <!-- Phone -->
+  <rect x="160" y="80" width="80" height="140" rx="12" fill="#FFF" stroke="#2B1D4F" stroke-width="2"/>
+  <rect x="170" y="90" width="60" height="80" rx="6" fill="#F5F7FB"/>
+  <circle cx="200" cy="190" r="8" fill="#10B981"/>
+  <rect x="185" y="210" width="30" height="4" rx="2" fill="#2B1D4F"/>
+  
+  <!-- Money -->
+  <circle cx="120" cy="120" r="25" fill="#FFC107" opacity="0.8"/>
+  <text x="120" y="125" text-anchor="middle" fill="#000" font-family="Inter" font-size="14" font-weight="700">$</text>
+  
+  <circle cx="280" cy="120" r="20" fill="#10B981" opacity="0.8"/>
+  <text x="280" y="125" text-anchor="middle" fill="#FFF" font-family="Inter" font-size="12" font-weight="700">$</text>
+  
+  <!-- Connections -->
+  <path d="M120,120 Q200,100 280,120" stroke="#2B1D4F" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+  <path d="M200,190 Q240,150 280,120" stroke="#2B1D4F" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+  <path d="M120,120 Q160,150 200,190" stroke="#2B1D4F" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+</svg>
