@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#003366">
+    <title>Offline | M-Pesewa</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/colors.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Offline page specific styles */
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --orange: #f37021;
+            --green: #28a745;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --dark-text: #555555;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .offline-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+        }
+        
+        .offline-title {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .offline-subtitle {
+            font-size: 1.25rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .offline-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .feature {
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 51, 102, 0.1);
+            border-left: 4px solid var(--secondary-blue);
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-text {
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+        
+        .offline-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0077cc;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(0, 51, 102, 0.1);
+        }
+        
+        .offline-footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .footer-text {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-contact {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Animation for offline icon */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .offline-icon {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .offline-title {
+                font-size: 2rem;
+            }
+            
+            .offline-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .offline-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .feature {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .offline-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 1rem;
+            }
+            
+            .offline-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 17.5L19 19M4 6l16 16M8.46 8.46a5 5 0 0 0 7.07 7.07M1 1l22 22M9 3l3.5 10.5M17 3l-3.5 10.5"/>
+                <line x1="10" y1="5" x2="10" y2="5.01"/>
+                <line x1="2" y1="9" x2="2" y2="9.01"/>
+                <line x1="14" y1="9" x2="14" y2="9.01"/>
+            </svg>
+        </div>
+        
+        <h1 class="offline-title">You're Offline</h1>
+        
+        <p class="offline-subtitle">
+            It looks like you've lost your internet connection. Don't worry! 
+            You can still access some features of M-Pesewa while offline.
+        </p>
+        
+        <div class="offline-features">
+            <div class="feature">
+                <div class="feature-icon">📋</div>
+                <div class="feature-text">View your saved ledgers</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <div class="feature-text">Check borrower ratings</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📝</div>
+                <div class="feature-text">Prepare loan applications</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📅</div>
+                <div class="feature-text">View repayment schedules</div>
+            </div>
+        </div>
+        
+        <div class="offline-actions">
+            <button onclick="window.location.reload()" class="btn btn-primary">
+                🔄 Try to Reconnect
+            </button>
+            
+            <button onclick="history.back()" class="btn btn-outline">
+                ↩️ Go Back
+            </button>
+            
+            <button onclick="window.location.href='index.html'" class="btn btn-outline">
+                🏠 Go to Homepage
+            </button>
+        </div>
+        
+        <div style="margin-top: 2rem; padding: 1rem; background: #f0f8ff; border-radius: 10px; border-left: 4px solid #0099ff;">
+            <h3 style="color: #003366; margin-bottom: 0.5rem;">📱 M-Pesewa PWA</h3>
+            <p style="color: #555; margin-bottom: 0.5rem;">
+                <strong>Tip:</strong> For better offline experience, make sure M-Pesewa is installed as a Progressive Web App.
+            </p>
+            <button onclick="installPWA()" class="btn btn-primary" style="margin-top: 0.5rem; padding: 0.5rem 1rem; font-size: 0.9rem;">
+                📲 Install App
+            </button>
+        </div>
+    </div>
+    
+    <footer class="offline-footer">
+        <div class="footer-text">M-Pesewa Emergency Micro-Lending Platform</div>
+        <div class="footer-contact">Need help? Contact support@mpesewa.com when back online</div>
+    </footer>
+    
+    <script>
+        // PWA installation prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+        
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('Installation is already available or not supported in this browser.');
+            }
+        }
+        
+        // Check connection status periodically
+        let isOnline = navigator.onLine;
+        
+        function updateOnlineStatus() {
+            isOnline = navigator.onLine;
+            if (isOnline) {
+                console.log('Connection restored');
+                // Show a subtle notification
+                showToast('Connection restored! Loading latest data...');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        }
+        
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+        
+        // Add CSS for toast animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Listen for online/offline events
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        
+        // Check immediately
+        updateOnlineStatus();
+    </script>
+</body>
+</html>
