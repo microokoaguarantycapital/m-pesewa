@@ -1,0 +1,124 @@
+{
+  "name": "M-Pesewa",
+  "short_name": "M-Pesewa",
+  "description": "Emergency Micro-Lending in Trusted Circles - Africa's trusted P2P lending platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#003366",
+  "theme_color": "#003366",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["finance", "business", "lifestyle"],
+  
+  "icons": [
+    {
+      "src": "assets/images/logo72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/home-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "M-Pesewa Homepage on Desktop"
+    },
+    {
+      "src": "assets/images/screenshots/home-mobile.png",
+      "sizes": "414x896",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "M-Pesewa Homepage on Mobile"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Apply for Loan",
+      "short_name": "Borrow",
+      "description": "Apply for emergency loan",
+      "url": "/borrower/apply-loan.html",
+      "icons": [{ "src": "assets/icons/borrow-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Lender Dashboard",
+      "short_name": "Lend",
+      "description": "Access lender dashboard",
+      "url": "/lender/dashboard.html",
+      "icons": [{ "src": "assets/icons/lend-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Emergency Hub",
+      "short_name": "Emergency",
+      "description": "Browse emergency categories",
+      "url": "/emergency/hub.html",
+      "icons": [{ "src": "assets/icons/emergency-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  
+  "related_applications": [],
+  
+  "prefer_related_applications": false,
+  
+  "features": [
+    "Cross-platform",
+    "Offline functionality",
+    "Push notifications",
+    "Background sync"
+  ],
+  
+  "protocol_handlers": [
+    {
+      "protocol": "web+mpesewa",
+      "url": "/?protocol=%s"
+    }
+  ]
+}

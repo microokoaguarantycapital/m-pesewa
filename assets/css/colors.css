@@ -1,0 +1,753 @@
+/* assets/css/colors.css - Complete Color System */
+/*
+ * M-Pesewa Color System v2.0
+ * Strict FinTech color palette with hierarchy enforcement
+ * Non-negotiable brand colors as per specifications
+ */
+
+/* ============================================
+ * 1. CORE BRAND COLORS (STRICT NON-NEGOTIABLE)
+ * ============================================ */
+
+/* Primary Brand Blue - #003366 */
+.bg-brand-blue-primary { background-color: #003366 !important; }
+.text-brand-blue-primary { color: #003366 !important; }
+.border-brand-blue-primary { border-color: #003366 !important; }
+.fill-brand-blue-primary { fill: #003366 !important; }
+.stroke-brand-blue-primary { stroke: #003366 !important; }
+
+/* Secondary Brand Blue - #0099ff */
+.bg-brand-blue-secondary { background-color: #0099ff !important; }
+.text-brand-blue-secondary { color: #0099ff !important; }
+.border-brand-blue-secondary { border-color: #0099ff !important; }
+.fill-brand-blue-secondary { fill: #0099ff !important; }
+.stroke-brand-blue-secondary { stroke: #0099ff !important; }
+
+/* Action Orange - #f37021 */
+.bg-brand-orange { background-color: #f37021 !important; }
+.text-brand-orange { color: #f37021 !important; }
+.border-brand-orange { border-color: #f37021 !important; }
+.fill-brand-orange { fill: #f37021 !important; }
+.stroke-brand-orange { stroke: #f37021 !important; }
+
+/* Trust Green - #28a745 */
+.bg-brand-green { background-color: #28a745 !important; }
+.text-brand-green { color: #28a745 !important; }
+.border-brand-green { border-color: #28a745 !important; }
+.fill-brand-green { fill: #28a745 !important; }
+.stroke-brand-green { stroke: #28a745 !important; }
+
+/* Neutral Light - #f8f9fa */
+.bg-brand-neutral-light { background-color: #f8f9fa !important; }
+.text-brand-neutral-light { color: #f8f9fa !important; }
+.border-brand-neutral-light { border-color: #f8f9fa !important; }
+.fill-brand-neutral-light { fill: #f8f9fa !important; }
+.stroke-brand-neutral-light { stroke: #f8f9fa !important; }
+
+/* Pure White - #ffffff */
+.bg-brand-white { background-color: #ffffff !important; }
+.text-brand-white { color: #ffffff !important; }
+.border-brand-white { border-color: #ffffff !important; }
+.fill-brand-white { fill: #ffffff !important; }
+.stroke-brand-white { stroke: #ffffff !important; }
+
+/* ============================================
+ * 2. COLOR UTILITY CLASSES (COMPREHENSIVE)
+ * ============================================ */
+
+/* Background Colors */
+.bg-transparent { background-color: transparent !important; }
+.bg-current { background-color: currentColor !important; }
+.bg-inherit { background-color: inherit !important; }
+
+/* Text Colors */
+.text-transparent { color: transparent !important; }
+.text-current { color: currentColor !important; }
+.text-inherit { color: inherit !important; }
+
+/* Border Colors */
+.border-transparent { border-color: transparent !important; }
+.border-current { border-color: currentColor !important; }
+.border-inherit { border-color: inherit !important; }
+
+/* ============================================
+ * 3. HIERARCHY SPECIFIC COLORS (STRICT STRUCTURE)
+ * ============================================ */
+
+/* Global Level Colors */
+.bg-hierarchy-global { background-color: var(--hierarchy-global-bg) !important; }
+.text-hierarchy-global { color: var(--hierarchy-global-text) !important; }
+.border-hierarchy-global { border-color: var(--hierarchy-global-border) !important; }
+
+/* Country Level Colors */
+.bg-hierarchy-country { background-color: var(--hierarchy-country-bg) !important; }
+.text-hierarchy-country { color: var(--hierarchy-country-text) !important; }
+.border-hierarchy-country { border-color: var(--hierarchy-country-border) !important; }
+
+/* Group Level Colors */
+.bg-hierarchy-group { background-color: var(--hierarchy-group-bg) !important; }
+.text-hierarchy-group { color: var(--hierarchy-group-text) !important; }
+.border-hierarchy-group { border-color: var(--hierarchy-group-border) !important; }
+
+/* Lender Level Colors */
+.bg-hierarchy-lender { background-color: var(--hierarchy-lender-bg) !important; }
+.text-hierarchy-lender { color: var(--hierarchy-lender-text) !important; }
+.border-hierarchy-lender { border-color: var(--hierarchy-lender-border) !important; }
+
+/* Borrower Level Colors */
+.bg-hierarchy-borrower { background-color: var(--hierarchy-borrower-bg) !important; }
+.text-hierarchy-borrower { color: var(--hierarchy-borrower-text) !important; }
+.border-hierarchy-borrower { border-color: var(--hierarchy-borrower-border) !important; }
+
+/* Ledger Level Colors */
+.bg-hierarchy-ledger { background-color: var(--hierarchy-ledger-bg) !important; }
+.text-hierarchy-ledger { color: var(--hierarchy-ledger-text) !important; }
+.border-hierarchy-ledger { border-color: var(--hierarchy-ledger-border) !important; }
+
+/* ============================================
+ * 4. STATE COLORS (INTERACTIVE ELEMENTS)
+ * ============================================ */
+
+/* Hover States */
+.hover\:bg-brand-blue-primary:hover { background-color: #003366 !important; }
+.hover\:text-brand-blue-primary:hover { color: #003366 !important; }
+.hover\:border-brand-blue-primary:hover { border-color: #003366 !important; }
+
+.hover\:bg-brand-blue-secondary:hover { background-color: #0099ff !important; }
+.hover\:text-brand-blue-secondary:hover { color: #0099ff !important; }
+.hover\:border-brand-blue-secondary:hover { border-color: #0099ff !important; }
+
+.hover\:bg-brand-orange:hover { background-color: #f37021 !important; }
+.hover\:text-brand-orange:hover { color: #f37021 !important; }
+.hover\:border-brand-orange:hover { border-color: #f37021 !important; }
+
+.hover\:bg-brand-green:hover { background-color: #28a745 !important; }
+.hover\:text-brand-green:hover { color: #28a745 !important; }
+.hover\:border-brand-green:hover { border-color: #28a745 !important; }
+
+/* Focus States */
+.focus\:bg-brand-blue-primary:focus { background-color: #003366 !important; }
+.focus\:text-brand-blue-primary:focus { color: #003366 !important; }
+.focus\:border-brand-blue-primary:focus { border-color: #003366 !important; }
+
+.focus\:bg-brand-blue-secondary:focus { background-color: #0099ff !important; }
+.focus\:text-brand-blue-secondary:focus { color: #0099ff !important; }
+.focus\:border-brand-blue-secondary:focus { border-color: #0099ff !important; }
+
+.focus\:ring-brand-blue-secondary:focus { 
+  --tw-ring-color: #0099ff !important;
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.3) !important;
+}
+
+/* Active States */
+.active\:bg-brand-blue-primary:active { background-color: #002244 !important; }
+.active\:text-brand-blue-primary:active { color: #002244 !important; }
+.active\:border-brand-blue-primary:active { border-color: #002244 !important; }
+
+.active\:bg-brand-orange:active { background-color: #d45f1a !important; }
+.active\:text-brand-orange:active { color: #d45f1a !important; }
+.active\:border-brand-orange:active { border-color: #d45f1a !important; }
+
+.active\:bg-brand-green:active { background-color: #218838 !important; }
+.active\:text-brand-green:active { color: #218838 !important; }
+.active\:border-brand-green:active { border-color: #218838 !important; }
+
+/* Disabled States */
+.disabled\:bg-neutral-100:disabled { background-color: var(--color-neutral-100) !important; }
+.disabled\:text-neutral-400:disabled { color: var(--color-neutral-400) !important; }
+.disabled\:border-neutral-200:disabled { border-color: var(--color-neutral-200) !important; }
+.disabled\:opacity-50:disabled { opacity: 0.5 !important; }
+
+/* ============================================
+ * 5. SEMANTIC COLORS (FINTECH SPECIFIC)
+ * ============================================ */
+
+/* Success Colors (Repayments, Positive Actions) */
+.bg-success-50 { background-color: var(--color-success-50) !important; }
+.bg-success-100 { background-color: var(--color-success-100) !important; }
+.bg-success-200 { background-color: var(--color-success-200) !important; }
+.bg-success-300 { background-color: var(--color-success-300) !important; }
+.bg-success-400 { background-color: var(--color-success-400) !important; }
+.bg-success-500 { background-color: var(--color-success-500) !important; }
+.bg-success-600 { background-color: var(--color-success-600) !important; }
+.bg-success-700 { background-color: var(--color-success-700) !important; }
+.bg-success-800 { background-color: var(--color-success-800) !important; }
+.bg-success-900 { background-color: var(--color-success-900) !important; }
+
+.text-success-50 { color: var(--color-success-50) !important; }
+.text-success-100 { color: var(--color-success-100) !important; }
+.text-success-200 { color: var(--color-success-200) !important; }
+.text-success-300 { color: var(--color-success-300) !important; }
+.text-success-400 { color: var(--color-success-400) !important; }
+.text-success-500 { color: var(--color-success-500) !important; }
+.text-success-600 { color: var(--color-success-600) !important; }
+.text-success-700 { color: var(--color-success-700) !important; }
+.text-success-800 { color: var(--color-success-800) !important; }
+.text-success-900 { color: var(--color-success-900) !important; }
+
+/* Warning Colors (Approaching Deadlines, Medium Risk) */
+.bg-warning-50 { background-color: var(--color-warning-50) !important; }
+.bg-warning-100 { background-color: var(--color-warning-100) !important; }
+.bg-warning-200 { background-color: var(--color-warning-200) !important; }
+.bg-warning-300 { background-color: var(--color-warning-300) !important; }
+.bg-warning-400 { background-color: var(--color-warning-400) !important; }
+.bg-warning-500 { background-color: var(--color-warning-500) !important; }
+.bg-warning-600 { background-color: var(--color-warning-600) !important; }
+.bg-warning-700 { background-color: var(--color-warning-700) !important; }
+.bg-warning-800 { background-color: var(--color-warning-800) !important; }
+.bg-warning-900 { background-color: var(--color-warning-900) !important; }
+
+.text-warning-50 { color: var(--color-warning-50) !important; }
+.text-warning-100 { color: var(--color-warning-100) !important; }
+.text-warning-200 { color: var(--color-warning-200) !important; }
+.text-warning-300 { color: var(--color-warning-300) !important; }
+.text-warning-400 { color: var(--color-warning-400) !important; }
+.text-warning-500 { color: var(--color-warning-500) !important; }
+.text-warning-600 { color: var(--color-warning-600) !important; }
+.text-warning-700 { color: var(--color-warning-700) !important; }
+.text-warning-800 { color: var(--color-warning-800) !important; }
+.text-warning-900 { color: var(--color-warning-900) !important; }
+
+/* Danger Colors (Defaults, High Risk, Errors) */
+.bg-danger-50 { background-color: var(--color-danger-50) !important; }
+.bg-danger-100 { background-color: var(--color-danger-100) !important; }
+.bg-danger-200 { background-color: var(--color-danger-200) !important; }
+.bg-danger-300 { background-color: var(--color-danger-300) !important; }
+.bg-danger-400 { background-color: var(--color-danger-400) !important; }
+.bg-danger-500 { background-color: var(--color-danger-500) !important; }
+.bg-danger-600 { background-color: var(--color-danger-600) !important; }
+.bg-danger-700 { background-color: var(--color-danger-700) !important; }
+.bg-danger-800 { background-color: var(--color-danger-800) !important; }
+.bg-danger-900 { background-color: var(--color-danger-900) !important; }
+
+.text-danger-50 { color: var(--color-danger-50) !important; }
+.text-danger-100 { color: var(--color-danger-100) !important; }
+.text-danger-200 { color: var(--color-danger-200) !important; }
+.text-danger-300 { color: var(--color-danger-300) !important; }
+.text-danger-400 { color: var(--color-danger-400) !important; }
+.text-danger-500 { color: var(--color-danger-500) !important; }
+.text-danger-600 { color: var(--color-danger-600) !important; }
+.text-danger-700 { color: var(--color-danger-700) !important; }
+.text-danger-800 { color: var(--color-danger-800) !important; }
+.text-danger-900 { color: var(--color-danger-900) !important; }
+
+/* Info Colors (Notifications, Status Updates) */
+.bg-info-50 { background-color: var(--color-info-50) !important; }
+.bg-info-100 { background-color: var(--color-info-100) !important; }
+.bg-info-200 { background-color: var(--color-info-200) !important; }
+.bg-info-300 { background-color: var(--color-info-300) !important; }
+.bg-info-400 { background-color: var(--color-info-400) !important; }
+.bg-info-500 { background-color: var(--color-info-500) !important; }
+.bg-info-600 { background-color: var(--color-info-600) !important; }
+.bg-info-700 { background-color: var(--color-info-700) !important; }
+.bg-info-800 { background-color: var(--color-info-800) !important; }
+.bg-info-900 { background-color: var(--color-info-900) !important; }
+
+.text-info-50 { color: var(--color-info-50) !important; }
+.text-info-100 { color: var(--color-info-100) !important; }
+.text-info-200 { color: var(--color-info-200) !important; }
+.text-info-300 { color: var(--color-info-300) !important; }
+.text-info-400 { color: var(--color-info-400) !important; }
+.text-info-500 { color: var(--color-info-500) !important; }
+.text-info-600 { color: var(--color-info-600) !important; }
+.text-info-700 { color: var(--color-info-700) !important; }
+.text-info-800 { color: var(--color-info-800) !important; }
+.text-info-900 { color: var(--color-info-900) !important; }
+
+/* ============================================
+ * 6. NEUTRAL COLOR SCALE (FOR UI ELEMENTS)
+ * ============================================ */
+
+/* Background Neutral */
+.bg-neutral-50 { background-color: var(--color-neutral-50) !important; }
+.bg-neutral-100 { background-color: var(--color-neutral-100) !important; }
+.bg-neutral-200 { background-color: var(--color-neutral-200) !important; }
+.bg-neutral-300 { background-color: var(--color-neutral-300) !important; }
+.bg-neutral-400 { background-color: var(--color-neutral-400) !important; }
+.bg-neutral-500 { background-color: var(--color-neutral-500) !important; }
+.bg-neutral-600 { background-color: var(--color-neutral-600) !important; }
+.bg-neutral-700 { background-color: var(--color-neutral-700) !important; }
+.bg-neutral-800 { background-color: var(--color-neutral-800) !important; }
+.bg-neutral-900 { background-color: var(--color-neutral-900) !important; }
+
+/* Text Neutral */
+.text-neutral-50 { color: var(--color-neutral-50) !important; }
+.text-neutral-100 { color: var(--color-neutral-100) !important; }
+.text-neutral-200 { color: var(--color-neutral-200) !important; }
+.text-neutral-300 { color: var(--color-neutral-300) !important; }
+.text-neutral-400 { color: var(--color-neutral-400) !important; }
+.text-neutral-500 { color: var(--color-neutral-500) !important; }
+.text-neutral-600 { color: var(--color-neutral-600) !important; }
+.text-neutral-700 { color: var(--color-neutral-700) !important; }
+.text-neutral-800 { color: var(--color-neutral-800) !important; }
+.text-neutral-900 { color: var(--color-neutral-900) !important; }
+
+/* Border Neutral */
+.border-neutral-50 { border-color: var(--color-neutral-50) !important; }
+.border-neutral-100 { border-color: var(--color-neutral-100) !important; }
+.border-neutral-200 { border-color: var(--color-neutral-200) !important; }
+.border-neutral-300 { border-color: var(--color-neutral-300) !important; }
+.border-neutral-400 { border-color: var(--color-neutral-400) !important; }
+.border-neutral-500 { border-color: var(--color-neutral-500) !important; }
+.border-neutral-600 { border-color: var(--color-neutral-600) !important; }
+.border-neutral-700 { border-color: var(--color-neutral-700) !important; }
+.border-neutral-800 { border-color: var(--color-neutral-800) !important; }
+.border-neutral-900 { border-color: var(--color-neutral-900) !important; }
+
+/* ============================================
+ * 7. GRADIENT BACKGROUNDS
+ * ============================================ */
+
+/* Brand Gradients */
+.bg-gradient-brand {
+  background-image: linear-gradient(135deg, #003366 0%, #0099ff 100%) !important;
+}
+
+.bg-gradient-lender {
+  background-image: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+}
+
+.bg-gradient-borrower {
+  background-image: linear-gradient(135deg, #f37021 0%, #ff922b 100%) !important;
+}
+
+.bg-gradient-success {
+  background-image: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
+}
+
+.bg-gradient-warning {
+  background-image: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%) !important;
+}
+
+.bg-gradient-danger {
+  background-image: linear-gradient(135deg, #dc2626 0%, #ef4444 100%) !important;
+}
+
+/* Directional Gradients */
+.bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-l { background-image: linear-gradient(to left, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-t { background-image: linear-gradient(to top, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-tl { background-image: linear-gradient(to top left, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important; }
+.bg-gradient-to-bl { background-image: linear-gradient(to bottom left, var(--tw-gradient-stops)) !important; }
+
+/* Gradient Color Stops */
+.from-brand-blue-primary { --tw-gradient-from: #003366 !important; }
+.from-brand-blue-secondary { --tw-gradient-from: #0099ff !important; }
+.from-brand-orange { --tw-gradient-from: #f37021 !important; }
+.from-brand-green { --tw-gradient-from: #28a745 !important; }
+
+.via-brand-blue-primary { --tw-gradient-via: #003366 !important; }
+.via-brand-blue-secondary { --tw-gradient-via: #0099ff !important; }
+
+.to-brand-blue-primary { --tw-gradient-to: #003366 !important; }
+.to-brand-blue-secondary { --tw-gradient-to: #0099ff !important; }
+.to-brand-orange { --tw-gradient-to: #f37021 !important; }
+.to-brand-green { --tw-gradient-to: #28a745 !important; }
+
+/* ============================================
+ * 8. OPACITY UTILITIES
+ * ============================================ */
+
+.opacity-0 { opacity: 0 !important; }
+.opacity-5 { opacity: 0.05 !important; }
+.opacity-10 { opacity: 0.1 !important; }
+.opacity-20 { opacity: 0.2 !important; }
+.opacity-25 { opacity: 0.25 !important; }
+.opacity-30 { opacity: 0.3 !important; }
+.opacity-40 { opacity: 0.4 !important; }
+.opacity-50 { opacity: 0.5 !important; }
+.opacity-60 { opacity: 0.6 !important; }
+.opacity-70 { opacity: 0.7 !important; }
+.opacity-75 { opacity: 0.75 !important; }
+.opacity-80 { opacity: 0.8 !important; }
+.opacity-90 { opacity: 0.9 !important; }
+.opacity-95 { opacity: 0.95 !important; }
+.opacity-100 { opacity: 1 !important; }
+
+/* ============================================
+ * 9. BACKGROUND BLEND MODES
+ * ============================================ */
+
+.bg-blend-normal { background-blend-mode: normal !important; }
+.bg-blend-multiply { background-blend-mode: multiply !important; }
+.bg-blend-screen { background-blend-mode: screen !important; }
+.bg-blend-overlay { background-blend-mode: overlay !important; }
+.bg-blend-darken { background-blend-mode: darken !important; }
+.bg-blend-lighten { background-blend-mode: lighten !important; }
+.bg-blend-color-dodge { background-blend-mode: color-dodge !important; }
+.bg-blend-color-burn { background-blend-mode: color-burn !important; }
+.bg-blend-hard-light { background-blend-mode: hard-light !important; }
+.bg-blend-soft-light { background-blend-mode: soft-light !important; }
+.bg-blend-difference { background-blend-mode: difference !important; }
+.bg-blend-exclusion { background-blend-mode: exclusion !important; }
+.bg-blend-hue { background-blend-mode: hue !important; }
+.bg-blend-saturation { background-blend-mode: saturation !important; }
+.bg-blend-color { background-blend-mode: color !important; }
+.bg-blend-luminosity { background-blend-mode: luminosity !important; }
+
+/* ============================================
+ * 10. BACKGROUND ATTACHMENT
+ * ============================================ */
+
+.bg-fixed { background-attachment: fixed !important; }
+.bg-local { background-attachment: local !important; }
+.bg-scroll { background-attachment: scroll !important; }
+
+/* ============================================
+ * 11. BACKGROUND CLIP
+ * ============================================ */
+
+.bg-clip-border { background-clip: border-box !important; }
+.bg-clip-padding { background-clip: padding-box !important; }
+.bg-clip-content { background-clip: content-box !important; }
+.bg-clip-text { 
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+/* ============================================
+ * 12. BACKGROUND ORIGIN
+ * ============================================ */
+
+.bg-origin-border { background-origin: border-box !important; }
+.bg-origin-padding { background-origin: padding-box !important; }
+.bg-origin-content { background-origin: content-box !important; }
+
+/* ============================================
+ * 13. BACKGROUND POSITION
+ * ============================================ */
+
+.bg-center { background-position: center !important; }
+.bg-top { background-position: top !important; }
+.bg-bottom { background-position: bottom !important; }
+.bg-left { background-position: left !important; }
+.bg-right { background-position: right !important; }
+.bg-left-top { background-position: left top !important; }
+.bg-left-bottom { background-position: left bottom !important; }
+.bg-right-top { background-position: right top !important; }
+.bg-right-bottom { background-position: right bottom !important; }
+
+/* ============================================
+ * 14. BACKGROUND REPEAT
+ * ============================================ */
+
+.bg-repeat { background-repeat: repeat !important; }
+.bg-no-repeat { background-repeat: no-repeat !important; }
+.bg-repeat-x { background-repeat: repeat-x !important; }
+.bg-repeat-y { background-repeat: repeat-y !important; }
+.bg-repeat-round { background-repeat: round !important; }
+.bg-repeat-space { background-repeat: space !important; }
+
+/* ============================================
+ * 15. BACKGROUND SIZE
+ * ============================================ */
+
+.bg-auto { background-size: auto !important; }
+.bg-cover { background-size: cover !important; }
+.bg-contain { background-size: contain !important; }
+
+/* ============================================
+ * 16. BOX SHADOW COLORS
+ * ============================================ */
+
+.shadow-brand-blue { box-shadow: 0 4px 12px rgba(0, 51, 102, 0.1) !important; }
+.shadow-brand-green { box-shadow: 0 4px 12px rgba(40, 167, 69, 0.1) !important; }
+.shadow-brand-orange { box-shadow: 0 4px 12px rgba(243, 112, 33, 0.1) !important; }
+
+.shadow-inner-brand-blue { box-shadow: inset 0 2px 4px rgba(0, 51, 102, 0.05) !important; }
+.shadow-inner-brand-green { box-shadow: inset 0 2px 4px rgba(40, 167, 69, 0.05) !important; }
+.shadow-inner-brand-orange { box-shadow: inset 0 2px 4px rgba(243, 112, 33, 0.05) !important; }
+
+/* ============================================
+ * 17. TEXT SHADOW COLORS
+ * ============================================ */
+
+.text-shadow-brand-blue { text-shadow: 0 2px 4px rgba(0, 51, 102, 0.2) !important; }
+.text-shadow-brand-green { text-shadow: 0 2px 4px rgba(40, 167, 69, 0.2) !important; }
+.text-shadow-brand-orange { text-shadow: 0 2px 4px rgba(243, 112, 33, 0.2) !important; }
+
+/* ============================================
+ * 18. BORDER OPACITY
+ * ============================================ */
+
+.border-opacity-0 { --tw-border-opacity: 0 !important; }
+.border-opacity-5 { --tw-border-opacity: 0.05 !important; }
+.border-opacity-10 { --tw-border-opacity: 0.1 !important; }
+.border-opacity-20 { --tw-border-opacity: 0.2 !important; }
+.border-opacity-25 { --tw-border-opacity: 0.25 !important; }
+.border-opacity-30 { --tw-border-opacity: 0.3 !important; }
+.border-opacity-40 { --tw-border-opacity: 0.4 !important; }
+.border-opacity-50 { --tw-border-opacity: 0.5 !important; }
+.border-opacity-60 { --tw-border-opacity: 0.6 !important; }
+.border-opacity-70 { --tw-border-opacity: 0.7 !important; }
+.border-opacity-75 { --tw-border-opacity: 0.75 !important; }
+.border-opacity-80 { --tw-border-opacity: 0.8 !important; }
+.border-opacity-90 { --tw-border-opacity: 0.9 !important; }
+.border-opacity-95 { --tw-border-opacity: 0.95 !important; }
+.border-opacity-100 { --tw-border-opacity: 1 !important; }
+
+/* ============================================
+ * 19. DIVIDE COLORS
+ * ============================================ */
+
+.divide-brand-blue-primary > * + * { border-color: #003366 !important; }
+.divide-brand-blue-secondary > * + * { border-color: #0099ff !important; }
+.divide-brand-orange > * + * { border-color: #f37021 !important; }
+.divide-brand-green > * + * { border-color: #28a745 !important; }
+
+.divide-neutral-50 > * + * { border-color: var(--color-neutral-50) !important; }
+.divide-neutral-100 > * + * { border-color: var(--color-neutral-100) !important; }
+.divide-neutral-200 > * + * { border-color: var(--color-neutral-200) !important; }
+.divide-neutral-300 > * + * { border-color: var(--color-neutral-300) !important; }
+.divide-neutral-400 > * + * { border-color: var(--color-neutral-400) !important; }
+.divide-neutral-500 > * + * { border-color: var(--color-neutral-500) !important; }
+.divide-neutral-600 > * + * { border-color: var(--color-neutral-600) !important; }
+.divide-neutral-700 > * + * { border-color: var(--color-neutral-700) !important; }
+.divide-neutral-800 > * + * { border-color: var(--color-neutral-800) !important; }
+.divide-neutral-900 > * + * { border-color: var(--color-neutral-900) !important; }
+
+/* ============================================
+ * 20. RING COLORS (FOCUS RINGS)
+ * ============================================ */
+
+.ring-brand-blue-primary { --tw-ring-color: #003366 !important; }
+.ring-brand-blue-secondary { --tw-ring-color: #0099ff !important; }
+.ring-brand-orange { --tw-ring-color: #f37021 !important; }
+.ring-brand-green { --tw-ring-color: #28a745 !important; }
+
+.ring-neutral-50 { --tw-ring-color: var(--color-neutral-50) !important; }
+.ring-neutral-100 { --tw-ring-color: var(--color-neutral-100) !important; }
+.ring-neutral-200 { --tw-ring-color: var(--color-neutral-200) !important; }
+.ring-neutral-300 { --tw-ring-color: var(--color-neutral-300) !important; }
+.ring-neutral-400 { --tw-ring-color: var(--color-neutral-400) !important; }
+.ring-neutral-500 { --tw-ring-color: var(--color-neutral-500) !important; }
+.ring-neutral-600 { --tw-ring-color: var(--color-neutral-600) !important; }
+.ring-neutral-700 { --tw-ring-color: var(--color-neutral-700) !important; }
+.ring-neutral-800 { --tw-ring-color: var(--color-neutral-800) !important; }
+.ring-neutral-900 { --tw-ring-color: var(--color-neutral-900) !important; }
+
+/* ============================================
+ * 21. FILL AND STROKE COLORS (SVG)
+ * ============================================ */
+
+.fill-current { fill: currentColor !important; }
+.stroke-current { stroke: currentColor !important; }
+
+.fill-brand-blue-primary { fill: #003366 !important; }
+.fill-brand-blue-secondary { fill: #0099ff !important; }
+.fill-brand-orange { fill: #f37021 !important; }
+.fill-brand-green { fill: #28a745 !important; }
+
+.stroke-brand-blue-primary { stroke: #003366 !important; }
+.stroke-brand-blue-secondary { stroke: #0099ff !important; }
+.stroke-brand-orange { stroke: #f37021 !important; }
+.stroke-brand-green { stroke: #28a745 !important; }
+
+/* ============================================
+ * 22. ACCENT COLORS (FORM ELEMENTS)
+ * ============================================ */
+
+.accent-brand-blue-primary { accent-color: #003366 !important; }
+.accent-brand-blue-secondary { accent-color: #0099ff !important; }
+.accent-brand-orange { accent-color: #f37021 !important; }
+.accent-brand-green { accent-color: #28a745 !important; }
+
+/* ============================================
+ * 23. CARET COLORS (TEXT INPUT CURSOR)
+ * ============================================ */
+
+.caret-brand-blue-primary { caret-color: #003366 !important; }
+.caret-brand-blue-secondary { caret-color: #0099ff !important; }
+.caret-brand-orange { caret-color: #f37021 !important; }
+.caret-brand-green { caret-color: #28a745 !important; }
+
+/* ============================================
+ * 24. SCROLLBAR COLORS
+ * ============================================ */
+
+.scrollbar-thumb-brand-blue-primary::-webkit-scrollbar-thumb {
+  background-color: #003366 !important;
+}
+
+.scrollbar-thumb-brand-blue-secondary::-webkit-scrollbar-thumb {
+  background-color: #0099ff !important;
+}
+
+.scrollbar-track-brand-neutral-light::-webkit-scrollbar-track {
+  background-color: #f8f9fa !important;
+}
+
+/* ============================================
+ * 25. SELECTION COLORS
+ * ============================================ */
+
+.selection\:bg-brand-blue-secondary *::selection {
+  background-color: rgba(0, 153, 255, 0.2) !important;
+}
+
+.selection\:text-brand-blue-primary *::selection {
+  color: #003366 !important;
+}
+
+/* ============================================
+ * 26. PLACEHOLDER COLORS
+ * ============================================ */
+
+.placeholder-brand-blue-primary::placeholder {
+  color: #003366 !important;
+}
+
+.placeholder-brand-blue-secondary::placeholder {
+  color: #0099ff !important;
+}
+
+.placeholder-neutral-400::placeholder {
+  color: var(--color-neutral-400) !important;
+}
+
+/* ============================================
+ * 27. BACKDROP COLORS (MODALS, OVERLAYS)
+ * ============================================ */
+
+.backdrop-blur-brand {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 51, 102, 0.8) !important;
+}
+
+.backdrop-blur-light {
+  backdrop-filter: blur(4px);
+  background-color: rgba(248, 249, 250, 0.8) !important;
+}
+
+/* ============================================
+ * 28. DARK MODE COLOR OVERRIDES
+ * ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-brand-blue-primary { background-color: #004488 !important; }
+  .dark\:text-brand-blue-primary { color: #66b3ff !important; }
+  
+  .dark\:bg-brand-blue-secondary { background-color: #66b3ff !important; }
+  .dark\:text-brand-blue-secondary { color: #004488 !important; }
+  
+  .dark\:bg-brand-neutral-light { background-color: #1a1a2e !important; }
+  .dark\:text-brand-neutral-light { color: #e6e6e6 !important; }
+  
+  .dark\:bg-brand-white { background-color: #0f0f1a !important; }
+  .dark\:text-brand-white { color: #ffffff !important; }
+}
+
+/* ============================================
+ * 29. PRINT COLOR OVERRIDES
+ * ============================================ */
+
+@media print {
+  .print\:bg-white { background-color: white !important; }
+  .print\:text-black { color: black !important; }
+  .print\:border-black { border-color: black !important; }
+}
+
+/* ============================================
+ * 30. COLOR CONTRAST UTILITIES (ACCESSIBILITY)
+ * ============================================ */
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .high-contrast\:border-2 { border-width: 2px !important; }
+  .high-contrast\:text-brand-blue-primary { color: #000080 !important; }
+  .high-contrast\:bg-brand-white { background-color: white !important; }
+}
+
+/* Reduced Transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .reduce-transparency\:opacity-100 { opacity: 1 !important; }
+}
+
+/* ============================================
+ * 31. ANIMATED GRADIENTS
+ * ============================================ */
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.bg-gradient-animated {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* ============================================
+ * 32. COLOR TESTING UTILITIES
+ * ============================================ */
+
+.color-test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+.color-swatch {
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  color: white;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.color-swatch.light {
+  color: var(--color-neutral-800);
+  border: 1px solid var(--color-neutral-200);
+}
+
+/* ============================================
+ * 33. FINAL COLOR VALIDATION CLASSES
+ * ============================================ */
+
+/* Validation: Never place Deep Blue text on Orange or Green buttons */
+.btn-orange {
+  background-color: #f37021;
+  color: #ffffff !important; /* White text enforced */
+}
+
+.btn-green {
+  background-color: #28a745;
+  color: #ffffff !important; /* White text enforced */
+}
+
+/* Validation: White background → Dark text */
+.bg-white {
+  background-color: #ffffff;
+  color: #003366 !important; /* Deep Blue text enforced */
+}
+
+/* Validation: Dark background → White text */
+.bg-dark {
+  background-color: #003366;
+  color: #ffffff !important; /* White text enforced */
+}
+
+/* Card floating effect with light sky blue glow */
+.card-floating {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 10px 25px -5px rgba(0, 153, 255, 0.1), 
+              0 5px 10px -5px rgba(0, 153, 255, 0.04),
+              0 0 20px rgba(0, 153, 255, 0.1); /* Sky blue glow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-floating:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(0, 153, 255, 0.15), 
+              0 10px 20px -10px rgba(0, 153, 255, 0.08),
+              0 0 30px rgba(0, 153, 255, 0.2); /* Enhanced glow on hover */
+}
+
+/* End of M-Pesewa Color System */

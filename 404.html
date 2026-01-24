@@ -1,0 +1,622 @@
+<!-- 404.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | M-Pesewa</title>
+    <meta name="description" content="The page you're looking for doesn't exist on M-Pesewa. Return to our trusted micro-lending platform.">
+    <meta name="theme-color" content="#003366">
+    
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/colors.css">
+    <link rel="stylesheet" href="assets/css/spacing.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/images/logo192.png">
+    
+    <style>
+        /* 404 Page Specific Styles */
+        :root {
+            --error-bg: #003366;
+            --error-text: #ffffff;
+            --error-accent: #0099ff;
+            --error-danger: #dc3545;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #004488 100%);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .error-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 900;
+            color: #dc3545;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
+            animation: error-pulse 2s infinite;
+        }
+        
+        .error-subtitle {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hierarchy-path {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        
+        .hierarchy-path h3 {
+            color: #0099ff;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .path-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .path-step i {
+            color: #0099ff;
+        }
+        
+        .path-step.active {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .path-step.active i {
+            color: #dc3545;
+        }
+        
+        .search-container {
+            margin: 30px 0;
+            position: relative;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #0099ff;
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .search-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #0099ff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .quick-link-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid #0099ff;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            border-top-color: #007acc;
+        }
+        
+        .quick-link-card i {
+            font-size: 2.5rem;
+            color: #0099ff;
+            margin-bottom: 15px;
+        }
+        
+        .quick-link-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+        
+        .quick-link-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: #0099ff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #007acc;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: rgba(220, 53, 69, 0.2);
+            color: white;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .btn-danger:hover {
+            background: rgba(220, 53, 69, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes error-pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 30px 20px;
+            }
+            
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-subtitle {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                font-size: 1rem;
+            }
+            
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Country flag display */
+        .country-flags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .country-flag {
+            font-size: 2rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .country-flag:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        
+        /* Debug information (only shown in development) */
+        .debug-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+        
+        .debug-info h4 {
+            color: #0099ff;
+            margin-bottom: 10px;
+        }
+        
+        .debug-info pre {
+            margin: 0;
+            overflow-x: auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .show-debug {
+            margin-top: 20px;
+            background: none;
+            border: none;
+            color: #0099ff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-subtitle">Page Not Found</h2>
+        
+        <p class="error-message">
+            The page you're looking for doesn't exist or has been moved. 
+            This could be due to a broken link, outdated bookmark, or typing error.
+        </p>
+        
+        <!-- Hierarchy Path Visualization -->
+        <div class="hierarchy-path">
+            <h3><i class="fas fa-sitemap"></i> M-Pesewa Hierarchy Path</h3>
+            <div class="path-steps">
+                <div class="path-step">
+                    <i class="fas fa-globe"></i>
+                    <span>Global</span>
+                </div>
+                <div class="path-step">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="path-step">
+                    <i class="fas fa-flag"></i>
+                    <span>Country</span>
+                </div>
+                <div class="path-step">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="path-step">
+                    <i class="fas fa-users"></i>
+                    <span>Group</span>
+                </div>
+                <div class="path-step">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="path-step active">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>404 - Not Found</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Country Flags -->
+        <div class="country-flags">
+            <div class="country-flag">🇰🇪</div>
+            <div class="country-flag">🇺🇬</div>
+            <div class="country-flag">🇹🇿</div>
+            <div class="country-flag">🇷🇼</div>
+            <div class="country-flag">🇧🇮</div>
+            <div class="country-flag">🇨🇩</div>
+            <div class="country-flag">🇳🇬</div>
+            <div class="country-flag">🇬🇭</div>
+            <div class="country-flag">🇸🇸</div>
+            <div class="country-flag">🇸🇴</div>
+            <div class="country-flag">🇿🇦</div>
+            <div class="country-flag">🇪🇹</div>
+        </div>
+        
+        <!-- Search Functionality -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search for lenders, borrowers, groups, or emergency categories..." id="searchInput">
+            <button class="search-button" onclick="performSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="quick-links">
+            <a href="index.html" class="quick-link-card">
+                <i class="fas fa-home"></i>
+                <h3>Home Page</h3>
+                <p>Return to the main dashboard and platform overview</p>
+            </a>
+            
+            <a href="emergency/hub.html" class="quick-link-card">
+                <i class="fas fa-first-aid"></i>
+                <h3>Emergency Hub</h3>
+                <p>Browse 20 emergency loan categories and solutions</p>
+            </a>
+            
+            <a href="auth/login.html" class="quick-link-card">
+                <i class="fas fa-sign-in-alt"></i>
+                <h3>Sign In</h3>
+                <p>Access your lender or borrower dashboard</p>
+            </a>
+            
+            <a href="how-it-works.html" class="quick-link-card">
+                <i class="fas fa-info-circle"></i>
+                <h3>How It Works</h3>
+                <p>Learn about M-Pesewa's trusted lending circles</p>
+            </a>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i>
+                Go to Homepage
+            </a>
+            
+            <button onclick="history.back()" class="btn btn-secondary">
+                <i class="fas fa-history"></i>
+                Go Back
+            </button>
+            
+            <a href="contact.html" class="btn btn-secondary">
+                <i class="fas fa-envelope"></i>
+                Report Issue
+            </a>
+            
+            <button onclick="toggleDebug()" class="btn btn-danger">
+                <i class="fas fa-bug"></i>
+                Debug Info
+            </button>
+        </div>
+        
+        <!-- Error Details (Hidden by default) -->
+        <div class="debug-info" id="debugInfo">
+            <h4><i class="fas fa-code"></i> Error Details</h4>
+            <pre id="errorDetails"></pre>
+        </div>
+        
+        <button class="show-debug" onclick="toggleDebug()" id="debugToggle">
+            Show Technical Details
+        </button>
+        
+        <!-- Service Status -->
+        <div style="margin-top: 40px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
+            <p style="margin: 0; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">
+                <i class="fas fa-server"></i> All M-Pesewa services are operational. 
+                <a href="status.html" style="color: #0099ff; text-decoration: none;">Check status page</a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Populate error details
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorDetails = {
+                timestamp: new Date().toISOString(),
+                url: window.location.href,
+                referrer: document.referrer || 'Direct entry',
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                online: navigator.onLine,
+                language: navigator.language,
+                cookies: navigator.cookieEnabled,
+                serviceWorker: 'serviceWorker' in navigator,
+                localStorage: typeof localStorage !== 'undefined',
+                sessionStorage: typeof sessionStorage !== 'undefined'
+            };
+            
+            document.getElementById('errorDetails').textContent = JSON.stringify(errorDetails, null, 2);
+        });
+        
+        // Toggle debug information
+        function toggleDebug() {
+            const debugInfo = document.getElementById('debugInfo');
+            const debugToggle = document.getElementById('debugToggle');
+            
+            if (debugInfo.style.display === 'none' || debugInfo.style.display === '') {
+                debugInfo.style.display = 'block';
+                debugToggle.textContent = 'Hide Technical Details';
+            } else {
+                debugInfo.style.display = 'none';
+                debugToggle.textContent = 'Show Technical Details';
+            }
+        }
+        
+        // Search functionality
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            
+            if (query) {
+                // Common M-Pesewa search terms mapping
+                const searchMap = {
+                    'lender': 'lender/dashboard.html',
+                    'borrower': 'borrower/dashboard.html',
+                    'emergency': 'emergency/hub.html',
+                    'loan': 'borrower/apply-loan.html',
+                    'group': 'groups/list.html',
+                    'subscription': 'subscription/plans.html',
+                    'blacklist': 'blacklist/public.html',
+                    'debt': 'debt-collectors.html',
+                    'kenya': 'countries/kenya.html',
+                    'uganda': 'countries/uganda.html',
+                    'tanzania': 'countries/tanzania.html',
+                    'rwanda': 'countries/rwanda.html',
+                    'calculator': 'tools/calculator.html',
+                    'terms': 'terms.html',
+                    'privacy': 'privacy.html',
+                    'contact': 'contact.html',
+                    'faq': 'faq.html',
+                    'how': 'how-it-works.html'
+                };
+                
+                // Check for direct matches
+                const lowerQuery = query.toLowerCase();
+                let found = false;
+                
+                for (const [key, value] of Object.entries(searchMap)) {
+                    if (lowerQuery.includes(key)) {
+                        window.location.href = value;
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if (!found) {
+                    // Fallback to search results page
+                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                }
+            } else {
+                searchInput.focus();
+            }
+        }
+        
+        // Enter key support for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        // Auto-focus search input
+        document.getElementById('searchInput').focus();
+        
+        // Log 404 errors for analytics
+        if (typeof ga !== 'undefined') {
+            ga('send', 'event', 'Error', '404', window.location.pathname);
+        }
+        
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(registration => {
+                    console.log('ServiceWorker registered for 404 page:', registration);
+                })
+                .catch(error => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        }
+        
+        // Check for broken links in session storage
+        const brokenLinks = JSON.parse(sessionStorage.getItem('brokenLinks') || '[]');
+        brokenLinks.push({
+            url: window.location.href,
+            timestamp: new Date().toISOString(),
+            referrer: document.referrer
+        });
+        
+        // Keep only last 10 broken links
+        if (brokenLinks.length > 10) {
+            brokenLinks.shift();
+        }
+        
+        sessionStorage.setItem('brokenLinks', JSON.stringify(brokenLinks));
+    </script>
+</body>
+</html>

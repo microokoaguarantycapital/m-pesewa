@@ -1,0 +1,890 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesewa | Emergency Micro-Lending in Trusted Circles</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="assets/images/logo192.png">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#003366">
+    
+    <!-- Primary CSS -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/colors.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker registration failed:', error);
+                    });
+            });
+        }
+        
+        // Check for install prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show install button
+            const installButton = document.getElementById('installButton');
+            if (installButton) {
+                installButton.style.display = 'block';
+                installButton.addEventListener('click', () => {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted install');
+                        }
+                        deferredPrompt = null;
+                    });
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="mp-header" id="mainHeader">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="logo-section">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-primary">M-Pesewa</span>
+                        <span class="logo-tagline">Trusted Circle Lending</span>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Lenders Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-landmark"></i>
+                            <span>Lenders</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="lender/dashboard.html" class="dropdown-item">
+                                <i class="fas fa-chart-line"></i>
+                                Dashboard
+                            </a>
+                            <a href="lender/portfolio.html" class="dropdown-item">
+                                <i class="fas fa-briefcase"></i>
+                                Portfolio
+                            </a>
+                            <a href="lender/history.html" class="dropdown-item">
+                                <i class="fas fa-history"></i>
+                                History
+                            </a>
+                            <a href="lender/rules.html" class="dropdown-item">
+                                <i class="fas fa-book"></i>
+                                Rules
+                            </a>
+                            <a href="lender/risk.html" class="dropdown-item">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Risk
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <!-- Borrowers Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-users"></i>
+                            <span>Borrowers</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="borrower/dashboard.html" class="dropdown-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Dashboard
+                            </a>
+                            <a href="borrower/apply-loan.html" class="dropdown-item">
+                                <i class="fas fa-file-signature"></i>
+                                Apply for Loan
+                            </a>
+                            <a href="borrower/history.html" class="dropdown-item">
+                                <i class="fas fa-clock"></i>
+                                Borrow History
+                            </a>
+                            <a href="borrower/repayments.html" class="dropdown-item">
+                                <i class="fas fa-money-check-alt"></i>
+                                Repayments
+                            </a>
+                            <a href="borrower/disputes.html" class="dropdown-item">
+                                <i class="fas fa-balance-scale"></i>
+                                Disputes
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <!-- Emergency Hub Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-first-aid"></i>
+                            <span>Emergency Hub</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu emergency-dropdown">
+                            <div class="dropdown-grid">
+                                <!-- Category 1-10 -->
+                                <div class="dropdown-column">
+                                    <a href="emergency/transport.html" class="dropdown-item">
+                                        <i class="fas fa-bus"></i>
+                                        M-pesewa Fare
+                                    </a>
+                                    <a href="emergency/data.html" class="dropdown-item">
+                                        <i class="fas fa-wifi"></i>
+                                        M-pesewa Data
+                                    </a>
+                                    <a href="emergency/gas.html" class="dropdown-item">
+                                        <i class="fas fa-fire"></i>
+                                        M-pesewa Cooking Gas
+                                    </a>
+                                    <a href="emergency/food.html" class="dropdown-item">
+                                        <i class="fas fa-utensils"></i>
+                                        M-pesewa Food
+                                    </a>
+                                    <a href="emergency/wifi.html" class="dropdown-item">
+                                        <i class="fas fa-broadcast-tower"></i>
+                                        M-pesewa Wifi
+                                    </a>
+                                </div>
+                                <!-- Category 11-15 -->
+                                <div class="dropdown-column">
+                                    <a href="emergency/water.html" class="dropdown-item">
+                                        <i class="fas fa-tint"></i>
+                                        M-pesewa Water Bill
+                                    </a>
+                                    <a href="emergency/electricity.html" class="dropdown-item">
+                                        <i class="fas fa-bolt"></i>
+                                        M-pesewa Electricity
+                                    </a>
+                                    <a href="emergency/tv.html" class="dropdown-item">
+                                        <i class="fas fa-tv"></i>
+                                        M-pesewa TV Subscription
+                                    </a>
+                                    <a href="emergency/fuel.html" class="dropdown-item">
+                                        <i class="fas fa-gas-pump"></i>
+                                        M-pesewa Fuel
+                                    </a>
+                                    <a href="emergency/repairs.html" class="dropdown-item">
+                                        <i class="fas fa-tools"></i>
+                                        M-pesewa Repair
+                                    </a>
+                                </div>
+                                <!-- Category 16-20 -->
+                                <div class="dropdown-column">
+                                    <a href="emergency/credo.html" class="dropdown-item">
+                                        <i class="fas fa-hard-hat"></i>
+                                        M-pesewa Credo
+                                    </a>
+                                    <a href="emergency/medicine.html" class="dropdown-item">
+                                        <i class="fas fa-pills"></i>
+                                        M-pesewa Medicine
+                                    </a>
+                                    <a href="emergency/school-fees.html" class="dropdown-item">
+                                        <i class="fas fa-graduation-cap"></i>
+                                        M-pesewa School Fees
+                                    </a>
+                                    <a href="emergency/advance.html" class="dropdown-item">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        M-pesewa Advance
+                                    </a>
+                                    <a href="emergency/hub.html" class="dropdown-item view-all">
+                                        <i class="fas fa-plus-circle"></i>
+                                        View All 20 Categories
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Subscription Plans Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-crown"></i>
+                            <span>Subscription Plans</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="subscription/current.html" class="dropdown-item">
+                                <i class="fas fa-id-card"></i>
+                                Current Plan
+                            </a>
+                            <a href="subscription/upgrade.html" class="dropdown-item">
+                                <i class="fas fa-arrow-up"></i>
+                                Upgrade
+                            </a>
+                            <a href="subscription/history.html" class="dropdown-item">
+                                <i class="fas fa-receipt"></i>
+                                History
+                            </a>
+                            <a href="subscription/invoices.html" class="dropdown-item">
+                                <i class="fas fa-file-invoice"></i>
+                                Invoices
+                            </a>
+                        </div>
+                    </li>
+                    
+                    <!-- Country Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>Country</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu country-dropdown">
+                            <div class="country-grid">
+                                <a href="countries/kenya.html" class="country-item">
+                                    <span class="flag-icon">🇰🇪</span>
+                                    Kenya
+                                </a>
+                                <a href="countries/uganda.html" class="country-item">
+                                    <span class="flag-icon">🇺🇬</span>
+                                    Uganda
+                                </a>
+                                <a href="countries/tanzania.html" class="country-item">
+                                    <span class="flag-icon">🇹🇿</span>
+                                    Tanzania
+                                </a>
+                                <a href="countries/rwanda.html" class="country-item">
+                                    <span class="flag-icon">🇷🇼</span>
+                                    Rwanda
+                                </a>
+                                <a href="countries/drc.html" class="country-item">
+                                    <span class="flag-icon">🇨🇩</span>
+                                    DRC
+                                </a>
+                                <a href="countries/burundi.html" class="country-item">
+                                    <span class="flag-icon">🇧🇮</span>
+                                    Burundi
+                                </a>
+                                <a href="countries/nigeria.html" class="country-item">
+                                    <span class="flag-icon">🇳🇬</span>
+                                    Nigeria
+                                </a>
+                                <a href="countries/ghana.html" class="country-item">
+                                    <span class="flag-icon">🇬🇭</span>
+                                    Ghana
+                                </a>
+                                <a href="countries/south-sudan.html" class="country-item">
+                                    <span class="flag-icon">🇸🇸</span>
+                                    South Sudan
+                                </a>
+                                <a href="countries/somalia.html" class="country-item">
+                                    <span class="flag-icon">🇸🇴</span>
+                                    Somalia
+                                </a>
+                                <a href="countries/south-africa.html" class="country-item">
+                                    <span class="flag-icon">🇿🇦</span>
+                                    South Africa
+                                </a>
+                                <a href="countries/ethiopia.html" class="country-item">
+                                    <span class="flag-icon">🇪🇹</span>
+                                    Ethiopia
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Auth Buttons -->
+            <div class="auth-section">
+                <a href="auth/login.html" class="auth-btn signin-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </a>
+                <a href="auth/register.html" class="auth-btn signup-btn">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Sign Up</span>
+                </a>
+                <button id="installButton" class="install-btn" style="display: none;">
+                    <i class="fas fa-download"></i>
+                    Install App
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Navigation (Hidden by default) -->
+        <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-header">
+                <h3>M-Pesewa Menu</h3>
+                <button class="mobile-close" id="mobileClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-nav-content">
+                <!-- Mobile nav content will be populated by JavaScript -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Choose your path to financial flexibility.</h1>
+                    <p class="hero-subtitle">Join Africa's trusted emergency micro-lending platform. Borrow when you need it, lend when you can.</p>
+                    
+                    <div class="hero-cta">
+                        <div class="cta-card borrower-cta">
+                            <div class="cta-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <h3>For Emergency Loans</h3>
+                            <p>Get quick funds for urgent needs within your trusted circle</p>
+                            <a href="borrower/dashboard.html" class="cta-btn borrower-btn">
+                                Get Started as Borrower
+                            </a>
+                        </div>
+                        
+                        <div class="cta-card lender-cta">
+                            <div class="cta-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3>To Start Lending</h3>
+                            <p>Earn returns by lending to trusted members in your group</p>
+                            <a href="lender/dashboard.html" class="cta-btn lender-btn">
+                                Start Now as Lender
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="50000">0</h3>
+                            <p class="stat-label">Active Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="99">0%</h3>
+                            <p class="stat-label">Repayment Rate</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="12">0</h3>
+                            <p class="stat-label">African Countries</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="1000">0</h3>
+                            <p class="stat-label">Trusted Groups</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">The Emergency Financial Gap</h2>
+                    <p class="section-subtitle">Life happens when you least expect it. We're here to bridge the gap.</p>
+                </div>
+                
+                <div class="problem-cards">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <h3>Stranded Without Fuel</h3>
+                        <p>Running out of fuel in the middle of a journey with no cash in hand.</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3>Data Running Out</h3>
+                        <p>Critical online work interrupted by exhausted data bundles.</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Empty Kitchen</h3>
+                        <p>Gas runs out while cooking, paycheck still days away.</p>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <h3>Transport Emergency</h3>
+                        <p>Stranded without fare to reach an important interview or appointment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="solution-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">The M-Pesewa Solution</h2>
+                    <p class="section-subtitle">Trust-based lending within your circle, powered by community accountability.</p>
+                </div>
+                
+                <div class="solution-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>Trusted Circles</h3>
+                        <p>Lend and borrow within groups of people you know and trust.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>7-Day Terms</h3>
+                        <p>Short repayment periods ensure funds keep circulating in the community.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>5-Star Ratings</h3>
+                        <p>Build reputation through timely repayments and responsible borrowing.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Group Isolation</h3>
+                        <p>Lenders only lend within their groups, creating accountability chains.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Hub Preview -->
+        <section class="emergency-hub-preview">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">20 Emergency Categories</h2>
+                    <p class="section-subtitle">Specific loans for specific needs. No misuse, just utility.</p>
+                </div>
+                
+                <div class="emergency-categories">
+                    <!-- First 8 categories as preview -->
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-bus"></i>
+                        </div>
+                        <h4>M-pesewa Fare</h4>
+                        <p>Move on, don't stall—borrow for your journey.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h4>M-pesewa Data</h4>
+                        <p>Stay connected, stay informed.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h4>M-pesewa Cooking Gas</h4>
+                        <p>Cook with confidence when gas is low.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h4>M-pesewa Food</h4>
+                        <p>Don't sleep hungry when paycheck is delayed.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h4>M-pesewa Water Bill</h4>
+                        <p>Stay hydrated—borrow for water needs.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>M-pesewa Electricity</h4>
+                        <p>Stay lit, stay powered—borrow tokens when needed.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h4>M-pesewa Medicine</h4>
+                        <p>Health first—borrow for urgent medicines.</p>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>M-pesewa School Fees</h4>
+                        <p>Secure your future without delay.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="emergency/hub.html" class="btn secondary-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        View All 20 Emergency Categories
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section -->
+        <section class="trust-section">
+            <div class="container">
+                <div class="trust-content">
+                    <div class="trust-text">
+                        <h2 class="trust-title">Why Trust M-Pesewa?</h2>
+                        <div class="trust-points">
+                            <div class="trust-point">
+                                <i class="fas fa-check-circle"></i>
+                                <span>No cross-country lending - strict country isolation</span>
+                            </div>
+                            <div class="trust-point">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Group-based accountability - lenders know borrowers</span>
+                            </div>
+                            <div class="trust-point">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Platform doesn't hold funds - direct peer-to-peer transfers</span>
+                            </div>
+                            <div class="trust-point">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Blacklist system protects lenders from repeat defaulters</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trust-stats">
+                        <div class="trust-stat">
+                            <h3>99%</h3>
+                            <p>Average Repayment Rate</p>
+                        </div>
+                        <div class="trust-stat">
+                            <h3>0</h3>
+                            <p>Platform Defaults (We don't hold funds)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section class="stories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Real People, Real Emergencies Solved</h2>
+                    <p class="section-subtitle">How M-Pesewa helped in critical moments</p>
+                </div>
+                
+                <div class="stories-grid">
+                    <div class="story-card">
+                        <div class="story-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h4>Mama Jimmy</h4>
+                        <p class="story-text">"Gas ended while cooking dinner. Borrowed KSh 1,200 for gas, repaid in 7 days with 10% interest. Crisis averted."</p>
+                        <div class="story-meta">
+                            <span class="story-category">Cooking Gas Emergency</span>
+                            <span class="story-location">Nairobi, Kenya</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h4>John Kimani</h4>
+                        <p class="story-text">"Stranded at home without transport to a job interview. Borrowed KSh 250 for fare, got the job, repaid promptly."</p>
+                        <div class="story-meta">
+                            <span class="story-category">Transport Emergency</span>
+                            <span class="story-location">Kampala, Uganda</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-icon">
+                            <i class="fas fa-church"></i>
+                        </div>
+                        <h4>Pastor Ndungu</h4>
+                        <p class="story-text">"Running online service when data ran out. Borrowed KSh 1,000 for data bundle, continued service, repaid in a week."</p>
+                        <div class="story-meta">
+                            <span class="story-category">Data Emergency</span>
+                            <span class="story-location">Dar es Salaam, Tanzania</span>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card">
+                        <div class="story-icon">
+                            <i class="fas fa-motorcycle"></i>
+                        </div>
+                        <h4>Ibrahim (Boda Rider)</h4>
+                        <p class="story-text">"Motorbike ran out of fuel with passenger. Borrowed KSh 500, completed journey, repaid with interest next day."</p>
+                        <div class="story-meta">
+                            <span class="story-category">Fuel Emergency</span>
+                            <span class="story-location">Kigali, Rwanda</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="final-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Join Africa's Trusted Lending Circle?</h2>
+                    <p>Whether you need emergency funds or want to earn by lending, M-Pesewa connects you with trusted circles in your community.</p>
+                    
+                    <div class="cta-buttons">
+                        <a href="auth/register.html?role=borrower" class="btn borrower-btn-lg">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            Become a Borrower
+                        </a>
+                        <a href="auth/register.html?role=lender" class="btn lender-btn-lg">
+                            <i class="fas fa-seedling"></i>
+                            Become a Lender
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="mp-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Column 1: Borrowing -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Borrowing</h4>
+                    <a href="borrower/apply-loan.html" class="footer-link">Get Emergency Loan</a>
+                    <a href="borrower/dashboard.html" class="footer-link">Online Personal Loan</a>
+                    <a href="#" class="footer-link">Business Loan</a>
+                    <a href="how-it-works.html" class="footer-link">How to Apply</a>
+                    <a href="#" class="footer-link">Active Borrowers</a>
+                </div>
+                
+                <!-- Column 2: Lending -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Lending</h4>
+                    <a href="lender/dashboard.html" class="footer-link">Smart Lending</a>
+                    <a href="lender/why-lend.html" class="footer-link">Why Lend at M-Pesewa?</a>
+                    <a href="lender/how-to-lend.html" class="footer-link">How to Lend</a>
+                    <a href="#" class="footer-link">Active Lenders</a>
+                </div>
+                
+                <!-- Column 3: Platform -->
+                <div class="footer-col">
+                    <h4 class="footer-title">How It Works</h4>
+                    <a href="how-it-works.html" class="footer-link">P2P Lending Explained</a>
+                    <a href="about.html#our-role" class="footer-link">Our Role</a>
+                    <a href="subscription/plans.html" class="footer-link">Subscriptions</a>
+                    <a href="blacklist/public.html" class="footer-link">Blacklist</a>
+                    <a href="debt-collectors.html" class="footer-link">Debt Collectors</a>
+                </div>
+                
+                <!-- Column 4: Company -->
+                <div class="footer-col">
+                    <h4 class="footer-title">About Us</h4>
+                    <a href="about.html" class="footer-link">About M-Pesewa</a>
+                    <a href="about.html#team" class="footer-link">Team & Advisory Board</a>
+                    <a href="press.html" class="footer-link">News & Careers</a>
+                    <a href="faq.html" class="footer-link">Blog / FAQs</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
+                </div>
+                
+                <!-- Column 5: Legal -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Legal & Compliance</h4>
+                    <a href="terms.html" class="footer-link">Terms & Conditions</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="grievance.html" class="footer-link">Grievance Redressal</a>
+                    <a href="fair-practices.html" class="footer-link">Fair Practices Code</a>
+                </div>
+                
+                <!-- Column 6: Partners -->
+                <div class="footer-col">
+                    <h4 class="footer-title">Partnerships</h4>
+                    <a href="partners.html" class="footer-link">Be a Partner</a>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Countries Ticker -->
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>M-Pesewa</span>
+                </div>
+                <div class="copyright">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                <div class="footer-legal">
+                    <a href="sitemap.html">Sitemap</a>
+                    <a href="accessibility.html">Accessibility</a>
+                    <a href="security.html">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="core/app.js"></script>
+    <script src="state/store.js"></script>
+    <script src="router/router.js"></script>
+    <script src="utils/validation.js"></script>
+    <script src="scripts/main.js"></script>
+    
+    <!-- Initialize App -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize counters
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const suffix = counter.textContent.includes('%') ? '%' : '';
+                let count = 0;
+                const increment = target / 100;
+                
+                const updateCounter = () => {
+                    if (count < target) {
+                        count += increment;
+                        counter.textContent = Math.floor(count) + suffix;
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                };
+                
+                updateCounter();
+            });
+            
+            // Mobile menu functionality
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            const mobileClose = document.getElementById('mobileClose');
+            const mobileNav = document.getElementById('mobileNav');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    mobileNav.classList.add('active');
+                });
+            }
+            
+            if (mobileClose) {
+                mobileClose.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileNav.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    mobileNav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
