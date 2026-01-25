@@ -1,517 +1,473 @@
-/* assets/css/reset.css - CSS Reset with FinTech Specific Adjustments */
-/*
- * M-Pesewa CSS Reset v2.0
- * Tailored for FinTech PWA with strict hierarchy enforcement
- */
-
-/* 1. Use a more-intuitive box-sizing model */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* Reset and Normalize */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 2. Remove default margin and padding */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-/* 3. Core HTML element resets */
 html {
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
-  text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
-  scroll-behavior: smooth;
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
-/* 4. Body defaults for FinTech platform */
 body {
-  min-height: 100vh;
-  min-height: -webkit-fill-available; /* For mobile browsers */
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
-  overflow-x: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* 5. Remove list styles (bullets/numbers) */
-ol, ul {
-  list-style: none;
+/* Remove list styles */
+ul, ol {
+    list-style: none;
 }
 
-/* 6. Set core root defaults for PWA */
-:root {
-  --safe-area-inset-top: env(safe-area-inset-top);
-  --safe-area-inset-right: env(safe-area-inset-right);
-  --safe-area-inset-bottom: env(safe-area-inset-bottom);
-  --safe-area-inset-left: env(safe-area-inset-left);
-}
-
-/* 7. Media defaults */
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-/* 8. Inherit fonts for form elements */
-input, button, textarea, select {
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  outline: none;
-}
-
-/* 9. Button reset with FinTech specific styles */
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* 10. Remove all animations and transitions for people who prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* 11. Table reset for financial data display */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-}
-
-/* 12. Anchor reset */
+/* Remove default link styles */
 a {
-  text-decoration: none;
-  color: inherit;
-  background-color: transparent;
-  -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+    color: inherit;
 }
 
-/* 13. Form element resets for financial forms */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* Remove button defaults */
+button {
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Remove input defaults */
+input, textarea, select {
+    font: inherit;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+/* Remove table defaults */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Remove image borders */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Remove iframe borders */
+iframe {
+    border: none;
+}
+
+/* Remove fieldset defaults */
+fieldset {
+    border: none;
+}
+
+/* Remove details summary arrow in some browsers */
+details summary {
+    list-style: none;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Remove autofill background color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Remove number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
-/* 14. Remove default fieldset styles */
-fieldset {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
+/* Remove search input clear button */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
 }
 
-/* 15. Textarea reset */
+/* Remove textarea resize */
 textarea {
-  resize: vertical;
-  overflow: auto;
-  vertical-align: top;
+    resize: none;
 }
 
-/* 16. Hidden attribute */
-[hidden] {
-  display: none !important;
+/* Remove select default arrow in some browsers */
+select::-ms-expand {
+    display: none;
 }
 
-/* 17. Focus styles for accessibility */
-:focus {
-  outline: 2px solid #0099ff;
-  outline-offset: 2px;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-:focus-visible {
-  outline: 2px solid #0099ff;
-  outline-offset: 2px;
-}
-
-/* 18. Selection color matching brand */
-::selection {
-  background-color: rgba(0, 153, 255, 0.2);
-  color: #003366;
-}
-
-/* 19. Scrollbar styling for financial data tables */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f8f9fa;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #0099ff;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #007acc;
-}
-
-/* 20. Disabled state styling */
-[disabled] {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* 21. Print styles for financial documents */
-@media print {
-  *,
-  *::before,
-  *::after {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-  
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-  
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
-  
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
-  
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-  
-  thead {
-    display: table-header-group;
-  }
-  
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-  
-  img {
-    max-width: 100% !important;
-  }
-  
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-  
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
-/* 22. High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --border-color: #000000;
-    --text-color: #000000;
-  }
-}
-
-/* 23. Reduced motion for animations */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* 24. Touch action for mobile devices */
-.touch-action-none {
-  touch-action: none;
-}
-
-.touch-action-pan-x {
-  touch-action: pan-x;
-}
-
-.touch-action-pan-y {
-  touch-action: pan-y;
-}
-
-/* 25. Container queries support */
-@container (min-width: 768px) {
-  .card {
-    padding: 2rem;
-  }
-}
-
-/* 26. Viewport units for mobile PWA */
-.min-h-screen {
-  min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for mobile */
-}
-
-.min-h-screen-safe {
-  min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-}
-
-/* 27. Focus within for complex components */
-.focus-within\:ring-2:focus-within {
-  outline: 2px solid #0099ff;
-  outline-offset: 2px;
-}
-
-/* 28. Dark mode support foundation */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark light;
-  }
-}
-
-/* 29. PWA specific styles */
-.pwa-install-prompt {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #003366;
-  color: white;
-  padding: 1rem;
-  z-index: 9999;
-}
-
-/* 30. Financial table specific resets */
-.financial-table {
-  border: none;
-  font-feature-settings: "tnum";
-  font-variant-numeric: tabular-nums;
-}
-
-/* 31. Hierarchical indentation for tree structures (groups, lenders, borrowers) */
-.hierarchy-level-0 { margin-left: 0; }
-.hierarchy-level-1 { margin-left: 1rem; }
-.hierarchy-level-2 { margin-left: 2rem; }
-.hierarchy-level-3 { margin-left: 3rem; }
-.hierarchy-level-4 { margin-left: 4rem; }
-
-/* 32. Loading states for financial data */
-.loading-skeleton {
-  background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
-}
-
-/* 33. Offline state styles */
-.offline-indicator {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #f37021;
-  color: white;
-  text-align: center;
-  padding: 0.5rem;
-  z-index: 10000;
-}
-
-/* 34. Toast notification positioning */
-.toast-container {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
-}
-
-/* 35. Modal backdrop */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 51, 102, 0.8);
-  z-index: 1000;
-}
-
-/* 36. Status badges for loan states */
-.status-badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* 37. Financial input focus states */
-.financial-input:focus {
-  border-color: #0099ff;
-  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
-}
-
-/* 38. Disabled financial controls */
-.financial-control[disabled] {
-  background: #f8f9fa;
-  color: #6c757d;
-  cursor: not-allowed;
-}
-
-/* 39. Currency formatting */
-.currency-amount {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 600;
-}
-
-/* 40. Data visualization containers */
-.chart-container {
-  position: relative;
-  width: 100%;
-  height: 300px;
-}
-
-/* 41. Print-only elements */
-.print-only {
-  display: none;
-}
-
-@media print {
-  .print-only {
-    display: block;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-}
-
-/* 42. Screen reader only - for accessibility */
+/* Utility classes for screen readers */
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-/* 43. Focus visible polyfill */
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
+/* Focus styles for accessibility */
+:focus-visible {
+    outline: 2px solid #0099ff;
+    outline-offset: 2px;
 }
 
-/* 44. Custom property fallbacks */
-@property --primary-color {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #003366;
+/* Remove focus for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
 }
 
-/* 45. Aspect ratio containers for financial charts */
-.aspect-ratio-16\/9 {
-  aspect-ratio: 16 / 9;
+/* Smooth scrolling for anchor links */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
-.aspect-ratio-4\/3 {
-  aspect-ratio: 4 / 3;
+/* Print styles */
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    
+    .no-print {
+        display: none !important;
+    }
 }
 
-.aspect-ratio-1\/1 {
-  aspect-ratio: 1 / 1;
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    * {
+        border-color: currentColor !important;
+    }
 }
 
-/* 46. Content visibility for performance */
-.content-visibility-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
-/* 47. View transition API support */
-::view-transition-group(root) {
-  animation-duration: 0.3s;
+/* Container for responsive design */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* 48. Container type for responsive layouts */
-.container-type-inline-size {
-  container-type: inline-size;
+/* Text alignment utilities */
+.text-center {
+    text-align: center;
 }
 
-/* 49. Scroll snap for mobile lists */
-.scroll-snap-x {
-  scroll-snap-type: x mandatory;
+.text-left {
+    text-align: left;
 }
 
-.scroll-snap-y {
-  scroll-snap-type: y mandatory;
+.text-right {
+    text-align: right;
 }
 
-.scroll-snap-align-start {
-  scroll-snap-align: start;
+/* Clearfix */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-/* 50. FinTech specific utility classes */
-.financial-gradient {
-  background: linear-gradient(135deg, #003366 0%, #0099ff 100%);
+/* Visually hidden but accessible */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
 }
 
-.lender-gradient {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+/* Skip to main content link */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #003366;
+    color: white;
+    padding: 8px 16px;
+    z-index: 9999;
+    text-decoration: none;
 }
 
-.borrower-gradient {
-  background: linear-gradient(135deg, #f37021 0%, #ff922b 100%);
+.skip-to-content:focus {
+    top: 0;
 }
 
-/* End of M-Pesewa CSS Reset */
+/* Aspect ratio containers */
+.aspect-ratio-16-9 {
+    aspect-ratio: 16/9;
+}
+
+.aspect-ratio-4-3 {
+    aspect-ratio: 4/3;
+}
+
+.aspect-ratio-1-1 {
+    aspect-ratio: 1/1;
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Responsive images */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive iframes */
+.responsive-iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}
+
+/* Grid system */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Flexbox utilities */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+/* Spacing utilities */
+.m-0 { margin: 0; }
+.m-1 { margin: 0.25rem; }
+.m-2 { margin: 0.5rem; }
+.m-3 { margin: 1rem; }
+.m-4 { margin: 1.5rem; }
+.m-5 { margin: 2rem; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 1rem; }
+.p-4 { padding: 1.5rem; }
+.p-5 { padding: 2rem; }
+
+/* Display utilities */
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.inline {
+    display: inline;
+}
+
+.none {
+    display: none;
+}
+
+/* Position utilities */
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.sticky {
+    position: sticky;
+}
+
+/* Z-index layers */
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-20 { z-index: 20; }
+.z-30 { z-index: 30; }
+.z-40 { z-index: 40; }
+.z-50 { z-index: 50; }
+
+/* Overflow utilities */
+.overflow-auto { overflow: auto; }
+.overflow-hidden { overflow: hidden; }
+.overflow-scroll { overflow: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* Cursor utilities */
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+/* User select utilities */
+.select-none { user-select: none; }
+.select-text { user-select: text; }
+.select-all { user-select: all; }
+
+/* Pointer events utilities */
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+
+/* Opacity utilities */
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* Transition utilities */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.transition-colors {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.transition-transform {
+    transition: transform 0.3s ease;
+}
+
+/* Animation utilities */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+    .mobile-hidden {
+        display: none;
+    }
+    
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .tablet-hidden {
+        display: none;
+    }
+    
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
