@@ -1,0 +1,303 @@
+/* assets/css/themes/rw.css */
+/* M-Pesewa Rwanda Theme - Imena Slate: Order, Discipline, Progress */
+/* Theme overrides for Rwanda operations maintaining strict hierarchy */
+
+:root {
+  /* Rwanda Theme Colors - Imena Slate Palette */
+  --rw-primary-color: #20603D;        /* Forest Green - Order */
+  --rw-secondary-color: #00A1DE;      /* Sky Blue - Progress */
+  --rw-accent-color: #FAD201;         /* Sun Yellow - Discipline */
+  --rw-success-color: #28a745;        /* Green - Growth */
+  --rw-warning-color: #ffc107;        /* Amber - Caution */
+  --rw-danger-color: #dc3545;         /* Red - Alert */
+  --rw-background-color: #ffffff;     /* Pure White */
+  --rw-surface-color: #f8f9fa;        /* Light Gray */
+  --rw-text-primary: #1a1a1a;         /* Deep Black */
+  --rw-text-secondary: #666666;       /* Medium Gray */
+  --rw-text-tertiary: #999999;        /* Light Gray */
+  --rw-border-color: #e0e0e0;         /* Light Border */
+  
+  /* Rwanda Financial Colors */
+  --rw-mtn-color: #ffcc00;            /* MTN Yellow */
+  --rw-airtel-color: #ee1c25;         /* Airtel Red */
+  --rw-sacco-color: #006400;          /* SACCO Green */
+  --rw-bank-color: #0066b3;           /* Banking Blue */
+  
+  /* Rwanda Typography */
+  --rw-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --rw-font-size-base: 16px;
+  --rw-font-size-scale: 1.25;         /* Major Third Scale */
+  --rw-line-height-base: 1.5;
+  --rw-letter-spacing-base: -0.01em;
+  
+  /* Rwanda Spacing */
+  --rw-spacing-unit: 8px;
+  --rw-spacing-xs: calc(var(--rw-spacing-unit) * 0.5);    /* 4px */
+  --rw-spacing-sm: calc(var(--rw-spacing-unit) * 1);      /* 8px */
+  --rw-spacing-md: calc(var(--rw-spacing-unit) * 2);      /* 16px */
+  --rw-spacing-lg: calc(var(--rw-spacing-unit) * 3);      /* 24px */
+  --rw-spacing-xl: calc(var(--rw-spacing-unit) * 4);      /* 32px */
+  --rw-spacing-xxl: calc(var(--rw-spacing-unit) * 6);     /* 48px */
+  
+  /* Rwanda Borders */
+  --rw-border-radius-sm: 4px;
+  --rw-border-radius-md: 8px;
+  --rw-border-radius-lg: 12px;
+  --rw-border-radius-xl: 16px;
+  --rw-border-width: 1px;
+  --rw-border-style: solid;
+  
+  /* Rwanda Shadows */
+  --rw-shadow-sm: 0 2px 4px rgba(32, 96, 61, 0.1);
+  --rw-shadow-md: 0 4px 8px rgba(32, 96, 61, 0.12);
+  --rw-shadow-lg: 0 8px 16px rgba(32, 96, 61, 0.15);
+  --rw-shadow-xl: 0 16px 32px rgba(32, 96, 61, 0.2);
+  
+  /* Rwanda Animations */
+  --rw-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --rw-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --rw-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Rwanda Z-Index */
+  --rw-z-base: 1;
+  --rw-z-dropdown: 100;
+  --rw-z-sticky: 200;
+  --rw-z-fixed: 300;
+  --rw-z-modal: 400;
+  --rw-z-popover: 500;
+  --rw-z-tooltip: 600;
+}
+
+/* Rwanda Header Overrides */
+[data-country="rw"] .mp-header {
+  background: linear-gradient(135deg, var(--rw-primary-color) 0%, #16482c 100%);
+  border-bottom: 3px solid var(--rw-accent-color);
+}
+
+[data-country="rw"] .nav-link.active {
+  background: rgba(250, 210, 1, 0.2);
+  color: var(--rw-accent-color);
+}
+
+[data-country="rw"] .nav-link.active::after {
+  background: var(--rw-accent-color);
+}
+
+[data-country="rw"] .signup-btn {
+  background: linear-gradient(135deg, var(--rw-secondary-color) 0%, #0088b8 100%);
+  color: #ffffff;
+}
+
+[data-country="rw"] .signup-btn:hover {
+  background: linear-gradient(135deg, #0088b8 0%, var(--rw-secondary-color) 100%);
+}
+
+/* Rwanda Footer Overrides */
+[data-country="rw"] .mp-footer {
+  background: linear-gradient(135deg, #16482c 0%, var(--rw-primary-color) 100%);
+  border-top: 3px solid var(--rw-accent-color);
+}
+
+[data-country="rw"] .footer-link:hover {
+  color: var(--rw-accent-color);
+}
+
+[data-country="rw"] .footer-link::before {
+  color: var(--rw-accent-color);
+}
+
+[data-country="rw"] .country-ticker {
+  background: linear-gradient(90deg, 
+    rgba(32, 96, 61, 0.9) 0%, 
+    rgba(0, 161, 222, 0.8) 50%, 
+    rgba(32, 96, 61, 0.9) 100%);
+  border-color: var(--rw-secondary-color);
+}
+
+/* Rwanda Sidebar Overrides */
+[data-country="rw"] .mp-sidebar {
+  border-right: 3px solid var(--rw-primary-color);
+}
+
+[data-country="rw"] .sidebar-link.active {
+  background: rgba(32, 96, 61, 0.1);
+  color: var(--rw-primary-color);
+}
+
+[data-country="rw"] .sidebar-link.active::before {
+  background: var(--rw-primary-color);
+}
+
+[data-country="rw"] .profile-card {
+  background: linear-gradient(135deg, rgba(32, 96, 61, 0.1) 0%, rgba(0, 161, 222, 0.05) 100%);
+  border-left: 3px solid var(--rw-primary-color);
+}
+
+/* Rwanda Button Overrides */
+[data-country="rw"] .borrower-btn,
+[data-country="rw"] [data-role="borrower"] .cta-btn {
+  background: linear-gradient(135deg, #f37021 0%, #d45c00 100%);
+  border: 2px solid #f37021;
+}
+
+[data-country="rw"] .lender-btn,
+[data-country="rw"] [data-role="lender"] .cta-btn {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border: 2px solid #28a745;
+}
+
+[data-country="rw"] .secondary-btn {
+  background: transparent;
+  border: 2px solid var(--rw-secondary-color);
+  color: var(--rw-secondary-color);
+}
+
+[data-country="rw"] .secondary-btn:hover {
+  background: var(--rw-secondary-color);
+  color: #ffffff;
+}
+
+/* Rwanda Card Overrides */
+[data-country="rw"] .card {
+  background: var(--rw-background-color);
+  border: var(--rw-border-width) var(--rw-border-style) var(--rw-border-color);
+  border-radius: var(--rw-border-radius-lg);
+  box-shadow: var(--rw-shadow-sm);
+  transition: all var(--rw-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="rw"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rw-primary-color) 0%, var(--rw-secondary-color) 100%);
+}
+
+[data-country="rw"] .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--rw-shadow-lg);
+  border-color: var(--rw-primary-color);
+}
+
+/* Rwanda Form Overrides */
+[data-country="rw"] .form-control:focus {
+  border-color: var(--rw-primary-color);
+  box-shadow: 0 0 0 3px rgba(32, 96, 61, 0.1);
+}
+
+/* Rwanda Table Overrides */
+[data-country="rw"] .table thead {
+  background: linear-gradient(135deg, var(--rw-primary-color) 0%, #16482c 100%);
+}
+
+[data-country="rw"] .table th {
+  border-bottom: 3px solid var(--rw-accent-color);
+}
+
+[data-country="rw"] .table tbody tr:hover {
+  background-color: rgba(32, 96, 61, 0.1);
+}
+
+/* Rwanda Alert Overrides */
+[data-country="rw"] .alert-info {
+  background-color: rgba(32, 96, 61, 0.1);
+  border-color: var(--rw-primary-color);
+  color: #155724;
+}
+
+[data-country="rw"] .alert-info::before {
+  background-color: var(--rw-primary-color);
+}
+
+/* Rwanda Badge Overrides */
+[data-country="rw"] .badge-primary {
+  background: linear-gradient(135deg, var(--rw-primary-color) 0%, #16482c 100%);
+  color: #ffffff;
+}
+
+[data-country="rw"] .badge-secondary {
+  background: linear-gradient(135deg, var(--rw-secondary-color) 0%, #0088b8 100%);
+  color: #ffffff;
+}
+
+[data-country="rw"] .badge-accent {
+  background: linear-gradient(135deg, var(--rw-accent-color) 0%, #e6b800 100%);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Rwanda Progress Overrides */
+[data-country="rw"] .progress-bar {
+  background: linear-gradient(90deg, var(--rw-primary-color) 0%, var(--rw-secondary-color) 100%);
+}
+
+/* Rwanda Hierarchy Visual Indicators */
+[data-country="rw"] [data-hierarchy-level="global"] {
+  border-left: 4px solid var(--rw-primary-color);
+}
+
+[data-country="rw"] [data-hierarchy-level="country"] {
+  border-left: 4px solid var(--rw-secondary-color);
+  background: linear-gradient(135deg, rgba(0, 161, 222, 0.05) 0%, transparent 100%);
+}
+
+[data-country="rw"] [data-hierarchy-level="group"] {
+  border-left: 4px solid var(--rw-accent-color);
+  background: linear-gradient(135deg, rgba(250, 210, 1, 0.05) 0%, transparent 100%);
+}
+
+/* Rwanda Currency Formatting */
+[data-country="rw"] .currency {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+[data-country="rw"] .currency::before {
+  content: 'RWF ';
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Rwanda Discipline Indicators */
+[data-country="rw"] .discipline-badge {
+  background: linear-gradient(135deg, var(--rw-accent-color) 0%, rgba(250, 210, 1, 0.3) 100%);
+  border: 1px solid var(--rw-accent-color);
+  color: var(--rw-text-primary);
+  padding: var(--rw-spacing-xs) var(--rw-spacing-md);
+  border-radius: var(--rw-border-radius-lg);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rw-spacing-sm);
+}
+
+.discipline-badge::before {
+  content: '📊';
+  font-size: 0.875rem;
+}
+
+/* Rwanda Responsive Adjustments */
+@media (max-width: 768px) {
+  [data-country="rw"] {
+    --rw-font-size-base: 14px;
+    --rw-spacing-unit: 6px;
+  }
+}
+
+/* Rwanda Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  [data-country="rw"] {
+    --rw-background-color: #1a1a1a;
+    --rw-surface-color: #2d2d2d;
+    --rw-text-primary: #ffffff;
+    --rw-text-secondary: #cccccc;
+    --rw-border-color: #444444;
+  }
+}
+
+/* Rwanda Theme Complete - Imena Slate: Order, Discipline, Progress */
