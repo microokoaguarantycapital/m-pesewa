@@ -1,0 +1,470 @@
+# Netlify Configuration for M-Pesewa Platform
+# Deployed from: https://github.com/microokoaguarantycapital/m-pesewa
+
+[build]
+  publish = "."  # Publish from root directory
+  command = ""   # No build command needed for static site
+  functions = "functions/"  # Location for serverless functions if needed
+
+[build.environment]
+  NODE_VERSION = "18"  # Node.js version for any Netlify Functions
+  PYTHON_VERSION = "3.11"  # Python version for any functions
+
+# ============================================
+# REDIRECTS & REWRITES
+# ============================================
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions:
+    Language = ["en"]
+    Country = ["KE", "UG", "TZ", "RW", "BI", "SS", "SO", "CD", "NG", "GH", "ZA", "ET"]
+
+# Country-specific routing
+[[redirects]]
+  from = "/kenya/*"
+  to = "/countries/kenya.html"
+  status = 301
+
+[[redirects]]
+  from = "/uganda/*"
+  to = "/countries/uganda.html"
+  status = 301
+
+[[redirects]]
+  from = "/tanzania/*"
+  to = "/countries/tanzania.html"
+  status = 301
+
+[[redirects]]
+  from = "/rwanda/*"
+  to = "/countries/rwanda.html"
+  status = 301
+
+[[redirects]]
+  from = "/drc/*"
+  to = "/countries/drc.html"
+  status = 301
+
+[[redirects]]
+  from = "/burundi/*"
+  to = "/countries/burundi.html"
+  status = 301
+
+[[redirects]]
+  from = "/nigeria/*"
+  to = "/countries/nigeria.html"
+  status = 301
+
+[[redirects]]
+  from = "/ghana/*"
+  to = "/countries/ghana.html"
+  status = 301
+
+[[redirects]]
+  from = "/south-sudan/*"
+  to = "/countries/south-sudan.html"
+  status = 301
+
+[[redirects]]
+  from = "/somalia/*"
+  to = "/countries/somalia.html"
+  status = 301
+
+[[redirects]]
+  from = "/south-africa/*"
+  to = "/countries/south-africa.html"
+  status = 301
+
+[[redirects]]
+  from = "/ethiopia/*"
+  to = "/countries/ethiopia.html"
+  status = 301
+
+# Emergency categories short URLs
+[[redirects]]
+  from = "/fare"
+  to = "/emergency/fare.html"
+  status = 302
+
+[[redirects]]
+  from = "/data"
+  to = "/emergency/data.html"
+  status = 302
+
+[[redirects]]
+  from = "/gas"
+  to = "/emergency/gas.html"
+  status = 302
+
+[[redirects]]
+  from = "/food"
+  to = "/emergency/food.html"
+  status = 302
+
+[[redirects]]
+  from = "/wifi"
+  to = "/emergency/wifi.html"
+  status = 302
+
+[[redirects]]
+  from = "/water"
+  to = "/emergency/water.html"
+  status = 302
+
+[[redirects]]
+  from = "/electricity"
+  to = "/emergency/electricity.html"
+  status = 302
+
+[[redirects]]
+  from = "/tv"
+  to = "/emergency/tv.html"
+  status = 302
+
+[[redirects]]
+  from = "/fuel"
+  to = "/emergency/fuel.html"
+  status = 302
+
+[[redirects]]
+  from = "/repair"
+  to = "/emergency/repair.html"
+  status = 302
+
+[[redirects]]
+  from = "/credo"
+  to = "/emergency/credo.html"
+  status = 302
+
+[[redirects]]
+  from = "/sales"
+  to = "/emergency/sales.html"
+  status = 302
+
+[[redirects]]
+  from = "/capital"
+  to = "/emergency/capital.html"
+  status = 302
+
+[[redirects]]
+  from = "/soko"
+  to = "/emergency/soko.html"
+  status = 302
+
+[[redirects]]
+  from = "/kidandaski"
+  to = "/emergency/kidandaski.html"
+  status = 302
+
+[[redirects]]
+  from = "/hawker"
+  to = "/emergency/hawker.html"
+  status = 302
+
+[[redirects]]
+  from = "/fuliziwa"
+  to = "/emergency/fuliziwa.html"
+  status = 302
+
+[[redirects]]
+  from = "/medicine"
+  to = "/emergency/medicine.html"
+  status = 302
+
+[[redirects]]
+  from = "/school"
+  to = "/emergency/school.html"
+  status = 302
+
+[[redirects]]
+  from = "/advance"
+  to = "/emergency/advance.html"
+  status = 302
+
+# Auth shortcuts
+[[redirects]]
+  from = "/login"
+  to = "/auth/login.html"
+  status = 302
+
+[[redirects]]
+  from = "/register"
+  to = "/auth/register.html"
+  status = 302
+
+[[redirects]]
+  from = "/signup"
+  to = "/auth/register.html"
+  status = 302
+
+[[redirects]]
+  from = "/logout"
+  to = "/auth/logout.html"
+  status = 302
+
+# User dashboard shortcuts
+[[redirects]]
+  from = "/dashboard"
+  to = "/lender/dashboard.html"
+  status = 302
+
+[[redirects]]
+  from = "/borrow"
+  to = "/borrower/dashboard.html"
+  status = 302
+
+# ============================================
+# SECURITY HEADERS
+# ============================================
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    
+    # Content Security Policy for PWA
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline';
+      style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https:;
+      connect-src 'self';
+      manifest-src 'self';
+      worker-src 'self';
+      frame-ancestors 'none';
+    """
+
+# Special headers for PWA assets
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/service-worker.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Service-Worker-Allowed = "/"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/assets/images/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Content-Type = "text/html; charset=UTF-8"
+    Cache-Control = "public, max-age=3600"
+
+# ============================================
+# CUSTOM 404 PAGE
+# ============================================
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# ============================================
+# INTERNATIONALIZATION (i18n) SETTINGS
+# ============================================
+[context.production.environment]
+  DEFAULT_COUNTRY = "KE"
+  SITE_URL = "https://m-pesewa.netlify.app"
+  API_ENDPOINT = "https://api.m-pesewa.com"
+  
+[context.deploy-preview.environment]
+  SITE_URL = "https://deploy-preview-*.m-pesewa.netlify.app"
+  API_ENDPOINT = "https://staging-api.m-pesewa.com"
+  
+[context.branch-deploy.environment]
+  SITE_URL = "https://*.m-pesewa.netlify.app"
+  API_ENDPOINT = "https://staging-api.m-pesewa.com"
+
+# ============================================
+# SERVERLESS FUNCTIONS (if needed in future)
+# ============================================
+# [functions]
+#   node_bundler = "esbuild"
+
+# ============================================
+# ENVIRONMENT VARIABLES
+# ============================================
+[build.environment]
+  # PWA Settings
+  PWA_NAME = "M-Pesewa"
+  PWA_SHORT_NAME = "M-Pesewa"
+  PWA_THEME_COLOR = "#003366"
+  PWA_BACKGROUND_COLOR = "#ffffff"
+  
+  # Analytics (if added later)
+  GOOGLE_ANALYTICS_ID = ""
+  FACEBOOK_PIXEL_ID = ""
+  
+  # Feature flags
+  ENABLE_SERVICE_WORKER = "true"
+  ENABLE_OFFLINE_SUPPORT = "true"
+  ENABLE_PUSH_NOTIFICATIONS = "false"
+
+# ============================================
+# SPAM PROTECTION
+# ============================================
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Netlify's built-in spam protection headers
+    X-Content-Type-Options = "nosniff"
+    
+    # Custom spam protection
+    X-Robots-Tag = "noindex, nofollow"
+    X-DNS-Prefetch-Control = "off"
+
+# ============================================
+# PERFORMANCE OPTIMIZATIONS
+# ============================================
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ============================================
+# BROWSER CACHING STRATEGY
+# ============================================
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=86400"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, s-maxage=86400"
+
+# ============================================
+# PWA ASSETS
+# ============================================
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/assets/images/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# ============================================
+# PREVIEW DEFAULTS
+# ============================================
+[context.deploy-preview]
+  command = "echo 'Preview build for M-Pesewa'"
+  publish = "."
+
+[context.branch-deploy]
+  command = "echo 'Branch deploy for M-Pesewa'"
+  publish = "."
+
+# ============================================
+# NETLIFY PLUGINS (optional - can be added later)
+# ============================================
+# [[plugins]]
+#   package = "@netlify/plugin-sitemap"
+# 
+# [[plugins]]
+#   package = "netlify-plugin-submit-sitemap"
+#     [plugins.inputs]
+#       searchConsoleClientEmail = ""
+#       searchConsolePrivateKey = ""
+# 
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"
+
+# ============================================
+# SITE SETTINGS
+# ============================================
+[site]
+  name = "M-Pesewa - Emergency Micro-Lending"
+  id = "m-pesewa-platform"
+  
+  # Git repository settings
+  [site.repository]
+    provider = "github"
+    repo = "microokoaguarantycapital/m-pesewa"
+    branch = "main"
+    base = "main"
+    
+  # Domain settings (if custom domain is configured)
+  [site.domain]
+    name = "m-pesewa.com"
+    https = true
+    force_ssl = true
+
+# ============================================
+# DEPLOY SETTINGS
+# ============================================
+[deploy]
+  # Auto-publish from main branch
+  publish = "."
+  
+  # Skip deploy for certain file changes
+  ignore = """
+  git diff --quiet HEAD^ HEAD -- README.md
+  """
+  
+  # Deploy hooks (if needed)
+  notification_urls = []
+  
+  # Deploy contexts
+  [deploy.contexts]
+    production = ["main"]
+    staging = ["develop"]
+    preview = ["feature/*", "bugfix/*"]
+
+# ============================================
+# DEV SETTINGS
+# ============================================
+[dev]
+  port = 3000
+  publish = "."
+  framework = "#static"
+  targetPort = 3000
+  autoLaunch = false
+  [dev.command]
+    develop = ""
+    start = ""

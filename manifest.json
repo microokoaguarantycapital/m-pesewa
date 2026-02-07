@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest",
+  "name": "M-Pesewa | Emergency Micro-Lending in Trusted Circles",
+  "short_name": "M-Pesewa",
+  "description": "Africa's trusted peer-to-peer emergency micro-lending platform. Friends lend to friends in trusted groups across 12 African countries.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "portrait-primary",
+  "theme_color": "#003366",
+  "background_color": "#ffffff",
+  "categories": ["finance", "business", "lifestyle", "social"],
+  "dir": "ltr",
+  "lang": "en-US",
+  "id": "/m-pesewa/",
+  "version": "1.0.0",
+  "author": "M-Pesewa Technology Pvt. Ltd.",
+  
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/home-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "M-Pesewa Mobile Home Screen"
+    },
+    {
+      "src": "assets/images/screenshots/dashboard-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "M-Pesewa Lender Dashboard"
+    },
+    {
+      "src": "assets/images/screenshots/emergency-hub-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "M-Pesewa Emergency Hub"
+    },
+    {
+      "src": "assets/images/screenshots/home-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "M-Pesewa Desktop Home Screen"
+    },
+    {
+      "src": "assets/images/screenshots/lender-dashboard-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "M-Pesewa Lender Dashboard Desktop"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Apply for Loan",
+      "short_name": "Apply",
+      "description": "Quickly apply for an emergency loan",
+      "url": "./borrower/apply.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/loan-icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Lender Dashboard",
+      "short_name": "Dashboard",
+      "description": "Access your lending dashboard",
+      "url": "./lender/dashboard.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/dashboard-icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Emergency Hub",
+      "short_name": "Emergency",
+      "description": "Browse 20 emergency categories",
+      "url": "./emergency/index.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/emergency-icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "My Ledgers",
+      "short_name": "Ledgers",
+      "description": "View and manage your loan ledgers",
+      "url": "./ledger/list.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/ledger-icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Country Selection",
+      "short_name": "Country",
+      "description": "Switch between supported countries",
+      "url": "./countries/index.html",
+      "icons": [
+        {
+          "src": "assets/images/icons/country-icon-96x96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

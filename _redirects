@@ -1,0 +1,14 @@
+# Country shortcuts
+/kenya/*    /countries/kenya.html    301
+/uganda/*   /countries/uganda.html   301
+
+# Emergency categories
+/fare       /emergency/fare.html     302
+/data       /emergency/data.html     302
+
+# Auth shortcuts
+/login      /auth/login.html         302
+/register   /auth/register.html      302
+
+# Fallback for SPA-like behavior (optional)
+/*          /index.html              200
