@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Management - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <style>
+        .risk-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .risk-header {
+            background: linear-gradient(135deg, #721c24 0%, #a71d2a 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .risk-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .risk-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-top: 5px solid;
+        }
+        
+        .risk-high { border-top-color: #dc3545; }
+        .risk-medium { border-top-color: #ffc107; }
+        .risk-low { border-top-color: #28a745; }
+        
+        .risk-score {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .score-high { color: #dc3545; }
+        .score-medium { color: #ffc107; }
+        .score-low { color: #28a745; }
+        
+        .risk-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .indicator-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .indicator-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+        
+        .indicator-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .high-risk-list {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .risk-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .risk-mitigation {
+            background: #d4edda;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .mitigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .mitigation-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .blacklist-section {
+            background: #721c24;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 14px;
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .risk-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .risk-indicators {
+                grid-template-columns: 1fr;
+            }
+            
+            .mitigation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="risk-container">
+        <div class="risk-header">
+            <h1 style="margin-bottom: 15px; font-size: 36px;">Risk Management Dashboard</h1>
+            <p style="opacity: 0.9; max-width: 700px; margin: 0 auto; font-size: 18px;">
+                Monitor lending risks, blacklist status, and portfolio health
+            </p>
+        </div>
+        
+        <!-- Risk Overview -->
+        <div class="risk-overview">
+            <div class="risk-card risk-medium">
+                <h3 style="color: #003366; margin-bottom: 10px;">Portfolio Risk Score</h3>
+                <div class="risk-score score-medium">6.2/10</div>
+                <p style="color: #555555; font-size: 14px;">
+                    Moderate Risk - 2 overdue loans detected
+                </p>
+                <div style="margin-top: 20px; font-size: 12px; color: #856404;">
+                    ⚠️ Action Recommended: Review overdue loans
+                </div>
+            </div>
+            
+            <div class="risk-card risk-low">
+                <h3 style="color: #003366; margin-bottom: 10px;">Default Rate</h3>
+                <div class="risk-score score-low">2.1%</div>
+                <p style="color: #555555; font-size: 14px;">
+                    Better than platform average (3.5%)
+                </p>
+                <div style="margin-top: 20px; font-size: 12px; color: #155724;">
+                    ✅ Excellent: Keep maintaining standards
+                </div>
+            </div>
+            
+            <div class="risk-card risk-high">
+                <h3 style="color: #003366; margin-bottom: 10px;">Concentration Risk</h3>
+                <div class="risk-score score-high">8.5/10</div>
+                <p style="color: #555555; font-size: 14px;">
+                    High: 45% of portfolio to 3 borrowers
+                </p>
+                <div style="margin-top: 20px; font-size: 12px; color: #721c24;">
+                    ⚠️ High Risk: Diversify your lending
+                </div>
+            </div>
+        </div>
+        
+        <!-- Risk Indicators -->
+        <div class="risk-indicators">
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <div class="indicator-icon" style="background: #dc3545;">⚠️</div>
+                    <div>
+                        <h3 style="color: #003366; margin: 0;">Overdue Loans</h3>
+                        <small style="color: #555555;">Loans past 7-day repayment period</small>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: #003366; font-weight: 600;">2 Active Overdue</span>
+                        <span style="color: #dc3545; font-weight: 600;">KSh 15,750</span>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%; background: #dc3545;"></div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <small style="color: #555555;">1-7 days overdue</small>
+                            <div style="color: #ffc107; font-weight: 600;">1 loan</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <small style="color: #555555;">8-30 days overdue</small>
+                            <div style="color: #dc3545; font-weight: 600;">1 loan</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <small style="color: #555555;">Risk of default</small>
+                            <div style="color: #721c24; font-weight: 600;">High</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <div class="indicator-icon" style="background: #ffc107;">⭐</div>
+                    <div>
+                        <h3 style="color: #003366; margin: 0;">Borrower Quality</h3>
+                        <small style="color: #555555;">Average borrower rating & behavior</small>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 36px; color: #ffc107; margin-bottom: 10px;">4.2 ★</div>
+                        <small style="color: #555555;">Average Borrower Rating</small>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: #003366;">5-star borrowers</span>
+                            <span style="color: #28a745; font-weight: 600;">35%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%; background: #28a745;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: #003366;">Low-rated (1-2 stars)</span>
+                            <span style="color: #dc3545; font-weight: 600;">8%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 8%; background: #dc3545;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="indicator-card">
+                <div class="indicator-header">
+                    <div class="indicator-icon" style="background: #0099ff;">📊</div>
+                    <div>
+                        <h3 style="color: #003366; margin: 0;">Portfolio Health</h3>
+                        <small style="color: #555555;">Distribution & diversification</small>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                        <span style="color: #003366; font-weight: 600;">Top 3 Borrowers</span>
+                        <span style="color: #dc3545; font-weight: 600;">45% of portfolio</span>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 45%; background: #dc3545;"></div>
+                    </div>
+                    
+                    <div style="margin-top: 25px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #003366;">Category Diversity</span>
+                            <span style="color: #28a745; font-weight: 600;">Good</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #003366;">Group Spread</span>
+                            <span style="color: #ffc107; font-weight: 600;">Limited</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #003366;">Loan Size Variety</span>
+                            <span style="color: #28a745; font-weight: 600;">Good</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- High Risk Loans -->
+        <div class="high-risk-list">
+            <h3 style="color: #003366; margin-bottom: 20px;">⚠️ High Risk Loans Requiring Attention</h3>
+            
+            <div class="risk-item">
+                <div style="font-size: 24px; color: #dc3545;">🚨</div>
+                <div style="flex: 1;">
+                    <strong style="color: #003366; display: block;">Peter Kamau</strong>
+                    <small style="color: #555555;">Loan: KSh 5,000 | 3 days overdue | KSh 750 penalty accrued</small>
+                </div>
+                <div>
+                    <button onclick="takeAction('peterk')" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-size: 14px; cursor: pointer;">
+                        Take Action
+                    </button>
+                </div>
+            </div>
+            
+            <div class="risk-item">
+                <div style="font-size: 24px; color: #ffc107;">⚠️</div>
+                <div style="flex: 1;">
+                    <strong style="color: #003366; display: block;">Sarah Wangari</strong>
+                    <small style="color: #555555;">Loan: KSh 8,000 | Rating dropped from 5 to 4 stars</small>
+                </div>
+                <div>
+                    <button onclick="reviewBorrower('sarahw')" style="background: #ffc107; color: #000; border: none; padding: 8px 15px; border-radius: 5px; font-size: 14px; cursor: pointer;">
+                        Review
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Risk Mitigation Strategies -->
+        <div class="risk-mitigation">
+            <h3 style="color: #155724; margin-bottom: 20px;">🎯 Risk Mitigation Strategies</h3>
+            
+            <div class="mitigation-grid">
+                <div class="mitigation-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">👥</div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Diversify Lending</h4>
+                    <p style="color: #555555; font-size: 14px;">
+                        Spread loans across more borrowers and groups to reduce concentration risk.
+                    </p>
+                </div>
+                
+                <div class="mitigation-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">⭐</div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Focus on High Ratings</h4>
+                    <p style="color: #555555; font-size: 14px;">
+                        Prioritize lending to borrowers with 4+ star ratings and good repayment history.
+                    </p>
+                </div>
+                
+                <div class="mitigation-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">⏰</div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Early Intervention</h4>
+                    <p style="color: #555555; font-size: 14px;">
+                        Contact borrowers at first sign of delay. Use guarantors for high-risk loans.
+                    </p>
+                </div>
+                
+                <div class="mitigation-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">📝</div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Use Blacklist System</h4>
+                    <p style="color: #555555; font-size: 14px;">
+                        Blacklist chronic defaulters to protect yourself and other lenders in the group.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Blacklist Section -->
+        <div class="blacklist-section">
+            <h3 style="margin-bottom: 15px; color: white;">🚫 Blacklist Management</h3>
+            <p style="opacity: 0.9; margin-bottom: 20px;">
+                Monitor and manage borrowers who have been blacklisted for defaults
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">1</div>
+                    <small style="opacity: 0.8;">Currently Blacklisted</small>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">KSh 15,000</div>
+                    <small style="opacity: 0.8;">Total Blacklisted Amount</small>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">45</div>
+                    <small style="opacity: 0.8;">Days Since First Default</small>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 36px; margin-bottom: 10px;">2</div>
+                    <small style="opacity: 0.8;">Guarantors Contacted</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <button onclick="viewBlacklist()" style="background: white; color: #721c24; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; margin-right: 15px;">
+                    View Blacklist
+                </button>
+                <button onclick="addToBlacklist()" style="background: transparent; color: white; border: 2px solid white; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+                    Add New to Blacklist
+                </button>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button onclick="generateRiskReport()" style="background: #003366; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                📊 Generate Risk Report
+            </button>
+            <button onclick="viewRiskHistory()" style="background: #0099ff; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                📈 View Risk History
+            </button>
+            <button onclick="contactSupport()" style="background: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px;">
+                🛡️ Contact Risk Support
+            </button>
+        </div>
+        
+        <!-- Risk Tips -->
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin-top: 40px;">
+            <h4 style="color: #003366; margin-bottom: 15px;">💡 Risk Management Tips</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div style="display: flex; gap: 10px;">
+                    <div style="color: #28a745; font-weight: bold;">1.</div>
+                    <div>
+                        <strong style="color: #003366;">Verify Guarantors:</strong>
+                        <p style="color: #555555; margin: 5px 0 0; font-size: 14px;">
+                            Always contact both guarantors before approving loans above KSh 5,000.
+                        </p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div style="color: #28a745; font-weight: bold;">2.</div>
+                    <div>
+                        <strong style="color: #003366;">Monitor 28th Rule:</strong>
+                        <p style="color: #555555; margin: 5px 0 0; font-size: 14px;">
+                            Remember subscriptions expire on the 28th. Renew early to avoid access block.
+                        </p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <div style="color: #28a745; font-weight: bold;">3.</div>
+                    <div>
+                        <strong style="color: #003366;">Use Group Isolation:</strong>
+                        <p style="color: #555555; margin: 5px 0 0; font-size: 14px;">
+                            Leverage group trust. Lend only to people you or your group members know well.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tooltip functionality
+        document.querySelectorAll('.tooltip').forEach(tooltip => {
+            tooltip.addEventListener('mouseenter', function() {
+                this.querySelector('.tooltip-text').style.opacity = '1';
+                this.querySelector('.tooltip-text').style.visibility = 'visible';
+            });
+            
+            tooltip.addEventListener('mouseleave', function() {
+                this.querySelector('.tooltip-text').style.opacity = '0';
+                this.querySelector('.tooltip-text').style.visibility = 'hidden';
+            });
+        });
+        
+        // Action functions
+        function takeAction(borrowerId) {
+            window.location.href = `../../blacklist/pages/blacklist-appeal.html?borrower=${borrowerId}&action=urgent`;
+        }
+        
+        function reviewBorrower(borrowerId) {
+            window.location.href = `../../borrower/pages/borrower-profile.html?id=${borrowerId}&review=risk`;
+        }
+        
+        function viewBlacklist() {
+            window.location.href = '../../blacklist/pages/blacklist-public.html';
+        }
+        
+        function addToBlacklist() {
+            window.location.href = '../../blacklist/pages/blacklist-appeal.html';
+        }
+        
+        function generateRiskReport() {
+            alert('Generating comprehensive risk report...');
+            // In real implementation, this would generate a detailed report
+        }
+        
+        function viewRiskHistory() {
+            window.location.href = '../../analytics/risk-history.html';
+        }
+        
+        function contactSupport() {
+            window.location.href = '../../global-pages/contact.html?category=risk';
+        }
+        
+        // Calculate and update risk metrics
+        function updateRiskMetrics() {
+            // In real implementation, this would calculate risk scores based on portfolio data
+            const overdueLoans = 2;
+            const totalLoans = 45;
+            const overduePercentage = (overdueLoans / totalLoans) * 100;
+            
+            // Update UI elements
+            document.querySelector('.score-high').textContent = `${overduePercentage.toFixed(1)}%`;
+        }
+        
+        // Check if user is logged in and is a lender
+        document.addEventListener('DOMContentLoaded', function() {
+            const userRole = localStorage.getItem('mpesewa_user_role');
+            const userCountry = localStorage.getItem('mpesewa_country');
+            
+            if (!userRole || userRole !== 'lender') {
+                window.location.href = '../../auth/login.html?redirect=lending-risk';
+            }
+            
+            if (!userCountry) {
+                window.location.href = '../../global-pages/countries.html';
+            }
+            
+            updateRiskMetrics();
+            
+            // Check subscription status
+            const subscriptionExpiry = localStorage.getItem('mpesewa_subscription_expiry');
+            if (subscriptionExpiry) {
+                const expiryDate = new Date(subscriptionExpiry);
+                const today = new Date();
+                
+                if (today > expiryDate) {
+                    document.querySelector('.risk-header').innerHTML += `
+                        <div style="background: rgba(220, 53, 69, 0.3); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid #dc3545;">
+                            <strong>⚠️ CRITICAL RISK ALERT:</strong>
+                            <p style="margin: 10px 0 0; font-size: 16px;">
+                                Your subscription has expired! Lending access is blocked until renewal.
+                            </p>
+                            <button onclick="renewSubscription()" style="background: white; color: #dc3545; border: none; padding: 10px 20px; border-radius: 5px; font-weight: 600; cursor: pointer; margin-top: 10px;">
+                                Renew Now
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        });
+        
+        function renewSubscription() {
+            window.location.href = '../../subscription/subscribe.html';
+        }
+    </script>
+</body>
+</html>

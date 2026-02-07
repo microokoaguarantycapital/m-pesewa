@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Dashboard - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/badges.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/flags.css">
+    <style>
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: linear-gradient(135deg, #003366 0%, #0099ff 100%);
+            border-radius: 10px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 40%;
+            background: rgba(255, 255, 255, 0.1);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%, 30% 0);
+        }
+        
+        .group-info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .group-title {
+            flex: 1;
+        }
+        
+        .group-title h1 {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .group-nickname {
+            font-size: 18px;
+            opacity: 0.9;
+            margin: 0 0 15px 0;
+        }
+        
+        .group-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .group-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary {
+            background: #28a745;
+            border-color: #28a745;
+        }
+        
+        .action-btn.primary:hover {
+            background: #218838;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header h3 {
+            margin: 0;
+            color: #003366;
+            font-size: 18px;
+        }
+        
+        .section-link {
+            color: #0099ff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .section-link:hover {
+            text-decoration: underline;
+        }
+        
+        .section-body {
+            padding: 20px;
+        }
+        
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #003366;
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            color: #003366;
+            margin: 0 0 5px 0;
+        }
+        
+        .activity-details {
+            color: #6c757d;
+            font-size: 14px;
+            margin: 0 0 5px 0;
+        }
+        
+        .activity-time {
+            color: #adb5bd;
+            font-size: 12px;
+        }
+        
+        .member-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .member-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #003366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-name {
+            font-weight: 500;
+            color: #003366;
+            margin: 0 0 2px 0;
+        }
+        
+        .member-role {
+            color: #6c757d;
+            font-size: 12px;
+        }
+        
+        .member-status {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active { background: #d4edda; color: #155724; }
+        .status-inactive { background: #fff3cd; color: #856404; }
+        .status-blacklisted { background: #f8d7da; color: #721c24; }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .quick-action {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quick-action:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            border-color: #0099ff;
+        }
+        
+        .action-icon {
+            font-size: 24px;
+            color: #003366;
+        }
+        
+        .action-label {
+            font-size: 12px;
+            color: #555555;
+        }
+        
+        .group-state-banner {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .state-icon {
+            font-size: 24px;
+        }
+        
+        .state-content {
+            flex: 1;
+        }
+        
+        .state-title {
+            font-weight: 600;
+            margin: 0 0 5px 0;
+        }
+        
+        .state-description {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .banner-active { background: #d4edda; color: #155724; }
+        .banner-locked { background: #fff3cd; color: #856404; }
+        .banner-suspended { background: #f8d7da; color: #721c24; }
+        .banner-created { background: #e2e3e5; color: #383d41; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+        }
+        
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h4 {
+            margin: 0 0 10px 0;
+            color: #003366;
+        }
+        
+        .empty-state p {
+            margin: 0 0 20px 0;
+        }
+        
+        .btn-action {
+            background: #0099ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-action:hover {
+            background: #007bff;
+        }
+        
+        .group-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .star {
+            color: #ffc107;
+            font-size: 20px;
+        }
+        
+        .rating-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #003366;
+        }
+        
+        .rating-count {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .mini-stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .mini-stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: #003366;
+            display: block;
+        }
+        
+        .mini-stat-label {
+            font-size: 11px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 1024px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 20px;
+            }
+            
+            .group-info-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .group-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #003366;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .country-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .group-type-badge {
+            background: #0099ff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be injected by JavaScript -->
+    <div id="header-placeholder"></div>
+
+    <div class="dashboard-container">
+        <!-- Loading State -->
+        <div class="loading-spinner" id="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading group dashboard...</p>
+        </div>
+
+        <!-- Dashboard Content (initially hidden) -->
+        <div id="dashboard-content" style="display: none;">
+            <!-- Group State Banner -->
+            <div id="group-state-banner" class="group-state-banner">
+                <!-- State banner will be populated by JavaScript -->
+            </div>
+
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="header-overlay"></div>
+                
+                <div class="group-info-header">
+                    <div class="group-title">
+                        <h1>
+                            <span id="group-name">Loading...</span>
+                            <span class="group-type-badge" id="group-type">TYPE</span>
+                        </h1>
+                        <p class="group-nickname" id="group-nickname"></p>
+                        <div class="group-meta">
+                            <div class="meta-item">
+                                <span class="country-badge" id="country-flag">🇺🇳</span>
+                                <span id="country-name">Country</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>👥</span>
+                                <span id="member-count">0</span> members
+                            </div>
+                            <div class="meta-item">
+                                <span>👑</span>
+                                Admin: <span id="admin-name">Loading...</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>📅</span>
+                                Created: <span id="created-date">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="group-actions" id="group-actions">
+                        <!-- Action buttons will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-lent">0</div>
+                        <div class="stat-label">Total Amount Lent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="repayment-rate">0%</div>
+                        <div class="stat-label">Repayment Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="active-loans">0</div>
+                        <div class="stat-label">Active Loans</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="group-rating">0.0</div>
+                        <div class="stat-label">Group Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Recent Activity -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Recent Activity</h3>
+                            <a href="group-activity.html" class="section-link">View All</a>
+                        </div>
+                        <div class="section-body">
+                            <ul class="activity-list" id="recent-activity">
+                                <!-- Activities will be populated by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Quick Actions</h3>
+                        </div>
+                        <div class="section-body">
+                            <div class="quick-actions" id="quick-actions">
+                                <!-- Quick actions will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loan Statistics -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Loan Statistics</h3>
+                        </div>
+                        <div class="section-body">
+                            <div class="group-rating">
+                                ${generateStarRating(4.5)}
+                                <span class="rating-value" id="loan-rating">4.5</span>
+                                <span class="rating-count">(Based on recent loans)</span>
+                            </div>
+                            
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="repayment-progress" style="width: 95%"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 12px; color: #6c757d;">
+                                <span>Repayment Rate: <strong id="repayment-percent">95%</strong></span>
+                                <span>Target: 90%</span>
+                            </div>
+                            
+                            <div class="stats-grid">
+                                <div class="mini-stat">
+                                    <span class="mini-stat-value" id="total-loans">0</span>
+                                    <span class="mini-stat-label">Total Loans</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-stat-value" id="cleared-loans">0</span>
+                                    <span class="mini-stat-label">Cleared</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-stat-value" id="defaulted-loans">0</span>
+                                    <span class="mini-stat-label">Defaulted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Group Members -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Top Members</h3>
+                            <a href="group-members.html" class="section-link">View All</a>
+                        </div>
+                        <div class="section-body">
+                            <div class="member-list" id="top-members">
+                                <!-- Members will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group Information -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Group Information</h3>
+                        </div>
+                        <div class="section-body">
+                            <div style="margin-bottom: 15px;">
+                                <strong style="color: #003366; display: block; margin-bottom: 5px;">Description:</strong>
+                                <p style="color: #555; margin: 0; font-size: 14px;" id="group-description">
+                                    No description provided.
+                                </p>
+                            </div>
+                            
+                            <div style="margin-bottom: 15px;">
+                                <strong style="color: #003366; display: block; margin-bottom: 5px;">Internal Rules:</strong>
+                                <p style="color: #555; margin: 0; font-size: 14px;" id="group-rules">
+                                    No internal rules specified.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <strong style="color: #003366; display: block; margin-bottom: 5px;">Communication:</strong>
+                                <p style="color: #555; margin: 0; font-size: 14px;" id="group-communication">
+                                    No communication channel specified.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group State -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>Group State</h3>
+                        </div>
+                        <div class="section-body">
+                            <div style="text-align: center;">
+                                <div style="font-size: 48px; margin-bottom: 10px;" id="state-icon">✅</div>
+                                <h4 style="margin: 0 0 5px 0; color: #003366;" id="state-title">Active</h4>
+                                <p style="color: #6c757d; margin: 0; font-size: 14px;" id="state-description">
+                                    Group is fully operational
+                                </p>
+                                <div style="margin-top: 15px;">
+                                    <button class="btn-action" onclick="manageGroupState()" id="state-action-btn">
+                                        Manage State
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">⚠️</div>
+            <h4>Unable to Load Group</h4>
+            <p id="error-message">The group could not be loaded. It may have been deleted or you may not have permission to view it.</p>
+            <button class="btn-action" onclick="window.location.href='group-list.html'">
+                Back to Groups
+            </button>
+        </div>
+
+        <!-- Not Member State -->
+        <div id="not-member-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">🔒</div>
+            <h4>Group Access Restricted</h4>
+            <p>You are not a member of this group. Request to join or browse other groups.</p>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button class="btn-action" onclick="requestToJoin()">
+                    Request to Join
+                </button>
+                <button class="btn-action" onclick="window.location.href='group-list.html'" style="background: #6c757d;">
+                    Browse Groups
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer will be injected by JavaScript -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../../core/app.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../groups/group.service.js"></script>
+    <script src="../../groups/group.state-machine.js"></script>
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!checkAuth()) {
+                window.location.href = '../../auth/login.html';
+                return;
+            }
+            
+            // Check country selection
+            if (!checkCountry()) {
+                window.location.href = '../../global-pages/countries.html';
+                return;
+            }
+            
+            // Get group ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const groupId = urlParams.get('groupId');
+            
+            if (!groupId) {
+                showError('No group specified. Please select a group from the groups list.');
+                return;
+            }
+            
+            // Load header and footer
+            loadHeader();
+            loadFooter();
+            
+            // Load group dashboard
+            loadGroupDashboard(groupId);
+        });
+        
+        function checkAuth() {
+            const user = JSON.parse(localStorage.getItem('mpesewa_user') || 'null');
+            return user !== null;
+        }
+        
+        function checkCountry() {
+            const country = localStorage.getItem('mpesewa_country');
+            return country !== null;
+        }
+        
+        function loadHeader() {
+            fetch('../../layout/Header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-placeholder').innerHTML = html;
+                    // Initialize header functionality
+                    initializeHeader();
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    document.getElementById('header-placeholder').innerHTML = '<div style="padding: 20px; background: #003366; color: white;">M-PESEWA</div>';
+                });
+        }
+        
+        function loadFooter() {
+            fetch('../../layout/Footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    document.getElementById('footer-placeholder').innerHTML = '<div style="padding: 20px; background: #1f2a37; color: white; text-align: center;">© M-PESEWA 2024</div>';
+                });
+        }
+        
+        function initializeHeader() {
+            // Add active class to current menu item
+            const currentPage = window.location.pathname.split('/').pop();
+            const menuItems = document.querySelectorAll('.nav-link');
+            menuItems.forEach(item => {
+                if (item.getAttribute('href')?.includes('groups')) {
+                    item.classList.add('active');
+                }
+            });
+        }
+        
+        let currentGroup = null;
+        let currentUser = null;
+        let userRole = null;
+        
+        async function loadGroupDashboard(groupId) {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const dashboardContent = document.getElementById('dashboard-content');
+            const errorState = document.getElementById('error-state');
+            const notMemberState = document.getElementById('not-member-state');
+            
+            loadingSpinner.style.display = 'block';
+            dashboardContent.style.display = 'none';
+            errorState.style.display = 'none';
+            notMemberState.style.display = 'none';
+            
+            try {
+                // Get current user
+                currentUser = JSON.parse(localStorage.getItem('mpesewa_user') || '{}');
+                
+                // Get group service
+                const groupService = new GroupService();
+                const group = groupService.getGroup(groupId);
+                
+                if (!group) {
+                    throw new Error('Group not found');
+                }
+                
+                currentGroup = group;
+                
+                // Check if user is a member
+                const userMembership = group.members.find(m => m.userId === currentUser.id);
+                
+                if (!userMembership) {
+                    // User is not a member
+                    loadingSpinner.style.display = 'none';
+                    notMemberState.style.display = 'block';
+                    return;
+                }
+                
+                userRole = userMembership.role;
+                
+                // Load dashboard data
+                await loadDashboardData(group);
+                
+                // Update UI
+                updateDashboardUI(group);
+                updateGroupStateUI(group);
+                loadRecentActivity(groupId);
+                loadTopMembers(group);
+                loadQuickActions(group);
+                
+                loadingSpinner.style.display = 'none';
+                dashboardContent.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading group dashboard:', error);
+                loadingSpinner.style.display = 'none';
+                errorState.style.display = 'block';
+                document.getElementById('error-message').textContent = error.message;
+            }
+        }
+        
+        async function loadDashboardData(group) {
+            // This function would normally fetch detailed statistics from an API
+            // For now, we'll use the group data and simulate some statistics
+            
+            // Calculate some statistics
+            const totalLent = group.totalAmountLent || 0;
+            const repaymentRate = group.successfulRepaymentRate || 0;
+            const activeLoans = group.activeLoans || 0;
+            const groupRating = group.groupRating || 5.0;
+            const totalLoans = group.totalLoans || 0;
+            
+            // Update statistics in group object (for demo)
+            group.stats = {
+                totalLent: totalLent,
+                repaymentRate: repaymentRate,
+                activeLoans: activeLoans,
+                groupRating: groupRating,
+                totalLoans: totalLoans,
+                clearedLoans: Math.floor(totalLoans * 0.85), // 85% cleared for demo
+                defaultedLoans: Math.floor(totalLoans * 0.05) // 5% defaulted for demo
+            };
+        }
+        
+        function updateDashboardUI(group) {
+            // Update header information
+            document.getElementById('group-name').textContent = group.name;
+            document.getElementById('group-type').textContent = formatGroupType(group.type);
+            
+            if (group.nickname) {
+                document.getElementById('group-nickname').textContent = `"${group.nickname}"`;
+                document.getElementById('group-nickname').style.display = 'block';
+            }
+            
+            document.getElementById('country-flag').textContent = getCountryFlag(group.country);
+            document.getElementById('country-name').textContent = group.country;
+            document.getElementById('member-count').textContent = group.memberCount;
+            document.getElementById('admin-name').textContent = group.adminUsername;
+            document.getElementById('created-date').textContent = formatDate(group.createdAt);
+            
+            // Update statistics
+            document.getElementById('total-lent').textContent = 
+                formatCurrency(group.stats.totalLent, group.currency);
+            document.getElementById('repayment-rate').textContent = 
+                `${group.stats.repaymentRate}%`;
+            document.getElementById('active-loans').textContent = group.stats.activeLoans;
+            document.getElementById('group-rating').textContent = group.stats.groupRating.toFixed(1);
+            
+            // Update loan statistics
+            document.getElementById('loan-rating').textContent = group.stats.groupRating.toFixed(1);
+            document.getElementById('repayment-percent').textContent = `${group.stats.repaymentRate}%`;
+            document.getElementById('repayment-progress').style.width = `${group.stats.repaymentRate}%`;
+            document.getElementById('total-loans').textContent = group.stats.totalLoans;
+            document.getElementById('cleared-loans').textContent = group.stats.clearedLoans;
+            document.getElementById('defaulted-loans').textContent = group.stats.defaultedLoans;
+            
+            // Update group information
+            if (group.description) {
+                document.getElementById('group-description').textContent = group.description;
+            }
+            
+            if (group.internalRules) {
+                document.getElementById('group-rules').textContent = 
+                    group.internalRules.length > 100 
+                        ? group.internalRules.substring(0, 100) + '...' 
+                        : group.internalRules;
+            }
+            
+            if (group.communicationChannel) {
+                document.getElementById('group-communication').textContent = 
+                    formatCommunicationChannel(group.communicationChannel);
+            }
+            
+            // Update action buttons based on user role
+            updateActionButtons(group);
+        }
+        
+        function updateGroupStateUI(group) {
+            const stateBanner = document.getElementById('group-state-banner');
+            const stateIcon = document.getElementById('state-icon');
+            const stateTitle = document.getElementById('state-title');
+            const stateDescription = document.getElementById('state-description');
+            const stateActionBtn = document.getElementById('state-action-btn');
+            
+            // Clear existing classes
+            stateBanner.className = 'group-state-banner';
+            
+            switch (group.state) {
+                case 'ACTIVE':
+                    stateBanner.classList.add('banner-active');
+                    stateIcon.textContent = '✅';
+                    stateTitle.textContent = 'Active';
+                    stateDescription.textContent = 'Group is fully operational';
+                    stateActionBtn.textContent = 'Manage State';
+                    stateActionBtn.style.display = userRole === 'ADMIN' ? 'inline-block' : 'none';
+                    break;
+                    
+                case 'LOCKED':
+                    stateBanner.classList.add('banner-locked');
+                    stateIcon.textContent = '🔒';
+                    stateTitle.textContent = 'Locked';
+                    stateDescription.textContent = 'New loans disabled. Repayments allowed.';
+                    stateActionBtn.textContent = userRole === 'ADMIN' ? 'Unlock Group' : 'View Restrictions';
+                    stateActionBtn.style.display = 'inline-block';
+                    break;
+                    
+                case 'SUSPENDED':
+                    stateBanner.classList.add('banner-suspended');
+                    stateIcon.textContent = '⛔';
+                    stateTitle.textContent = 'Suspended';
+                    stateDescription.textContent = 'All operations suspended by platform admin';
+                    stateActionBtn.textContent = 'Contact Support';
+                    stateActionBtn.style.display = 'inline-block';
+                    break;
+                    
+                case 'CREATED':
+                    stateBanner.classList.add('banner-created');
+                    stateIcon.textContent = '🆕';
+                    stateTitle.textContent = 'Created';
+                    stateDescription.textContent = 'Group created but not yet active';
+                    stateActionBtn.textContent = userRole === 'ADMIN' ? 'Activate Group' : 'Pending Activation';
+                    stateActionBtn.style.display = userRole === 'ADMIN' ? 'inline-block' : 'none';
+                    break;
+                    
+                default:
+                    stateBanner.style.display = 'none';
+            }
+            
+            // Update banner content
+            stateBanner.innerHTML = `
+                <div class="state-icon">${stateIcon.textContent}</div>
+                <div class="state-content">
+                    <div class="state-title">${stateTitle.textContent}</div>
+                    <p class="state-description">${stateDescription.textContent}</p>
+                </div>
+            `;
+            
+            // Only show banner for non-active states
+            if (group.state === 'ACTIVE') {
+                stateBanner.style.display = 'none';
+            }
+        }
+        
+        function updateActionButtons(group) {
+            const actionsContainer = document.getElementById('group-actions');
+            let actionsHTML = '';
+            
+            // Common actions for all members
+            actionsHTML += `
+                <button class="action-btn" onclick="viewMembers()">
+                    <span>👥</span> Members
+                </button>
+            `;
+            
+            // Admin-only actions
+            if (userRole === 'ADMIN') {
+                actionsHTML += `
+                    <button class="action-btn" onclick="editGroup()">
+                        <span>⚙️</span> Settings
+                    </button>
+                    <button class="action-btn" onclick="inviteMembers()">
+                        <span>➕</span> Invite
+                    </button>
+                `;
+            }
+            
+            // Lender actions
+            if (userRole === 'LENDER' && group.state === 'ACTIVE') {
+                actionsHTML += `
+                    <button class="action-btn primary" onclick="createLoan()">
+                        <span>💰</span> Create Loan
+                    </button>
+                `;
+            }
+            
+            // Borrower actions
+            if (userRole === 'BORROWER' && group.state === 'ACTIVE') {
+                actionsHTML += `
+                    <button class="action-btn primary" onclick="requestLoan()">
+                        <span>📝</span> Request Loan
+                    </button>
+                `;
+            }
+            
+            actionsContainer.innerHTML = actionsHTML;
+        }
+        
+        function loadRecentActivity(groupId) {
+            const activityList = document.getElementById('recent-activity');
+            
+            // Simulated activity data
+            const activities = [
+                {
+                    type: 'LOAN_CREATED',
+                    user: 'JohnDoe',
+                    amount: 1500,
+                    currency: 'KSh',
+                    timestamp: new Date(Date.now() - 3600000),
+                    icon: '💰'
+                },
+                {
+                    type: 'MEMBER_JOINED',
+                    user: 'JaneSmith',
+                    role: 'BORROWER',
+                    timestamp: new Date(Date.now() - 7200000),
+                    icon: '👤'
+                },
+                {
+                    type: 'REPAYMENT',
+                    user: 'MikeBrown',
+                    amount: 500,
+                    currency: 'KSh',
+                    timestamp: new Date(Date.now() - 10800000),
+                    icon: '💳'
+                },
+                {
+                    type: 'RATING',
+                    user: 'Admin',
+                    target: 'SarahWilson',
+                    rating: 5,
+                    timestamp: new Date(Date.now() - 14400000),
+                    icon: '⭐'
+                }
+            ];
+            
+            let activityHTML = '';
+            
+            activities.forEach(activity => {
+                let title = '';
+                let details = '';
+                
+                switch (activity.type) {
+                    case 'LOAN_CREATED':
+                        title = 'New Loan Created';
+                        details = `${activity.user} created a loan of ${activity.currency} ${activity.amount}`;
+                        break;
+                    case 'MEMBER_JOINED':
+                        title = 'New Member Joined';
+                        details = `${activity.user} joined as ${activity.role}`;
+                        break;
+                    case 'REPAYMENT':
+                        title = 'Repayment Received';
+                        details = `${activity.user} repaid ${activity.currency} ${activity.amount}`;
+                        break;
+                    case 'RATING':
+                        title = 'Rating Given';
+                        details = `${activity.user} rated ${activity.target} ${activity.rating} stars`;
+                        break;
+                }
+                
+                activityHTML += `
+                    <li class="activity-item">
+                        <div class="activity-icon">${activity.icon}</div>
+                        <div class="activity-content">
+                            <div class="activity-title">${title}</div>
+                            <p class="activity-details">${details}</p>
+                            <div class="activity-time">${formatTimeAgo(activity.timestamp)}</div>
+                        </div>
+                    </li>
+                `;
+            });
+            
+            activityList.innerHTML = activityHTML;
+        }
+        
+        function loadTopMembers(group) {
+            const membersList = document.getElementById('top-members');
+            
+            // Get top 5 members (for demo, we'll use the first 5)
+            const topMembers = group.members.slice(0, 5);
+            
+            let membersHTML = '';
+            
+            topMembers.forEach(member => {
+                const firstLetter = member.username.charAt(0).toUpperCase();
+                const status = member.blacklisted ? 'Blacklisted' : 'Active';
+                const statusClass = member.blacklisted ? 'status-blacklisted' : 'status-active';
+                
+                membersHTML += `
+                    <div class="member-item">
+                        <div class="member-avatar">${firstLetter}</div>
+                        <div class="member-info">
+                            <div class="member-name">${member.username}</div>
+                            <div class="member-role">${member.role}</div>
+                        </div>
+                        <div class="member-status ${statusClass}">${status}</div>
+                    </div>
+                `;
+            });
+            
+            membersList.innerHTML = membersHTML;
+        }
+        
+        function loadQuickActions(group) {
+            const quickActions = document.getElementById('quick-actions');
+            
+            let actionsHTML = '';
+            
+            // Common actions
+            const commonActions = [
+                { icon: '👥', label: 'View Members', action: 'viewMembers()' },
+                { icon: '💬', label: 'Group Chat', action: 'openGroupChat()' },
+                { icon: '📊', label: 'Statistics', action: 'viewStatistics()' }
+            ];
+            
+            // Admin actions
+            if (userRole === 'ADMIN') {
+                commonActions.push(
+                    { icon: '⚙️', label: 'Settings', action: 'editGroup()' },
+                    { icon: '📋', label: 'Reports', action: 'viewReports()' },
+                    { icon: '🔄', label: 'State', action: 'manageGroupState()' }
+                );
+            }
+            
+            // Lender actions
+            if (userRole === 'LENDER') {
+                commonActions.push(
+                    { icon: '💰', label: 'Lend', action: 'createLoan()' },
+                    { icon: '📋', label: 'Ledgers', action: 'viewLedgers()' }
+                );
+            }
+            
+            // Borrower actions
+            if (userRole === 'BORROWER') {
+                commonActions.push(
+                    { icon: '📝', label: 'Borrow', action: 'requestLoan()' },
+                    { icon: '💳', label: 'Repay', action: 'makeRepayment()' }
+                );
+            }
+            
+            // Display actions (max 6)
+            commonActions.slice(0, 6).forEach(action => {
+                actionsHTML += `
+                    <div class="quick-action" onclick="${action.action}">
+                        <div class="action-icon">${action.icon}</div>
+                        <div class="action-label">${action.label}</div>
+                    </div>
+                `;
+            });
+            
+            quickActions.innerHTML = actionsHTML;
+        }
+        
+        // Action Functions
+        function viewMembers() {
+            window.location.href = `group-members.html?groupId=${currentGroup.id}`;
+        }
+        
+        function editGroup() {
+            window.location.href = `group-settings.html?groupId=${currentGroup.id}`;
+        }
+        
+        function inviteMembers() {
+            window.location.href = `group-invites.html?groupId=${currentGroup.id}`;
+        }
+        
+        function createLoan() {
+            window.location.href = `../../lender/pages/lending-cart.html?groupId=${currentGroup.id}`;
+        }
+        
+        function requestLoan() {
+            window.location.href = `../../borrower/pages/borrow-request.html?groupId=${currentGroup.id}`;
+        }
+        
+        function manageGroupState() {
+            if (userRole !== 'ADMIN') {
+                alert('Only group admins can manage group state.');
+                return;
+            }
+            
+            window.location.href = `group-admin.html?groupId=${currentGroup.id}&tab=state`;
+        }
+        
+        function openGroupChat() {
+            alert('Group chat feature coming soon!');
+        }
+        
+        function viewStatistics() {
+            window.location.href = `group-admin.html?groupId=${currentGroup.id}&tab=stats`;
+        }
+        
+        function viewReports() {
+            window.location.href = `group-admin.html?groupId=${currentGroup.id}&tab=reports`;
+        }
+        
+        function viewLedgers() {
+            window.location.href = `../../ledger/pages/ledger-list.html?groupId=${currentGroup.id}`;
+        }
+        
+        function makeRepayment() {
+            window.location.href = `../../borrower/pages/borrow-repayments.html?groupId=${currentGroup.id}`;
+        }
+        
+        function requestToJoin() {
+            if (!currentGroup) return;
+            
+            const referralData = {
+                referrerId: currentGroup.adminUserId,
+                referrerUsername: currentGroup.adminUsername
+            };
+            
+            const groupService = new GroupService();
+            const result = groupService.joinGroup(currentGroup.id, referralData);
+            
+            if (result.success) {
+                alert('Join request sent successfully! The group admin will review your request.');
+                window.location.reload();
+            } else {
+                alert(`Error: ${result.error}`);
+            }
+        }
+        
+        // Utility Functions
+        function getCountryFlag(country) {
+            const flags = {
+                'Kenya': '🇰🇪',
+                'Uganda': '🇺🇬',
+                'Tanzania': '🇹🇿',
+                'Rwanda': '🇷🇼',
+                'Burundi': '🇧🇮',
+                'DRC': '🇨🇩',
+                'South Sudan': '🇸🇸',
+                'South Africa': '🇿🇦',
+                'Nigeria': '🇳🇬',
+                'Ghana': '🇬🇭',
+                'Ethiopia': '🇪🇹'
+            };
+            return flags[country] || '🇺🇳';
+        }
+        
+        function formatGroupType(type) {
+            const typeMap = {
+                'FAMILY': 'Family',
+                'CHURCH': 'Church',
+                'PROFESSIONAL': 'Professional',
+                'LOCAL_COMMUNITY': 'Local Community',
+                'SOCIAL': 'Social',
+                'BUSINESS_ASSOCIATION': 'Business Association',
+                'STUDENT': 'Student',
+                'NEIGHBORHOOD': 'Neighborhood'
+            };
+            return typeMap[type] || type;
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+        
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / (1000 * 60));
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            
+            if (diffMins < 60) {
+                return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`;
+            } else if (diffHours < 24) {
+                return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`;
+            } else {
+                return `${diffDays} day${diffDays !== 1 ? 's' : ''} ago`;
+            }
+        }
+        
+        function formatCurrency(amount, currency) {
+            if (!amount) return '0';
+            
+            return amount.toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+        
+        function formatCommunicationChannel(channel) {
+            const channelMap = {
+                'WHATSAPP': 'WhatsApp Group',
+                'TELEGRAM': 'Telegram Group',
+                'EMAIL': 'Email List',
+                'IN_APP': 'M-Pesewa App Only',
+                'OTHER': 'Other Platform'
+            };
+            return channelMap[channel] || channel;
+        }
+        
+        function generateStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<span class="star">★</span>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<span class="star">⭐</span>';
+                } else {
+                    stars += '<span class="star" style="color: #dee2e6;">★</span>';
+                }
+            }
+            
+            return stars;
+        }
+        
+        function showError(message) {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const errorState = document.getElementById('error-state');
+            
+            loadingSpinner.style.display = 'none';
+            errorState.style.display = 'block';
+            document.getElementById('error-message').textContent = message;
+        }
+    </script>
+</body>
+</html>

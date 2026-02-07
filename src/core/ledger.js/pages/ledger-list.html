@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Ledgers - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/badges.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+    <style>
+        .ledger-filters {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .ledger-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #003366;
+        }
+        
+        .stat-card.active {
+            border-left-color: #28a745;
+        }
+        
+        .stat-card.overdue {
+            border-left-color: #dc3545;
+        }
+        
+        .stat-card.cleared {
+            border-left-color: #17a2b8;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        
+        .ledger-table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .ledger-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active { background: #d4edda; color: #155724; }
+        .status-overdue { background: #f8d7da; color: #721c24; }
+        .status-defaulted { background: #f5c6cb; color: #721c24; }
+        .status-cleared { background: #d1ecf1; color: #0c5460; }
+        .status-blacklisted { background: #343a40; color: white; }
+        
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .ledger-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .ledger-table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Would be loaded from layout component) -->
+    <header class="mp-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="../../index.html">
+                        <img src="../../assets/images/logo.svg" alt="M-Pesewa" height="40">
+                        <span class="logo-text">M-Pesewa</span>
+                    </a>
+                </div>
+                
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../../index.html">Home</a></li>
+                        <li class="has-dropdown">
+                            <a href="#">Lenders ▾</a>
+                            <div class="dropdown-menu">
+                                <a href="../lender/lender-dashboard.html">Dashboard</a>
+                                <a href="../lender/lending-portfolio.html">Portfolio</a>
+                                <a href="../lender/lending-history.html">History</a>
+                                <a href="../lender/lending-rules.html">Rules</a>
+                                <a href="../lender/lending-risk.html">Risk</a>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Borrowers ▾</a>
+                            <div class="dropdown-menu">
+                                <a href="../borrower/borrower-dashboard.html">Dashboard</a>
+                                <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                                <a href="../borrower/borrow-history.html">Borrow History</a>
+                                <a href="../borrower/borrow-repayments.html">Repayments</a>
+                                <a href="../borrower/borrow-disputes.html">Disputes</a>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Emergency Hub ▾</a>
+                            <div class="dropdown-menu">
+                                <a href="../../global-pages/emergency-categories.html">All Categories</a>
+                                <a href="../../global-pages/emergency-transport.html">Transport Fare</a>
+                                <a href="../../global-pages/emergency-data.html">Mobile Data</a>
+                                <a href="../../global-pages/emergency-gas.html">Cooking Gas</a>
+                                <a href="../../global-pages/emergency-food.html">Food</a>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Subscription Plans ▾</a>
+                            <div class="dropdown-menu">
+                                <a href="../subscription/status.html">Current Plan</a>
+                                <a href="../subscription/subscribe.html">Upgrade</a>
+                                <a href="../subscription/history.html">History</a>
+                                <a href="../subscription/invoices.html">Invoices</a>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Country ▾</a>
+                            <div class="dropdown-menu">
+                                <a href="../../countries/ke.html">Kenya</a>
+                                <a href="../../countries/ug.html">Uganda</a>
+                                <a href="../../countries/tz.html">Tanzania</a>
+                                <a href="../../countries/rw.html">Rwanda</a>
+                                <a href="../../countries/bi.html">Burundi</a>
+                                <a href="../../countries/cd.html">DRC</a>
+                                <a href="../../countries/ss.html">South Sudan</a>
+                                <a href="../../countries/za.html">South Africa</a>
+                                <a href="../../countries/ng.html">Nigeria</a>
+                                <a href="../../countries/gh.html">Ghana</a>
+                                <a href="../../countries/et.html">Ethiopia</a>
+                                <a href="../../countries/so.html">Somalia</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                    <a href="../../auth/login.html" class="btn btn-outline">Sign In</a>
+                    <a href="../../auth/register.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../../index.html">Home</a> &gt;
+            <a href="../lender/lender-dashboard.html">Lender Dashboard</a> &gt;
+            <span>My Ledgers</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>My Ledgers</h1>
+            <p class="subtitle">Manage all your lending activities and track borrower repayments</p>
+            
+            <div class="quick-actions">
+                <a href="ledger-view.html?action=create" class="btn btn-primary">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Create New Ledger
+                </a>
+                <a href="ledger-audit.html" class="btn btn-outline">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
+                    </svg>
+                    Audit Trail
+                </a>
+                <a href="ledger-reconciliation.html" class="btn btn-outline">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 0-.5.5v11.793l-3.146-3.147a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0-.708-.708L4 13.293V1.5a.5.5 0 0 0-.5-.5z"/>
+                    </svg>
+                    Reconciliation
+                </a>
+            </div>
+        </div>
+
+        <!-- Ledger Statistics -->
+        <div class="ledger-stats">
+            <div class="stat-card active">
+                <div class="stat-label">Active Ledgers</div>
+                <div class="stat-value" id="active-count">8</div>
+                <div class="stat-detail">KSh 45,200 total</div>
+            </div>
+            
+            <div class="stat-card overdue">
+                <div class="stat-label">Overdue</div>
+                <div class="stat-value" id="overdue-count">2</div>
+                <div class="stat-detail">KSh 12,500 due</div>
+            </div>
+            
+            <div class="stat-card cleared">
+                <div class="stat-label">Cleared This Month</div>
+                <div class="stat-value" id="cleared-count">15</div>
+                <div class="stat-detail">KSh 78,300 repaid</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-label">Total Interest Earned</div>
+                <div class="stat-value" id="interest-earned">KSh 7,830</div>
+                <div class="stat-detail">10% on cleared loans</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="ledger-filters">
+            <form id="ledgerFilterForm" class="filter-form">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="filterStatus">Status</label>
+                        <select id="filterStatus" class="form-select">
+                            <option value="">All Status</option>
+                            <option value="ACTIVE">Active</option>
+                            <option value="OVERDUE">Overdue</option>
+                            <option value="DEFAULTED">Defaulted</option>
+                            <option value="CLEARED">Cleared</option>
+                            <option value="BLACKLISTED">Blacklisted</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterCategory">Category</label>
+                        <select id="filterCategory" class="form-select">
+                            <option value="">All Categories</option>
+                            <option value="TRANSPORT_FARE">Transport Fare</option>
+                            <option value="MOBILE_DATA">Mobile Data</option>
+                            <option value="COOKING_GAS">Cooking Gas</option>
+                            <option value="FOOD">Food</option>
+                            <option value="MEDICINE">Medicine</option>
+                            <option value="SCHOOL_FEES">School Fees</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterDate">Date Range</label>
+                        <select id="filterDate" class="form-select">
+                            <option value="">All Time</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">Last 3 Months</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterAmount">Amount Range</label>
+                        <select id="filterAmount" class="form-select">
+                            <option value="">All Amounts</option>
+                            <option value="0-500">KSh 0 - 500</option>
+                            <option value="500-1500">KSh 500 - 1,500</option>
+                            <option value="1500-5000">KSh 1,500 - 5,000</option>
+                            <option value="5000-20000">KSh 5,000 - 20,000</option>
+                            <option value="20000+">KSh 20,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>&nbsp;</label>
+                        <div class="filter-buttons">
+                            <button type="submit" class="btn btn-primary">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                                Apply Filters
+                            </button>
+                            <button type="reset" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Ledgers Table -->
+        <div class="ledger-table-container">
+            <div class="table-header">
+                <h3>All Ledgers</h3>
+                <div class="table-actions">
+                    <button id="exportLedgers" class="btn btn-outline">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Export CSV
+                    </button>
+                    <button id="bulkActions" class="btn btn-outline" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                        </svg>
+                        Bulk Actions
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="data-table" id="ledgersTable">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>Borrower</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Category</th>
+                            <th>Due Date</th>
+                            <th>Days Overdue</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledgersTableBody">
+                        <!-- Ledger data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-footer">
+                <div class="pagination-info">
+                    Showing <span id="showingCount">1-10</span> of <span id="totalCount">50</span> ledgers
+                </div>
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                    <button class="pagination-btn">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">
+                <svg width="64" height="64" fill="#6c757d" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+            <h3>No Ledgers Found</h3>
+            <p>You don't have any ledgers yet. Create your first ledger to start lending.</p>
+            <a href="ledger-view.html?action=create" class="btn btn-primary">Create First Ledger</a>
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section">
+            <h4>Need Help?</h4>
+            <div class="help-cards">
+                <div class="card">
+                    <div class="card-header">
+                        <svg width="24" height="24" fill="#003366" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM5.496 6.033a.237.237 0 0 1-.24-.247C5.35 4.091 6.737 3.5 8.005 3.5c1.396 0 2.672.73 2.672 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.105a.25.25 0 0 1-.25.25h-.81a.25.25 0 0 1-.25-.246l-.004-.217c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.803 0-1.253.478-1.342 1.134-.018.137-.128.25-.266.25h-.825zm2.325 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <h5>Understanding Ledger States</h5>
+                        <p>Learn about different ledger states and what actions you can take for each.</p>
+                        <a href="../../global-pages/faq.html#ledger-states" class="btn-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <svg width="24" height="24" fill="#003366" viewBox="0 0 16 16">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <h5>Creating Effective Ledgers</h5>
+                        <p>Best practices for creating ledgers that ensure successful repayment.</p>
+                        <a href="../../global-pages/faq.html#ledger-creation" class="btn-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <svg width="24" height="24" fill="#003366" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                        </svg>
+                    </div>
+                    <div class="card-body">
+                        <h5>Handling Defaults</h5>
+                        <p>What to do when a borrower defaults and how to use the blacklist system.</p>
+                        <a href="../../global-pages/faq.html#defaults" class="btn-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Would be loaded from layout component) -->
+    <footer class="mp-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Borrowing</h4>
+                    <a href="../../global-pages/emergency-loan.html">Get Emergency Loan</a>
+                    <a href="../../global-pages/personal-loan.html">Online Personal Loan</a>
+                    <a href="../../global-pages/business-loan.html">Business Loan</a>
+                    <a href="../../global-pages/how-to-apply.html">How to Apply</a>
+                    <a href="../../global-pages/active-borrowers.html">Active Borrowers</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Lending</h4>
+                    <a href="../../global-pages/smart-lending.html">Smart Lending</a>
+                    <a href="../../global-pages/why-lend.html">Why Lend at M-Pesewa?</a>
+                    <a href="../../global-pages/how-to-lend.html">How to Lend</a>
+                    <a href="../../global-pages/active-lenders.html">Active Lenders</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>How It Works</h4>
+                    <a href="../../global-pages/how-it-works.html">P2P Lending Works</a>
+                    <a href="../../global-pages/our-role.html">Our Role</a>
+                    <a href="../subscription/plans.html">Subscriptions</a>
+                    <a href="../../global-pages/blacklist.html">Blacklist</a>
+                    <a href="../../global-pages/debt-collectors.html">Debt Collectors</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <a href="../../global-pages/about.html">About M-Pesewa</a>
+                    <a href="../../global-pages/team.html">Team / Advisory Board</a>
+                    <a href="../../global-pages/careers.html">News / Careers</a>
+                    <a href="../../global-pages/blog.html">Blog / FAQs</a>
+                    <a href="../../global-pages/contact.html">Contact Us</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="../../global-pages/terms.html">Terms & Conditions</a>
+                    <a href="../../global-pages/privacy.html">Privacy Policy</a>
+                    <a href="../../global-pages/grievance.html">Grievance Redressal</a>
+                    <a href="../../global-pages/fair-practices.html">Fair Practices Code</a>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Partners</h4>
+                    <a href="../../global-pages/partners.html">Be a Partner</a>
+                </div>
+            </div>
+            
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.875 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg></a>
+                    <a href="#" aria-label="Twitter"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a>
+                    <a href="#" aria-label="LinkedIn"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372.853.04 1.125.048 3.298.048 2.173 0 2.445-.01 3.298-.048.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.416.198-.51.333-1.09.372-1.942.037-.852.048-1.125.048-3.297 0-2.173-.01-2.445-.048-3.299-.04-.851-.174-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg></a>
+                    <a href="#" aria-label="YouTube"><svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/></svg></a>
+                </div>
+                
+                <div class="copyright">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module">
+        import LedgerAPI from '../index.js';
+        
+        class LedgerListManager {
+            constructor() {
+                this.ledgers = [];
+                this.filteredLedgers = [];
+                this.currentPage = 1;
+                this.pageSize = 10;
+                this.filters = {};
+                this.init();
+            }
+            
+            async init() {
+                this.bindEvents();
+                await this.loadLedgers();
+                this.render();
+                this.updateStats();
+            }
+            
+            bindEvents() {
+                // Filter form
+                document.getElementById('ledgerFilterForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.applyFilters();
+                });
+                
+                document.getElementById('ledgerFilterForm').addEventListener('reset', () => {
+                    this.resetFilters();
+                });
+                
+                // Bulk actions
+                document.getElementById('selectAll').addEventListener('change', (e) => {
+                    this.toggleSelectAll(e.target.checked);
+                });
+                
+                document.getElementById('exportLedgers').addEventListener('click', () => {
+                    this.exportLedgers();
+                });
+                
+                // Pagination
+                document.querySelectorAll('.pagination-btn').forEach(btn => {
+                    if (!btn.disabled && !btn.classList.contains('active')) {
+                        btn.addEventListener('click', (e) => {
+                            const pageText = e.target.textContent.trim();
+                            if (pageText === '›' || pageText === '»') {
+                                this.currentPage++;
+                            } else if (pageText === '‹' || pageText === '«') {
+                                this.currentPage--;
+                            } else {
+                                this.currentPage = parseInt(pageText);
+                            }
+                            this.render();
+                        });
+                    }
+                });
+            }
+            
+            async loadLedgers() {
+                try {
+                    // In production, this would call the API
+                    // For now, use mock data
+                    this.ledgers = await this.getMockLedgers();
+                    this.filteredLedgers = [...this.ledgers];
+                } catch (error) {
+                    console.error('Error loading ledgers:', error);
+                    this.showError('Failed to load ledgers. Please try again.');
+                }
+            }
+            
+            async getMockLedgers() {
+                // Mock data simulating real ledger data
+                return [
+                    {
+                        id: 'LEDGER_KE_GROUP001_LENDER001_1',
+                        borrowerName: 'John Kimani',
+                        borrowerId: 'BORROWER001',
+                        amount: 2500,
+                        currency: 'KSh',
+                        status: 'ACTIVE',
+                        category: 'TRANSPORT_FARE',
+                        disbursementDate: '2024-01-15',
+                        dueDate: '2024-01-22',
+                        daysOverdue: 0,
+                        balance: 2750,
+                        interest: 250,
+                        penalties: 0,
+                        groupName: 'Family Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-18'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP001_LENDER001_2',
+                        borrowerName: 'Mary Wanjiku',
+                        borrowerId: 'BORROWER002',
+                        amount: 1500,
+                        currency: 'KSh',
+                        status: 'OVERDUE',
+                        category: 'COOKING_GAS',
+                        disbursementDate: '2024-01-10',
+                        dueDate: '2024-01-17',
+                        daysOverdue: 3,
+                        balance: 1725,
+                        interest: 150,
+                        penalties: 75,
+                        groupName: 'Family Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-20'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP002_LENDER001_3',
+                        borrowerName: 'Peter Otieno',
+                        borrowerId: 'BORROWER003',
+                        amount: 5000,
+                        currency: 'KSh',
+                        status: 'ACTIVE',
+                        category: 'SCHOOL_FEES',
+                        disbursementDate: '2024-01-20',
+                        dueDate: '2024-01-27',
+                        daysOverdue: 0,
+                        balance: 5500,
+                        interest: 500,
+                        penalties: 0,
+                        groupName: 'Church Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-20'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP001_LENDER001_4',
+                        borrowerName: 'Sarah Achieng',
+                        borrowerId: 'BORROWER004',
+                        amount: 3000,
+                        currency: 'KSh',
+                        status: 'CLEARED',
+                        category: 'MEDICINE',
+                        disbursementDate: '2024-01-05',
+                        dueDate: '2024-01-12',
+                        daysOverdue: 0,
+                        balance: 0,
+                        interest: 300,
+                        penalties: 0,
+                        groupName: 'Family Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-12'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP003_LENDER001_5',
+                        borrowerName: 'James Mwangi',
+                        borrowerId: 'BORROWER005',
+                        amount: 10000,
+                        currency: 'KSh',
+                        status: 'DEFAULTED',
+                        category: 'BUSINESS_CAPITAL',
+                        disbursementDate: '2023-11-15',
+                        dueDate: '2023-11-22',
+                        daysOverdue: 60,
+                        balance: 14300,
+                        interest: 1000,
+                        penalties: 3300,
+                        groupName: 'Business Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-18'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP001_LENDER001_6',
+                        borrowerName: 'Grace Njeri',
+                        borrowerId: 'BORROWER006',
+                        amount: 800,
+                        currency: 'KSh',
+                        status: 'ACTIVE',
+                        category: 'MOBILE_DATA',
+                        disbursementDate: '2024-01-18',
+                        dueDate: '2024-01-25',
+                        daysOverdue: 0,
+                        balance: 880,
+                        interest: 80,
+                        penalties: 0,
+                        groupName: 'Family Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-18'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP002_LENDER001_7',
+                        borrowerName: 'David Ochieng',
+                        borrowerId: 'BORROWER007',
+                        amount: 4500,
+                        currency: 'KSh',
+                        status: 'OVERDUE',
+                        category: 'FOOD',
+                        disbursementDate: '2024-01-12',
+                        dueDate: '2024-01-19',
+                        daysOverdue: 1,
+                        balance: 5175,
+                        interest: 450,
+                        penalties: 225,
+                        groupName: 'Church Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-20'
+                    },
+                    {
+                        id: 'LEDGER_KE_GROUP001_LENDER001_8',
+                        borrowerName: 'Ann Mumbi',
+                        borrowerId: 'BORROWER008',
+                        amount: 2000,
+                        currency: 'KSh',
+                        status: 'CLEARED',
+                        category: 'TRANSPORT_FARE',
+                        disbursementDate: '2024-01-08',
+                        dueDate: '2024-01-15',
+                        daysOverdue: 0,
+                        balance: 0,
+                        interest: 200,
+                        penalties: 0,
+                        groupName: 'Family Group',
+                        country: 'KE',
+                        lastUpdated: '2024-01-15'
+                    }
+                ];
+            }
+            
+            applyFilters() {
+                const status = document.getElementById('filterStatus').value;
+                const category = document.getElementById('filterCategory').value;
+                const dateRange = document.getElementById('filterDate').value;
+                const amountRange = document.getElementById('filterAmount').value;
+                
+                this.filters = { status, category, dateRange, amountRange };
+                this.currentPage = 1;
+                
+                this.filteredLedgers = this.ledgers.filter(ledger => {
+                    // Status filter
+                    if (status && ledger.status !== status) return false;
+                    
+                    // Category filter
+                    if (category && ledger.category !== category) return false;
+                    
+                    // Date range filter
+                    if (dateRange) {
+                        const now = new Date();
+                        const ledgerDate = new Date(ledger.disbursementDate);
+                        
+                        switch (dateRange) {
+                            case 'today':
+                                if (ledgerDate.toDateString() !== now.toDateString()) return false;
+                                break;
+                            case 'week':
+                                const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                                if (ledgerDate < weekAgo) return false;
+                                break;
+                            case 'month':
+                                const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+                                if (ledgerDate < monthAgo) return false;
+                                break;
+                            case 'quarter':
+                                const quarterAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+                                if (ledgerDate < quarterAgo) return false;
+                                break;
+                            case 'year':
+                                const yearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+                                if (ledgerDate < yearAgo) return false;
+                                break;
+                        }
+                    }
+                    
+                    // Amount range filter
+                    if (amountRange) {
+                        const [min, max] = amountRange.split('-').map(val => {
+                            if (val.endsWith('+')) {
+                                return { min: parseInt(val), max: Infinity };
+                            }
+                            return parseInt(val);
+                        });
+                        
+                        if (Array.isArray(min)) {
+                            if (ledger.amount < min[0]) return false;
+                        } else if (max === Infinity) {
+                            if (ledger.amount < min) return false;
+                        } else {
+                            if (ledger.amount < min || ledger.amount > max) return false;
+                        }
+                    }
+                    
+                    return true;
+                });
+                
+                this.render();
+                this.updateStats();
+            }
+            
+            resetFilters() {
+                document.getElementById('ledgerFilterForm').reset();
+                this.filters = {};
+                this.filteredLedgers = [...this.ledgers];
+                this.currentPage = 1;
+                this.render();
+                this.updateStats();
+            }
+            
+            render() {
+                const tbody = document.getElementById('ledgersTableBody');
+                if (!tbody) return;
+                
+                // Show/hide empty state
+                if (this.filteredLedgers.length === 0) {
+                    document.getElementById('emptyState').style.display = 'block';
+                    document.querySelector('.ledger-table-container').style.display = 'none';
+                    return;
+                }
+                
+                document.getElementById('emptyState').style.display = 'none';
+                document.querySelector('.ledger-table-container').style.display = 'block';
+                
+                // Calculate pagination
+                const startIndex = (this.currentPage - 1) * this.pageSize;
+                const endIndex = startIndex + this.pageSize;
+                const pageLedgers = this.filteredLedgers.slice(startIndex, endIndex);
+                
+                // Update pagination info
+                document.getElementById('showingCount').textContent = 
+                    `${startIndex + 1}-${Math.min(endIndex, this.filteredLedgers.length)}`;
+                document.getElementById('totalCount').textContent = this.filteredLedgers.length;
+                
+                // Clear table
+                tbody.innerHTML = '';
+                
+                // Render ledgers
+                pageLedgers.forEach(ledger => {
+                    const row = this.createLedgerRow(ledger);
+                    tbody.appendChild(row);
+                });
+                
+                // Update pagination buttons
+                this.updatePagination();
+                
+                // Update bulk actions button
+                const selectedCount = document.querySelectorAll('input[type="checkbox"]:checked:not(#selectAll)').length;
+                const bulkBtn = document.getElementById('bulkActions');
+                bulkBtn.disabled = selectedCount === 0;
+                bulkBtn.textContent = selectedCount > 0 ? `Bulk Actions (${selectedCount})` : 'Bulk Actions';
+            }
+            
+            createLedgerRow(ledger) {
+                const tr = document.createElement('tr');
+                tr.dataset.ledgerId = ledger.id;
+                
+                // Status badge
+                let statusBadge = '';
+                switch (ledger.status) {
+                    case 'ACTIVE':
+                        statusBadge = '<span class="status-badge status-active">Active</span>';
+                        break;
+                    case 'OVERDUE':
+                        statusBadge = `<span class="status-badge status-overdue">Overdue ${ledger.daysOverdue}d</span>`;
+                        break;
+                    case 'DEFAULTED':
+                        statusBadge = '<span class="status-badge status-defaulted">Defaulted</span>';
+                        break;
+                    case 'CLEARED':
+                        statusBadge = '<span class="status-badge status-cleared">Cleared</span>';
+                        break;
+                    case 'BLACKLISTED':
+                        statusBadge = '<span class="status-badge status-blacklisted">Blacklisted</span>';
+                        break;
+                }
+                
+                // Category icon
+                let categoryIcon = '';
+                switch (ledger.category) {
+                    case 'TRANSPORT_FARE':
+                        categoryIcon = '🚌';
+                        break;
+                    case 'MOBILE_DATA':
+                        categoryIcon = '📶';
+                        break;
+                    case 'COOKING_GAS':
+                        categoryIcon = '🔥';
+                        break;
+                    case 'FOOD':
+                        categoryIcon = '🍲';
+                        break;
+                    case 'MEDICINE':
+                        categoryIcon = '💊';
+                        break;
+                    case 'SCHOOL_FEES':
+                        categoryIcon = '🎓';
+                        break;
+                    default:
+                        categoryIcon = '💸';
+                }
+                
+                // Format dates
+                const dueDate = new Date(ledger.dueDate);
+                const dueDateStr = dueDate.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                });
+                
+                // Create row HTML
+                tr.innerHTML = `
+                    <td><input type="checkbox" class="ledger-checkbox" value="${ledger.id}"></td>
+                    <td>
+                        <div class="borrower-info">
+                            <strong>${ledger.borrowerName}</strong>
+                            <small class="text-muted">${ledger.groupName}</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="amount-info">
+                            <strong>${ledger.currency} ${ledger.amount.toLocaleString()}</strong>
+                            <small class="text-muted">Principal</small>
+                        </div>
+                    </td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <div class="category-info">
+                            <span class="category-icon">${categoryIcon}</span>
+                            <span>${this.formatCategory(ledger.category)}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="date-info">
+                            <strong>${dueDateStr}</strong>
+                            <small class="text-muted">Due</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="overdue-info">
+                            <strong>${ledger.daysOverdue}</strong>
+                            <small class="text-muted">days</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="balance-info">
+                            <strong>${ledger.currency} ${ledger.balance.toLocaleString()}</strong>
+                            <small class="text-muted">Total owed</small>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ledger-actions">
+                            <a href="ledger-view.html?id=${ledger.id}" class="btn-action" title="View Ledger">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                </svg>
+                            </a>
+                            <a href="ledger-update.html?id=${ledger.id}" class="btn-action" title="Update Ledger">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                </svg>
+                            </a>
+                            ${ledger.status === 'ACTIVE' || ledger.status === 'OVERDUE' ? `
+                            <a href="ledger-update.html?id=${ledger.id}&action=repayment" class="btn-action" title="Record Repayment">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2H3z"/>
+                                </svg>
+                            </a>
+                            ` : ''}
+                            ${ledger.status === 'OVERDUE' ? `
+                            <a href="ledger-update.html?id=${ledger.id}&action=penalty" class="btn-action" title="Apply Penalty">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                </svg>
+                            </a>
+                            ` : ''}
+                        </div>
+                    </td>
+                `;
+                
+                // Add checkbox event
+                const checkbox = tr.querySelector('.ledger-checkbox');
+                checkbox.addEventListener('change', () => {
+                    this.updateBulkActions();
+                });
+                
+                return tr;
+            }
+            
+            formatCategory(category) {
+                const categoryNames = {
+                    'TRANSPORT_FARE': 'Transport Fare',
+                    'MOBILE_DATA': 'Mobile Data',
+                    'COOKING_GAS': 'Cooking Gas',
+                    'FOOD': 'Food',
+                    'MEDICINE': 'Medicine',
+                    'SCHOOL_FEES': 'School Fees',
+                    'BUSINESS_CAPITAL': 'Business Capital'
+                };
+                return categoryNames[category] || category;
+            }
+            
+            updatePagination() {
+                const totalPages = Math.ceil(this.filteredLedgers.length / this.pageSize);
+                const pagination = document.querySelector('.pagination');
+                
+                if (totalPages <= 1) {
+                    pagination.style.display = 'none';
+                    return;
+                }
+                
+                pagination.style.display = 'flex';
+                
+                // Simple pagination update
+                // In production, you would generate proper pagination buttons
+            }
+            
+            toggleSelectAll(checked) {
+                const checkboxes = document.querySelectorAll('.ledger-checkbox');
+                checkboxes.forEach(cb => {
+                    cb.checked = checked;
+                });
+                this.updateBulkActions();
+            }
+            
+            updateBulkActions() {
+                const selectedCount = document.querySelectorAll('.ledger-checkbox:checked').length;
+                const bulkBtn = document.getElementById('bulkActions');
+                const selectAll = document.getElementById('selectAll');
+                
+                bulkBtn.disabled = selectedCount === 0;
+                bulkBtn.textContent = selectedCount > 0 ? `Bulk Actions (${selectedCount})` : 'Bulk Actions';
+                
+                // Update select all checkbox
+                const totalCheckboxes = document.querySelectorAll('.ledger-checkbox').length;
+                selectAll.indeterminate = selectedCount > 0 && selectedCount < totalCheckboxes;
+                selectAll.checked = selectedCount === totalCheckboxes && totalCheckboxes > 0;
+            }
+            
+            async exportLedgers() {
+                try {
+                    const format = 'csv';
+                    const data = this.filteredLedgers.map(ledger => ({
+                        ID: ledger.id,
+                        Borrower: ledger.borrowerName,
+                        Amount: `${ledger.currency} ${ledger.amount}`,
+                        Status: ledger.status,
+                        Category: this.formatCategory(ledger.category),
+                        DueDate: ledger.dueDate,
+                        DaysOverdue: ledger.daysOverdue,
+                        Balance: `${ledger.currency} ${ledger.balance}`,
+                        Interest: `${ledger.currency} ${ledger.interest}`,
+                        Penalties: `${ledger.currency} ${ledger.penalties}`,
+                        Group: ledger.groupName,
+                        Country: ledger.country
+                    }));
+                    
+                    // Convert to CSV
+                    const headers = Object.keys(data[0]);
+                    const csvRows = [
+                        headers.join(','),
+                        ...data.map(row => headers.map(header => {
+                            const cell = row[header];
+                            return `"${cell}"`;
+                        }).join(','))
+                    ];
+                    
+                    const csvContent = csvRows.join('\n');
+                    const blob = new Blob([csvContent], { type: 'text/csv' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // Create download link
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `ledgers_export_${new Date().toISOString().split('T')[0]}.csv`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    // Log export
+                    console.log(`Exported ${data.length} ledgers to CSV`);
+                    
+                } catch (error) {
+                    console.error('Export failed:', error);
+                    this.showError('Failed to export ledgers. Please try again.');
+                }
+            }
+            
+            updateStats() {
+                const active = this.filteredLedgers.filter(l => l.status === 'ACTIVE');
+                const overdue = this.filteredLedgers.filter(l => l.status === 'OVERDUE');
+                const cleared = this.filteredLedgers.filter(l => l.status === 'CLEARED');
+                
+                const activeTotal = active.reduce((sum, l) => sum + l.amount, 0);
+                const overdueTotal = overdue.reduce((sum, l) => sum + l.balance, 0);
+                const clearedTotal = cleared.reduce((sum, l) => sum + l.amount, 0);
+                const interestTotal = this.filteredLedgers.reduce((sum, l) => sum + l.interest, 0);
+                
+                document.getElementById('active-count').textContent = active.length;
+                document.getElementById('overdue-count').textContent = overdue.length;
+                document.getElementById('cleared-count').textContent = cleared.length;
+                document.getElementById('interest-earned').textContent = `KSh ${interestTotal.toLocaleString()}`;
+                
+                // Update detail texts
+                document.querySelector('.stat-card.active .stat-detail').textContent = 
+                    `KSh ${activeTotal.toLocaleString()} total`;
+                document.querySelector('.stat-card.overdue .stat-detail').textContent = 
+                    `KSh ${overdueTotal.toLocaleString()} due`;
+                document.querySelector('.stat-card.cleared .stat-detail').textContent = 
+                    `KSh ${clearedTotal.toLocaleString()} repaid`;
+            }
+            
+            showError(message) {
+                // Create error toast
+                const toast = document.createElement('div');
+                toast.className = 'toast error';
+                toast.innerHTML = `
+                    <div class="toast-content">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                        </svg>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        setTimeout(() => {
+                            document.body.removeChild(toast);
+                        }, 300);
+                    }, 3000);
+                }, 100);
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.ledgerListManager = new LedgerListManager();
+        });
+    </script>
+</body>
+</html>

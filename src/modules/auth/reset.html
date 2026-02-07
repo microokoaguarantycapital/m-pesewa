@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/auth.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/logos/favicon.ico">
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --action-orange: #f37021;
+            --trust-green: #28a745;
+            --neutral-light: #f8f9fa;
+            --pure-white: #ffffff;
+            --dark-text: #003366;
+            --light-text: #ffffff;
+            --body-text: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #0099ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-card {
+            background: var(--pure-white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.2);
+            border: 1px solid rgba(0, 153, 255, 0.1);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--light-text);
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .auth-title {
+            color: var(--dark-text);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .auth-subtitle {
+            color: var(--body-text);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--dark-text);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: var(--pure-white);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .form-hint {
+            font-size: 12px;
+            color: var(--body-text);
+            margin-top: 4px;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--body-text);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-blue);
+            color: var(--light-text);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #0088dd;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #c00;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #090;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #090;
+            display: none;
+        }
+        
+        .reset-instructions {
+            background: var(--neutral-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--body-text);
+        }
+        
+        .instruction-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-blue);
+            color: var(--light-text);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+        }
+        
+        .reset-success {
+            text-align: center;
+            padding: 30px 0;
+            display: none;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--trust-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--light-text);
+            font-size: 40px;
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        
+        .auth-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--light-text);
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .auth-footer a {
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .auth-title {
+                font-size: 20px;
+            }
+        }
+        
+        .security-note {
+            background: rgba(243, 112, 33, 0.1);
+            border-left: 4px solid var(--action-orange);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--dark-text);
+        }
+        
+        .password-requirements {
+            margin-top: 20px;
+        }
+        
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--body-text);
+        }
+        
+        .requirement-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #e1e5e9;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .requirement-item.met .requirement-check {
+            background: var(--trust-green);
+            border-color: var(--trust-green);
+            color: var(--light-text);
+        }
+        
+        .token-verification {
+            display: none;
+        }
+        
+        .token-input {
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">M-P</div>
+                <h1 class="auth-title">Set New Password</h1>
+                <p class="auth-subtitle">
+                    Create a new strong password for your account
+                </p>
+            </div>
+            
+            <div class="security-note">
+                🔒 Create a strong, unique password that you haven't used before
+            </div>
+            
+            <!-- Token Verification (for direct link access) -->
+            <div class="token-verification" id="tokenVerification">
+                <div class="reset-instructions">
+                    <div class="instruction-icon">✓</div>
+                    Please enter the verification token sent to your email to continue.
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="verificationToken">Verification Token</label>
+                    <input type="text" 
+                           id="verificationToken" 
+                           class="form-input token-input" 
+                           placeholder="Enter verification token"
+                           maxlength="64">
+                    <div class="form-hint">Enter the 64-character token from your email</div>
+                </div>
+                
+                <button type="button" class="btn btn-primary" id="verifyTokenButton">
+                    Verify Token
+                </button>
+                
+                <div class="auth-links">
+                    <a href="forgot.html" class="auth-link">Request new token</a>
+                </div>
+            </div>
+            
+            <!-- Password Reset Form -->
+            <div id="passwordResetForm">
+                <div class="reset-instructions">
+                    <div class="instruction-icon">🔐</div>
+                    Your password must meet the following security requirements:
+                </div>
+                
+                <form id="resetForm">
+                    <div class="form-group password-toggle">
+                        <label class="form-label" for="newPassword">New Password</label>
+                        <input type="password" 
+                               id="newPassword" 
+                               class="form-input" 
+                               placeholder="Enter new password"
+                               required>
+                        <button type="button" class="toggle-password" data-target="newPassword">Show</button>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                        <input type="password" 
+                               id="confirmPassword" 
+                               class="form-input" 
+                               placeholder="Confirm new password"
+                               required>
+                        <button type="button" class="toggle-password" data-target="confirmPassword">Show</button>
+                    </div>
+                    
+                    <div class="password-requirements">
+                        <div class="requirement-item" id="lengthRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>At least 8 characters</span>
+                        </div>
+                        <div class="requirement-item" id="uppercaseRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>At least one uppercase letter (A-Z)</span>
+                        </div>
+                        <div class="requirement-item" id="lowercaseRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>At least one lowercase letter (a-z)</span>
+                        </div>
+                        <div class="requirement-item" id="numberRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>At least one number (0-9)</span>
+                        </div>
+                        <div class="requirement-item" id="symbolRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>At least one symbol (@$!%*?&)</span>
+                        </div>
+                        <div class="requirement-item" id="matchRequirement">
+                            <div class="requirement-check">✓</div>
+                            <span>Passwords match</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="resetButton" disabled>
+                        Reset Password
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="reset-success" id="resetSuccess">
+                <div class="success-icon">✓</div>
+                <h2 style="color: var(--dark-text); margin-bottom: 10px;">Password Reset Complete!</h2>
+                <p style="color: var(--body-text); margin-bottom: 25px;">
+                    Your password has been successfully updated. You will be redirected to login.
+                </p>
+                <a href="login.html" class="btn btn-primary">
+                    Go to Login
+                </a>
+            </div>
+            
+            <div class="auth-links">
+                Remember your password? <a href="login.html" class="auth-link">Login here</a>
+            </div>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Use strong passwords and never share them with anyone</p>
+            <p>© 2016–2026 M-Pesewa Technology Ltd. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="../../modules/auth/auth.service.js"></script>
+    <script src="../../modules/auth/auth.rules.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const tokenVerification = document.getElementById('tokenVerification');
+            const passwordResetForm = document.getElementById('passwordResetForm');
+            const resetSuccess = document.getElementById('resetSuccess');
+            const resetForm = document.getElementById('resetForm');
+            const resetButton = document.getElementById('resetButton');
+            const newPasswordInput = document.getElementById('newPassword');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const verifyTokenButton = document.getElementById('verifyTokenButton');
+            const verificationTokenInput = document.getElementById('verificationToken');
+            
+            // Password requirement elements
+            const lengthRequirement = document.getElementById('lengthRequirement');
+            const uppercaseRequirement = document.getElementById('uppercaseRequirement');
+            const lowercaseRequirement = document.getElementById('lowercaseRequirement');
+            const numberRequirement = document.getElementById('numberRequirement');
+            const symbolRequirement = document.getElementById('symbolRequirement');
+            const matchRequirement = document.getElementById('matchRequirement');
+            
+            // Check if token is required from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            
+            if (token) {
+                // Auto-verify token if present in URL
+                verifyToken(token);
+            } else {
+                // Check for recovery session
+                const recoverySession = JSON.parse(localStorage.getItem('mpesewa_recovery_session') || '{}');
+                if (recoverySession.token && recoverySession.expiresAt) {
+                    const expiresAt = new Date(recoverySession.expiresAt);
+                    const now = new Date();
+                    
+                    if (now < expiresAt) {
+                        // Valid recovery session, show password reset form
+                        passwordResetForm.style.display = 'block';
+                        tokenVerification.style.display = 'none';
+                    } else {
+                        // Expired session, show token verification
+                        passwordResetForm.style.display = 'none';
+                        tokenVerification.style.display = 'block';
+                        showError('Recovery session expired. Please enter verification token.');
+                    }
+                } else {
+                    // No session, show token verification
+                    passwordResetForm.style.display = 'none';
+                    tokenVerification.style.display = 'block';
+                }
+            }
+            
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const input = document.getElementById(targetId);
+                    const type = input.type === 'password' ? 'text' : 'password';
+                    input.type = type;
+                    this.textContent = type === 'password' ? 'Show' : 'Hide';
+                });
+            });
+            
+            // Password validation on input
+            newPasswordInput.addEventListener('input', validatePasswordRequirements);
+            confirmPasswordInput.addEventListener('input', validatePasswordRequirements);
+            
+            // Form submission
+            resetForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const newPassword = newPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Validate passwords
+                const validation = validatePassword(newPassword, confirmPassword);
+                if (!validation.isValid) {
+                    showError(validation.errors[0]);
+                    return;
+                }
+                
+                try {
+                    resetButton.disabled = true;
+                    resetButton.innerHTML = 'Resetting password...';
+                    
+                    // Get recovery session
+                    const recoverySession = JSON.parse(localStorage.getItem('mpesewa_recovery_session') || '{}');
+                    if (!recoverySession.token) {
+                        throw new Error('Invalid recovery session. Please start over.');
+                    }
+                    
+                    // Check if session is expired
+                    const expiresAt = new Date(recoverySession.expiresAt);
+                    const now = new Date();
+                    if (now > expiresAt) {
+                        throw new Error('Recovery session expired. Please start over.');
+                    }
+                    
+                    // In production, this would update password in backend
+                    // For demo, we'll update localStorage
+                    const users = JSON.parse(localStorage.getItem('mpesewa_users_registry') || '[]');
+                    const userIndex = users.findIndex(u => u.id === recoverySession.userId);
+                    
+                    if (userIndex !== -1) {
+                        // Update user password (in production, this would be hashed)
+                        users[userIndex].passwordUpdatedAt = new Date().toISOString();
+                        users[userIndex].lastPasswordChange = new Date().toISOString();
+                        
+                        localStorage.setItem('mpesewa_users_registry', JSON.stringify(users));
+                        
+                        // Clear recovery session
+                        localStorage.removeItem('mpesewa_recovery_session');
+                        
+                        // Log password reset
+                        if (window.AuthAudit) {
+                            window.AuthAudit.logEvent('PASSWORD_RESET_SUCCESS', {
+                                userId: recoverySession.userId
+                            }, recoverySession.userId);
+                        }
+                        
+                        // Show success
+                        passwordResetForm.style.display = 'none';
+                        resetSuccess.style.display = 'block';
+                        
+                        // Auto-redirect after 5 seconds
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 5000);
+                        
+                    } else {
+                        throw new Error('User account not found');
+                    }
+                    
+                } catch (error) {
+                    showError(error.message || 'Failed to reset password. Please try again.');
+                } finally {
+                    resetButton.disabled = false;
+                    resetButton.innerHTML = 'Reset Password';
+                }
+            });
+            
+            // Token verification
+            verifyTokenButton.addEventListener('click', function() {
+                const token = verificationTokenInput.value.trim();
+                
+                if (!token || token.length !== 64) {
+                    showError('Please enter a valid 64-character verification token');
+                    return;
+                }
+                
+                verifyToken(token);
+            });
+            
+            // Validate password requirements
+            function validatePasswordRequirements() {
+                const password = newPasswordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                
+                // Length requirement
+                const hasLength = password.length >= 8;
+                updateRequirement(lengthRequirement, hasLength);
+                
+                // Uppercase requirement
+                const hasUppercase = /[A-Z]/.test(password);
+                updateRequirement(uppercaseRequirement, hasUppercase);
+                
+                // Lowercase requirement
+                const hasLowercase = /[a-z]/.test(password);
+                updateRequirement(lowercaseRequirement, hasLowercase);
+                
+                // Number requirement
+                const hasNumber = /\d/.test(password);
+                updateRequirement(numberRequirement, hasNumber);
+                
+                // Symbol requirement
+                const hasSymbol = /[@$!%*?&]/.test(password);
+                updateRequirement(symbolRequirement, hasSymbol);
+                
+                // Match requirement
+                const hasMatch = password === confirmPassword && password.length > 0;
+                updateRequirement(matchRequirement, hasMatch);
+                
+                // Enable/disable reset button
+                const allRequirementsMet = hasLength && hasUppercase && hasLowercase && 
+                                          hasNumber && hasSymbol && hasMatch;
+                resetButton.disabled = !allRequirementsMet;
+            }
+            
+            // Update requirement display
+            function updateRequirement(element, isMet) {
+                if (isMet) {
+                    element.classList.add('met');
+                } else {
+                    element.classList.remove('met');
+                }
+            }
+            
+            // Validate password
+            function validatePassword(password, confirmPassword) {
+                const errors = [];
+                
+                if (!password || password.length < 8) {
+                    errors.push('Password must be at least 8 characters');
+                }
+                
+                if (!/[A-Z]/.test(password)) {
+                    errors.push('Password must contain at least one uppercase letter');
+                }
+                
+                if (!/[a-z]/.test(password)) {
+                    errors.push('Password must contain at least one lowercase letter');
+                }
+                
+                if (!/\d/.test(password)) {
+                    errors.push('Password must contain at least one number');
+                }
+                
+                if (!/[@$!%*?&]/.test(password)) {
+                    errors.push('Password must contain at least one symbol (@$!%*?&)');
+                }
+                
+                if (password !== confirmPassword) {
+                    errors.push('Passwords do not match');
+                }
+                
+                return {
+                    isValid: errors.length === 0,
+                    errors: errors
+                };
+            }
+            
+            // Verify token
+            async function verifyToken(token) {
+                try {
+                    verifyTokenButton.disabled = true;
+                    verifyTokenButton.innerHTML = 'Verifying...';
+                    
+                    // In production, this would verify token with backend
+                    // For demo, we'll simulate verification
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Mock token verification
+                    // In reality, this would validate against a backend and return user info
+                    const isValidToken = token.length === 64 && /^[a-f0-9]+$/i.test(token);
+                    
+                    if (!isValidToken) {
+                        throw new Error('Invalid verification token');
+                    }
+                    
+                    // Mock user ID from token (in production, this would come from backend)
+                    const mockUserId = `user_${Date.now()}`;
+                    
+                    // Create recovery session
+                    const recoverySession = {
+                        userId: mockUserId,
+                        token: token,
+                        expiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString() // 30 minutes
+                    };
+                    
+                    localStorage.setItem('mpesewa_recovery_session', JSON.stringify(recoverySession));
+                    
+                    // Show password reset form
+                    tokenVerification.style.display = 'none';
+                    passwordResetForm.style.display = 'block';
+                    
+                    showSuccess('Token verified successfully. You can now set a new password.');
+                    
+                } catch (error) {
+                    showError(error.message || 'Invalid verification token');
+                } finally {
+                    verifyTokenButton.disabled = false;
+                    verifyTokenButton.innerHTML = 'Verify Token';
+                }
+            }
+            
+            // Helper function to show error
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Helper function to show success
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
