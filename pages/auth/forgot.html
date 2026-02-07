@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/tokens.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/auth.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/logos/favicon.ico">
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --action-orange: #f37021;
+            --trust-green: #28a745;
+            --neutral-light: #f8f9fa;
+            --pure-white: #ffffff;
+            --dark-text: #003366;
+            --light-text: #ffffff;
+            --body-text: #555555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #003366 0%, #0099ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-card {
+            background: var(--pure-white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 51, 102, 0.2);
+            border: 1px solid rgba(0, 153, 255, 0.1);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--light-text);
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .auth-title {
+            color: var(--dark-text);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .auth-subtitle {
+            color: var(--body-text);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--dark-text);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: var(--pure-white);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .form-hint {
+            font-size: 12px;
+            color: var(--body-text);
+            margin-top: 4px;
+        }
+        
+        .recovery-method {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e1e5e9;
+            padding-bottom: 20px;
+        }
+        
+        .method-option {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            background: var(--pure-white);
+            color: var(--body-text);
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .method-option:hover {
+            border-color: var(--secondary-blue);
+            color: var(--dark-text);
+        }
+        
+        .method-option.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--light-text);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #002244;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-blue);
+            color: var(--light-text);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #0088dd;
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #c00;
+            display: none;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #090;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #090;
+            display: none;
+        }
+        
+        .recovery-instructions {
+            background: var(--neutral-light);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--body-text);
+        }
+        
+        .instruction-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-blue);
+            color: var(--light-text);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+        }
+        
+        .recovery-success {
+            text-align: center;
+            padding: 30px 0;
+            display: none;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--trust-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--light-text);
+            font-size: 40px;
+        }
+        
+        .timer {
+            font-size: 14px;
+            color: var(--body-text);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .timer.expired {
+            color: #c00;
+        }
+        
+        .resend-link {
+            color: var(--secondary-blue);
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            border: none;
+            background: none;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .resend-link:hover {
+            text-decoration: underline;
+        }
+        
+        .resend-link:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+        }
+        
+        .auth-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--light-text);
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .auth-footer a {
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .auth-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .auth-title {
+                font-size: 20px;
+            }
+            
+            .recovery-method {
+                flex-direction: column;
+            }
+        }
+        
+        .security-note {
+            background: rgba(243, 112, 33, 0.1);
+            border-left: 4px solid var(--action-orange);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--dark-text);
+        }
+        
+        .verification-code-container {
+            text-align: center;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .code-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .code-input {
+            width: 50px;
+            height: 60px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 24px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark-text);
+            background: var(--pure-white);
+            transition: all 0.3s ease;
+        }
+        
+        .code-input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .code-input.filled {
+            border-color: var(--trust-green);
+            background: rgba(40, 167, 69, 0.05);
+        }
+        
+        .country-selector {
+            margin-top: 15px;
+        }
+        
+        .country-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--pure-white);
+            color: var(--dark-text);
+        }
+        
+        .country-select:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">M-P</div>
+                <h1 class="auth-title">Reset Your Password</h1>
+                <p class="auth-subtitle">
+                    Enter your account details to receive password reset instructions
+                </p>
+            </div>
+            
+            <div class="security-note">
+                🔒 For security, password reset requires identity verification through multiple steps.
+            </div>
+            
+            <!-- Step 1: Account Identification -->
+            <div id="step1">
+                <div class="recovery-instructions">
+                    <div class="instruction-icon">1</div>
+                    First, let's identify your account. Enter your username or email.
+                </div>
+                
+                <form id="identifyForm">
+                    <div class="form-group">
+                        <label class="form-label" for="identifier">Username or Email Address</label>
+                        <input type="text" 
+                               id="identifier" 
+                               class="form-input" 
+                               placeholder="Enter your username or email"
+                               required>
+                        <div class="form-hint">Enter the username or email associated with your account</div>
+                    </div>
+                    
+                    <div class="form-group country-selector">
+                        <label class="form-label" for="country">Country</label>
+                        <select id="country" class="country-select" required>
+                            <option value="">Select your country</option>
+                            <option value="KE">Kenya 🇰🇪</option>
+                            <option value="UG">Uganda 🇺🇬</option>
+                            <option value="TZ">Tanzania 🇹🇿</option>
+                            <option value="RW">Rwanda 🇷🇼</option>
+                            <option value="BI">Burundi 🇧🇮</option>
+                            <option value="CD">DR Congo 🇨🇩</option>
+                            <option value="SS">South Sudan 🇸🇸</option>
+                            <option value="ZA">South Africa 🇿🇦</option>
+                            <option value="NG">Nigeria 🇳🇬</option>
+                            <option value="GH">Ghana 🇬🇭</option>
+                            <option value="ET">Ethiopia 🇪🇹</option>
+                            <option value="SO">Somalia 🇸🇴</option>
+                        </select>
+                        <div class="form-hint">Select the country where your account is registered</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="identifyButton">
+                        Continue to Verification
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Step 2: Verification Method -->
+            <div id="step2" style="display: none;">
+                <div class="recovery-instructions">
+                    <div class="instruction-icon">2</div>
+                    Choose how you want to receive the verification code
+                </div>
+                
+                <div class="recovery-method">
+                    <div class="method-option active" data-method="email">
+                        Email
+                    </div>
+                    <div class="method-option" data-method="sms">
+                        SMS
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-label" id="contactInfoLabel">
+                        Verification will be sent to: <span id="contactInfo" style="color: var(--dark-text); font-weight: 600;"></span>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-primary" id="sendCodeButton">
+                    Send Verification Code
+                </button>
+                
+                <button type="button" class="btn btn-outline" id="backToStep1" style="margin-top: 15px; width: 100%;">
+                    ← Back
+                </button>
+            </div>
+            
+            <!-- Step 3: Enter Verification Code -->
+            <div id="step3" style="display: none;">
+                <div class="recovery-instructions">
+                    <div class="instruction-icon">3</div>
+                    Enter the 6-digit verification code sent to your contact method
+                </div>
+                
+                <div class="verification-code-container" id="verificationCodeContainer">
+                    <div class="code-inputs" id="codeInputsContainer">
+                        <!-- Code inputs will be generated by JavaScript -->
+                    </div>
+                    
+                    <div class="timer" id="timer">
+                        Code expires in: <span id="countdown">10:00</span>
+                    </div>
+                    
+                    <button class="resend-link" id="resendCode">
+                        Didn't receive code? Resend
+                    </button>
+                </div>
+                
+                <button type="button" class="btn btn-primary" id="verifyCodeButton" disabled>
+                    Verify and Continue
+                </button>
+                
+                <button type="button" class="btn btn-outline" id="backToStep2" style="margin-top: 15px; width: 100%;">
+                    ← Back to Method Selection
+                </button>
+            </div>
+            
+            <!-- Step 4: Reset Password -->
+            <div id="step4" style="display: none;">
+                <div class="recovery-instructions">
+                    <div class="instruction-icon">4</div>
+                    Create a new password for your account
+                </div>
+                
+                <form id="resetPasswordForm">
+                    <div class="form-group password-toggle">
+                        <label class="form-label" for="newPassword">New Password</label>
+                        <input type="password" 
+                               id="newPassword" 
+                               class="form-input" 
+                               placeholder="Enter new password"
+                               required>
+                        <div class="form-hint">8-12 characters with uppercase, lowercase, numbers, and symbols</div>
+                    </div>
+                    
+                    <div class="form-group password-toggle">
+                        <label class="form-label" for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" 
+                               id="confirmNewPassword" 
+                               class="form-input" 
+                               placeholder="Confirm new password"
+                               required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-label">Password Requirements</div>
+                        <div class="form-hint" id="passwordRequirements">
+                            <div id="lengthRequirement">• At least 8 characters</div>
+                            <div id="uppercaseRequirement">• At least one uppercase letter</div>
+                            <div id="lowercaseRequirement">• At least one lowercase letter</div>
+                            <div id="numberRequirement">• At least one number</div>
+                            <div id="symbolRequirement">• At least one symbol (@$!%*?&)</div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="resetPasswordButton">
+                        Reset Password
+                    </button>
+                    
+                    <button type="button" class="btn btn-outline" id="backToStep3" style="margin-top: 15px; width: 100%;">
+                        ← Back to Verification
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="recovery-success" id="successStep">
+                <div class="success-icon">✓</div>
+                <h2 style="color: var(--dark-text); margin-bottom: 10px;">Password Reset Successful!</h2>
+                <p style="color: var(--body-text); margin-bottom: 25px;">
+                    Your password has been successfully reset. You can now login with your new password.
+                </p>
+                <a href="login.html" class="btn btn-primary">
+                    Go to Login
+                </a>
+            </div>
+            
+            <div class="auth-links">
+                Remember your password? <a href="login.html" class="auth-link">Login here</a>
+            </div>
+        </div>
+        
+        <div class="auth-footer">
+            <p>Password reset requires identity verification for security</p>
+            <p>© 2016–2026 M-Pesewa Technology Ltd. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script src="../../modules/auth/auth.service.js"></script>
+    <script src="../../modules/auth/auth.rules.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize variables
+            let currentStep = 1;
+            let recoveryMethod = 'email';
+            let verificationCode = '';
+            let countdownInterval = null;
+            let timeLeft = 600; // 10 minutes in seconds
+            let canResend = false;
+            let userAccount = null;
+            let recoveryToken = null;
+            
+            // DOM elements
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            const step3 = document.getElementById('step3');
+            const step4 = document.getElementById('step4');
+            const successStep = document.getElementById('successStep');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const identifyForm = document.getElementById('identifyForm');
+            const identifyButton = document.getElementById('identifyButton');
+            const contactInfo = document.getElementById('contactInfo');
+            const contactInfoLabel = document.getElementById('contactInfoLabel');
+            const sendCodeButton = document.getElementById('sendCodeButton');
+            const verificationCodeContainer = document.getElementById('verificationCodeContainer');
+            const codeInputsContainer = document.getElementById('codeInputsContainer');
+            const timerElement = document.getElementById('timer');
+            const countdownElement = document.getElementById('countdown');
+            const resendButton = document.getElementById('resendCode');
+            const verifyCodeButton = document.getElementById('verifyCodeButton');
+            const resetPasswordForm = document.getElementById('resetPasswordForm');
+            const resetPasswordButton = document.getElementById('resetPasswordButton');
+            const newPasswordInput = document.getElementById('newPassword');
+            const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
+            
+            // Navigation buttons
+            const backToStep1 = document.getElementById('backToStep1');
+            const backToStep2 = document.getElementById('backToStep2');
+            const backToStep3 = document.getElementById('backToStep3');
+            
+            // Password requirement elements
+            const lengthRequirement = document.getElementById('lengthRequirement');
+            const uppercaseRequirement = document.getElementById('uppercaseRequirement');
+            const lowercaseRequirement = document.getElementById('lowercaseRequirement');
+            const numberRequirement = document.getElementById('numberRequirement');
+            const symbolRequirement = document.getElementById('symbolRequirement');
+            
+            // Country selector
+            const countrySelect = document.getElementById('country');
+            
+            // Auto-fill country if previously selected
+            const savedCountry = localStorage.getItem('mpesewa_country');
+            if (savedCountry) {
+                countrySelect.value = savedCountry;
+            }
+            
+            // Step 1: Account identification
+            identifyForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const identifier = document.getElementById('identifier').value.trim();
+                const country = countrySelect.value;
+                
+                if (!identifier || !country) {
+                    showError('Please enter your username/email and select your country');
+                    return;
+                }
+                
+                try {
+                    // Simulate account lookup
+                    identifyButton.disabled = true;
+                    identifyButton.innerHTML = 'Checking account...';
+                    
+                    // In production, this would call a backend API
+                    // For demo, we'll simulate a delay and check localStorage
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    const users = JSON.parse(localStorage.getItem('mpesewa_users_registry') || '[]');
+                    const user = users.find(u => 
+                        (u.username === identifier || u.email === identifier) && 
+                        u.country === country
+                    );
+                    
+                    if (!user) {
+                        throw new Error('Account not found. Please check your details and try again.');
+                    }
+                    
+                    // Check if account is locked
+                    if (window.AuthAudit && window.AuthAudit.isAccountLocked(user.username)) {
+                        throw new Error('Account is temporarily locked. Please try again later or contact support.');
+                    }
+                    
+                    // Store user account for recovery
+                    userAccount = user;
+                    
+                    // Update contact info display
+                    contactInfo.textContent = recoveryMethod === 'email' ? user.email : user.phone;
+                    
+                    // Move to step 2
+                    goToStep(2);
+                    
+                } catch (error) {
+                    showError(error.message);
+                } finally {
+                    identifyButton.disabled = false;
+                    identifyButton.innerHTML = 'Continue to Verification';
+                }
+            });
+            
+            // Recovery method selection
+            document.querySelectorAll('.method-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const method = this.getAttribute('data-method');
+                    
+                    // Update active option
+                    document.querySelectorAll('.method-option').forEach(o => {
+                        o.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    recoveryMethod = method;
+                    
+                    // Update contact info display
+                    if (userAccount) {
+                        contactInfo.textContent = method === 'email' ? userAccount.email : userAccount.phone;
+                    }
+                });
+            });
+            
+            // Step 2: Send verification code
+            sendCodeButton.addEventListener('click', async function() {
+                if (!userAccount) {
+                    showError('Account information not found. Please go back and try again.');
+                    return;
+                }
+                
+                try {
+                    sendCodeButton.disabled = true;
+                    sendCodeButton.innerHTML = 'Sending code...';
+                    
+                    // Simulate sending verification code
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Generate recovery token (simulated)
+                    recoveryToken = `recovery_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    // Store recovery session
+                    localStorage.setItem('mpesewa_recovery_session', JSON.stringify({
+                        userId: userAccount.id,
+                        method: recoveryMethod,
+                        token: recoveryToken,
+                        expiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString() // 30 minutes
+                    }));
+                    
+                    // Initialize code inputs
+                    initializeCodeInputs();
+                    
+                    // Start countdown timer
+                    startCountdown();
+                    
+                    // Show step 3
+                    goToStep(3);
+                    
+                    // Show success message
+                    showSuccess(`Verification code sent to your ${recoveryMethod}`);
+                    
+                    // Log recovery attempt
+                    if (window.AuthAudit) {
+                        window.AuthAudit.logEvent('PASSWORD_RECOVERY_INITIATED', {
+                            method: recoveryMethod,
+                            userId: userAccount.id
+                        }, userAccount.id);
+                    }
+                    
+                } catch (error) {
+                    showError('Failed to send verification code. Please try again.');
+                } finally {
+                    sendCodeButton.disabled = false;
+                    sendCodeButton.innerHTML = 'Send Verification Code';
+                }
+            });
+            
+            // Step 3: Verify code
+            verifyCodeButton.addEventListener('click', async function() {
+                if (verificationCode.length !== 6) {
+                    showError('Please enter the complete 6-digit code');
+                    return;
+                }
+                
+                try {
+                    verifyCodeButton.disabled = true;
+                    verifyCodeButton.innerHTML = 'Verifying...';
+                    
+                    // Simulate code verification
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // In production, this would verify against backend
+                    // For demo, we accept any 6-digit code
+                    const isValid = /^\d{6}$/.test(verificationCode);
+                    
+                    if (!isValid) {
+                        throw new Error('Invalid verification code');
+                    }
+                    
+                    // Check if recovery session is valid
+                    const recoverySession = JSON.parse(localStorage.getItem('mpesewa_recovery_session') || '{}');
+                    if (!recoverySession.token || recoverySession.token !== recoveryToken) {
+                        throw new Error('Recovery session expired. Please start over.');
+                    }
+                    
+                    // Clear timer
+                    clearInterval(countdownInterval);
+                    
+                    // Move to step 4
+                    goToStep(4);
+                    
+                    // Log successful verification
+                    if (window.AuthAudit) {
+                        window.AuthAudit.logEvent('PASSWORD_RECOVERY_VERIFIED', {
+                            method: recoveryMethod,
+                            userId: userAccount.id
+                        }, userAccount.id);
+                    }
+                    
+                } catch (error) {
+                    showError(error.message || 'Verification failed. Please try again.');
+                    
+                    // Clear inputs and shake animation for error
+                    const inputs = document.querySelectorAll('.code-input');
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                        input.style.animation = 'shake 0.5s';
+                    });
+                    
+                    setTimeout(() => {
+                        inputs.forEach(input => {
+                            input.style.animation = '';
+                        });
+                    }, 500);
+                    
+                    verificationCode = '';
+                    verifyCodeButton.disabled = true;
+                } finally {
+                    verifyCodeButton.disabled = false;
+                    verifyCodeButton.innerHTML = 'Verify and Continue';
+                }
+            });
+            
+            // Step 4: Reset password
+            resetPasswordForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const newPassword = newPasswordInput.value;
+                const confirmNewPassword = confirmNewPasswordInput.value;
+                
+                // Validate passwords
+                const validation = validatePassword(newPassword);
+                if (!validation.isValid) {
+                    showError(validation.errors[0]);
+                    return;
+                }
+                
+                if (newPassword !== confirmNewPassword) {
+                    showError('Passwords do not match');
+                    return;
+                }
+                
+                try {
+                    resetPasswordButton.disabled = true;
+                    resetPasswordButton.innerHTML = 'Resetting password...';
+                    
+                    // Check if recovery session is still valid
+                    const recoverySession = JSON.parse(localStorage.getItem('mpesewa_recovery_session') || '{}');
+                    if (!recoverySession.token || recoverySession.token !== recoveryToken) {
+                        throw new Error('Recovery session expired. Please start over.');
+                    }
+                    
+                    // In production, this would update password in backend
+                    // For demo, we'll update localStorage
+                    const users = JSON.parse(localStorage.getItem('mpesewa_users_registry') || '[]');
+                    const userIndex = users.findIndex(u => u.id === userAccount.id);
+                    
+                    if (userIndex !== -1) {
+                        // Update user password (in production, this would be hashed)
+                        users[userIndex].passwordUpdatedAt = new Date().toISOString();
+                        users[userIndex].lastPasswordChange = new Date().toISOString();
+                        
+                        localStorage.setItem('mpesewa_users_registry', JSON.stringify(users));
+                        
+                        // Clear recovery session
+                        localStorage.removeItem('mpesewa_recovery_session');
+                        
+                        // Log password reset
+                        if (window.AuthAudit) {
+                            window.AuthAudit.logEvent('PASSWORD_RESET_SUCCESS', {
+                                userId: userAccount.id
+                            }, userAccount.id);
+                        }
+                        
+                        // Show success step
+                        goToStep(5);
+                        
+                        // Show success message
+                        showSuccess('Password successfully reset!');
+                        
+                    } else {
+                        throw new Error('User account not found');
+                    }
+                    
+                } catch (error) {
+                    showError(error.message || 'Failed to reset password. Please try again.');
+                } finally {
+                    resetPasswordButton.disabled = false;
+                    resetPasswordButton.innerHTML = 'Reset Password';
+                }
+            });
+            
+            // Navigation buttons
+            backToStep1.addEventListener('click', () => goToStep(1));
+            backToStep2.addEventListener('click', () => goToStep(2));
+            backToStep3.addEventListener('click', () => goToStep(3));
+            
+            // Password validation on input
+            newPasswordInput.addEventListener('input', validatePasswordRequirements);
+            
+            // Resend code
+            resendButton.addEventListener('click', resendCode);
+            
+            // Initialize code inputs
+            function initializeCodeInputs() {
+                codeInputsContainer.innerHTML = '';
+                verificationCodeContainer.style.display = 'block';
+                
+                for (let i = 0; i < 6; i++) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    input.className = 'code-input';
+                    input.dataset.index = i;
+                    
+                    input.addEventListener('input', function(e) {
+                        const value = e.target.value;
+                        const index = parseInt(e.target.dataset.index);
+                        
+                        // Only allow numbers
+                        if (!/^\d*$/.test(value)) {
+                            e.target.value = '';
+                            return;
+                        }
+                        
+                        // Move to next input if value entered
+                        if (value && index < 5) {
+                            const nextInput = document.querySelector(`.code-input[data-index="${index + 1}"]`);
+                            if (nextInput) {
+                                nextInput.focus();
+                            }
+                        }
+                        
+                        // Update verification code
+                        updateVerificationCode();
+                    });
+                    
+                    input.addEventListener('keydown', function(e) {
+                        const index = parseInt(e.target.dataset.index);
+                        
+                        // Handle backspace
+                        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                            const prevInput = document.querySelector(`.code-input[data-index="${index - 1}"]`);
+                            if (prevInput) {
+                                prevInput.focus();
+                            }
+                        }
+                        
+                        // Handle paste
+                        if (e.key === 'v' && (e.ctrlKey || e.metaKey)) {
+                            e.preventDefault();
+                            handlePaste(e);
+                        }
+                    });
+                    
+                    codeInputsContainer.appendChild(input);
+                }
+                
+                // Focus first input
+                const firstInput = document.querySelector('.code-input[data-index="0"]');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }
+            
+            // Handle paste
+            function handlePaste(e) {
+                navigator.clipboard.readText().then(text => {
+                    const digits = text.replace(/\D/g, '').substring(0, 6);
+                    
+                    for (let i = 0; i < Math.min(digits.length, 6); i++) {
+                        const input = document.querySelector(`.code-input[data-index="${i}"]`);
+                        if (input) {
+                            input.value = digits[i];
+                            input.classList.add('filled');
+                        }
+                    }
+                    
+                    updateVerificationCode();
+                    
+                    // Focus last filled input
+                    const lastIndex = Math.min(digits.length, 5);
+                    const lastInput = document.querySelector(`.code-input[data-index="${lastIndex}"]`);
+                    if (lastInput) {
+                        lastInput.focus();
+                    }
+                }).catch(err => {
+                    console.error('Failed to read clipboard:', err);
+                });
+            }
+            
+            // Update verification code
+            function updateVerificationCode() {
+                verificationCode = '';
+                const inputs = document.querySelectorAll('.code-input');
+                
+                inputs.forEach(input => {
+                    verificationCode += input.value;
+                    if (input.value) {
+                        input.classList.add('filled');
+                    } else {
+                        input.classList.remove('filled');
+                    }
+                });
+                
+                // Enable verify button if all 6 digits are entered
+                verifyCodeButton.disabled = verificationCode.length !== 6;
+            }
+            
+            // Start countdown timer
+            function startCountdown() {
+                clearInterval(countdownInterval);
+                timeLeft = 600; // Reset to 10 minutes
+                updateCountdownDisplay();
+                
+                countdownInterval = setInterval(() => {
+                    timeLeft--;
+                    updateCountdownDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        timerElement.classList.add('expired');
+                        countdownElement.textContent = '00:00';
+                        resendButton.disabled = false;
+                        canResend = true;
+                        showError('Verification code has expired. Please request a new code.');
+                    }
+                }, 1000);
+            }
+            
+            // Update countdown display
+            function updateCountdownDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Enable resend button when timer expires
+                resendButton.disabled = timeLeft > 0;
+            }
+            
+            // Resend code
+            async function resendCode() {
+                if (!canResend && timeLeft > 0) {
+                    showError(`Please wait ${timeLeft} seconds before requesting a new code`);
+                    return;
+                }
+                
+                try {
+                    // Simulate resending code
+                    showSuccess(`New verification code sent to your ${recoveryMethod}`);
+                    
+                    // Generate new recovery token
+                    recoveryToken = `recovery_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    // Update recovery session
+                    localStorage.setItem('mpesewa_recovery_session', JSON.stringify({
+                        userId: userAccount.id,
+                        method: recoveryMethod,
+                        token: recoveryToken,
+                        expiresAt: new Date(Date.now() + 30 * 60 * 1000).toISOString()
+                    }));
+                    
+                    // Reset timer
+                    startCountdown();
+                    timerElement.classList.remove('expired');
+                    canResend = false;
+                    
+                    // Clear inputs
+                    const inputs = document.querySelectorAll('.code-input');
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('filled');
+                    });
+                    
+                    verificationCode = '';
+                    verifyCodeButton.disabled = true;
+                    
+                    // Focus first input
+                    const firstInput = document.querySelector('.code-input[data-index="0"]');
+                    if (firstInput) {
+                        firstInput.focus();
+                    }
+                    
+                    // Log resend request
+                    if (window.AuthAudit) {
+                        window.AuthAudit.logEvent('PASSWORD_RECOVERY_CODE_RESENT', {
+                            method: recoveryMethod
+                        }, userAccount.id);
+                    }
+                    
+                } catch (error) {
+                    showError('Failed to resend code. Please try again.');
+                }
+            }
+            
+            // Validate password requirements
+            function validatePasswordRequirements() {
+                const password = newPasswordInput.value;
+                
+                // Length requirement
+                const hasLength = password.length >= 8;
+                lengthRequirement.style.color = hasLength ? 'var(--trust-green)' : 'var(--body-text)';
+                
+                // Uppercase requirement
+                const hasUppercase = /[A-Z]/.test(password);
+                uppercaseRequirement.style.color = hasUppercase ? 'var(--trust-green)' : 'var(--body-text)';
+                
+                // Lowercase requirement
+                const hasLowercase = /[a-z]/.test(password);
+                lowercaseRequirement.style.color = hasLowercase ? 'var(--trust-green)' : 'var(--body-text)';
+                
+                // Number requirement
+                const hasNumber = /\d/.test(password);
+                numberRequirement.style.color = hasNumber ? 'var(--trust-green)' : 'var(--body-text)';
+                
+                // Symbol requirement
+                const hasSymbol = /[@$!%*?&]/.test(password);
+                symbolRequirement.style.color = hasSymbol ? 'var(--trust-green)' : 'var(--body-text)';
+            }
+            
+            // Validate password
+            function validatePassword(password) {
+                const errors = [];
+                
+                if (!password || password.length < 8) {
+                    errors.push('Password must be at least 8 characters');
+                }
+                
+                if (!/[A-Z]/.test(password)) {
+                    errors.push('Password must contain at least one uppercase letter');
+                }
+                
+                if (!/[a-z]/.test(password)) {
+                    errors.push('Password must contain at least one lowercase letter');
+                }
+                
+                if (!/\d/.test(password)) {
+                    errors.push('Password must contain at least one number');
+                }
+                
+                if (!/[@$!%*?&]/.test(password)) {
+                    errors.push('Password must contain at least one symbol (@$!%*?&)');
+                }
+                
+                return {
+                    isValid: errors.length === 0,
+                    errors: errors
+                };
+            }
+            
+            // Navigate between steps
+            function goToStep(step) {
+                currentStep = step;
+                
+                // Hide all steps
+                step1.style.display = 'none';
+                step2.style.display = 'none';
+                step3.style.display = 'none';
+                step4.style.display = 'none';
+                successStep.style.display = 'none';
+                
+                // Show current step
+                switch (step) {
+                    case 1:
+                        step1.style.display = 'block';
+                        break;
+                    case 2:
+                        step2.style.display = 'block';
+                        break;
+                    case 3:
+                        step3.style.display = 'block';
+                        break;
+                    case 4:
+                        step4.style.display = 'block';
+                        break;
+                    case 5:
+                        successStep.style.display = 'block';
+                        break;
+                }
+                
+                // Clear error/success messages
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+            }
+            
+            // Helper function to show error
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Helper function to show success
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Add shake animation for error
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

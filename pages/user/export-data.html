@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Data - M-Pesewa</title>
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <style>
+        .export-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .export-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .export-header h1 {
+            color: #003366;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .export-header p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .export-info-section {
+            background: #e8f4fd;
+            border: 2px solid #0099ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .export-info-section h3 {
+            color: #003366;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #b3e0ff;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li::before {
+            content: "ℹ️";
+            flex-shrink: 0;
+        }
+
+        .data-selection-section {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 51, 102, 0.1);
+        }
+
+        .data-selection-section h3 {
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .data-category {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .data-category:hover {
+            background: #e8f4fd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 51, 102, 0.1);
+        }
+
+        .data-category.selected {
+            background: #e8f4fd;
+            border-color: #0099ff;
+            box-shadow: 0 4px 12px rgba(0, 153, 255, 0.2);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .category-header h4 {
+            margin: 0;
+            color: #003366;
+            font-size: 1.1rem;
+        }
+
+        .category-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .category-checkbox:checked {
+            background-color: #0099ff;
+            border-color: #0099ff;
+        }
+
+        .category-checkbox:checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .category-info {
+            margin-bottom: 15px;
+        }
+
+        .category-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .category-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .select-all-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .select-all-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #003366;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .select-all-checkbox:checked {
+            background-color: #003366;
+        }
+
+        .select-all-checkbox:checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .select-all-section label {
+            color: #003366;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .format-selection {
+            margin-bottom: 30px;
+        }
+
+        .format-selection h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .format-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .format-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .format-option:hover {
+            border-color: #0099ff;
+            background: #e8f4fd;
+        }
+
+        .format-option.selected {
+            border-color: #0099ff;
+            background: #e8f4fd;
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+
+        .format-option input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .format-option input[type="radio"]:checked {
+            border-color: #0099ff;
+        }
+
+        .format-option input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: #0099ff;
+            border-radius: 50%;
+        }
+
+        .format-option label {
+            color: #333;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .format-icon {
+            font-size: 1.2rem;
+        }
+
+        .date-range-section {
+            margin-bottom: 30px;
+        }
+
+        .date-range-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .date-range-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .date-range-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-range-option:hover {
+            border-color: #0099ff;
+            background: #e8f4fd;
+        }
+
+        .date-range-option.selected {
+            border-color: #0099ff;
+            background: #e8f4fd;
+        }
+
+        .date-range-option input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .date-range-option input[type="radio"]:checked {
+            border-color: #0099ff;
+        }
+
+        .date-range-option input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background-color: #0099ff;
+            border-radius: 50%;
+        }
+
+        .date-range-option label {
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .custom-date-range {
+            display: none;
+            gap: 15px;
+            margin-top: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .custom-date-range.active {
+            display: flex;
+        }
+
+        .date-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .date-input-group label {
+            color: #333;
+            font-size: 0.9rem;
+            min-width: 70px;
+        }
+
+        .date-input-group input {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .date-input-group input:focus {
+            border-color: #0099ff;
+            outline: none;
+        }
+
+        .export-button-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn-export {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-export:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-export:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .export-progress {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 8px;
+            border-left: 4px solid #0099ff;
+        }
+
+        .export-progress.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-header h4 {
+            margin: 0;
+            color: #003366;
+            font-size: 1.1rem;
+        }
+
+        .progress-percentage {
+            color: #0099ff;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0099ff, #003366);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .download-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #e8f5e9;
+            border-radius: 12px;
+            border: 2px solid #4caf50;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .download-section.active {
+            display: block;
+        }
+
+        .download-section h4 {
+            color: #388e3c;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .download-section p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn-download {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-download:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        .file-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .export-container {
+                padding: 20px 15px;
+            }
+            
+            .export-header h1 {
+                font-size: 2rem;
+            }
+            
+            .data-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .format-options,
+            .date-range-options {
+                flex-direction: column;
+            }
+            
+            .custom-date-range {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .date-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date-input-group input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .export-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .export-info-section,
+            .data-selection-section {
+                padding: 20px;
+            }
+            
+            .data-category {
+                padding: 15px;
+            }
+            
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="mp-header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <a href="../index.html">
+                    <h1>M-PESEWA</h1>
+                </a>
+            </div>
+            
+            <div class="header-menu">
+                <a href="../index.html">Home</a>
+                
+                <!-- Lenders Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Lenders ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../lender/pages/lender-dashboard.html">Dashboard</a>
+                        <a href="../lender/pages/lending-portfolio.html">Portfolio</a>
+                        <a href="../lender/pages/lending-history.html">History</a>
+                        <a href="../lender/pages/lending-rules.html">Rules</a>
+                        <a href="../lender/pages/lending-risk.html">Risk</a>
+                    </div>
+                </div>
+                
+                <!-- Borrowers Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Borrowers ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../borrower/pages/borrower-dashboard.html">Dashboard</a>
+                        <a href="../borrower/pages/borrow-request.html">Apply for Loan</a>
+                        <a href="../borrower/pages/borrow-history.html">Borrow History</a>
+                        <a href="../borrower/pages/borrow-repayments.html">Repayments</a>
+                        <a href="../borrower/pages/borrow-disputes.html">Disputes</a>
+                    </div>
+                </div>
+                
+                <!-- Emergency Hub Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Emergency Hub ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../emergency/everyday-essentials.html">Everyday Essentials</a>
+                        <a href="../emergency/logistics-repairs.html">Logistics & Repairs</a>
+                        <a href="../emergency/business-growth.html">Business & Growth</a>
+                        <a href="../emergency/health-education.html">Health & Education</a>
+                    </div>
+                </div>
+                
+                <!-- Subscription Plans Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Subscription Plans ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../subscription/plans.html">Current Plan</a>
+                        <a href="../subscription/subscribe.html">Upgrade</a>
+                        <a href="../subscription/history.html">History</a>
+                        <a href="../subscription/invoices.html">Invoices</a>
+                    </div>
+                </div>
+                
+                <!-- Country Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Country ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../countries/ke.html">Kenya</a>
+                        <a href="../countries/ug.html">Uganda</a>
+                        <a href="../countries/tz.html">Tanzania</a>
+                        <a href="../countries/rw.html">Rwanda</a>
+                        <a href="../countries/drc.html">DRC</a>
+                        <a href="../countries/bi.html">Burundi</a>
+                        <a href="../countries/ng.html">Nigeria</a>
+                        <a href="../countries/gh.html">Ghana</a>
+                        <a href="../countries/ssd.html">South Sudan</a>
+                        <a href="../countries/so.html">Somalia</a>
+                        <a href="../countries/za.html">South Africa</a>
+                        <a href="../countries/et.html">Ethiopia</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Profile & Actions -->
+            <div class="header-actions">
+                <div class="dropdown">
+                    <a href="#" class="user-profile dropdown-toggle">
+                        <span class="user-name">John Doe</span>
+                        <span class="user-role">Lender</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">My Profile</a>
+                        <a href="preferences.html">Preferences</a>
+                        <a href="security.html">Security</a>
+                        <a href="activity.html">Activity</a>
+                        <a href="devices.html">Devices</a>
+                        <a href="sessions.html">Sessions</a>
+                        <a href="#" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="export-container">
+            <!-- Header Section -->
+            <div class="export-header">
+                <h1>Export Your Data</h1>
+                <p>
+                    Download a copy of your personal data from M-Pesewa. You can select specific data categories, 
+                    choose your preferred format, and specify date ranges. Your data will be compiled and made available for download.
+                </p>
+            </div>
+
+            <!-- Information Section -->
+            <div class="export-info-section">
+                <h3><span>ℹ️</span> Important Information</h3>
+                <ul class="info-list">
+                    <li><strong>GDPR/Data Rights:</strong> You have the right to access and receive a copy of your personal data</li>
+                    <li><strong>Processing Time:</strong> Large data exports may take several minutes to prepare</li>
+                    <li><strong>File Retention:</strong> Generated files are available for download for 7 days</li>
+                    <li><strong>Data Format:</strong> Choose between JSON (machine-readable) or CSV (spreadsheet-friendly)</li>
+                    <li><strong>Sensitive Data:</strong> Some sensitive information may be redacted for security</li>
+                </ul>
+            </div>
+
+            <!-- Data Selection Section -->
+            <div class="data-selection-section">
+                <h3><span>📊</span> Select Data to Export</h3>
+                
+                <!-- Select All -->
+                <div class="select-all-section">
+                    <input type="checkbox" id="select-all" class="select-all-checkbox">
+                    <label for="select-all">Select All Data Categories</label>
+                </div>
+
+                <!-- Data Categories Grid -->
+                <div class="data-categories">
+                    <!-- Profile Data -->
+                    <div class="data-category" data-category="profile">
+                        <div class="category-header">
+                            <h4>Profile Information</h4>
+                            <input type="checkbox" id="category-profile" class="category-checkbox" checked>
+                        </div>
+                        <div class="category-info">
+                            <p>Personal details, contact information, verification documents, and account settings</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 15 records</span>
+                            <span>⚡ ~5KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Loan History -->
+                    <div class="data-category" data-category="loans">
+                        <div class="category-header">
+                            <h4>Loan History (Borrower)</h4>
+                            <input type="checkbox" id="category-loans" class="category-checkbox" checked>
+                        </div>
+                        <div class="category-info">
+                            <p>All loans borrowed, repayment history, interest paid, and loan agreements</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 42 records</span>
+                            <span>⚡ ~25KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Lending Portfolio -->
+                    <div class="data-category" data-category="lending">
+                        <div class="category-header">
+                            <h4>Lending Portfolio (Lender)</h4>
+                            <input type="checkbox" id="category-lending" class="category-checkbox" checked>
+                        </div>
+                        <div class="category-info">
+                            <p>Active ledgers, lending history, borrower ratings, and interest earned</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 87 records</span>
+                            <span>⚡ ~45KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Group Memberships -->
+                    <div class="data-category" data-category="groups">
+                        <div class="category-header">
+                            <h4>Group Memberships</h4>
+                            <input type="checkbox" id="category-groups" class="category-checkbox" checked>
+                        </div>
+                        <div class="category-info">
+                            <p>All groups you belong to, membership history, roles, and group activities</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 3 records</span>
+                            <span>⚡ ~8KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Transaction History -->
+                    <div class="data-category" data-category="transactions">
+                        <div class="category-header">
+                            <h4>Subscription & Transactions</h4>
+                            <input type="checkbox" id="category-transactions" class="category-checkbox">
+                        </div>
+                        <div class="category-info">
+                            <p>Subscription payments, invoice history, payment methods, and billing records</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 12 records</span>
+                            <span>⚡ ~15KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Communication History -->
+                    <div class="data-category" data-category="communications">
+                        <div class="category-header">
+                            <h4>Communications</h4>
+                            <input type="checkbox" id="category-communications" class="category-checkbox">
+                        </div>
+                        <div class="category-info">
+                            <p>Messages, notifications, support tickets, and platform announcements</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 156 records</span>
+                            <span>⚡ ~75KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Activity Logs -->
+                    <div class="data-category" data-category="activity">
+                        <div class="category-header">
+                            <h4>Activity & Security Logs</h4>
+                            <input type="checkbox" id="category-activity" class="category-checkbox">
+                        </div>
+                        <div class="category-info">
+                            <p>Login history, security events, IP addresses, and account activity timeline</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 89 records</span>
+                            <span>⚡ ~35KB</span>
+                        </div>
+                    </div>
+
+                    <!-- Ratings & Reputation -->
+                    <div class="data-category" data-category="ratings">
+                        <div class="category-header">
+                            <h4>Ratings & Reputation</h4>
+                            <input type="checkbox" id="category-ratings" class="category-checkbox" checked>
+                        </div>
+                        <div class="category-info">
+                            <p>Borrower ratings, lender reputation scores, feedback received, and blacklist status</p>
+                        </div>
+                        <div class="category-stats">
+                            <span>📄 24 records</span>
+                            <span>⚡ ~12KB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Format Selection -->
+                <div class="format-selection">
+                    <h4>Export Format</h4>
+                    <div class="format-options">
+                        <div class="format-option" data-format="json">
+                            <input type="radio" id="format-json" name="export-format" value="json" checked>
+                            <label for="format-json">
+                                <span class="format-icon">{ }</span> JSON Format
+                            </label>
+                        </div>
+                        <div class="format-option" data-format="csv">
+                            <input type="radio" id="format-csv" name="export-format" value="csv">
+                            <label for="format-csv">
+                                <span class="format-icon">📊</span> CSV Format
+                            </label>
+                        </div>
+                        <div class="format-option" data-format="pdf">
+                            <input type="radio" id="format-pdf" name="export-format" value="pdf">
+                            <label for="format-pdf">
+                                <span class="format-icon">📄</span> PDF Report
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date Range Selection -->
+                <div class="date-range-section">
+                    <h4>Date Range</h4>
+                    <div class="date-range-options">
+                        <div class="date-range-option">
+                            <input type="radio" id="range-all" name="date-range" value="all" checked>
+                            <label for="range-all">All Time</label>
+                        </div>
+                        <div class="date-range-option">
+                            <input type="radio" id="range-year" name="date-range" value="year">
+                            <label for="range-year">Last 12 Months</label>
+                        </div>
+                        <div class="date-range-option">
+                            <input type="radio" id="range-month" name="date-range" value="month">
+                            <label for="range-month">Last 30 Days</label>
+                        </div>
+                        <div class="date-range-option">
+                            <input type="radio" id="range-custom" name="date-range" value="custom">
+                            <label for="range-custom">Custom Range</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Date Range Inputs -->
+                    <div class="custom-date-range" id="custom-date-range">
+                        <div class="date-input-group">
+                            <label for="start-date">From:</label>
+                            <input type="date" id="start-date" value="2025-01-01">
+                        </div>
+                        <div class="date-input-group">
+                            <label for="end-date">To:</label>
+                            <input type="date" id="end-date" value="2026-01-24">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Button -->
+            <div class="export-button-section">
+                <button type="button" id="export-btn" class="btn-export">
+                    <span>📥</span> Generate Data Export
+                </button>
+                
+                <!-- Progress Bar -->
+                <div class="export-progress" id="export-progress">
+                    <div class="progress-header">
+                        <h4>Preparing Your Data Export</h4>
+                        <span class="progress-percentage" id="progress-percentage">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span id="current-task">Initializing...</span>
+                        <span id="time-remaining">Estimated time: 2 minutes</span>
+                    </div>
+                </div>
+                
+                <!-- Download Section -->
+                <div class="download-section" id="download-section">
+                    <h4>✅ Your Data is Ready!</h4>
+                    <p>Your data export has been prepared successfully. Click the button below to download the file.</p>
+                    <a href="#" class="btn-download" id="download-link" download="mpesewa-data-export.json">
+                        <span>⬇️</span> Download Export File
+                    </a>
+                    <div class="file-info">
+                        <p id="file-info">File: mpesewa-data-export.json (≈ 120KB) • Generated: Just now</p>
+                        <p style="font-size: 0.8rem; color: #888;">This download link will expire in 7 days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Borrowing</h4>
+                <a href="../borrower/pages/borrow-request.html">Get Emergency Loan</a>
+                <a href="#">Online Personal Loan</a>
+                <a href="#">Business Loan</a>
+                <a href="../how-it-works.html">How to Apply</a>
+                <a href="#">Active Borrowers</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Lending</h4>
+                <a href="../lender/pages/lending-rules.html">Smart Lending</a>
+                <a href="../how-it-works.html">Why Lend at M-Pesewa?</a>
+                <a href="../lender/pages/lending-rules.html">How to Lend</a>
+                <a href="#">Active Lenders</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>How It Works</h4>
+                <a href="../how-it-works.html">P2P Lending Explained</a>
+                <a href="../about.html">Our Role</a>
+                <a href="../subscription/plans.html">Subscriptions</a>
+                <a href="../blacklist/pages/blacklist-public.html">Blacklist</a>
+                <a href="../collectors.html">Debt Collectors</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>About Us</h4>
+                <a href="../about.html">About M-Pesewa</a>
+                <a href="../about.html#team">Team & Advisory Board</a>
+                <a href="../careers.html">News & Careers</a>
+                <a href="../faq.html">Blog / FAQs</a>
+                <a href="../contact.html">Contact Us</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal & Compliance</h4>
+                <a href="../terms.html">Terms & Conditions</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../grievance.html">Grievance Redressal</a>
+                <a href="../fair-practices.html">Fair Practices Code</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Partnerships</h4>
+                <a href="../partners.html">Be a Partner</a>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i>📘</i></a>
+                    <a href="#" aria-label="Twitter"><i>🐦</i></a>
+                    <a href="#" aria-label="YouTube"><i>📺</i></a>
+                    <a href="#" aria-label="Instagram"><i>📸</i></a>
+                    <a href="#" aria-label="LinkedIn"><i>💼</i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countries Ticker -->
+        <div class="country-ticker">
+            <div class="ticker-track">
+                Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                South Africa • Nigeria • Ghana • Ethiopia •
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+            <p class="footer-disclaimer">
+                M-Pesewa is a technology platform. We do not hold funds or guarantee loans. 
+                All lending happens directly between users in trusted groups.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const headerMenu = document.querySelector('.header-menu');
+            
+            mobileMenuToggle?.addEventListener('click', function() {
+                headerMenu?.classList.toggle('active');
+                mobileMenuToggle?.classList.toggle('active');
+            });
+
+            // User data
+            const userData = JSON.parse(localStorage.getItem('mpesewa_user')) || {
+                name: 'John Doe',
+                role: 'Lender',
+                country: 'KE'
+            };
+
+            // Category selection
+            const categories = document.querySelectorAll('.data-category');
+            const selectAllCheckbox = document.getElementById('select-all');
+            const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+            
+            // Category click handling
+            categories.forEach(category => {
+                category.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('category-checkbox')) {
+                        const checkbox = this.querySelector('.category-checkbox');
+                        checkbox.checked = !checkbox.checked;
+                        checkbox.dispatchEvent(new Event('change'));
+                    }
+                });
+                
+                const checkbox = category.querySelector('.category-checkbox');
+                checkbox.addEventListener('change', function() {
+                    category.classList.toggle('selected', this.checked);
+                    updateSelectAllState();
+                    updateExportButton();
+                });
+            });
+
+            // Select All functionality
+            selectAllCheckbox.addEventListener('change', function() {
+                const isChecked = this.checked;
+                categoryCheckboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                    const category = checkbox.closest('.data-category');
+                    if (category) {
+                        category.classList.toggle('selected', isChecked);
+                    }
+                });
+                updateExportButton();
+            });
+
+            function updateSelectAllState() {
+                const allChecked = Array.from(categoryCheckboxes).every(cb => cb.checked);
+                const someChecked = Array.from(categoryCheckboxes).some(cb => cb.checked);
+                
+                selectAllCheckbox.checked = allChecked;
+                selectAllCheckbox.indeterminate = someChecked && !allChecked;
+            }
+
+            // Format selection
+            const formatOptions = document.querySelectorAll('.format-option');
+            formatOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (e.target.type !== 'radio') {
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                });
+                
+                const radio = option.querySelector('input[type="radio"]');
+                radio.addEventListener('change', function() {
+                    formatOptions.forEach(opt => opt.classList.remove('selected'));
+                    if (this.checked) {
+                        this.closest('.format-option').classList.add('selected');
+                    }
+                });
+            });
+
+            // Date range selection
+            const dateRangeOptions = document.querySelectorAll('.date-range-option');
+            const customDateRange = document.getElementById('custom-date-range');
+            
+            dateRangeOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (e.target.type !== 'radio') {
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        radio.dispatchEvent(new Event('change'));
+                    }
+                });
+                
+                const radio = option.querySelector('input[type="radio"]');
+                radio.addEventListener('change', function() {
+                    dateRangeOptions.forEach(opt => opt.classList.remove('selected'));
+                    if (this.checked) {
+                        this.closest('.date-range-option').classList.add('selected');
+                        
+                        // Show/hide custom date range
+                        if (this.value === 'custom') {
+                            customDateRange.classList.add('active');
+                        } else {
+                            customDateRange.classList.remove('active');
+                        }
+                    }
+                });
+            });
+
+            // Export button
+            const exportBtn = document.getElementById('export-btn');
+            const progressSection = document.getElementById('export-progress');
+            const downloadSection = document.getElementById('download-section');
+            
+            function updateExportButton() {
+                const anySelected = Array.from(categoryCheckboxes).some(cb => cb.checked);
+                exportBtn.disabled = !anySelected;
+            }
+
+            exportBtn.addEventListener('click', function() {
+                if (this.disabled) return;
+                
+                // Collect export settings
+                const selectedCategories = Array.from(categoryCheckboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.id.replace('category-', ''));
+                
+                const format = document.querySelector('input[name="export-format"]:checked')?.value || 'json';
+                const dateRange = document.querySelector('input[name="date-range"]:checked')?.value || 'all';
+                
+                let dateRangeText = '';
+                if (dateRange === 'custom') {
+                    const startDate = document.getElementById('start-date').value;
+                    const endDate = document.getElementById('end-date').value;
+                    dateRangeText = `${startDate} to ${endDate}`;
+                } else {
+                    dateRangeText = dateRange;
+                }
+                
+                console.log('Export settings:', {
+                    categories: selectedCategories,
+                    format,
+                    dateRange: dateRangeText
+                });
+                
+                // Show progress
+                exportBtn.style.display = 'none';
+                progressSection.classList.add('active');
+                
+                // Simulate export process
+                simulateExportProcess();
+            });
+
+            function simulateExportProcess() {
+                const progressFill = document.getElementById('progress-fill');
+                const progressPercentage = document.getElementById('progress-percentage');
+                const currentTask = document.getElementById('current-task');
+                const timeRemaining = document.getElementById('time-remaining');
+                
+                let progress = 0;
+                const tasks = [
+                    { task: 'Collecting profile data...', duration: 1000 },
+                    { task: 'Processing loan history...', duration: 1500 },
+                    { task: 'Compiling lending portfolio...', duration: 2000 },
+                    { task: 'Aggregating group memberships...', duration: 1000 },
+                    { task: 'Formatting data...', duration: 1500 },
+                    { task: 'Generating export file...', duration: 1000 }
+                ];
+                
+                tasks.forEach((task, index) => {
+                    setTimeout(() => {
+                        const taskProgress = (index + 1) / tasks.length * 100;
+                        progress = taskProgress;
+                        progressFill.style.width = `${taskProgress}%`;
+                        progressPercentage.textContent = `${Math.round(taskProgress)}%`;
+                        currentTask.textContent = task.task;
+                        
+                        // Update time remaining
+                        const remainingTasks = tasks.length - (index + 1);
+                        const estimatedSeconds = remainingTasks * 1.5;
+                        timeRemaining.textContent = `Estimated time: ${estimatedSeconds} seconds`;
+                        
+                        // If last task, show download
+                        if (index === tasks.length - 1) {
+                            setTimeout(() => {
+                                progressSection.classList.remove('active');
+                                showDownloadSection();
+                            }, 1000);
+                        }
+                    }, index * 1000);
+                });
+            }
+
+            function showDownloadSection() {
+                const format = document.querySelector('input[name="export-format"]:checked')?.value || 'json';
+                const fileName = `mpesewa-data-export.${format}`;
+                const fileSize = '≈ 120KB';
+                const timestamp = new Date().toLocaleString();
+                
+                const downloadLink = document.getElementById('download-link');
+                const fileInfo = document.getElementById('file-info');
+                
+                downloadLink.href = `data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ 
+                    message: 'This is a simulated data export. In production, this would be your actual data.',
+                    timestamp: new Date().toISOString(),
+                    format: format 
+                }))}`;
+                downloadLink.download = fileName;
+                downloadLink.textContent = `Download ${fileName.toUpperCase()} File`;
+                
+                fileInfo.textContent = `File: ${fileName} (${fileSize}) • Generated: ${timestamp}`;
+                
+                downloadSection.classList.add('active');
+            }
+
+            // Initialize
+            updateSelectAllState();
+            updateExportButton();
+            
+            // Set today's date as default end date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('end-date').value = today;
+            
+            // Set 30 days ago as default start date for custom range
+            const thirtyDaysAgo = new Date();
+            thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+            document.getElementById('start-date').value = thirtyDaysAgo.toISOString().split('T')[0];
+
+            // Logout button
+            document.getElementById('logout-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('mpesewa_auth_token');
+                    window.location.href = '../auth/login.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
