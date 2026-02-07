@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+    <defs>
+        <style>
+            .kenya-black {fill: #000000}
+            .kenya-red {fill: #BB0000}
+            .kenya-green {fill: #006600}
+            .kenya-white {fill: #FFFFFF}
+        </style>
+    </defs>
+    <rect width="900" height="200" y="0" class="kenya-black"/>
+    <rect width="900" height="200" y="200" class="kenya-red"/>
+    <rect width="900" height="200" y="400" class="kenya-green"/>
+    <path d="M0,0 L900,300 L0,600 Z" class="kenya-white"/>
+    <path d="M0,60 L900,300 L0,540 Z" class="kenya-red"/>
+    <g transform="translate(300,300)">
+        <path d="M0,-100 L40,0 L0,100 L-40,0 Z" class="kenya-black"/>
+        <circle cx="0" cy="0" r="30" class="kenya-white"/>
+        <circle cx="0" cy="0" r="20" class="kenya-black"/>
+        <circle cx="0" cy="0" r="10" class="kenya-white"/>
+        <path d="M-80,-100 L80,-100 L80,100 L-80,100 Z" stroke="#000000" stroke-width="4" fill="none"/>
+    </g>
+</svg>

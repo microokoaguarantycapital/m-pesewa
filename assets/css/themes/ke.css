@@ -1,0 +1,812 @@
+/* assets/css/themes/ke.css */
+/* M-Pesewa Kenya Theme - Savanna Blue: Trust, Mobile-Money Leadership */
+/* Theme overrides for Kenya operations maintaining strict hierarchy */
+
+:root {
+  /* Kenya Theme Colors - Savanna Blue Palette */
+  --ke-primary-color: #003366;        /* Deep Blue - Authority */
+  --ke-secondary-color: #0099ff;      /* Sky Blue - Mobile Money */
+  --ke-accent-color: #ffd700;         /* Gold - Prosperity */
+  --ke-success-color: #28a745;        /* Green - Growth */
+  --ke-warning-color: #ffc107;        /* Amber - Caution */
+  --ke-danger-color: #dc3545;         /* Red - Alert */
+  --ke-background-color: #ffffff;     /* Pure White */
+  --ke-surface-color: #f8f9fa;        /* Light Gray */
+  --ke-text-primary: #003366;         /* Deep Blue */
+  --ke-text-secondary: #666666;       /* Medium Gray */
+  --ke-text-tertiary: #999999;        /* Light Gray */
+  --ke-border-color: #e0e0e0;         /* Light Border */
+  
+  /* Kenya Financial Colors */
+  --ke-mpesa-color: #00a99d;          /* Safaricom Green */
+  --ke-bank-color: #0066b3;           /* Banking Blue */
+  --ke-sacco-color: #ff6600;          /* SACCOS Orange */
+  --ke-microfinance-color: #663399;   /* Microfinance Purple */
+  
+  /* Kenya Typography */
+  --ke-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ke-font-size-base: 16px;
+  --ke-font-size-scale: 1.25;         /* Major Third Scale */
+  --ke-line-height-base: 1.6;
+  --ke-letter-spacing-base: -0.01em;
+  
+  /* Kenya Spacing */
+  --ke-spacing-unit: 8px;
+  --ke-spacing-xs: calc(var(--ke-spacing-unit) * 0.5);    /* 4px */
+  --ke-spacing-sm: calc(var(--ke-spacing-unit) * 1);      /* 8px */
+  --ke-spacing-md: calc(var(--ke-spacing-unit) * 2);      /* 16px */
+  --ke-spacing-lg: calc(var(--ke-spacing-unit) * 3);      /* 24px */
+  --ke-spacing-xl: calc(var(--ke-spacing-unit) * 4);      /* 32px */
+  --ke-spacing-xxl: calc(var(--ke-spacing-unit) * 6);     /* 48px */
+  
+  /* Kenya Borders */
+  --ke-border-radius-sm: 4px;
+  --ke-border-radius-md: 8px;
+  --ke-border-radius-lg: 12px;
+  --ke-border-radius-xl: 16px;
+  --ke-border-width: 1px;
+  --ke-border-style: solid;
+  
+  /* Kenya Shadows */
+  --ke-shadow-sm: 0 1px 3px rgba(0, 51, 102, 0.12);
+  --ke-shadow-md: 0 4px 6px rgba(0, 51, 102, 0.1);
+  --ke-shadow-lg: 0 10px 25px rgba(0, 51, 102, 0.15);
+  --ke-shadow-xl: 0 20px 40px rgba(0, 51, 102, 0.2);
+  
+  /* Kenya Animations */
+  --ke-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ke-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ke-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Kenya Z-Index */
+  --ke-z-base: 1;
+  --ke-z-dropdown: 100;
+  --ke-z-sticky: 200;
+  --ke-z-fixed: 300;
+  --ke-z-modal: 400;
+  --ke-z-popover: 500;
+  --ke-z-tooltip: 600;
+}
+
+/* Kenya Header Overrides */
+[data-country="ke"] .mp-header {
+  background: linear-gradient(135deg, var(--ke-primary-color) 0%, #002244 100%);
+  border-bottom: 3px solid var(--ke-accent-color);
+}
+
+[data-country="ke"] .nav-link.active {
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--ke-accent-color);
+}
+
+[data-country="ke"] .nav-link.active::after {
+  background: var(--ke-accent-color);
+}
+
+[data-country="ke"] .signup-btn {
+  background: linear-gradient(135deg, var(--ke-mpesa-color) 0%, #008c7a 100%);
+}
+
+[data-country="ke"] .signup-btn:hover {
+  background: linear-gradient(135deg, #008c7a 0%, var(--ke-mpesa-color) 100%);
+}
+
+/* Kenya Footer Overrides */
+[data-country="ke"] .mp-footer {
+  background: linear-gradient(135deg, #001a33 0%, var(--ke-primary-color) 100%);
+  border-top: 3px solid var(--ke-accent-color);
+}
+
+[data-country="ke"] .footer-link:hover {
+  color: var(--ke-accent-color);
+}
+
+[data-country="ke"] .footer-link::before {
+  color: var(--ke-accent-color);
+}
+
+[data-country="ke"] .country-ticker {
+  background: linear-gradient(90deg, 
+    rgba(0, 51, 102, 0.9) 0%, 
+    rgba(255, 215, 0, 0.8) 50%, 
+    rgba(0, 51, 102, 0.9) 100%);
+  border-color: var(--ke-accent-color);
+}
+
+/* Kenya Sidebar Overrides */
+[data-country="ke"] .mp-sidebar {
+  border-right: 3px solid var(--ke-accent-color);
+}
+
+[data-country="ke"] .sidebar-link.active {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .sidebar-link.active::before {
+  background: var(--ke-accent-color);
+}
+
+[data-country="ke"] .profile-card {
+  background: linear-gradient(135deg, rgba(0, 153, 255, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border-left: 3px solid var(--ke-accent-color);
+}
+
+/* Kenya Button Overrides */
+[data-country="ke"] .borrower-btn,
+[data-country="ke"] [data-role="borrower"] .cta-btn {
+  background: linear-gradient(135deg, #f37021 0%, #e65c00 100%);
+  border: 2px solid #f37021;
+}
+
+[data-country="ke"] .lender-btn,
+[data-country="ke"] [data-role="lender"] .cta-btn {
+  background: linear-gradient(135deg, var(--ke-success-color) 0%, #218838 100%);
+  border: 2px solid var(--ke-success-color);
+}
+
+[data-country="ke"] .secondary-btn {
+  background: transparent;
+  border: 2px solid var(--ke-secondary-color);
+  color: var(--ke-secondary-color);
+}
+
+[data-country="ke"] .secondary-btn:hover {
+  background: var(--ke-secondary-color);
+  color: #ffffff;
+}
+
+/* Kenya Card Overrides */
+[data-country="ke"] .card {
+  background: var(--ke-background-color);
+  border: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  border-radius: var(--ke-border-radius-lg);
+  box-shadow: var(--ke-shadow-sm);
+  transition: all var(--ke-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="ke"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ke-primary-color) 0%, var(--ke-accent-color) 100%);
+}
+
+[data-country="ke"] .card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ke-shadow-lg);
+  border-color: var(--ke-secondary-color);
+}
+
+[data-country="ke"] .card-header {
+  background: linear-gradient(135deg, var(--ke-surface-color) 0%, #ffffff 100%);
+  border-bottom: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  padding: var(--ke-spacing-lg) var(--ke-spacing-xl);
+}
+
+[data-country="ke"] .card-title {
+  color: var(--ke-primary-color);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+[data-country="ke"] .card-body {
+  padding: var(--ke-spacing-xl);
+  color: var(--ke-text-primary);
+}
+
+/* Kenya Form Overrides */
+[data-country="ke"] .form-control {
+  border: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  border-radius: var(--ke-border-radius-md);
+  padding: var(--ke-spacing-md) var(--ke-spacing-lg);
+  font-family: var(--ke-font-family);
+  font-size: var(--ke-font-size-base);
+  color: var(--ke-text-primary);
+  background: var(--ke-background-color);
+  transition: all var(--ke-transition-fast);
+}
+
+[data-country="ke"] .form-control:focus {
+  outline: none;
+  border-color: var(--ke-secondary-color);
+  box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+}
+
+[data-country="ke"] .form-label {
+  color: var(--ke-text-primary);
+  font-weight: 500;
+  margin-bottom: var(--ke-spacing-sm);
+  display: block;
+}
+
+[data-country="ke"] .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23003366' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+/* Kenya Table Overrides */
+[data-country="ke"] .table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  border-radius: var(--ke-border-radius-md);
+  overflow: hidden;
+}
+
+[data-country="ke"] .table thead {
+  background: linear-gradient(135deg, var(--ke-primary-color) 0%, #002244 100%);
+}
+
+[data-country="ke"] .table th {
+  color: #ffffff;
+  font-weight: 600;
+  padding: var(--ke-spacing-lg);
+  text-align: left;
+  border-bottom: 3px solid var(--ke-accent-color);
+}
+
+[data-country="ke"] .table tbody tr {
+  transition: background-color var(--ke-transition-fast);
+}
+
+[data-country="ke"] .table tbody tr:nth-child(even) {
+  background-color: var(--ke-surface-color);
+}
+
+[data-country="ke"] .table tbody tr:hover {
+  background-color: rgba(0, 153, 255, 0.1);
+}
+
+[data-country="ke"] .table td {
+  padding: var(--ke-spacing-lg);
+  color: var(--ke-text-primary);
+  border-bottom: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+}
+
+/* Kenya Alert Overrides */
+[data-country="ke"] .alert {
+  padding: var(--ke-spacing-lg);
+  border-radius: var(--ke-border-radius-md);
+  border: var(--ke-border-width) var(--ke-border-style) transparent;
+  margin-bottom: var(--ke-spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="ke"] .alert::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+[data-country="ke"] .alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: var(--ke-success-color);
+  color: #155724;
+}
+
+[data-country="ke"] .alert-success::before {
+  background-color: var(--ke-success-color);
+}
+
+[data-country="ke"] .alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: var(--ke-warning-color);
+  color: #856404;
+}
+
+[data-country="ke"] .alert-warning::before {
+  background-color: var(--ke-warning-color);
+}
+
+[data-country="ke"] .alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-color: var(--ke-danger-color);
+  color: #721c24;
+}
+
+[data-country="ke"] .alert-danger::before {
+  background-color: var(--ke-danger-color);
+}
+
+[data-country="ke"] .alert-info {
+  background-color: rgba(0, 153, 255, 0.1);
+  border-color: var(--ke-secondary-color);
+  color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .alert-info::before {
+  background-color: var(--ke-secondary-color);
+}
+
+/* Kenya Badge Overrides */
+[data-country="ke"] .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ke-spacing-xs) var(--ke-spacing-md);
+  border-radius: var(--ke-border-radius-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-country="ke"] .badge-primary {
+  background: linear-gradient(135deg, var(--ke-primary-color) 0%, #002244 100%);
+  color: #ffffff;
+}
+
+[data-country="ke"] .badge-secondary {
+  background: linear-gradient(135deg, var(--ke-secondary-color) 0%, #0088e6 100%);
+  color: #ffffff;
+}
+
+[data-country="ke"] .badge-success {
+  background: linear-gradient(135deg, var(--ke-success-color) 0%, #1e7e34 100%);
+  color: #ffffff;
+}
+
+[data-country="ke"] .badge-warning {
+  background: linear-gradient(135deg, var(--ke-warning-color) 0%, #e0a800 100%);
+  color: #000000;
+}
+
+[data-country="ke"] .badge-danger {
+  background: linear-gradient(135deg, var(--ke-danger-color) 0%, #c82333 100%);
+  color: #ffffff;
+}
+
+[data-country="ke"] .badge-accent {
+  background: linear-gradient(135deg, var(--ke-accent-color) 0%, #ffcc00 100%);
+  color: var(--ke-primary-color);
+  font-weight: 600;
+}
+
+/* Kenya Progress Overrides */
+[data-country="ke"] .progress {
+  height: 8px;
+  background-color: var(--ke-surface-color);
+  border-radius: var(--ke-border-radius-lg);
+  overflow: hidden;
+}
+
+[data-country="ke"] .progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ke-secondary-color) 0%, var(--ke-primary-color) 100%);
+  border-radius: var(--ke-border-radius-lg);
+  transition: width 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="ke"] .progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 100%);
+  animation: progress-shimmer 2s infinite;
+}
+
+@keyframes progress-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Kenya Modal Overrides */
+[data-country="ke"] .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 51, 102, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--ke-z-modal);
+  padding: var(--ke-spacing-xl);
+}
+
+[data-country="ke"] .modal-content {
+  background: var(--ke-background-color);
+  border-radius: var(--ke-border-radius-lg);
+  box-shadow: var(--ke-shadow-xl);
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+[data-country="ke"] .modal-header {
+  padding: var(--ke-spacing-xl);
+  border-bottom: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  background: linear-gradient(135deg, var(--ke-surface-color) 0%, #ffffff 100%);
+  border-radius: var(--ke-border-radius-lg) var(--ke-border-radius-lg) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[data-country="ke"] .modal-title {
+  color: var(--ke-primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+[data-country="ke"] .modal-body {
+  padding: var(--ke-spacing-xl);
+  color: var(--ke-text-primary);
+}
+
+[data-country="ke"] .modal-footer {
+  padding: var(--ke-spacing-xl);
+  border-top: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  background: var(--ke-surface-color);
+  border-radius: 0 0 var(--ke-border-radius-lg) var(--ke-border-radius-lg);
+  display: flex;
+  gap: var(--ke-spacing-md);
+  justify-content: flex-end;
+}
+
+/* Kenya Tooltip Overrides */
+[data-country="ke"] .tooltip {
+  position: absolute;
+  background: linear-gradient(135deg, var(--ke-primary-color) 0%, #002244 100%);
+  color: #ffffff;
+  padding: var(--ke-spacing-sm) var(--ke-spacing-md);
+  border-radius: var(--ke-border-radius-md);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: var(--ke-z-tooltip);
+  box-shadow: var(--ke-shadow-lg);
+  border: 1px solid var(--ke-accent-color);
+}
+
+[data-country="ke"] .tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+}
+
+[data-country="ke"] .tooltip-top::before {
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .tooltip-bottom::before {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .tooltip-left::before {
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .tooltip-right::before {
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: var(--ke-primary-color);
+}
+
+/* Kenya Popover Overrides */
+[data-country="ke"] .popover {
+  position: absolute;
+  background: var(--ke-background-color);
+  border: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  border-radius: var(--ke-border-radius-lg);
+  box-shadow: var(--ke-shadow-xl);
+  z-index: var(--ke-z-popover);
+  max-width: 300px;
+  overflow: hidden;
+}
+
+[data-country="ke"] .popover-header {
+  padding: var(--ke-spacing-md) var(--ke-spacing-lg);
+  background: linear-gradient(135deg, var(--ke-primary-color) 0%, #002244 100%);
+  color: #ffffff;
+  font-weight: 600;
+  border-bottom: var(--ke-border-width) var(--ke-border-style) var(--ke-accent-color);
+}
+
+[data-country="ke"] .popover-body {
+  padding: var(--ke-spacing-lg);
+  color: var(--ke-text-primary);
+}
+
+/* Kenya Tabs Overrides */
+[data-country="ke"] .tabs {
+  display: flex;
+  border-bottom: 2px solid var(--ke-border-color);
+  gap: var(--ke-spacing-md);
+}
+
+[data-country="ke"] .tab {
+  padding: var(--ke-spacing-md) var(--ke-spacing-lg);
+  color: var(--ke-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition: all var(--ke-transition-fast);
+  position: relative;
+}
+
+[data-country="ke"] .tab:hover {
+  color: var(--ke-primary-color);
+  border-bottom-color: var(--ke-secondary-color);
+}
+
+[data-country="ke"] .tab.active {
+  color: var(--ke-primary-color);
+  border-bottom-color: var(--ke-accent-color);
+  font-weight: 600;
+}
+
+[data-country="ke"] .tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ke-accent-color) 0%, var(--ke-secondary-color) 100%);
+  border-radius: 2px;
+}
+
+/* Kenya Accordion Overrides */
+[data-country="ke"] .accordion {
+  border: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+  border-radius: var(--ke-border-radius-md);
+  overflow: hidden;
+}
+
+[data-country="ke"] .accordion-item {
+  border-bottom: var(--ke-border-width) var(--ke-border-style) var(--ke-border-color);
+}
+
+[data-country="ke"] .accordion-item:last-child {
+  border-bottom: none;
+}
+
+[data-country="ke"] .accordion-header {
+  padding: var(--ke-spacing-lg) var(--ke-spacing-xl);
+  background: var(--ke-surface-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color var(--ke-transition-fast);
+}
+
+[data-country="ke"] .accordion-header:hover {
+  background-color: rgba(0, 153, 255, 0.1);
+}
+
+[data-country="ke"] .accordion-title {
+  color: var(--ke-primary-color);
+  font-weight: 600;
+  margin: 0;
+}
+
+[data-country="ke"] .accordion-icon {
+  transition: transform var(--ke-transition-fast);
+  color: var(--ke-secondary-color);
+}
+
+[data-country="ke"] .accordion-header.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+[data-country="ke"] .accordion-content {
+  padding: var(--ke-spacing-xl);
+  background: var(--ke-background-color);
+  color: var(--ke-text-primary);
+  display: none;
+}
+
+[data-country="ke"] .accordion-content.active {
+  display: block;
+}
+
+/* Kenya Loading Spinner Overrides */
+[data-country="ke"] .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--ke-surface-color);
+  border-top-color: var(--ke-accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+[data-country="ke"] .spinner-sm {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+[data-country="ke"] .spinner-lg {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+/* Kenya Hierarchy Visual Indicators */
+[data-country="ke"] [data-hierarchy-level="global"] {
+  border-left: 4px solid var(--ke-primary-color);
+}
+
+[data-country="ke"] [data-hierarchy-level="country"] {
+  border-left: 4px solid var(--ke-accent-color);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+}
+
+[data-country="ke"] [data-hierarchy-level="group"] {
+  border-left: 4px solid var(--ke-secondary-color);
+  background: linear-gradient(135deg, rgba(0, 153, 255, 0.05) 0%, transparent 100%);
+}
+
+[data-country="ke"] [data-hierarchy-level="lender"] {
+  border-left: 4px solid var(--ke-success-color);
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, transparent 100%);
+}
+
+[data-country="ke"] [data-hierarchy-level="borrower"] {
+  border-left: 4px solid #f37021;
+  background: linear-gradient(135deg, rgba(243, 112, 33, 0.05) 0%, transparent 100%);
+}
+
+[data-country="ke"] [data-hierarchy-level="ledger"] {
+  border-left: 4px solid var(--ke-mpesa-color);
+  background: linear-gradient(135deg, rgba(0, 169, 157, 0.05) 0%, transparent 100%);
+}
+
+/* Kenya Currency Formatting */
+[data-country="ke"] .currency {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+[data-country="ke"] .currency::before {
+  content: 'KSh ';
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Kenya Compliance Badges */
+[data-country="ke"] .compliance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ke-spacing-sm);
+  padding: var(--ke-spacing-xs) var(--ke-spacing-md);
+  background: linear-gradient(135deg, rgba(0, 51, 102, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 1px solid var(--ke-accent-color);
+  border-radius: var(--ke-border-radius-lg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ke-primary-color);
+}
+
+[data-country="ke"] .compliance-badge::before {
+  content: '✓';
+  color: var(--ke-success-color);
+  font-weight: bold;
+}
+
+/* Kenya Legal Notice */
+[data-country="ke"] .legal-notice {
+  background: linear-gradient(135deg, var(--ke-surface-color) 0%, #ffffff 100%);
+  border: 2px solid var(--ke-accent-color);
+  border-radius: var(--ke-border-radius-md);
+  padding: var(--ke-spacing-lg);
+  margin: var(--ke-spacing-xl) 0;
+  position: relative;
+}
+
+[data-country="ke"] .legal-notice::before {
+  content: '⚠';
+  position: absolute;
+  top: var(--ke-spacing-lg);
+  left: var(--ke-spacing-lg);
+  font-size: 1.5rem;
+  color: var(--ke-warning-color);
+}
+
+[data-country="ke"] .legal-notice-content {
+  margin-left: calc(var(--ke-spacing-lg) * 2);
+  color: var(--ke-text-primary);
+}
+
+/* Kenya Responsive Adjustments */
+@media (max-width: 768px) {
+  [data-country="ke"] {
+    --ke-font-size-base: 14px;
+    --ke-spacing-unit: 6px;
+  }
+  
+  [data-country="ke"] .modal {
+    padding: var(--ke-spacing-md);
+  }
+  
+  [data-country="ke"] .modal-content {
+    max-height: 95vh;
+  }
+}
+
+/* Kenya Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  [data-country="ke"] {
+    --ke-background-color: #1a1a1a;
+    --ke-surface-color: #2d2d2d;
+    --ke-text-primary: #ffffff;
+    --ke-text-secondary: #cccccc;
+    --ke-border-color: #444444;
+  }
+  
+  [data-country="ke"] .card {
+    background: var(--ke-surface-color);
+  }
+  
+  [data-country="ke"] .modal-content {
+    background: var(--ke-surface-color);
+    color: var(--ke-text-primary);
+  }
+  
+  [data-country="ke"] .table tbody tr:nth-child(even) {
+    background-color: #333333;
+  }
+}
+
+/* Kenya Print Styles */
+@media print {
+  [data-country="ke"] .mp-header,
+  [data-country="ke"] .mp-footer,
+  [data-country="ke"] .modal,
+  [data-country="ke"] .tooltip,
+  [data-country="ke"] .popover {
+    display: none !important;
+  }
+  
+  [data-country="ke"] .card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #000000;
+    box-shadow: none;
+  }
+  
+  [data-country="ke"] .table {
+    border: 1px solid #000000;
+  }
+}
+
+/* Kenya Theme Complete - Savanna Blue: Trust, Mobile-Money Leadership */

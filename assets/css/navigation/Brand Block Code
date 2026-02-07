@@ -1,0 +1,339 @@
+/* 
+ * M-Pesewa Brand Block Styles
+ * Complete brand identity implementation
+ */
+
+.mpesewa-brand-block {
+    --brand-primary: #003366;
+    --brand-secondary: #0099ff;
+    --brand-accent: #f37021;
+    --brand-success: #28a745;
+    --brand-neutral: #f8f9fa;
+    --brand-white: #ffffff;
+    --brand-text-dark: #003366;
+    --brand-text-light: #ffffff;
+    
+    font-family: 'Inter', 'Poppins', -apple-system, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Brand Container */
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--brand-primary), #002244);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 51, 102, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand-accent), var(--brand-success));
+}
+
+/* Brand Logo */
+.brand-logo {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: var(--brand-white);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--brand-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--brand-secondary);
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 153, 255, 0.3);
+}
+
+.brand-logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Brand Content */
+.brand-content {
+    flex: 1;
+}
+
+.brand-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-white);
+    margin: 0 0 4px 0;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.brand-tagline {
+    font-size: 14px;
+    color: var(--brand-secondary);
+    margin: 0 0 8px 0;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.brand-description {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Brand Colors Display */
+.brand-colors {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.color-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.color-swatch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatch::after {
+    content: attr(data-color);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.color-swatch:hover::after {
+    opacity: 1;
+}
+
+.color-primary { background: var(--brand-primary); }
+.color-secondary { background: var(--brand-secondary); }
+.color-accent { background: var(--brand-accent); }
+.color-success { background: var(--brand-success); }
+
+/* Brand Stats */
+.brand-stats {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--brand-white);
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+/* Brand Hierarchy Badge */
+.brand-hierarchy {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: var(--brand-white);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.hierarchy-icon {
+    font-size: 14px;
+}
+
+/* Brand Footer */
+.brand-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.brand-links {
+    display: flex;
+    gap: 12px;
+}
+
+.brand-link {
+    color: var(--brand-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.brand-link:hover {
+    color: var(--brand-white);
+    text-decoration: underline;
+}
+
+/* Responsive Brand Block */
+@media (max-width: 480px) {
+    .brand-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .brand-stats {
+        justify-content: center;
+    }
+    
+    .brand-hierarchy {
+        position: static;
+        margin-top: 12px;
+        justify-content: center;
+    }
+}
+
+/* Dark mode adjustment */
+@media (prefers-color-scheme: dark) {
+    .brand-container {
+        background: linear-gradient(135deg, #002244, #001122);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Print styles */
+@media print {
+    .brand-container {
+        border: 2px solid var(--brand-primary);
+        box-shadow: none;
+        background: var(--brand-white) !important;
+        color: var(--brand-text-dark) !important;
+    }
+    
+    .brand-name {
+        color: var(--brand-primary) !important;
+    }
+    
+    .brand-tagline {
+        color: var(--brand-secondary) !important;
+    }
+    
+    .brand-description {
+        color: var(--brand-text-dark) !important;
+    }
+    
+    .color-swatch {
+        border: 1px solid #ccc;
+    }
+}
+
+/* Brand Block HTML Structure */
+/*
+<div class="mpesewa-brand-block">
+    <div class="brand-container">
+        <div class="brand-hierarchy">
+            <span class="hierarchy-icon">🌍</span>
+            <span>Global Platform</span>
+        </div>
+        
+        <div class="brand-logo">
+            <span class="brand-logo-text">MP</span>
+        </div>
+        
+        <div class="brand-content">
+            <h1 class="brand-name">M-PESEWA</h1>
+            <p class="brand-tagline">Trusted Circles Lending</p>
+            <p class="brand-description">
+                Emergency micro-lending in trusted groups across 12 African countries.
+                Friends lend to friends with complete transparency.
+            </p>
+            
+            <div class="brand-colors">
+                <div class="color-swatch color-primary" data-color="#003366"></div>
+                <div class="color-swatch color-secondary" data-color="#0099ff"></div>
+                <div class="color-swatch color-accent" data-color="#f37021"></div>
+                <div class="color-swatch color-success" data-color="#28a745"></div>
+            </div>
+            
+            <div class="brand-stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Repayment</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Groups</span>
+                </div>
+            </div>
+            
+            <div class="brand-footer">
+                <span>© 2016–2026 M-Pesewa</span>
+                <div class="brand-links">
+                    <a href="#" class="brand-link">Terms</a>
+                    <a href="#" class="brand-link">Privacy</a>
+                    <a href="#" class="brand-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*/

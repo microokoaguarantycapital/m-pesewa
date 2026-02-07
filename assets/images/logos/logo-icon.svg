@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .icon-blue {fill: #003366}
+            .icon-orange {fill: #f37021}
+            .icon-green {fill: #28a745}
+            .icon-light-blue {fill: #0099ff}
+        </style>
+    </defs>
+    
+    <!-- Circular Background -->
+    <circle cx="50" cy="50" r="45" fill="#f8f9fa" stroke="#003366" stroke-width="2"/>
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#0099ff" stroke-width="1" stroke-dasharray="5,5"/>
+    
+    <!-- M-P Symbol -->
+    <path d="M30,60 L35,40 L40,50 L45,40 L50,60" stroke="#f37021" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M55,40 L55,60" stroke="#28a745" stroke-width="4" fill="none"/>
+    <path d="M55,40 Q65,40 65,50 Q65,60 55,60" stroke="#28a745" stroke-width="4" fill="none"/>
+    
+    <!-- Trust Dots -->
+    <circle cx="70" cy="70" r="3" fill="#003366">
+        <animate attributeName="r" values="3;4;3" dur="1s" repeatCount="indefinite" begin="0s"/>
+    </circle>
+    <circle cx="75" cy="75" r="3" fill="#0099ff">
+        <animate attributeName="r" values="3;4;3" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+    </circle>
+    <circle cx="80" cy="70" r="3" fill="#28a745">
+        <animate attributeName="r" values="3;4;3" dur="1s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+</svg>

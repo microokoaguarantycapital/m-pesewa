@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .plate {fill: #0099ff}
+            .food-1 {fill: #f37021}
+            .food-2 {fill: #28a745}
+            .food-3 {fill: #ffcc00}
+            .utensil {fill: #003366}
+        </style>
+    </defs>
+    
+    <!-- Plate -->
+    <circle cx="50" cy="60" r="35" class="plate"/>
+    <circle cx="50" cy="60" r="30" fill="#ffffff"/>
+    
+    <!-- Food Items -->
+    <!-- Rice -->
+    <circle cx="50" cy="60" r="25" fill="#f8f9fa"/>
+    <!-- Meat -->
+    <ellipse cx="40" cy="50" rx="10" ry="5" class="food-1" transform="rotate(30,40,50)"/>
+    <!-- Vegetables -->
+    <path d="M60,50 Q65,40 70,50 Q65,60 60,50" class="food-2"/>
+    <!-- Sauce -->
+    <circle cx="55" cy="65" r="8" class="food-3"/>
+    
+    <!-- Fork -->
+    <rect x="20" y="10" width="4" height="30" class="utensil"/>
+    <rect x="18" y="10" width="8" height="4" class="utensil"/>
+    <rect x="17" y="14" width="2" height="4" class="utensil"/>
+    <rect x="21" y="14" width="2" height="4" class="utensil"/>
+    <rect x="25" y="14" width="2" height="4" class="utensil"/>
+    
+    <!-- Spoon -->
+    <rect x="70" y="10" width="4" height="30" class="utensil"/>
+    <ellipse cx="72" cy="45" rx="8" ry="5" class="utensil"/>
+</svg>

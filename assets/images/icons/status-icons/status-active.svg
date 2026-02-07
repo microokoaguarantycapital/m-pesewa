@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .status-circle {fill: #28a745}
+            .status-inner {fill: #ffffff}
+        </style>
+    </defs>
+    
+    <circle cx="50" cy="50" r="40" class="status-circle"/>
+    <circle cx="50" cy="50" r="25" class="status-inner"/>
+    <circle cx="50" cy="50" r="15" class="status-circle">
+        <animate attributeName="r" values="15;20;15" dur="2s" repeatCount="indefinite"/>
+    </circle>
+</svg>

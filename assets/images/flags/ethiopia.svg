@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+    <defs>
+        <style>
+            .ethiopia-green {fill: #078930}
+            .ethiopia-yellow {fill: #FCDD09}
+            .ethiopia-red {fill: #DA121A}
+            .ethiopia-blue {fill: #0F47AF}
+            .ethiopia-white {fill: #FFFFFF}
+        </style>
+    </defs>
+    <rect width="900" height="200" y="0" class="ethiopia-green"/>
+    <rect width="900" height="200" y="200" class="ethiopia-yellow"/>
+    <rect width="900" height="200" y="400" class="ethiopia-red"/>
+    <g transform="translate(450,300)">
+        <circle cx="0" cy="0" r="80" class="ethiopia-blue"/>
+        <circle cx="0" cy="0" r="70" class="ethiopia-white"/>
+        <circle cx="0" cy="0" r="60" class="ethiopia-blue"/>
+        <path d="M-40,-70 L40,-70 L0,70 Z" class="ethiopia-yellow"/>
+        <path d="M-40,70 L40,70 L0,-70 Z" class="ethiopia-yellow"/>
+        <path d="M-70,-40 L70,40 L-70,40 L70,-40 Z" class="ethiopia-yellow"/>
+    </g>
+</svg>

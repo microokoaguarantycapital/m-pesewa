@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .repay-arrow {fill: #28a745}
+            .repay-coin {fill: #ffcc00}
+            .repay-clock {fill: #003366}
+            .repay-check {fill: #28a745}
+        </style>
+    </defs>
+    
+    <!-- Arrow -->
+    <path d="M30,50 L50,30 L70,50 L60,50 L60,70 L40,70 L40,50 Z" class="repay-arrow"/>
+    
+    <!-- Coins -->
+    <circle cx="30" cy="30" r="8" class="repay-coin">
+        <animate attributeName="cy" values="30;35;30" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="25" r="6" class="repay-coin">
+        <animate attributeName="cy" values="25;30;25" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+    </circle>
+    <circle cx="70" cy="30" r="8" class="repay-coin">
+        <animate attributeName="cy" values="30;35;30" dur="1s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+    
+    <!-- Clock -->
+    <circle cx="50" cy="80" r="15" class="repay-clock"/>
+    <circle cx="50" cy="80" r="13" fill="#ffffff"/>
+    
+    <!-- Clock Hands -->
+    <line x1="50" y1="80" x2="50" y2="75" stroke="#003366" stroke-width="3"/>
+    <line x1="50" y1="80" x2="55" y2="80" stroke="#003366" stroke-width="2">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 50 80" to="360 50 80" dur="8s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- Check Mark -->
+    <path d="M45,85 L50,90 L60,80" stroke="#28a745" stroke-width="4" fill="none" stroke-linecap="round"/>
+    
+    <!-- Days Indicator -->
+    <text x="50" y="80" text-anchor="middle" font-family="Arial" font-size="8" fill="#003366">7</text>
+</svg>
