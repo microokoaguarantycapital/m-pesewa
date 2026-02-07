@@ -793,12 +793,19 @@
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="core/app.js" defer></script>
-    <script src="core/bootstrap.js" defer></script>
-    <script src="state/store.js" defer></script>
-    <script src="router/router.js" defer></script>
-    <script src="utils/validation.js" defer></script>
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js');
+            });
+        }
+    </script>
+
+    <!-- 🚀 CORE BOOTSTRAP — SINGLE ENTRY POINT -->
+    <script type="module" src="/core/bootstrap.js"></script>
+</body>
+</html>
     
     <!-- Service Worker Registration -->
     <script>
