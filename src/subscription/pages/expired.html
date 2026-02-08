@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" data-country="" data-role="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Expired - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/alerts.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <style>
+        .subscription-expired {
+            min-height: 70vh;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .expired-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .expired-warning {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #dc3545;
+        }
+        
+        .expired-icon {
+            font-size: 64px;
+            color: #dc3545;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .subscription-details {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e9ecef;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .detail-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+        
+        .impact-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn-renew {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-renew:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+        }
+        
+        .btn-view-plans {
+            background: #003366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #003366;
+            transition: all 0.2s;
+        }
+        
+        .btn-view-plans:hover {
+            background: transparent;
+            color: #003366;
+        }
+        
+        .grace-period {
+            background: #e7f5ff;
+            border: 1px solid #0099ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .access-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .access-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #28a745;
+        }
+        
+        .access-card.blocked {
+            border-top-color: #dc3545;
+        }
+        
+        .access-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .expired-warning {
+                padding: 25px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-renew, .btn-view-plans {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <main class="subscription-expired">
+        <div class="expired-container">
+            <div class="expired-warning">
+                <div class="expired-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                
+                <h1 style="color: #dc3545; margin-bottom: 10px;">Your Subscription Has Expired</h1>
+                <p class="text-large" style="color: #555; margin-bottom: 30px;">
+                    Your lending access has been temporarily suspended. Renew your subscription to continue lending.
+                </p>
+                
+                <div class="timer">
+                    <span id="days-since-expiry">0</span> days since expiry
+                </div>
+            </div>
+            
+            <div class="subscription-details">
+                <h2 style="color: #003366; margin-bottom: 20px;">Subscription Details</h2>
+                
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="text-small" style="color: #666;">Plan Type</div>
+                        <div class="text-large" id="plan-type" style="color: #003366; font-weight: 600;">Basic</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="text-small" style="color: #666;">Expiry Date</div>
+                        <div class="text-large" id="expiry-date" style="color: #dc3545; font-weight: 600;">28th of Month</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="text-small" style="color: #666;">Last Active</div>
+                        <div class="text-large" id="last-active" style="color: #003366; font-weight: 600;">Loading...</div>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <div class="text-small" style="color: #666;">Weekly Limit</div>
+                        <div class="text-large" id="weekly-limit" style="color: #003366; font-weight: 600;">₦ 1,500</div>
+                    </div>
+                </div>
+                
+                <div class="impact-section">
+                    <h3 style="color: #856404; margin-bottom: 15px;">📋 Current Access Restrictions</h3>
+                    <ul style="color: #856404; padding-left: 20px;">
+                        <li>❌ <strong>Lending Blocked:</strong> Cannot approve new loans or create ledgers</li>
+                        <li>✅ <strong>Read Access:</strong> Can view existing ledgers and portfolio</li>
+                        <li>✅ <strong>Borrowing Allowed:</strong> Can still request loans as a borrower</li>
+                        <li>❌ <strong>Group Management:</strong> Cannot invite new members to groups</li>
+                        <li>✅ <strong>Profile Updates:</strong> Can update personal information</li>
+                    </ul>
+                </div>
+                
+                <div class="grace-period">
+                    <h3 style="color: #0099ff; margin-bottom: 15px;">⏳ Grace Period Information</h3>
+                    <p style="color: #003366;">
+                        <strong>Important:</strong> According to M-Pesewa policy, subscriptions expire on the <strong>28th of each month</strong>.
+                        You have a <strong>7-day grace period</strong> after expiry before full suspension.
+                    </p>
+                    <div style="margin-top: 15px;">
+                        <div class="text-small" style="color: #666;">Grace Period Status:</div>
+                        <div class="text-large" id="grace-status" style="color: #28a745; font-weight: 600;">Active - Day 3 of 7</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="../subscribe.html" class="btn-renew">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        Renew Subscription Now
+                    </a>
+                    
+                    <a href="../plans.html" class="btn-view-plans">
+                        View All Plans & Upgrade Options
+                    </a>
+                </div>
+            </div>
+            
+            <div class="access-levels">
+                <div class="access-card">
+                    <div class="access-icon" style="color: #28a745;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3 style="color: #003366;">View Access</h3>
+                    <p style="color: #555; margin-top: 10px;">
+                        Can view all existing ledgers, borrower profiles, and repayment history
+                    </p>
+                </div>
+                
+                <div class="access-card blocked">
+                    <div class="access-icon" style="color: #dc3545;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3 style="color: #003366;">Lending Access</h3>
+                    <p style="color: #555; margin-top: 10px;">
+                        Cannot approve new loans or create ledgers until subscription is renewed
+                    </p>
+                </div>
+                
+                <div class="access-card">
+                    <div class="access-icon" style="color: #28a745;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3 style="color: #003366;">Group Access</h3>
+                    <p style="color: #555; margin-top: 10px;">
+                        Can participate in group discussions but cannot invite new members
+                    </p>
+                </div>
+                
+                <div class="access-card">
+                    <div class="access-icon" style="color: #28a745;">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </div>
+                    <h3 style="color: #003366;">Borrowing Access</h3>
+                    <p style="color: #555; margin-top: 10px;">
+                        Can still request loans as a borrower in your groups (no subscription required)
+                    </p>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+                <h2 style="color: #003366; margin-bottom: 20px;">💡 Important Notes</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Subscription Gates Permissions</h4>
+                        <p style="color: #555;">
+                            M-Pesewa uses subscription status as a permission gate. Only active subscribers can create new ledgers.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Time-Based Checks</h4>
+                        <p style="color: #555;">
+                            All subscription validations are time-based and checked server-side to prevent fraud.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Grace Period Policy</h4>
+                        <p style="color: #555;">
+                            7-day grace period after expiry allows for payment processing before full suspension.
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: #e7f5ff; border-radius: 8px; border-left: 4px solid #0099ff;">
+                    <h4 style="color: #003366; margin-bottom: 10px;">📞 Need Help?</h4>
+                    <p style="color: #003366;">
+                        Contact our support team if you have questions about your subscription or need assistance with renewal.
+                        Email: <strong>support@mpesewa.com</strong> | Phone: <strong id="support-phone">+254 709 219 000</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../core/config.js"></script>
+    <script src="../../core/constants.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../utils/date.js"></script>
+    <script src="../../utils/validation.js"></script>
+    <script src="../../state/slices/auth.slice.js"></script>
+    <script src="../../state/slices/user.slice.js"></script>
+    <script src="../../state/slices/subscription.slice.js"></script>
+    <script src="../../state/slices/country.slice.js"></script>
+    <script src="../../router/route-guards.js"></script>
+    <script src="../../router/guard-subscription.js"></script>
+    <script src="../../layout/Header.js"></script>
+    <script src="../../layout/Footer.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header and footer
+            const headerContainer = document.getElementById('header-container');
+            const footerContainer = document.getElementById('footer-container');
+            
+            if (headerContainer && window.loadHeader) {
+                window.loadHeader(headerContainer);
+            }
+            
+            if (footerContainer && window.loadFooter) {
+                window.loadFooter(footerContainer);
+            }
+            
+            // Initialize page
+            initializeExpiredPage();
+            
+            // Route guard - check if user is a lender
+            if (window.checkSubscriptionGuard) {
+                const guardResult = window.checkSubscriptionGuard();
+                if (guardResult.redirect) {
+                    window.location.href = guardResult.redirectTo;
+                }
+            }
+        });
+        
+        function initializeExpiredPage() {
+            // Get subscription data from store
+            const store = window.mpesewaStore || {};
+            const subscription = store.subscription || {};
+            const user = store.user || {};
+            const country = store.country || 'KE';
+            
+            // Update support phone based on country
+            const supportPhones = {
+                'KE': '+254 709 219 000',
+                'UG': '+256 392 175 546',
+                'TZ': '+255 659 073 010',
+                'RW': '+250 791 590 801',
+                'BI': '+257 79 000 000',
+                'CD': '+243 81 000 0000',
+                'SS': '+27 11 200 0000',
+                'ZA': '+27 11 000 0000',
+                'NG': '+234 800 000 0000',
+                'GH': '+233 24 000 0000',
+                'ET': '+251 11 000 0000',
+                'SO': '+252 63 0000000'
+            };
+            
+            const supportPhone = supportPhones[country] || '+254 709 219 000';
+            document.getElementById('support-phone').textContent = supportPhone;
+            
+            // Format currency based on country
+            const currencies = {
+                'KE': 'KSh',
+                'UG': 'UGX',
+                'TZ': 'TZS',
+                'RW': 'RWF',
+                'BI': 'BIF',
+                'CD': 'CDF',
+                'SS': 'SSP',
+                'ZA': 'ZAR',
+                'NG': '₦',
+                'GH': 'GHS',
+                'ET': 'ETB',
+                'SO': 'SOS'
+            };
+            
+            const currencySymbol = currencies[country] || '₦';
+            
+            // Update subscription details
+            if (subscription.plan) {
+                document.getElementById('plan-type').textContent = subscription.plan;
+                
+                // Set weekly limit based on plan
+                const limits = {
+                    'Basic': '1,500',
+                    'Premium': '5,000',
+                    'Super': '20,000',
+                    'Lender of Lenders': '50,000'
+                };
+                
+                const limit = limits[subscription.plan] || '1,500';
+                document.getElementById('weekly-limit').textContent = `${currencySymbol} ${limit}`;
+            }
+            
+            // Calculate days since expiry
+            const now = new Date();
+            const expiryDate = subscription.expiryDate ? new Date(subscription.expiryDate) : new Date();
+            
+            // If no expiry date, assume it was the 28th of last month
+            if (!subscription.expiryDate) {
+                const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 28);
+                expiryDate.setTime(lastMonth.getTime());
+            }
+            
+            const timeDiff = now.getTime() - expiryDate.getTime();
+            const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+            
+            document.getElementById('days-since-expiry').textContent = Math.max(0, daysDiff);
+            
+            // Format dates
+            const formatDate = (date) => {
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            };
+            
+            document.getElementById('expiry-date').textContent = formatDate(expiryDate);
+            document.getElementById('last-active').textContent = formatDate(expiryDate);
+            
+            // Update grace period status
+            const graceDays = Math.max(0, 7 - daysDiff);
+            const graceStatus = graceDays > 0 ? 
+                `Active - Day ${7 - graceDays} of 7` : 
+                'Expired - Full suspension active';
+            
+            document.getElementById('grace-status').textContent = graceStatus;
+            document.getElementById('grace-status').style.color = graceDays > 0 ? '#28a745' : '#dc3545';
+            
+            // Update hierarchy display based on strict structure
+            updateHierarchyDisplay(user, country);
+            
+            // Add event listeners for buttons
+            document.querySelector('.btn-renew').addEventListener('click', function(e) {
+                e.preventDefault();
+                handleRenewSubscription();
+            });
+        }
+        
+        function updateHierarchyDisplay(user, countryCode) {
+            // Map country codes to names
+            const countryNames = {
+                'KE': 'Kenya',
+                'UG': 'Uganda',
+                'TZ': 'Tanzania',
+                'RW': 'Rwanda',
+                'BI': 'Burundi',
+                'CD': 'DRC',
+                'SS': 'South Sudan',
+                'ZA': 'South Africa',
+                'NG': 'Nigeria',
+                'GH': 'Ghana',
+                'ET': 'Ethiopia',
+                'SO': 'Somalia'
+            };
+            
+            const countryName = countryNames[countryCode] || 'Kenya';
+            
+            // Display hierarchy information
+            const hierarchyInfo = `
+                <div style="margin-top: 30px; padding: 20px; background: #003366; color: white; border-radius: 8px;">
+                    <h4 style="color: white; margin-bottom: 10px;">🌍 Current Hierarchy Status</h4>
+                    <div style="font-family: monospace; line-height: 1.8;">
+                        <div>Global Platform</div>
+                        <div>  └── ${countryName} (Country Locked)</div>
+                        <div>        └── Groups (Your Access: Read-only)</div>
+                        <div>              ├── Lenders (Your Role: Inactive)</div>
+                        <div>              │   └── Ledgers (Access: View only)</div>
+                        <div>              └── Borrowers (Available for requests)</div>
+                    </div>
+                </div>
+            `;
+            
+            // Add hierarchy info to page
+            const container = document.querySelector('.expired-container');
+            const infoDiv = document.createElement('div');
+            infoDiv.innerHTML = hierarchyInfo;
+            container.appendChild(infoDiv);
+        }
+        
+        function handleRenewSubscription() {
+            // Show loading state
+            const renewBtn = document.querySelector('.btn-renew');
+            const originalText = renewBtn.innerHTML;
+            renewBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin">
+                    <path d="M21 12a9 9 0 11-6.219-8.56"></path>
+                </svg>
+                Processing Renewal...
+            `;
+            renewBtn.style.opacity = '0.7';
+            renewBtn.style.pointerEvents = 'none';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // In production, this would be an actual API call
+                console.log('Subscription renewal requested');
+                
+                // Show success message
+                alert('Renewal request received! Redirecting to payment page...');
+                
+                // Redirect to payment page
+                window.location.href = '../subscribe.html?renew=true';
+            }, 1500);
+        }
+        
+        // Add CSS for spinner
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .spin {
+                animation: spin 1s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

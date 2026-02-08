@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" data-country="" data-role="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription History - M-Pesewa</title>
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/alerts.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <style>
+        .subscription-history {
+            min-height: 70vh;
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+        
+        .history-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border-top: 4px solid #003366;
+        }
+        
+        .stat-card.green {
+            border-top-color: #28a745;
+        }
+        
+        .stat-card.orange {
+            border-top-color: #f37021;
+        }
+        
+        .stat-card.blue {
+            border-top-color: #0099ff;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #003366;
+            margin: 10px 0;
+        }
+        
+        .stat-card.green .stat-number {
+            color: #28a745;
+        }
+        
+        .stat-card.orange .stat-number {
+            color: #f37021;
+        }
+        
+        .stat-card.blue .stat-number {
+            color: #0099ff;
+        }
+        
+        .history-table-container {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .table-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            position: relative;
+            min-width: 300px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .search-input:focus {
+            border-color: #0099ff;
+            outline: none;
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        
+        .filter-select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            background: white;
+            color: #003366;
+            font-size: 14px;
+            min-width: 200px;
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .history-table th {
+            background: #003366;
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            border: none;
+        }
+        
+        .history-table td {
+            padding: 16px;
+            border-bottom: 1px solid #e9ecef;
+            color: #555;
+        }
+        
+        .history-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-expired {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-renewed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-invoice, .btn-receipt {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-invoice {
+            background: #0099ff;
+            color: white;
+        }
+        
+        .btn-invoice:hover {
+            background: #007acc;
+        }
+        
+        .btn-receipt {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-receipt:hover {
+            background: #218838;
+        }
+        
+        .plan-change-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .upgrade-icon {
+            color: #28a745;
+        }
+        
+        .downgrade-icon {
+            color: #dc3545;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .empty-icon {
+            font-size: 48px;
+            color: #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .page-btn {
+            padding: 8px 16px;
+            border: 1px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .page-btn:hover:not(:disabled) {
+            background: #003366;
+            color: white;
+            border-color: #003366;
+        }
+        
+        .page-btn.active {
+            background: #003366;
+            color: white;
+            border-color: #003366;
+        }
+        
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .export-options {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e7f5ff;
+            border-radius: 12px;
+            border-left: 4px solid #0099ff;
+        }
+        
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-export {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #003366;
+            border-radius: 8px;
+            color: #003366;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .btn-export:hover {
+            background: #003366;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .history-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+            
+            .filter-select {
+                min-width: 100%;
+            }
+            
+            .table-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+        
+        .timeline-view {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #003366;
+            border: 4px solid white;
+            position: absolute;
+            left: 0;
+            z-index: 2;
+            box-shadow: 0 0 0 3px #e9ecef;
+        }
+        
+        .timeline-content {
+            margin-left: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #003366;
+            flex: 1;
+        }
+        
+        .timeline-date {
+            color: #003366;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-description {
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <main class="subscription-history">
+        <div class="history-container">
+            <div style="margin-bottom: 30px;">
+                <h1 style="color: #003366; margin-bottom: 10px;">Subscription History</h1>
+                <p style="color: #555; font-size: 18px;">
+                    Track all your subscription payments, upgrades, and renewal history
+                </p>
+            </div>
+            
+            <!-- Stats Overview -->
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <div style="color: #666; font-size: 14px;">Active Since</div>
+                    <div class="stat-number" id="active-since">2023</div>
+                    <div style="color: #666;">First subscription year</div>
+                </div>
+                
+                <div class="stat-card green">
+                    <div style="color: #666; font-size: 14px;">Total Invested</div>
+                    <div class="stat-number" id="total-invested">₦ 0</div>
+                    <div style="color: #666;">All subscription payments</div>
+                </div>
+                
+                <div class="stat-card orange">
+                    <div style="color: #666; font-size: 14px;">Active Subscribers</div>
+                    <div class="stat-number" id="active-subscribers">0</div>
+                    <div style="color: #666;">In your groups</div>
+                </div>
+                
+                <div class="stat-card blue">
+                    <div style="color: #666; font-size: 14px;">Next Renewal</div>
+                    <div class="stat-number" id="next-renewal">28th</div>
+                    <div style="color: #666;">Monthly renewal date</div>
+                </div>
+            </div>
+            
+            <!-- Table View -->
+            <div class="history-table-container">
+                <div class="table-actions">
+                    <h2 style="color: #003366;">Payment History</h2>
+                    
+                    <div class="search-filter">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="Search subscriptions..." id="search-input">
+                            <div class="search-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <select class="filter-select" id="status-filter">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="expired">Expired</option>
+                            <option value="pending">Pending</option>
+                            <option value="renewed">Renewed</option>
+                        </select>
+                        
+                        <select class="filter-select" id="plan-filter">
+                            <option value="">All Plans</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Super">Super</option>
+                            <option value="Lender of Lenders">Lender of Lenders</option>
+                        </select>
+                        
+                        <select class="filter-select" id="period-filter">
+                            <option value="all">All Time</option>
+                            <option value="year">This Year</option>
+                            <option value="month">This Month</option>
+                            <option value="quarter">Last 3 Months</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="history-table" id="subscription-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Billing Period</th>
+                                <th>Status</th>
+                                <th>Transaction ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <!-- Data will be populated by JavaScript -->
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    <div class="empty-icon">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                                        </svg>
+                                    </div>
+                                    <h3 style="color: #666; margin-bottom: 10px;">No subscription history found</h3>
+                                    <p style="color: #999;">Your subscription history will appear here once you make your first payment.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <button class="page-btn" id="prev-page" disabled>← Previous</button>
+                    <span style="color: #666;">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+                    <button class="page-btn" id="next-page" disabled>Next →</button>
+                </div>
+            </div>
+            
+            <!-- Timeline View -->
+            <div class="timeline-view">
+                <h2 style="color: #003366; margin-bottom: 30px;">Subscription Timeline</h2>
+                <div id="timeline-content">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">March 28, 2024</div>
+                            <h4 style="color: #003366; margin: 5px 0;">Premium Plan - Annual</h4>
+                            <div class="timeline-description">
+                                Annual subscription renewed. Upgraded from Basic to Premium plan for increased lending limits.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #28a745;"></div>
+                        <div class="timeline-content" style="border-left-color: #28a745;">
+                            <div class="timeline-date">December 28, 2023</div>
+                            <h4 style="color: #003366; margin: 5px 0;">Basic Plan - Monthly</h4>
+                            <div class="timeline-description">
+                                Monthly subscription renewed. Consistent payments for 6 months.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #f37021;"></div>
+                        <div class="timeline-content" style="border-left-color: #f37021;">
+                            <div class="timeline-date">June 28, 2023</div>
+                            <h4 style="color: #003366; margin: 5px 0;">Initial Subscription</h4>
+                            <div class="timeline-description">
+                                Joined M-Pesewa as a lender. Started with Basic plan to test the platform.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Export Options -->
+            <div class="export-options">
+                <h3 style="color: #003366; margin-bottom: 15px;">Export History</h3>
+                <p style="color: #555;">
+                    Download your subscription history for accounting, tax purposes, or personal records.
+                </p>
+                
+                <div class="export-buttons">
+                    <a href="#" class="btn-export" id="export-csv">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Export as CSV
+                    </a>
+                    
+                    <a href="#" class="btn-export" id="export-pdf">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Export as PDF
+                    </a>
+                    
+                    <a href="#" class="btn-export" id="export-excel">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        Export as Excel
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hierarchy Info -->
+            <div style="margin-top: 40px; padding: 25px; background: #003366; color: white; border-radius: 12px;">
+                <h3 style="color: white; margin-bottom: 15px;">📊 Subscription & Hierarchy Integration</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div>
+                        <h4 style="color: white; margin-bottom: 10px;">Strict Hierarchy Enforcement</h4>
+                        <div style="font-family: monospace; line-height: 1.8; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 6px;">
+                            <div>Global Platform</div>
+                            <div>  └── Country Locked</div>
+                            <div>        └── Groups (Subscription gates access)</div>
+                            <div>              ├── Lenders (Active subscription required)</div>
+                            <div>              │   └── Ledgers (Subscription tier limits)</div>
+                            <div>              └── Borrowers (No subscription needed)</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: white; margin-bottom: 10px;">Subscription Rules</h4>
+                        <ul style="color: white; padding-left: 20px;">
+                            <li>Expires 28th of each month</li>
+                            <li>7-day grace period after expiry</li>
+                            <li>Tier-based lending limits</li>
+                            <li>No subscription = Read-only access</li>
+                            <li>Country-specific pricing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../core/config.js"></script>
+    <script src="../../core/constants.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../utils/date.js"></script>
+    <script src="../../utils/validation.js"></script>
+    <script src="../../state/slices/auth.slice.js"></script>
+    <script src="../../state/slices/user.slice.js"></script>
+    <script src="../../state/slices/subscription.slice.js"></script>
+    <script src="../../state/slices/country.slice.js"></script>
+    <script src="../../router/route-guards.js"></script>
+    <script src="../../router/guard-subscription.js"></script>
+    <script src="../../layout/Header.js"></script>
+    <script src="../../layout/Footer.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header and footer
+            const headerContainer = document.getElementById('header-container');
+            const footerContainer = document.getElementById('footer-container');
+            
+            if (headerContainer && window.loadHeader) {
+                window.loadHeader(headerContainer);
+            }
+            
+            if (footerContainer && window.loadFooter) {
+                window.loadFooter(footerContainer);
+            }
+            
+            // Initialize page
+            initializeHistoryPage();
+            
+            // Route guard - check if user is authenticated
+            if (window.checkAuthGuard) {
+                const guardResult = window.checkAuthGuard();
+                if (guardResult.redirect) {
+                    window.location.href = guardResult.redirectTo;
+                }
+            }
+        });
+        
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let allSubscriptions = [];
+        let filteredSubscriptions = [];
+        
+        function initializeHistoryPage() {
+            // Get user data from store
+            const store = window.mpesewaStore || {};
+            const user = store.user || {};
+            const country = store.country || 'KE';
+            const subscription = store.subscription || {};
+            
+            // Update stats
+            updateStats(user, country, subscription);
+            
+            // Load subscription history
+            loadSubscriptionHistory(user.id);
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Initialize table with sample data
+            initializeSampleData();
+        }
+        
+        function updateStats(user, countryCode, subscription) {
+            // Format currency based on country
+            const currencies = {
+                'KE': 'KSh',
+                'UG': 'UGX',
+                'TZ': 'TZS',
+                'RW': 'RWF',
+                'BI': 'BIF',
+                'CD': 'CDF',
+                'SS': 'SSP',
+                'ZA': 'ZAR',
+                'NG': '₦',
+                'GH': 'GHS',
+                'ET': 'ETB',
+                'SO': 'SOS'
+            };
+            
+            const currencySymbol = currencies[countryCode] || '₦';
+            
+            // Update active since
+            if (user.createdAt) {
+                const year = new Date(user.createdAt).getFullYear();
+                document.getElementById('active-since').textContent = year;
+            }
+            
+            // Update total invested
+            const total = subscription.totalPaid || 0;
+            document.getElementById('total-invested').textContent = `${currencySymbol} ${total.toLocaleString()}`;
+            
+            // Update next renewal (always 28th)
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
+            let renewalDay = 28;
+            let renewalMonth = currentMonth;
+            let renewalYear = currentYear;
+            
+            // If today is after 28th, next renewal is 28th of next month
+            if (now.getDate() > 28) {
+                renewalMonth = currentMonth + 1;
+                if (renewalMonth > 11) {
+                    renewalMonth = 0;
+                    renewalYear = currentYear + 1;
+                }
+            }
+            
+            const renewalDate = new Date(renewalYear, renewalMonth, renewalDay);
+            const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            document.getElementById('next-renewal').textContent = `${renewalDay} ${monthNames[renewalMonth]}`;
+        }
+        
+        function loadSubscriptionHistory(userId) {
+            // In production, this would be an API call
+            // For now, we'll use sample data
+            setTimeout(() => {
+                generateSampleSubscriptions();
+                renderTable();
+            }, 500);
+        }
+        
+        function generateSampleSubscriptions() {
+            allSubscriptions = [
+                {
+                    id: 'SUB001',
+                    date: '2024-03-28',
+                    plan: 'Premium',
+                    amount: 2500,
+                    period: 'Annual',
+                    status: 'active',
+                    transactionId: 'TXN20240328123456',
+                    type: 'renewal',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB002',
+                    date: '2023-12-28',
+                    plan: 'Basic',
+                    amount: 500,
+                    period: 'Annual',
+                    status: 'expired',
+                    transactionId: 'TXN20231228123456',
+                    type: 'renewal',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB003',
+                    date: '2023-09-28',
+                    plan: 'Basic',
+                    amount: 50,
+                    period: 'Monthly',
+                    status: 'expired',
+                    transactionId: 'TXN20230928123456',
+                    type: 'payment',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB004',
+                    date: '2023-08-28',
+                    plan: 'Basic',
+                    amount: 50,
+                    period: 'Monthly',
+                    status: 'expired',
+                    transactionId: 'TXN20230828123456',
+                    type: 'payment',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB005',
+                    date: '2023-07-28',
+                    plan: 'Basic',
+                    amount: 50,
+                    period: 'Monthly',
+                    status: 'expired',
+                    transactionId: 'TXN20230728123456',
+                    type: 'payment',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB006',
+                    date: '2023-06-28',
+                    plan: 'Basic',
+                    amount: 50,
+                    period: 'Monthly',
+                    status: 'expired',
+                    transactionId: 'TXN20230628123456',
+                    type: 'initial',
+                    currency: '₦'
+                },
+                {
+                    id: 'SUB007',
+                    date: '2024-01-15',
+                    plan: 'Super',
+                    amount: 1000,
+                    period: 'Monthly',
+                    status: 'pending',
+                    transactionId: 'TXN20240115123456',
+                    type: 'upgrade',
+                    currency: '₦'
+                }
+            ];
+            
+            filteredSubscriptions = [...allSubscriptions];
+        }
+        
+        function renderTable() {
+            const tbody = document.getElementById('history-body');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageSubscriptions = filteredSubscriptions.slice(startIndex, endIndex);
+            
+            if (pageSubscriptions.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <div class="empty-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="9" y1="9" x2="15" y2="15"></line>
+                                    <line x1="15" y1="9" x2="9" y2="15"></line>
+                                </svg>
+                            </div>
+                            <h3 style="color: #666; margin-bottom: 10px;">No matching subscriptions found</h3>
+                            <p style="color: #999;">Try changing your search or filter criteria.</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = pageSubscriptions.map(sub => `
+                    <tr>
+                        <td>${formatDate(sub.date)}</td>
+                        <td>
+                            ${sub.plan}
+                            ${sub.type === 'upgrade' ? '<span class="plan-change-indicator"><svg class="upgrade-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>Upgrade</span>' : ''}
+                            ${sub.type === 'downgrade' ? '<span class="plan-change-indicator"><svg class="downgrade-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>Downgrade</span>' : ''}
+                        </td>
+                        <td><strong>${sub.currency} ${sub.amount.toLocaleString()}</strong></td>
+                        <td>${sub.period}</td>
+                        <td>
+                            <span class="status-badge status-${sub.status}">
+                                ${sub.status.charAt(0).toUpperCase() + sub.status.slice(1)}
+                            </span>
+                        </td>
+                        <td><code style="color: #666;">${sub.transactionId}</code></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-invoice" onclick="viewInvoice('${sub.id}')">
+                                    Invoice
+                                </button>
+                                <button class="btn-receipt" onclick="viewReceipt('${sub.id}')">
+                                    Receipt
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+            
+            // Update pagination
+            updatePagination();
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredSubscriptions.length / itemsPerPage);
+            document.getElementById('current-page').textContent = currentPage;
+            document.getElementById('total-pages').textContent = totalPages;
+            
+            document.getElementById('prev-page').disabled = currentPage <= 1;
+            document.getElementById('next-page').disabled = currentPage >= totalPages;
+        }
+        
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('search-input').addEventListener('input', function(e) {
+                filterSubscriptions();
+            });
+            
+            // Filter selects
+            document.getElementById('status-filter').addEventListener('change', filterSubscriptions);
+            document.getElementById('plan-filter').addEventListener('change', filterSubscriptions);
+            document.getElementById('period-filter').addEventListener('change', filterSubscriptions);
+            
+            // Pagination buttons
+            document.getElementById('prev-page').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            
+            document.getElementById('next-page').addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredSubscriptions.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            
+            // Export buttons
+            document.getElementById('export-csv').addEventListener('click', function(e) {
+                e.preventDefault();
+                exportData('csv');
+            });
+            
+            document.getElementById('export-pdf').addEventListener('click', function(e) {
+                e.preventDefault();
+                exportData('pdf');
+            });
+            
+            document.getElementById('export-excel').addEventListener('click', function(e) {
+                e.preventDefault();
+                exportData('excel');
+            });
+        }
+        
+        function filterSubscriptions() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const statusFilter = document.getElementById('status-filter').value;
+            const planFilter = document.getElementById('plan-filter').value;
+            const periodFilter = document.getElementById('period-filter').value;
+            
+            filteredSubscriptions = allSubscriptions.filter(sub => {
+                // Search filter
+                const matchesSearch = !searchTerm || 
+                    sub.plan.toLowerCase().includes(searchTerm) ||
+                    sub.transactionId.toLowerCase().includes(searchTerm);
+                
+                // Status filter
+                const matchesStatus = !statusFilter || sub.status === statusFilter;
+                
+                // Plan filter
+                const matchesPlan = !planFilter || sub.plan === planFilter;
+                
+                // Period filter
+                const matchesPeriod = filterByPeriod(sub.date, periodFilter);
+                
+                return matchesSearch && matchesStatus && matchesPlan && matchesPeriod;
+            });
+            
+            currentPage = 1;
+            renderTable();
+        }
+        
+        function filterByPeriod(dateString, period) {
+            if (period === 'all') return true;
+            
+            const date = new Date(dateString);
+            const now = new Date();
+            
+            switch(period) {
+                case 'year':
+                    return date.getFullYear() === now.getFullYear();
+                case 'month':
+                    return date.getMonth() === now.getMonth() && 
+                           date.getFullYear() === now.getFullYear();
+                case 'quarter':
+                    const threeMonthsAgo = new Date();
+                    threeMonthsAgo.setMonth(now.getMonth() - 3);
+                    return date >= threeMonthsAgo;
+                default:
+                    return true;
+            }
+        }
+        
+        function initializeSampleData() {
+            // This would be replaced with actual API data
+            setTimeout(() => {
+                document.getElementById('active-subscribers').textContent = '3';
+            }, 1000);
+        }
+        
+        function viewInvoice(subscriptionId) {
+            alert(`Invoice for subscription ${subscriptionId} would be displayed here.`);
+            // In production: window.location.href = `invoices.html?id=${subscriptionId}`;
+        }
+        
+        function viewReceipt(subscriptionId) {
+            alert(`Receipt for subscription ${subscriptionId} would be displayed here.`);
+            // In production: window.location.href = `receipts.html?id=${subscriptionId}`;
+        }
+        
+        function exportData(format) {
+            const data = filteredSubscriptions.map(sub => ({
+                Date: formatDate(sub.date),
+                Plan: sub.plan,
+                Amount: `${sub.currency} ${sub.amount}`,
+                Period: sub.period,
+                Status: sub.status,
+                'Transaction ID': sub.transactionId
+            }));
+            
+            // Simulate export
+            const fileName = `M-Pesewa-Subscription-History-${new Date().toISOString().split('T')[0]}.${format}`;
+            
+            alert(`Exporting ${data.length} records as ${format.toUpperCase()} file: ${fileName}\n\nIn production, this would download the file.`);
+            
+            // In production, this would generate and download the actual file
+            console.log(`Exporting data as ${format}:`, data);
+        }
+        
+        // Initialize with sample data
+        generateSampleSubscriptions();
+    </script>
+</body>
+</html>

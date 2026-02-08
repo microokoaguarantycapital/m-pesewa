@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacklist History - M-PESEWA</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/filters.css">
+    <link rel="stylesheet" href="../../assets/css/badges.css">
+    <style>
+        .history-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .history-header {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(31, 41, 55, 0.2);
+        }
+        
+        .history-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .view-toggle {
+            display: flex;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 5px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+        
+        .view-btn {
+            padding: 8px 20px;
+            border: none;
+            background: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #6b7280;
+            transition: all 0.3s;
+        }
+        
+        .view-btn.active {
+            background: white;
+            color: #003366;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .history-content {
+            display: none;
+        }
+        
+        .history-content.active {
+            display: block;
+        }
+        
+        .timeline-view {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, #0099ff, #e5e7eb);
+        }
+        
+        .timeline-item:last-child:before {
+            display: none;
+        }
+        
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #0099ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+            font-size: 24px;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .timeline-date {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .timeline-details {
+            color: #4b5563;
+            margin-bottom: 15px;
+        }
+        
+        .timeline-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        
+        .table-view .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .chart-view {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .chart-container {
+            height: 400px;
+            margin-top: 20px;
+        }
+        
+        .export-history {
+            background: #f0f9ff;
+            border: 2px solid #0099ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .export-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .export-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .export-btn:hover {
+            border-color: #0099ff;
+            transform: translateY(-3px);
+        }
+        
+        .export-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .export-label {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .year-filter {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .year-btn {
+            padding: 6px 12px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .year-btn.active {
+            background: #003366;
+            color: white;
+            border-color: #003366;
+        }
+        
+        .year-btn:hover:not(.active) {
+            background: #f3f4f6;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .status-cleared {
+            background: #d1fae5;
+            color: #059669;
+        }
+        
+        .status-appealed {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        .status-pending {
+            background: #e0f2fe;
+            color: #0284c7;
+        }
+        
+        .detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .detail-content {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .history-container {
+                padding: 10px;
+            }
+            
+            .history-header {
+                padding: 25px 20px;
+            }
+            
+            .history-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+            }
+            
+            .timeline-item:before {
+                left: 30px;
+            }
+            
+            .timeline-icon {
+                margin-bottom: 15px;
+            }
+            
+            .year-filter {
+                flex-wrap: wrap;
+            }
+            
+            .export-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .history-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .export-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .view-toggle {
+                width: 100%;
+            }
+            
+            .view-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="history-container">
+        <div class="history-header">
+            <h1>Blacklist History</h1>
+            <p>Track your blacklist status history and appeals timeline</p>
+        </div>
+        
+        <div class="history-stats">
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div class="stat-value" id="totalEntries">0</div>
+                <div class="stat-label">Total Entries</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-value" id="totalDays">0</div>
+                <div class="stat-label">Total Days Blacklisted</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value" id="totalAmount">KES 0</div>
+                <div class="stat-label">Total Amount Owed</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">⚖️</div>
+                <div class="stat-value" id="appealCount">0</div>
+                <div class="stat-label">Appeals Submitted</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="clearedCount">0</div>
+                <div class="stat-label">Times Cleared</div>
+            </div>
+        </div>
+        
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="timeline">
+                📅 Timeline
+            </button>
+            <button class="view-btn" data-view="table">
+                📊 Table
+            </button>
+            <button class="view-btn" data-view="charts">
+                📈 Charts
+            </button>
+        </div>
+        
+        <div class="year-filter">
+            <span>Filter by Year:</span>
+            <button class="year-btn active" data-year="all">All Time</button>
+            <button class="year-btn" data-year="2024">2024</button>
+            <button class="year-btn" data-year="2023">2023</button>
+            <button class="year-btn" data-year="2022">2022</button>
+            <button class="year-btn" data-year="2021">2021</button>
+        </div>
+        
+        <!-- Timeline View -->
+        <div id="timelineView" class="history-content active">
+            <div class="timeline-view">
+                <div id="timelineContent">
+                    <!-- Timeline items will be added here -->
+                    <div class="timeline-item">
+                        <div class="timeline-icon">⏳</div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Loading history...</div>
+                            <div class="timeline-title">Please wait</div>
+                            <div class="timeline-details">
+                                Loading your blacklist history. This may take a moment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Table View -->
+        <div id="tableView" class="history-content">
+            <div class="table-view">
+                <div class="table-container">
+                    <div class="table-header">
+                        <div>
+                            <h4 style="margin: 0;">Blacklist History</h4>
+                            <small class="text-muted" id="tableCount">Loading records...</small>
+                        </div>
+                        <div>
+                            <button id="refreshTableBtn" class="btn btn-outline-primary btn-sm">
+                                🔄 Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Event</th>
+                                    <th>Status</th>
+                                    <th>Amount</th>
+                                    <th>Days</th>
+                                    <th>Details</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <tr>
+                                    <td colspan="7" class="text-center">
+                                        <div class="loading-spinner">Loading history data...</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart View -->
+        <div id="chartView" class="history-content">
+            <div class="chart-view">
+                <h4>Blacklist History Analysis</h4>
+                <p class="text-muted">Visual representation of your blacklist history</p>
+                
+                <div class="chart-container">
+                    <canvas id="historyChart"></canvas>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="monthlyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="export-history">
+            <h4>Export History</h4>
+            <p class="text-muted">Export your complete blacklist history for your records</p>
+            
+            <div class="export-options">
+                <div class="export-btn" data-format="pdf">
+                    <div class="export-icon">📄</div>
+                    <div class="export-label">PDF Report</div>
+                </div>
+                
+                <div class="export-btn" data-format="csv">
+                    <div class="export-icon">📊</div>
+                    <div class="export-label">CSV Data</div>
+                </div>
+                
+                <div class="export-btn" data-format="json">
+                    <div class="export-icon">🔧</div>
+                    <div class="export-label">JSON Export</div>
+                </div>
+                
+                <div class="export-btn" data-format="print">
+                    <div class="export-icon">🖨️</div>
+                    <div class="export-label">Print Summary</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detail Modal -->
+        <div id="detailModal" class="detail-modal">
+            <div class="detail-content">
+                <div id="modalContent">
+                    <!-- Modal content will be loaded here -->
+                </div>
+                <div class="mt-3 text-right">
+                    <button id="closeModalBtn" class="btn btn-secondary">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import blacklistModule from '../index.js';
+        
+        class BlacklistHistory {
+            constructor() {
+                this.userId = localStorage.getItem('mpesewa_user_id');
+                this.countryCode = localStorage.getItem('mpesewa_country');
+                this.historyData = [];
+                this.filteredData = [];
+                this.currentView = 'timeline';
+                this.currentYear = 'all';
+                this.charts = {};
+                this.init();
+            }
+            
+            async init() {
+                if (!this.userId || !this.countryCode) {
+                    this.redirectToLogin();
+                    return;
+                }
+                
+                await this.loadHistoryData();
+                this.setupEventListeners();
+                this.updateStatistics();
+                this.renderCurrentView();
+            }
+            
+            redirectToLogin() {
+                alert('Please login to view your blacklist history');
+                window.location.href = '../../auth/login.html';
+            }
+            
+            async loadHistoryData() {
+                try {
+                    // Load blacklist record
+                    const blacklistRecord = blacklistModule.getUserBlacklistRecord(this.userId);
+                    
+                    // Load appeals
+                    const appeals = await this.getUserAppeals();
+                    
+                    // Load audit trail for this user
+                    const auditTrail = await this.getUserAuditTrail();
+                    
+                    // Combine all data into timeline
+                    this.historyData = this.combineHistoryData(blacklistRecord, appeals, auditTrail);
+                    
+                    // Sort by date (newest first)
+                    this.historyData.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    
+                    this.filteredData = [...this.historyData];
+                    
+                } catch (error) {
+                    console.error('Error loading history data:', error);
+                    this.showError('Failed to load history data');
+                }
+            }
+            
+            combineHistoryData(blacklistRecord, appeals, auditTrail) {
+                const history = [];
+                
+                // Add blacklist record if exists
+                if (blacklistRecord) {
+                    history.push({
+                        type: 'BLACKLIST',
+                        date: blacklistRecord.appliedAt,
+                        status: blacklistRecord.removedAt ? 'CLEARED' : 'ACTIVE',
+                        title: blacklistRecord.removedAt ? 'Blacklist Cleared' : 'Blacklisted',
+                        amount: blacklistRecord.defaultAmount,
+                        days: this.calculateDays(blacklistRecord.appliedAt, blacklistRecord.removedAt),
+                        details: blacklistRecord.reason,
+                        metadata: {
+                            removedAt: blacklistRecord.removedAt,
+                            removedBy: blacklistRecord.removedBy,
+                            removalReason: blacklistRecord.removalReason
+                        }
+                    });
+                }
+                
+                // Add appeals
+                appeals.forEach(appeal => {
+                    history.push({
+                        type: 'APPEAL',
+                        date: appeal.submittedAt,
+                        status: appeal.status,
+                        title: `Appeal ${appeal.status.toLowerCase().replace('_', ' ')}`,
+                        amount: null,
+                        days: null,
+                        details: appeal.details?.reason || 'Appeal submitted',
+                        metadata: {
+                            appealId: appeal.appealId,
+                            outcome: appeal.outcome,
+                            priority: appeal.priority
+                        }
+                    });
+                    
+                    // Add appeal decision if exists
+                    if (appeal.outcome) {
+                        history.push({
+                            type: 'APPEAL_DECISION',
+                            date: appeal.outcome.decidedAt,
+                            status: appeal.outcome.decision,
+                            title: `Appeal ${appeal.outcome.decision}`,
+                            amount: null,
+                            days: null,
+                            details: appeal.outcome.reason,
+                            metadata: {
+                                decidedBy: appeal.outcome.decidedBy,
+                                conditions: appeal.outcome.conditions
+                            }
+                        });
+                    }
+                });
+                
+                // Add relevant audit trail entries
+                auditTrail.forEach(audit => {
+                    if (this.isRelevantAuditEntry(audit)) {
+                        history.push({
+                            type: 'AUDIT',
+                            date: audit.timestamp,
+                            status: 'LOGGED',
+                            title: audit.action.replace(/_/g, ' '),
+                            amount: null,
+                            days: null,
+                            details: audit.reason || audit.action,
+                            metadata: {
+                                performedBy: audit.performedBy,
+                                details: audit.details
+                            }
+                        });
+                    }
+                });
+                
+                return history;
+            }
+            
+            calculateDays(startDate, endDate) {
+                const start = new Date(startDate);
+                const end = endDate ? new Date(endDate) : new Date();
+                return Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            }
+            
+            isRelevantAuditEntry(audit) {
+                const relevantActions = [
+                    'BLACKLIST_ADDED',
+                    'BLACKLIST_REMOVED',
+                    'RESTRICTIONS_APPLIED',
+                    'RESTRICTIONS_REMOVED',
+                    'APPEAL_SUBMITTED',
+                    'APPEAL_APPROVED',
+                    'APPEAL_REJECTED',
+                    'APPEAL_WITHDRAWN'
+                ];
+                
+                return relevantActions.includes(audit.action) && 
+                       audit.userId === this.userId;
+            }
+            
+            async getUserAppeals() {
+                try {
+                    const storedAppeals = localStorage.getItem('mpesewa_blacklist_appeals');
+                    if (storedAppeals) {
+                        const allAppeals = JSON.parse(storedAppeals);
+                        return allAppeals.filter(appeal => 
+                            appeal.userId === this.userId && 
+                            appeal.countryCode === this.countryCode
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error loading appeals:', error);
+                }
+                
+                return [];
+            }
+            
+            async getUserAuditTrail() {
+                try {
+                    const storedAudit = localStorage.getItem('mpesewa_blacklist_audit');
+                    if (storedAudit) {
+                        const allAudit = JSON.parse(storedAudit);
+                        return allAudit.filter(audit => 
+                            audit.userId === this.userId
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error loading audit trail:', error);
+                }
+                
+                return [];
+            }
+            
+            updateStatistics() {
+                const totalEntries = this.historyData.length;
+                const totalDays = this.historyData
+                    .filter(entry => entry.type === 'BLACKLIST' && entry.days)
+                    .reduce((sum, entry) => sum + entry.days, 0);
+                
+                const totalAmount = this.historyData
+                    .filter(entry => entry.amount)
+                    .reduce((sum, entry) => sum + entry.amount, 0);
+                
+                const appealCount = this.historyData
+                    .filter(entry => entry.type === 'APPEAL')
+                    .length;
+                
+                const clearedCount = this.historyData
+                    .filter(entry => entry.status === 'CLEARED' || entry.status === 'APPROVED')
+                    .length;
+                
+                document.getElementById('totalEntries').textContent = totalEntries;
+                document.getElementById('totalDays').textContent = totalDays;
+                document.getElementById('totalAmount').textContent = 
+                    `KES ${totalAmount.toLocaleString()}`;
+                document.getElementById('appealCount').textContent = appealCount;
+                document.getElementById('clearedCount').textContent = clearedCount;
+            }
+            
+            renderCurrentView() {
+                // Apply year filter
+                this.applyYearFilter();
+                
+                // Hide all views
+                document.querySelectorAll('.history-content').forEach(view => {
+                    view.classList.remove('active');
+                });
+                
+                // Show current view
+                document.getElementById(`${this.currentView}View`).classList.add('active');
+                
+                // Render specific view
+                switch (this.currentView) {
+                    case 'timeline':
+                        this.renderTimelineView();
+                        break;
+                    case 'table':
+                        this.renderTableView();
+                        break;
+                    case 'charts':
+                        this.renderChartView();
+                        break;
+                }
+            }
+            
+            applyYearFilter() {
+                if (this.currentYear === 'all') {
+                    this.filteredData = [...this.historyData];
+                    return;
+                }
+                
+                const year = parseInt(this.currentYear);
+                this.filteredData = this.historyData.filter(entry => {
+                    const entryYear = new Date(entry.date).getFullYear();
+                    return entryYear === year;
+                });
+            }
+            
+            renderTimelineView() {
+                const timelineContent = document.getElementById('timelineContent');
+                
+                if (this.filteredData.length === 0) {
+                    timelineContent.innerHTML = `
+                        <div class="timeline-item">
+                            <div class="timeline-icon">📭</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">No History Found</div>
+                                <div class="timeline-details">
+                                    No blacklist history found for the selected period.
+                                    ${this.currentYear !== 'all' ? 'Try selecting "All Time" or another year.' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let timelineHTML = '';
+                
+                this.filteredData.forEach(entry => {
+                    const date = new Date(entry.date);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const icon = this.getEntryIcon(entry);
+                    const statusBadge = this.getStatusBadge(entry.status);
+                    
+                    timelineHTML += `
+                        <div class="timeline-item" data-entry-id="${entry.date}">
+                            <div class="timeline-icon">${icon}</div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">${formattedDate}</div>
+                                <div class="timeline-title">
+                                    ${entry.title}
+                                    <span class="status-badge ${statusBadge.class}">
+                                        ${statusBadge.text}
+                                    </span>
+                                </div>
+                                <div class="timeline-details">
+                                    ${entry.details}
+                                    ${entry.amount ? `<br><strong>Amount:</strong> KES ${entry.amount.toLocaleString()}` : ''}
+                                    ${entry.days ? `<br><strong>Duration:</strong> ${entry.days} days` : ''}
+                                </div>
+                                <div class="timeline-meta">
+                                    <span>Type: ${entry.type}</span>
+                                    ${entry.metadata?.performedBy ? 
+                                        `<span>By: ${entry.metadata.performedBy}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                timelineContent.innerHTML = timelineHTML;
+                
+                // Add click event to timeline items
+                document.querySelectorAll('.timeline-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const entryId = item.dataset.entryId;
+                        const entry = this.filteredData.find(e => e.date === entryId);
+                        if (entry) {
+                            this.showEntryDetails(entry);
+                        }
+                    });
+                });
+            }
+            
+            getEntryIcon(entry) {
+                const icons = {
+                    'BLACKLIST': '🚫',
+                    'APPEAL': '⚖️',
+                    'APPEAL_DECISION': '📝',
+                    'AUDIT': '📋'
+                };
+                
+                return icons[entry.type] || '📅';
+            }
+            
+            getStatusBadge(status) {
+                const statusMap = {
+                    'ACTIVE': { class: 'status-active', text: 'ACTIVE' },
+                    'CLEARED': { class: 'status-cleared', text: 'CLEARED' },
+                    'PENDING_REVIEW': { class: 'status-pending', text: 'PENDING' },
+                    'UNDER_REVIEW': { class: 'status-pending', text: 'UNDER REVIEW' },
+                    'APPROVED': { class: 'status-cleared', text: 'APPROVED' },
+                    'REJECTED': { class: 'status-active', text: 'REJECTED' },
+                    'WITHDRAWN': { class: 'status-appealed', text: 'WITHDRAWN' },
+                    'LOGGED': { class: 'status-appealed', text: 'LOGGED' }
+                };
+                
+                return statusMap[status] || { class: 'status-appealed', text: status };
+            }
+            
+            renderTableView() {
+                const tbody = document.getElementById('historyTableBody');
+                const countElement = document.getElementById('tableCount');
+                
+                if (this.filteredData.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                <div class="empty-state">
+                                    <div style="font-size: 48px; margin-bottom: 16px;">📭</div>
+                                    <h4>No records found</h4>
+                                    <p class="text-muted">Try selecting a different year or view.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    countElement.textContent = '0 records';
+                    return;
+                }
+                
+                countElement.textContent = `${this.filteredData.length} records`;
+                
+                let tableHTML = '';
+                
+                this.filteredData.forEach(entry => {
+                    const date = new Date(entry.date);
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    const statusBadge = this.getStatusBadge(entry.status);
+                    
+                    tableHTML += `
+                        <tr data-entry-id="${entry.date}">
+                            <td>${formattedDate}</td>
+                            <td>
+                                <strong>${entry.title}</strong><br>
+                                <small class="text-muted">${entry.type}</small>
+                            </td>
+                            <td>
+                                <span class="status-badge ${statusBadge.class}">
+                                    ${statusBadge.text}
+                                </span>
+                            </td>
+                            <td>
+                                ${entry.amount ? `KES ${entry.amount.toLocaleString()}` : '—'}
+                            </td>
+                            <td>
+                                ${entry.days || '—'}
+                            </td>
+                            <td>
+                                <div class="text-truncate" style="max-width: 200px;">
+                                    ${entry.details}
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-entry-btn"
+                                        data-entry-id="${entry.date}">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                tbody.innerHTML = tableHTML;
+                
+                // Add click events to view buttons
+                document.querySelectorAll('.view-entry-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const entryId = btn.dataset.entryId;
+                        const entry = this.filteredData.find(e => e.date === entryId);
+                        if (entry) {
+                            this.showEntryDetails(entry);
+                        }
+                    });
+                });
+                
+                // Add click events to table rows
+                document.querySelectorAll('tbody tr').forEach(row => {
+                    row.addEventListener('click', (e) => {
+                        if (!e.target.closest('.view-entry-btn')) {
+                            const entryId = row.dataset.entryId;
+                            const entry = this.filteredData.find(e => e.date === entryId);
+                            if (entry) {
+                                this.showEntryDetails(entry);
+                            }
+                        }
+                    });
+                });
+            }
+            
+            renderChartView() {
+                if (this.filteredData.length === 0) {
+                    document.getElementById('chartView').innerHTML = `
+                        <div class="chart-view">
+                            <h4>No Data for Charts</h4>
+                            <p class="text-muted">No history data available for the selected period.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Destroy existing charts
+                Object.values(this.charts).forEach(chart => {
+                    if (chart) chart.destroy();
+                });
+                
+                // Create new charts
+                this.createMainChart();
+                this.createStatusChart();
+                this.createMonthlyChart();
+            }
+            
+            createMainChart() {
+                const ctx = document.getElementById('historyChart').getContext('2d');
+                
+                // Prepare data by month
+                const monthlyData = {};
+                this.filteredData.forEach(entry => {
+                    const date = new Date(entry.date);
+                    const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                    
+                    if (!monthlyData[monthYear]) {
+                        monthlyData[monthYear] = {
+                            blacklists: 0,
+                            appeals: 0,
+                            decisions: 0
+                        };
+                    }
+                    
+                    switch (entry.type) {
+                        case 'BLACKLIST':
+                            monthlyData[monthYear].blacklists++;
+                            break;
+                        case 'APPEAL':
+                            monthlyData[monthYear].appeals++;
+                            break;
+                        case 'APPEAL_DECISION':
+                        case 'AUDIT':
+                            monthlyData[monthYear].decisions++;
+                            break;
+                    }
+                });
+                
+                const months = Object.keys(monthlyData).sort();
+                const blacklistCounts = months.map(m => monthlyData[m].blacklists);
+                const appealCounts = months.map(m => monthlyData[m].appeals);
+                const decisionCounts = months.map(m => monthlyData[m].decisions);
+                
+                this.charts.main = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: months.map(m => {
+                            const [year, month] = m.split('-');
+                            return new Date(year, month - 1).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                year: '2-digit' 
+                            });
+                        }),
+                        datasets: [
+                            {
+                                label: 'Blacklist Events',
+                                data: blacklistCounts,
+                                borderColor: '#dc2626',
+                                backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                                tension: 0.1
+                            },
+                            {
+                                label: 'Appeals',
+                                data: appealCounts,
+                                borderColor: '#d97706',
+                                backgroundColor: 'rgba(217, 119, 6, 0.1)',
+                                tension: 0.1
+                            },
+                            {
+                                label: 'Decisions/Audits',
+                                data: decisionCounts,
+                                borderColor: '#0284c7',
+                                backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Blacklist Activity Over Time'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            createStatusChart() {
+                const ctx = document.getElementById('statusChart').getContext('2d');
+                
+                // Count by status
+                const statusCounts = {};
+                this.filteredData.forEach(entry => {
+                    const status = entry.status;
+                    statusCounts[status] = (statusCounts[status] || 0) + 1;
+                });
+                
+                const statuses = Object.keys(statusCounts);
+                const counts = statuses.map(s => statusCounts[s]);
+                
+                const colors = {
+                    'ACTIVE': '#dc2626',
+                    'CLEARED': '#059669',
+                    'APPROVED': '#059669',
+                    'REJECTED': '#dc2626',
+                    'PENDING_REVIEW': '#d97706',
+                    'UNDER_REVIEW': '#d97706',
+                    'WITHDRAWN': '#9ca3af',
+                    'LOGGED': '#0284c7'
+                };
+                
+                const backgroundColors = statuses.map(s => colors[s] || '#9ca3af');
+                
+                this.charts.status = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: statuses.map(s => s.replace(/_/g, ' ')),
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: backgroundColors,
+                            borderWidth: 2,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Status Distribution'
+                            },
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            createMonthlyChart() {
+                const ctx = document.getElementById('monthlyChart').getContext('2d');
+                
+                // Group by month and calculate total days blacklisted
+                const monthlyDays = {};
+                this.filteredData
+                    .filter(entry => entry.type === 'BLACKLIST' && entry.days)
+                    .forEach(entry => {
+                        const date = new Date(entry.date);
+                        const monthYear = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+                        
+                        monthlyDays[monthYear] = (monthlyDays[monthYear] || 0) + entry.days;
+                    });
+                
+                const months = Object.keys(monthlyDays).sort();
+                const days = months.map(m => monthlyDays[m]);
+                
+                this.charts.monthly = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: months.map(m => {
+                            const [year, month] = m.split('-');
+                            return new Date(year, month - 1).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                year: '2-digit' 
+                            });
+                        }),
+                        datasets: [{
+                            label: 'Total Days Blacklisted',
+                            data: days,
+                            backgroundColor: 'rgba(220, 38, 38, 0.5)',
+                            borderColor: '#dc2626',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Blacklist Duration by Month'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Days'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            showEntryDetails(entry) {
+                const modal = document.getElementById('detailModal');
+                const modalContent = document.getElementById('modalContent');
+                
+                const date = new Date(entry.date);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const statusBadge = this.getStatusBadge(entry.status);
+                
+                let detailsHTML = `
+                    <h4>${entry.title}</h4>
+                    <p class="text-muted">${formattedDate}</p>
+                    
+                    <div class="detail-item mb-3">
+                        <strong>Type:</strong> ${entry.type}<br>
+                        <strong>Status:</strong> 
+                        <span class="status-badge ${statusBadge.class}">
+                            ${statusBadge.text}
+                        </span>
+                    </div>
+                    
+                    <div class="detail-item mb-3">
+                        <strong>Details:</strong><br>
+                        <p class="p-2 bg-light rounded">${entry.details}</p>
+                    </div>
+                `;
+                
+                if (entry.amount) {
+                    detailsHTML += `
+                        <div class="detail-item mb-3">
+                            <strong>Amount:</strong> KES ${entry.amount.toLocaleString()}
+                        </div>
+                    `;
+                }
+                
+                if (entry.days) {
+                    detailsHTML += `
+                        <div class="detail-item mb-3">
+                            <strong>Duration:</strong> ${entry.days} days
+                        </div>
+                    `;
+                }
+                
+                if (entry.metadata) {
+                    detailsHTML += `
+                        <div class="detail-item">
+                            <strong>Additional Information:</strong>
+                            <pre class="p-2 bg-light rounded" style="font-size: 12px; max-height: 200px; overflow: auto;">
+                                ${JSON.stringify(entry.metadata, null, 2)}
+                            </pre>
+                        </div>
+                    `;
+                }
+                
+                modalContent.innerHTML = detailsHTML;
+                modal.style.display = 'flex';
+            }
+            
+            setupEventListeners() {
+                // View toggle buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const view = e.target.dataset.view;
+                        
+                        // Update active button
+                        document.querySelectorAll('.view-btn').forEach(b => {
+                            b.classList.remove('active');
+                        });
+                        e.target.classList.add('active');
+                        
+                        // Update view
+                        this.currentView = view;
+                        this.renderCurrentView();
+                    });
+                });
+                
+                // Year filter buttons
+                document.querySelectorAll('.year-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const year = e.target.dataset.year;
+                        
+                        // Update active button
+                        document.querySelectorAll('.year-btn').forEach(b => {
+                            b.classList.remove('active');
+                        });
+                        e.target.classList.add('active');
+                        
+                        // Update year filter
+                        this.currentYear = year;
+                        this.renderCurrentView();
+                    });
+                });
+                
+                // Refresh table button
+                document.getElementById('refreshTableBtn').addEventListener('click', async () => {
+                    await this.loadHistoryData();
+                    this.renderCurrentView();
+                    alert('History data refreshed');
+                });
+                
+                // Export buttons
+                document.querySelectorAll('.export-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const format = e.currentTarget.dataset.format;
+                        this.exportHistory(format);
+                    });
+                });
+                
+                // Close modal button
+                document.getElementById('closeModalBtn').addEventListener('click', () => {
+                    document.getElementById('detailModal').style.display = 'none';
+                });
+                
+                // Close modal on background click
+                document.getElementById('detailModal').addEventListener('click', (e) => {
+                    if (e.target === document.getElementById('detailModal')) {
+                        document.getElementById('detailModal').style.display = 'none';
+                    }
+                });
+            }
+            
+            exportHistory(format) {
+                try {
+                    const exportData = {
+                        exportedAt: new Date().toISOString(),
+                        userId: this.userId,
+                        countryCode: this.countryCode,
+                        period: this.currentYear === 'all' ? 'All Time' : this.currentYear,
+                        totalEntries: this.filteredData.length,
+                        entries: this.filteredData.map(entry => ({
+                            date: entry.date,
+                            type: entry.type,
+                            status: entry.status,
+                            title: entry.title,
+                            amount: entry.amount,
+                            days: entry.days,
+                            details: entry.details
+                        }))
+                    };
+                    
+                    let blob, filename, mimeType;
+                    
+                    switch (format) {
+                        case 'pdf':
+                            // For PDF, we'd typically use a library
+                            // For demo, we'll create a text version
+                            const pdfContent = this.generatePDFContent(exportData);
+                            blob = new Blob([pdfContent], { type: 'application/pdf' });
+                            filename = `blacklist_history_${this.userId}_${new Date().toISOString().split('T')[0]}.pdf`;
+                            mimeType = 'application/pdf';
+                            break;
+                            
+                        case 'csv':
+                            const headers = ['Date', 'Type', 'Status', 'Title', 'Amount', 'Days', 'Details'];
+                            const csvRows = [
+                                headers.join(','),
+                                ...exportData.entries.map(entry => [
+                                    entry.date,
+                                    entry.type,
+                                    entry.status,
+                                    `"${entry.title}"`,
+                                    entry.amount || '',
+                                    entry.days || '',
+                                    `"${entry.details.replace(/"/g, '""')}"`
+                                ].join(','))
+                            ];
+                            
+                            blob = new Blob([csvRows.join('\n')], { type: 'text/csv' });
+                            filename = `blacklist_history_${this.userId}_${new Date().toISOString().split('T')[0]}.csv`;
+                            mimeType = 'text/csv';
+                            break;
+                            
+                        case 'json':
+                            blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                                type: 'application/json'
+                            });
+                            filename = `blacklist_history_${this.userId}_${new Date().toISOString().split('T')[0]}.json`;
+                            mimeType = 'application/json';
+                            break;
+                            
+                        case 'print':
+                            window.print();
+                            return;
+                    }
+                    
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    console.log(`Exported ${exportData.entries.length} entries as ${format}`);
+                    
+                } catch (error) {
+                    console.error('Export error:', error);
+                    alert('Failed to export history. Please try again.');
+                }
+            }
+            
+            generatePDFContent(data) {
+                return `
+                    M-PESEWA BLACKLIST HISTORY REPORT
+                    =================================
+                    
+                    User ID: ${data.userId}
+                    Country: ${data.countryCode}
+                    Period: ${data.period}
+                    Export Date: ${new Date().toLocaleDateString()}
+                    Total Entries: ${data.totalEntries}
+                    
+                    ${data.entries.map((entry, index) => `
+                    Entry ${index + 1}:
+                    • Date: ${new Date(entry.date).toLocaleDateString()}
+                    • Type: ${entry.type}
+                    • Status: ${entry.status}
+                    • Title: ${entry.title}
+                    • Amount: ${entry.amount ? `KES ${entry.amount}` : 'N/A'}
+                    • Days: ${entry.days || 'N/A'}
+                    • Details: ${entry.details}
+                    
+                    `).join('\n')}
+                    
+                    --- END OF REPORT ---
+                `;
+            }
+            
+            showError(message) {
+                alert('Error: ' + message);
+            }
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new BlacklistHistory();
+        });
+    </script>
+</body>
+</html>

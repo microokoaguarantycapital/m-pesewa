@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="en" data-mpesewa-page="ledger-closure">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger Closure - M-Pesewa</title>
+    
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#003366">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/alerts.css">
+    <link rel="stylesheet" href="../assets/css/timeline.css">
+    
+    <!-- Country Theme -->
+    <link rel="stylesheet" href="../assets/css/themes/default.css">
+    <link rel="stylesheet" href="" id="country-theme">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/logos/favicon.ico" type="image/x-icon">
+</head>
+<body class="ledger-closure-page">
+    <!-- Header -->
+    <header class="mp-header" id="mainHeader">
+        <!-- Header content will be loaded by JavaScript -->
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <ol>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="ledger-list.html">Ledgers</a></li>
+                    <li><a href="#" id="ledgerViewLink">Ledger View</a></li>
+                    <li class="active">Closure</li>
+                </ol>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h1 class="page-title">
+                        <i class="fas fa-flag-checkered"></i>
+                        Ledger Closure
+                    </h1>
+                    <p class="page-subtitle">
+                        Finalize and close this ledger. This action marks the end of the loan lifecycle.
+                    </p>
+                </div>
+                <div class="page-header-right">
+                    <div class="page-actions">
+                        <button class="btn btn-secondary" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button class="btn btn-success" id="initiateClosure" disabled>
+                            <i class="fas fa-check-circle"></i> Initiate Closure
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Overview -->
+            <div class="closure-status-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card status-card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-line"></i>
+                                    Ledger Status Summary
+                                </h3>
+                                <span class="badge" id="overallStatusBadge">Status</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="status-metrics">
+                                    <div class="metric-row">
+                                        <div class="metric-item">
+                                            <div class="metric-label">Principal</div>
+                                            <div class="metric-value" id="principalAmount">-</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-label">Interest</div>
+                                            <div class="metric-value" id="interestAmount">-</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-label">Penalties</div>
+                                            <div class="metric-value" id="penaltyAmount">-</div>
+                                        </div>
+                                    </div>
+                                    <div class="metric-row">
+                                        <div class="metric-item">
+                                            <div class="metric-label">Total Due</div>
+                                            <div class="metric-value total-due" id="totalDueAmount">-</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-label">Total Paid</div>
+                                            <div class="metric-value total-paid" id="totalPaidAmount">-</div>
+                                        </div>
+                                        <div class="metric-item">
+                                            <div class="metric-label">Balance</div>
+                                            <div class="metric-value" id="balanceAmount">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="status-details">
+                                    <div class="detail-item">
+                                        <span class="label">Borrower:</span>
+                                        <span class="value" id="borrowerName">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">Lender:</span>
+                                        <span class="value" id="lenderName">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">Days Active:</span>
+                                        <span class="value" id="daysActive">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="label">Last Activity:</span>
+                                        <span class="value" id="lastActivity">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card closure-readiness-card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-clipboard-check"></i>
+                                    Closure Readiness Check
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="readiness-checklist" id="readinessChecklist">
+                                    <!-- Checklist items will be populated here -->
+                                </div>
+                                <div class="readiness-score">
+                                    <div class="score-circle">
+                                        <div class="circle-progress" id="circleProgress">
+                                            <svg width="100" height="100" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="45" fill="none" stroke="#e6e6e6" stroke-width="8"/>
+                                                <circle cx="50" cy="50" r="45" fill="none" stroke="#28a745" stroke-width="8" 
+                                                        stroke-linecap="round" stroke-dasharray="283" stroke-dashoffset="283"
+                                                        id="progressCircle"/>
+                                            </svg>
+                                            <div class="score-text" id="readinessScore">0%</div>
+                                        </div>
+                                    </div>
+                                    <div class="score-details">
+                                        <h4 id="readinessStatus">Not Ready</h4>
+                                        <p id="readinessMessage">Checking requirements...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closure Eligibility -->
+            <div class="eligibility-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-award"></i>
+                        Closure Eligibility
+                    </h3>
+                    <span class="badge" id="eligibilityBadge">Checking...</span>
+                </div>
+                <div class="card-body">
+                    <div class="eligibility-grid">
+                        <div class="eligibility-item" id="eligibilityBalance">
+                            <div class="eligibility-icon">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                            <div class="eligibility-content">
+                                <h5>Zero Balance</h5>
+                                <p>All principal, interest, and penalties must be fully paid.</p>
+                                <div class="eligibility-status">
+                                    <span class="status-indicator" id="balanceStatus"></span>
+                                    <span class="status-text" id="balanceText">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="eligibility-item" id="eligibilityDisputes">
+                            <div class="eligibility-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="eligibility-content">
+                                <h5>No Active Disputes</h5>
+                                <p>All disputes must be resolved before closure.</p>
+                                <div class="eligibility-status">
+                                    <span class="status-indicator" id="disputesStatus"></span>
+                                    <span class="status-text" id="disputesText">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="eligibility-item" id="eligibilityTime">
+                            <div class="eligibility-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="eligibility-content">
+                                <h5>Minimum Period</h5>
+                                <p>Ledger must be active for at least 1 day.</p>
+                                <div class="eligibility-status">
+                                    <span class="status-indicator" id="timeStatus"></span>
+                                    <span class="status-text" id="timeText">Checking...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="eligibility-item" id="eligibilityConsent">
+                            <div class="eligibility-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="eligibility-content">
+                                <h5>Mutual Consent</h5>
+                                <p>Both borrower and lender must agree to closure.</p>
+                                <div class="eligibility-status">
+                                    <span class="status-indicator" id="consentStatus"></span>
+                                    <span class="status-text" id="consentText">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="eligibility-actions" id="eligibilityActions" style="display: none;">
+                        <div class="alert" id="eligibilityAlert">
+                            <!-- Alert message will be shown here -->
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" id="requestConsent">
+                                <i class="fas fa-envelope"></i> Request Consent
+                            </button>
+                            <button class="btn btn-info" id="recalculateEligibility">
+                                <i class="fas fa-sync-alt"></i> Recheck Eligibility
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Closure Process -->
+            <div class="closure-process-section">
+                <div class="process-header">
+                    <h3>
+                        <i class="fas fa-list-ol"></i>
+                        Closure Process
+                    </h3>
+                    <div class="process-steps">
+                        <div class="process-step active" data-step="1">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Review</span>
+                        </div>
+                        <div class="process-step" data-step="2">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Settlement</span>
+                        </div>
+                        <div class="process-step" data-step="3">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Confirmation</span>
+                        </div>
+                        <div class="process-step" data-step="4">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Completion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 1: Review -->
+                <div class="process-step-content active" id="step1Content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                <i class="fas fa-search"></i>
+                                Step 1: Final Review & Verification
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="review-section">
+                                <h5>Ledger Summary</h5>
+                                <div class="review-summary">
+                                    <div class="summary-item">
+                                        <strong>Loan Purpose:</strong>
+                                        <span id="loanPurpose">Transport to job interview</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <strong>Start Date:</strong>
+                                        <span id="startDate">2024-01-20</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <strong>Original Amount:</strong>
+                                        <span id="originalAmount">KES 2,500.00</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <strong>Interest Rate:</strong>
+                                        <span id="interestRate">10% weekly</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <strong>Total Repayments:</strong>
+                                        <span id="totalRepayments">3 payments</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <strong>Final Payment Date:</strong>
+                                        <span id="finalPaymentDate">2024-01-25</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="review-section">
+                                <h5>Financial Reconciliation</h5>
+                                <div class="reconciliation-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Principal Amount</td>
+                                                <td id="reviewPrincipal">KES 2,500.00</td>
+                                                <td><span class="badge badge-success">Paid</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Interest (10% weekly)</td>
+                                                <td id="reviewInterest">KES 250.00</td>
+                                                <td><span class="badge badge-success">Paid</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Penalties</td>
+                                                <td id="reviewPenalties">KES 0.00</td>
+                                                <td><span class="badge badge-success">None</span></td>
+                                            </tr>
+                                            <tr class="total-row">
+                                                <td><strong>Total Amount</strong></td>
+                                                <td><strong id="reviewTotal">KES 2,750.00</strong></td>
+                                                <td><span class="badge badge-success">Fully Paid</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="review-section">
+                                <h5>Final Verification</h5>
+                                <div class="verification-checks">
+                                    <div class="check-item">
+                                        <input type="checkbox" id="verifyPayments" name="verificationChecks">
+                                        <label for="verifyPayments">
+                                            I have verified all payments are correctly recorded
+                                        </label>
+                                    </div>
+                                    <div class="check-item">
+                                        <input type="checkbox" id="verifyDisputes" name="verificationChecks">
+                                        <label for="verifyDisputes">
+                                            I confirm there are no active disputes
+                                        </label>
+                                    </div>
+                                    <div class="check-item">
+                                        <input type="checkbox" id="verifyConsent" name="verificationChecks">
+                                        <label for="verifyConsent">
+                                            I have obtained mutual consent for closure
+                                        </label>
+                                    </div>
+                                    <div class="check-item">
+                                        <input type="checkbox" id="verifyDocuments" name="verificationChecks">
+                                        <label for="verifyDocuments">
+                                            All required documentation is complete
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button class="btn btn-secondary" onclick="window.history.back()">
+                                    <i class="fas fa-times"></i> Cancel
+                                </button>
+                                <button class="btn btn-primary" id="proceedToStep2">
+                                    Next: Settlement <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Settlement -->
+                <div class="process-step-content" id="step2Content" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                <i class="fas fa-file-contract"></i>
+                                Step 2: Final Settlement & Documentation
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="settlement-form">
+                                <div class="form-section">
+                                    <h5>Settlement Type</h5>
+                                    <div class="form-group">
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="settlementType" value="FULL" checked>
+                                                <span>Full Settlement (All amounts paid)</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="settlementType" value="PARTIAL">
+                                                <span>Partial Settlement (Agreed amount)</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="settlementType" value="WRITE_OFF">
+                                                <span>Write-off (Lender forgives balance)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section" id="partialSettlementSection" style="display: none;">
+                                    <h5>Partial Settlement Details</h5>
+                                    <div class="form-group">
+                                        <label for="settlementAmount">Settlement Amount</label>
+                                        <div class="input-with-currency">
+                                            <input type="number" 
+                                                   id="settlementAmount" 
+                                                   name="settlementAmount" 
+                                                   class="form-control" 
+                                                   min="0" 
+                                                   step="0.01">
+                                            <span class="currency-display">KES</span>
+                                        </div>
+                                        <small class="form-text">Amount agreed for final settlement</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="settlementReason">Reason for Partial Settlement</label>
+                                        <textarea id="settlementReason" 
+                                                  name="settlementReason" 
+                                                  class="form-control" 
+                                                  rows="2"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section" id="writeOffSection" style="display: none;">
+                                    <h5>Write-off Details</h5>
+                                    <div class="form-group">
+                                        <label for="writeOffReason">Reason for Write-off</label>
+                                        <select id="writeOffReason" name="writeOffReason" class="form-control">
+                                            <option value="">Select reason...</option>
+                                            <option value="HARDSHIP">Borrower Hardship</option>
+                                            <option value="DEATH">Borrower Death</option>
+                                            <option value="DISPUTE_RESOLUTION">Dispute Resolution</option>
+                                            <option value="LENDER_DISCRETION">Lender Discretion</option>
+                                            <option value="OTHER">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="writeOffAmount">Amount Written Off</label>
+                                        <div class="input-with-currency">
+                                            <input type="number" 
+                                                   id="writeOffAmount" 
+                                                   name="writeOffAmount" 
+                                                   class="form-control" 
+                                                   min="0" 
+                                                   step="0.01">
+                                            <span class="currency-display">KES</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h5>Settlement Documentation</h5>
+                                    <div class="form-group">
+                                        <label>Required Documents</label>
+                                        <div class="document-checklist">
+                                            <div class="check-item">
+                                                <input type="checkbox" id="docFinalStatement" name="settlementDocs">
+                                                <label for="docFinalStatement">
+                                                    Final Account Statement
+                                                </label>
+                                            </div>
+                                            <div class="check-item">
+                                                <input type="checkbox" id="docSettlementAgreement" name="settlementDocs">
+                                                <label for="docSettlementAgreement">
+                                                    Settlement Agreement
+                                                </label>
+                                            </div>
+                                            <div class="check-item">
+                                                <input type="checkbox" id="docProofPayment" name="settlementDocs">
+                                                <label for="docProofPayment">
+                                                    Proof of Final Payment
+                                                </label>
+                                            </div>
+                                            <div class="check-item">
+                                                <input type="checkbox" id="docConsentForms" name="settlementDocs">
+                                                <label for="docConsentForms">
+                                                    Mutual Consent Forms
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="uploadSettlementDocs">Upload Documents</label>
+                                        <div class="file-upload-area">
+                                            <input type="file" 
+                                                   id="uploadSettlementDocs" 
+                                                   name="uploadSettlementDocs" 
+                                                   class="file-input" 
+                                                   multiple
+                                                   accept=".pdf,.jpg,.jpeg,.png">
+                                            <div class="upload-prompt">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Drop settlement documents here or click to browse</p>
+                                                <p class="file-types">PDF, Images (Max 10MB each)</p>
+                                            </div>
+                                        </div>
+                                        <div class="uploaded-files" id="uploadedSettlementDocs">
+                                            <!-- Uploaded files will appear here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-section">
+                                    <h5>Final Notes</h5>
+                                    <div class="form-group">
+                                        <label for="closureNotes">Closure Notes (Optional)</label>
+                                        <textarea id="closureNotes" 
+                                                  name="closureNotes" 
+                                                  class="form-control" 
+                                                  rows="3"
+                                                  placeholder="Any additional notes about this closure..."></textarea>
+                                        <small class="form-text">These notes will be included in the closure record</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button class="btn btn-secondary" id="backToStep1">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button class="btn btn-primary" id="proceedToStep3">
+                                    Next: Confirmation <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Confirmation -->
+                <div class="process-step-content" id="step3Content" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                <i class="fas fa-check-double"></i>
+                                Step 3: Final Confirmation
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="confirmation-section">
+                                <div class="confirmation-alert">
+                                    <div class="alert alert-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div>
+                                            <h5>Final Warning</h5>
+                                            <p>Once confirmed, this ledger will be permanently closed and marked as completed. No further modifications will be allowed.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-summary">
+                                    <h5>Closure Summary</h5>
+                                    <div class="summary-grid" id="closureSummaryGrid">
+                                        <!-- Summary will be populated here -->
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-details">
+                                    <h5>Parties Involved</h5>
+                                    <div class="parties-list">
+                                        <div class="party-card">
+                                            <div class="party-icon">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div class="party-info">
+                                                <h6>Borrower</h6>
+                                                <p id="confirmationBorrower">-</p>
+                                                <small>Consent: <span id="borrowerConsentStatus">Pending</span></small>
+                                            </div>
+                                        </div>
+                                        <div class="party-card">
+                                            <div class="party-icon">
+                                                <i class="fas fa-hand-holding-usd"></i>
+                                            </div>
+                                            <div class="party-info">
+                                                <h6>Lender</h6>
+                                                <p id="confirmationLender">-</p>
+                                                <small>Consent: <span id="lenderConsentStatus">Pending</span></small>
+                                            </div>
+                                        </div>
+                                        <div class="party-card">
+                                            <div class="party-icon">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <div class="party-info">
+                                                <h6>Group</h6>
+                                                <p id="confirmationGroup">-</p>
+                                                <small>Status: Active</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-audit">
+                                    <h5>Audit Record Preview</h5>
+                                    <div class="audit-preview">
+                                        <pre id="auditPreview"><code>// Audit record will be generated here</code></pre>
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-verification">
+                                    <div class="form-group">
+                                        <label for="finalConfirmation">
+                                            <i class="fas fa-check-circle"></i>
+                                            Final Confirmation
+                                        </label>
+                                        <input type="text" 
+                                               id="finalConfirmation" 
+                                               class="form-control" 
+                                               placeholder="Type 'CLOSE LEDGER' to confirm"
+                                               required>
+                                        <small class="form-text">Type the exact phrase to confirm ledger closure</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button class="btn btn-secondary" id="backToStep2">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button class="btn btn-success" id="confirmClosure" disabled>
+                                    <i class="fas fa-flag-checkered"></i> Confirm & Close Ledger
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Completion -->
+                <div class="process-step-content" id="step4Content" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                <i class="fas fa-trophy"></i>
+                                Step 4: Closure Complete
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="completion-content">
+                                <div class="completion-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="completion-message">
+                                    <h4>Ledger Successfully Closed</h4>
+                                    <p>This ledger has been permanently closed and archived.</p>
+                                    
+                                    <div class="completion-details">
+                                        <div class="detail-card">
+                                            <div class="detail-icon">
+                                                <i class="fas fa-hashtag"></i>
+                                            </div>
+                                            <div class="detail-content">
+                                                <h6>Closure ID</h6>
+                                                <p id="closureId">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="detail-card">
+                                            <div class="detail-icon">
+                                                <i class="fas fa-calendar-check"></i>
+                                            </div>
+                                            <div class="detail-content">
+                                                <h6>Closed Date</h6>
+                                                <p id="closureDate">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="detail-card">
+                                            <div class="detail-icon">
+                                                <i class="fas fa-user-check"></i>
+                                            </div>
+                                            <div class="detail-content">
+                                                <h6>Closed By</h6>
+                                                <p id="closedBy">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="completion-stats">
+                                        <h5>Performance Summary</h5>
+                                        <div class="stats-grid">
+                                            <div class="stat-item">
+                                                <div class="stat-value" id="statDuration">6 days</div>
+                                                <div class="stat-label">Loan Duration</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <div class="stat-value" id="statRepayments">3</div>
+                                                <div class="stat-label">Repayments</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <div class="stat-value" id="statInterest">KES 250.00</div>
+                                                <div class="stat-label">Interest Earned</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <div class="stat-value" id="statRating">★★★★★</div>
+                                                <div class="stat-label">Borrower Rating</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="completion-actions">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            <div>
+                                                <h6>What Happens Next?</h6>
+                                                <ul>
+                                                    <li>Ledger is moved to "Closed Ledgers" section</li>
+                                                    <li>Borrower reputation is updated</li>
+                                                    <li>Lender portfolio is updated</li>
+                                                    <li>Group statistics are recalculated</li>
+                                                    <li>Audit trail is finalized</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step-actions">
+                                <button class="btn btn-primary" id="viewClosedLedger">
+                                    <i class="fas fa-eye"></i> View Closed Ledger
+                                </button>
+                                <button class="btn btn-secondary" id="downloadCertificate">
+                                    <i class="fas fa-download"></i> Download Closure Certificate
+                                </button>
+                                <button class="btn btn-info" id="goToHistory">
+                                    <i class="fas fa-history"></i> View Loan History
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Impact & Consequences -->
+            <div class="impact-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-bullseye"></i>
+                        Closure Impact & Consequences
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="impact-grid">
+                        <div class="impact-card positive">
+                            <div class="impact-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h5>Positive Impacts</h5>
+                                <ul>
+                                    <li>Improves borrower credit rating</li>
+                                    <li>Increases lender reputation score</li>
+                                    <li>Boosts group success rate</li>
+                                    <li>Clears space for new loans</li>
+                                    <li>Provides closure for both parties</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="impact-card warning">
+                            <div class="impact-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h5>Important Considerations</h5>
+                                <ul>
+                                    <li>No further modifications allowed</li>
+                                    <li>Ledger becomes read-only</li>
+                                    <li>Cannot be reopened (except by admin)</li>
+                                    <li>Affects statistical calculations</li>
+                                    <li>Permanent audit record created</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="impact-card info">
+                            <div class="impact-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h5>Post-Closure Actions</h5>
+                                <ul>
+                                    <li>Borrower can apply for new loans</li>
+                                    <li>Lender can lend to other borrowers</li>
+                                    <li>Group can see completed loan in history</li>
+                                    <li>Platform updates success metrics</li>
+                                    <li>Tax documents may be generated</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legal & Compliance -->
+            <div class="legal-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-gavel"></i>
+                        Legal & Compliance Requirements
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="legal-content">
+                        <div class="legal-item">
+                            <h5>Record Keeping Requirements</h5>
+                            <p>Closed ledgers must be maintained for a minimum of 7 years as per financial regulations.</p>
+                        </div>
+                        
+                        <div class="legal-item">
+                            <h5>Tax Implications</h5>
+                            <p>Interest earned may be subject to taxation. Lenders are responsible for declaring income.</p>
+                        </div>
+                        
+                        <div class="legal-item">
+                            <h5>Dispute Resolution</h5>
+                            <p>Once closed, disputes can only be reopened by platform administrators with proper justification.</p>
+                        </div>
+                        
+                        <div class="legal-item">
+                            <h5>Data Privacy</h5>
+                            <p>Closed ledger data remains subject to data protection laws and privacy policies.</p>
+                        </div>
+                        
+                        <div class="closure-certificate-preview">
+                            <h5>Closure Certificate</h5>
+                            <div class certificate-preview>
+                                <div class="certificate-header">
+                                    <h4>M-PESEWA LOAN CLOSURE CERTIFICATE</h4>
+                                    <p>This certifies that the loan has been successfully completed</p>
+                                </div>
+                                <div class="certificate-body">
+                                    <div class="certificate-details">
+                                        <div class="detail-row">
+                                            <span class="label">Certificate ID:</span>
+                                            <span class="value" id="certificateIdPreview">CLOSE-XXXXXX</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Ledger ID:</span>
+                                            <span class="value" id="certificateLedgerId">LED-XXXXXX</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Borrower:</span>
+                                            <span class="value" id="certificateBorrower">-</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Lender:</span>
+                                            <span class="value" id="certificateLender">-</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Loan Amount:</span>
+                                            <span class="value" id="certificateAmount">-</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="label">Status:</span>
+                                            <span class="value badge badge-success">Successfully Closed</span>
+                                        </div>
+                                    </div>
+                                    <div class="certificate-footer">
+                                        <p>Issued by M-Pesewa Platform</p>
+                                        <p id="certificateDate">Date: -</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" id="mainFooter">
+        <!-- Footer content will be loaded by JavaScript -->
+    </footer>
+
+    <!-- Consent Request Modal -->
+    <div class="modal" id="consentRequestModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-envelope"></i>
+                    Request Closure Consent
+                </h3>
+                <button type="button" class="modal-close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="consentRequestForm">
+                    <div class="form-group">
+                        <label for="consentMessage">Message to Parties</label>
+                        <textarea id="consentMessage" 
+                                  class="form-control" 
+                                  rows="4"
+                                  placeholder="Add a personal message explaining the closure..."></textarea>
+                        <small class="form-text">This message will be sent along with the consent request</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Request Consent From</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="requestBorrower" checked>
+                                <label for="requestBorrower">Borrower</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="requestLender" checked>
+                                <label for="requestLender">Lender</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="requestGroupAdmin">
+                                <label for="requestGroupAdmin">Group Admin</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Consent requests will be sent via SMS and email. Parties have 24 hours to respond.</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="sendConsentRequests">
+                    <i class="fas fa-paper-plane"></i> Send Requests
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../core/config.js"></script>
+    <script src="../core/constants.js"></script>
+    <script src="../utils/date.js"></script>
+    <script src="../utils/money.js"></script>
+    <script src="../utils/validation.js"></script>
+    <script src="../utils/formatting.js"></script>
+    
+    <!-- State Management -->
+    <script src="../state/store.js"></script>
+    <script src="../state/slices/auth.slice.js"></script>
+    <script src="../state/slices/user.slice.js"></script>
+    <script src="../state/slices/country.slice.js"></script>
+    <script src="../state/slices/ledger.slice.js"></script>
+    
+    <!-- Router Guards -->
+    <script src="../router/guard-auth.js"></script>
+    <script src="../router/guard-role.js"></script>
+    
+    <!-- Components -->
+    <script src="../layout/Header.js"></script>
+    <script src="../layout/Footer.js"></script>
+    
+    <!-- Module Logic -->
+    <script src="../ledger/ledger.engine.js"></script>
+    <script src="../ledger/ledger.rules.js"></script>
+    <script src="../ledger/ledger.calculator.js"></script>
+    
+    <!-- Page Script -->
+    <script>
+        // Global variables
+        let currentLedger = null;
+        let ledgerData = {};
+        let currentStep = 1;
+        let uploadedFiles = [];
+        let settlementType = 'FULL';
+        let consentRequests = { borrower: false, lender: false };
+
+        // Page initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initializeHeader();
+            initializeFooter();
+            
+            // Check authentication
+            if (!checkAuth()) {
+                window.location.href = '../auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
+            // Get ledger ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const ledgerId = urlParams.get('id');
+            
+            if (!ledgerId) {
+                showError('No ledger specified. Please select a ledger to close.');
+                window.location.href = 'ledger-list.html';
+                return;
+            }
+            
+            // Load ledger data
+            loadLedgerData(ledgerId);
+            
+            // Initialize UI components
+            initializeProcessSteps();
+            initializeEventListeners();
+            initializeFileUpload();
+            
+            // Check eligibility
+            checkEligibility();
+            
+            // Update process steps based on user role
+            updateProcessForUserRole();
+        });
+        
+        function loadLedgerData(ledgerId) {
+            // Mock ledger data
+            currentLedger = {
+                id: ledgerId,
+                borrowerName: "John Kimani",
+                borrowerContact: "+254712345678",
+                lenderName: "Sarah Mwangi",
+                lenderContact: "+254723456789",
+                principalAmount: 2500,
+                totalInterest: 250,
+                totalPenalty: 0,
+                totalPaid: 2750,
+                currentBalance: 0,
+                currency: "KES",
+                status: "ACTIVE",
+                daysActive: 6,
+                lastActivity: new Date('2024-01-25'),
+                startDate: new Date('2024-01-20'),
+                dueDate: new Date('2024-01-27'),
+                groupName: "Family Support Group",
+                groupAdmin: "James Omondi",
+                country: "KE",
+                loanPurpose: "Transport to job interview",
+                interestRate: 10,
+                penaltyRate: 5,
+                repaymentCount: 3,
+                borrowerRating: 5,
+                activeDisputes: 0
+            };
+            
+            // Update UI
+            updateLedgerSummary();
+            updateReviewSection();
+            updateCertificatePreview();
+            
+            // Update ledger view link
+            document.getElementById('ledgerViewLink').href = 
+                `ledger-view.html?id=${ledgerId}`;
+        }
+        
+        function updateLedgerSummary() {
+            if (!currentLedger) return;
+            
+            document.getElementById('principalAmount').textContent = 
+                formatCurrency(currentLedger.principalAmount, currentLedger.currency);
+            document.getElementById('interestAmount').textContent = 
+                formatCurrency(currentLedger.totalInterest, currentLedger.currency);
+            document.getElementById('penaltyAmount').textContent = 
+                formatCurrency(currentLedger.totalPenalty, currentLedger.currency);
+            document.getElementById('totalDueAmount').textContent = 
+                formatCurrency(currentLedger.principalAmount + currentLedger.totalInterest + currentLedger.totalPenalty, currentLedger.currency);
+            document.getElementById('totalPaidAmount').textContent = 
+                formatCurrency(currentLedger.totalPaid, currentLedger.currency);
+            document.getElementById('balanceAmount').textContent = 
+                formatCurrency(currentLedger.currentBalance, currentLedger.currency);
+            
+            document.getElementById('borrowerName').textContent = currentLedger.borrowerName;
+            document.getElementById('lenderName').textContent = currentLedger.lenderName;
+            document.getElementById('daysActive').textContent = currentLedger.daysActive;
+            document.getElementById('lastActivity').textContent = 
+                formatDate(currentLedger.lastActivity);
+            
+            // Update overall status badge
+            const statusBadge = document.getElementById('overallStatusBadge');
+            statusBadge.textContent = currentLedger.currentBalance === 0 ? 'Ready for Closure' : 'Balance Pending';
+            statusBadge.className = currentLedger.currentBalance === 0 ? 'badge badge-success' : 'badge badge-warning';
+        }
+        
+        function updateReviewSection() {
+            document.getElementById('loanPurpose').textContent = currentLedger.loanPurpose;
+            document.getElementById('startDate').textContent = formatDate(currentLedger.startDate);
+            document.getElementById('originalAmount').textContent = 
+                formatCurrency(currentLedger.principalAmount, currentLedger.currency);
+            document.getElementById('interestRate').textContent = `${currentLedger.interestRate}% weekly`;
+            document.getElementById('totalRepayments').textContent = `${currentLedger.repaymentCount} payments`;
+            document.getElementById('finalPaymentDate').textContent = formatDate(currentLedger.lastActivity);
+            
+            document.getElementById('reviewPrincipal').textContent = 
+                formatCurrency(currentLedger.principalAmount, currentLedger.currency);
+            document.getElementById('reviewInterest').textContent = 
+                formatCurrency(currentLedger.totalInterest, currentLedger.currency);
+            document.getElementById('reviewPenalties').textContent = 
+                formatCurrency(currentLedger.totalPenalty, currentLedger.currency);
+            document.getElementById('reviewTotal').textContent = 
+                formatCurrency(currentLedger.principalAmount + currentLedger.totalInterest + currentLedger.totalPenalty, currentLedger.currency);
+            
+            // Update confirmation section
+            document.getElementById('confirmationBorrower').textContent = currentLedger.borrowerName;
+            document.getElementById('confirmationLender').textContent = currentLedger.lenderName;
+            document.getElementById('confirmationGroup').textContent = currentLedger.groupName;
+            
+            // Update certificate preview
+            updateCertificatePreview();
+        }
+        
+        function updateCertificatePreview() {
+            document.getElementById('certificateLedgerId').textContent = 
+                `LED-${currentLedger.id.slice(0, 6).toUpperCase()}`;
+            document.getElementById('certificateBorrower').textContent = currentLedger.borrowerName;
+            document.getElementById('certificateLender').textContent = currentLedger.lenderName;
+            document.getElementById('certificateAmount').textContent = 
+                formatCurrency(currentLedger.principalAmount, currentLedger.currency);
+            document.getElementById('certificateDate').textContent = `Date: ${formatDate(new Date())}`;
+        }
+        
+        function initializeProcessSteps() {
+            // Process step click handlers
+            document.querySelectorAll('.process-step').forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepNum = parseInt(this.getAttribute('data-step'));
+                    if (stepNum <= currentStep) {
+                        goToStep(stepNum);
+                    }
+                });
+            });
+        }
+        
+        function initializeEventListeners() {
+            // Step navigation
+            document.getElementById('proceedToStep2').addEventListener('click', () => goToStep(2));
+            document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
+            document.getElementById('proceedToStep3').addEventListener('click', () => goToStep(3));
+            document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
+            
+            // Settlement type changes
+            document.querySelectorAll('input[name="settlementType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    settlementType = this.value;
+                    updateSettlementSections();
+                });
+            });
+            
+            // Final confirmation input
+            document.getElementById('finalConfirmation').addEventListener('input', function() {
+                document.getElementById('confirmClosure').disabled = this.value !== 'CLOSE LEDGER';
+            });
+            
+            // Consent request
+            document.getElementById('requestConsent').addEventListener('click', openConsentRequestModal);
+            document.getElementById('sendConsentRequests').addEventListener('click', sendConsentRequests);
+            
+            // Recalculate eligibility
+            document.getElementById('recalculateEligibility').addEventListener('click', checkEligibility);
+            
+            // Confirm closure
+            document.getElementById('confirmClosure').addEventListener('click', confirmClosure);
+            
+            // Completion actions
+            document.getElementById('viewClosedLedger').addEventListener('click', viewClosedLedger);
+            document.getElementById('downloadCertificate').addEventListener('click', downloadCertificate);
+            document.getElementById('goToHistory').addEventListener('click', goToHistory);
+            
+            // Initiate closure button
+            document.getElementById('initiateClosure').addEventListener('click', function() {
+                goToStep(1);
+                this.disabled = true;
+            });
+            
+            // Modal close handlers
+            document.querySelectorAll('.modal-close, .modal .btn-secondary').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+        }
+        
+        function initializeFileUpload() {
+            const fileInput = document.getElementById('uploadSettlementDocs');
+            const uploadArea = fileInput.parentElement;
+            const filesContainer = document.getElementById('uploadedSettlementDocs');
+            
+            uploadedFiles = [];
+            
+            // Click to browse
+            uploadArea.addEventListener('click', function(e) {
+                if (e.target !== fileInput) {
+                    fileInput.click();
+                }
+            });
+            
+            // File selection
+            fileInput.addEventListener('change', function() {
+                Array.from(this.files).forEach(file => {
+                    if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                        alert(`File ${file.name} exceeds 10MB limit`);
+                        return;
+                    }
+                    
+                    uploadedFiles.push(file);
+                    addFileToDisplay(file);
+                });
+                
+                // Reset input
+                this.value = '';
+            });
+            
+            // Drag and drop
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                if (e.dataTransfer.files.length) {
+                    Array.from(e.dataTransfer.files).forEach(file => {
+                        if (file.size > 10 * 1024 * 1024) {
+                            alert(`File ${file.name} exceeds 10MB limit`);
+                            return;
+                        }
+                        
+                        uploadedFiles.push(file);
+                        addFileToDisplay(file);
+                    });
+                }
+            });
+        }
+        
+        function addFileToDisplay(file) {
+            const filesContainer = document.getElementById('uploadedSettlementDocs');
+            const fileItem = document.createElement('div');
+            fileItem.className = 'uploaded-file';
+            fileItem.innerHTML = `
+                <div class="file-info">
+                    <i class="fas fa-file"></i>
+                    <div class="file-details">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-icon btn-sm remove-file" data-name="${file.name}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            filesContainer.appendChild(fileItem);
+            
+            // Add remove event listener
+            fileItem.querySelector('.remove-file').addEventListener('click', function() {
+                const fileName = this.getAttribute('data-name');
+                uploadedFiles = uploadedFiles.filter(f => f.name !== fileName);
+                fileItem.remove();
+            });
+        }
+        
+        function checkEligibility() {
+            // Reset all status indicators
+            resetEligibilityStatus();
+            
+            // Check balance
+            const balanceEligible = currentLedger.currentBalance === 0;
+            updateEligibilityStatus('balance', balanceEligible, 
+                balanceEligible ? 'Zero balance confirmed' : `Balance of ${formatCurrency(currentLedger.currentBalance, currentLedger.currency)} remains`);
+            
+            // Check disputes
+            const disputesEligible = currentLedger.activeDisputes === 0;
+            updateEligibilityStatus('disputes', disputesEligible,
+                disputesEligible ? 'No active disputes' : `${currentLedger.activeDisputes} active dispute(s)`);
+            
+            // Check time
+            const timeEligible = currentLedger.daysActive >= 1;
+            updateEligibilityStatus('time', timeEligible,
+                timeEligible ? `Active for ${currentLedger.daysActive} days` : 'Minimum period not met');
+            
+            // Check consent
+            const consentEligible = consentRequests.borrower && consentRequests.lender;
+            updateEligibilityStatus('consent', consentEligible,
+                consentEligible ? 'Both parties consented' : 'Consent pending');
+            
+            // Calculate overall eligibility
+            const allEligible = balanceEligible && disputesEligible && timeEligible && consentEligible;
+            
+            // Update eligibility badge
+            const eligibilityBadge = document.getElementById('eligibilityBadge');
+            if (allEligible) {
+                eligibilityBadge.textContent = 'Eligible';
+                eligibilityBadge.className = 'badge badge-success';
+                document.getElementById('initiateClosure').disabled = false;
+            } else {
+                eligibilityBadge.textContent = 'Not Eligible';
+                eligibilityBadge.className = 'badge badge-warning';
+                document.getElementById('initiateClosure').disabled = true;
+            }
+            
+            // Update readiness checklist
+            updateReadinessChecklist();
+            
+            // Show/hide eligibility actions
+            const eligibilityActions = document.getElementById('eligibilityActions');
+            eligibilityActions.style.display = 'block';
+            
+            // Update alert message
+            const alert = document.getElementById('eligibilityAlert');
+            if (allEligible) {
+                alert.className = 'alert alert-success';
+                alert.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <h5>Ready for Closure</h5>
+                        <p>All eligibility criteria are met. You can proceed with ledger closure.</p>
+                    </div>
+                `;
+            } else {
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h5>Eligibility Criteria Not Met</h5>
+                        <p>Please address the issues above before proceeding with closure.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function resetEligibilityStatus() {
+            ['balance', 'disputes', 'time', 'consent'].forEach(item => {
+                document.getElementById(`${item}Status`).className = 'status-indicator';
+                document.getElementById(`${item}Text`).textContent = 'Checking...';
+            });
+        }
+        
+        function updateEligibilityStatus(item, eligible, message) {
+            const statusIndicator = document.getElementById(`${item}Status`);
+            const statusText = document.getElementById(`${item}Text`);
+            
+            if (eligible) {
+                statusIndicator.className = 'status-indicator success';
+                statusText.textContent = message;
+                statusText.className = 'status-text success';
+            } else {
+                statusIndicator.className = 'status-indicator error';
+                statusText.textContent = message;
+                statusText.className = 'status-text error';
+            }
+        }
+        
+        function updateReadinessChecklist() {
+            const checklist = document.getElementById('readinessChecklist');
+            const items = [
+                { id: 'balance', label: 'Zero Balance', met: currentLedger.currentBalance === 0 },
+                { id: 'disputes', label: 'No Active Disputes', met: currentLedger.activeDisputes === 0 },
+                { id: 'time', label: 'Minimum Period Met', met: currentLedger.daysActive >= 1 },
+                { id: 'consent', label: 'Mutual Consent', met: consentRequests.borrower && consentRequests.lender },
+                { id: 'repayments', label: 'Repayments Recorded', met: currentLedger.repaymentCount > 0 },
+                { id: 'rating', label: 'Borrower Rated', met: currentLedger.borrowerRating > 0 }
+            ];
+            
+            let html = '';
+            let metCount = 0;
+            
+            items.forEach(item => {
+                const icon = item.met ? 'fa-check-circle success' : 'fa-times-circle error';
+                const textClass = item.met ? 'success' : 'error';
+                
+                html += `
+                    <div class="checklist-item">
+                        <i class="fas ${icon}"></i>
+                        <span class="${textClass}">${item.label}</span>
+                    </div>
+                `;
+                
+                if (item.met) metCount++;
+            });
+            
+            checklist.innerHTML = html;
+            
+            // Update readiness score
+            const score = Math.round((metCount / items.length) * 100);
+            const scoreElement = document.getElementById('readinessScore');
+            const progressCircle = document.getElementById('progressCircle');
+            const readinessStatus = document.getElementById('readinessStatus');
+            const readinessMessage = document.getElementById('readinessMessage');
+            
+            scoreElement.textContent = `${score}%`;
+            
+            // Update progress circle
+            const circumference = 283; // 2 * π * r (r=45)
+            const offset = circumference - (score / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+            
+            // Update status message
+            if (score === 100) {
+                readinessStatus.textContent = 'Ready for Closure';
+                readinessStatus.className = 'success';
+                readinessMessage.textContent = 'All requirements are met';
+            } else if (score >= 75) {
+                readinessStatus.textContent = 'Almost Ready';
+                readinessStatus.className = 'warning';
+                readinessMessage.textContent = 'Minor issues to resolve';
+            } else {
+                readinessStatus.textContent = 'Not Ready';
+                readinessStatus.className = 'error';
+                readinessMessage.textContent = 'Several requirements pending';
+            }
+        }
+        
+        function updateProcessForUserRole() {
+            const user = getCurrentUser();
+            if (!user) return;
+            
+            // If user is borrower, lender, or admin, adjust process accordingly
+            // For now, we assume all roles can initiate closure if eligible
+        }
+        
+        function goToStep(step) {
+            // Hide all step contents
+            document.querySelectorAll('.process-step-content').forEach(content => {
+                content.style.display = 'none';
+                content.classList.remove('active');
+            });
+            
+            // Show selected step content
+            document.getElementById(`step${step}Content`).style.display = 'block';
+            document.getElementById(`step${step}Content`).classList.add('active');
+            
+            // Update process steps
+            document.querySelectorAll('.process-step').forEach(stepEl => {
+                const stepNum = parseInt(stepEl.getAttribute('data-step'));
+                stepEl.classList.remove('active');
+                stepEl.classList.remove('completed');
+                
+                if (stepNum === step) {
+                    stepEl.classList.add('active');
+                } else if (stepNum < step) {
+                    stepEl.classList.add('completed');
+                }
+            });
+            
+            currentStep = step;
+            
+            // Update UI based on step
+            if (step === 3) {
+                updateConfirmationSummary();
+                updateAuditPreview();
+            } else if (step === 4) {
+                updateCompletionDetails();
+            }
+        }
+        
+        function updateSettlementSections() {
+            // Show/hide sections based on settlement type
+            document.getElementById('partialSettlementSection').style.display = 
+                settlementType === 'PARTIAL' ? 'block' : 'none';
+            document.getElementById('writeOffSection').style.display = 
+                settlementType === 'WRITE_OFF' ? 'block' : 'none';
+        }
+        
+        function openConsentRequestModal() {
+            document.getElementById('consentRequestModal').style.display = 'block';
+        }
+        
+        function sendConsentRequests() {
+            // Get selected parties
+            const requestBorrower = document.getElementById('requestBorrower').checked;
+            const requestLender = document.getElementById('requestLender').checked;
+            const requestGroupAdmin = document.getElementById('requestGroupAdmin').checked;
+            const message = document.getElementById('consentMessage').value;
+            
+            // Simulate sending requests
+            showToast('Consent requests sent successfully', 'success');
+            
+            // Simulate receiving consent (in real app, this would come from responses)
+            setTimeout(() => {
+                if (requestBorrower) consentRequests.borrower = true;
+                if (requestLender) consentRequests.lender = true;
+                
+                // Update consent status
+                updateConsentStatus();
+                
+                // Recheck eligibility
+                checkEligibility();
+                
+                // Close modal
+                document.getElementById('consentRequestModal').style.display = 'none';
+                
+                // Reset form
+                document.getElementById('consentMessage').value = '';
+                document.getElementById('requestGroupAdmin').checked = false;
+            }, 1000);
+        }
+        
+        function updateConsentStatus() {
+            document.getElementById('borrowerConsentStatus').textContent = 
+                consentRequests.borrower ? 'Granted' : 'Pending';
+            document.getElementById('borrowerConsentStatus').className = 
+                consentRequests.borrower ? 'success' : 'warning';
+            
+            document.getElementById('lenderConsentStatus').textContent = 
+                consentRequests.lender ? 'Granted' : 'Pending';
+            document.getElementById('lenderConsentStatus').className = 
+                consentRequests.lender ? 'success' : 'warning';
+            
+            document.getElementById('consentText').textContent = 
+                consentRequests.borrower && consentRequests.lender ? 'Both parties consented' : 'Consent pending';
+        }
+        
+        function updateConfirmationSummary() {
+            const settlementAmount = settlementType === 'PARTIAL' ? 
+                parseFloat(document.getElementById('settlementAmount').value) || 0 : 
+                currentLedger.principalAmount + currentLedger.totalInterest + currentLedger.totalPenalty;
+            
+            const summaryHtml = `
+                <div class="summary-item">
+                    <strong>Settlement Type:</strong> ${settlementType.replace('_', ' ')}
+                </div>
+                <div class="summary-item">
+                    <strong>Final Amount:</strong> ${formatCurrency(settlementAmount, currentLedger.currency)}
+                </div>
+                <div class="summary-item">
+                    <strong>Documents:</strong> ${uploadedFiles.length} uploaded
+                </div>
+                <div class="summary-item">
+                    <strong>Consent:</strong> ${consentRequests.borrower && consentRequests.lender ? 'Received' : 'Pending'}
+                </div>
+            `;
+            
+            document.getElementById('closureSummaryGrid').innerHTML = summaryHtml;
+        }
+        
+        function updateAuditPreview() {
+            const auditRecord = generateAuditRecord();
+            document.getElementById('auditPreview').innerHTML = `<code>${auditRecord}</code>`;
+        }
+        
+        function updateCompletionDetails() {
+            const closureId = `CLOSE-${Date.now().toString(36).toUpperCase()}`;
+            const closureDate = new Date();
+            const closedBy = getCurrentUser()?.name || 'System';
+            
+            document.getElementById('closureId').textContent = closureId;
+            document.getElementById('closureDate').textContent = formatDate(closureDate);
+            document.getElementById('closedBy').textContent = closedBy;
+            
+            document.getElementById('statDuration').textContent = `${currentLedger.daysActive} days`;
+            document.getElementById('statRepayments').textContent = currentLedger.repaymentCount;
+            document.getElementById('statInterest').textContent = 
+                formatCurrency(currentLedger.totalInterest, currentLedger.currency);
+            document.getElementById('statRating').textContent = '★'.repeat(currentLedger.borrowerRating);
+            
+            // Update certificate ID
+            document.getElementById('certificateIdPreview').textContent = closureId;
+        }
+        
+        function confirmClosure() {
+            // Validate step 3 requirements
+            const verificationChecks = document.querySelectorAll('input[name="verificationChecks"]:checked').length;
+            const settlementDocs = document.querySelectorAll('input[name="settlementDocs"]:checked').length;
+            
+            if (verificationChecks < 4) {
+                alert('Please complete all verification checks');
+                return;
+            }
+            
+            if (settlementDocs < 4) {
+                if (!confirm('Not all settlement documents are marked as ready. Continue anyway?')) {
+                    return;
+                }
+            }
+            
+            // Show loading state
+            const confirmBtn = document.getElementById('confirmClosure');
+            const originalText = confirmBtn.innerHTML;
+            confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Closing...';
+            confirmBtn.disabled = true;
+            
+            // Simulate closure process
+            setTimeout(() => {
+                // Move to completion step
+                goToStep(4);
+                
+                // Update ledger status
+                currentLedger.status = 'CLOSED';
+                
+                // Log closure
+                logClosure();
+                
+                // Reset button
+                confirmBtn.innerHTML = originalText;
+                confirmBtn.disabled = false;
+            }, 2000);
+        }
+        
+        function logClosure() {
+            // In a real app, this would log to an audit trail and update backend
+            console.log(`Ledger ${currentLedger.id} closed successfully`);
+        }
+        
+        function generateAuditRecord() {
+            const closureId = `CLOSE-${Date.now().toString(36).toUpperCase()}`;
+            const timestamp = new Date().toISOString();
+            const user = getCurrentUser()?.name || 'Unknown';
+            
+            return `AUDIT ENTRY: LEDGER CLOSURE
+================================
+Ledger: ${currentLedger.id}
+Closure ID: ${closureId}
+Timestamp: ${timestamp}
+Closed By: ${user}
+Settlement Type: ${settlementType}
+Final Balance: ${formatCurrency(0, currentLedger.currency)}
+Documents: ${uploadedFiles.length} files
+Consent: Borrower=${consentRequests.borrower}, Lender=${consentRequests.lender}
+================================
+LEDGER SUMMARY:
+Principal: ${formatCurrency(currentLedger.principalAmount, currentLedger.currency)}
+Interest: ${formatCurrency(currentLedger.totalInterest, currentLedger.currency)}
+Penalties: ${formatCurrency(currentLedger.totalPenalty, currentLedger.currency)}
+Total Paid: ${formatCurrency(currentLedger.totalPaid, currentLedger.currency)}
+Duration: ${currentLedger.daysActive} days
+Repayments: ${currentLedger.repaymentCount}
+Borrower Rating: ${currentLedger.borrowerRating}/5
+================================
+END AUDIT ENTRY`;
+        }
+        
+        function viewClosedLedger() {
+            // In a real app, this would redirect to a read-only view
+            alert('Ledger view would open in read-only mode');
+        }
+        
+        function downloadCertificate() {
+            // Generate certificate content
+            const certificateContent = `
+                M-PESEWA LOAN CLOSURE CERTIFICATE
+                =================================
+                
+                Certificate ID: ${document.getElementById('closureId').textContent}
+                Ledger ID: LED-${currentLedger.id.slice(0, 6).toUpperCase()}
+                Borrower: ${currentLedger.borrowerName}
+                Lender: ${currentLedger.lenderName}
+                Loan Amount: ${formatCurrency(currentLedger.principalAmount, currentLedger.currency)}
+                Interest Earned: ${formatCurrency(currentLedger.totalInterest, currentLedger.currency)}
+                Loan Duration: ${currentLedger.daysActive} days
+                Repayments: ${currentLedger.repaymentCount}
+                Closure Date: ${formatDate(new Date())}
+                Closed By: ${getCurrentUser()?.name || 'System'}
+                
+                This certifies that the above loan has been successfully
+                completed and closed on the M-Pesewa platform.
+                
+                Status: SUCCESSFULLY CLOSED
+                Borrower Rating: ${'★'.repeat(currentLedger.borrowerRating)}
+                
+                =================================
+                Issued by M-Pesewa Platform
+                ${new Date().toLocaleDateString()}
+            `;
+            
+            // Create download link
+            const blob = new Blob([certificateContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `closure-certificate-${currentLedger.id}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Certificate downloaded', 'success');
+        }
+        
+        function goToHistory() {
+            window.location.href = `ledger-history.html?id=${currentLedger.id}`;
+        }
+        
+        // Helper functions
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        function formatCurrency(amount, currency) {
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency || 'KES',
+                minimumFractionDigits: 2
+            });
+            return formatter.format(amount);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function showToast(message, type = 'info') {
+            // Implementation would show a toast notification
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+        
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle"></i>
+                ${message}
+            `;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(errorDiv, container.firstChild);
+        }
+    </script>
+</body>
+</html>

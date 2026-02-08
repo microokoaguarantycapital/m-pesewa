@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en" data-country-code="" data-user-role="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Status - M-Pesewa</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../../manifest.json">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    <link rel="stylesheet" href="../../assets/css/badges.css">
+    
+    <!-- Subscription Module CSS -->
+    <link rel="stylesheet" href="../subscription.css">
+    
+    <!-- Country-specific theme -->
+    <link rel="stylesheet" href="../../assets/css/themes/default.css" id="country-theme">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/images/logos/favicon.ico" type="image/x-icon">
+    
+    <style>
+        /* Status Page Specific Styles */
+        .status-page {
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            min-height: calc(100vh - 200px);
+        }
+        
+        .status-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Status Header */
+        .status-header {
+            margin-bottom: 40px;
+        }
+        
+        .status-header h1 {
+            color: #003366;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .status-header p {
+            color: #555555;
+            font-size: 1.1rem;
+            max-width: 700px;
+        }
+        
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1024px) {
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Status Card */
+        .status-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-card.wide {
+            grid-column: 1 / -1;
+        }
+        
+        .status-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .status-card-header h2 {
+            color: #003366;
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-card-header h2 i {
+            color: #0099ff;
+        }
+        
+        .status-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+        
+        .status-expired {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+        
+        .status-grace {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+        
+        .status-suspended {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+            border: 1px solid #6c757d;
+        }
+        
+        /* Subscription Overview */
+        .subscription-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .overview-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .overview-item:hover {
+            transform: translateY(-5px);
+            background: #e9ecef;
+        }
+        
+        .overview-item .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #003366;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .overview-item .label {
+            color: #555555;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .overview-item .subtext {
+            color: #777777;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        
+        /* Progress Bars */
+        .progress-section {
+            margin-bottom: 30px;
+        }
+        
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .progress-header span {
+            color: #003366;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-weekly {
+            background: linear-gradient(90deg, #0099ff, #0066cc);
+        }
+        
+        .progress-ledgers {
+            background: linear-gradient(90deg, #28a745, #1e7e34);
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #003366;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            border-color: #0099ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 153, 255, 0.1);
+        }
+        
+        .action-btn i {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #0099ff;
+        }
+        
+        .action-btn span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* Usage Charts */
+        .chart-container {
+            height: 300px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .chart-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #777777;
+            font-style: italic;
+        }
+        
+        /* Payment History */
+        .payment-history {
+            margin-top: 30px;
+        }
+        
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .history-table th {
+            background: #003366;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .history-table td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .history-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .history-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .payment-status {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-paid {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        
+        .status-failed {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+        
+        /* Expiry Warning */
+        .expiry-warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .expiry-warning.critical {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-color: #dc3545;
+        }
+        
+        .warning-icon {
+            font-size: 2.5rem;
+            color: #ffc107;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .expiry-warning.critical .warning-icon {
+            color: #dc3545;
+        }
+        
+        .warning-content h3 {
+            color: #856404;
+            margin: 0 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .expiry-warning.critical .warning-content h3 {
+            color: #721c24;
+        }
+        
+        .warning-content p {
+            color: #856404;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .expiry-warning.critical .warning-content p {
+            color: #721c24;
+        }
+        
+        /* Tier Benefits */
+        .tier-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 153, 255, 0.1);
+            color: #0099ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .benefit-content h4 {
+            color: #003366;
+            margin: 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .benefit-content p {
+            color: #555555;
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        /* Loading State */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0099ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* No Subscription State */
+        .no-subscription {
+            text-align: center;
+            padding: 60px 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .no-subscription-icon {
+            font-size: 4rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        
+        .no-subscription h2 {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+        
+        .no-subscription p {
+            color: #555555;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            color: #003366;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #777777;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .status-header h1 {
+                font-size: 2rem;
+            }
+            
+            .status-card {
+                padding: 25px 20px;
+            }
+            
+            .overview-item .value {
+                font-size: 1.8rem;
+            }
+            
+            .history-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .expiry-warning {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .status-page {
+                padding: 20px 10px;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .overview-item {
+                padding: 15px 10px;
+            }
+            
+            .modal-body {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            .status-page {
+                background: white;
+                padding: 0;
+            }
+            
+            .action-btn,
+            .quick-actions,
+            .modal,
+            .expiry-warning {
+                display: none !important;
+            }
+            
+            .status-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                break-inside: avoid;
+            }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .status-card {
+                background: #1f2a37;
+                color: #ffffff;
+            }
+            
+            .status-card-header h2,
+            .overview-item .value {
+                color: #ffffff;
+            }
+            
+            .overview-item {
+                background: #2d3748;
+            }
+            
+            .benefit-item {
+                background: #2d3748;
+            }
+            
+            .history-table {
+                background: #1f2a37;
+            }
+            
+            .history-table td {
+                color: #ffffff;
+            }
+            
+            .history-table tr:hover {
+                background: #2d3748;
+            }
+        }
+        
+        /* Animation for status updates */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .status-updated {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <header id="main-header"></header>
+
+    <!-- Loading State -->
+    <div class="loading-state" id="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading subscription status...</p>
+    </div>
+
+    <!-- Main Content -->
+    <main class="status-page" id="main-content" style="display: none;">
+        <div class="status-container">
+            <!-- Status Header -->
+            <div class="status-header">
+                <h1>Subscription Status</h1>
+                <p>View your current subscription details, usage statistics, and manage your subscription settings.</p>
+            </div>
+
+            <!-- Expiry Warning (if applicable) -->
+            <div class="expiry-warning" id="expiry-warning" style="display: none;">
+                <div class="warning-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="warning-content">
+                    <h3 id="warning-title"></h3>
+                    <p id="warning-message"></p>
+                    <div class="warning-actions" id="warning-actions" style="margin-top: 15px;"></div>
+                </div>
+            </div>
+
+            <!-- No Subscription State -->
+            <div class="no-subscription" id="no-subscription" style="display: none;">
+                <div class="no-subscription-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h2>No Active Subscription</h2>
+                <p>You don't have an active subscription. To start lending on M-Pesewa, you need to subscribe to one of our lending plans. Borrowers can use the platform for free, but lenders require a subscription.</p>
+                <div class="quick-actions" style="max-width: 400px; margin: 0 auto;">
+                    <a href="plans.html" class="action-btn">
+                        <i class="fas fa-gem"></i>
+                        <span>View Plans</span>
+                    </a>
+                    <a href="subscribe.html" class="action-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Subscribe Now</span>
+                    </a>
+                    <a href="../../global-pages/how-it-works.html" class="action-btn">
+                        <i class="fas fa-question-circle"></i>
+                        <span>How It Works</span>
+                    </a>
+                    <a href="../../lender/pages/lending-rules.html" class="action-btn">
+                        <i class="fas fa-book"></i>
+                        <span>Lending Rules</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Subscription Status Grid -->
+            <div class="status-grid" id="subscription-grid" style="display: none;">
+                <!-- Current Status Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-id-card"></i> Current Status</h2>
+                        <div class="status-badge" id="status-badge">Active</div>
+                    </div>
+                    
+                    <div class="subscription-overview">
+                        <div class="overview-item">
+                            <div class="value" id="tier-name">Basic</div>
+                            <div class="label">Subscription Tier</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="value" id="days-remaining">28</div>
+                            <div class="label">Days Remaining</div>
+                            <div class="subtext" id="expiry-date">Expires: 28th Dec</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="value" id="weekly-limit">1,500</div>
+                            <div class="label">Weekly Limit</div>
+                            <div class="subtext" id="currency-display">KSh</div>
+                        </div>
+                        <div class="overview-item">
+                            <div class="value" id="ledgers-count">12</div>
+                            <div class="label">Active Ledgers</div>
+                            <div class="subtext" id="max-ledgers">Max: 1,500</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-section">
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Weekly Usage</span>
+                                <span id="weekly-usage">750 / 1,500</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-weekly" id="weekly-progress" style="width: 50%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <span>Ledger Usage</span>
+                                <span id="ledger-usage">12 / 1,500</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-ledgers" id="ledger-progress" style="width: 1%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <a href="subscribe.html?upgrade=true" class="action-btn" id="upgrade-btn">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Upgrade</span>
+                        </a>
+                        <a href="subscribe.html?renew=true" class="action-btn" id="renew-btn">
+                            <i class="fas fa-redo"></i>
+                            <span>Renew</span>
+                        </a>
+                        <button class="action-btn" onclick="showUsageDetails()">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Usage Details</span>
+                        </button>
+                        <button class="action-btn" onclick="showInvoiceHistory()">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Invoices</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tier Benefits Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-star"></i> Tier Benefits</h2>
+                        <div class="tier-indicator" id="tier-indicator" style="color: #0099ff; font-weight: 700;">Basic</div>
+                    </div>
+                    
+                    <div class="tier-benefits" id="tier-benefits">
+                        <!-- Benefits will be loaded dynamically -->
+                    </div>
+                    
+                    <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #f0f0f0;">
+                        <h4 style="color: #003366; margin-bottom: 15px;">Upgrade Benefits</h4>
+                        <div class="quick-actions">
+                            <a href="plans.html#comparison" class="action-btn">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Compare Plans</span>
+                            </a>
+                            <button class="action-btn" onclick="showUpgradeCalculator()">
+                                <i class="fas fa-calculator"></i>
+                                <span>Upgrade Calc</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Statistics Card (Wide) -->
+                <div class="status-card wide">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-chart-line"></i> Usage Statistics</h2>
+                        <div class="period-selector">
+                            <select id="stats-period" onchange="loadUsageStatistics()" style="padding: 5px 10px; border-radius: 15px; border: 1px solid #ddd;">
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter">Last 3 Months</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="usage-chart"></canvas>
+                    </div>
+                    
+                    <div class="stats-summary" id="stats-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <!-- Stats will be loaded dynamically -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                        <button class="btn-text" onclick="loadFullActivity()" style="background: none; border: none; color: #0099ff; font-weight: 600; cursor: pointer;">
+                            View All
+                        </button>
+                    </div>
+                    
+                    <div class="activity-list" id="activity-list" style="max-height: 300px; overflow-y: auto;">
+                        <!-- Activities will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="quick-actions" style="margin-top: 20px;">
+                        <button class="action-btn" onclick="exportActivityData()">
+                            <i class="fas fa-download"></i>
+                            <span>Export Data</span>
+                        </button>
+                        <a href="history.html" class="action-btn">
+                            <i class="fas fa-clock"></i>
+                            <span>Full History</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Payment History Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-credit-card"></i> Payment History</h2>
+                        <a href="invoices.html" class="btn-text" style="color: #0099ff; font-weight: 600; text-decoration: none;">
+                            All Invoices
+                        </a>
+                    </div>
+                    
+                    <div class="payment-history">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payment-history-body">
+                                <!-- Payments will be loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn-text" onclick="loadMorePayments()" style="background: none; border: none; color: #0099ff; font-weight: 600; cursor: pointer;">
+                            Load More Payments
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <h2><i class="fas fa-cog"></i> Subscription Settings</h2>
+                    </div>
+                    
+                    <div class="settings-list">
+                        <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+                            <div>
+                                <h4 style="color: #003366; margin: 0 0 5px;">Auto-Renewal</h4>
+                                <p style="color: #555555; margin: 0; font-size: 0.9rem;">Automatically renew subscription before expiry</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="auto-renewal" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+                            <div>
+                                <h4 style="color: #003366; margin: 0 0 5px;">Email Notifications</h4>
+                                <p style="color: #555555; margin: 0; font-size: 0.9rem;">Receive subscription updates via email</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="email-notifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="setting-item" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;">
+                            <div>
+                                <h4 style="color: #003366; margin: 0 0 5px;">SMS Alerts</h4>
+                                <p style="color: #555555; margin: 0; font-size: 0.9rem;">Receive expiry alerts via SMS</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="sms-alerts">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions" style="margin-top: 20px;">
+                        <button class="action-btn" onclick="saveSettings()">
+                            <i class="fas fa-save"></i>
+                            <span>Save Settings</span>
+                        </button>
+                        <button class="action-btn" onclick="showCancelModal()">
+                            <i class="fas fa-ban"></i>
+                            <span>Cancel Plan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <footer id="main-footer"></footer>
+
+    <!-- Modals -->
+    <div class="modal" id="usage-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detailed Usage</h3>
+                <button class="modal-close" onclick="closeModal('usage-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="usage-details">
+                    <!-- Usage details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="upgrade-calculator-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Upgrade Calculator</h3>
+                <button class="modal-close" onclick="closeModal('upgrade-calculator-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="upgrade-calculator">
+                    <!-- Calculator will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cancel-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cancel Subscription</h3>
+                <button class="modal-close" onclick="closeModal('cancel-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cancel-details">
+                    <!-- Cancel details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../../core/config.js"></script>
+    <script src="../../core/constants.js"></script>
+    <script src="../../utils/validation.js"></script>
+    <script src="../../utils/money.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../auth/auth.service.js"></script>
+    <script src="../index.js"></script>
+    <script src="../rules.js"></script>
+    <script src="../gates.js"></script>
+    
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentCountry = 'KE';
+        let currentCurrency = 'KES';
+        let currentSubscription = null;
+        let usageChart = null;
+        let paymentHistory = [];
+        
+        // Tier configuration
+        const TIER_CONFIG = {
+            basic: {
+                name: 'Basic',
+                weeklyLimit: 1500,
+                maxLedgers: 1500,
+                monthly: 50,
+                color: '#0099ff',
+                benefits: [
+                    {
+                        icon: 'fas fa-shield-alt',
+                        title: 'Basic Protection',
+                        description: 'Standard fraud protection and verification'
+                    },
+                    {
+                        icon: 'fas fa-users',
+                        title: 'Group Access',
+                        description: 'Access to join and create lending groups'
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        title: 'Basic Analytics',
+                        description: 'Simple lending performance metrics'
+                    },
+                    {
+                        icon: 'fas fa-headset',
+                        title: 'Email Support',
+                        description: 'Standard email support during business hours'
+                    }
+                ]
+            },
+            premium: {
+                name: 'Premium',
+                weeklyLimit: 5000,
+                maxLedgers: 10000,
+                monthly: 250,
+                color: '#28a745',
+                benefits: [
+                    {
+                        icon: 'fas fa-shield-alt',
+                        title: 'Enhanced Protection',
+                        description: 'Advanced fraud detection and risk assessment'
+                    },
+                    {
+                        icon: 'fas fa-users',
+                        title: 'Priority Group Access',
+                        description: 'Early access to premium lending groups'
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        title: 'Advanced Analytics',
+                        description: 'Detailed performance reports and insights'
+                    },
+                    {
+                        icon: 'fas fa-headset',
+                        title: 'Priority Support',
+                        description: 'Faster email response times'
+                    },
+                    {
+                        icon: 'fas fa-bolt',
+                        title: 'Faster Processing',
+                        description: 'Priority loan approval processing'
+                    }
+                ]
+            },
+            super: {
+                name: 'Super',
+                weeklyLimit: 20000,
+                maxLedgers: 20000,
+                monthly: 1000,
+                color: '#f37021',
+                benefits: [
+                    {
+                        icon: 'fas fa-shield-alt',
+                        title: 'Maximum Protection',
+                        description: 'Full fraud protection with CRB integration'
+                    },
+                    {
+                        icon: 'fas fa-users',
+                        title: 'Exclusive Groups',
+                        description: 'Access to exclusive high-value lending groups'
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        title: 'Professional Analytics',
+                        description: 'Comprehensive business intelligence reports'
+                    },
+                    {
+                        icon: 'fas fa-headset',
+                        title: '24/7 Support',
+                        description: 'Round-the-clock email and chat support'
+                    },
+                    {
+                        icon: 'fas fa-bolt',
+                        title: 'Instant Processing',
+                        description: 'Instant loan approval and processing'
+                    },
+                    {
+                        icon: 'fas fa-code',
+                        title: 'API Access',
+                        description: 'Read-only API for integration'
+                    }
+                ]
+            },
+            lender_of_lenders: {
+                name: 'Lender of Lenders',
+                weeklyLimit: 50000,
+                maxLedgers: 50000,
+                monthly: 500,
+                color: '#9900ff',
+                benefits: [
+                    {
+                        icon: 'fas fa-shield-alt',
+                        title: 'Enterprise Protection',
+                        description: 'Bank-grade security and compliance'
+                    },
+                    {
+                        icon: 'fas fa-users',
+                        title: 'Custom Groups',
+                        description: 'Create custom groups with special rules'
+                    },
+                    {
+                        icon: 'fas fa-chart-bar',
+                        title: 'Custom Analytics',
+                        description: 'Tailored reporting and business insights'
+                    },
+                    {
+                        icon: 'fas fa-headset',
+                        title: 'Dedicated Support',
+                        description: 'Personal account manager and phone support'
+                    },
+                    {
+                        icon: 'fas fa-bolt',
+                        title: 'Custom Processing',
+                        description: 'Custom workflows and approval processes'
+                    },
+                    {
+                        icon: 'fas fa-code',
+                        title: 'Full API Access',
+                        description: 'Complete API integration capabilities'
+                    },
+                    {
+                        icon: 'fas fa-cogs',
+                        title: 'Custom Rates',
+                        description: 'Set custom interest rates and terms'
+                    },
+                    {
+                        icon: 'fas fa-building',
+                        title: 'Business Tools',
+                        description: 'Enterprise-grade management tools'
+                    }
+                ]
+            }
+        };
+        
+        // Currency symbols
+        const CURRENCY_SYMBOLS = {
+            KES: 'KSh',
+            UGX: 'UGX',
+            TZS: 'TZS',
+            RWF: 'FRw',
+            BIF: 'FBu',
+            CDF: 'FC',
+            SSP: 'SSP',
+            ZAR: 'R',
+            NGN: '₦',
+            GHS: 'GH₵',
+            ETB: 'Br',
+            SOS: 'Sh.So.'
+        };
+        
+        // Country currency mapping
+        const COUNTRY_CURRENCIES = {
+            KE: 'KES',
+            UG: 'UGX',
+            TZ: 'TZS',
+            RW: 'RWF',
+            BI: 'BIF',
+            CD: 'CDF',
+            SS: 'SSP',
+            ZA: 'ZAR',
+            NG: 'NGN',
+            GH: 'GHS',
+            ET: 'ETB',
+            SO: 'SOS'
+        };
+        
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', async function() {
+            await initializePage();
+            loadHeader();
+            loadFooter();
+            await loadSubscriptionStatus();
+            setupEventListeners();
+        });
+        
+        // Initialize page
+        async function initializePage() {
+            try {
+                // Get current user from auth state
+                const authState = window.authStore?.getState() || {};
+                currentUser = authState.user;
+                
+                if (!currentUser) {
+                    window.location.href = '../../auth/login.html?redirect=subscription/status.html';
+                    return;
+                }
+                
+                // Get user's country
+                currentCountry = currentUser.countryCode || 'KE';
+                currentCurrency = COUNTRY_CURRENCIES[currentCountry] || 'KES';
+                
+                // Set attributes
+                document.documentElement.setAttribute('data-country-code', currentCountry);
+                document.documentElement.setAttribute('data-user-role', currentUser.role);
+                
+                // Load theme
+                loadCountryTheme(currentCountry);
+                
+            } catch (error) {
+                console.error('Error initializing page:', error);
+                showError('Failed to load subscription status. Please try again.');
+            }
+        }
+        
+        // Load country theme
+        function loadCountryTheme(countryCode) {
+            const themeLink = document.getElementById('country-theme');
+            const themePath = `../../assets/css/themes/${countryCode.toLowerCase()}.css`;
+            
+            fetch(themePath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        themeLink.href = themePath;
+                    }
+                })
+                .catch(() => {
+                    themeLink.href = '../../assets/css/themes/default.css';
+                });
+        }
+        
+        // Load subscription status
+        async function loadSubscriptionStatus() {
+            try {
+                // Load subscription from localStorage (for demo)
+                const subscriptionData = localStorage.getItem('mpesewa_subscription');
+                
+                if (!subscriptionData) {
+                    // No subscription found
+                    showNoSubscription();
+                    return;
+                }
+                
+                currentSubscription = JSON.parse(subscriptionData);
+                
+                // Check if subscription is active
+                const expiryDate = new Date(currentSubscription.expiryDate);
+                const now = new Date();
+                const daysRemaining = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+                
+                // Update UI
+                updateSubscriptionUI();
+                
+                // Show/hide content
+                document.getElementById('loading-state').style.display = 'none';
+                document.getElementById('subscription-grid').style.display = 'grid';
+                
+                // Load additional data
+                await loadUsageStatistics();
+                await loadRecentActivity();
+                await loadPaymentHistory();
+                
+                // Check for expiry warnings
+                checkExpiryWarnings(daysRemaining, expiryDate);
+                
+            } catch (error) {
+                console.error('Error loading subscription status:', error);
+                document.getElementById('loading-state').style.display = 'none';
+                showError('Failed to load subscription details. Please try again.');
+            }
+        }
+        
+        // Show no subscription state
+        function showNoSubscription() {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('no-subscription').style.display = 'block';
+        }
+        
+        // Update subscription UI
+        function updateSubscriptionUI() {
+            if (!currentSubscription) return;
+            
+            const tier = TIER_CONFIG[currentSubscription.tierId];
+            if (!tier) return;
+            
+            const expiryDate = new Date(currentSubscription.expiryDate);
+            const now = new Date();
+            const daysRemaining = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+            
+            // Update status badge
+            updateStatusBadge(daysRemaining);
+            
+            // Update tier name
+            document.getElementById('tier-name').textContent = tier.name;
+            document.getElementById('tier-indicator').textContent = tier.name;
+            document.getElementById('tier-indicator').style.color = tier.color;
+            
+            // Update days remaining
+            document.getElementById('days-remaining').textContent = daysRemaining > 0 ? daysRemaining : 0;
+            document.getElementById('expiry-date').textContent = `Expires: ${formatDate(expiryDate)}`;
+            
+            // Update limits
+            document.getElementById('weekly-limit').textContent = formatNumber(tier.weeklyLimit);
+            document.getElementById('currency-display').textContent = CURRENCY_SYMBOLS[currentCurrency];
+            
+            // Update ledger counts (demo data)
+            const activeLedgers = currentSubscription.activeLedgers || 12;
+            const maxLedgers = tier.maxLedgers;
+            document.getElementById('ledgers-count').textContent = activeLedgers;
+            document.getElementById('max-ledgers').textContent = `Max: ${formatNumber(maxLedgers)}`;
+            
+            // Update progress bars
+            const weeklyUsed = currentSubscription.weeklyUsed || 750;
+            const weeklyPercent = Math.min((weeklyUsed / tier.weeklyLimit) * 100, 100);
+            const ledgerPercent = Math.min((activeLedgers / maxLedgers) * 100, 100);
+            
+            document.getElementById('weekly-usage').textContent = `${formatNumber(weeklyUsed)} / ${formatNumber(tier.weeklyLimit)}`;
+            document.getElementById('ledger-usage').textContent = `${activeLedgers} / ${formatNumber(maxLedgers)}`;
+            document.getElementById('weekly-progress').style.width = `${weeklyPercent}%`;
+            document.getElementById('ledger-progress').style.width = `${ledgerPercent}%`;
+            
+            // Update tier benefits
+            updateTierBenefits(tier);
+            
+            // Update upgrade/renew buttons based on status
+            updateActionButtons(daysRemaining);
+        }
+        
+        // Update status badge
+        function updateStatusBadge(daysRemaining) {
+            const badge = document.getElementById('status-badge');
+            
+            if (daysRemaining > 7) {
+                badge.className = 'status-badge status-active';
+                badge.textContent = 'Active';
+            } else if (daysRemaining > 0) {
+                badge.className = 'status-badge status-grace';
+                badge.textContent = 'Expiring Soon';
+            } else {
+                badge.className = 'status-badge status-expired';
+                badge.textContent = 'Expired';
+            }
+        }
+        
+        // Update tier benefits
+        function updateTierBenefits(tier) {
+            const container = document.getElementById('tier-benefits');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            tier.benefits.forEach(benefit => {
+                const benefitEl = document.createElement('div');
+                benefitEl.className = 'benefit-item';
+                
+                benefitEl.innerHTML = `
+                    <div class="benefit-icon">
+                        <i class="${benefit.icon}"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h4>${benefit.title}</h4>
+                        <p>${benefit.description}</p>
+                    </div>
+                `;
+                
+                container.appendChild(benefitEl);
+            });
+        }
+        
+        // Update action buttons
+        function updateActionButtons(daysRemaining) {
+            const upgradeBtn = document.getElementById('upgrade-btn');
+            const renewBtn = document.getElementById('renew-btn');
+            
+            if (daysRemaining <= 0) {
+                // Expired - show renew prominently
+                if (upgradeBtn) upgradeBtn.style.display = 'none';
+                if (renewBtn) {
+                    renewBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Renew Now</span>';
+                    renewBtn.style.borderColor = '#dc3545';
+                    renewBtn.style.color = '#dc3545';
+                }
+            } else if (daysRemaining <= 7) {
+                // Expiring soon - emphasize renew
+                if (renewBtn) {
+                    renewBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Renew Now</span>';
+                    renewBtn.style.borderColor = '#ffc107';
+                    renewBtn.style.color = '#ffc107';
+                }
+            }
+        }
+        
+        // Check expiry warnings
+        function checkExpiryWarnings(daysRemaining, expiryDate) {
+            const warningEl = document.getElementById('expiry-warning');
+            const titleEl = document.getElementById('warning-title');
+            const messageEl = document.getElementById('warning-message');
+            const actionsEl = document.getElementById('warning-actions');
+            
+            if (daysRemaining <= 0) {
+                // Expired
+                warningEl.classList.add('critical');
+                warningEl.style.display = 'flex';
+                titleEl.textContent = 'Subscription Expired!';
+                messageEl.textContent = `Your subscription expired on ${formatDate(expiryDate)}. You cannot lend until you renew your subscription.`;
+                
+                actionsEl.innerHTML = `
+                    <a href="subscribe.html?renew=true" class="btn" style="background: #dc3545; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600;">
+                        Renew Now
+                    </a>
+                `;
+            } else if (daysRemaining <= 7) {
+                // Expiring soon
+                warningEl.style.display = 'flex';
+                titleEl.textContent = 'Subscription Expiring Soon';
+                messageEl.textContent = `Your subscription expires in ${daysRemaining} day${daysRemaining !== 1 ? 's' : ''}. Renew now to avoid service interruption.`;
+                
+                actionsEl.innerHTML = `
+                    <a href="subscribe.html?renew=true" class="btn" style="background: #ffc107; color: #000; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; margin-right: 10px;">
+                        Renew Now
+                    </a>
+                    <a href="subscribe.html?upgrade=true" class="btn" style="background: #0099ff; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600;">
+                        Upgrade Plan
+                    </a>
+                `;
+            }
+        }
+        
+        // Load usage statistics
+        async function loadUsageStatistics() {
+            try {
+                const period = document.getElementById('stats-period').value;
+                
+                // Demo data - in production, this would come from an API
+                const demoData = {
+                    week: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        lent: [120, 180, 150, 200, 250, 100, 80],
+                        borrowed: [50, 80, 60, 100, 120, 40, 30]
+                    },
+                    month: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                        lent: [500, 600, 700, 400],
+                        borrowed: [200, 250, 300, 150]
+                    },
+                    quarter: {
+                        labels: ['Month 1', 'Month 2', 'Month 3'],
+                        lent: [2000, 2500, 3000],
+                        borrowed: [800, 1000, 1200]
+                    },
+                    year: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        lent: [1500, 1800, 2200, 2500, 3000, 2800, 3200, 3500, 3800, 4000, 4200, 4500],
+                        borrowed: [600, 700, 800, 900, 1100, 1000, 1200, 1300, 1400, 1500, 1600, 1700]
+                    }
+                };
+                
+                const data = demoData[period] || demoData.week;
+                
+                // Create or update chart
+                const ctx = document.getElementById('usage-chart').getContext('2d');
+                
+                if (usageChart) {
+                    usageChart.destroy();
+                }
+                
+                usageChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: 'Amount Lent',
+                                data: data.lent,
+                                borderColor: '#28a745',
+                                backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Amount Borrowed',
+                                data: data.borrowed,
+                                borderColor: '#0099ff',
+                                backgroundColor: 'rgba(0, 153, 255, 0.1)',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    color: '#003366',
+                                    font: {
+                                        size: 12,
+                                        weight: '600'
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${CURRENCY_SYMBOLS[currentCurrency]} ${context.parsed.y.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#555555'
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    color: '#555555',
+                                    callback: function(value) {
+                                        return `${CURRENCY_SYMBOLS[currentCurrency]} ${value.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // Update stats summary
+                const totalLent = data.lent.reduce((a, b) => a + b, 0);
+                const totalBorrowed = data.borrowed.reduce((a, b) => a + b, 0);
+                const avgLent = Math.round(totalLent / data.lent.length);
+                const avgBorrowed = Math.round(totalBorrowed / data.borrowed.length);
+                
+                const statsSummary = document.getElementById('stats-summary');
+                if (statsSummary) {
+                    statsSummary.innerHTML = `
+                        <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: #28a745;">${CURRENCY_SYMBOLS[currentCurrency]} ${totalLent.toLocaleString()}</div>
+                            <div style="color: #555555; font-size: 0.9rem; font-weight: 600;">Total Lent</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: #0099ff;">${CURRENCY_SYMBOLS[currentCurrency]} ${totalBorrowed.toLocaleString()}</div>
+                            <div style="color: #555555; font-size: 0.9rem; font-weight: 600;">Total Borrowed</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: #003366;">${CURRENCY_SYMBOLS[currentCurrency]} ${avgLent.toLocaleString()}</div>
+                            <div style="color: #555555; font-size: 0.9rem; font-weight: 600;">Avg. Lent/Day</div>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: #003366;">${CURRENCY_SYMBOLS[currentCurrency]} ${avgBorrowed.toLocaleString()}</div>
+                            <div style="color: #555555; font-size: 0.9rem; font-weight: 600;">Avg. Borrowed/Day</div>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Error loading usage statistics:', error);
+            }
+        }
+        
+        // Load recent activity
+        async function loadRecentActivity() {
+            try {
+                // Demo data
+                const activities = [
+                    { date: '2024-01-15', action: 'Lent KSh 500 to John Doe', type: 'lending', icon: 'fas fa-hand-holding-usd', color: '#28a745' },
+                    { date: '2024-01-14', action: 'Received repayment of KSh 550', type: 'repayment', icon: 'fas fa-money-check-alt', color: '#0099ff' },
+                    { date: '2024-01-13', action: 'Subscription payment processed', type: 'payment', icon: 'fas fa-credit-card', color: '#f37021' },
+                    { date: '2024-01-12', action: 'Joined "Family Group"', type: 'group', icon: 'fas fa-users', color: '#9900ff' },
+                    { date: '2024-01-11', action: 'Borrowed KSh 1,000 for transport', type: 'borrowing', icon: 'fas fa-car', color: '#6c757d' }
+                ];
+                
+                const container = document.getElementById('activity-list');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                activities.forEach(activity => {
+                    const activityEl = document.createElement('div');
+                    activityEl.className = 'activity-item';
+                    activityEl.style.cssText = 'display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #f0f0f0;';
+                    
+                    activityEl.innerHTML = `
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: ${activity.color}20; color: ${activity.color}; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 1.2rem;">
+                            <i class="${activity.icon}"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="color: #003366; font-weight: 600; margin-bottom: 3px;">${activity.action}</div>
+                            <div style="color: #777777; font-size: 0.85rem;">${formatDate(new Date(activity.date))}</div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(activityEl);
+                });
+                
+            } catch (error) {
+                console.error('Error loading recent activity:', error);
+            }
+        }
+        
+        // Load payment history
+        async function loadPaymentHistory() {
+            try {
+                // Demo data
+                const payments = [
+                    { date: '2024-01-15', amount: 50, method: 'M-Pesa', status: 'paid' },
+                    { date: '2023-12-15', amount: 50, method: 'M-Pesa', status: 'paid' },
+                    { date: '2023-11-15', amount: 50, method: 'M-Pesa', status: 'paid' },
+                    { date: '2023-10-15', amount: 50, method: 'Bank Transfer', status: 'paid' },
+                    { date: '2023-09-15', amount: 50, method: 'M-Pesa', status: 'failed' }
+                ];
+                
+                paymentHistory = payments;
+                const container = document.getElementById('payment-history-body');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                payments.forEach(payment => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${formatDate(new Date(payment.date))}</td>
+                        <td>${CURRENCY_SYMBOLS[currentCurrency]} ${payment.amount.toLocaleString()}</td>
+                        <td>${payment.method}</td>
+                        <td>
+                            <span class="payment-status status-${payment.status}">
+                                ${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
+                            </span>
+                        </td>
+                    `;
+                    
+                    container.appendChild(row);
+                });
+                
+            } catch (error) {
+                console.error('Error loading payment history:', error);
+            }
+        }
+        
+        // Show usage details modal
+        function showUsageDetails() {
+            const modal = document.getElementById('usage-modal');
+            const container = document.getElementById('usage-details');
+            
+            if (!currentSubscription) return;
+            
+            const tier = TIER_CONFIG[currentSubscription.tierId];
+            if (!tier) return;
+            
+            const weeklyUsed = currentSubscription.weeklyUsed || 750;
+            const activeLedgers = currentSubscription.activeLedgers || 12;
+            const weeklyPercent = Math.min((weeklyUsed / tier.weeklyLimit) * 100, 100);
+            const ledgerPercent = Math.min((activeLedgers / tier.maxLedgers) * 100, 100);
+            
+            container.innerHTML = `
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Weekly Lending Limit</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Used: ${CURRENCY_SYMBOLS[currentCurrency]} ${weeklyUsed.toLocaleString()}</span>
+                        <span>Remaining: ${CURRENCY_SYMBOLS[currentCurrency]} ${(tier.weeklyLimit - weeklyUsed).toLocaleString()}</span>
+                        <span>Total: ${CURRENCY_SYMBOLS[currentCurrency]} ${tier.weeklyLimit.toLocaleString()}</span>
+                    </div>
+                    <div style="height: 10px; background: #e9ecef; border-radius: 5px; overflow: hidden;">
+                        <div style="height: 100%; width: ${weeklyPercent}%; background: linear-gradient(90deg, #0099ff, #0066cc); border-radius: 5px;"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 5px; color: #777777; font-size: 0.9rem;">
+                        ${weeklyPercent.toFixed(1)}% used
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Ledger Usage</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Active: ${activeLedgers}</span>
+                        <span>Remaining: ${tier.maxLedgers - activeLedgers}</span>
+                        <span>Total: ${tier.maxLedgers.toLocaleString()}</span>
+                    </div>
+                    <div style="height: 10px; background: #e9ecef; border-radius: 5px; overflow: hidden;">
+                        <div style="height: 100%; width: ${ledgerPercent}%; background: linear-gradient(90deg, #28a745, #1e7e34); border-radius: 5px;"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 5px; color: #777777; font-size: 0.9rem;">
+                        ${ledgerPercent.toFixed(1)}% used
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #003366; margin-bottom: 10px;">Usage Tips</h4>
+                    <ul style="color: #555555; padding-left: 20px; margin: 0;">
+                        <li>Weekly limit resets every Monday at 00:00</li>
+                        <li>Ledgers are automatically created when you approve loans</li>
+                        <li>Consider upgrading if you're consistently hitting limits</li>
+                        <li>Unused weekly limit does not carry over to next week</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="subscribe.html?upgrade=true" class="btn" style="background: #28a745; color: white; padding: 10px 25px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block;">
+                        <i class="fas fa-arrow-up"></i> Upgrade for Higher Limits
+                    </a>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+        
+        // Show upgrade calculator modal
+        function showUpgradeCalculator() {
+            const modal = document.getElementById('upgrade-calculator-modal');
+            const container = document.getElementById('upgrade-calculator');
+            
+            if (!currentSubscription) return;
+            
+            const currentTier = TIER_CONFIG[currentSubscription.tierId];
+            if (!currentTier) return;
+            
+            const tiers = Object.entries(TIER_CONFIG).filter(([id, tier]) => 
+                id !== currentSubscription.tierId
+            );
+            
+            container.innerHTML = `
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Current Tier: ${currentTier.name}</h4>
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Weekly Limit:</span>
+                            <span style="font-weight: 600;">${CURRENCY_SYMBOLS[currentCurrency]} ${currentTier.weeklyLimit.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Max Ledgers:</span>
+                            <span style="font-weight: 600;">${currentTier.maxLedgers.toLocaleString()}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Monthly Cost:</span>
+                            <span style="font-weight: 600;">${CURRENCY_SYMBOLS[currentCurrency]} ${currentTier.monthly.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Select Target Tier</h4>
+                    <select id="upgrade-target" style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; margin-bottom: 20px;">
+                        ${tiers.map(([id, tier]) => `
+                            <option value="${id}">${tier.name} - ${CURRENCY_SYMBOLS[currentCurrency]} ${tier.monthly}/month</option>
+                        `).join('')}
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 25px; text-align: center;">
+                    <button onclick="calculateUpgrade()" style="background: #0099ff; color: white; border: none; padding: 12px 30px; border-radius: 20px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                        <i class="fas fa-calculator"></i> Calculate Upgrade Cost
+                    </button>
+                </div>
+                
+                <div id="upgrade-result" style="display: none;">
+                    <!-- Results will be shown here -->
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+        
+        // Calculate upgrade
+        function calculateUpgrade() {
+            const targetTierId = document.getElementById('upgrade-target').value;
+            const targetTier = TIER_CONFIG[targetTierId];
+            const currentTier = TIER_CONFIG[currentSubscription.tierId];
+            
+            if (!targetTier || !currentTier) return;
+            
+            // Calculate prorated cost (simplified)
+            const expiryDate = new Date(currentSubscription.expiryDate);
+            const now = new Date();
+            const daysRemaining = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+            const totalDays = 30; // Assuming 30-day month
+            
+            const dailyCurrentRate = currentTier.monthly / totalDays;
+            const dailyTargetRate = targetTier.monthly / totalDays;
+            
+            const upgradeCost = Math.max(0, (dailyTargetRate - dailyCurrentRate) * daysRemaining);
+            
+            const resultDiv = document.getElementById('upgrade-result');
+            resultDiv.style.display = 'block';
+            
+            resultDiv.innerHTML = `
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Upgrade Calculation</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
+                        <span>From:</span>
+                        <span style="font-weight: 600;">${currentTier.name}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
+                        <span>To:</span>
+                        <span style="font-weight: 600;">${targetTier.name}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
+                        <span>Days remaining:</span>
+                        <span style="font-weight: 600;">${daysRemaining}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;">
+                        <span>Upgrade cost:</span>
+                        <span style="font-weight: 600; color: #28a745;">${CURRENCY_SYMBOLS[currentCurrency]} ${Math.round(upgradeCost).toLocaleString()}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #003366;">
+                        <span>New weekly limit:</span>
+                        <span>${CURRENCY_SYMBOLS[currentCurrency]} ${targetTier.weeklyLimit.toLocaleString()}</span>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="subscribe.html?upgrade=${targetTierId}" class="btn" style="background: #28a745; color: white; padding: 12px 30px; border-radius: 20px; text-decoration: none; font-weight: 600; display: inline-block;">
+                        <i class="fas fa-arrow-up"></i> Upgrade to ${targetTier.name}
+                    </a>
+                </div>
+            `;
+        }
+        
+        // Show cancel modal
+        function showCancelModal() {
+            const modal = document.getElementById('cancel-modal');
+            const container = document.getElementById('cancel-details');
+            
+            if (!currentSubscription) return;
+            
+            const expiryDate = new Date(currentSubscription.expiryDate);
+            const now = new Date();
+            const daysRemaining = Math.ceil((expiryDate - now) / (1000 * 60 * 60 * 24));
+            
+            container.innerHTML = `
+                <div style="text-align: center; margin-bottom: 25px;">
+                    <div style="font-size: 4rem; color: #dc3545; margin-bottom: 15px;">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3 style="color: #003366; margin-bottom: 15px;">Cancel Subscription</h3>
+                    <p style="color: #555555; line-height: 1.6; margin-bottom: 20px;">
+                        Are you sure you want to cancel your subscription? 
+                        You will lose access to lending features when your current period ends.
+                    </p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Cancellation Details</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Current Tier:</span>
+                        <span style="font-weight: 600;">${TIER_CONFIG[currentSubscription.tierId]?.name || 'Unknown'}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Remaining Access:</span>
+                        <span style="font-weight: 600;">${daysRemaining} day${daysRemaining !== 1 ? 's' : ''}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Access Ends:</span>
+                        <span style="font-weight: 600;">${formatDate(expiryDate)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; color: #dc3545; font-weight: 700;">
+                        <span>No refund for unused period</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <button onclick="closeModal('cancel-modal')" style="background: #6c757d; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: 600; cursor: pointer;">
+                        Keep Subscription
+                    </button>
+                    <button onclick="confirmCancellation()" style="background: #dc3545; color: white; border: none; padding: 12px 25px; border-radius: 20px; font-weight: 600; cursor: pointer;">
+                        Cancel Subscription
+                    </button>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+        
+        // Confirm cancellation
+        function confirmCancellation() {
+            if (!currentSubscription) return;
+            
+            // Update subscription status
+            currentSubscription.status = 'cancelled';
+            localStorage.setItem('mpesewa_subscription', JSON.stringify(currentSubscription));
+            
+            // Show success message
+            alert('Your subscription has been cancelled. You will have access until the end of your current billing period.');
+            
+            // Close modal and reload
+            closeModal('cancel-modal');
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        }
+        
+        // Close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        // Load full activity
+        function loadFullActivity() {
+            window.location.href = 'history.html';
+        }
+        
+        // Load more payments
+        function loadMorePayments() {
+            // In production, this would load more payments from API
+            alert('Loading more payments...');
+        }
+        
+        // Export activity data
+        function exportActivityData() {
+            // In production, this would generate and download a CSV
+            alert('Exporting activity data...');
+        }
+        
+        // Save settings
+        function saveSettings() {
+            const autoRenewal = document.getElementById('auto-renewal').checked;
+            const emailNotifications = document.getElementById('email-notifications').checked;
+            const smsAlerts = document.getElementById('sms-alerts').checked;
+            
+            // Save to localStorage (for demo)
+            localStorage.setItem('mpesewa_subscription_settings', JSON.stringify({
+                autoRenewal,
+                emailNotifications,
+                smsAlerts
+            }));
+            
+            // Show success message
+            const statusGrid = document.getElementById('subscription-grid');
+            statusGrid.classList.add('status-updated');
+            
+            setTimeout(() => {
+                statusGrid.classList.remove('status-updated');
+            }, 500);
+            
+            alert('Settings saved successfully!');
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Stats period change
+            const statsPeriod = document.getElementById('stats-period');
+            if (statsPeriod) {
+                statsPeriod.addEventListener('change', loadUsageStatistics);
+            }
+            
+            // Auto-renewal change
+            const autoRenewal = document.getElementById('auto-renewal');
+            if (autoRenewal) {
+                autoRenewal.addEventListener('change', function() {
+                    if (!this.checked) {
+                        if (!confirm('Turning off auto-renewal may cause service interruption if you forget to renew. Continue?')) {
+                            this.checked = true;
+                        }
+                    }
+                });
+            }
+            
+            // Load saved settings
+            const savedSettings = localStorage.getItem('mpesewa_subscription_settings');
+            if (savedSettings) {
+                try {
+                    const settings = JSON.parse(savedSettings);
+                    document.getElementById('auto-renewal').checked = settings.autoRenewal;
+                    document.getElementById('email-notifications').checked = settings.emailNotifications;
+                    document.getElementById('sms-alerts').checked = settings.smsAlerts;
+                } catch (e) {
+                    console.error('Error loading settings:', e);
+                }
+            }
+        }
+        
+        // Format date
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+        
+        // Show error
+        function showError(message) {
+            // Create error toast
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #dc3545;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 400px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            `;
+            
+            toast.innerHTML = `
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+        }
+        
+        // Load header
+        function loadHeader() {
+            const header = document.getElementById('main-header');
+            if (header) {
+                header.innerHTML = `
+                    <nav class="mp-header">
+                        <div class="header-container">
+                            <div class="header-logo">
+                                <a href="../../index.html">
+                                    <img src="../../assets/images/logos/logo.png" alt="M-Pesewa" height="40">
+                                </a>
+                            </div>
+                            
+                            <div class="header-nav">
+                                <a href="../../index.html">Home</a>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0)">Lenders <i class="fas fa-chevron-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="../../lender/pages/lender-dashboard.html">Dashboard</a>
+                                        <a href="../../lender/pages/lending-portfolio.html">Portfolio</a>
+                                        <a href="../../lender/pages/lending-history.html">History</a>
+                                        <a href="../../lender/pages/lending-rules.html">Rules</a>
+                                        <a href="../../lender/pages/lending-risk.html">Risk</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0)">Borrowers <i class="fas fa-chevron-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="../../borrower/pages/borrower-dashboard.html">Dashboard</a>
+                                        <a href="../../borrower/pages/borrow-request.html">Apply for Loan</a>
+                                        <a href="../../borrower/pages/borrow-history.html">Borrow History</a>
+                                        <a href="../../borrower/pages/borrow-repayments.html">Repayments</a>
+                                        <a href="../../borrower/pages/borrow-disputes.html">Disputes</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0)">Emergency Hub <i class="fas fa-chevron-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="../../emergency-hub/transport.html">Transport</a>
+                                        <a href="../../emergency-hub/data.html">Data</a>
+                                        <a href="../../emergency-hub/food.html">Food</a>
+                                        <a href="../../emergency-hub/medical.html">Medical</a>
+                                        <a href="../../emergency-hub/all-categories.html">View All 20 Categories</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown active">
+                                    <a href="javascript:void(0)">Subscription Plans <i class="fas fa-chevron-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="plans.html">Current Plan</a>
+                                        <a href="subscribe.html">Upgrade</a>
+                                        <a href="history.html">History</a>
+                                        <a href="invoices.html">Invoices</a>
+                                        <a href="status.html" class="active">Status</a>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <a href="javascript:void(0)">Country <i class="fas fa-chevron-down"></i></a>
+                                    <div class="dropdown-content">
+                                        <a href="../../countries/ke.html">Kenya</a>
+                                        <a href="../../countries/ug.html">Uganda</a>
+                                        <a href="../../countries/tz.html">Tanzania</a>
+                                        <a href="../../countries/rw.html">Rwanda</a>
+                                        <a href="../../countries/bi.html">Burundi</a>
+                                        <a href="../../countries/cd.html">DRC</a>
+                                        <a href="../../countries/ss.html">South Sudan</a>
+                                        <a href="../../countries/za.html">South Africa</a>
+                                        <a href="../../countries/ng.html">Nigeria</a>
+                                        <a href="../../countries/gh.html">Ghana</a>
+                                        <a href="../../countries/et.html">Ethiopia</a>
+                                        <a href="../../countries/so.html">Somalia</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="header-auth">
+                                ${currentUser ? 
+                                    `<div class="dropdown">
+                                        <a href="javascript:void(0)" class="user-profile">
+                                            <i class="fas fa-user-circle"></i> ${currentUser.name || 'Profile'} <i class="fas fa-chevron-down"></i>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a href="../../user/profile.html">Profile</a>
+                                            <a href="status.html">Subscription</a>
+                                            <a href="../../user/activity.html">Activity</a>
+                                            <a href="../../auth/logout.html">Logout</a>
+                                        </div>
+                                    </div>` :
+                                    `<a href="../../auth/login.html" class="btn-login">Sign In</a>
+                                    <a href="../../auth/register.html" class="btn-signup">Sign Up</a>`
+                                }
+                            </div>
+                        </div>
+                    </nav>
+                `;
+            }
+        }
+        
+        // Load footer
+        function loadFooter() {
+            const footer = document.getElementById('main-footer');
+            if (footer) {
+                footer.innerHTML = `
+                    <footer class="mp-footer">
+                        <div class="footer-container">
+                            <div class="footer-grid">
+                                <div class="footer-col">
+                                    <h4>Borrowing</h4>
+                                    <a href="../../borrower/pages/borrow-request.html">Get Emergency Loan</a>
+                                    <a href="../../borrower/pages/borrow-request.html">Online Personal Loan</a>
+                                    <a href="../../borrower/pages/borrow-request.html">Business Loan</a>
+                                    <a href="../../global-pages/how-it-works.html">How to Apply</a>
+                                    <a href="../../global-pages/trust.html">Active Borrowers</a>
+                                </div>
+                                
+                                <div class="footer-col">
+                                    <h4>Lending</h4>
+                                    <a href="../../lender/pages/lending-rules.html">Smart Lending</a>
+                                    <a href="plans.html">Why Lend at M-Pesewa?</a>
+                                    <a href="../../global-pages/how-it-works.html">How to Lend</a>
+                                    <a href="../../global-pages/trust.html">Active Lenders</a>
+                                </div>
+                                
+                                <div class="footer-col">
+                                    <h4>How It Works</h4>
+                                    <a href="../../global-pages/how-it-works.html">P2P Lending Works</a>
+                                    <a href="../../global-pages/about.html">Our Role</a>
+                                    <a href="plans.html">Subscriptions</a>
+                                    <a href="../../blacklist/pages/blacklist-public.html">Blacklist</a>
+                                    <a href="../../global-pages/collectors.html">Debt Collectors</a>
+                                </div>
+                                
+                                <div class="footer-col">
+                                    <h4>About Us</h4>
+                                    <a href="../../global-pages/about.html">About M-Pesewa</a>
+                                    <a href="../../global-pages/about.html#team">Team / Advisory Board</a>
+                                    <a href="../../global-pages/careers.html">News / Careers</a>
+                                    <a href="../../global-pages/faq.html">Blog / FAQs</a>
+                                    <a href="../../global-pages/contact.html">Contact Us</a>
+                                </div>
+                                
+                                <div class="footer-col">
+                                    <h4>Legal</h4>
+                                    <a href="../../global-pages/terms.html">Terms & Conditions</a>
+                                    <a href="../../global-pages/privacy.html">Privacy Policy</a>
+                                    <a href="../../global-pages/contact.html">Grievance Redressal</a>
+                                    <a href="../../global-pages/terms.html#fair-practices">Fair Practices Code</a>
+                                </div>
+                                
+                                <div class="footer-col">
+                                    <h4>Partners</h4>
+                                    <a href="../../global-pages/contact.html#partnership">Be a Partner</a>
+                                </div>
+                            </div>
+                            
+                            <div class="country-ticker">
+                                <div class="ticker-track">
+                                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                                </div>
+                            </div>
+                            
+                            <div class="footer-bottom">
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-facebook"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                </div>
+                                
+                                <div class="footer-copyright">
+                                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                                </div>
+                                
+                                <div class="footer-links">
+                                    <a href="../../global-pages/sitemap.html">Sitemap</a>
+                                    <a href="../../global-pages/status.html">System Status</a>
+                                    <a href="../../global-pages/contact.html">Support</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

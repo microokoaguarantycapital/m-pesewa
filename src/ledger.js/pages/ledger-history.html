@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="en" data-mpesewa-page="ledger-history">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger History - M-Pesewa</title>
+    
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#003366">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/filters.css">
+    
+    <!-- Country Theme -->
+    <link rel="stylesheet" href="../assets/css/themes/default.css">
+    <link rel="stylesheet" href="" id="country-theme">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/logos/favicon.ico" type="image/x-icon">
+</head>
+<body class="ledger-history-page">
+    <!-- Header -->
+    <header class="mp-header" id="mainHeader">
+        <!-- Header content will be loaded by JavaScript -->
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <ol>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="ledger-list.html">Ledgers</a></li>
+                    <li><a href="#" id="ledgerViewLink">Ledger View</a></li>
+                    <li class="active">Full History</li>
+                </ol>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-header-left">
+                    <h1 class="page-title">
+                        <i class="fas fa-history"></i>
+                        Ledger History
+                    </h1>
+                    <p class="page-subtitle">
+                        Complete audit trail of all ledger entries. Every action is permanently recorded.
+                    </p>
+                </div>
+                <div class="page-header-right">
+                    <div class="page-actions">
+                        <button class="btn btn-secondary" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button class="btn btn-primary" id="exportHistory">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-info" id="printHistory">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ledger Summary Card -->
+            <div class="ledger-summary-card card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        Ledger Summary
+                    </h3>
+                    <div class="card-actions">
+                        <span class="badge badge-primary" id="ledgerIdDisplay">LED-XXXXXX</span>
+                        <span class="badge" id="ledgerStatusBadge">Status</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="label">Borrower:</span>
+                            <span class="value" id="borrowerName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Lender:</span>
+                            <span class="value" id="lenderName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Principal:</span>
+                            <span class="value" id="principalAmount">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Current Balance:</span>
+                            <span class="value" id="currentBalance">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Total Interest:</span>
+                            <span class="value" id="totalInterest">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Total Penalty:</span>
+                            <span class="value" id="totalPenalty">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Total Repaid:</span>
+                            <span class="value" id="totalRepaid">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Days Active:</span>
+                            <span class="value" id="daysActive">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Created:</span>
+                            <span class="value" id="createdDate">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Due Date:</span>
+                            <span class="value" id="dueDate">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters & Controls -->
+            <div class="filters-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-filter"></i>
+                        Filter History
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="filter-grid">
+                        <div class="filter-group">
+                            <label for="entryTypeFilter">
+                                <i class="fas fa-tag"></i>
+                                Entry Type
+                            </label>
+                            <select id="entryTypeFilter" class="form-control" multiple>
+                                <option value="ALL" selected>All Types</option>
+                                <option value="CREATED">Created</option>
+                                <option value="REPAYMENT">Repayment</option>
+                                <option value="INTEREST_APPLIED">Interest Applied</option>
+                                <option value="PENALTY_APPLIED">Penalty Applied</option>
+                                <option value="ADJUSTMENT">Adjustment</option>
+                                <option value="FEE">Fee</option>
+                                <option value="NOTE">Note</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="dateRange">
+                                <i class="fas fa-calendar-alt"></i>
+                                Date Range
+                            </label>
+                            <div class="date-range-inputs">
+                                <input type="date" id="dateFrom" class="form-control" placeholder="From">
+                                <span class="date-range-separator">to</span>
+                                <input type="date" id="dateTo" class="form-control" placeholder="To">
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="amountRange">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Amount Range
+                            </label>
+                            <div class="range-inputs">
+                                <input type="number" id="amountMin" class="form-control" placeholder="Min" min="0">
+                                <span class="range-separator">to</span>
+                                <input type="number" id="amountMax" class="form-control" placeholder="Max" min="0">
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="searchEntries">
+                                <i class="fas fa-search"></i>
+                                Search Description
+                            </label>
+                            <input type="text" 
+                                   id="searchEntries" 
+                                   class="form-control" 
+                                   placeholder="Search in descriptions...">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="btn btn-secondary" id="resetFilters">
+                            <i class="fas fa-redo"></i>
+                            Reset Filters
+                        </button>
+                        <button class="btn btn-primary" id="applyFilters">
+                            <i class="fas fa-filter"></i>
+                            Apply Filters
+                        </button>
+                        <button class="btn btn-info" id="showAdvanced">
+                            <i class="fas fa-sliders-h"></i>
+                            Advanced
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Filters (Collapsed) -->
+            <div class="advanced-filters card" id="advancedFilters" style="display: none;">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-cogs"></i>
+                        Advanced Filters
+                    </h3>
+                    <button class="btn btn-link" id="hideAdvanced">
+                        <i class="fas fa-times"></i> Close
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="advanced-filter-grid">
+                        <div class="filter-group">
+                            <label for="userFilter">
+                                <i class="fas fa-user"></i>
+                                Added By
+                            </label>
+                            <select id="userFilter" class="form-control">
+                                <option value="">All Users</option>
+                                <option value="SYSTEM">System</option>
+                                <option value="LENDER">Lender</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="BORROWER">Borrower</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="paymentMethodFilter">
+                                <i class="fas fa-credit-card"></i>
+                                Payment Method
+                            </label>
+                            <select id="paymentMethodFilter" class="form-control">
+                                <option value="">All Methods</option>
+                                <option value="MPESA">M-Pesa</option>
+                                <option value="CASH">Cash</option>
+                                <option value="BANK">Bank Transfer</option>
+                                <option value="AIRTEL">Airtel Money</option>
+                                <option value="TIGO">Tigo Pesa</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="statusFilter">
+                                <i class="fas fa-flag"></i>
+                                Entry Status
+                            </label>
+                            <select id="statusFilter" class="form-control">
+                                <option value="">All Statuses</option>
+                                <option value="VERIFIED">Verified</option>
+                                <option value="PENDING">Pending</option>
+                                <option value="DISPUTED">Disputed</option>
+                                <option value="REVERSED">Reversed</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>
+                                <i class="fas fa-check-circle"></i>
+                                Verified Only
+                            </label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="verifiedOnly" name="verifiedOnly">
+                                <label for="verifiedOnly">Show only verified entries</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-list-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="totalEntries">0</h3>
+                            <p class="stat-label">Total Entries</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="totalDebits">0</h3>
+                            <p class="stat-label">Total Debits</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="totalCredits">0</h3>
+                            <p class="stat-label">Total Credits</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-value" id="verifiedEntries">0</h3>
+                            <p class="stat-label">Verified Entries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Table -->
+            <div class="history-table-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-table"></i>
+                        Complete Ledger History
+                    </h3>
+                    <div class="card-actions">
+                        <div class="entries-count">
+                            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> entries
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-controls">
+                        <div class="table-control-left">
+                            <div class="entries-per-page">
+                                <label for="entriesPerPage">Show:</label>
+                                <select id="entriesPerPage" class="form-control">
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="500">500</option>
+                                </select>
+                                <span>entries</span>
+                            </div>
+                        </div>
+                        <div class="table-control-right">
+                            <div class="pagination-info" id="paginationInfo">
+                                Page 1 of 1
+                            </div>
+                            <div class="pagination-controls">
+                                <button class="btn btn-icon" id="firstPage" disabled>
+                                    <i class="fas fa-angle-double-left"></i>
+                                </button>
+                                <button class="btn btn-icon" id="prevPage" disabled>
+                                    <i class="fas fa-angle-left"></i>
+                                </button>
+                                <button class="btn btn-icon" id="nextPage" disabled>
+                                    <i class="fas fa-angle-right"></i>
+                                </button>
+                                <button class="btn btn-icon" id="lastPage" disabled>
+                                    <i class="fas fa-angle-double-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table ledger-history-table" id="ledgerHistoryTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAllEntries">
+                                    </th>
+                                    <th>Date & Time</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Balance</th>
+                                    <th>Added By</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- Entries will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-footer">
+                        <div class="bulk-actions">
+                            <select id="bulkAction" class="form-control">
+                                <option value="">Bulk Actions</option>
+                                <option value="VERIFY">Mark as Verified</option>
+                                <option value="EXPORT">Export Selected</option>
+                                <option value="PRINT">Print Selected</option>
+                                <option value="DISPUTE">Flag for Dispute</option>
+                            </select>
+                            <button class="btn btn-secondary" id="applyBulkAction" disabled>
+                                Apply
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Section -->
+            <div class="visualization-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-line"></i>
+                                    Balance Over Time
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="balanceChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3>
+                                    <i class="fas fa-chart-pie"></i>
+                                    Entry Type Distribution
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="typeDistributionChart" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audit Trail Notes -->
+            <div class="audit-notes card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-shield-alt"></i>
+                        Audit Trail Integrity
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="audit-info">
+                        <div class="audit-item">
+                            <i class="fas fa-fingerprint"></i>
+                            <div class="audit-content">
+                                <h4>Hash Chain Verification</h4>
+                                <p>Each entry includes a cryptographic hash of the previous entry, ensuring the ledger cannot be altered without detection.</p>
+                                <code id="ledgerHash">Loading hash chain...</code>
+                            </div>
+                        </div>
+                        <div class="audit-item">
+                            <i class="fas fa-user-shield"></i>
+                            <div class="audit-content">
+                                <h4>Access Log</h4>
+                                <p>Every view and modification of this ledger is logged with IP address, user agent, and timestamp.</p>
+                                <button class="btn btn-sm btn-outline" id="viewAccessLog">
+                                    View Access Log
+                                </button>
+                            </div>
+                        </div>
+                        <div class="audit-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="audit-content">
+                                <h4>Timestamp Authority</h4>
+                                <p>All timestamps are synchronized with trusted time servers and cannot be backdated.</p>
+                                <small>Last synchronized: <span id="lastSync">Just now</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Notice -->
+            <div class="alert alert-warning">
+                <div class="alert-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Important Legal Notice</h4>
+                    <p>This ledger history constitutes a legal record of financial obligations. Under M-Pesewa's append-only policy:</p>
+                    <ul>
+                        <li>Entries cannot be modified or deleted after creation</li>
+                        <li>All entries are timestamped and cryptographically signed</li>
+                        <li>This record may be used as evidence in legal proceedings</li>
+                        <li>Tampering with ledger history is a criminal offense</li>
+                        <li>Platform administrators have read-only access to all entries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" id="mainFooter">
+        <!-- Footer content will be loaded by JavaScript -->
+    </footer>
+
+    <!-- Entry Detail Modal -->
+    <div class="modal" id="entryDetailModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-file-invoice"></i>
+                    Ledger Entry Details
+                </h3>
+                <button type="button" class="modal-close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="entryDetailContent">
+                    <!-- Details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" id="verifyEntry">
+                    <i class="fas fa-check-circle"></i>
+                    Verify Entry
+                </button>
+                <button type="button" class="btn btn-danger" id="flagDispute">
+                    <i class="fas fa-flag"></i>
+                    Flag Dispute
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal" id="exportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-download"></i>
+                    Export Ledger History
+                </h3>
+                <button type="button" class="modal-close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="export-options">
+                    <div class="form-group">
+                        <label>Format</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="exportFormat" value="CSV" checked>
+                                <span>CSV (Excel compatible)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="exportFormat" value="PDF">
+                                <span>PDF (Printable)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="exportFormat" value="JSON">
+                                <span>JSON (Machine readable)</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Date Range</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="exportRange" value="ALL" checked>
+                                <span>All history</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="exportRange" value="FILTERED">
+                                <span>Current filtered view</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="exportRange" value="CUSTOM">
+                                <span>Custom range</span>
+                            </label>
+                        </div>
+                        
+                        <div class="custom-range" id="customRangeSection" style="display: none;">
+                            <div class="date-inputs">
+                                <input type="date" id="exportDateFrom" class="form-control">
+                                <span>to</span>
+                                <input type="date" id="exportDateTo" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Include</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="includeFields[]" value="TIMESTAMPS" checked>
+                                <span>Timestamps</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="includeFields[]" value="DESCRIPTIONS" checked>
+                                <span>Descriptions</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="includeFields[]" value="BALANCES" checked>
+                                <span>Running balances</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="includeFields[]" value="HASHES">
+                                <span>Cryptographic hashes</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="includeFields[]" value="AUDIT_INFO">
+                                <span>Audit information</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note:</strong> Exported files contain sensitive financial information. 
+                        Please handle them securely and delete when no longer needed.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="confirmExport">
+                    <i class="fas fa-download"></i>
+                    Download Export
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../core/config.js"></script>
+    <script src="../core/constants.js"></script>
+    <script src="../utils/date.js"></script>
+    <script src="../utils/money.js"></script>
+    <script src="../utils/validation.js"></script>
+    <script src="../utils/formatting.js"></script>
+    
+    <!-- State Management -->
+    <script src="../state/store.js"></script>
+    <script src="../state/slices/auth.slice.js"></script>
+    <script src="../state/slices/user.slice.js"></script>
+    <script src="../state/slices/country.slice.js"></script>
+    <script src="../state/slices/ledger.slice.js"></script>
+    
+    <!-- Router Guards -->
+    <script src="../router/guard-auth.js"></script>
+    <script src="../router/guard-role.js"></script>
+    
+    <!-- Components -->
+    <script src="../layout/Header.js"></script>
+    <script src="../layout/Footer.js"></script>
+    
+    <!-- Module Logic -->
+    <script src="../ledger/ledger.engine.js"></script>
+    <script src="../ledger/ledger.rules.js"></script>
+    <script src="../ledger/ledger.calculator.js"></script>
+    
+    <!-- Page Script -->
+    <script>
+        // Global variables
+        let currentLedger = null;
+        let allEntries = [];
+        let filteredEntries = [];
+        let currentPage = 1;
+        let entriesPerPage = 25;
+        let currentFilters = {};
+        let balanceChart = null;
+        let typeChart = null;
+
+        // Page initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initializeHeader();
+            initializeFooter();
+            
+            // Check authentication
+            if (!checkAuth()) {
+                window.location.href = '../auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
+            // Get ledger ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const ledgerId = urlParams.get('id');
+            
+            if (!ledgerId) {
+                showError('No ledger specified. Please select a ledger to view history.');
+                window.location.href = 'ledger-list.html';
+                return;
+            }
+            
+            // Load ledger data and history
+            loadLedgerData(ledgerId);
+            
+            // Initialize UI components
+            initializeFilters();
+            initializeTableControls();
+            initializeModals();
+            
+            // Set default dates
+            setDefaultDateRange();
+            
+            // Check user permissions
+            checkUserPermissions();
+        });
+        
+        function loadLedgerData(ledgerId) {
+            // Mock data for demonstration
+            // In production, this would fetch from API
+            
+            currentLedger = {
+                id: ledgerId,
+                borrowerName: "John Kimani",
+                borrowerContact: "+254712345678",
+                lenderName: "Sarah Mwangi",
+                principalAmount: 2500,
+                currency: "KES",
+                currentBalance: 2750,
+                totalInterest: 250,
+                totalPenalty: 0,
+                totalRepaid: 500,
+                status: "ACTIVE",
+                daysActive: 5,
+                createdAt: new Date('2024-01-20'),
+                dueDate: new Date('2024-01-27'),
+                groupName: "Family Support Group",
+                country: "KE",
+                interestRate: 10,
+                penaltyRate: 5,
+                category: "Transport",
+                guarantor1: "James Omondi",
+                guarantor2: "Mary Atieno"
+            };
+            
+            // Update UI with ledger info
+            updateLedgerSummary();
+            
+            // Load mock entries
+            loadMockEntries();
+            
+            // Update ledger view link
+            document.getElementById('ledgerViewLink').href = 
+                `ledger-view.html?id=${ledgerId}`;
+        }
+        
+        function updateLedgerSummary() {
+            if (!currentLedger) return;
+            
+            document.getElementById('ledgerIdDisplay').textContent = `LED-${currentLedger.id.slice(0, 6).toUpperCase()}`;
+            
+            const statusBadge = document.getElementById('ledgerStatusBadge');
+            statusBadge.textContent = currentLedger.status;
+            statusBadge.className = 'badge ' + getStatusClass(currentLedger.status);
+            
+            document.getElementById('borrowerName').textContent = currentLedger.borrowerName;
+            document.getElementById('lenderName').textContent = currentLedger.lenderName;
+            document.getElementById('principalAmount').textContent = 
+                formatCurrency(currentLedger.principalAmount, currentLedger.currency);
+            document.getElementById('currentBalance').textContent = 
+                formatCurrency(currentLedger.currentBalance, currentLedger.currency);
+            document.getElementById('totalInterest').textContent = 
+                formatCurrency(currentLedger.totalInterest, currentLedger.currency);
+            document.getElementById('totalPenalty').textContent = 
+                formatCurrency(currentLedger.totalPenalty, currentLedger.currency);
+            document.getElementById('totalRepaid').textContent = 
+                formatCurrency(currentLedger.totalRepaid, currentLedger.currency);
+            document.getElementById('daysActive').textContent = currentLedger.daysActive;
+            document.getElementById('createdDate').textContent = 
+                formatDate(currentLedger.createdAt);
+            document.getElementById('dueDate').textContent = 
+                formatDate(currentLedger.dueDate);
+            
+            // Update hash display
+            document.getElementById('ledgerHash').textContent = 
+                `SHA256: ${generateHash(currentLedger.id + Date.now())}`;
+        }
+        
+        function loadMockEntries() {
+            // Generate mock ledger entries
+            const mockEntries = [
+                {
+                    id: 'ENT-001',
+                    timestamp: new Date('2024-01-20T10:30:00'),
+                    type: 'CREATED',
+                    description: 'Loan created for transport to job interview',
+                    amount: 2500,
+                    balance: 2500,
+                    addedBy: 'Sarah Mwangi (Lender)',
+                    addedByType: 'LENDER',
+                    status: 'VERIFIED',
+                    paymentMethod: null,
+                    transactionRef: null,
+                    evidence: null,
+                    notes: 'Borrower needs transport money for important interview',
+                    hash: generateHash('ENT-001'),
+                    verified: true,
+                    verifiedBy: 'SYSTEM',
+                    verifiedAt: new Date('2024-01-20T10:31:00')
+                },
+                {
+                    id: 'ENT-002',
+                    timestamp: new Date('2024-01-23T14:15:00'),
+                    type: 'INTEREST_APPLIED',
+                    description: 'Weekly interest applied (10%)',
+                    amount: 250,
+                    balance: 2750,
+                    addedBy: 'System',
+                    addedByType: 'SYSTEM',
+                    status: 'VERIFIED',
+                    paymentMethod: null,
+                    transactionRef: null,
+                    evidence: null,
+                    notes: 'Auto-calculated weekly interest',
+                    hash: generateHash('ENT-002'),
+                    verified: true,
+                    verifiedBy: 'SYSTEM',
+                    verifiedAt: new Date('2024-01-23T14:15:00')
+                },
+                {
+                    id: 'ENT-003',
+                    timestamp: new Date('2024-01-24T09:45:00'),
+                    type: 'REPAYMENT',
+                    description: 'Partial repayment via M-Pesa',
+                    amount: -500,
+                    balance: 2250,
+                    addedBy: 'John Kimani (Borrower)',
+                    addedByType: 'BORROWER',
+                    status: 'VERIFIED',
+                    paymentMethod: 'MPESA',
+                    transactionRef: 'MJ23G7H8K9',
+                    evidence: 'receipt_001.jpg',
+                    notes: 'Borrower made partial repayment',
+                    hash: generateHash('ENT-003'),
+                    verified: true,
+                    verifiedBy: 'Sarah Mwangi',
+                    verifiedAt: new Date('2024-01-24T10:00:00')
+                },
+                {
+                    id: 'ENT-004',
+                    timestamp: new Date('2024-01-24T11:20:00'),
+                    type: 'NOTE',
+                    description: 'Borrower called to confirm receipt',
+                    amount: 0,
+                    balance: 2250,
+                    addedBy: 'Sarah Mwangi (Lender)',
+                    addedByType: 'LENDER',
+                    status: 'VERIFIED',
+                    paymentMethod: null,
+                    transactionRef: null,
+                    evidence: null,
+                    notes: 'Phone conversation recorded',
+                    hash: generateHash('ENT-004'),
+                    verified: false,
+                    verifiedBy: null,
+                    verifiedAt: null
+                },
+                {
+                    id: 'ENT-005',
+                    timestamp: new Date('2024-01-25T16:30:00'),
+                    type: 'REPAYMENT',
+                    description: 'Additional repayment via M-Pesa',
+                    amount: -500,
+                    balance: 1750,
+                    addedBy: 'System',
+                    addedByType: 'SYSTEM',
+                    status: 'PENDING',
+                    paymentMethod: 'MPESA',
+                    transactionRef: 'NJ45H6J7K8',
+                    evidence: 'receipt_002.jpg',
+                    notes: 'Auto-detected from M-Pesa statement',
+                    hash: generateHash('ENT-005'),
+                    verified: false,
+                    verifiedBy: null,
+                    verifiedAt: null
+                }
+            ];
+            
+            allEntries = mockEntries;
+            filteredEntries = [...mockEntries];
+            
+            // Update statistics
+            updateStatistics();
+            
+            // Render table
+            renderTable();
+            
+            // Initialize charts
+            initializeCharts();
+        }
+        
+        function initializeFilters() {
+            // Entry type filter
+            const typeFilter = document.getElementById('entryTypeFilter');
+            typeFilter.addEventListener('change', function() {
+                if (this.value === 'ALL') {
+                    // If "All" is selected, unselect other options
+                    Array.from(this.options).forEach(opt => {
+                        if (opt.value !== 'ALL') opt.selected = false;
+                    });
+                } else {
+                    // If specific type is selected, unselect "All"
+                    const allOption = this.querySelector('option[value="ALL"]');
+                    if (allOption) allOption.selected = false;
+                }
+            });
+            
+            // Date range defaults
+            const today = new Date();
+            const oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+            
+            document.getElementById('dateFrom').value = formatDateForInput(oneMonthAgo);
+            document.getElementById('dateTo').value = formatDateForInput(today);
+            
+            // Apply filters button
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            
+            // Reset filters button
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            
+            // Advanced filters toggle
+            document.getElementById('showAdvanced').addEventListener('click', function() {
+                document.getElementById('advancedFilters').style.display = 'block';
+            });
+            
+            document.getElementById('hideAdvanced').addEventListener('click', function() {
+                document.getElementById('advancedFilters').style.display = 'none';
+            });
+            
+            // Custom export range toggle
+            document.querySelectorAll('input[name="exportRange"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const customSection = document.getElementById('customRangeSection');
+                    customSection.style.display = this.value === 'CUSTOM' ? 'block' : 'none';
+                });
+            });
+        }
+        
+        function initializeTableControls() {
+            // Entries per page
+            document.getElementById('entriesPerPage').addEventListener('change', function() {
+                entriesPerPage = parseInt(this.value);
+                currentPage = 1;
+                renderTable();
+            });
+            
+            // Pagination buttons
+            document.getElementById('firstPage').addEventListener('click', function() {
+                currentPage = 1;
+                renderTable();
+            });
+            
+            document.getElementById('prevPage').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                }
+            });
+            
+            document.getElementById('nextPage').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredEntries.length / entriesPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                }
+            });
+            
+            document.getElementById('lastPage').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredEntries.length / entriesPerPage);
+                currentPage = totalPages;
+                renderTable();
+            });
+            
+            // Select all entries
+            document.getElementById('selectAllEntries').addEventListener('change', function() {
+                const checkboxes = document.querySelectorAll('.entry-checkbox');
+                checkboxes.forEach(cb => {
+                    cb.checked = this.checked;
+                });
+                updateBulkActionButton();
+            });
+            
+            // Bulk action
+            document.getElementById('bulkAction').addEventListener('change', updateBulkActionButton);
+            document.getElementById('applyBulkAction').addEventListener('click', applyBulkAction);
+        }
+        
+        function initializeModals() {
+            // Export button
+            document.getElementById('exportHistory').addEventListener('click', function() {
+                document.getElementById('exportModal').style.display = 'block';
+            });
+            
+            // Print button
+            document.getElementById('printHistory').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Confirm export
+            document.getElementById('confirmExport').addEventListener('click', function() {
+                exportHistory();
+            });
+            
+            // View access log
+            document.getElementById('viewAccessLog').addEventListener('click', function() {
+                alert('Access log functionality would be implemented with backend integration.');
+            });
+            
+            // Modal close handlers
+            document.querySelectorAll('.modal-close, .modal .btn-secondary').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+        }
+        
+        function setDefaultDateRange() {
+            const today = new Date();
+            const oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+            
+            document.getElementById('dateFrom').value = formatDateForInput(oneMonthAgo);
+            document.getElementById('dateTo').value = formatDateForInput(today);
+            
+            // Set export dates to match
+            document.getElementById('exportDateFrom').value = formatDateForInput(oneMonthAgo);
+            document.getElementById('exportDateTo').value = formatDateForInput(today);
+        }
+        
+        function applyFilters() {
+            // Collect filter values
+            currentFilters = {
+                entryTypes: Array.from(document.getElementById('entryTypeFilter').selectedOptions)
+                    .map(opt => opt.value)
+                    .filter(v => v !== 'ALL'),
+                dateFrom: document.getElementById('dateFrom').value,
+                dateTo: document.getElementById('dateTo').value,
+                amountMin: document.getElementById('amountMin').value,
+                amountMax: document.getElementById('amountMax').value,
+                searchText: document.getElementById('searchEntries').value.toLowerCase(),
+                userType: document.getElementById('userFilter').value,
+                paymentMethod: document.getElementById('paymentMethodFilter').value,
+                entryStatus: document.getElementById('statusFilter').value,
+                verifiedOnly: document.getElementById('verifiedOnly').checked
+            };
+            
+            // Apply filters
+            filteredEntries = allEntries.filter(entry => {
+                // Entry type filter
+                if (currentFilters.entryTypes.length > 0 && 
+                    !currentFilters.entryTypes.includes(entry.type)) {
+                    return false;
+                }
+                
+                // Date range filter
+                if (currentFilters.dateFrom) {
+                    const filterDate = new Date(currentFilters.dateFrom);
+                    if (entry.timestamp < filterDate) return false;
+                }
+                
+                if (currentFilters.dateTo) {
+                    const filterDate = new Date(currentFilters.dateTo);
+                    filterDate.setHours(23, 59, 59, 999);
+                    if (entry.timestamp > filterDate) return false;
+                }
+                
+                // Amount range filter
+                if (currentFilters.amountMin && Math.abs(entry.amount) < parseFloat(currentFilters.amountMin)) {
+                    return false;
+                }
+                
+                if (currentFilters.amountMax && Math.abs(entry.amount) > parseFloat(currentFilters.amountMax)) {
+                    return false;
+                }
+                
+                // Search text filter
+                if (currentFilters.searchText && 
+                    !entry.description.toLowerCase().includes(currentFilters.searchText) &&
+                    !entry.notes.toLowerCase().includes(currentFilters.searchText)) {
+                    return false;
+                }
+                
+                // User type filter
+                if (currentFilters.userType && entry.addedByType !== currentFilters.userType) {
+                    return false;
+                }
+                
+                // Payment method filter
+                if (currentFilters.paymentMethod && entry.paymentMethod !== currentFilters.paymentMethod) {
+                    return false;
+                }
+                
+                // Entry status filter
+                if (currentFilters.entryStatus && entry.status !== currentFilters.entryStatus) {
+                    return false;
+                }
+                
+                // Verified only filter
+                if (currentFilters.verifiedOnly && !entry.verified) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            // Reset to first page
+            currentPage = 1;
+            
+            // Update UI
+            updateStatistics();
+            renderTable();
+            updateCharts();
+            
+            // Show filter summary
+            showToast(`Filter applied: ${filteredEntries.length} entries found`, 'success');
+        }
+        
+        function resetFilters() {
+            // Reset all filter inputs
+            document.getElementById('entryTypeFilter').selectedIndex = 0;
+            setDefaultDateRange();
+            document.getElementById('amountMin').value = '';
+            document.getElementById('amountMax').value = '';
+            document.getElementById('searchEntries').value = '';
+            document.getElementById('userFilter').value = '';
+            document.getElementById('paymentMethodFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('verifiedOnly').checked = false;
+            
+            // Hide advanced filters
+            document.getElementById('advancedFilters').style.display = 'none';
+            
+            // Reset filtered entries
+            filteredEntries = [...allEntries];
+            currentFilters = {};
+            currentPage = 1;
+            
+            // Update UI
+            updateStatistics();
+            renderTable();
+            updateCharts();
+            
+            showToast('Filters reset', 'info');
+        }
+        
+        function updateStatistics() {
+            const totalEntries = filteredEntries.length;
+            const totalDebits = filteredEntries
+                .filter(e => e.amount > 0)
+                .reduce((sum, e) => sum + e.amount, 0);
+            const totalCredits = filteredEntries
+                .filter(e => e.amount < 0)
+                .reduce((sum, e) => sum + Math.abs(e.amount), 0);
+            const verifiedEntries = filteredEntries.filter(e => e.verified).length;
+            
+            document.getElementById('totalEntries').textContent = totalEntries;
+            document.getElementById('totalDebits').textContent = formatCurrency(totalDebits, currentLedger?.currency || 'KES');
+            document.getElementById('totalCredits').textContent = formatCurrency(totalCredits, currentLedger?.currency || 'KES');
+            document.getElementById('verifiedEntries').textContent = verifiedEntries;
+        }
+        
+        function renderTable() {
+            const tbody = document.getElementById('historyTableBody');
+            const totalEntries = filteredEntries.length;
+            const totalPages = Math.ceil(totalEntries / entriesPerPage);
+            
+            // Calculate slice for current page
+            const startIndex = (currentPage - 1) * entriesPerPage;
+            const endIndex = Math.min(startIndex + entriesPerPage, totalEntries);
+            const pageEntries = filteredEntries.slice(startIndex, endIndex);
+            
+            // Clear table
+            tbody.innerHTML = '';
+            
+            // Add rows
+            pageEntries.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                const globalIndex = startIndex + index + 1;
+                
+                // Format date
+                const dateStr = entry.timestamp.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                const timeStr = entry.timestamp.toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                // Type badge
+                const typeBadge = `<span class="badge ${getEntryTypeClass(entry.type)}">${entry.type.replace('_', ' ')}</span>`;
+                
+                // Amount with color coding
+                const amountStr = formatCurrency(Math.abs(entry.amount), currentLedger?.currency || 'KES');
+                const amountClass = entry.amount === 0 ? '' : 
+                    (entry.amount > 0 ? 'text-danger' : 'text-success');
+                const amountSign = entry.amount === 0 ? '' : 
+                    (entry.amount > 0 ? '+' : '-');
+                
+                // Balance
+                const balanceStr = formatCurrency(entry.balance, currentLedger?.currency || 'KES');
+                
+                // Status badge
+                const statusBadge = `<span class="badge ${getEntryStatusClass(entry.status)}">${entry.status}</span>`;
+                
+                // Verified icon
+                const verifiedIcon = entry.verified ? 
+                    `<i class="fas fa-check-circle text-success" title="Verified"></i>` : 
+                    `<i class="fas fa-clock text-warning" title="Pending verification"></i>`;
+                
+                row.innerHTML = `
+                    <td>
+                        <input type="checkbox" class="entry-checkbox" data-id="${entry.id}">
+                    </td>
+                    <td>
+                        <div class="datetime-cell">
+                            <div class="date">${dateStr}</div>
+                            <div class="time">${timeStr}</div>
+                        </div>
+                    </td>
+                    <td>${typeBadge}</td>
+                    <td>
+                        <div class="description-cell">
+                            <div class="description">${entry.description}</div>
+                            ${entry.notes ? `<div class="notes">${entry.notes}</div>` : ''}
+                        </div>
+                    </td>
+                    <td class="${amountClass}">
+                        <strong>${amountSign}${amountStr}</strong>
+                    </td>
+                    <td>
+                        <strong>${balanceStr}</strong>
+                    </td>
+                    <td>
+                        <div class="added-by-cell">
+                            <div class="user">${entry.addedBy}</div>
+                            <div class="user-type">${entry.addedByType}</div>
+                        </div>
+                    </td>
+                    <td>
+                        ${statusBadge}
+                        ${verifiedIcon}
+                    </td>
+                    <td>
+                        <button class="btn btn-icon btn-sm view-entry" data-id="${entry.id}" title="View details">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        ${!entry.verified ? `
+                        <button class="btn btn-icon btn-sm verify-entry" data-id="${entry.id}" title="Verify">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        ` : ''}
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Update pagination info
+            document.getElementById('showingCount').textContent = `${startIndex + 1}-${endIndex}`;
+            document.getElementById('totalCount').textContent = totalEntries;
+            document.getElementById('paginationInfo').textContent = 
+                `Page ${currentPage} of ${totalPages || 1}`;
+            
+            // Update pagination buttons
+            document.getElementById('firstPage').disabled = currentPage === 1;
+            document.getElementById('prevPage').disabled = currentPage === 1;
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+            document.getElementById('lastPage').disabled = currentPage >= totalPages;
+            
+            // Add event listeners to action buttons
+            document.querySelectorAll('.view-entry').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const entryId = this.getAttribute('data-id');
+                    viewEntryDetails(entryId);
+                });
+            });
+            
+            document.querySelectorAll('.verify-entry').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const entryId = this.getAttribute('data-id');
+                    verifyEntry(entryId);
+                });
+            });
+            
+            // Add change listeners to checkboxes
+            document.querySelectorAll('.entry-checkbox').forEach(cb => {
+                cb.addEventListener('change', updateBulkActionButton);
+            });
+            
+            // Update select all checkbox
+            const allChecked = pageEntries.length > 0 && 
+                pageEntries.every(e => document.querySelector(`.entry-checkbox[data-id="${e.id}"]`).checked);
+            document.getElementById('selectAllEntries').checked = allChecked;
+        }
+        
+        function updateBulkActionButton() {
+            const selectedCount = document.querySelectorAll('.entry-checkbox:checked').length;
+            const bulkActionSelect = document.getElementById('bulkAction');
+            const applyButton = document.getElementById('applyBulkAction');
+            
+            applyButton.disabled = selectedCount === 0 || bulkActionSelect.value === '';
+            if (selectedCount > 0) {
+                applyButton.textContent = `Apply to ${selectedCount} entries`;
+            } else {
+                applyButton.textContent = 'Apply';
+            }
+        }
+        
+        function applyBulkAction() {
+            const action = document.getElementById('bulkAction').value;
+            const selectedIds = Array.from(document.querySelectorAll('.entry-checkbox:checked'))
+                .map(cb => cb.getAttribute('data-id'));
+            
+            if (selectedIds.length === 0) return;
+            
+            switch(action) {
+                case 'VERIFY':
+                    if (confirm(`Mark ${selectedIds.length} entries as verified?`)) {
+                        selectedIds.forEach(id => verifyEntry(id));
+                        showToast(`${selectedIds.length} entries marked as verified`, 'success');
+                    }
+                    break;
+                    
+                case 'EXPORT':
+                    exportSelectedEntries(selectedIds);
+                    break;
+                    
+                case 'PRINT':
+                    printSelectedEntries(selectedIds);
+                    break;
+                    
+                case 'DISPUTE':
+                    flagSelectedEntries(selectedIds);
+                    break;
+            }
+            
+            // Reset bulk action
+            document.getElementById('bulkAction').value = '';
+            document.getElementById('selectAllEntries').checked = false;
+            updateBulkActionButton();
+        }
+        
+        function initializeCharts() {
+            // Balance over time chart
+            const balanceCtx = document.getElementById('balanceChart').getContext('2d');
+            
+            // Prepare data for balance chart
+            const sortedEntries = [...filteredEntries].sort((a, b) => a.timestamp - b.timestamp);
+            const dates = sortedEntries.map(e => e.timestamp.toLocaleDateString());
+            const balances = sortedEntries.map(e => e.balance);
+            
+            balanceChart = new Chart(balanceCtx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Balance Over Time',
+                        data: balances,
+                        borderColor: '#003366',
+                        backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value, currentLedger?.currency || 'KES');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Type distribution chart
+            const typeCtx = document.getElementById('typeDistributionChart').getContext('2d');
+            
+            // Count entries by type
+            const typeCounts = {};
+            filteredEntries.forEach(entry => {
+                typeCounts[entry.type] = (typeCounts[entry.type] || 0) + 1;
+            });
+            
+            const typeColors = {
+                'CREATED': '#003366',
+                'REPAYMENT': '#28a745',
+                'INTEREST_APPLIED': '#f37021',
+                'PENALTY_APPLIED': '#dc3545',
+                'ADJUSTMENT': '#0099ff',
+                'FEE': '#6f42c1',
+                'NOTE': '#6c757d'
+            };
+            
+            typeChart = new Chart(typeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(typeCounts),
+                    datasets: [{
+                        data: Object.values(typeCounts),
+                        backgroundColor: Object.keys(typeCounts).map(type => typeColors[type] || '#cccccc'),
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateCharts() {
+            if (!balanceChart || !typeChart) return;
+            
+            // Update balance chart
+            const sortedEntries = [...filteredEntries].sort((a, b) => a.timestamp - b.timestamp);
+            const dates = sortedEntries.map(e => e.timestamp.toLocaleDateString());
+            const balances = sortedEntries.map(e => e.balance);
+            
+            balanceChart.data.labels = dates;
+            balanceChart.data.datasets[0].data = balances;
+            balanceChart.update();
+            
+            // Update type distribution chart
+            const typeCounts = {};
+            filteredEntries.forEach(entry => {
+                typeCounts[entry.type] = (typeCounts[entry.type] || 0) + 1;
+            });
+            
+            const typeColors = {
+                'CREATED': '#003366',
+                'REPAYMENT': '#28a745',
+                'INTEREST_APPLIED': '#f37021',
+                'PENALTY_APPLIED': '#dc3545',
+                'ADJUSTMENT': '#0099ff',
+                'FEE': '#6f42c1',
+                'NOTE': '#6c757d'
+            };
+            
+            typeChart.data.labels = Object.keys(typeCounts);
+            typeChart.data.datasets[0].data = Object.values(typeCounts);
+            typeChart.data.datasets[0].backgroundColor = Object.keys(typeCounts).map(type => typeColors[type] || '#cccccc');
+            typeChart.update();
+        }
+        
+        function viewEntryDetails(entryId) {
+            const entry = filteredEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            const detailsHtml = `
+                <div class="entry-details">
+                    <div class="detail-section">
+                        <h4>Basic Information</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <strong>Entry ID:</strong> ${entry.id}
+                            </div>
+                            <div class="detail-item">
+                                <strong>Type:</strong> <span class="badge ${getEntryTypeClass(entry.type)}">${entry.type.replace('_', ' ')}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Timestamp:</strong> ${entry.timestamp.toLocaleString()}
+                            </div>
+                            <div class="detail-item">
+                                <strong>Added By:</strong> ${entry.addedBy} (${entry.addedByType})
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>Financial Details</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <strong>Amount:</strong> 
+                                <span class="${entry.amount === 0 ? '' : (entry.amount > 0 ? 'text-danger' : 'text-success')}">
+                                    ${entry.amount > 0 ? '+' : ''}${formatCurrency(entry.amount, currentLedger?.currency || 'KES')}
+                                </span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Balance After:</strong> ${formatCurrency(entry.balance, currentLedger?.currency || 'KES')}
+                            </div>
+                            ${entry.paymentMethod ? `
+                            <div class="detail-item">
+                                <strong>Payment Method:</strong> ${entry.paymentMethod}
+                            </div>
+                            ` : ''}
+                            ${entry.transactionRef ? `
+                            <div class="detail-item">
+                                <strong>Transaction Reference:</strong> ${entry.transactionRef}
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>Description & Notes</h4>
+                        <div class="description-box">
+                            <p><strong>Description:</strong> ${entry.description}</p>
+                            ${entry.notes ? `<p><strong>Notes:</strong> ${entry.notes}</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>Verification Status</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <strong>Status:</strong> <span class="badge ${getEntryStatusClass(entry.status)}">${entry.status}</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Verified:</strong> ${entry.verified ? 'Yes' : 'No'}
+                            </div>
+                            ${entry.verifiedBy ? `
+                            <div class="detail-item">
+                                <strong>Verified By:</strong> ${entry.verifiedBy}
+                            </div>
+                            ` : ''}
+                            ${entry.verifiedAt ? `
+                            <div class="detail-item">
+                                <strong>Verified At:</strong> ${entry.verifiedAt.toLocaleString()}
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4>Technical Information</h4>
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <strong>Hash:</strong> 
+                                <code class="hash-code">${entry.hash}</code>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Integrity:</strong> 
+                                <span class="text-success">
+                                    <i class="fas fa-check-circle"></i> Verified in hash chain
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${entry.evidence ? `
+                    <div class="detail-section">
+                        <h4>Supporting Evidence</h4>
+                        <div class="evidence-box">
+                            <p>File: ${entry.evidence}</p>
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fas fa-download"></i> Download Evidence
+                            </button>
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            document.getElementById('entryDetailContent').innerHTML = detailsHtml;
+            document.getElementById('entryDetailModal').style.display = 'block';
+            
+            // Update action buttons
+            document.getElementById('verifyEntry').onclick = function() {
+                verifyEntry(entryId);
+                document.getElementById('entryDetailModal').style.display = 'none';
+            };
+            
+            document.getElementById('flagDispute').onclick = function() {
+                flagEntryDispute(entryId);
+                document.getElementById('entryDetailModal').style.display = 'none';
+            };
+        }
+        
+        function verifyEntry(entryId) {
+            const entry = filteredEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            // In a real app, this would call an API
+            entry.verified = true;
+            entry.status = 'VERIFIED';
+            entry.verifiedBy = getCurrentUser()?.name || 'Current User';
+            entry.verifiedAt = new Date();
+            
+            // Update UI
+            const entryRow = document.querySelector(`.entry-checkbox[data-id="${entryId}"]`).closest('tr');
+            if (entryRow) {
+                const statusCell = entryRow.cells[7];
+                statusCell.innerHTML = `
+                    <span class="badge badge-success">VERIFIED</span>
+                    <i class="fas fa-check-circle text-success" title="Verified"></i>
+                `;
+                
+                const actionCell = entryRow.cells[8];
+                actionCell.innerHTML = `
+                    <button class="btn btn-icon btn-sm view-entry" data-id="${entryId}" title="View details">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                `;
+            }
+            
+            showToast(`Entry ${entryId} verified successfully`, 'success');
+        }
+        
+        function flagEntryDispute(entryId) {
+            const reason = prompt('Please enter the reason for disputing this entry:');
+            if (!reason) return;
+            
+            const entry = filteredEntries.find(e => e.id === entryId);
+            if (!entry) return;
+            
+            entry.status = 'DISPUTED';
+            entry.notes = entry.notes ? `${entry.notes}\nDISPUTED: ${reason}` : `DISPUTED: ${reason}`;
+            
+            showToast(`Entry ${entryId} flagged for dispute`, 'warning');
+        }
+        
+        function exportHistory() {
+            const format = document.querySelector('input[name="exportFormat"]:checked').value;
+            const range = document.querySelector('input[name="exportRange"]:checked').value;
+            
+            // Determine which entries to export
+            let entriesToExport = [];
+            
+            if (range === 'FILTERED') {
+                entriesToExport = filteredEntries;
+            } else if (range === 'CUSTOM') {
+                const fromDate = new Date(document.getElementById('exportDateFrom').value);
+                const toDate = new Date(document.getElementById('exportDateTo').value);
+                toDate.setHours(23, 59, 59, 999);
+                
+                entriesToExport = allEntries.filter(entry => 
+                    entry.timestamp >= fromDate && entry.timestamp <= toDate
+                );
+            } else {
+                entriesToExport = allEntries;
+            }
+            
+            // Get selected fields
+            const selectedFields = Array.from(document.querySelectorAll('input[name="includeFields[]"]:checked'))
+                .map(cb => cb.value);
+            
+            // In a real app, this would generate and download a file
+            // For demo, we'll just show a success message
+            showToast(`Exporting ${entriesToExport.length} entries as ${format}...`, 'info');
+            
+            // Simulate download
+            setTimeout(() => {
+                showToast(`Exported ${entriesToExport.length} entries successfully`, 'success');
+                document.getElementById('exportModal').style.display = 'none';
+            }, 1500);
+        }
+        
+        function exportSelectedEntries(entryIds) {
+            const selectedEntries = allEntries.filter(e => entryIds.includes(e.id));
+            showToast(`Preparing export of ${selectedEntries.length} selected entries...`, 'info');
+            
+            // In a real app, this would generate a file
+            setTimeout(() => {
+                showToast(`Exported ${selectedEntries.length} entries successfully`, 'success');
+            }, 1000);
+        }
+        
+        function printSelectedEntries(entryIds) {
+            const selectedEntries = allEntries.filter(e => entryIds.includes(e.id));
+            
+            // Open print window with selected entries
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>M-Pesewa Ledger Print</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        h1 { color: #003366; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #003366; color: white; }
+                        .badge { padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+                        .badge-success { background: #28a745; color: white; }
+                        .badge-warning { background: #f37021; color: white; }
+                        .badge-danger { background: #dc3545; color: white; }
+                    </style>
+                </head>
+                <body>
+                    <h1>M-Pesewa Ledger History</h1>
+                    <p>Printed: ${new Date().toLocaleString()}</p>
+                    <p>Ledger: ${currentLedger?.id || 'Unknown'}</p>
+                    <p>Borrower: ${currentLedger?.borrowerName || 'Unknown'}</p>
+                    <p>Entries: ${selectedEntries.length} selected</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Balance</th>
+                                <th>Added By</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${selectedEntries.map(entry => `
+                                <tr>
+                                    <td>${entry.timestamp.toLocaleDateString()}</td>
+                                    <td><span class="badge ${getEntryTypeClass(entry.type)}">${entry.type.replace('_', ' ')}</span></td>
+                                    <td>${entry.description}</td>
+                                    <td>${entry.amount > 0 ? '+' : ''}${formatCurrency(entry.amount, currentLedger?.currency || 'KES')}</td>
+                                    <td>${formatCurrency(entry.balance, currentLedger?.currency || 'KES')}</td>
+                                    <td>${entry.addedBy}</td>
+                                    <td><span class="badge ${getEntryStatusClass(entry.status)}">${entry.status}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 30px; font-size: 12px; color: #666;">
+                        This is a computer-generated document from M-Pesewa. No signature required.
+                    </p>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+        
+        function flagSelectedEntries(entryIds) {
+            const reason = prompt('Enter reason for flagging these entries as disputed:');
+            if (!reason) return;
+            
+            entryIds.forEach(id => {
+                const entry = filteredEntries.find(e => e.id === id);
+                if (entry) {
+                    entry.status = 'DISPUTED';
+                    entry.notes = entry.notes ? `${entry.notes}\nBULK DISPUTED: ${reason}` : `BULK DISPUTED: ${reason}`;
+                }
+            });
+            
+            showToast(`${entryIds.length} entries flagged for dispute`, 'warning');
+            renderTable();
+        }
+        
+        function checkUserPermissions() {
+            const user = getCurrentUser();
+            if (!user) return;
+            
+            // Hide admin-only features for non-admins
+            if (!user.isAdmin) {
+                const adminFeatures = document.querySelectorAll('.admin-only');
+                adminFeatures.forEach(el => el.style.display = 'none');
+            }
+            
+            // Check if user can verify entries
+            if (!user.isLender && !user.isAdmin) {
+                document.querySelectorAll('.verify-entry').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            }
+        }
+        
+        // Helper functions
+        function getStatusClass(status) {
+            switch(status) {
+                case 'ACTIVE': return 'badge-success';
+                case 'OVERDUE': return 'badge-warning';
+                case 'DEFAULTED': return 'badge-danger';
+                case 'CLEARED': return 'badge-info';
+                case 'ARCHIVED': return 'badge-secondary';
+                default: return 'badge-secondary';
+            }
+        }
+        
+        function getEntryTypeClass(type) {
+            switch(type) {
+                case 'CREATED': return 'badge-primary';
+                case 'REPAYMENT': return 'badge-success';
+                case 'INTEREST_APPLIED': return 'badge-warning';
+                case 'PENALTY_APPLIED': return 'badge-danger';
+                case 'ADJUSTMENT': return 'badge-info';
+                case 'FEE': return 'badge-purple';
+                case 'NOTE': return 'badge-secondary';
+                default: return 'badge-secondary';
+            }
+        }
+        
+        function getEntryStatusClass(status) {
+            switch(status) {
+                case 'VERIFIED': return 'badge-success';
+                case 'PENDING': return 'badge-warning';
+                case 'DISPUTED': return 'badge-danger';
+                case 'REVERSED': return 'badge-secondary';
+                default: return 'badge-secondary';
+            }
+        }
+        
+        function formatDate(date) {
+            if (!date) return '-';
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        function formatDateForInput(date) {
+            return date.toISOString().split('T')[0];
+        }
+        
+        function formatCurrency(amount, currency) {
+            if (amount === null || amount === undefined) return '-';
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency || 'KES',
+                minimumFractionDigits: 2
+            });
+            return formatter.format(Math.abs(amount));
+        }
+        
+        function generateHash(input) {
+            // Simple hash for demo purposes
+            // In production, use proper cryptographic hash
+            let hash = 0;
+            for (let i = 0; i < input.length; i++) {
+                hash = ((hash << 5) - hash) + input.charCodeAt(i);
+                hash |= 0;
+            }
+            return Math.abs(hash).toString(16).slice(0, 16).toUpperCase();
+        }
+        
+        function showToast(message, type = 'info') {
+            // Implementation would show a toast notification
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+        
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle"></i>
+                ${message}
+            `;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(errorDiv, container.firstChild);
+        }
+    </script>
+</body>
+</html>

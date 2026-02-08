@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en" data-mpesewa-page="ledger-update">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Ledger - M-Pesewa</title>
+    
+    <!-- PWA Meta -->
+    <meta name="theme-color" content="#003366">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    
+    <!-- Country Theme -->
+    <link rel="stylesheet" href="../assets/css/themes/default.css">
+    <link rel="stylesheet" href="" id="country-theme">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/logos/favicon.ico" type="image/x-icon">
+</head>
+<body class="ledger-update-page">
+    <!-- Header -->
+    <header class="mp-header" id="mainHeader">
+        <!-- Header content will be loaded by JavaScript -->
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <ol>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="ledger-list.html">Ledgers</a></li>
+                    <li><a href="#" id="ledgerViewLink">Ledger View</a></li>
+                    <li class="active">Update Ledger</li>
+                </ol>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-edit"></i>
+                    Update Ledger
+                </h1>
+                <p class="page-subtitle">
+                    Add new entries to the ledger. Remember: Ledgers are append-only for audit integrity.
+                </p>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.history.back()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ledger Summary -->
+            <div class="ledger-summary-card card">
+                <div class="card-header">
+                    <h3>Current Ledger Status</h3>
+                </div>
+                <div class="card-body">
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <span class="label">Borrower:</span>
+                            <span class="value" id="borrowerName">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Principal:</span>
+                            <span class="value" id="principalAmount">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Current Balance:</span>
+                            <span class="value" id="currentBalance">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Status:</span>
+                            <span class="badge" id="ledgerStatus">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Days Active:</span>
+                            <span class="value" id="daysActive">-</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Next Interest:</span>
+                            <span class="value" id="nextInterest">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Update Form -->
+            <div class="update-form-section card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-plus-circle"></i>
+                        Add New Ledger Entry
+                    </h3>
+                    <p class="card-subtitle">
+                        Add repayment, interest, penalty, or adjustment entries. All entries are permanent and auditable.
+                    </p>
+                </div>
+                
+                <div class="card-body">
+                    <form id="ledgerUpdateForm" class="ledger-update-form">
+                        <!-- Entry Type Selection -->
+                        <div class="form-group">
+                            <label for="entryType">
+                                <i class="fas fa-tag"></i>
+                                Entry Type *
+                            </label>
+                            <select id="entryType" name="entryType" class="form-control" required>
+                                <option value="">Select entry type...</option>
+                                <option value="REPAYMENT">Repayment (Principal/Interest)</option>
+                                <option value="INTEREST_APPLIED">Interest Applied (10%)</option>
+                                <option value="PENALTY_APPLIED">Penalty Applied (5% daily after 7 days)</option>
+                                <option value="ADJUSTMENT">Adjustment (Admin/Special)</option>
+                                <option value="FEE">Fee Applied</option>
+                                <option value="NOTE">Administrative Note</option>
+                            </select>
+                            <div class="form-hint">
+                                Select the type of entry you're adding to the ledger
+                            </div>
+                        </div>
+
+                        <!-- Amount Input -->
+                        <div class="form-group" id="amountGroup">
+                            <label for="amount">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Amount *
+                            </label>
+                            <div class="input-with-currency">
+                                <input type="number" 
+                                       id="amount" 
+                                       name="amount" 
+                                       class="form-control" 
+                                       min="0" 
+                                       step="0.01"
+                                       placeholder="0.00">
+                                <span class="currency-display" id="currencySymbol">KES</span>
+                            </div>
+                            <div class="form-hint" id="amountHint">
+                                Enter the amount for this entry
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="description">
+                                <i class="fas fa-align-left"></i>
+                                Description *
+                            </label>
+                            <textarea id="description" 
+                                      name="description" 
+                                      class="form-control" 
+                                      rows="3" 
+                                      placeholder="Describe this ledger entry (e.g., 'Partial repayment received', 'Weekly interest applied')"
+                                      required></textarea>
+                            <div class="form-hint">
+                                Be specific and clear for audit purposes
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="form-group" id="paymentMethodGroup">
+                            <label for="paymentMethod">
+                                <i class="fas fa-credit-card"></i>
+                                Payment Method
+                            </label>
+                            <select id="paymentMethod" name="paymentMethod" class="form-control">
+                                <option value="">Select method...</option>
+                                <option value="MPESA">M-Pesa</option>
+                                <option value="TILL">M-Pesa Till</option>
+                                <option value="PAYBILL">PayBill</option>
+                                <option value="BANK">Bank Transfer</option>
+                                <option value="CASH">Cash</option>
+                                <option value="AIRTEL">Airtel Money</option>
+                                <option value="TIGO">Tigo Pesa</option>
+                                <option value="VODACOM">Vodacom M-Pesa</option>
+                                <option value="MTN">MTN Mobile Money</option>
+                            </select>
+                            <div class="form-hint">
+                                How was the payment made? (Required for repayments)
+                            </div>
+                        </div>
+
+                        <!-- Transaction Reference -->
+                        <div class="form-group" id="transactionRefGroup">
+                            <label for="transactionRef">
+                                <i class="fas fa-receipt"></i>
+                                Transaction Reference
+                            </label>
+                            <input type="text" 
+                                   id="transactionRef" 
+                                   name="transactionRef" 
+                                   class="form-control" 
+                                   placeholder="e.g., MJ23G7H8K9">
+                            <div class="form-hint">
+                                Transaction ID, receipt number, or reference code
+                            </div>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="form-group">
+                            <label for="entryDate">
+                                <i class="fas fa-calendar-alt"></i>
+                                Entry Date *
+                            </label>
+                            <input type="date" 
+                                   id="entryDate" 
+                                   name="entryDate" 
+                                   class="form-control" 
+                                   required>
+                            <div class="form-hint">
+                                Date when this entry occurred
+                            </div>
+                        </div>
+
+                        <!-- Supporting Evidence -->
+                        <div class="form-group">
+                            <label for="evidenceFile">
+                                <i class="fas fa-paperclip"></i>
+                                Supporting Evidence
+                            </label>
+                            <div class="file-upload-area">
+                                <input type="file" 
+                                       id="evidenceFile" 
+                                       name="evidenceFile" 
+                                       class="file-input" 
+                                       accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                                <div class="file-upload-prompt">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Drop receipt or evidence here, or click to browse</p>
+                                    <p class="file-types">JPG, PNG, PDF, DOC (Max 5MB)</p>
+                                </div>
+                            </div>
+                            <div class="form-hint">
+                                Upload receipt, screenshot, or document for audit trail
+                            </div>
+                        </div>
+
+                        <!-- Notification to Borrower -->
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" 
+                                       id="notifyBorrower" 
+                                       name="notifyBorrower" 
+                                       checked>
+                                <label for="notifyBorrower">
+                                    <i class="fas fa-bell"></i>
+                                    Notify borrower about this update
+                                </label>
+                            </div>
+                            <div class="form-hint">
+                                Send SMS and/or email notification to the borrower
+                            </div>
+                        </div>
+
+                        <!-- Admin Notes (Hidden for regular lenders) -->
+                        <div class="form-group admin-only" id="adminNotesGroup">
+                            <label for="adminNotes">
+                                <i class="fas fa-shield-alt"></i>
+                                Admin Notes
+                            </label>
+                            <textarea id="adminNotes" 
+                                      name="adminNotes" 
+                                      class="form-control" 
+                                      rows="2" 
+                                      placeholder="Internal notes for administrators only"></textarea>
+                            <div class="form-hint">
+                                These notes are only visible to platform administrators
+                            </div>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back()">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Add Ledger Entry
+                            </button>
+                            <button type="button" class="btn btn-danger" id="recalculateBtn">
+                                <i class="fas fa-calculator"></i>
+                                Recalculate Totals
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recent Entries -->
+            <div class="recent-entries card">
+                <div class="card-header">
+                    <h3>
+                        <i class="fas fa-history"></i>
+                        Recent Entries in This Ledger
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="data-table" id="recentEntriesTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Balance</th>
+                                    <th>By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Recent entries will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-actions">
+                        <a href="#" id="viewAllEntries" class="btn btn-link">
+                            <i class="fas fa-list"></i>
+                            View All Entries
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Notice -->
+            <div class="alert alert-info">
+                <div class="alert-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="alert-content">
+                    <h4>Ledger Update Rules</h4>
+                    <ul>
+                        <li><strong>Append-Only:</strong> You cannot modify or delete existing ledger entries</li>
+                        <li><strong>Audit Trail:</strong> All entries are permanently recorded with timestamp and user ID</li>
+                        <li><strong>Interest:</strong> 10% interest is automatically calculated weekly</li>
+                        <li><strong>Penalty:</strong> 5% daily penalty applies after 7 days of overdue</li>
+                        <li><strong>Default:</strong> Loans enter default state after 2 months (60 days)</li>
+                        <li><strong>Admin Oversight:</strong> Platform administrators can review and validate all entries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" id="mainFooter">
+        <!-- Footer content will be loaded by JavaScript -->
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-check-circle"></i>
+                    Confirm Ledger Entry
+                </h3>
+                <button type="button" class="modal-close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmationMessage">Are you sure you want to add this ledger entry?</p>
+                <div class="confirmation-details" id="confirmationDetails">
+                    <!-- Details will be inserted here -->
+                </div>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Warning:</strong> This action cannot be undone. All ledger entries are permanent.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="confirmEntry">
+                    <i class="fas fa-check"></i>
+                    Confirm & Add Entry
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recalculation Modal -->
+    <div class="modal" id="recalculationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    <i class="fas fa-calculator"></i>
+                    Recalculate Ledger Totals
+                </h3>
+                <button type="button" class="modal-close" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Recalculating will update all interest, penalties, and balances based on current rules.</p>
+                <div class="calculation-summary" id="calculationSummary">
+                    <!-- Calculation results will be shown here -->
+                </div>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Note:</strong> This only calculates what should be applied. You still need to add the actual entries.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i>
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" id="applyCalculations">
+                    <i class="fas fa-bolt"></i>
+                    Apply Calculations
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../core/config.js"></script>
+    <script src="../core/constants.js"></script>
+    <script src="../utils/date.js"></script>
+    <script src="../utils/money.js"></script>
+    <script src="../utils/validation.js"></script>
+    
+    <!-- State Management -->
+    <script src="../state/store.js"></script>
+    <script src="../state/slices/auth.slice.js"></script>
+    <script src="../state/slices/user.slice.js"></script>
+    <script src="../state/slices/country.slice.js"></script>
+    <script src="../state/slices/ledger.slice.js"></script>
+    
+    <!-- Router Guards -->
+    <script src="../router/guard-auth.js"></script>
+    <script src="../router/guard-role.js"></script>
+    <script src="../router/guard-subscription.js"></script>
+    
+    <!-- Components -->
+    <script src="../layout/Header.js"></script>
+    <script src="../layout/Footer.js"></script>
+    
+    <!-- Module Logic -->
+    <script src="../ledger/ledger.engine.js"></script>
+    <script src="../ledger/ledger.rules.js"></script>
+    <script src="../ledger/ledger.calculator.js"></script>
+    
+    <!-- Page Script -->
+    <script>
+        // Page initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initializeHeader();
+            initializeFooter();
+            
+            // Check authentication and permissions
+            if (!checkAuth()) {
+                window.location.href = '../auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
+            // Check if user can update ledgers
+            const user = getCurrentUser();
+            if (!user || (!user.isLender && !user.isAdmin)) {
+                showAccessDenied();
+                return;
+            }
+            
+            // Get ledger ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const ledgerId = urlParams.get('id');
+            
+            if (!ledgerId) {
+                showError('No ledger specified. Please select a ledger to update.');
+                window.location.href = 'ledger-list.html';
+                return;
+            }
+            
+            // Load ledger data
+            loadLedgerData(ledgerId);
+            
+            // Initialize form
+            initializeForm();
+            
+            // Set today's date as default
+            document.getElementById('entryDate').valueAsDate = new Date();
+            
+            // Load recent entries
+            loadRecentEntries(ledgerId);
+            
+            // Check subscription status for lenders
+            if (user.isLender && !user.isAdmin) {
+                checkSubscriptionStatus();
+            }
+        });
+        
+        function initializeForm() {
+            const form = document.getElementById('ledgerUpdateForm');
+            const entryTypeSelect = document.getElementById('entryType');
+            const amountGroup = document.getElementById('amountGroup');
+            const paymentMethodGroup = document.getElementById('paymentMethodGroup');
+            const transactionRefGroup = document.getElementById('transactionRefGroup');
+            const adminNotesGroup = document.getElementById('adminNotesGroup');
+            
+            // Show/hide admin notes based on role
+            const user = getCurrentUser();
+            if (user && user.isAdmin) {
+                adminNotesGroup.style.display = 'block';
+            } else {
+                adminNotesGroup.style.display = 'none';
+            }
+            
+            // Entry type change handler
+            entryTypeSelect.addEventListener('change', function() {
+                const type = this.value;
+                
+                // Show/hide amount field
+                if (type === 'NOTE') {
+                    amountGroup.style.display = 'none';
+                    document.getElementById('amount').required = false;
+                } else {
+                    amountGroup.style.display = 'block';
+                    document.getElementById('amount').required = true;
+                }
+                
+                // Show/hide payment method for repayments
+                if (type === 'REPAYMENT') {
+                    paymentMethodGroup.style.display = 'block';
+                    transactionRefGroup.style.display = 'block';
+                    document.getElementById('paymentMethod').required = true;
+                } else {
+                    paymentMethodGroup.style.display = 'none';
+                    transactionRefGroup.style.display = 'none';
+                    document.getElementById('paymentMethod').required = false;
+                }
+                
+                // Update amount hint
+                const amountHint = document.getElementById('amountHint');
+                switch(type) {
+                    case 'REPAYMENT':
+                        amountHint.textContent = 'Enter repayment amount (can be partial)';
+                        break;
+                    case 'INTEREST_APPLIED':
+                        amountHint.textContent = 'Interest will be auto-calculated at 10% weekly';
+                        break;
+                    case 'PENALTY_APPLIED':
+                        amountHint.textContent = 'Penalty will be auto-calculated at 5% daily after 7 days';
+                        break;
+                    default:
+                        amountHint.textContent = 'Enter the amount for this entry';
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showConfirmation();
+            });
+            
+            // Recalculate button
+            document.getElementById('recalculateBtn').addEventListener('click', function() {
+                showRecalculation();
+            });
+            
+            // File upload styling
+            const fileInput = document.getElementById('evidenceFile');
+            const fileUploadArea = fileInput.parentElement;
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileUploadArea.classList.add('has-file');
+                    const fileName = this.files[0].name;
+                    const prompt = fileUploadArea.querySelector('p');
+                    prompt.textContent = `File selected: ${fileName}`;
+                }
+            });
+            
+            // Drag and drop for file upload
+            fileUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    fileInput.dispatchEvent(new Event('change'));
+                }
+            });
+            
+            // Click to browse
+            fileUploadArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+        }
+        
+        function loadLedgerData(ledgerId) {
+            // In a real app, this would fetch from an API
+            // For demo, we'll use mock data
+            
+            const mockLedger = {
+                id: ledgerId,
+                borrowerName: "John Kimani",
+                borrowerContact: "+254712345678",
+                principalAmount: 2500,
+                currency: "KES",
+                currentBalance: 2750,
+                status: "ACTIVE",
+                daysActive: 5,
+                interestRate: 10,
+                penaltyRate: 5,
+                dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000), // 2 days from now
+                createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
+                groupName: "Family Support Group",
+                country: "KE"
+            };
+            
+            // Update UI
+            document.getElementById('borrowerName').textContent = mockLedger.borrowerName;
+            document.getElementById('principalAmount').textContent = 
+                formatCurrency(mockLedger.principalAmount, mockLedger.currency);
+            document.getElementById('currentBalance').textContent = 
+                formatCurrency(mockLedger.currentBalance, mockLedger.currency);
+            
+            // Status badge
+            const statusBadge = document.getElementById('ledgerStatus');
+            statusBadge.textContent = mockLedger.status;
+            statusBadge.className = 'badge ' + getStatusClass(mockLedger.status);
+            
+            document.getElementById('daysActive').textContent = mockLedger.daysActive;
+            document.getElementById('nextInterest').textContent = 
+                formatCurrency(calculateNextInterest(mockLedger), mockLedger.currency);
+            
+            // Set currency
+            document.getElementById('currencySymbol').textContent = 
+                getCurrencySymbol(mockLedger.currency);
+            
+            // Update ledger view link
+            document.getElementById('ledgerViewLink').href = 
+                `ledger-view.html?id=${ledgerId}`;
+            
+            // Store in global state
+            window.currentLedger = mockLedger;
+        }
+        
+        function calculateNextInterest(ledger) {
+            // Simple interest calculation: 10% weekly
+            return ledger.currentBalance * 0.1;
+        }
+        
+        function getStatusClass(status) {
+            switch(status) {
+                case 'ACTIVE': return 'badge-success';
+                case 'OVERDUE': return 'badge-warning';
+                case 'DEFAULTED': return 'badge-danger';
+                case 'CLEARED': return 'badge-info';
+                case 'ARCHIVED': return 'badge-secondary';
+                default: return 'badge-secondary';
+            }
+        }
+        
+        function loadRecentEntries(ledgerId) {
+            // Mock recent entries
+            const mockEntries = [
+                {
+                    date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+                    type: 'REPAYMENT',
+                    description: 'Partial repayment via M-Pesa',
+                    amount: 500,
+                    balance: 2750,
+                    by: 'John Kimani'
+                },
+                {
+                    date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+                    type: 'INTEREST_APPLIED',
+                    description: 'Weekly interest applied',
+                    amount: 250,
+                    balance: 3250,
+                    by: 'System'
+                },
+                {
+                    date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+                    type: 'CREATED',
+                    description: 'Loan disbursed for transport to interview',
+                    amount: 2500,
+                    balance: 2500,
+                    by: 'Sarah Mwangi (Lender)'
+                }
+            ];
+            
+            const tbody = document.querySelector('#recentEntriesTable tbody');
+            tbody.innerHTML = '';
+            
+            mockEntries.forEach(entry => {
+                const row = document.createElement('tr');
+                
+                // Format date
+                const dateStr = entry.date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                // Type badge
+                const typeBadge = `<span class="badge ${getEntryTypeClass(entry.type)}">${entry.type}</span>`;
+                
+                // Amount with currency
+                const amountStr = formatCurrency(entry.amount, window.currentLedger?.currency || 'KES');
+                const balanceStr = formatCurrency(entry.balance, window.currentLedger?.currency || 'KES');
+                
+                row.innerHTML = `
+                    <td>${dateStr}</td>
+                    <td>${typeBadge}</td>
+                    <td>${entry.description}</td>
+                    <td class="${entry.amount >= 0 ? 'text-success' : 'text-danger'}">
+                        ${entry.amount >= 0 ? '+' : ''}${amountStr}
+                    </td>
+                    <td><strong>${balanceStr}</strong></td>
+                    <td>${entry.by}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Update "view all" link
+            document.getElementById('viewAllEntries').href = 
+                `ledger-history.html?id=${ledgerId}`;
+        }
+        
+        function getEntryTypeClass(type) {
+            switch(type) {
+                case 'REPAYMENT': return 'badge-success';
+                case 'INTEREST_APPLIED': return 'badge-warning';
+                case 'PENALTY_APPLIED': return 'badge-danger';
+                case 'CREATED': return 'badge-primary';
+                case 'ADJUSTMENT': return 'badge-info';
+                case 'NOTE': return 'badge-secondary';
+                default: return 'badge-secondary';
+            }
+        }
+        
+        function showConfirmation() {
+            const form = document.getElementById('ledgerUpdateForm');
+            const formData = new FormData(form);
+            
+            const entryType = formData.get('entryType');
+            const amount = formData.get('amount');
+            const description = formData.get('description');
+            const paymentMethod = formData.get('paymentMethod');
+            const transactionRef = formData.get('transactionRef');
+            const entryDate = formData.get('entryDate');
+            
+            // Update confirmation message
+            document.getElementById('confirmationMessage').textContent = 
+                `Add ${entryType} entry to ledger?`;
+            
+            // Update details
+            const detailsHtml = `
+                <div class="detail-item">
+                    <strong>Type:</strong> ${entryType}
+                </div>
+                ${amount ? `
+                <div class="detail-item">
+                    <strong>Amount:</strong> ${formatCurrency(parseFloat(amount), window.currentLedger?.currency || 'KES')}
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <strong>Description:</strong> ${description}
+                </div>
+                ${paymentMethod ? `
+                <div class="detail-item">
+                    <strong>Payment Method:</strong> ${paymentMethod}
+                </div>
+                ` : ''}
+                ${transactionRef ? `
+                <div class="detail-item">
+                    <strong>Reference:</strong> ${transactionRef}
+                </div>
+                ` : ''}
+                <div class="detail-item">
+                    <strong>Date:</strong> ${new Date(entryDate).toLocaleDateString()}
+                </div>
+            `;
+            
+            document.getElementById('confirmationDetails').innerHTML = detailsHtml;
+            
+            // Show modal
+            const modal = document.getElementById('confirmationModal');
+            modal.style.display = 'block';
+            
+            // Confirm button handler
+            document.getElementById('confirmEntry').onclick = function() {
+                submitLedgerEntry(formData);
+            };
+        }
+        
+        function submitLedgerEntry(formData) {
+            // Show loading
+            const confirmBtn = document.getElementById('confirmEntry');
+            const originalText = confirmBtn.innerHTML;
+            confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            confirmBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Close modal
+                document.getElementById('confirmationModal').style.display = 'none';
+                
+                // Show success message
+                showToast('Ledger entry added successfully!', 'success');
+                
+                // Reset form
+                document.getElementById('ledgerUpdateForm').reset();
+                document.getElementById('entryDate').valueAsDate = new Date();
+                
+                // Reload recent entries
+                loadRecentEntries(window.currentLedger?.id);
+                
+                // Update ledger summary
+                // In real app, would fetch updated data
+                
+                // Reset button
+                confirmBtn.innerHTML = originalText;
+                confirmBtn.disabled = false;
+                
+                // Navigate to ledger view after 2 seconds
+                setTimeout(() => {
+                    window.location.href = `ledger-view.html?id=${window.currentLedger?.id}`;
+                }, 2000);
+                
+            }, 1500);
+        }
+        
+        function showRecalculation() {
+            if (!window.currentLedger) return;
+            
+            const ledger = window.currentLedger;
+            
+            // Calculate what's due
+            const daysOverdue = Math.max(0, ledger.daysActive - 7);
+            const interestDue = ledger.currentBalance * 0.1; // 10% weekly
+            const penaltyDue = daysOverdue > 0 ? ledger.currentBalance * 0.05 * daysOverdue : 0;
+            const totalDue = ledger.currentBalance + interestDue + penaltyDue;
+            
+            const summaryHtml = `
+                <div class="calculation-item">
+                    <strong>Current Balance:</strong> ${formatCurrency(ledger.currentBalance, ledger.currency)}
+                </div>
+                <div class="calculation-item">
+                    <strong>Interest Due (10% weekly):</strong> ${formatCurrency(interestDue, ledger.currency)}
+                </div>
+                ${daysOverdue > 0 ? `
+                <div class="calculation-item">
+                    <strong>Penalty Due (5% daily for ${daysOverdue} days):</strong> ${formatCurrency(penaltyDue, ledger.currency)}
+                </div>
+                ` : ''}
+                <div class="calculation-item total">
+                    <strong>Total Amount Due:</strong> ${formatCurrency(totalDue, ledger.currency)}
+                </div>
+                <div class="calculation-item">
+                    <strong>Status:</strong> ${ledger.status} (${ledger.daysActive} days active)
+                </div>
+                ${daysOverdue > 0 ? `
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    This loan is ${daysOverdue} days overdue! Penalties are accumulating.
+                </div>
+                ` : ''}
+            `;
+            
+            document.getElementById('calculationSummary').innerHTML = summaryHtml;
+            
+            // Show modal
+            document.getElementById('recalculationModal').style.display = 'block';
+            
+            // Apply calculations button
+            document.getElementById('applyCalculations').onclick = function() {
+                // Auto-fill form with calculated values
+                if (interestDue > 0) {
+                    document.getElementById('entryType').value = 'INTEREST_APPLIED';
+                    document.getElementById('amount').value = interestDue.toFixed(2);
+                    document.getElementById('description').value = 
+                        `Weekly interest calculated at 10% on balance of ${formatCurrency(ledger.currentBalance, ledger.currency)}`;
+                }
+                
+                // Close modal
+                document.getElementById('recalculationModal').style.display = 'none';
+                
+                // Show toast
+                showToast('Calculations applied to form', 'info');
+            };
+        }
+        
+        function checkSubscriptionStatus() {
+            const user = getCurrentUser();
+            if (user.isLender && user.subscriptionStatus !== 'ACTIVE') {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning';
+                alert.innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Subscription Expired:</strong> Your lender subscription has expired. 
+                    You can still view ledgers but cannot add new entries until you renew.
+                    <a href="../subscription/subscribe.html" class="alert-link">Renew Now</a>
+                `;
+                
+                const form = document.getElementById('ledgerUpdateForm');
+                form.insertBefore(alert, form.firstChild);
+                
+                // Disable form
+                form.querySelectorAll('input, select, textarea, button').forEach(el => {
+                    if (el.type !== 'button') {
+                        el.disabled = true;
+                    }
+                });
+                
+                document.getElementById('recalculateBtn').disabled = false; // Keep this enabled
+            }
+        }
+        
+        // Modal close handlers
+        document.querySelectorAll('.modal-close, .modal .btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+        
+        // Helper function to show toast
+        function showToast(message, type = 'info') {
+            // Implementation would go here
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+        
+        // Helper function to show error
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-circle"></i>
+                ${message}
+            `;
+            
+            const container = document.querySelector('.container');
+            container.insertBefore(errorDiv, container.firstChild);
+        }
+        
+        // Helper function to show access denied
+        function showAccessDenied() {
+            const main = document.querySelector('.main-content');
+            main.innerHTML = `
+                <div class="container">
+                    <div class="access-denied">
+                        <div class="denied-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h2>Access Denied</h2>
+                        <p>You don't have permission to update ledgers. Only lenders and administrators can perform this action.</p>
+                        <div class="denied-actions">
+                            <a href="ledger-list.html" class="btn btn-primary">
+                                <i class="fas fa-list"></i>
+                                View Ledgers
+                            </a>
+                            <a href="../index.html" class="btn btn-secondary">
+                                <i class="fas fa-home"></i>
+                                Go Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

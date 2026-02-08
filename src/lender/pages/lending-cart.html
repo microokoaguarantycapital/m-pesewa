@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lending Cart - M-Pesewa</title>
+    
+    <!-- Brand Colors -->
+    <meta name="theme-color" content="#003366">
+    <meta name="msapplication-navbutton-color" content="#003366">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#003366">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/badges.css">
+    <link rel="stylesheet" href="../../assets/css/modals.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="lending-cart">
+    <!-- Header -->
+    <header class="mp-header" style="background-color: #003366;">
+        <div class="header-container">
+            <!-- Logo -->
+            <div class="header-logo">
+                <a href="../../index.html" class="logo-link">
+                    <div class="logo-icon" style="color: #ffffff;">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-primary" style="color: #ffffff;">M-PESEWA</span>
+                        <span class="logo-subtitle" style="color: #0099ff;">Lending Cart</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Main Navigation -->
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../../index.html" class="nav-link" style="color: #ffffff;">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" style="color: #ffffff;">
+                            <i class="fas fa-users"></i> Groups ▾
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../groups/group-dashboard.html" class="dropdown-item">Group Dashboard</a>
+                            <a href="../groups/group-members.html" class="dropdown-item">Group Members</a>
+                            <a href="../groups/group-create.html" class="dropdown-item">Create Group</a>
+                            <a href="../groups/group-invites.html" class="dropdown-item">Invites</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link active" style="color: #0099ff;">
+                            <i class="fas fa-money-bill-wave"></i> Lending ▾
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="lender-dashboard.html" class="dropdown-item">Dashboard</a>
+                            <a href="lending-cart.html" class="dropdown-item active">Lending Cart</a>
+                            <a href="lending-requests.html" class="dropdown-item">Loan Requests</a>
+                            <a href="lending-portfolio.html" class="dropdown-item">Portfolio</a>
+                            <a href="lending-history.html" class="dropdown-item">History</a>
+                            <a href="lending-risk.html" class="dropdown-item">Risk Analysis</a>
+                            <a href="lending-rules.html" class="dropdown-item">Rules</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" style="color: #ffffff;">
+                            <i class="fas fa-file-invoice-dollar"></i> Ledgers ▾
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../ledger/ledger-list.html" class="dropdown-item">All Ledgers</a>
+                            <a href="../ledger/ledger-view.html" class="dropdown-item">Active Ledgers</a>
+                            <a href="../ledger/ledger-update.html" class="dropdown-item">Update Ledger</a>
+                            <a href="../ledger/ledger-history.html" class="dropdown-item">Ledger History</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../blacklist/blacklist-public.html" class="nav-link" style="color: #ffffff;">
+                            <i class="fas fa-ban"></i> Blacklist
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Zone - User Area -->
+            <div class="header-user">
+                <div class="user-profile dropdown">
+                    <button class="user-btn" style="color: #ffffff;">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="user-name" id="lenderUsername">Loading...</span> ▾
+                    </button>
+                    <div class="dropdown-menu user-menu">
+                        <div class="user-info">
+                            <strong id="profileName">Loading...</strong>
+                            <small id="profileGroup">Group: Loading...</small>
+                            <small id="profileCountry">Country: Loading...</small>
+                        </div>
+                        <a href="../user/profile.html" class="dropdown-item"><i class="fas fa-user"></i> Profile</a>
+                        <a href="../subscription/status.html" class="dropdown-item"><i class="fas fa-crown"></i> Subscription</a>
+                        <a href="../user/security.html" class="dropdown-item"><i class="fas fa-shield-alt"></i> Security</a>
+                        <a href="../user/activity.html" class="dropdown-item"><i class="fas fa-history"></i> Activity</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="../../auth/logout.html" class="dropdown-item logout-btn" style="color: #f37021;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Cart Indicator -->
+                <div class="cart-indicator dropdown">
+                    <button class="cart-btn" style="color: #ffffff;" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <div class="dropdown-menu cart-menu">
+                        <div class="cart-header">
+                            <h4>Lending Cart</h4>
+                            <span class="cart-total" id="cartTotalSmall">KES 0</span>
+                        </div>
+                        <div class="cart-items-preview" id="cartItemsPreview">
+                            <!-- Cart items preview -->
+                        </div>
+                        <a href="lending-cart.html" class="dropdown-item view-cart">View Full Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars" style="color: #ffffff;"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <span>M-PESEWA Lender</span>
+            <button class="mobile-nav-close" id="mobileNavClose">&times;</button>
+        </div>
+        <nav class="mobile-nav-menu">
+            <!-- Mobile navigation will be populated by JavaScript -->
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="cart-container">
+        <!-- Cart Header -->
+        <div class="cart-header">
+            <div class="cart-title">
+                <h1 style="color: #003366;">
+                    <i class="fas fa-shopping-cart"></i> Lending Cart
+                </h1>
+                <p class="cart-subtitle" style="color: #555555;">
+                    Review and manage loan requests before approval. Bulk approve or reject multiple requests.
+                </p>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn btn-primary" style="background-color: #28a745; color: #ffffff;" id="bulkApproveBtn" disabled>
+                    <i class="fas fa-check-circle"></i> Approve Selected (<span id="selectedCount">0</span>)
+                </button>
+                <button class="btn btn-danger" style="background-color: #dc3545; color: #ffffff;" id="bulkRejectBtn" disabled>
+                    <i class="fas fa-times-circle"></i> Reject Selected
+                </button>
+                <button class="btn btn-secondary" style="background-color: #0099ff; color: #ffffff;" id="clearCartBtn">
+                    <i class="fas fa-trash-alt"></i> Clear Cart
+                </button>
+                <button class="btn btn-outline" style="color: #003366; border-color: #003366;" id="findMoreBtn">
+                    <i class="fas fa-search-plus"></i> Find More Requests
+                </button>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner" id="cartAlert" style="display: none;">
+            <div class="alert-content">
+                <i class="fas fa-info-circle"></i>
+                <span id="cartAlertMessage"></span>
+            </div>
+            <button class="alert-action" id="cartAlertActionBtn" style="background-color: #0099ff; color: #ffffff;">
+                View Details
+            </button>
+        </div>
+
+        <!-- Cart Summary -->
+        <div class="cart-summary-grid">
+            <!-- Total Items -->
+            <div class="summary-card" style="background-color: #ffffff; border: 1px solid #e9ecef;">
+                <div class="summary-icon" style="background-color: #0099ff; color: #ffffff;">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+                <div class="summary-info">
+                    <h3 style="color: #003366;" id="totalItems">0</h3>
+                    <p style="color: #555555;">Total Items in Cart</p>
+                </div>
+            </div>
+
+            <!-- Total Amount -->
+            <div class="summary-card" style="background-color: #ffffff; border: 1px solid #e9ecef;">
+                <div class="summary-icon" style="background-color: #28a745; color: #ffffff;">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="summary-info">
+                    <h3 style="color: #003366;" id="totalAmount">KES 0</h3>
+                    <p style="color: #555555;">Total Loan Amount</p>
+                </div>
+            </div>
+
+            <!-- Weekly Limit -->
+            <div class="summary-card" style="background-color: #ffffff; border: 1px solid #e9ecef;">
+                <div class="summary-icon" style="background-color: #f37021; color: #ffffff;">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="summary-info">
+                    <h3 style="color: #003366;" id="weeklyLimit">KES 5,000</h3>
+                    <p style="color: #555555;">Weekly Lending Limit</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="limitProgress" style="background-color: #28a745; width: 0%;"></div>
+                    </div>
+                    <small style="color: #f37021;" id="limitStatus">0% used</small>
+                </div>
+            </div>
+
+            <!-- Estimated Interest -->
+            <div class="summary-card" style="background-color: #ffffff; border: 1px solid #e9ecef;">
+                <div class="summary-icon" style="background-color: #6f42c1; color: #ffffff;">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="summary-info">
+                    <h3 style="color: #003366;" id="estimatedInterest">KES 0</h3>
+                    <p style="color: #555555;">Estimated Interest (10%)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cart Content -->
+        <div class="cart-content">
+            <!-- Left Column - Cart Items -->
+            <div class="cart-items-section">
+                <div class="section-header">
+                    <h2 style="color: #003366;">
+                        <i class="fas fa-shopping-basket"></i> Cart Items
+                        <span class="badge" id="cartItemsCount" style="background-color: #0099ff; color: #ffffff;">0</span>
+                    </h2>
+                    <div class="section-actions">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="selectAllCheckbox">
+                            <label class="form-check-label" style="color: #003366;">Select All</label>
+                        </div>
+                        <button class="btn btn-small" style="color: #003366; border-color: #003366;" id="sortCartBtn">
+                            <i class="fas fa-sort-amount-down"></i> Sort
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cart Items List -->
+                <div class="cart-items-list" id="cartItemsList">
+                    <!-- Cart items will be loaded here -->
+                    <div class="empty-cart">
+                        <div class="empty-icon">
+                            <i class="fas fa-shopping-cart" style="color: #0099ff; font-size: 4rem;"></i>
+                        </div>
+                        <h3 style="color: #003366;">Your Lending Cart is Empty</h3>
+                        <p style="color: #555555; max-width: 500px; margin: 10px auto 20px;">
+                            Add loan requests to your cart from the Loan Requests page. You can review them here before approval.
+                        </p>
+                        <button class="btn btn-primary" style="background-color: #0099ff; color: #ffffff;" id="browseRequestsBtn">
+                            <i class="fas fa-search"></i> Browse Loan Requests
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cart Pagination -->
+                <div class="cart-pagination" id="cartPagination" style="display: none;">
+                    <button class="pagination-btn" id="prevPageBtn">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers">
+                        <span class="page-number active">1</span>
+                    </div>
+                    <button class="pagination-btn" id="nextPageBtn">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column - Cart Summary & Actions -->
+            <div class="cart-sidebar">
+                <!-- Cart Summary -->
+                <div class="sidebar-widget" style="background-color: #ffffff;">
+                    <div class="widget-header">
+                        <h3 style="color: #003366;">
+                            <i class="fas fa-receipt"></i> Cart Summary
+                        </h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span style="color: #555555;">Subtotal (Principal):</span>
+                                <span style="color: #003366;" id="summarySubtotal">KES 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: #555555;">Interest (10%):</span>
+                                <span style="color: #f37021;" id="summaryInterest">KES 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: #555555;">Processing Fee:</span>
+                                <span style="color: #555555;" id="summaryFee">KES 0</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span style="color: #003366; font-weight: bold;">Total Due:</span>
+                                <span style="color: #28a745; font-weight: bold;" id="summaryTotal">KES 0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span style="color: #555555;">Weekly Limit Used:</span>
+                                <span style="color: #0099ff;" id="summaryLimitUsed">0%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-actions">
+                            <button class="btn btn-primary" style="background-color: #28a745; color: #ffffff; width: 100%;" id="checkoutBtn" disabled>
+                                <i class="fas fa-lock"></i> Approve All Loans
+                            </button>
+                            <button class="btn btn-outline" style="color: #003366; border-color: #003366; width: 100%; margin-top: 10px;" id="saveForLaterBtn">
+                                <i class="fas fa-bookmark"></i> Save for Later
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="sidebar-widget" style="background-color: #ffffff;">
+                    <div class="widget-header">
+                        <h3 style="color: #003366;">
+                            <i class="fas fa-shield-alt"></i> Risk Assessment
+                        </h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="risk-meter">
+                            <div class="risk-level" id="riskLevel" style="color: #28a745;">
+                                <i class="fas fa-check-circle"></i> Low Risk
+                            </div>
+                            <div class="risk-score">
+                                <span style="color: #555555;">Risk Score:</span>
+                                <span style="color: #003366; font-weight: bold;" id="riskScore">85/100</span>
+                            </div>
+                        </div>
+                        
+                        <div class="risk-factors">
+                            <h4 style="color: #003366; margin-top: 15px; margin-bottom: 10px;">Risk Factors:</h4>
+                            <ul class="risk-list">
+                                <li class="risk-item positive">
+                                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                    <span style="color: #555555;">All borrowers in your group</span>
+                                </li>
+                                <li class="risk-item positive">
+                                    <i class="fas fa-check-circle" style="color: #28a745;"></i>
+                                    <span style="color: #555555;">Good repayment history</span>
+                                </li>
+                                <li class="risk-item warning">
+                                    <i class="fas fa-exclamation-circle" style="color: #f37021;"></i>
+                                    <span style="color: #555555;">2 new borrowers</span>
+                                </li>
+                                <li class="risk-item negative">
+                                    <i class="fas fa-times-circle" style="color: #dc3545;"></i>
+                                    <span style="color: #555555;">1 borrower with late payment</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="sidebar-widget" style="background-color: #ffffff;">
+                    <div class="widget-header">
+                        <h3 style="color: #003366;">
+                            <i class="fas fa-chart-pie"></i> Cart Composition
+                        </h3>
+                    </div>
+                    <div class="widget-body">
+                        <div class="chart-container-small">
+                            <canvas id="cartChart" width="200" height="200"></canvas>
+                        </div>
+                        <div class="chart-legend" id="chartLegend">
+                            <!-- Chart legend will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div class="recommendations-section" style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 30px;">
+            <div class="section-header">
+                <h2 style="color: #003366;">
+                    <i class="fas fa-lightbulb"></i> Smart Recommendations
+                </h2>
+            </div>
+            <div class="recommendations-grid" id="recommendationsGrid">
+                <!-- Recommendations will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37; color: #ffffff;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Borrowing Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../../global-pages/how-it-works.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="#" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <!-- Lending Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="lending-rules.html" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="../../global-pages/how-it-works.html" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="lending-rules.html" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <!-- Platform Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../../global-pages/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../../global-pages/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="../../global-pages/collectors.html" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <!-- Company Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../../global-pages/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="../../global-pages/careers.html" style="color: #d1d5db;">Team & Advisory Board</a>
+                    <a href="../../global-pages/press.html" style="color: #d1d5db;">News & Careers</a>
+                    <a href="../../global-pages/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../../global-pages/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <!-- Legal Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../../global-pages/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../../global-pages/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="../../global-pages/contact.html" style="color: #d1d5db;">Grievance Redressal</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <!-- Partners Column -->
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="../../global-pages/contact.html" style="color: #d1d5db;">Be a Partner</a>
+                </div>
+            </div>
+
+            <!-- Country Ticker -->
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p style="color: #ffffff;">
+                        © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                    </p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" style="color: #ffffff;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #ffffff;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: #ffffff;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="color: #ffffff;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: #ffffff;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    
+    <!-- Item Details Modal -->
+    <div class="modal" id="itemDetailsModal">
+        <div class="modal-content wide-modal">
+            <div class="modal-header">
+                <h3 style="color: #003366;">
+                    <i class="fas fa-file-invoice"></i> Loan Request Details
+                </h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="details-container" id="itemDetailsContent">
+                    <!-- Details will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-cancel" style="color: #003366; border-color: #003366;">Close</button>
+                <button class="btn btn-danger" style="background-color: #dc3545; color: #ffffff;" id="removeFromCartBtn">
+                    <i class="fas fa-trash"></i> Remove from Cart
+                </button>
+                <button class="btn btn-primary" style="background-color: #28a745; color: #ffffff;" id="approveSingleBtn">
+                    <i class="fas fa-check"></i> Approve This Loan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Approval Modal -->
+    <div class="modal" id="bulkApprovalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: #003366;">
+                    <i class="fas fa-tasks"></i> Bulk Loan Approval
+                </h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="approval-summary">
+                    <div class="summary-card" style="background-color: #f8f9fa; padding: 15px; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-bottom: 15px;">Approval Summary</h4>
+                        <div class="summary-row">
+                            <span style="color: #555555;">Number of Loans:</span>
+                            <span style="color: #003366; font-weight: bold;" id="approvalCount">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span style="color: #555555;">Total Amount:</span>
+                            <span style="color: #003366; font-weight: bold;" id="approvalAmount">KES 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span style="color: #555555;">Total Interest (10%):</span>
+                            <span style="color: #f37021; font-weight: bold;" id="approvalInterest">KES 0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span style="color: #003366; font-weight: bold;">Grand Total:</span>
+                            <span style="color: #28a745; font-weight: bold;" id="approvalTotal">KES 0</span>
+                        </div>
+                    </div>
+
+                    <div class="approval-options" style="margin-top: 20px;">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Approval Options</h4>
+                        <div class="form-group">
+                            <label style="color: #003366;">Disbursement Method:</label>
+                            <select class="form-control" id="disbursementMethod" style="border-color: #0099ff;">
+                                <option value="mpesa">M-Pesa</option>
+                                <option value="bank">Bank Transfer</option>
+                                <option value="cash">Cash</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="color: #003366;">Repayment Reminder:</label>
+                            <select class="form-control" id="reminderFrequency" style="border-color: #0099ff;">
+                                <option value="daily">Daily Reminders</option>
+                                <option value="weekly">Weekly Summary</option>
+                                <option value="due_date">Due Date Only</option>
+                                <option value="none">No Reminders</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="autoPenaltyCheck" checked>
+                                <label class="form-check-label" style="color: #555555;">
+                                    Automatically apply 5% daily penalty after 7 days
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="notifyBorrowersCheck" checked>
+                                <label class="form-check-label" style="color: #555555;">
+                                    Notify borrowers about approval
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="approval-warning" style="margin-top: 20px; padding: 15px; background-color: #fff3cd; border-radius: 8px; border-left: 4px solid #ffc107;">
+                        <h5 style="color: #856404;">
+                            <i class="fas fa-exclamation-triangle"></i> Important Notice
+                        </h5>
+                        <p style="color: #856404; margin: 10px 0;">
+                            By approving these loans, you acknowledge that:
+                        </p>
+                        <ul style="color: #856404; padding-left: 20px;">
+                            <li>All loans follow M-Pesewa rules and hierarchy</li>
+                            <li>You are lending within your group only</li>
+                            <li>Borrowers are in the same country as you</li>
+                            <li>You have verified guarantor information</li>
+                            <li>You understand the 10% interest and 5% penalty structure</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-cancel" style="color: #003366; border-color: #003366;">Cancel</button>
+                <button class="btn btn-primary" style="background-color: #28a745; color: #ffffff;" id="confirmBulkApproval">
+                    <i class="fas fa-check-double"></i> Confirm Bulk Approval
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Cart Modal -->
+    <div class="modal" id="saveCartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: #003366;">
+                    <i class="fas fa-bookmark"></i> Save Cart for Later
+                </h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label style="color: #003366;">Cart Name:</label>
+                    <input type="text" class="form-control" id="cartName" placeholder="e.g., January Loans, High Priority, etc." style="border-color: #0099ff;">
+                </div>
+                <div class="form-group">
+                    <label style="color: #003366;">Expiry Date:</label>
+                    <input type="date" class="form-control" id="cartExpiry" style="border-color: #0099ff;">
+                </div>
+                <div class="form-group">
+                    <label style="color: #003366;">Notes (optional):</label>
+                    <textarea class="form-control" id="cartNotes" rows="3" placeholder="Add any notes about this cart..." style="border-color: #0099ff;"></textarea>
+                </div>
+                <div class="save-options">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="notifyExpiryCheck" checked>
+                        <label class="form-check-label" style="color: #555555;">
+                            Notify me before expiry
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-cancel" style="color: #003366; border-color: #003366;">Cancel</button>
+                <button class="btn btn-primary" style="background-color: #0099ff; color: #ffffff;" id="confirmSaveCart">
+                    <i class="fas fa-save"></i> Save Cart
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p style="color: #ffffff;">Loading cart...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../core/app.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../state/slices/auth.slice.js"></script>
+    <script src="../../state/slices/lender.slice.js"></script>
+    <script src="../../state/slices/cart.slice.js"></script>
+    
+    <!-- Lender Module Scripts -->
+    <script src="../lender.state-machine.js"></script>
+    <script src="../lender.rules.js"></script>
+    <script src="../lender.permissions.js"></script>
+    <script src="../lender.audit.js"></script>
+    
+    <!-- Cart Script -->
+    <script>
+        // Cart state
+        let cartState = {
+            items: [],
+            selectedItems: new Set(),
+            currentPage: 1,
+            itemsPerPage: 10,
+            totalPages: 1,
+            weeklyLimit: 5000,
+            weeklyUsed: 1500,
+            riskScore: 85
+        };
+        
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart
+            initializeCart();
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Load cart data
+            loadCartData();
+            
+            // Initialize chart
+            initializeCartChart();
+        });
+        
+        function initializeCart() {
+            console.log('Initializing Lending Cart...');
+            
+            // Check authentication
+            if (!checkAuthentication()) {
+                window.location.href = '../../auth/login.html';
+                return;
+            }
+            
+            // Load cart from localStorage
+            loadCartFromStorage();
+            
+            // Update cart indicators
+            updateCartIndicators();
+        }
+        
+        function checkAuthentication() {
+            const token = localStorage.getItem('mpesewa_auth_token');
+            const userRole = localStorage.getItem('mpesewa_user_role');
+            
+            if (!token || userRole !== 'lender') {
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function loadCartFromStorage() {
+            const cartStr = localStorage.getItem('mpesewa_lending_cart');
+            if (cartStr) {
+                try {
+                    cartState.items = JSON.parse(cartStr);
+                } catch (e) {
+                    console.error('Error parsing cart:', e);
+                    cartState.items = [];
+                }
+            }
+            
+            // If no cart in storage, load demo data
+            if (cartState.items.length === 0) {
+                loadDemoCartData();
+            }
+            
+            // Calculate total pages
+            cartState.totalPages = Math.ceil(cartState.items.length / cartState.itemsPerPage);
+        }
+        
+        function loadDemoCartData() {
+            // Demo cart items
+            cartState.items = [
+                {
+                    id: 'cart_001',
+                    borrowerId: 'borrower_001',
+                    borrowerName: 'Jane Wanjiku',
+                    borrowerRating: 4.5,
+                    phone: '+254 712 345 678',
+                    location: 'Nairobi, Kenya',
+                    groupId: 'group_001',
+                    groupName: 'Family Group',
+                    category: 'transport',
+                    categoryName: 'M-pesewa Fare',
+                    amount: 1200,
+                    dateAdded: '2024-01-20',
+                    dueDate: '2024-01-27',
+                    interest: 120,
+                    total: 1320,
+                    guarantors: [
+                        { name: 'John Kimani', phone: '+254 723 456 789' },
+                        { name: 'Mary Njeri', phone: '+254 734 567 890' }
+                    ],
+                    riskLevel: 'low',
+                    notes: 'Transport to work interview'
+                },
+                {
+                    id: 'cart_002',
+                    borrowerId: 'borrower_002',
+                    borrowerName: 'Michael Otieno',
+                    borrowerRating: 4.0,
+                    phone: '+254 745 678 901',
+                    location: 'Kisumu, Kenya',
+                    groupId: 'group_001',
+                    groupName: 'Family Group',
+                    category: 'data',
+                    categoryName: 'M-pesewa Data',
+                    amount: 800,
+                    dateAdded: '2024-01-21',
+                    dueDate: '2024-01-28',
+                    interest: 80,
+                    total: 880,
+                    guarantors: [
+                        { name: 'Sarah Achieng', phone: '+254 756 789 012' },
+                        { name: 'David Mwangi', phone: '+254 767 890 123' }
+                    ],
+                    riskLevel: 'medium',
+                    notes: 'Internet data for online work'
+                },
+                {
+                    id: 'cart_003',
+                    borrowerId: 'borrower_003',
+                    borrowerName: 'Sarah Achieng',
+                    borrowerRating: 3.5,
+                    phone: '+254 778 901 234',
+                    location: 'Mombasa, Kenya',
+                    groupId: 'group_001',
+                    groupName: 'Family Group',
+                    category: 'food',
+                    categoryName: 'M-pesewa Food',
+                    amount: 1500,
+                    dateAdded: '2024-01-22',
+                    dueDate: '2024-01-29',
+                    interest: 150,
+                    total: 1650,
+                    guarantors: [
+                        { name: 'James Omondi', phone: '+254 789 012 345' },
+                        { name: 'Grace Wambui', phone: '+254 790 123 456' }
+                    ],
+                    riskLevel: 'low',
+                    notes: 'Family groceries'
+                },
+                {
+                    id: 'cart_004',
+                    borrowerId: 'borrower_004',
+                    borrowerName: 'David Mwangi',
+                    borrowerRating: 4.8,
+                    phone: '+254 701 234 567',
+                    location: 'Nakuru, Kenya',
+                    groupId: 'group_001',
+                    groupName: 'Family Group',
+                    category: 'medicine',
+                    categoryName: 'M-pesewa Medicine',
+                    amount: 2500,
+                    dateAdded: '2024-01-23',
+                    dueDate: '2024-01-30',
+                    interest: 250,
+                    total: 2750,
+                    guarantors: [
+                        { name: 'Peter Kamau', phone: '+254 712 345 678' },
+                        { name: 'Lucy Njoki', phone: '+254 723 456 789' }
+                    ],
+                    riskLevel: 'low',
+                    notes: 'Medical emergency'
+                }
+            ];
+            
+            // Save to localStorage
+            saveCartToStorage();
+        }
+        
+        function saveCartToStorage() {
+            localStorage.setItem('mpesewa_lending_cart', JSON.stringify(cartState.items));
+        }
+        
+        function updateCartIndicators() {
+            // Update cart count in header
+            const cartCount = cartState.items.length;
+            document.getElementById('cartCount').textContent = cartCount;
+            
+            // Update cart total in preview
+            const totalAmount = cartState.items.reduce((sum, item) => sum + item.amount, 0);
+            document.getElementById('cartTotalSmall').textContent = `KES ${totalAmount.toLocaleString()}`;
+            
+            // Update cart preview
+            updateCartPreview();
+        }
+        
+        function updateCartPreview() {
+            const previewContainer = document.getElementById('cartItemsPreview');
+            const items = cartState.items.slice(0, 3); // Show only first 3 items
+            
+            if (items.length === 0) {
+                previewContainer.innerHTML = '<p style="color: #555555; padding: 10px; text-align: center;">Cart is empty</p>';
+                return;
+            }
+            
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="cart-preview-item">
+                        <div class="preview-info">
+                            <strong style="color: #003366; font-size: 12px;">${item.borrowerName}</strong>
+                            <span style="color: #28a745; font-size: 11px;">KES ${item.amount.toLocaleString()}</span>
+                        </div>
+                        <small style="color: #555555; font-size: 10px;">${item.categoryName}</small>
+                    </div>
+                `;
+            });
+            
+            if (cartState.items.length > 3) {
+                html += `<div class="preview-more" style="color: #0099ff; font-size: 11px; padding: 5px; text-align: center;">
+                    +${cartState.items.length - 3} more items
+                </div>`;
+            }
+            
+            previewContainer.innerHTML = html;
+        }
+        
+        function setupEventListeners() {
+            // Select All Checkbox
+            document.getElementById('selectAllCheckbox').addEventListener('change', function() {
+                const isChecked = this.checked;
+                const checkboxes = document.querySelectorAll('.item-checkbox');
+                
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                    const itemId = checkbox.dataset.itemId;
+                    
+                    if (isChecked) {
+                        cartState.selectedItems.add(itemId);
+                    } else {
+                        cartState.selectedItems.delete(itemId);
+                    }
+                });
+                
+                updateSelectedCount();
+                updateBulkButtons();
+            });
+            
+            // Bulk Approve Button
+            document.getElementById('bulkApproveBtn').addEventListener('click', openBulkApprovalModal);
+            
+            // Bulk Reject Button
+            document.getElementById('bulkRejectBtn').addEventListener('click', bulkRejectItems);
+            
+            // Clear Cart Button
+            document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+            
+            // Find More Requests Button
+            document.getElementById('findMoreBtn').addEventListener('click', function() {
+                window.location.href = 'lending-requests.html';
+            });
+            
+            // Browse Requests Button
+            document.getElementById('browseRequestsBtn').addEventListener('click', function() {
+                window.location.href = 'lending-requests.html';
+            });
+            
+            // Checkout Button
+            document.getElementById('checkoutBtn').addEventListener('click', openBulkApprovalModal);
+            
+            // Save for Later Button
+            document.getElementById('saveForLaterBtn').addEventListener('click', openSaveCartModal);
+            
+            // Sort Button
+            document.getElementById('sortCartBtn').addEventListener('click', openSortOptions);
+            
+            // Modal close buttons
+            document.querySelectorAll('.modal-close, .modal-cancel').forEach(button => {
+                button.addEventListener('click', function() {
+                    closeAllModals();
+                });
+            });
+            
+            // Confirm Bulk Approval
+            document.getElementById('confirmBulkApproval')?.addEventListener('click', confirmBulkApproval);
+            
+            // Confirm Save Cart
+            document.getElementById('confirmSaveCart')?.addEventListener('click', confirmSaveCart);
+            
+            // Mobile menu toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.add('active');
+            });
+            
+            document.getElementById('mobileNavClose').addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.remove('active');
+            });
+        }
+        
+        function loadCartData() {
+            // Show loading overlay
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            // Simulate API call
+            setTimeout(() => {
+                renderCartItems();
+                updateCartSummary();
+                updateRiskAssessment();
+                loadRecommendations();
+                
+                // Hide loading overlay
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 800);
+        }
+        
+        function renderCartItems() {
+            const container = document.getElementById('cartItemsList');
+            const pagination = document.getElementById('cartPagination');
+            
+            if (cartState.items.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-icon">
+                            <i class="fas fa-shopping-cart" style="color: #0099ff; font-size: 4rem;"></i>
+                        </div>
+                        <h3 style="color: #003366;">Your Lending Cart is Empty</h3>
+                        <p style="color: #555555; max-width: 500px; margin: 10px auto 20px;">
+                            Add loan requests to your cart from the Loan Requests page. You can review them here before approval.
+                        </p>
+                        <button class="btn btn-primary" style="background-color: #0099ff; color: #ffffff;" id="browseRequestsBtn">
+                            <i class="fas fa-search"></i> Browse Loan Requests
+                        </button>
+                    </div>
+                `;
+                
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            // Calculate pagination
+            const startIndex = (cartState.currentPage - 1) * cartState.itemsPerPage;
+            const endIndex = startIndex + cartState.itemsPerPage;
+            const pageItems = cartState.items.slice(startIndex, endIndex);
+            
+            let html = '';
+            pageItems.forEach(item => {
+                const isSelected = cartState.selectedItems.has(item.id);
+                const riskColor = getRiskColor(item.riskLevel);
+                
+                html += `
+                    <div class="cart-item" data-item-id="${item.id}">
+                        <div class="item-select">
+                            <input type="checkbox" class="item-checkbox" data-item-id="${item.id}" ${isSelected ? 'checked' : ''}>
+                        </div>
+                        <div class="item-info">
+                            <div class="item-header">
+                                <h4 style="color: #003366;">
+                                    ${item.borrowerName}
+                                    <span class="item-rating">
+                                        ${getRatingStars(item.borrowerRating)}
+                                    </span>
+                                </h4>
+                                <div class="item-amount">
+                                    <span class="amount-primary" style="color: #28a745;">KES ${item.amount.toLocaleString()}</span>
+                                    <span class="amount-interest" style="color: #f37021;">(+KES ${item.interest})</span>
+                                </div>
+                            </div>
+                            
+                            <div class="item-details">
+                                <div class="detail-row">
+                                    <span class="detail-label" style="color: #555555;">Category:</span>
+                                    <span class="detail-value" style="color: #003366;">
+                                        <i class="${getCategoryIcon(item.category)}"></i> ${item.categoryName}
+                                    </span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label" style="color: #555555;">Due Date:</span>
+                                    <span class="detail-value" style="color: #003366;">${item.dueDate}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label" style="color: #555555;">Risk Level:</span>
+                                    <span class="detail-value" style="color: ${riskColor};">
+                                        <i class="fas fa-circle"></i> ${item.riskLevel.charAt(0).toUpperCase() + item.riskLevel.slice(1)} Risk
+                                    </span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label" style="color: #555555;">Notes:</span>
+                                    <span class="detail-value" style="color: #555555;">${item.notes}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="btn btn-small view-details" style="color: #0099ff; border-color: #0099ff;" data-item-id="${item.id}">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
+                                <button class="btn btn-small remove-item" style="color: #dc3545; border-color: #dc3545;" data-item-id="${item.id}">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                                <button class="btn btn-small approve-item" style="background-color: #28a745; color: #ffffff;" data-item-id="${item.id}">
+                                    <i class="fas fa-check"></i> Approve
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Update pagination controls
+            updatePagination();
+            
+            // Show pagination if needed
+            pagination.style.display = cartState.totalPages > 1 ? 'flex' : 'none';
+            
+            // Update item count badge
+            document.getElementById('cartItemsCount').textContent = cartState.items.length;
+            
+            // Add event listeners to new elements
+            addItemEventListeners();
+        }
+        
+        function getRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star" style="color: #f37021;"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt" style="color: #f37021;"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star" style="color: #f37021;"></i>';
+            }
+            
+            return stars;
+        }
+        
+        function getCategoryIcon(category) {
+            const icons = {
+                'transport': 'fas fa-bus',
+                'data': 'fas fa-wifi',
+                'food': 'fas fa-utensils',
+                'medicine': 'fas fa-pills',
+                'fuel': 'fas fa-gas-pump',
+                'electricity': 'fas fa-bolt',
+                'water': 'fas fa-tint',
+                'default': 'fas fa-money-bill-wave'
+            };
+            return icons[category] || icons.default;
+        }
+        
+        function getRiskColor(riskLevel) {
+            const colors = {
+                'low': '#28a745',
+                'medium': '#f37021',
+                'high': '#dc3545'
+            };
+            return colors[riskLevel] || '#555555';
+        }
+        
+        function addItemEventListeners() {
+            // Checkbox change
+            document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const itemId = this.dataset.itemId;
+                    
+                    if (this.checked) {
+                        cartState.selectedItems.add(itemId);
+                    } else {
+                        cartState.selectedItems.delete(itemId);
+                        document.getElementById('selectAllCheckbox').checked = false;
+                    }
+                    
+                    updateSelectedCount();
+                    updateBulkButtons();
+                });
+            });
+            
+            // View Details buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.dataset.itemId;
+                    openItemDetailsModal(itemId);
+                });
+            });
+            
+            // Remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.dataset.itemId;
+                    removeItemFromCart(itemId);
+                });
+            });
+            
+            // Approve buttons
+            document.querySelectorAll('.approve-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.dataset.itemId;
+                    approveSingleItem(itemId);
+                });
+            });
+        }
+        
+        function updateSelectedCount() {
+            const selectedCount = cartState.selectedItems.size;
+            document.getElementById('selectedCount').textContent = selectedCount;
+        }
+        
+        function updateBulkButtons() {
+            const selectedCount = cartState.selectedItems.size;
+            const bulkApproveBtn = document.getElementById('bulkApproveBtn');
+            const bulkRejectBtn = document.getElementById('bulkRejectBtn');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            
+            const isDisabled = selectedCount === 0;
+            
+            bulkApproveBtn.disabled = isDisabled;
+            bulkRejectBtn.disabled = isDisabled;
+            checkoutBtn.disabled = cartState.items.length === 0;
+            
+            if (isDisabled) {
+                bulkApproveBtn.style.opacity = '0.5';
+                bulkRejectBtn.style.opacity = '0.5';
+            } else {
+                bulkApproveBtn.style.opacity = '1';
+                bulkRejectBtn.style.opacity = '1';
+            }
+        }
+        
+        function updatePagination() {
+            const pageNumbers = document.getElementById('pageNumbers');
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            
+            // Update page numbers
+            let pageHtml = '';
+            for (let i = 1; i <= cartState.totalPages; i++) {
+                pageHtml += `<span class="page-number ${i === cartState.currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+            }
+            pageNumbers.innerHTML = pageHtml;
+            
+            // Update button states
+            prevBtn.disabled = cartState.currentPage === 1;
+            nextBtn.disabled = cartState.currentPage === cartState.totalPages;
+            
+            // Add event listeners to page numbers
+            document.querySelectorAll('.page-number').forEach(number => {
+                number.addEventListener('click', function() {
+                    const page = parseInt(this.dataset.page);
+                    if (page !== cartState.currentPage) {
+                        cartState.currentPage = page;
+                        renderCartItems();
+                    }
+                });
+            });
+            
+            // Add event listeners to prev/next buttons
+            prevBtn.addEventListener('click', function() {
+                if (cartState.currentPage > 1) {
+                    cartState.currentPage--;
+                    renderCartItems();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (cartState.currentPage < cartState.totalPages) {
+                    cartState.currentPage++;
+                    renderCartItems();
+                }
+            });
+        }
+        
+        function updateCartSummary() {
+            const totalItems = cartState.items.length;
+            const totalAmount = cartState.items.reduce((sum, item) => sum + item.amount, 0);
+            const totalInterest = cartState.items.reduce((sum, item) => sum + item.interest, 0);
+            const weeklyLimit = cartState.weeklyLimit;
+            const weeklyUsed = cartState.weeklyUsed;
+            const cartTotal = totalAmount + totalInterest;
+            
+            // Update summary cards
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('totalAmount').textContent = `KES ${totalAmount.toLocaleString()}`;
+            document.getElementById('weeklyLimit').textContent = `KES ${weeklyLimit.toLocaleString()}`;
+            document.getElementById('estimatedInterest').textContent = `KES ${totalInterest.toLocaleString()}`;
+            
+            // Update progress bar
+            const totalAfterApproval = weeklyUsed + totalAmount;
+            const percentageUsed = (totalAfterApproval / weeklyLimit) * 100;
+            const progressFill = document.getElementById('limitProgress');
+            const limitStatus = document.getElementById('limitStatus');
+            
+            progressFill.style.width = `${Math.min(percentageUsed, 100)}%`;
+            
+            if (percentageUsed > 100) {
+                progressFill.style.backgroundColor = '#dc3545';
+                limitStatus.textContent = 'Limit exceeded!';
+                limitStatus.style.color = '#dc3545';
+                showCartAlert('Weekly lending limit will be exceeded!', true);
+            } else if (percentageUsed > 80) {
+                progressFill.style.backgroundColor = '#f37021';
+                limitStatus.textContent = `${Math.round(percentageUsed)}% used`;
+                limitStatus.style.color = '#f37021';
+                showCartAlert('Approaching weekly lending limit', false);
+            } else {
+                progressFill.style.backgroundColor = '#28a745';
+                limitStatus.textContent = `${Math.round(percentageUsed)}% used`;
+                limitStatus.style.color = '#28a745';
+            }
+            
+            // Update sidebar summary
+            document.getElementById('summarySubtotal').textContent = `KES ${totalAmount.toLocaleString()}`;
+            document.getElementById('summaryInterest').textContent = `KES ${totalInterest.toLocaleString()}`;
+            document.getElementById('summaryFee').textContent = 'KES 0';
+            document.getElementById('summaryTotal').textContent = `KES ${cartTotal.toLocaleString()}`;
+            document.getElementById('summaryLimitUsed').textContent = `${Math.round(percentageUsed)}%`;
+            
+            // Update chart
+            updateCartChart();
+        }
+        
+        function showCartAlert(message, isError = false) {
+            const alertBanner = document.getElementById('cartAlert');
+            const alertMessage = document.getElementById('cartAlertMessage');
+            const alertActionBtn = document.getElementById('cartAlertActionBtn');
+            
+            alertMessage.textContent = message;
+            alertBanner.style.display = 'flex';
+            
+            if (isError) {
+                alertBanner.style.backgroundColor = '#f8d7da';
+                alertBanner.style.borderLeft = '4px solid #dc3545';
+                alertMessage.style.color = '#721c24';
+                alertActionBtn.textContent = 'Adjust Cart';
+                alertActionBtn.onclick = function() {
+                    // Sort items by amount descending
+                    cartState.items.sort((a, b) => b.amount - a.amount);
+                    renderCartItems();
+                    alertBanner.style.display = 'none';
+                };
+            } else {
+                alertBanner.style.backgroundColor = '#d1ecf1';
+                alertBanner.style.borderLeft = '4px solid #17a2b8';
+                alertMessage.style.color = '#0c5460';
+                alertActionBtn.textContent = 'View Limits';
+                alertActionBtn.onclick = function() {
+                    window.location.href = '../subscription/status.html';
+                };
+            }
+        }
+        
+        function updateRiskAssessment() {
+            const riskScore = cartState.riskScore;
+            const riskLevel = document.getElementById('riskLevel');
+            const riskScoreElement = document.getElementById('riskScore');
+            
+            riskScoreElement.textContent = `${riskScore}/100`;
+            
+            if (riskScore >= 80) {
+                riskLevel.innerHTML = '<i class="fas fa-check-circle"></i> Low Risk';
+                riskLevel.style.color = '#28a745';
+            } else if (riskScore >= 60) {
+                riskLevel.innerHTML = '<i class="fas fa-exclamation-circle"></i> Medium Risk';
+                riskLevel.style.color = '#f37021';
+            } else {
+                riskLevel.innerHTML = '<i class="fas fa-times-circle"></i> High Risk';
+                riskLevel.style.color = '#dc3545';
+            }
+            
+            // Calculate risk factors based on cart items
+            updateRiskFactors();
+        }
+        
+        function updateRiskFactors() {
+            // This would calculate actual risk factors in production
+            // For now, we'll show demo factors
+        }
+        
+        function initializeCartChart() {
+            const ctx = document.getElementById('cartChart').getContext('2d');
+            window.cartChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: [
+                            '#003366',
+                            '#0099ff',
+                            '#28a745',
+                            '#f37021',
+                            '#6f42c1',
+                            '#17a2b8',
+                            '#ffc107',
+                            '#dc3545'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateCartChart() {
+            // Group items by category
+            const categoryTotals = {};
+            cartState.items.forEach(item => {
+                if (!categoryTotals[item.categoryName]) {
+                    categoryTotals[item.categoryName] = 0;
+                }
+                categoryTotals[item.categoryName] += item.amount;
+            });
+            
+            // Update chart data
+            const labels = Object.keys(categoryTotals);
+            const data = Object.values(categoryTotals);
+            
+            window.cartChart.data.labels = labels;
+            window.cartChart.data.datasets[0].data = data;
+            window.cartChart.update();
+            
+            // Update legend
+            updateChartLegend(labels, data);
+        }
+        
+        function updateChartLegend(labels, data) {
+            const legendContainer = document.getElementById('chartLegend');
+            let html = '';
+            
+            const colors = window.cartChart.data.datasets[0].backgroundColor;
+            
+            labels.forEach((label, index) => {
+                const percentage = ((data[index] / data.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
+                html += `
+                    <div class="legend-item">
+                        <span class="legend-color" style="background-color: ${colors[index]};"></span>
+                        <span class="legend-label" style="color: #003366;">${label}</span>
+                        <span class="legend-value" style="color: #555555;">${percentage}%</span>
+                    </div>
+                `;
+            });
+            
+            legendContainer.innerHTML = html;
+        }
+        
+        function loadRecommendations() {
+            const container = document.getElementById('recommendationsGrid');
+            
+            const recommendations = [
+                {
+                    icon: 'fas fa-user-friends',
+                    color: '#28a745',
+                    title: 'Group Lending',
+                    description: 'Invite more lenders to your group to spread risk',
+                    action: 'Invite Now',
+                    actionUrl: '../groups/group-invites.html'
+                },
+                {
+                    icon: 'fas fa-chart-line',
+                    color: '#0099ff',
+                    title: 'Upgrade Subscription',
+                    description: 'Increase your weekly limit to KES 20,000',
+                    action: 'Upgrade',
+                    actionUrl: '../subscription/plans.html'
+                },
+                {
+                    icon: 'fas fa-shield-alt',
+                    color: '#f37021',
+                    title: 'Verify Guarantors',
+                    description: 'Contact guarantors to reduce default risk',
+                    action: 'Verify',
+                    actionUrl: '#'
+                },
+                {
+                    icon: 'fas fa-clock',
+                    color: '#6f42c1',
+                    title: 'Stagger Approvals',
+                    description: 'Approve loans over multiple weeks to manage cash flow',
+                    action: 'Learn More',
+                    actionUrl: 'lending-rules.html'
+                }
+            ];
+            
+            let html = '';
+            recommendations.forEach(rec => {
+                html += `
+                    <div class="recommendation-card" style="background-color: #ffffff; border: 1px solid #e9ecef;">
+                        <div class="rec-icon" style="background-color: ${rec.color}; color: #ffffff;">
+                            <i class="${rec.icon}"></i>
+                        </div>
+                        <div class="rec-content">
+                            <h4 style="color: #003366;">${rec.title}</h4>
+                            <p style="color: #555555;">${rec.description}</p>
+                            <a href="${rec.actionUrl}" class="btn btn-small" style="background-color: ${rec.color}; color: #ffffff;">
+                                ${rec.action} <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function openItemDetailsModal(itemId) {
+            const item = cartState.items.find(i => i.id === itemId);
+            if (!item) return;
+            
+            const modalContent = document.getElementById('itemDetailsContent');
+            
+            // Format guarantors list
+            const guarantorsList = item.guarantors.map(g => 
+                `<li><strong>${g.name}</strong>: ${g.phone}</li>`
+            ).join('');
+            
+            modalContent.innerHTML = `
+                <div class="details-grid">
+                    <div class="details-section">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Borrower Information</h4>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Name:</span>
+                            <span style="color: #003366; font-weight: 500;">${item.borrowerName}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Phone:</span>
+                            <span style="color: #003366;">${item.phone}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Location:</span>
+                            <span style="color: #003366;">${item.location}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Rating:</span>
+                            <span style="color: #003366;">${getRatingStars(item.borrowerRating)} (${item.borrowerRating})</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Group:</span>
+                            <span style="color: #003366;">${item.groupName}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="details-section">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Loan Details</h4>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Category:</span>
+                            <span style="color: #003366;">
+                                <i class="${getCategoryIcon(item.category)}"></i> ${item.categoryName}
+                            </span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Amount:</span>
+                            <span style="color: #28a745; font-weight: bold;">KES ${item.amount.toLocaleString()}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Interest (10%):</span>
+                            <span style="color: #f37021;">KES ${item.interest.toLocaleString()}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Total Due:</span>
+                            <span style="color: #003366; font-weight: bold;">KES ${item.total.toLocaleString()}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span style="color: #555555;">Due Date:</span>
+                            <span style="color: #003366;">${item.dueDate} (7 days)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="details-section full-width">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Guarantors/Referrers</h4>
+                        <ul style="color: #003366; padding-left: 20px;">
+                            ${guarantorsList}
+                        </ul>
+                    </div>
+                    
+                    <div class="details-section full-width">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Notes</h4>
+                        <p style="color: #555555; padding: 10px; background-color: #f8f9fa; border-radius: 4px;">
+                            ${item.notes}
+                        </p>
+                    </div>
+                    
+                    <div class="details-section full-width">
+                        <h4 style="color: #003366; margin-bottom: 10px;">Risk Assessment</h4>
+                        <div class="risk-indicator" style="background-color: ${getRiskColor(item.riskLevel)}20; border-left: 4px solid ${getRiskColor(item.riskLevel)}; padding: 10px;">
+                            <span style="color: ${getRiskColor(item.riskLevel)};">
+                                <i class="fas fa-circle"></i> ${item.riskLevel.charAt(0).toUpperCase() + item.riskLevel.slice(1)} Risk
+                            </span>
+                            <p style="color: #555555; margin-top: 5px;">
+                                Based on borrower history, loan amount, and guarantor verification.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Set up modal buttons
+            document.getElementById('removeFromCartBtn').onclick = function() {
+                removeItemFromCart(itemId);
+                closeAllModals();
+            };
+            
+            document.getElementById('approveSingleBtn').onclick = function() {
+                approveSingleItem(itemId);
+                closeAllModals();
+            };
+            
+            // Show modal
+            document.getElementById('itemDetailsModal').classList.add('active');
+        }
+        
+        function openBulkApprovalModal() {
+            const selectedItems = Array.from(cartState.selectedItems);
+            if (selectedItems.length === 0) return;
+            
+            const selectedCartItems = cartState.items.filter(item => selectedItems.includes(item.id));
+            const totalAmount = selectedCartItems.reduce((sum, item) => sum + item.amount, 0);
+            const totalInterest = selectedCartItems.reduce((sum, item) => sum + item.interest, 0);
+            const grandTotal = totalAmount + totalInterest;
+            
+            // Update modal content
+            document.getElementById('approvalCount').textContent = selectedCartItems.length;
+            document.getElementById('approvalAmount').textContent = `KES ${totalAmount.toLocaleString()}`;
+            document.getElementById('approvalInterest').textContent = `KES ${totalInterest.toLocaleString()}`;
+            document.getElementById('approvalTotal').textContent = `KES ${grandTotal.toLocaleString()}`;
+            
+            // Show modal
+            document.getElementById('bulkApprovalModal').classList.add('active');
+        }
+        
+        function openSaveCartModal() {
+            // Set default expiry date (30 days from now)
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            document.getElementById('cartExpiry').value = expiryDate.toISOString().split('T')[0];
+            
+            // Show modal
+            document.getElementById('saveCartModal').classList.add('active');
+        }
+        
+        function openSortOptions() {
+            // In production, this would open a dropdown with sort options
+            const sortOptions = [
+                { name: 'Amount (High to Low)', action: () => sortByAmountDesc() },
+                { name: 'Amount (Low to High)', action: () => sortByAmountAsc() },
+                { name: 'Risk Level', action: () => sortByRisk() },
+                { name: 'Rating', action: () => sortByRating() },
+                { name: 'Date Added', action: () => sortByDate() }
+            ];
+            
+            // For now, just sort by amount descending
+            sortByAmountDesc();
+        }
+        
+        function sortByAmountDesc() {
+            cartState.items.sort((a, b) => b.amount - a.amount);
+            cartState.currentPage = 1;
+            renderCartItems();
+        }
+        
+        function sortByAmountAsc() {
+            cartState.items.sort((a, b) => a.amount - b.amount);
+            cartState.currentPage = 1;
+            renderCartItems();
+        }
+        
+        function sortByRisk() {
+            const riskOrder = { high: 3, medium: 2, low: 1 };
+            cartState.items.sort((a, b) => riskOrder[b.riskLevel] - riskOrder[a.riskLevel]);
+            cartState.currentPage = 1;
+            renderCartItems();
+        }
+        
+        function sortByRating() {
+            cartState.items.sort((a, b) => b.borrowerRating - a.borrowerRating);
+            cartState.currentPage = 1;
+            renderCartItems();
+        }
+        
+        function sortByDate() {
+            cartState.items.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+            cartState.currentPage = 1;
+            renderCartItems();
+        }
+        
+        function removeItemFromCart(itemId) {
+            cartState.items = cartState.items.filter(item => item.id !== itemId);
+            cartState.selectedItems.delete(itemId);
+            cartState.currentPage = 1;
+            
+            saveCartToStorage();
+            renderCartItems();
+            updateCartSummary();
+            updateCartIndicators();
+            
+            // Show notification
+            showNotification('Item removed from cart', 'info');
+        }
+        
+        function approveSingleItem(itemId) {
+            const item = cartState.items.find(i => i.id === itemId);
+            if (!item) return;
+            
+            // In production, this would call the approval API
+            // For now, simulate approval
+            if (confirm(`Approve loan of KES ${item.amount} to ${item.borrowerName}?`)) {
+                // Remove from cart
+                removeItemFromCart(itemId);
+                
+                // Update weekly used amount
+                cartState.weeklyUsed += item.amount;
+                
+                // Show success message
+                showNotification(`Loan approved to ${item.borrowerName}`, 'success');
+                
+                // Log audit event
+                if (window.lenderAudit) {
+                    window.lenderAudit.logFinancialEvent(
+                        window.lenderAudit.AUDIT_CATEGORIES.FINANCIAL.LOAN_APPROVE,
+                        {
+                            borrowerId: item.borrowerId,
+                            amount: item.amount,
+                            ledgerId: `ledger_${Date.now()}`
+                        }
+                    );
+                }
+            }
+        }
+        
+        function bulkRejectItems() {
+            const selectedItems = Array.from(cartState.selectedItems);
+            if (selectedItems.length === 0) return;
+            
+            if (confirm(`Reject ${selectedItems.length} selected loan requests?`)) {
+                // Remove selected items from cart
+                cartState.items = cartState.items.filter(item => !selectedItems.includes(item.id));
+                cartState.selectedItems.clear();
+                cartState.currentPage = 1;
+                
+                saveCartToStorage();
+                renderCartItems();
+                updateCartSummary();
+                updateCartIndicators();
+                
+                // Show notification
+                showNotification(`${selectedItems.length} requests rejected`, 'info');
+                
+                // Log audit event
+                if (window.lenderAudit) {
+                    window.lenderAudit.logFinancialEvent(
+                        window.lenderAudit.AUDIT_CATEGORIES.FINANCIAL.LOAN_REJECT,
+                        {
+                            count: selectedItems.length,
+                            reason: 'bulk_rejection'
+                        }
+                    );
+                }
+            }
+        }
+        
+        function clearCart() {
+            if (cartState.items.length === 0) return;
+            
+            if (confirm('Clear all items from your lending cart?')) {
+                cartState.items = [];
+                cartState.selectedItems.clear();
+                cartState.currentPage = 1;
+                
+                saveCartToStorage();
+                renderCartItems();
+                updateCartSummary();
+                updateCartIndicators();
+                
+                showNotification('Cart cleared', 'info');
+            }
+        }
+        
+        function confirmBulkApproval() {
+            const selectedItems = Array.from(cartState.selectedItems);
+            const selectedCartItems = cartState.items.filter(item => selectedItems.includes(item.id));
+            
+            if (selectedCartItems.length === 0) {
+                closeAllModals();
+                return;
+            }
+            
+            // Check weekly limit
+            const totalAmount = selectedCartItems.reduce((sum, item) => sum + item.amount, 0);
+            const newWeeklyUsed = cartState.weeklyUsed + totalAmount;
+            
+            if (newWeeklyUsed > cartState.weeklyLimit) {
+                alert(`Error: Approving these loans would exceed your weekly limit of KES ${cartState.weeklyLimit.toLocaleString()}`);
+                return;
+            }
+            
+            // Get options from modal
+            const disbursementMethod = document.getElementById('disbursementMethod').value;
+            const reminderFrequency = document.getElementById('reminderFrequency').value;
+            
+            // Simulate approval process
+            showNotification(`Processing ${selectedCartItems.length} loans...`, 'info');
+            
+            setTimeout(() => {
+                // Remove approved items from cart
+                cartState.items = cartState.items.filter(item => !selectedItems.includes(item.id));
+                cartState.selectedItems.clear();
+                
+                // Update weekly used
+                cartState.weeklyUsed = newWeeklyUsed;
+                
+                // Save changes
+                saveCartToStorage();
+                
+                // Update UI
+                renderCartItems();
+                updateCartSummary();
+                updateCartIndicators();
+                
+                // Show success message
+                showNotification(`${selectedCartItems.length} loans approved successfully!`, 'success');
+                
+                // Log audit event
+                if (window.lenderAudit) {
+                    selectedCartItems.forEach(item => {
+                        window.lenderAudit.logFinancialEvent(
+                            window.lenderAudit.AUDIT_CATEGORIES.FINANCIAL.LOAN_APPROVE,
+                            {
+                                borrowerId: item.borrowerId,
+                                amount: item.amount,
+                                method: disbursementMethod,
+                                ledgerId: `ledger_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+                            }
+                        );
+                    });
+                }
+                
+                closeAllModals();
+            }, 1500);
+        }
+        
+        function confirmSaveCart() {
+            const cartName = document.getElementById('cartName').value.trim();
+            const expiryDate = document.getElementById('cartExpiry').value;
+            const notes = document.getElementById('cartNotes').value.trim();
+            
+            if (!cartName) {
+                alert('Please enter a name for your cart');
+                return;
+            }
+            
+            // Create saved cart object
+            const savedCart = {
+                id: `saved_${Date.now()}`,
+                name: cartName,
+                items: [...cartState.items],
+                expiryDate: expiryDate,
+                notes: notes,
+                createdAt: new Date().toISOString(),
+                itemCount: cartState.items.length,
+                totalAmount: cartState.items.reduce((sum, item) => sum + item.amount, 0)
+            };
+            
+            // Save to localStorage
+            const savedCarts = JSON.parse(localStorage.getItem('mpesewa_saved_carts') || '[]');
+            savedCarts.push(savedCart);
+            localStorage.setItem('mpesewa_saved_carts', JSON.stringify(savedCarts));
+            
+            // Clear current cart if requested
+            const clearAfterSave = confirm('Save cart and clear current cart?');
+            if (clearAfterSave) {
+                clearCart();
+            }
+            
+            // Show success message
+            showNotification(`Cart "${cartName}" saved successfully`, 'success');
+            
+            closeAllModals();
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close">&times;</button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+            
+            // Close button
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.remove();
+            });
+        }
+        
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+        
+        // PWA Installation
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('../../service-worker.js')
+                    .then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

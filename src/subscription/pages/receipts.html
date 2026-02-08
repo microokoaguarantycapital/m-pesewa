@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en" data-country="" data-role="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipts - M-Pesewa Subscription</title>
+    <link rel="stylesheet" href="../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../assets/css/colors.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/layout.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/alerts.css">
+    <link rel="stylesheet" href="../../assets/css/cards.css">
+    <link rel="stylesheet" href="../../assets/css/navigation.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <link rel="stylesheet" href="../../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/accessibility.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.ico">
+    <style>
+        .receipts-page {
+            min-height: 70vh;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f7ff 100%);
+        }
+        
+        .receipts-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #003366;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid #003366;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            background: #003366;
+            color: white;
+        }
+        
+        .receipts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .receipt-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .receipt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #28a745;
+        }
+        
+        .receipt-card.receipt-refund::before {
+            background: #f37021;
+        }
+        
+        .receipt-card.receipt-pending::before {
+            background: #ffc107;
+        }
+        
+        .receipt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #28a745;
+        }
+        
+        .receipt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .receipt-id {
+            font-size: 18px;
+            font-weight: 700;
+            color: #003366;
+        }
+        
+        .receipt-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .badge-refund {
+            background: #ffe5d0;
+            color: #a85100;
+        }
+        
+        .receipt-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            font-size: 16px;
+            color: #003366;
+            font-weight: 600;
+        }
+        
+        .receipt-amount {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .amount-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .amount-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #28a745;
+        }
+        
+        .receipt-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-action {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-view {
+            background: #0099ff;
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: #007acc;
+        }
+        
+        .btn-print {
+            background: #003366;
+            color: white;
+        }
+        
+        .btn-print:hover {
+            background: #002244;
+        }
+        
+        .btn-share {
+            background: #6f42c1;
+            color: white;
+        }
+        
+        .btn-share:hover {
+            background: #5a32a3;
+        }
+        
+        .filters-section {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-label {
+            font-size: 14px;
+            color: #003366;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .filter-input, .filter-select {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #003366;
+            background: white;
+        }
+        
+        .filter-input:focus, .filter-select:focus {
+            border-color: #0099ff;
+            outline: none;
+        }
+        
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 48px;
+            color: #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .summary-card.green {
+            border-top: 4px solid #28a745;
+        }
+        
+        .summary-card.blue {
+            border-top: 4px solid #003366;
+        }
+        
+        .summary-card.orange {
+            border-top: 4px solid #f37021;
+        }
+        
+        .summary-card.purple {
+            border-top: 4px solid #6f42c1;
+        }
+        
+        .summary-value {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .summary-value.green {
+            color: #28a745;
+        }
+        
+        .summary-value.blue {
+            color: #003366;
+        }
+        
+        .summary-value.orange {
+            color: #f37021;
+        }
+        
+        .summary-value.purple {
+            color: #6f42c1;
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .receipt-preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            background: #28a745;
+            color: white;
+            padding: 25px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .receipts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .header-actions {
+                flex-direction: column;
+            }
+            
+            .receipt-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .receipt-actions {
+                flex-direction: column;
+            }
+        }
+        
+        .verified-stamp {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 60px;
+            color: rgba(40, 167, 69, 0.1);
+            font-weight: bold;
+            pointer-events: none;
+            white-space: nowrap;
+            border: 8px solid rgba(40, 167, 69, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .hierarchy-info {
+            background: #003366;
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .method-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .subscription-cycle {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 40px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .cycle-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .cycle-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e9ecef;
+            z-index: 1;
+        }
+        
+        .cycle-step {
+            background: white;
+            border: 2px solid #28a745;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #28a745;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cycle-step.active {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step-label {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .tax-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+        }
+        
+        .tax-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .tax-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <main class="receipts-page">
+        <div class="receipts-container">
+            <div class="page-header">
+                <div>
+                    <h1 style="color: #003366; margin-bottom: 10px;">Payment Receipts</h1>
+                    <p style="color: #555; font-size: 18px;">
+                        Official payment receipts for your subscription transactions
+                    </p>
+                </div>
+                
+                <div class="header-actions">
+                    <button class="btn-primary" id="request-receipt">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Request Receipt
+                    </button>
+                    
+                    <a href="../history.html" class="btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        Back to History
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card green">
+                    <div class="summary-value green" id="total-receipts">0</div>
+                    <div class="summary-label">Total Receipts</div>
+                </div>
+                
+                <div class="summary-card blue">
+                    <div class="summary-value blue" id="total-received">₦ 0</div>
+                    <div class="summary-label">Total Received</div>
+                </div>
+                
+                <div class="summary-card orange">
+                    <div class="summary-value orange" id="current-year">₦ 0</div>
+                    <div class="summary-label">This Year</div>
+                </div>
+                
+                <div class="summary-card purple">
+                    <div class="summary-value purple" id="tax-deductible">₦ 0</div>
+                    <div class="summary-label">Tax Deductible</div>
+                </div>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filters-section">
+                <h3 style="color: #003366; margin-bottom: 20px;">Filter Receipts</h3>
+                
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Year</label>
+                        <select class="filter-select" id="filter-year">
+                            <option value="">All Years</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Plan Type</label>
+                        <select class="filter-select" id="filter-plan">
+                            <option value="">All Plans</option>
+                            <option value="Basic">Basic</option>
+                            <option value="Premium">Premium</option>
+                            <option value="Super">Super</option>
+                            <option value="Lender of Lenders">Lender of Lenders</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Payment Method</label>
+                        <select class="filter-select" id="filter-method">
+                            <option value="">All Methods</option>
+                            <option value="Mobile Money">Mobile Money</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit Card</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Month</label>
+                        <select class="filter-select" id="filter-month">
+                            <option value="">All Months</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; gap: 15px; justify-content: flex-end;">
+                    <button class="btn-secondary" id="reset-filters">
+                        Reset Filters
+                    </button>
+                    
+                    <button class="btn-primary" id="apply-filters">
+                        Apply Filters
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Receipts Grid -->
+            <div class="receipts-grid" id="receipts-container">
+                <!-- Receipts will be dynamically inserted here -->
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3 style="color: #666; margin-bottom: 10px;">No receipts found</h3>
+                    <p style="color: #999;">Your payment receipts will appear here once you make subscription payments.</p>
+                </div>
+            </div>
+            
+            <!-- Subscription Cycle -->
+            <div class="subscription-cycle">
+                <h3 style="color: #003366; margin-bottom: 15px;">📅 Subscription Payment Cycle</h3>
+                <p style="color: #555; margin-bottom: 10px;">
+                    M-Pesewa operates on a strict 28-day subscription cycle. Receipts are automatically generated upon successful payment.
+                </p>
+                
+                <div class="cycle-timeline">
+                    <div class="cycle-step active">
+                        1
+                        <div class="step-label">Payment</div>
+                    </div>
+                    <div class="cycle-step">
+                        2
+                        <div class="step-label">Verification</div>
+                    </div>
+                    <div class="cycle-step">
+                        3
+                        <div class="step-label">Receipt</div>
+                    </div>
+                    <div class="cycle-step">
+                        4
+                        <div class="step-label">Access</div>
+                    </div>
+                    <div class="cycle-step">
+                        5
+                        <div class="step-label">Renewal</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <h4 style="color: #003366; margin-bottom: 8px;">Auto-Renewal</h4>
+                        <p style="color: #555; font-size: 14px; margin: 0;">
+                            Receipts are generated automatically for subscription renewals on the 28th of each month.
+                        </p>
+                    </div>
+                    
+                    <div style="padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #0099ff;">
+                        <h4 style="color: #003366; margin-bottom: 8px;">Payment Verification</h4>
+                        <p style="color: #555; font-size: 14px; margin: 0;">
+                            Each receipt undergoes verification to ensure payment authenticity before ledger access is granted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tax Summary -->
+            <div class="tax-summary">
+                <h3 style="color: #003366; margin-bottom: 20px;">🧾 Tax & Accounting Summary</h3>
+                
+                <div class="tax-grid">
+                    <div class="tax-item">
+                        <div style="color: #666; font-size: 14px;">Total Tax Paid</div>
+                        <div style="color: #003366; font-size: 24px; font-weight: bold;" id="total-tax">₦ 0</div>
+                    </div>
+                    
+                    <div class="tax-item">
+                        <div style="color: #666; font-size: 14px;">Business Expense</div>
+                        <div style="color: #28a745; font-size: 24px; font-weight: bold;" id="business-expense">₦ 0</div>
+                    </div>
+                    
+                    <div class="tax-item">
+                        <div style="color: #666; font-size: 14px;">VAT Collected</div>
+                        <div style="color: #f37021; font-size: 24px; font-weight: bold;" id="vat-collected">₦ 0</div>
+                    </div>
+                    
+                    <div class="tax-item">
+                        <div style="color: #666; font-size: 14px;">Deductible Amount</div>
+                        <div style="color: #6f42c1; font-size: 24px; font-weight: bold;" id="deductible-amount">₦ 0</div>
+                    </div>
+                </div>
+                
+                <p style="color: #666; font-size: 14px; margin-top: 20px;">
+                    <strong>Note:</strong> Subscription payments to M-Pesewa are considered business expenses for tax purposes. 
+                    Keep receipts for your annual tax filings.
+                </p>
+            </div>
+            
+            <!-- Hierarchy & Payment Methods -->
+            <div class="hierarchy-info">
+                <h3 style="color: white; margin-bottom: 20px;">💳 Payment Methods & Hierarchy</h3>
+                <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 15px;">
+                    Payment receipts are linked to your lending hierarchy. Each receipt validates your subscription status across the platform.
+                </p>
+                
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: white; margin-bottom: 15px;">Accepted Payment Methods:</h4>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <div class="method-icon">📱</div>
+                            <div style="color: white; font-size: 14px;">Mobile Money</div>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <div class="method-icon">🏦</div>
+                            <div style="color: white; font-size: 14px;">Bank Transfer</div>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <div class="method-icon">💳</div>
+                            <div style="color: white; font-size: 14px;">Credit Card</div>
+                        </div>
+                        
+                        <div class="payment-method">
+                            <div class="method-icon">🪪</div>
+                            <div style="color: white; font-size: 14px;">Debit Card</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="padding: 20px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                    <h4 style="color: white; margin-bottom: 10px;">Strict Hierarchy Validation:</h4>
+                    <div style="font-family: monospace; line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                        <div>Country: Kenya 🇰🇪</div>
+                        <div>  └── Group: Family Trust</div>
+                        <div>        ├── Lenders: 3 (Active with valid receipts)</div>
+                        <div>        │   └── Ledgers: 12 (Access requires valid receipt)</div>
+                        <div>        └── Borrowers: 8 (No receipt required)</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 8px;">
+                    <p style="color: white; font-size: 14px; margin: 0;">
+                        <strong>Receipt Rule:</strong> Each receipt number is unique and linked to your lender ID, 
+                        country, and group. Receipts expire on the 28th of each month along with subscription access.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Receipt Preview Modal -->
+    <div class="receipt-preview-modal" id="receipt-preview-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: white; margin: 0;">Payment Receipt</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Receipt preview will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="../../core/config.js"></script>
+    <script src="../../core/constants.js"></script>
+    <script src="../../state/store.js"></script>
+    <script src="../../utils/date.js"></script>
+    <script src="../../utils/validation.js"></script>
+    <script src="../../state/slices/auth.slice.js"></script>
+    <script src="../../state/slices/user.slice.js"></script>
+    <script src="../../state/slices/subscription.slice.js"></script>
+    <script src="../../state/slices/country.slice.js"></script>
+    <script src="../../router/route-guards.js"></script>
+    <script src="../../router/guard-subscription.js"></script>
+    <script src="../../layout/Header.js"></script>
+    <script src="../../layout/Footer.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load header and footer
+            const headerContainer = document.getElementById('header-container');
+            const footerContainer = document.getElementById('footer-container');
+            
+            if (headerContainer && window.loadHeader) {
+                window.loadHeader(headerContainer);
+            }
+            
+            if (footerContainer && window.loadFooter) {
+                window.loadFooter(footerContainer);
+            }
+            
+            // Initialize page
+            initializeReceiptsPage();
+            
+            // Route guard - check if user is authenticated
+            if (window.checkAuthGuard) {
+                const guardResult = window.checkAuthGuard();
+                if (guardResult.redirect) {
+                    window.location.href = guardResult.redirectTo;
+                }
+            }
+        });
+        
+        let allReceipts = [];
+        let filteredReceipts = [];
+        
+        function initializeReceiptsPage() {
+            // Get user data from store
+            const store = window.mpesewaStore || {};
+            const user = store.user || {};
+            const country = store.country || 'KE';
+            
+            // Load receipts
+            loadReceipts(user.id, country);
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Initialize modal
+            initializeModal();
+        }
+        
+        function loadReceipts(userId, countryCode) {
+            // In production, this would be an API call
+            setTimeout(() => {
+                generateSampleReceipts(countryCode);
+                updateSummary();
+                renderReceipts();
+            }, 500);
+        }
+        
+        function generateSampleReceipts(countryCode) {
+            // Currency mapping
+            const currencies = {
+                'KE': { symbol: 'KSh', name: 'Kenyan Shilling' },
+                'UG': { symbol: 'UGX', name: 'Ugandan Shilling' },
+                'TZ': { symbol: 'TZS', name: 'Tanzanian Shilling' },
+                'RW': { symbol: 'RWF', name: 'Rwandan Franc' },
+                'BI': { symbol: 'BIF', name: 'Burundian Franc' },
+                'CD': { symbol: 'CDF', name: 'Congolese Franc' },
+                'SS': { symbol: 'SSP', name: 'South Sudanese Pound' },
+                'ZA': { symbol: 'ZAR', name: 'South African Rand' },
+                'NG': { symbol: '₦', name: 'Nigerian Naira' },
+                'GH': { symbol: 'GHS', name: 'Ghanaian Cedi' },
+                'ET': { symbol: 'ETB', name: 'Ethiopian Birr' },
+                'SO': { symbol: 'SOS', name: 'Somali Shilling' }
+            };
+            
+            const currency = currencies[countryCode] || currencies['NG'];
+            
+            allReceipts = [
+                {
+                    id: 'RCPT-2024-00328',
+                    date: '2024-03-28',
+                    paymentDate: '2024-03-28 14:30:00',
+                    plan: 'Premium',
+                    period: 'Annual',
+                    amount: 2500,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'subscription_renewal',
+                    paymentMethod: 'Mobile Money',
+                    transactionId: 'TXN20240328123456',
+                    reference: 'MPW202403281234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 125,
+                    fee: 0,
+                    netAmount: 2375,
+                    verified: true,
+                    items: [
+                        { description: 'Premium Plan Subscription', amount: 2000 },
+                        { description: 'Platform Maintenance Fee', amount: 400 },
+                        { description: 'Digital Service Tax (5%)', amount: 100 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2023-12328',
+                    date: '2023-12-28',
+                    paymentDate: '2023-12-28 09:15:00',
+                    plan: 'Basic',
+                    period: 'Annual',
+                    amount: 500,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'subscription_renewal',
+                    paymentMethod: 'Bank Transfer',
+                    transactionId: 'TXN20231228123456',
+                    reference: 'MPW202312281234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 25,
+                    fee: 0,
+                    netAmount: 475,
+                    verified: true,
+                    items: [
+                        { description: 'Basic Plan Subscription', amount: 450 },
+                        { description: 'Platform Maintenance Fee', amount: 50 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2023-09328',
+                    date: '2023-09-28',
+                    paymentDate: '2023-09-28 16:45:00',
+                    plan: 'Basic',
+                    period: 'Monthly',
+                    amount: 50,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'subscription_payment',
+                    paymentMethod: 'Mobile Money',
+                    transactionId: 'TXN20230928123456',
+                    reference: 'MPW202309281234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 2.5,
+                    fee: 0,
+                    netAmount: 47.5,
+                    verified: true,
+                    items: [
+                        { description: 'Basic Plan Subscription', amount: 45 },
+                        { description: 'Platform Maintenance Fee', amount: 5 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2023-08328',
+                    date: '2023-08-28',
+                    paymentDate: '2023-08-28 11:20:00',
+                    plan: 'Basic',
+                    period: 'Monthly',
+                    amount: 50,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'subscription_payment',
+                    paymentMethod: 'Mobile Money',
+                    transactionId: 'TXN20230828123456',
+                    reference: 'MPW202308281234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 2.5,
+                    fee: 0,
+                    netAmount: 47.5,
+                    verified: true,
+                    items: [
+                        { description: 'Basic Plan Subscription', amount: 45 },
+                        { description: 'Platform Maintenance Fee', amount: 5 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2023-0628',
+                    date: '2023-06-28',
+                    paymentDate: '2023-06-28 10:00:00',
+                    plan: 'Basic',
+                    period: 'Monthly',
+                    amount: 50,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'initial_subscription',
+                    paymentMethod: 'Mobile Money',
+                    transactionId: 'TXN20230628123456',
+                    reference: 'MPW202306281234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 2.5,
+                    fee: 0,
+                    netAmount: 47.5,
+                    verified: true,
+                    items: [
+                        { description: 'Basic Plan Subscription', amount: 45 },
+                        { description: 'Platform Maintenance Fee', amount: 5 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2024-00115',
+                    date: '2024-01-15',
+                    paymentDate: '2024-01-15 13:45:00',
+                    plan: 'Super',
+                    period: 'Monthly',
+                    amount: 1000,
+                    currency: currency.symbol,
+                    status: 'pending',
+                    type: 'plan_upgrade',
+                    paymentMethod: 'Credit Card',
+                    transactionId: 'TXN20240115123456',
+                    reference: 'MPW202401151234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: 50,
+                    fee: 10,
+                    netAmount: 940,
+                    verified: false,
+                    items: [
+                        { description: 'Super Plan Upgrade', amount: 900 },
+                        { description: 'Platform Maintenance Fee', amount: 100 }
+                    ]
+                },
+                {
+                    id: 'RCPT-2023-0715',
+                    date: '2023-07-15',
+                    paymentDate: '2023-07-15 15:30:00',
+                    plan: 'Basic',
+                    period: 'Monthly',
+                    amount: -25,
+                    currency: currency.symbol,
+                    status: 'success',
+                    type: 'refund',
+                    paymentMethod: 'Mobile Money',
+                    transactionId: 'RFND202307151234',
+                    reference: 'REF202307151234',
+                    payerName: 'John Doe',
+                    payerEmail: 'john@example.com',
+                    taxAmount: -1.25,
+                    fee: 0,
+                    netAmount: -23.75,
+                    verified: true,
+                    items: [
+                        { description: 'Partial Refund - Service Credit', amount: -25 }
+                    ]
+                }
+            ];
+            
+            filteredReceipts = [...allReceipts];
+        }
+        
+        function updateSummary() {
+            const totalReceipts = allReceipts.length;
+            const totalReceived = allReceipts
+                .filter(r => r.amount > 0 && r.status === 'success')
+                .reduce((sum, rec) => sum + rec.amount, 0);
+            
+            const currentYear = new Date().getFullYear();
+            const currentYearAmount = allReceipts
+                .filter(r => {
+                    const year = new Date(r.date).getFullYear();
+                    return year === currentYear && r.amount > 0 && r.status === 'success';
+                })
+                .reduce((sum, rec) => sum + rec.amount, 0);
+            
+            const taxDeductible = allReceipts
+                .filter(r => r.amount > 0 && r.status === 'success')
+                .reduce((sum, rec) => sum + rec.amount, 0);
+            
+            // Tax calculations
+            const totalTax = allReceipts
+                .filter(r => r.amount > 0)
+                .reduce((sum, rec) => sum + rec.taxAmount, 0);
+            
+            const businessExpense = totalReceived;
+            const vatCollected = totalTax;
+            const deductibleAmount = totalReceived * 0.8; // Assuming 80% deductible
+            
+            document.getElementById('total-receipts').textContent = totalReceipts;
+            document.getElementById('total-received').textContent = `${allReceipts[0]?.currency || '₦'} ${totalReceived.toLocaleString()}`;
+            document.getElementById('current-year').textContent = `${allReceipts[0]?.currency || '₦'} ${currentYearAmount.toLocaleString()}`;
+            document.getElementById('tax-deductible').textContent = `${allReceipts[0]?.currency || '₦'} ${taxDeductible.toLocaleString()}`;
+            
+            document.getElementById('total-tax').textContent = `${allReceipts[0]?.currency || '₦'} ${totalTax.toFixed(2)}`;
+            document.getElementById('business-expense').textContent = `${allReceipts[0]?.currency || '₦'} ${businessExpense.toLocaleString()}`;
+            document.getElementById('vat-collected').textContent = `${allReceipts[0]?.currency || '₦'} ${vatCollected.toFixed(2)}`;
+            document.getElementById('deductible-amount').textContent = `${allReceipts[0]?.currency || '₦'} ${deductibleAmount.toLocaleString()}`;
+        }
+        
+        function renderReceipts() {
+            const container = document.getElementById('receipts-container');
+            
+            if (filteredReceipts.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                            </svg>
+                        </div>
+                        <h3 style="color: #666; margin-bottom: 10px;">No receipts found</h3>
+                        <p style="color: #999;">Try changing your filter criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filteredReceipts.map(receipt => {
+                const isRefund = receipt.amount < 0;
+                const isPending = receipt.status === 'pending';
+                const cardClass = isRefund ? 'receipt-refund' : isPending ? 'receipt-pending' : '';
+                const badgeClass = isRefund ? 'badge-refund' : isPending ? 'badge-warning' : 'badge-success';
+                const badgeText = isRefund ? 'REFUND' : isPending ? 'PENDING' : 'SUCCESS';
+                
+                return `
+                <div class="receipt-card ${cardClass}">
+                    <div class="receipt-header">
+                        <div class="receipt-id">${receipt.id}</div>
+                        <div class="receipt-badge ${badgeClass}">${badgeText}</div>
+                    </div>
+                    
+                    <div class="receipt-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Payment Date</span>
+                            <span class="detail-value">${formatDate(receipt.date)}</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Plan Type</span>
+                            <span class="detail-value">${receipt.plan}</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Payment Method</span>
+                            <span class="detail-value">${receipt.paymentMethod}</span>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <span class="detail-label">Reference</span>
+                            <span class="detail-value">${receipt.reference}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="receipt-amount">
+                        <div class="amount-label">${isRefund ? 'Refund Amount' : 'Payment Amount'}</div>
+                        <div class="amount-value" style="color: ${isRefund ? '#f37021' : '#28a745'}">
+                            ${receipt.currency} ${Math.abs(receipt.amount).toLocaleString()}
+                        </div>
+                    </div>
+                    
+                    <div class="receipt-actions">
+                        <button class="btn-action btn-view" onclick="viewReceipt('${receipt.id}')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            View
+                        </button>
+                        
+                        <button class="btn-action btn-print" onclick="printReceipt('${receipt.id}')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                <rect x="6" y="14" width="12" height="8"></rect>
+                            </svg>
+                            Print
+                        </button>
+                        
+                        <button class="btn-action btn-share" onclick="shareReceipt('${receipt.id}')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                            Share
+                        </button>
+                    </div>
+                    
+                    ${receipt.verified ? '<div class="verified-stamp">VERIFIED</div>' : ''}
+                </div>
+                `;
+            }).join('');
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+        
+        function setupEventListeners() {
+            // Filter buttons
+            document.getElementById('apply-filters').addEventListener('click', applyFilters);
+            document.getElementById('reset-filters').addEventListener('click', resetFilters);
+            
+            // Request receipt button
+            document.getElementById('request-receipt').addEventListener('click', requestReceipt);
+            
+            // Filter inputs
+            const filterInputs = ['filter-year', 'filter-plan', 'filter-method', 'filter-month'];
+            filterInputs.forEach(id => {
+                document.getElementById(id).addEventListener('change', applyFilters);
+            });
+        }
+        
+        function applyFilters() {
+            const year = document.getElementById('filter-year').value;
+            const plan = document.getElementById('filter-plan').value;
+            const method = document.getElementById('filter-method').value;
+            const month = document.getElementById('filter-month').value;
+            
+            filteredReceipts = allReceipts.filter(receipt => {
+                // Year filter
+                if (year) {
+                    const receiptYear = new Date(receipt.date).getFullYear().toString();
+                    if (receiptYear !== year) return false;
+                }
+                
+                // Plan filter
+                if (plan && receipt.plan !== plan) return false;
+                
+                // Method filter
+                if (method && receipt.paymentMethod !== method) return false;
+                
+                // Month filter
+                if (month) {
+                    const receiptMonth = (new Date(receipt.date).getMonth() + 1).toString();
+                    if (receiptMonth !== month) return false;
+                }
+                
+                return true;
+            });
+            
+            renderReceipts();
+        }
+        
+        function resetFilters() {
+            document.getElementById('filter-year').value = '';
+            document.getElementById('filter-plan').value = '';
+            document.getElementById('filter-method').value = '';
+            document.getElementById('filter-month').value = '';
+            
+            filteredReceipts = [...allReceipts];
+            renderReceipts();
+        }
+        
+        function initializeModal() {
+            const modal = document.getElementById('receipt-preview-modal');
+            const closeBtn = document.getElementById('close-modal');
+            
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Close with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        function viewReceipt(receiptId) {
+            const receipt = allReceipts.find(rec => rec.id === receiptId);
+            if (!receipt) return;
+            
+            const modal = document.getElementById('receipt-preview-modal');
+            const modalBody = document.getElementById('modal-body');
+            
+            const isRefund = receipt.amount < 0;
+            const paymentTime = receipt.paymentDate ? new Date(receipt.paymentDate).toLocaleTimeString() : 'N/A';
+            
+            modalBody.innerHTML = `
+                <div style="max-width: 100%;">
+                    <!-- Receipt Header -->
+                    <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e9ecef;">
+                        <h1 style="color: #003366; margin: 0 0 10px; font-size: 28px;">PAYMENT RECEIPT</h1>
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 15px;">
+                            <div style="padding: 8px 16px; background: ${receipt.status === 'success' ? '#d4edda' : '#fff3cd'}; color: ${receipt.status === 'success' ? '#155724' : '#856404'}; border-radius: 20px; font-weight: bold;">
+                                ${receipt.status.toUpperCase()}
+                            </div>
+                            ${receipt.verified ? '<div style="padding: 8px 16px; background: #cce5ff; color: #004085; border-radius: 20px; font-weight: bold;">VERIFIED</div>' : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Receipt Details -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                        <div>
+                            <h4 style="color: #003366; margin-bottom: 15px;">Receipt Information:</h4>
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                                <p style="margin: 0 0 10px;"><strong>Receipt Number:</strong> ${receipt.id}</p>
+                                <p style="margin: 0 0 10px;"><strong>Date:</strong> ${formatDate(receipt.date)}</p>
+                                <p style="margin: 0 0 10px;"><strong>Time:</strong> ${paymentTime}</p>
+                                <p style="margin: 0;"><strong>Reference:</strong> ${receipt.reference}</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 style="color: #003366; margin-bottom: 15px;">Transaction Details:</h4>
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                                <p style="margin: 0 0 10px;"><strong>Transaction ID:</strong> ${receipt.transactionId}</p>
+                                <p style="margin: 0 0 10px;"><strong>Payment Method:</strong> ${receipt.paymentMethod}</p>
+                                <p style="margin: 0 0 10px;"><strong>Type:</strong> ${receipt.type.replace(/_/g, ' ').toUpperCase()}</p>
+                                <p style="margin: 0;"><strong>Plan:</strong> ${receipt.plan} (${receipt.period})</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Payer Information -->
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="color: #003366; margin-bottom: 15px;">Payer Information:</h4>
+                        <div style="background: #e7f5ff; padding: 20px; border-radius: 8px; border-left: 4px solid #0099ff;">
+                            <p style="margin: 0 0 10px; font-weight: bold;">${receipt.payerName}</p>
+                            <p style="margin: 0; color: #003366;">${receipt.payerEmail}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Items -->
+                    <h4 style="color: #003366; margin-bottom: 15px;">Payment Details:</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                        <thead>
+                            <tr style="background: #003366; color: white;">
+                                <th style="padding: 12px; text-align: left;">Description</th>
+                                <th style="padding: 12px; text-align: right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${receipt.items.map(item => `
+                                <tr style="border-bottom: 1px solid #e9ecef;">
+                                    <td style="padding: 12px;">${item.description}</td>
+                                    <td style="padding: 12px; text-align: right;">${receipt.currency} ${item.amount.toLocaleString()}</td>
+                                </tr>
+                            `).join('')}
+                            
+                            <tr>
+                                <td style="padding: 12px; font-weight: bold;">Tax (${receipt.taxAmount/receipt.amount*100 || 0}%)</td>
+                                <td style="padding: 12px; text-align: right; font-weight: bold;">${receipt.currency} ${receipt.taxAmount.toFixed(2)}</td>
+                            </tr>
+                            
+                            ${receipt.fee > 0 ? `
+                                <tr>
+                                    <td style="padding: 12px; font-weight: bold;">Processing Fee</td>
+                                    <td style="padding: 12px; text-align: right; font-weight: bold;">${receipt.currency} ${receipt.fee.toFixed(2)}</td>
+                                </tr>
+                            ` : ''}
+                        </tbody>
+                    </table>
+                    
+                    <!-- Totals -->
+                    <div style="text-align: right; margin-bottom: 40px;">
+                        <div style="border-top: 2px solid #28a745; padding-top: 20px;">
+                            <span style="color: #003366; font-size: 20px; font-weight: bold;">${isRefund ? 'Refund Total:' : 'Payment Total:'}</span>
+                            <span style="margin-left: 20px; font-size: 32px; font-weight: bold; color: ${isRefund ? '#f37021' : '#28a745'};">${receipt.currency} ${Math.abs(receipt.amount).toLocaleString()}</span>
+                        </div>
+                        
+                        <div style="margin-top: 15px; color: #666; font-size: 14px;">
+                            Net Amount: ${receipt.currency} ${Math.abs(receipt.netAmount).toLocaleString()}
+                        </div>
+                    </div>
+                    
+                    <!-- Legal Information -->
+                    <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                        <h4 style="color: #003366; margin-bottom: 15px;">Legal & Verification:</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div>
+                                <div style="color: #666; font-size: 12px;">Receipt Status</div>
+                                <div style="color: #003366; font-weight: bold;">${receipt.verified ? 'Verified & Valid' : 'Pending Verification'}</div>
+                            </div>
+                            
+                            <div>
+                                <div style="color: #666; font-size: 12px;">Valid Until</div>
+                                <div style="color: #003366; font-weight: bold;">28th of Next Month</div>
+                            </div>
+                            
+                            <div>
+                                <div style="color: #666; font-size: 12px;">Tax Deductible</div>
+                                <div style="color: #28a745; font-weight: bold;">Yes</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e9ecef;">
+                            <p style="color: #666; font-size: 12px; margin: 0;">
+                                This is an official M-Pesewa payment receipt. For verification, contact support@mpesewa.com with receipt number.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+        
+        function printReceipt(receiptId) {
+            const receipt = allReceipts.find(rec => rec.id === receiptId);
+            if (!receipt) return;
+            
+            // Create a print-friendly version
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Print Receipt - ${receipt.id}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 40px; }
+                        .header { text-align: center; margin-bottom: 30px; }
+                        .details { margin: 20px 0; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+                        th { background: #f5f5f5; }
+                        .total { font-size: 24px; font-weight: bold; text-align: right; margin-top: 30px; }
+                        .footer { margin-top: 50px; font-size: 12px; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>M-PESEWA PAYMENT RECEIPT</h1>
+                        <h2>${receipt.id}</h2>
+                    </div>
+                    
+                    <div class="details">
+                        <p><strong>Date:</strong> ${formatDate(receipt.date)}</p>
+                        <p><strong>Transaction ID:</strong> ${receipt.transactionId}</p>
+                        <p><strong>Payment Method:</strong> ${receipt.paymentMethod}</p>
+                        <p><strong>Payer:</strong> ${receipt.payerName}</p>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${receipt.items.map(item => `
+                                <tr>
+                                    <td>${item.description}</td>
+                                    <td>${receipt.currency} ${item.amount}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <div class="total">
+                        Total: ${receipt.currency} ${Math.abs(receipt.amount)}
+                    </div>
+                    
+                    <div class="footer">
+                        <p>This is an official receipt from M-Pesewa Technologies Ltd.</p>
+                        <p>For verification: support@mpesewa.com | +254 709 219 000</p>
+                        <p>Generated on: ${new Date().toLocaleDateString()}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+        
+        function shareReceipt(receiptId) {
+            const receipt = allReceipts.find(rec => rec.id === receiptId);
+            if (!receipt) return;
+            
+            // In a real application, this would use the Web Share API
+            if (navigator.share) {
+                navigator.share({
+                    title: `M-Pesewa Receipt: ${receipt.id}`,
+                    text: `Payment receipt for ${receipt.plan} subscription. Amount: ${receipt.currency} ${Math.abs(receipt.amount)}`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy to clipboard
+                const receiptText = `M-Pesewa Receipt
+Receipt Number: ${receipt.id}
+Date: ${formatDate(receipt.date)}
+Amount: ${receipt.currency} ${Math.abs(receipt.amount)}
+Plan: ${receipt.plan} (${receipt.period})
+Transaction: ${receipt.transactionId}
+Status: ${receipt.status.toUpperCase()}`;
+                
+                navigator.clipboard.writeText(receiptText).then(() => {
+                    alert('Receipt details copied to clipboard!');
+                });
+            }
+        }
+        
+        function requestReceipt() {
+            // Show request form
+            const invoiceId = prompt('Enter invoice number to request receipt:');
+            if (!invoiceId) return;
+            
+            alert(`Receipt request submitted for invoice ${invoiceId}.\n\nA receipt will be generated and sent to your email within 24 hours.`);
+            
+            // In production, this would submit a request to the backend
+            console.log(`Receipt requested for invoice: ${invoiceId}`);
+        }
+        
+        // Initialize with sample data
+        generateSampleReceipts('NG');
+        updateSummary();
+        renderReceipts();
+    </script>
+</body>
+</html>
