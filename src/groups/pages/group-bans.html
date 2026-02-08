@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bans & Blacklists - M-Pesewa</title>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('../service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    
+    <style>
+        .bans-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .bans-list {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .bans-sidebar {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+        }
+        
+        .ban-card {
+            background: #ffebee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f44336;
+            transition: all 0.3s ease;
+        }
+        
+        .ban-card.warning {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+        
+        .ban-card.resolved {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+            opacity: 0.8;
+        }
+        
+        .ban-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .ban-info {
+            flex: 1;
+        }
+        
+        .ban-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .ban-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .badge-blacklist {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+        
+        .badge-warning {
+            background: #ffe0b2;
+            color: #ef6c00;
+        }
+        
+        .badge-resolved {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        .ban-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: #003366;
+        }
+        
+        .blacklist-reason {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #9e9e9e;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #003366;
+            margin: 5px 0;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #555;
+        }
+        
+        .ban-tabs {
+            display: flex;
+            border-bottom: 2px solid #e9ecef;
+            margin-bottom: 25px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #555;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab.active {
+            color: #003366;
+            border-bottom-color: #003366;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-width: 200px;
+        }
+        
+        @media (max-width: 992px) {
+            .bans-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .ban-header {
+                flex-direction: column;
+            }
+            
+            .ban-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .ban-actions {
+                flex-direction: column;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-controls {
+                flex-direction: column;
+            }
+        }
+        
+        .country-flag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            background: #e3f2fd;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #003366;
+            margin-right: 10px;
+        }
+        
+        .rules-section {
+            background: #f8f9fa;
+            border-left: 4px solid #003366;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .platform-blacklist-notice {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+        
+        .escalation-path {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header" style="background: #003366;">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="../index.html" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 24px;">
+                    M-PESEWA
+                </a>
+            </div>
+            
+            <nav class="header-nav">
+                <ul class="nav-menu">
+                    <li><a href="../index.html" style="color: #ffffff;">Home</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Groups ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="group-admin.html" style="color: #003366;">Admin Panel</a>
+                            <a href="group-invites.html" style="color: #003366;">Invites</a>
+                            <a href="group-requests.html" style="color: #003366;">Join Requests</a>
+                            <a href="group-bans.html" style="color: #003366;">Bans & Blacklists</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Blacklist ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../blacklist/pages/blacklist-public.html" style="color: #003366;">Public Blacklist</a>
+                            <a href="../blacklist/pages/blacklist-status.html" style="color: #003366;">My Blacklist Status</a>
+                            <a href="../blacklist/pages/blacklist-appeal.html" style="color: #003366;">Appeal Process</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Collectors ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../global-pages/collectors.html" style="color: #003366;">Debt Collectors</a>
+                            <a href="#" style="color: #003366;">Recovery Process</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Country ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../countries/ke.html" style="color: #003366;">Kenya</a>
+                            <a href="../countries/ug.html" style="color: #003366;">Uganda</a>
+                            <a href="../countries/tz.html" style="color: #003366;">Tanzania</a>
+                            <a href="../countries/rw.html" style="color: #003366;">Rwanda</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header-auth">
+                <div style="color: #ffffff; margin-right: 15px;">👤 John Kamau</div>
+                <a href="../auth/logout.html" class="btn-outline" style="color: #ffffff; border-color: #ffffff;">Logout</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <div class="breadcrumbs">
+            <a href="../index.html" style="color: #0099ff;">Home</a> &gt;
+            <a href="group-admin.html" style="color: #0099ff;">Group Admin</a> &gt;
+            <span style="color: #555;">Bans & Blacklists</span>
+        </div>
+        
+        <header class="page-header">
+            <h1 style="color: #003366;">Bans & Blacklists Management</h1>
+            <p style="color: #555;">Manage member restrictions, blacklists, and monitor default risks within your group.</p>
+        </header>
+        
+        <!-- Blacklist Rules -->
+        <div class="rules-section">
+            <h3 style="color: #003366; margin-bottom: 15px;">⚡ STRICT BLACKLIST RULES (NON-NEGOTIABLE)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div>
+                    <h4 style="color: #c62828; margin-bottom: 10px;">Blacklisting Triggers</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: #555;">
+                        <li>Loan default after <strong>2 months</strong> of non-payment</li>
+                        <li>Consistent late repayments (3+ instances)</li>
+                        <li>Fraudulent activity or misrepresentation</li>
+                        <li>Violation of group trust rules</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #2e7d32; margin-bottom: 10px;">Blacklist Consequences</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: #555;">
+                        <li><strong>Cannot borrow</strong> from any group</li>
+                        <li><strong>Cannot join new groups</strong></li>
+                        <li>Visible blacklist badge platform-wide</li>
+                        <li>Referrals from blacklisted users are flagged</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Removal Process</h4>
+                    <ul style="margin: 0; padding-left: 20px; color: #555;">
+                        <li>Only by <strong>Platform Admin</strong> (not group admin)</li>
+                        <li>Requires <strong>full repayment</strong> (principal + interest + penalties)</li>
+                        <li>Appeal process with evidence</li>
+                        <li>Reinstatement probation period</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bans-container">
+            <div class="bans-list">
+                <div class="ban-tabs">
+                    <div class="tab active" data-tab="active">Active Blacklists (3)</div>
+                    <div class="tab" data-tab="warnings">Warnings (5)</div>
+                    <div class="tab" data-tab="resolved">Resolved (12)</div>
+                </div>
+                
+                <div class="search-controls">
+                    <input type="text" class="search-input" placeholder="Search by name, phone, or amount...">
+                    <select class="filter-select" style="padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option>Filter by Status</option>
+                        <option>Active Defaults</option>
+                        <option>Late Repayments</option>
+                        <option>Fraud Cases</option>
+                    </select>
+                    <button class="btn-secondary" style="background: #0099ff; color: #ffffff;">Export Blacklist</button>
+                </div>
+                
+                <!-- Active Blacklists Tab -->
+                <div class="tab-content active" id="active">
+                    <div class="ban-card">
+                        <div class="ban-header">
+                            <div class="ban-info">
+                                <h3 style="margin: 0; color: #003366;">Michael Odhiambo</h3>
+                                <div style="display: flex; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
+                                    <span class="country-flag">🇰🇪 Kenya</span>
+                                    <span style="color: #555;">Role: <strong>Borrower</strong></span>
+                                    <span class="ban-badge badge-blacklist">BLACKLISTED</span>
+                                </div>
+                            </div>
+                            <div class="ban-actions">
+                                <button class="btn-primary" style="background: #003366; color: #ffffff;">View Ledger</button>
+                                <button class="btn-outline" style="border-color: #0099ff; color: #0099ff;">Contact</button>
+                                <button class="btn-outline escalate-btn" style="border-color: #f44336; color: #f44336;">Escalate to Platform</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ban-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount Owed</span>
+                                <span class="detail-value" style="color: #c62828;">KSh 15,000</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Days Overdue</span>
+                                <span class="detail-value" style="color: #c62828;">75 days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Default Date</span>
+                                <span class="detail-value">2024-01-05</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Lender</span>
+                                <span class="detail-value">James Kamau</span>
+                            </div>
+                        </div>
+                        
+                        <div class="blacklist-reason">
+                            <strong>Blacklist Reason:</strong> Loan default after 2 months. Initial loan: KSh 10,000 (Jan 5). Interest accrued: KSh 3,000. Penalties: KSh 2,000. Multiple contact attempts unsuccessful.
+                        </div>
+                        
+                        <div style="color: #555; margin-top: 15px;">
+                            <strong>Last Contact:</strong> 2024-02-20 (Phone call - promised to pay but didn't)<br>
+                            <strong>Referrers:</strong> Jane Wambui (colleague), Peter Njoroge (friend)<br>
+                            <strong>Platform Action:</strong> Escalated to platform admin on 2024-03-01
+                        </div>
+                    </div>
+                    
+                    <div class="ban-card">
+                        <div class="ban-header">
+                            <div class="ban-info">
+                                <h3 style="margin: 0; color: #003366;">Susan Atieno</h3>
+                                <div style="display: flex; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
+                                    <span class="country-flag">🇰🇪 Kenya</span>
+                                    <span style="color: #555;">Role: <strong>Borrower/Lender</strong></span>
+                                    <span class="ban-badge badge-blacklist">BLACKLISTED</span>
+                                </div>
+                            </div>
+                            <div class="ban-actions">
+                                <button class="btn-primary" style="background: #003366; color: #ffffff;">View Ledger</button>
+                                <button class="btn-outline" style="border-color: #0099ff; color: #0099ff;">Contact</button>
+                                <button class="btn-outline escalate-btn" style="border-color: #f44336; color: #f44336;">Escalate to Platform</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ban-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount Owed</span>
+                                <span class="detail-value" style="color: #c62828;">KSh 8,500</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Days Overdue</span>
+                                <span class="detail-value" style="color: #c62828;">60 days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Default Date</span>
+                                <span class="detail-value">2024-01-20</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Lender</span>
+                                <span class="detail-value">Sarah Mwangi</span>
+                            </div>
+                        </div>
+                        
+                        <div class="blacklist-reason">
+                            <strong>Blacklist Reason:</strong> Multiple loan default history. This is second default within 6 months. Previous default cleared in Nov 2023.
+                        </div>
+                        
+                        <div style="color: #555; margin-top: 15px;">
+                            <strong>Last Contact:</strong> 2024-02-28 (SMS response - claims financial difficulties)<br>
+                            <strong>Referrers:</strong> Robert Mutiso (family), Grace Akinyi (church)<br>
+                            <strong>Note:</strong> Also acts as lender in 2 other groups (subscription suspended)
+                        </div>
+                    </div>
+                    
+                    <div class="ban-card">
+                        <div class="ban-header">
+                            <div class="ban-info">
+                                <h3 style="margin: 0; color: #003366;">David Omondi</h3>
+                                <div style="display: flex; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
+                                    <span class="country-flag">🇰🇪 Kenya</span>
+                                    <span style="color: #555;">Role: <strong>Borrower</strong></span>
+                                    <span class="ban-badge badge-blacklist">BLACKLISTED</span>
+                                </div>
+                            </div>
+                            <div class="ban-actions">
+                                <button class="btn-primary" style="background: #003366; color: #ffffff;">View Ledger</button>
+                                <button class="btn-outline" style="border-color: #0099ff; color: #0099ff;">Contact</button>
+                                <button class="btn-outline escalate-btn" style="border-color: #f44336; color: #f44336;">Escalate to Platform</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ban-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount Owed</span>
+                                <span class="detail-value" style="color: #c62828;">KSh 12,300</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Days Overdue</span>
+                                <span class="detail-value" style="color: #c62828;">90+ days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Default Date</span>
+                                <span class="detail-value">2023-12-15</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Lender</span>
+                                <span class="detail-value">John Kamau</span>
+                            </div>
+                        </div>
+                        
+                        <div class="blacklist-reason">
+                            <strong>Blacklist Reason:</strong> Long-term default. Loan taken Dec 2023, no payments made. Multiple contact attempts failed. Phone disconnected.
+                        </div>
+                        
+                        <div style="color: #555; margin-top: 15px;">
+                            <strong>Last Contact:</strong> 2024-01-10 (Phone call - then phone disconnected)<br>
+                            <strong>Referrers:</strong> Michael Otieno (friend - also blacklisted), Jane Wambui (colleague)<br>
+                            <strong>Platform Action:</strong> Already escalated. Debt collector assigned.
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Warnings Tab -->
+                <div class="tab-content" id="warnings">
+                    <div class="ban-card warning">
+                        <div class="ban-header">
+                            <div class="ban-info">
+                                <h3 style="margin: 0; color: #003366;">Peter Njoroge</h3>
+                                <div style="display: flex; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
+                                    <span class="country-flag">🇰🇪 Kenya</span>
+                                    <span style="color: #555;">Role: <strong>Borrower</strong></span>
+                                    <span class="ban-badge badge-warning">WARNING - 14 DAYS LATE</span>
+                                </div>
+                            </div>
+                            <div class="ban-actions">
+                                <button class="btn-primary" style="background: #ff9800; color: #ffffff;">Send Reminder</button>
+                                <button class="btn-outline" style="border-color: #0099ff; color: #0099ff;">Contact</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ban-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount Due</span>
+                                <span class="detail-value" style="color: #ef6c00;">KSh 3,300</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Days Late</span>
+                                <span class="detail-value" style="color: #ef6c00;">14 days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Due Date</span>
+                                <span class="detail-value">2024-03-01</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Lender</span>
+                                <span class="detail-value">Grace Akinyi</span>
+                            </div>
+                        </div>
+                        
+                        <div style="color: #555; margin-top: 15px;">
+                            <strong>Status:</strong> In communication. Promised to pay by March 20.<br>
+                            <strong>History:</strong> Good repayment record (95% on-time)<br>
+                            <strong>Risk Level:</strong> Medium - first significant delay
+                        </div>
+                    </div>
+                    
+                    <!-- More warning cards would go here -->
+                    <div style="text-align: center; padding: 30px; color: #555;">
+                        <p>4 more warnings in this category</p>
+                        <button class="btn-secondary" style="background: #0099ff; color: #ffffff; margin-top: 10px;">Load All Warnings</button>
+                    </div>
+                </div>
+                
+                <!-- Resolved Tab -->
+                <div class="tab-content" id="resolved">
+                    <div class="ban-card resolved">
+                        <div class="ban-header">
+                            <div class="ban-info">
+                                <h3 style="margin: 0; color: #003366;">Robert Mutiso</h3>
+                                <div style="display: flex; align-items: center; margin-top: 8px; flex-wrap: wrap; gap: 8px;">
+                                    <span class="country-flag">🇰🇪 Kenya</span>
+                                    <span style="color: #555;">Role: <strong>Borrower</strong></span>
+                                    <span class="ban-badge badge-resolved">RESOLVED - MAR 2024</span>
+                                </div>
+                            </div>
+                            <div class="ban-actions">
+                                <button class="btn-outline" style="border-color: #003366; color: #003366;">View History</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ban-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Amount Cleared</span>
+                                <span class="detail-value" style="color: #2e7d32;">KSh 7,700</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Resolution Date</span>
+                                <span class="detail-value">2024-03-10</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Default Period</span>
+                                <span class="detail-value">45 days</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Status</span>
+                                <span class="detail-value" style="color: #2e7d32;">Reinstated</span>
+                            </div>
+                        </div>
+                        
+                        <div style="color: #555; margin-top: 15px;">
+                            <strong>Resolution:</strong> Full payment made including penalties. Platform admin approved reinstatement.<br>
+                            <strong>Current Status:</strong> Active borrower with probation monitoring<br>
+                            <strong>Lessons:</strong> Financial literacy counseling completed
+                        </div>
+                    </div>
+                    
+                    <!-- More resolved cards would go here -->
+                    <div style="text-align: center; padding: 30px; color: #555;">
+                        <p>11 more resolved cases</p>
+                        <button class="btn-secondary" style="background: #0099ff; color: #ffffff; margin-top: 10px;">Load All Resolved Cases</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bans-sidebar">
+                <h3 style="color: #003366; margin-bottom: 20px;">Blacklist Statistics</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Active Blacklists</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Active Warnings</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">KSh 35.8K</div>
+                        <div class="stat-label">Total Amount Owed</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">1.3%</div>
+                        <div class="stat-label">Group Default Rate</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 25px 0;">
+                    <h4 style="color: #003366; margin-bottom: 15px;">Blacklist Actions</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button class="btn-secondary" style="background: #0099ff; color: #ffffff; width: 100%;" id="addBlacklist">Add to Blacklist</button>
+                        <button class="btn-outline" style="border-color: #f44336; color: #f44336; width: 100%;" id="bulkEscalate">Bulk Escalate to Platform</button>
+                        <button class="btn-primary" style="background: #003366; color: #ffffff; width: 100%;" id="debtCollectors">Contact Debt Collectors</button>
+                    </div>
+                </div>
+                
+                <div class="platform-blacklist-notice">
+                    <h4 style="color: #003366; margin-bottom: 10px;">⚠️ Platform-Level Blacklist</h4>
+                    <p style="color: #555; font-size: 14px; margin-bottom: 15px;">
+                        Blacklisted members are visible <strong>platform-wide</strong>. Only Platform Admin can remove blacklist status after full repayment.
+                    </p>
+                    <a href="../blacklist/pages/blacklist-public.html" class="btn-secondary" style="background: #2196f3; color: #ffffff; width: 100%; display: block; text-align: center;">View Platform Blacklist</a>
+                </div>
+                
+                <div class="escalation-path">
+                    <h4 style="color: #003366; margin-bottom: 10px;">📋 Escalation Process</h4>
+                    <ol style="margin: 0; padding-left: 20px; color: #555; font-size: 14px;">
+                        <li>Group admin identifies default (60+ days)</li>
+                        <li>Document all contact attempts</li>
+                        <li>Escalate to platform admin</li>
+                        <li>Platform admin reviews & approves blacklist</li>
+                        <li>Debt collector assignment (optional)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Debt Collectors Integration -->
+        <section style="background: #ffffff; border-radius: 12px; padding: 25px; margin: 40px 0; border: 2px solid #e9ecef;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h3 style="color: #003366; margin-bottom: 10px;">🛡️ Debt Collectors Network</h3>
+                    <p style="color: #555; margin: 0;">Access 200+ vetted debt collectors across Kenya. Platform does not participate in recovery.</p>
+                </div>
+                <div>
+                    <a href="../global-pages/collectors.html" class="btn-primary" style="background: #f37021; color: #ffffff; padding: 12px 24px;">Browse Debt Collectors</a>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 25px;">
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 8px;">✅ Vetted Professionals</div>
+                    <div style="color: #555; font-size: 14px;">All collectors verified, licensed, and rated by previous clients</div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 8px;">📍 Location-Based</div>
+                    <div style="color: #555; font-size: 14px;">Find collectors in specific regions across Kenya</div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 8px;">💰 Negotiate Terms</div>
+                    <div style="color: #555; font-size: 14px;">Direct negotiation between lender and collector</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Group State Context -->
+        <section style="background: #f8f9fa; border-radius: 12px; padding: 25px; margin: 40px 0; border: 2px solid #e9ecef;">
+            <h3 style="color: #003366; margin-bottom: 15px;">👥 Group State Impact on Blacklists</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 10px;">ACTIVE State</div>
+                    <div style="color: #555; font-size: 14px;">• Can add new blacklists<br>• Can escalate to platform<br>• Normal operations</div>
+                </div>
+                
+                <div style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 10px;">LOCKED State</div>
+                    <div style="color: #555; font-size: 14px;">• Can manage existing blacklists<br>• Cannot add new members<br>• Repayments allowed</div>
+                </div>
+                
+                <div style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e9ecef;">
+                    <div style="color: #003366; font-weight: 600; margin-bottom: 10px;">SUSPENDED State</div>
+                    <div style="color: #555; font-size: 14px;">• Read-only access to blacklists<br>• No new actions allowed<br>• Platform admin control only</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: #fff8e1; border-radius: 8px; border-left: 4px solid #ff9800;">
+                <div style="color: #003366; font-weight: 600;">Current Group State: <span style="color: #2e7d32;">ACTIVE</span></div>
+                <div style="color: #555; font-size: 14px; margin-top: 5px;">You have full permissions to manage blacklists and escalations.</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background: #1f2a37; color: #ffffff; padding: 60px 40px 30px;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px;">
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Risk Management</h4>
+                <a href="group-bans.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Bans & Blacklists</a>
+                <a href="../blacklist/pages/blacklist-public.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Public Blacklist</a>
+                <a href="../global-pages/collectors.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Debt Collectors</a>
+                <a href="../lender/pages/lending-risk.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Risk Assessment</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Groups</h4>
+                <a href="group-admin.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Group Administration</a>
+                <a href="group-invites.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Invites & Referrals</a>
+                <a href="group-requests.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Join Requests</a>
+                <a href="group-bans.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Member Management</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Legal & Compliance</h4>
+                <a href="../global-pages/terms.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Terms & Conditions</a>
+                <a href="../global-pages/privacy.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Privacy Policy</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Fair Practices Code</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Dispute Resolution</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Support</h4>
+                <a href="../global-pages/faq.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">FAQ</a>
+                <a href="../global-pages/contact.html" style="color: #d1d5db; display: block; margin-bottom: 8px;">Contact Us</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Help Center</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Emergency Support</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Resources</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Financial Literacy</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Risk Management Guide</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Community Guidelines</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Best Practices</a>
+            </div>
+        </div>
+        
+        <!-- Country Ticker -->
+        <div class="country-ticker" style="overflow: hidden; background: #111827; padding: 12px 0; margin-top: 40px;">
+            <div class="ticker-track" style="white-space: nowrap; display: inline-block; color: #ffffff; animation: scroll-left 25s linear infinite;">
+                Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • South Africa • Nigeria • Ghana • Ethiopia •
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #374151;">
+            <p style="color: #9ca3af;">© 2016–2024, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+            <div style="margin-top: 20px;">
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📘</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">🐦</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📺</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📸</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">💼</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const headerNav = document.querySelector('.header-nav');
+            
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    headerNav.classList.toggle('active');
+                    mobileMenuToggle.classList.toggle('active');
+                });
+            }
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Escalate buttons
+            const escalateButtons = document.querySelectorAll('.escalate-btn');
+            escalateButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.ban-card');
+                    const memberName = card.querySelector('h3').textContent;
+                    const amount = card.querySelector('.detail-value').textContent;
+                    
+                    if (confirm(`Escalate ${memberName} (${amount}) to Platform Admin for blacklisting?`)) {
+                        const notes = prompt('Add escalation notes (reason, contact attempts, evidence):');
+                        if (notes !== null) {
+                            card.style.opacity = '0.7';
+                            card.style.borderLeftColor = '#ff9800';
+                            alert(`Escalation submitted for ${memberName}. Platform admin will review within 48 hours.`);
+                        }
+                    }
+                });
+            });
+            
+            // Add to blacklist button
+            const addBlacklistBtn = document.getElementById('addBlacklist');
+            if (addBlacklistBtn) {
+                addBlacklistBtn.addEventListener('click', function() {
+                    const memberName = prompt('Enter member name to blacklist:');
+                    if (memberName) {
+                        const amount = prompt('Enter amount owed:');
+                        const reason = prompt('Enter reason for blacklisting:');
+                        const days = prompt('Enter days overdue:');
+                        
+                        if (amount && reason && days) {
+                            alert(`Blacklist entry created for ${memberName}.\nAmount: ${amount}\nReason: ${reason}\nDays overdue: ${days}\n\nThis will be reviewed before platform-wide blacklisting.`);
+                        }
+                    }
+                });
+            }
+            
+            // Bulk escalate button
+            const bulkEscalateBtn = document.getElementById('bulkEscalate');
+            if (bulkEscalateBtn) {
+                bulkEscalateBtn.addEventListener('click', function() {
+                    const count = document.querySelectorAll('#active .ban-card').length;
+                    if (count > 0) {
+                        if (confirm(`Escalate all ${count} active blacklists to Platform Admin?`)) {
+                            alert(`${count} blacklists escalated to Platform Admin for review.`);
+                        }
+                    } else {
+                        alert('No active blacklists to escalate.');
+                    }
+                });
+            }
+            
+            // Debt collectors button
+            const debtCollectorsBtn = document.getElementById('debtCollectors');
+            if (debtCollectorsBtn) {
+                debtCollectorsBtn.addEventListener('click', function() {
+                    alert('Redirecting to Debt Collectors directory...\n\nRemember: Platform does not participate in recovery. You negotiate directly with collectors.');
+                });
+            }
+            
+            // View ledger buttons
+            const viewLedgerButtons = document.querySelectorAll('.ban-card .btn-primary');
+            viewLedgerButtons.forEach(button => {
+                if (button.textContent.includes('View Ledger')) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const card = this.closest('.ban-card');
+                        const memberName = card.querySelector('h3').textContent;
+                        alert(`Opening ledger for ${memberName}...\n\nIn a real application, this would show complete loan history, payment timeline, interest calculations, and communication logs.`);
+                    });
+                }
+            });
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    const activeCards = document.querySelectorAll('#active .ban-card');
+                    
+                    activeCards.forEach(card => {
+                        const cardText = card.textContent.toLowerCase();
+                        if (cardText.includes(searchTerm) || searchTerm === '') {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+        
+        // CSS Animation for ticker
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scroll-left {
+                from { transform: translateX(100%); }
+                to { transform: translateX(-100%); }
+            }
+            
+            @media (max-width: 768px) {
+                .header-nav.active {
+                    display: block !important;
+                }
+                
+                .dropdown-content {
+                    position: static !important;
+                    width: 100% !important;
+                    box-shadow: none !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

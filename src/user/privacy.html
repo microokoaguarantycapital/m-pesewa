@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Preferences - M-Pesewa</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#003366">
+    <meta name="description" content="Manage your M-Pesewa preferences and settings">
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    
+    <!-- Country-specific theme -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const country = localStorage.getItem('mpesewa_country') || 'ke';
+            const themeLink = document.createElement('link');
+            themeLink.rel = 'stylesheet';
+            themeLink.href = `../assets/css/themes/${country}.css`;
+            document.head.appendChild(themeLink);
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --action-orange: #f37021;
+            --trust-green: #28a745;
+            --neutral-light: #f8f9fa;
+            --pure-white: #ffffff;
+            --dark-text: #333333;
+            --medium-gray: #555555;
+        }
+        
+        .preferences-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 70vh;
+        }
+        
+        .preferences-header {
+            margin-bottom: 2rem;
+        }
+        
+        .preferences-header h1 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .preferences-header p {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+        }
+        
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .preferences-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .preferences-sidebar {
+            background: var(--pure-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .preferences-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .preferences-nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .preferences-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--dark-text);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .preferences-nav a:hover {
+            background-color: var(--neutral-light);
+            color: var(--primary-blue);
+        }
+        
+        .preferences-nav a.active {
+            background-color: var(--primary-blue);
+            color: var(--pure-white);
+        }
+        
+        .preferences-nav i {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .preferences-content {
+            background: var(--pure-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .preference-section {
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .preference-section.active {
+            display: block;
+        }
+        
+        .preference-section h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--neutral-light);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--trust-green);
+        }
+        
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--trust-green);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--neutral-light);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .toggle-label {
+            flex: 1;
+        }
+        
+        .toggle-label h3 {
+            margin: 0 0 0.25rem 0;
+            color: var(--dark-text);
+        }
+        
+        .toggle-label p {
+            margin: 0;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-blue);
+            color: var(--pure-white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0077cc;
+        }
+        
+        .btn-secondary {
+            background-color: var(--neutral-light);
+            color: var(--dark-text);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            color: var(--pure-white);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        
+        .notification-settings {
+            margin-bottom: 2rem;
+        }
+        
+        .notification-item {
+            background: var(--neutral-light);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .notification-header h3 {
+            margin: 0;
+            color: var(--dark-text);
+        }
+        
+        .notification-channels {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .channel-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .channel-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .currency-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .currency-option {
+            background: var(--neutral-light);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .currency-option:hover {
+            background: #e9ecef;
+        }
+        
+        .currency-option.selected {
+            background: var(--primary-blue);
+            color: var(--pure-white);
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+        
+        .country-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary-blue);
+            color: var(--pure-white);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: var(--neutral-light);
+            margin: 2rem 0;
+        }
+    </style>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Country flags -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header" style="background-color: #003366; color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 1.5rem;">
+                    <i class="fas fa-hand-holding-usd" style="margin-right: 0.5rem;"></i>M-Pesewa
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <a href="../index.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Home</a>
+                
+                <!-- Navigation based on user role -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const userRole = localStorage.getItem('mpesewa_role') || 'borrower';
+                        const navContainer = document.querySelector('.main-nav');
+                        
+                        if (userRole === 'lender') {
+                            navContainer.innerHTML += `
+                                <a href="../lender/lender-dashboard.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Lender Dashboard</a>
+                                <a href="../lender/lending-portfolio.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Portfolio</a>
+                                <a href="../subscription/status.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Subscription</a>
+                            `;
+                        } else if (userRole === 'borrower') {
+                            navContainer.innerHTML += `
+                                <a href="../borrower/borrower-dashboard.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Borrower Dashboard</a>
+                                <a href="../borrower/borrow-request.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Apply for Loan</a>
+                                <a href="../borrower/borrow-history.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">History</a>
+                            `;
+                        } else if (userRole === 'admin') {
+                            navContainer.innerHTML += `
+                                <a href="../admin/admin-dashboard.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Admin Dashboard</a>
+                                <a href="../admin/admin-users.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Users</a>
+                                <a href="../admin/admin-groups.html" style="color: white; text-decoration: none; margin-right: 1.5rem;">Groups</a>
+                            `;
+                        }
+                    });
+                </script>
+                
+                <div class="user-menu">
+                    <span id="user-greeting" style="margin-right: 1rem;">
+                        <i class="fas fa-user-circle"></i>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const username = localStorage.getItem('mpesewa_username') || 'User';
+                                document.getElementById('user-greeting').innerHTML = `<i class="fas fa-user-circle"></i> ${username}`;
+                            });
+                        </script>
+                    </span>
+                    <a href="../auth/logout.html" style="color: white; text-decoration: none; background-color: #f37021; padding: 0.5rem 1rem; border-radius: 4px;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="preferences-container">
+            <div class="preferences-header">
+                <h1><i class="fas fa-cog"></i> User Preferences</h1>
+                <p>Manage your account settings and preferences</p>
+                
+                <!-- Country Badge -->
+                <div class="country-badge" id="country-badge">
+                    <i class="fas fa-globe-africa"></i>
+                    <span id="country-name">Loading country...</span>
+                </div>
+                
+                <!-- User Role Badge -->
+                <div id="role-badge" style="display: inline-block; padding: 0.25rem 0.75rem; background-color: #28a745; color: white; border-radius: 20px; font-size: 0.875rem; margin-left: 0.5rem;">
+                    <i class="fas fa-user-tag"></i>
+                    <span id="role-name">Loading role...</span>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> 
+                <strong>Remember:</strong> Changing country requires logout and re-registration. Your current country determines available groups and lenders.
+            </div>
+            
+            <div class="preferences-grid">
+                <!-- Sidebar Navigation -->
+                <div class="preferences-sidebar">
+                    <ul class="preferences-nav">
+                        <li><a href="#" class="active" data-section="profile"><i class="fas fa-user"></i> Profile Settings</a></li>
+                        <li><a href="#" data-section="notifications"><i class="fas fa-bell"></i> Notifications</a></li>
+                        <li><a href="#" data-section="security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                        <li><a href="#" data-section="privacy"><i class="fas fa-lock"></i> Privacy</a></li>
+                        <li><a href="#" data-section="display"><i class="fas fa-palette"></i> Display</a></li>
+                        <li><a href="#" data-section="groups"><i class="fas fa-users"></i> Group Settings</a></li>
+                        <li><a href="#" data-section="subscription"><i class="fas fa-credit-card"></i> Subscription</a></li>
+                        <li><a href="delete-account.html" style="color: #dc3545;"><i class="fas fa-trash-alt"></i> Delete Account</a></li>
+                        <li><a href="export-data.html"><i class="fas fa-download"></i> Export Data</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Content Area -->
+                <div class="preferences-content">
+                    <!-- Profile Settings -->
+                    <div class="preference-section active" id="profile">
+                        <h2>Profile Settings</h2>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <strong>Important:</strong> Some profile changes require admin approval and may affect your lending/borrowing limits.
+                        </div>
+                        
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" class="form-control" disabled>
+                                <small style="color: #666; font-size: 0.875rem;">Username cannot be changed</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="nationalId">National ID Number</label>
+                                <input type="text" id="nationalId" class="form-control">
+                                <small style="color: #666; font-size: 0.875rem;">Required for Super Tier lenders</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Country</label>
+                                <div id="country-display" style="padding: 0.75rem; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd;">
+                                    <i class="fas fa-globe-africa"></i> <span id="current-country">Loading...</span>
+                                </div>
+                                <small style="color: #666; font-size: 0.875rem;">Country cannot be changed. To change country, you must logout and register again.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>User Role</label>
+                                <div id="role-display" style="padding: 0.75rem; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd;">
+                                    <i class="fas fa-user-tag"></i> <span id="current-role">Loading...</span>
+                                </div>
+                                <small style="color: #666; font-size: 0.875rem;">To change roles, you must logout and register with the new role</small>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Notification Settings -->
+                    <div class="preference-section" id="notifications">
+                        <h2>Notification Settings</h2>
+                        
+                        <div class="notification-settings">
+                            <div class="notification-item">
+                                <div class="notification-header">
+                                    <h3>Loan Requests</h3>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p>Receive notifications when someone requests a loan in your group</p>
+                                <div class="notification-channels">
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="loan-email" checked>
+                                        <label for="loan-email">Email</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="loan-sms" checked>
+                                        <label for="loan-sms">SMS</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="loan-push" checked>
+                                        <label for="loan-push">Push</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-header">
+                                    <h3>Repayment Reminders</h3>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p>Get reminders when loan repayments are due</p>
+                                <div class="notification-channels">
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="repayment-email" checked>
+                                        <label for="repayment-email">Email</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="repayment-sms" checked>
+                                        <label for="repayment-sms">SMS</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="repayment-push" checked>
+                                        <label for="repayment-push">Push</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-header">
+                                    <h3>Subscription Alerts</h3>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p>Notifications about subscription status and expiry</p>
+                                <div class="notification-channels">
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="subscription-email" checked>
+                                        <label for="subscription-email">Email</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="subscription-sms">
+                                        <label for="subscription-sms">SMS</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="subscription-push" checked>
+                                        <label for="subscription-push">Push</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="notification-item">
+                                <div class="notification-header">
+                                    <h3>Group Activity</h3>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <p>Updates about your group members and activities</p>
+                                <div class="notification-channels">
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="group-email" checked>
+                                        <label for="group-email">Email</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="group-sms">
+                                        <label for="group-sms">SMS</label>
+                                    </div>
+                                    <div class="channel-option">
+                                        <input type="checkbox" id="group-push" checked>
+                                        <label for="group-push">Push</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary">Save Notification Settings</button>
+                    </div>
+                    
+                    <!-- Security Settings -->
+                    <div class="preference-section" id="security">
+                        <h2>Security Settings</h2>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-shield-alt"></i> 
+                            <strong>Security Tip:</strong> For maximum security, enable two-factor authentication and change your password regularly.
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Two-Factor Authentication</h3>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="twoFactorToggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div id="twoFactorSetup" style="display: none; background: #f8f9fa; padding: 1.5rem; border-radius: 4px; margin-top: 1rem;">
+                            <h4>Setup Two-Factor Authentication</h4>
+                            <p>Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)</p>
+                            <div style="background: white; padding: 1rem; display: inline-block; margin: 1rem 0;">
+                                <!-- QR Code Placeholder -->
+                                <div style="width: 200px; height: 200px; background: #eee; display: flex; align-items: center; justify-content: center;">
+                                    <span>QR Code Placeholder</span>
+                                </div>
+                            </div>
+                            <p>Or enter this code manually: <strong>JBSWY3DPEHPK3PXP</strong></p>
+                            <div class="form-group">
+                                <label for="authCode">Enter 6-digit code from your app</label>
+                                <input type="text" id="authCode" class="form-control" placeholder="123456" maxlength="6">
+                            </div>
+                            <button class="btn btn-primary">Verify & Enable</button>
+                        </div>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <h3>Change Password</h3>
+                        <form id="password-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" class="form-control" required>
+                                <small style="color: #666; font-size: 0.875rem;">Password must be 8-12 characters with mixed case, numbers, and symbols</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" class="form-control" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </form>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <h3>Active Sessions</h3>
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Current Session</strong><br>
+                                    <small>Chrome on Windows • Nairobi, Kenya</small><br>
+                                    <small>Started: Today, 10:30 AM</small>
+                                </div>
+                                <span style="color: #28a745; font-weight: bold;">Active</span>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>Mobile Session</strong><br>
+                                    <small>Safari on iPhone • Mombasa, Kenya</small><br>
+                                    <small>Last active: Yesterday, 3:45 PM</small>
+                                </div>
+                                <button class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.875rem;">End Session</button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-danger">End All Other Sessions</button>
+                    </div>
+                    
+                    <!-- Privacy Settings -->
+                    <div class="preference-section" id="privacy">
+                        <h2>Privacy Settings</h2>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Profile Visibility</h3>
+                                <p>Allow other group members to see your profile information</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Loan History Visibility</h3>
+                                <p>Show your loan history to group admins and lenders</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Rating Visibility</h3>
+                                <p>Display your borrower/lender rating to others</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Search Engine Indexing</h3>
+                                <p>Allow search engines to index your public profile</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="section-divider"></div>
+                        
+                        <h3>Data Sharing Preferences</h3>
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Share data for analytics</h3>
+                                <p>Help us improve M-Pesewa by sharing anonymous usage data</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Marketing communications</h3>
+                                <p>Receive emails about new features and promotions</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-primary">Save Privacy Settings</button>
+                    </div>
+                    
+                    <!-- Display Settings -->
+                    <div class="preference-section" id="display">
+                        <h2>Display Settings</h2>
+                        
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <select id="language" class="form-control">
+                                <option value="en" selected>English</option>
+                                <option value="sw">Swahili</option>
+                                <option value="fr">French</option>
+                                <option value="ar">Arabic</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="currency">Currency Display</label>
+                            <div class="currency-selector" id="currency-selector">
+                                <!-- Will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dateFormat">Date Format</label>
+                            <select id="dateFormat" class="form-control">
+                                <option value="dd/mm/yyyy">DD/MM/YYYY</option>
+                                <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                                <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Dark Mode</h3>
+                                <p>Use dark theme throughout the application</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="darkModeToggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Compact View</h3>
+                                <p>Use compact spacing for lists and tables</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Animation Effects</h3>
+                                <p>Enable animations and transitions</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-primary">Save Display Settings</button>
+                    </div>
+                    
+                    <!-- Group Settings -->
+                    <div class="preference-section" id="groups">
+                        <h2>Group Settings</h2>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Group Rules:</strong> You can belong to up to 4 groups simultaneously. Each group is country-locked.
+                        </div>
+                        
+                        <h3>Your Groups</h3>
+                        <div id="groups-list" style="margin-bottom: 2rem;">
+                            <!-- Groups will be loaded here -->
+                            <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 4px;">
+                                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #003366; margin-bottom: 1rem;"></i>
+                                <p>Loading your groups...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Auto-join Group Invites</h3>
+                                <p>Automatically accept group invitations from trusted members</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Group Notifications</h3>
+                                <p>Receive notifications for all group activities</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Show Group Badges</h3>
+                                <p>Display group badges next to your name</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-primary">Save Group Settings</button>
+                    </div>
+                    
+                    <!-- Subscription Settings -->
+                    <div class="preference-section" id="subscription">
+                        <h2>Subscription Settings</h2>
+                        
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <strong>Important:</strong> Lenders must have an active subscription to lend. Subscriptions expire on the 28th of each month.
+                        </div>
+                        
+                        <div id="subscription-info" style="background: #f8f9fa; padding: 1.5rem; border-radius: 4px; margin-bottom: 1.5rem;">
+                            <h3>Current Subscription</h3>
+                            <div id="subscription-details">
+                                <!-- Will be populated by JavaScript -->
+                                <div style="text-align: center; padding: 1rem;">
+                                    <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; color: #003366;"></i>
+                                    <p>Loading subscription details...</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Auto-renew Subscription</h3>
+                                <p>Automatically renew your subscription before expiry</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="autoRenewToggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Expiry Reminders</h3>
+                                <p>Send me reminders before subscription expiry</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-group">
+                            <div class="toggle-label">
+                                <h3>Payment Receipts</h3>
+                                <p>Email me payment receipts for subscription renewals</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        
+                        <div style="margin-top: 2rem;">
+                            <a href="../subscription/upgrade.html" class="btn btn-primary" style="margin-right: 1rem;">
+                                <i class="fas fa-arrow-up"></i> Upgrade Subscription
+                            </a>
+                            <a href="../subscription/history.html" class="btn btn-secondary">
+                                <i class="fas fa-history"></i> View History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37; color: white; padding: 60px 40px 30px;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px; max-width: 1200px; margin: 0 auto;">
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">Borrowing</h4>
+                <a href="../borrower/borrow-request.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Get Emergency Loan</a>
+                <a href="#" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Online Personal Loan</a>
+                <a href="#" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Business Loan</a>
+                <a href="../global-pages/how-it-works.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">How to Apply</a>
+                <a href="#" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Active Borrowers</a>
+            </div>
+
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">Lending</h4>
+                <a href="../lender/lending-rules.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Smart Lending</a>
+                <a href="../global-pages/how-it-works.html#lending" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Why Lend at M-Pesewa?</a>
+                <a href="../lender/lending-rules.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">How to Lend</a>
+                <a href="#" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Active Lenders</a>
+            </div>
+
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">How It Works</h4>
+                <a href="../global-pages/how-it-works.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">P2P Lending Works</a>
+                <a href="../global-pages/about.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Our Role</a>
+                <a href="../subscription/plans.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Subscriptions</a>
+                <a href="../blacklist/blacklist-public.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Blacklist</a>
+                <a href="../global-pages/collectors.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Debt Collectors</a>
+            </div>
+
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">About Us</h4>
+                <a href="../global-pages/about.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">About M-Pesewa</a>
+                <a href="../global-pages/careers.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Team / Advisory Board</a>
+                <a href="../global-pages/press.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">News / Careers</a>
+                <a href="../global-pages/faq.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Blog / FAQs</a>
+                <a href="../global-pages/contact.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Contact Us</a>
+            </div>
+
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">Legal</h4>
+                <a href="../global-pages/terms.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Terms & Conditions</a>
+                <a href="../global-pages/privacy.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Privacy Policy</a>
+                <a href="../global-pages/contact.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Grievance Redressal</a>
+                <a href="../global-pages/terms.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Fair Practices Code</a>
+            </div>
+
+            <div class="footer-col">
+                <h4 style="color: white; margin-bottom: 14px; font-size: 15px;">Partners</h4>
+                <a href="../global-pages/contact.html" style="display: block; color: #d1d5db; text-decoration: none; margin-bottom: 8px;">Be a Partner</a>
+            </div>
+        </div>
+        
+        <!-- Country Ticker -->
+        <div class="country-ticker" style="overflow: hidden; background: #111827; padding: 12px 0; margin-top: 40px;">
+            <div class="ticker-track" style="white-space: nowrap; display: inline-block; color: #ffffff; animation: scroll-left 25s linear infinite; font-size: 13px;">
+                Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • South Africa • Nigeria • Ghana • Ethiopia •
+            </div>
+        </div>
+        
+        <style>
+            @keyframes scroll-left {
+                from { transform: translateX(100%); }
+                to { transform: translateX(-100%); }
+            }
+        </style>
+        
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #374151; color: #9ca3af; font-size: 14px;">
+            <p>© 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+            <div style="margin-top: 10px;">
+                <a href="#" style="color: #9ca3af; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                <a href="#" style="color: #9ca3af; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: #9ca3af; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                <a href="#" style="color: #9ca3af; margin: 0 10px; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize user preferences
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data from localStorage
+            const user = JSON.parse(localStorage.getItem('mpesewa_user')) || {
+                fullName: 'John Doe',
+                username: 'johndoe',
+                email: 'john.doe@example.com',
+                phone: '+254712345678',
+                nationalId: '12345678',
+                country: 'ke',
+                role: 'borrower'
+            };
+            
+            // Country mapping
+            const countryMap = {
+                'ke': { name: 'Kenya', currency: 'KSh', flag: 'fi-ke' },
+                'ug': { name: 'Uganda', currency: 'UGX', flag: 'fi-ug' },
+                'tz': { name: 'Tanzania', currency: 'TZS', flag: 'fi-tz' },
+                'rw': { name: 'Rwanda', currency: 'RWF', flag: 'fi-rw' },
+                'bi': { name: 'Burundi', currency: 'BIF', flag: 'fi-bi' },
+                'cd': { name: 'DRC', currency: 'CDF', flag: 'fi-cd' },
+                'ss': { name: 'South Sudan', currency: 'SSP', flag: 'fi-ss' },
+                'za': { name: 'South Africa', currency: 'ZAR', flag: 'fi-za' },
+                'ng': { name: 'Nigeria', currency: 'NGN', flag: 'fi-ng' },
+                'gh': { name: 'Ghana', currency: 'GHS', flag: 'fi-gh' },
+                'et': { name: 'Ethiopia', currency: 'ETB', flag: 'fi-et' }
+            };
+            
+            const currentCountry = user.country || 'ke';
+            const countryInfo = countryMap[currentCountry];
+            const currentRole = user.role || 'borrower';
+            
+            // Update country display
+            document.getElementById('country-name').textContent = countryInfo.name;
+            document.getElementById('current-country').textContent = countryInfo.name;
+            
+            // Update role display
+            const roleDisplay = currentRole.charAt(0).toUpperCase() + currentRole.slice(1);
+            document.getElementById('role-name').textContent = roleDisplay;
+            document.getElementById('current-role').textContent = roleDisplay;
+            
+            // Update role badge color
+            const roleBadge = document.getElementById('role-badge');
+            if (currentRole === 'lender') {
+                roleBadge.style.backgroundColor = '#28a745'; // Trust Green
+            } else if (currentRole === 'borrower') {
+                roleBadge.style.backgroundColor = '#f37021'; // Action Orange
+            } else if (currentRole === 'admin') {
+                roleBadge.style.backgroundColor = '#003366'; // Primary Blue
+            }
+            
+            // Populate form fields
+            document.getElementById('fullName').value = user.fullName;
+            document.getElementById('username').value = user.username;
+            document.getElementById('email').value = user.email;
+            document.getElementById('phone').value = user.phone;
+            document.getElementById('nationalId').value = user.nationalId || '';
+            
+            // Setup navigation tabs
+            const navLinks = document.querySelectorAll('.preferences-nav a');
+            const sections = document.querySelectorAll('.preference-section');
+            
+            navLinks.forEach(link => {
+                if (!link.href.includes('delete-account.html') && !link.href.includes('export-data.html')) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        // Remove active class from all links
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        // Add active class to clicked link
+                        this.classList.add('active');
+                        
+                        // Get target section
+                        const targetSection = this.getAttribute('data-section');
+                        
+                        // Hide all sections
+                        sections.forEach(section => section.classList.remove('active'));
+                        // Show target section
+                        document.getElementById(targetSection).classList.add('active');
+                    });
+                }
+            });
+            
+            // Setup currency selector
+            const currencySelector = document.getElementById('currency-selector');
+            Object.entries(countryMap).forEach(([code, info]) => {
+                const currencyOption = document.createElement('div');
+                currencyOption.className = 'currency-option';
+                if (code === currentCountry) {
+                    currencyOption.classList.add('selected');
+                }
+                currencyOption.innerHTML = `
+                    <span class="fi ${info.flag}" style="font-size: 1.5rem;"></span><br>
+                    <strong>${info.name}</strong><br>
+                    <small>${info.currency}</small>
+                `;
+                currencyOption.addEventListener('click', function() {
+                    document.querySelectorAll('.currency-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    
+                    // Show alert about country change restrictions
+                    if (code !== currentCountry) {
+                        alert(`To change to ${info.name}, you must logout and register again. Country changes are not allowed within an active account.`);
+                    }
+                });
+                currencySelector.appendChild(currencyOption);
+            });
+            
+            // Load flag icons
+            const flagLinks = document.querySelectorAll('.fi');
+            flagLinks.forEach(flag => {
+                flag.style.backgroundSize = 'contain';
+                flag.style.backgroundPosition = '50%';
+                flag.style.backgroundRepeat = 'no-repeat';
+                flag.style.display = 'inline-block';
+                flag.style.width = '1.33333333em';
+                flag.style.lineHeight = '1em';
+            });
+            
+            // Two-factor authentication toggle
+            const twoFactorToggle = document.getElementById('twoFactorToggle');
+            const twoFactorSetup = document.getElementById('twoFactorSetup');
+            
+            twoFactorToggle.addEventListener('change', function() {
+                twoFactorSetup.style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Dark mode toggle
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            darkModeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('mpesewa_darkmode', 'true');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('mpesewa_darkmode', 'false');
+                }
+            });
+            
+            // Check for saved dark mode preference
+            if (localStorage.getItem('mpesewa_darkmode') === 'true') {
+                darkModeToggle.checked = true;
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Auto-renew toggle
+            const autoRenewToggle = document.getElementById('autoRenewToggle');
+            const subscription = JSON.parse(localStorage.getItem('mpesewa_subscription')) || {
+                plan: 'Basic',
+                amount: '50',
+                currency: 'KSh',
+                expiry: '2024-03-28',
+                autoRenew: false
+            };
+            
+            autoRenewToggle.checked = subscription.autoRenew || false;
+            
+            // Populate subscription details
+            const subscriptionDetails = document.getElementById('subscription-details');
+            if (currentRole === 'lender') {
+                const daysRemaining = Math.ceil((new Date(subscription.expiry) - new Date()) / (1000 * 60 * 60 * 24));
+                const statusClass = daysRemaining > 7 ? 'text-success' : daysRemaining > 0 ? 'text-warning' : 'text-danger';
+                const statusText = daysRemaining > 0 ? `Active (${daysRemaining} days remaining)` : 'Expired';
+                
+                subscriptionDetails.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <div>
+                            <strong>Plan:</strong><br>
+                            <span style="font-size: 1.2rem; font-weight: bold; color: #003366;">${subscription.plan}</span>
+                        </div>
+                        <div>
+                            <strong>Amount:</strong><br>
+                            <span style="font-size: 1.2rem; font-weight: bold;">${subscription.amount} ${subscription.currency}/month</span>
+                        </div>
+                        <div>
+                            <strong>Expiry Date:</strong><br>
+                            <span>${subscription.expiry}</span>
+                        </div>
+                        <div>
+                            <strong>Status:</strong><br>
+                            <span class="${statusClass}" style="font-weight: bold;">${statusText}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #e9ecef; border-radius: 4px;">
+                        <strong>Note:</strong> Subscription expires on the 28th of each month. Renew before expiry to avoid lending access interruption.
+                    </div>
+                `;
+            } else {
+                subscriptionDetails.innerHTML = `
+                    <div style="text-align: center; padding: 1rem;">
+                        <i class="fas fa-info-circle" style="font-size: 2rem; color: #003366; margin-bottom: 1rem;"></i>
+                        <p>Borrowers don't require a subscription. This section is only for lenders.</p>
+                        <p>To become a lender, logout and register as a lender with a subscription plan.</p>
+                    </div>
+                `;
+            }
+            
+            // Load groups
+            const groupsList = document.getElementById('groups-list');
+            const userGroups = JSON.parse(localStorage.getItem('mpesewa_groups')) || [
+                { name: 'Family Group', country: 'ke', members: 45, role: 'Member' },
+                { name: 'Nairobi Business', country: 'ke', members: 120, role: 'Admin' }
+            ];
+            
+            if (userGroups.length > 0) {
+                let groupsHTML = '';
+                userGroups.forEach(group => {
+                    groupsHTML += `
+                        <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; border-left: 4px solid #003366;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <strong>${group.name}</strong><br>
+                                    <small><i class="fas fa-globe-africa"></i> ${countryMap[group.country]?.name || group.country} • <i class="fas fa-users"></i> ${group.members} members</small>
+                                </div>
+                                <span style="background-color: ${group.role === 'Admin' ? '#003366' : '#6c757d'}; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem;">
+                                    ${group.role}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                groupsHTML += `
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <a href="../groups/group-list.html" class="btn btn-secondary" style="margin-right: 0.5rem;">
+                            <i class="fas fa-list"></i> View All Groups
+                        </a>
+                        <a href="../groups/group-create.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create New Group
+                        </a>
+                    </div>
+                `;
+                
+                groupsList.innerHTML = groupsHTML;
+            } else {
+                groupsList.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; background: #f8f9fa; border-radius: 4px;">
+                        <i class="fas fa-users" style="font-size: 2rem; color: #6c757d; margin-bottom: 1rem;"></i>
+                        <p>You haven't joined any groups yet.</p>
+                        <a href="../groups/group-list.html" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Find Groups
+                        </a>
+                    </div>
+                `;
+            }
+            
+            // Form submission handlers
+            document.getElementById('profile-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Update user data
+                user.fullName = document.getElementById('fullName').value;
+                user.email = document.getElementById('email').value;
+                user.phone = document.getElementById('phone').value;
+                user.nationalId = document.getElementById('nationalId').value;
+                
+                // Save to localStorage
+                localStorage.setItem('mpesewa_user', JSON.stringify(user));
+                
+                // Show success message
+                alert('Profile updated successfully! Some changes may require admin approval.');
+            });
+            
+            document.getElementById('password-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Simple validation
+                if (newPassword !== confirmPassword) {
+                    alert('New passwords do not match!');
+                    return;
+                }
+                
+                if (newPassword.length < 8 || newPassword.length > 12) {
+                    alert('Password must be 8-12 characters long!');
+                    return;
+                }
+                
+                // In a real app, you would validate current password with backend
+                alert('Password changed successfully!');
+                this.reset();
+            });
+            
+            // Initialize with saved preferences
+            const savedPreferences = JSON.parse(localStorage.getItem('mpesewa_preferences')) || {};
+            
+            // Language
+            if (savedPreferences.language) {
+                document.getElementById('language').value = savedPreferences.language;
+            }
+            
+            // Date format
+            if (savedPreferences.dateFormat) {
+                document.getElementById('dateFormat').value = savedPreferences.dateFormat;
+            }
+            
+            // Save all preferences
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                if (!btn.closest('form')) {
+                    btn.addEventListener('click', function() {
+                        const activeSection = document.querySelector('.preference-section.active').id;
+                        
+                        // Collect preferences based on active section
+                        const preferences = JSON.parse(localStorage.getItem('mpesewa_preferences')) || {};
+                        
+                        if (activeSection === 'display') {
+                            preferences.language = document.getElementById('language').value;
+                            preferences.dateFormat = document.getElementById('dateFormat').value;
+                            preferences.darkMode = document.getElementById('darkModeToggle').checked;
+                        }
+                        
+                        // Save to localStorage
+                        localStorage.setItem('mpesewa_preferences', JSON.stringify(preferences));
+                        
+                        // Show success message
+                        alert('Preferences saved successfully!');
+                    });
+                }
+            });
+            
+            // Check authentication
+            const isAuthenticated = localStorage.getItem('mpesewa_authenticated') === 'true';
+            if (!isAuthenticated) {
+                window.location.href = '../auth/login.html';
+            }
+        });
+        
+        // Dark mode styles
+        const darkModeStyles = `
+            <style>
+                body.dark-mode {
+                    background-color: #121212;
+                    color: #ffffff;
+                }
+                
+                body.dark-mode .preferences-sidebar,
+                body.dark-mode .preferences-content {
+                    background-color: #1e1e1e;
+                    color: #ffffff;
+                }
+                
+                body.dark-mode .form-control {
+                    background-color: #2d2d2d;
+                    color: #ffffff;
+                    border-color: #444;
+                }
+                
+                body.dark-mode .notification-item,
+                body.dark-mode .toggle-group {
+                    background-color: #2d2d2d;
+                }
+                
+                body.dark-mode .alert-info {
+                    background-color: #0c5460;
+                    border-color: #bee5eb;
+                    color: #ffffff;
+                }
+                
+                body.dark-mode .alert-warning {
+                    background-color: #856404;
+                    border-color: #ffeaa7;
+                    color: #ffffff;
+                }
+            </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', darkModeStyles);
+    </script>
+</body>
+</html>

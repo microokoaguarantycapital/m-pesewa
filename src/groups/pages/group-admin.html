@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Administration - M-Pesewa</title>
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/tokens.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/modals.css">
+    <link rel="stylesheet" href="../assets/css/dashboards.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('../service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    
+    <style>
+        .group-state-machine {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .state-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .state-node {
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 150px;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .state-created { background: #e3f2fd; border: 2px solid #2196f3; color: #1565c0; }
+        .state-active { background: #e8f5e9; border: 2px solid #4caf50; color: #2e7d32; }
+        .state-locked { background: #fff3e0; border: 2px solid #ff9800; color: #ef6c00; }
+        .state-suspended { background: #ffebee; border: 2px solid #f44336; color: #c62828; }
+        .state-archived { background: #f5f5f5; border: 2px solid #9e9e9e; color: #616161; }
+        
+        .state-arrow {
+            position: absolute;
+            color: #555;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .state-rules {
+            background: #f8f9fa;
+            border-left: 4px solid #003366;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .state-rules h4 {
+            color: #003366;
+            margin-bottom: 15px;
+        }
+        
+        .state-rules ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .state-rules li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+        }
+        
+        .state-rules li:before {
+            content: "•";
+            color: #28a745;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        
+        .admin-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .control-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .control-card h3 {
+            color: #003366;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+        
+        .state-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .group-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #003366;
+            margin: 10px 0;
+        }
+        
+        .stat-card .label {
+            color: #555555;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .state-diagram {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .admin-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .group-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header" style="background: #003366;">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="../index.html" style="color: #ffffff; text-decoration: none; font-weight: 700; font-size: 24px;">
+                    M-PESEWA
+                </a>
+            </div>
+            
+            <nav class="header-nav">
+                <ul class="nav-menu">
+                    <li><a href="../index.html" style="color: #ffffff;">Home</a></li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Lenders ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../lender/pages/lender-dashboard.html" style="color: #003366;">Dashboard</a>
+                            <a href="../lender/pages/lending-portfolio.html" style="color: #003366;">Portfolio</a>
+                            <a href="../lender/pages/lending-history.html" style="color: #003366;">History</a>
+                            <a href="../lender/pages/lending-rules.html" style="color: #003366;">Rules</a>
+                            <a href="../lender/pages/lending-risk.html" style="color: #003366;">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Borrowers ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../borrower/pages/borrower-dashboard.html" style="color: #003366;">Dashboard</a>
+                            <a href="../borrower/pages/borrow-request.html" style="color: #003366;">Apply for Loan</a>
+                            <a href="../borrower/pages/borrow-history.html" style="color: #003366;">Borrow History</a>
+                            <a href="../borrower/pages/borrow-repayments.html" style="color: #003366;">Repayments</a>
+                            <a href="../borrower/pages/borrow-disputes.html" style="color: #003366;">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Emergency Hub ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff; width: 400px;">
+                            <div class="emergency-grid">
+                                <a href="../emergency/transport.html" style="color: #003366;">🚌 Transport Fare</a>
+                                <a href="../emergency/data.html" style="color: #003366;">📶 Mobile Data</a>
+                                <a href="../emergency/gas.html" style="color: #003366;">🔥 Cooking Gas</a>
+                                <a href="../emergency/food.html" style="color: #003366;">🍲 Food</a>
+                                <a href="../emergency/electricity.html" style="color: #003366;">⚡ Electricity</a>
+                                <a href="../emergency/water.html" style="color: #003366;">🚰 Water Bill</a>
+                                <a href="../emergency/medicine.html" style="color: #003366;">💊 Medicine</a>
+                                <a href="../emergency/school-fees.html" style="color: #003366;">🎓 School Fees</a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Subscription ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../subscription/plans.html" style="color: #003366;">Current Plan</a>
+                            <a href="../subscription/upgrade.html" style="color: #003366;">Upgrade</a>
+                            <a href="../subscription/history.html" style="color: #003366;">History</a>
+                            <a href="../subscription/invoices.html" style="color: #003366;">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" style="color: #ffffff;">Country ▾</a>
+                        <div class="dropdown-content" style="background: #ffffff;">
+                            <a href="../countries/ke.html" style="color: #003366;">Kenya</a>
+                            <a href="../countries/ug.html" style="color: #003366;">Uganda</a>
+                            <a href="../countries/tz.html" style="color: #003366;">Tanzania</a>
+                            <a href="../countries/rw.html" style="color: #003366;">Rwanda</a>
+                            <a href="../countries/bi.html" style="color: #003366;">Burundi</a>
+                            <a href="../countries/drc.html" style="color: #003366;">DRC</a>
+                            <a href="../countries/ss.html" style="color: #003366;">South Sudan</a>
+                            <a href="../countries/so.html" style="color: #003366;">Somalia</a>
+                            <a href="../countries/ng.html" style="color: #003366;">Nigeria</a>
+                            <a href="../countries/gh.html" style="color: #003366;">Ghana</a>
+                            <a href="../countries/za.html" style="color: #003366;">South Africa</a>
+                            <a href="../countries/et.html" style="color: #003366;">Ethiopia</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header-auth">
+                <a href="../auth/login.html" class="btn-outline" style="color: #ffffff; border-color: #ffffff;">Sign In</a>
+                <a href="../auth/register.html" class="btn-primary" style="background: #28a745; color: #ffffff;">Sign Up</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <div class="breadcrumbs">
+            <a href="../index.html" style="color: #0099ff;">Home</a> &gt;
+            <a href="../groups/pages/group-dashboard.html" style="color: #0099ff;">Groups</a> &gt;
+            <span style="color: #555;">Group Administration</span>
+        </div>
+        
+        <header class="page-header">
+            <h1 style="color: #003366;">Group Administration Panel</h1>
+            <p style="color: #555;">Manage your group settings, members, and monitor group health</p>
+            
+            <div class="group-header-info" style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div>
+                        <h3 style="margin: 0; color: #003366;">Family Trust Group</h3>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                            <span class="state-badge" style="background: #e8f5e9; color: #2e7d32; border: 1px solid #4caf50;">ACTIVE</span>
+                            <span style="color: #555;">• Country: <strong>Kenya</strong></span>
+                            <span style="color: #555;">• Founder: <strong>John Kamau</strong></span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-secondary" style="background: #0099ff; color: #ffffff;">Group Settings</button>
+                        <button class="btn-primary" style="background: #28a745; color: #ffffff;">Invite Members</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Group State Machine Section -->
+        <section class="group-state-machine">
+            <h2 style="color: #003366; margin-bottom: 20px;">👥 Group State Machine</h2>
+            <p style="color: #555; margin-bottom: 30px;">
+                State machines ensure no "if (something)" chaos, prevent edge-case abuse, and eliminate accidental permissions.
+                Everything becomes predictable and follows strict financial protocols.
+            </p>
+            
+            <div class="state-diagram">
+                <div class="state-node state-created">CREATED</div>
+                <div class="state-arrow">→</div>
+                <div class="state-node state-active">ACTIVE</div>
+                <div class="state-arrow">→</div>
+                <div class="state-node state-locked">LOCKED</div>
+                <div class="state-arrow">→</div>
+                <div class="state-node state-suspended">SUSPENDED</div>
+                <div class="state-arrow">→</div>
+                <div class="state-node state-archived">ARCHIVED</div>
+            </div>
+            
+            <div class="state-rules">
+                <h4>Group State Rules (STRICT ENFORCEMENT)</h4>
+                <ul>
+                    <li><strong>LOCKED groups</strong> allow repayment of existing loans but prevent new loans</li>
+                    <li><strong>SUSPENDED groups</strong> block everything - no lending, borrowing, or repayments</li>
+                    <li><strong>ARCHIVED groups</strong> are read-only forever - historical records only</li>
+                    <li>State transitions require admin approval and are logged for audit</li>
+                    <li>Each state has specific permission sets that cannot be bypassed</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Group Statistics -->
+        <section class="group-stats">
+            <div class="stat-card">
+                <div class="label">Total Members</div>
+                <div class="number">142</div>
+                <div style="color: #555; font-size: 12px;">5 min • 1000 max</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="label">Active Lenders</div>
+                <div class="number">38</div>
+                <div style="color: #555; font-size: 12px;">With active subscriptions</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="label">Active Borrowers</div>
+                <div class="number">104</div>
+                <div style="color: #555; font-size: 12px;">Maximum 4 groups each</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="label">Repayment Rate</div>
+                <div class="number">98.7%</div>
+                <div style="color: #28a745; font-size: 12px;">Excellent</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="label">Total Lent</div>
+                <div class="number">KSh 2.4M</div>
+                <div style="color: #555; font-size: 12px;">Since creation</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="label">Default Rate</div>
+                <div class="number">1.3%</div>
+                <div style="color: #f37021; font-size: 12px;">Within tolerance</div>
+            </div>
+        </section>
+        
+        <!-- Admin Controls -->
+        <section class="admin-controls">
+            <div class="control-card">
+                <h3>Group State Management</h3>
+                <div style="margin-bottom: 20px;">
+                    <label for="state-change" style="display: block; margin-bottom: 10px; color: #555;">Change Group State:</label>
+                    <select id="state-change" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                        <option value="active">ACTIVE - Normal operations</option>
+                        <option value="locked">LOCKED - Allow repayments only</option>
+                        <option value="suspended">SUSPENDED - Block all activities</option>
+                        <option value="archived">ARCHIVED - Read-only forever</option>
+                    </select>
+                </div>
+                <textarea placeholder="Reason for state change (required for audit)" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px;"></textarea>
+                <button class="btn-primary" style="background: #f37021; color: #ffffff; width: 100%;">Submit State Change Request</button>
+                <p style="color: #666; font-size: 12px; margin-top: 10px;">Note: Major state changes require platform admin approval</p>
+            </div>
+            
+            <div class="control-card">
+                <h3>Member Management</h3>
+                <div style="margin-bottom: 20px;">
+                    <a href="group-invites.html" class="btn-secondary" style="background: #0099ff; color: #ffffff; display: block; text-align: center; margin-bottom: 10px; padding: 12px;">Manage Invites</a>
+                    <a href="group-requests.html" class="btn-secondary" style="background: #0099ff; color: #ffffff; display: block; text-align: center; margin-bottom: 10px; padding: 12px;">Review Join Requests</a>
+                    <a href="group-bans.html" class="btn-secondary" style="background: #0099ff; color: #ffffff; display: block; text-align: center; margin-bottom: 10px; padding: 12px;">Manage Bans & Blacklists</a>
+                </div>
+                <div>
+                    <h4 style="color: #003366; margin-bottom: 10px;">Member Export</h4>
+                    <button class="btn-outline" style="border-color: #003366; color: #003366; width: 100%; margin-bottom: 5px;">Export Member List (CSV)</button>
+                    <button class="btn-outline" style="border-color: #003366; color: #003366; width: 100%;">Export Ledger Summary</button>
+                </div>
+            </div>
+            
+            <div class="control-card">
+                <h3>Group Rules & Settings</h3>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Group Nickname:</label>
+                    <input type="text" value="Family Trust Group" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Group Description:</label>
+                    <textarea rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">Family group for emergency support among relatives and close friends. Based in Nairobi, Kenya.</textarea>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: #555;">Internal Group Rules:</label>
+                    <textarea rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">1. Maximum loan: KSh 5,000 per member
+2. 7-day repayment period
+3. Family referrals only
+4. Meetings: Every Sunday 4 PM</textarea>
+                </div>
+                <button class="btn-primary" style="background: #003366; color: #ffffff; width: 100%;">Save Group Settings</button>
+            </div>
+        </section>
+        
+        <!-- Hierarchy Visualization -->
+        <section style="background: #ffffff; border-radius: 12px; padding: 30px; margin: 40px 0; border: 2px solid #e9ecef;">
+            <h2 style="color: #003366; margin-bottom: 20px;">STRICT Core Hierarchy (MANDATORY)</h2>
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 20px 0;">
+                <div style="text-align: center; font-family: monospace; line-height: 2.5;">
+                    <div style="font-weight: bold; color: #003366; font-size: 18px;">Global</div>
+                    <div style="color: #555;">└── <strong style="color: #003366;">Countries</strong> (12 Sub-Saharan)</div>
+                    <div style="color: #555; margin-left: 40px;">└── <strong style="color: #003366;">Groups</strong> (unlimited per country)</div>
+                    <div style="color: #555; margin-left: 80px;">
+                        ├── <strong style="color: #28a745;">Lenders</strong> (min 5, max 1000 total)<br>
+                        <div style="margin-left: 20px; color: #666;">└── <em>Ledgers</em> (Borrowers in loan state)</div>
+                    </div>
+                    <div style="color: #555; margin-left: 80px;">
+                        └── <strong style="color: #f37021;">Borrowers</strong> (default = available)
+                    </div>
+                </div>
+            </div>
+            
+            <div class="state-rules">
+                <h4>Hierarchy Enforcement Rules</h4>
+                <ul>
+                    <li><strong>Country Isolation:</strong> No cross-country lending or borrowing</li>
+                    <li><strong>Group Isolation:</strong> Lenders can only lend within their group</li>
+                    <li><strong>Borrower Limits:</strong> Maximum of 4 groups, only with good rating</li>
+                    <li><strong>Subscription Enforcement:</strong> Lenders blocked when subscription expires</li>
+                    <li><strong>Admin Supremacy:</strong> Platform admin can override any blacklist or ledger</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Recent Activity -->
+        <section style="background: #ffffff; border-radius: 12px; padding: 30px; margin: 40px 0;">
+            <h2 style="color: #003366; margin-bottom: 20px;">Recent Group Activity</h2>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #f8f9fa;">
+                            <th style="padding: 15px; text-align: left; color: #003366; border-bottom: 2px solid #e9ecef;">Date</th>
+                            <th style="padding: 15px; text-align: left; color: #003366; border-bottom: 2px solid #e9ecef;">Activity</th>
+                            <th style="padding: 15px; text-align: left; color: #003366; border-bottom: 2px solid #e9ecef;">Member</th>
+                            <th style="padding: 15px; text-align: left; color: #003366; border-bottom: 2px solid #e9ecef;">Amount</th>
+                            <th style="padding: 15px; text-align: left; color: #003366; border-bottom: 2px solid #e9ecef;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">2024-03-15</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">New loan approved</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Sarah M.</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">KSh 3,500</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;"><span style="color: #28a745;">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">2024-03-14</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Loan repayment</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">James K.</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">KSh 2,200</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;"><span style="color: #28a745;">Cleared</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">2024-03-13</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">New member joined</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Peter N.</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">-</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;"><span style="color: #0099ff;">Verified</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">2024-03-12</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Loan default</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Michael O.</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">KSh 5,000</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;"><span style="color: #f44336;">Blacklisted</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">2024-03-11</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Subscription renewed</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">Jane W. (Lender)</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;">KSh 250</td>
+                            <td style="padding: 15px; border-bottom: 1px solid #e9ecef;"><span style="color: #28a745;">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background: #1f2a37; color: #ffffff; padding: 60px 40px 30px;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px;">
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Borrowing</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Get Emergency Loan</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Online Personal Loan</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Business Loan</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">How to Apply</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Active Borrowers</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Lending</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Smart Lending</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Why Lend at M-Pesewa?</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">How to Lend</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Active Lenders</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">How It Works</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">P2P Lending Works</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Our Role</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Subscriptions</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Blacklist</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Debt Collectors</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">About Us</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">About M-Pesewa</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Team / Advisory Board</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">News / Careers</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Blog / FAQs</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Contact Us</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Legal</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Terms & Conditions</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Privacy Policy</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Grievance Redressal</a>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Fair Practices Code</a>
+            </div>
+            
+            <div class="footer-col">
+                <h4 style="color: #ffffff; margin-bottom: 14px;">Partners</h4>
+                <a href="#" style="color: #d1d5db; display: block; margin-bottom: 8px;">Be a Partner</a>
+            </div>
+        </div>
+        
+        <!-- Country Ticker -->
+        <div class="country-ticker" style="overflow: hidden; background: #111827; padding: 12px 0; margin-top: 40px;">
+            <div class="ticker-track" style="white-space: nowrap; display: inline-block; color: #ffffff; animation: scroll-left 25s linear infinite;">
+                Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • South Africa • Nigeria • Ghana • Ethiopia •
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #374151;">
+            <p style="color: #9ca3af;">© 2016–2024, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+            <div style="margin-top: 20px;">
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📘</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">🐦</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📺</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">📸</a>
+                <a href="#" style="color: #d1d5db; margin: 0 10px;">💼</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Group State Machine Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            // State change form submission
+            const stateChangeForm = document.querySelector('.control-card:first-child button');
+            if (stateChangeForm) {
+                stateChangeForm.addEventListener('click', function() {
+                    const stateSelect = document.getElementById('state-change');
+                    const reasonText = document.querySelector('.control-card:first-child textarea');
+                    
+                    if (!reasonText.value.trim()) {
+                        alert('Please provide a reason for the state change (required for audit trail)');
+                        return;
+                    }
+                    
+                    const newState = stateSelect.value;
+                    const stateNames = {
+                        'active': 'ACTIVE',
+                        'locked': 'LOCKED',
+                        'suspended': 'SUSPENDED',
+                        'archived': 'ARCHIVED'
+                    };
+                    
+                    // In a real app, this would make an API call
+                    alert(`State change request submitted:\nNew State: ${stateNames[newState]}\nReason: ${reasonText.value}\n\nNote: Major state changes require platform admin approval.`);
+                    reasonText.value = '';
+                });
+            }
+            
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const headerNav = document.querySelector('.header-nav');
+            
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    headerNav.classList.toggle('active');
+                    mobileMenuToggle.classList.toggle('active');
+                });
+            }
+            
+            // Save group settings
+            const saveButton = document.querySelector('.control-card:last-child button');
+            if (saveButton) {
+                saveButton.addEventListener('click', function() {
+                    alert('Group settings saved successfully.');
+                });
+            }
+            
+            // Initialize state machine visualization
+            const stateNodes = document.querySelectorAll('.state-node');
+            stateNodes.forEach(node => {
+                node.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(0, 0, 0, 0.15)';
+                });
+                
+                node.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                });
+            });
+        });
+        
+        // CSS Animation for ticker
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scroll-left {
+                from { transform: translateX(100%); }
+                to { transform: translateX(-100%); }
+            }
+            
+            @media (max-width: 768px) {
+                .header-nav.active {
+                    display: block !important;
+                }
+                
+                .dropdown-content {
+                    position: static !important;
+                    width: 100% !important;
+                    box-shadow: none !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
