@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger Management - M-PESEWA</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/images/icons/icon-72x72.png">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.svg" alt="M-PESEWA Logo" height="40">
+                    <span>M-PESEWA</span>
+                </a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="./dashboard/lender-dashboard.html">Dashboard</a>
+                    <a href="./lending.html">Lending</a>
+                    <a href="./borrowing.html">Borrowing</a>
+                    <a href="./groups.html">Groups</a>
+                    <a href="./countries/index.html">Countries</a>
+                    <a href="./ledger.html" class="active">Ledger</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn btn-outline" onclick="location.href='./dashboard/lender-dashboard.html'">
+                        Go to Dashboard
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-2">
+        <div class="page-header">
+            <h1 class="page-title">Loan Ledger Management</h1>
+            <p class="page-subtitle">Track and update all your active and cleared loans</p>
+        </div>
+
+        <div class="alert alert-info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+                <div class="alert-title">Ledger Rules</div>
+                <p>Each ledger represents a borrower with an active loan. You must manually update repayments. Platform Admin can override entries if needed.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Your Ledgers</h2>
+                <div class="section-actions">
+                    <button class="btn btn-sm btn-primary" onclick="createNewLedger()">
+                        + New Ledger
+                    </button>
+                    <button class="btn btn-sm btn-outline" onclick="exportLedgers()">
+                        Export
+                    </button>
+                </div>
+            </div>
+
+            <div class="ledger-summary">
+                <div class="ledger-card active">
+                    <div class="ledger-count">5</div>
+                    <div class="ledger-label">Active Ledgers</div>
+                </div>
+                <div class="ledger-card">
+                    <div class="ledger-count">12</div>
+                    <div class="ledger-label">Cleared Ledgers</div>
+                </div>
+                <div class="ledger-card">
+                    <div class="ledger-count">₵ 2,100</div>
+                    <div class="ledger-label">Pending Repayment</div>
+                </div>
+                <div class="ledger-card">
+                    <div class="ledger-count">₵ 1,032</div>
+                    <div class="ledger-label">Total Interest Earned</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Borrower</th>
+                            <th>Contact</th>
+                            <th>Guarantors</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Dates</th>
+                            <th>Interest & Penalties</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar">JD</div>
+                                    <div>
+                                        <div>John Doe</div>
+                                        <div class="text-sm text-muted">Family Group</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>+254 712 345 678</div>
+                                    <div>Nairobi, Kenya</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Jane M. (+254 723 456 789)</div>
+                                    <div>Mike K. (+254 734 567 890)</div>
+                                </div>
+                            </td>
+                            <td>Transport</td>
+                            <td>
+                                <div class="font-semibold">₵ 500</div>
+                                <div class="text-xs text-muted">Principal</div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Borrowed: Dec 21, 2024</div>
+                                    <div>Due: Dec 28, 2024</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Interest: ₵ 50 (10%)</div>
+                                    <div>Penalty: ₵ 0</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">Active</span>
+                                <div class="text-xs">Due in 3 days</div>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn btn-sm btn-success" onclick="markRepaid(1)">
+                                        Mark Repaid
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="viewLedger(1)">
+                                        View
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar">MS</div>
+                                    <div>
+                                        <div>Mary Smith</div>
+                                        <div class="text-sm text-muted">Work Group</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>+254 745 678 901</div>
+                                    <div>Mombasa, Kenya</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Peter W. (+254 756 789 012)</div>
+                                    <div>Sarah K. (+254 767 890 123)</div>
+                                </div>
+                            </td>
+                            <td>Data</td>
+                            <td>
+                                <div class="font-semibold">₵ 300</div>
+                                <div class="text-xs text-muted">Principal</div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Borrowed: Dec 18, 2024</div>
+                                    <div>Due: Jan 5, 2025</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Interest: ₵ 30 (10%)</div>
+                                    <div>Penalty: ₵ 0</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-success">Active</span>
+                                <div class="text-xs">On track</div>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn btn-sm btn-success" onclick="markRepaid(2)">
+                                        Mark Repaid
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="viewLedger(2)">
+                                        View
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar">TK</div>
+                                    <div>
+                                        <div>Thomas Kariuki</div>
+                                        <div class="text-sm text-muted">Church Group</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>+254 778 901 234</div>
+                                    <div>Kisumu, Kenya</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>David O. (+254 789 012 345)</div>
+                                    <div>Grace N. (+254 790 123 456)</div>
+                                </div>
+                            </td>
+                            <td>Cooking Gas</td>
+                            <td>
+                                <div class="font-semibold">₵ 800</div>
+                                <div class="text-xs text-muted">Principal</div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Borrowed: Dec 10, 2024</div>
+                                    <div>Due: Dec 17, 2024</div>
+                                    <div class="text-danger">Overdue: 3 days</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-sm">
+                                    <div>Interest: ₵ 80 (10%)</div>
+                                    <div class="text-danger">Penalty: ₵ 12 (5% daily)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-danger">Overdue</span>
+                                <div class="text-xs">Contact borrower</div>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <button class="btn btn-sm btn-danger" onclick="applyPenalty(3)">
+                                        Apply Penalty
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="viewLedger(3)">
+                                        View
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="section-header">
+                <h2 class="section-title">Cleared Ledgers</h2>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Borrower</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Date Cleared</th>
+                            <th>Total Repaid</th>
+                            <th>Rating Given</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar">RN</div>
+                                    <div>Robert Njoroge</div>
+                                </div>
+                            </td>
+                            <td>Food</td>
+                            <td>₵ 400</td>
+                            <td>Dec 15, 2024</td>
+                            <td>₵ 440</td>
+                            <td>★★★★★</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="viewClearedLedger(1)">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center gap-2">
+                                    <div class="avatar">LW</div>
+                                    <div>Lucy Wambui</div>
+                                </div>
+                            </td>
+                            <td>Medicine</td>
+                            <td>₵ 600</td>
+                            <td>Dec 12, 2024</td>
+                            <td>₵ 660</td>
+                            <td>★★★★☆</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline" onclick="viewClearedLedger(2)">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Ledger Fields Explanation</div>
+            </div>
+            <div class="card-body">
+                <ul class="list-disc pl-5">
+                    <li><strong>Borrower:</strong> The individual who received the loan.</li>
+                    <li><strong>Guarantors:</strong> Two contacts who recommended the borrower.</li>
+                    <li><strong>Category:</strong> The emergency need (e.g., Transport, Data).</li>
+                    <li><strong>Amount:</strong> Principal borrowed.</li>
+                    <li><strong>Interest:</strong> 10% fixed, added to repayment.</li>
+                    <li><strong>Penalty:</strong> 5% daily on outstanding balance after 7 days.</li>
+                    <li><strong>Status:</strong> Active, Cleared, or Overdue.</li>
+                    <li><strong>Admin Override:</strong> Platform admin can correct entries if needed.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>M-PESEWA</h4>
+                    <p>Emergency micro-lending in trusted circles across Africa.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Countries</h4>
+                    <div class="country-flags">
+                        <span>🇰🇪 Kenya</span>
+                        <span>🇺🇬 Uganda</span>
+                        <span>🇹🇿 Tanzania</span>
+                        <span>🇷🇼 Rwanda</span>
+                        <span>🇧🇮 Burundi</span>
+                        <span>🇸🇴 Somalia</span>
+                        <span>🇸🇸 South Sudan</span>
+                        <span>🇪🇹 Ethiopia</span>
+                        <span>🇨🇩 DRC</span>
+                        <span>🇳🇬 Nigeria</span>
+                        <span>🇿🇦 South Africa</span>
+                        <span>🇬🇭 Ghana</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>support@mpesewa.com</p>
+                    <p>+254 700 000 000</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 M-PESEWA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/ledger.js"></script>
+    <script>
+        function createNewLedger() {
+            alert('Creating new ledger entry...');
+        }
+
+        function exportLedgers() {
+            alert('Exporting ledger data...');
+        }
+
+        function markRepaid(id) {
+            if (confirm('Mark this ledger as fully repaid?')) {
+                alert('Ledger #' + id + ' marked as repaid.');
+            }
+        }
+
+        function viewLedger(id) {
+            alert('Viewing ledger #' + id);
+        }
+
+        function applyPenalty(id) {
+            if (confirm('Apply 5% daily penalty to overdue ledger?')) {
+                alert('Penalty applied to ledger #' + id);
+            }
+        }
+
+        function viewClearedLedger(id) {
+            alert('Viewing cleared ledger #' + id);
+        }
+    </script>
+</body>
+</html>

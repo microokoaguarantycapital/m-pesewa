@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uganda - M-Pesewa</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="/assets/css/forms.css">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#512DA8">
+    <meta name="description" content="M-Pesewa Uganda dashboard. Groups, lenders, borrowers, and loan calculator for Uganda.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa Logo">
+                    <span>M-Pesewa</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/countries/index.html">Countries</a></li>
+                    <li><a href="/pages/groups.html">Groups</a></li>
+                    <li><a href="/pages/lending.html">Lend</a></li>
+                    <li><a href="/pages/borrowing.html">Borrow</a></li>
+                    <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                    <li><a href="/pages/ledger.html">Ledger</a></li>
+                    <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                    <li><a href="/pages/debt-collectors.html">Collectors</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/qa.html">Q&A</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-outline">Lender Dashboard</a>
+                    <a href="/pages/dashboard/borrower-dashboard.html" class="btn btn-primary">Borrower Dashboard</a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="section section-hero">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <div class="flex items-center justify-center gap-4 mb-6">
+                        <span class="text-4xl">🇺🇬</span>
+                        <h1 class="hero-title">Uganda Dashboard</h1>
+                    </div>
+                    <p class="hero-subtitle">Emergency micro-lending within trusted Ugandan groups. Currency: Ugandan Shilling (UGX).</p>
+                    <div class="alert alert-info">
+                        <div class="alert-icon">📍</div>
+                        <div class="alert-content">
+                            <p><strong>Country Locked:</strong> All groups, lenders, and borrowers are locked to Uganda. No cross-country transactions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <!-- Country Stats -->
+                <div class="stats-grid mb-12">
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-primary">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="total-groups">0</div>
+                            <div class="stat-label">Total Groups</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-success">🤝</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="active-lenders">0</div>
+                            <div class="stat-label">Active Lenders</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-warning">🙋</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="active-borrowers">0</div>
+                            <div class="stat-label">Active Borrowers</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon stat-icon-danger">💸</div>
+                        <div class="stat-content">
+                            <div class="stat-value" id="total-lent">UGX 0</div>
+                            <div class="stat-label">Total Lent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left Column -->
+                    <div class="lg:col-span-2">
+                        <!-- Groups -->
+                        <div class="dashboard-section">
+                            <div class="section-header">
+                                <h2 class="section-title">Groups in Uganda</h2>
+                                <a href="/pages/groups.html?country=Uganda" class="btn btn-outline btn-sm">View All Groups</a>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Group Name</th>
+                                            <th>Members</th>
+                                            <th>Lenders</th>
+                                            <th>Borrowers</th>
+                                            <th>Total Lent</th>
+                                            <th>Repayment Rate</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="groups-table">
+                                        <!-- Groups will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Loan Calculator -->
+                        <div class="dashboard-section">
+                            <h2 class="section-title">Loan Calculator (UGX)</h2>
+                            <p class="section-subtitle">Calculate interest, repayment, and penalties for loans in Uganda.</p>
+                            <form id="loan-calculator" class="form-layout">
+                                <div class="form-group">
+                                    <label for="amount" class="form-label">Loan Amount (UGX)</label>
+                                    <input type="number" id="amount" class="form-control" min="5" max="50000" step="1" value="1000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="days" class="form-label">Days Overdue (if any)</label>
+                                    <input type="number" id="days" class="form-control" min="0" max="60" step="1" value="0">
+                                </div>
+                                <button type="button" id="calculate-loan" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="calculator-result" class="mt-6 hidden">
+                                <h3 class="text-lg font-semibold mb-4">Calculation Result</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>Principal:</span>
+                                        <strong id="calc-principal">UGX 0</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Interest (10% per week):</span>
+                                        <strong id="calc-interest">UGX 0</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Penalty (5% daily after 7 days):</span>
+                                        <strong id="calc-penalty">UGX 0</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Total Repayable:</span>
+                                        <strong id="calc-total">UGX 0</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Daily Partial Repayment:</span>
+                                        <strong id="calc-daily">UGX 0</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div>
+                        <!-- Currency Converter -->
+                        <div class="dashboard-section">
+                            <h2 class="section-title">Currency Converter</h2>
+                            <div class="form-group">
+                                <label for="ugx-amount" class="form-label">UGX Amount</label>
+                                <input type="number" id="ugx-amount" class="form-control" value="1000" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="usd-amount" class="form-label">USD Equivalent</label>
+                                <input type="text" id="usd-amount" class="form-control" readonly>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-4">Exchange rate: 1 USD ≈ <span id="exchange-rate">3700</span> UGX (demo rate).</p>
+                        </div>
+
+                        <!-- Language Toggle -->
+                        <div class="dashboard-section">
+                            <h2 class="section-title">Language</h2>
+                            <div class="flex items-center justify-between">
+                                <span>English / Français</span>
+                                <label class="toggle">
+                                    <input type="checkbox" id="language-toggle">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-4">Toggle between English and French. French translation is in development.</p>
+                        </div>
+
+                        <!-- Country Contact -->
+                        <div class="dashboard-section">
+                            <h2 class="section-title">Uganda Contact</h2>
+                            <p class="mb-4">For Uganda-specific support, use the contact details below.</p>
+                            <ul class="space-y-2">
+                                <li>Email: <strong>uganda@mpesewa.com</strong></li>
+                                <li>Phone: <strong>+256 700 000000</strong></li>
+                                <li>WhatsApp: <strong>+256 700 000000</strong></li>
+                            </ul>
+                            <a href="/pages/contact.html?country=Uganda" class="btn btn-outline btn-sm mt-4 w-full">Contact Form</a>
+                        </div>
+
+                        <!-- Country Rules -->
+                        <div class="dashboard-section">
+                            <h2 class="section-title">Uganda Rules</h2>
+                            <ul class="list-disc pl-5 space-y-1 text-sm">
+                                <li>All groups are Uganda-only.</li>
+                                <li>Maximum loan per week per tier applies.</li>
+                                <li>Subscription expiry: 28th of each month.</li>
+                                <li>Blacklist propagated across all Ugandan groups.</li>
+                                <li>No cross-country lending.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>M-Pesewa</h4>
+                    <p>Emergency micro‑lending in trusted circles across Africa.</p>
+                    <div class="country-flags">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇧🇮</span><span>🇸🇴</span>
+                        <span>🇸🇸</span><span>🇪🇹</span><span>🇨🇩</span><span>🇳🇬</span><span>🇿🇦</span><span>🇬🇭</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Countries</h4>
+                    <ul>
+                        <li><a href="/pages/countries/kenya.html">Kenya</a></li>
+                        <li><a href="/pages/countries/uganda.html">Uganda</a></li>
+                        <li><a href="/pages/countries/tanzania.html">Tanzania</a></li>
+                        <li><a href="/pages/countries/rwanda.html">Rwanda</a></li>
+                        <li><a href="/pages/countries/burundi.html">Burundi</a></li>
+                        <li><a href="/pages/countries/somalia.html">Somalia</a></li>
+                        <li><a href="/pages/countries/south-sudan.html">South Sudan</a></li>
+                        <li><a href="/pages/countries/ethiopia.html">Ethiopia</a></li>
+                        <li><a href="/pages/countries/DRC.html">DRC</a></li>
+                        <li><a href="/pages/countries/nigeria.html">Nigeria</a></li>
+                        <li><a href="/pages/countries/south-africa.html">South Africa</a></li>
+                        <li><a href="/pages/countries/ghana.html">Ghana</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="/pages/about.html">About Us</a></li>
+                        <li><a href="/pages/qa.html">Q&A</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                        <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                        <li><a href="/pages/debt-collectors.html">Debt Collectors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@mpesewa.com</li>
+                        <li>
+                            <a href="#" aria-label="Facebook">Facebook</a> |
+                            <a href="#" aria-label="Twitter">Twitter</a> |
+                            <a href="#" aria-label="Instagram">Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> M-Pesewa. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/countries.js"></script>
+    <script src="/assets/js/calculator.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Country-specific logic for Uganda
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load country stats and groups from demo data
+            if (typeof loadCountryData === 'function') {
+                loadCountryData('Uganda');
+            }
+
+            // Currency converter (demo rate)
+            const rate = 3700; // 1 USD = 3700 UGX (demo)
+            document.getElementById('exchange-rate').textContent = rate.toLocaleString();
+            const ugxInput = document.getElementById('ugx-amount');
+            const usdInput = document.getElementById('usd-amount');
+
+            function updateUSD() {
+                const ugx = parseFloat(ugxInput.value) || 0;
+                usdInput.value = (ugx / rate).toFixed(2) + ' USD';
+            }
+
+            ugxInput.addEventListener('input', updateUSD);
+            updateUSD();
+
+            // Language toggle
+            document.getElementById('language-toggle').addEventListener('change', function(e) {
+                alert('Language switch to ' + (e.target.checked ? 'French' : 'English') + ' is in development.');
+            });
+
+            // Loan calculator for Uganda
+            document.getElementById('calculate-loan').addEventListener('click', function() {
+                const amount = parseFloat(document.getElementById('amount').value) || 0;
+                const daysOverdue = parseInt(document.getElementById('days').value) || 0;
+
+                // Calculate interest (10% per week, prorated for 7 days)
+                const interest = amount * 0.10; // 10% for one week
+                let penalty = 0;
+                if (daysOverdue > 7) {
+                    const overdueDays = daysOverdue - 7;
+                    penalty = amount * 0.05 * overdueDays; // 5% daily penalty
+                }
+                const total = amount + interest + penalty;
+                const dailyPartial = total / 7;
+
+                document.getElementById('calc-principal').textContent = 'UGX ' + amount.toFixed(2);
+                document.getElementById('calc-interest').textContent = 'UGX ' + interest.toFixed(2);
+                document.getElementById('calc-penalty').textContent = 'UGX ' + penalty.toFixed(2);
+                document.getElementById('calc-total').textContent = 'UGX ' + total.toFixed(2);
+                document.getElementById('calc-daily').textContent = 'UGX ' + dailyPartial.toFixed(2) + ' per day';
+                document.getElementById('calculator-result').classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR Congo - M-Pesewa</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/tables.css">
+    <link rel="stylesheet" href="/assets/css/forms.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/assets/images/icons/icon-192x192.png">
+    <script src="/assets/js/utils.js" defer></script>
+    <script src="/assets/js/countries.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-brand">
+                <a href="/">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa" class="logo">
+                </a>
+            </div>
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/countries/">Countries</a></li>
+                    <li><a href="/pages/groups.html">Groups</a></li>
+                    <li><a href="/pages/lending.html">Lend</a></li>
+                    <li><a href="/pages/borrowing.html">Borrow</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="header-auth">
+                <a href="/pages/auth/login.html" class="btn btn-outline">Login</a>
+                <a href="/pages/auth/register.html" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="country-dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">
+                        <img src="/assets/images/flags/cd.svg" alt="DR Congo Flag" class="country-flag">
+                        Democratic Republic of the Congo
+                    </h1>
+                    <p class="dashboard-subtitle">Emergency micro-lending in trusted Congolese groups</p>
+                </div>
+                <div class="dashboard-actions">
+                    <a href="/pages/borrowing.html" class="btn btn-primary">Borrow Now</a>
+                    <a href="/pages/lending.html" class="btn btn-outline">Lend Now</a>
+                </div>
+            </div>
+
+            <div class="stats-grid" id="country-stats">
+                <!-- Dynamic stats will be inserted here by countries.js -->
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Groups in DR Congo</h2>
+                    <div class="section-actions">
+                        <a href="/pages/groups.html?country=DRC" class="btn btn-outline">View All Groups</a>
+                        <a href="/pages/groups.html?create=true" class="btn btn-primary">Create Group</a>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="groups-table">
+                        <thead>
+                            <tr>
+                                <th>Group Name</th>
+                                <th>Admin</th>
+                                <th>Lenders</th>
+                                <th>Borrowers</th>
+                                <th>Total Lent</th>
+                                <th>Repayment Rate</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Groups data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Loan Calculator</h2>
+                </div>
+                <div class="calculator">
+                    <div class="form-group">
+                        <label for="loan-amount">Loan Amount (CDF)</label>
+                        <input type="number" id="loan-amount" min="500" max="2000000" step="500" value="50000">
+                    </div>
+                    <div class="form-group">
+                        <label for="loan-days">Repayment Days (Max 7)</label>
+                        <input type="number" id="loan-days" min="1" max="7" value="7">
+                    </div>
+                    <div class="calculator-results">
+                        <div class="result-item">
+                            <span class="result-label">Principal:</span>
+                            <span class="result-value" id="principal">50,000 CDF</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Interest (10%):</span>
+                            <span class="result-value" id="interest">5,000 CDF</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Repayment:</span>
+                            <span class="result-value" id="total">55,000 CDF</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Daily Payment:</span>
+                            <span class="result-value" id="daily">7,857 CDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Currency Exchange</h2>
+                </div>
+                <div class="currency-converter">
+                    <div class="converter-row">
+                        <div class="form-group">
+                            <label for="cdf-amount">Congolese Franc (CDF)</label>
+                            <input type="number" id="cdf-amount" value="1000">
+                        </div>
+                        <div class="converter-arrow">⇄</div>
+                        <div class="form-group">
+                            <label for="usd-amount">US Dollar (USD)</label>
+                            <input type="number" id="usd-amount" value="0.36" readonly>
+                        </div>
+                    </div>
+                    <p class="converter-rate">Rate: 1 USD = 2,750 CDF (Central Bank of Congo)</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Contact DR Congo Support</h2>
+                </div>
+                <form class="contact-form" id="drc-contact">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> drc@m-pesewa.com</p>
+                    <p><strong>Phone:</strong> +243 81 000 0000</p>
+                    <p><strong>Hours:</strong> Mon-Fri 8am-6pm WAT</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>M-Pesewa</h4>
+                    <p>Emergency micro-lending in trusted circles across Africa.</p>
+                    <div class="footer-links">
+                        <a href="/pages/about.html">About Us</a>
+                        <a href="/pages/qa.html">Q&A</a>
+                        <a href="/pages/contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Countries</h4>
+                    <div class="country-list">
+                        <a href="/pages/countries/kenya.html">Kenya</a>
+                        <a href="/pages/countries/uganda.html">Uganda</a>
+                        <a href="/pages/countries/tanzania.html">Tanzania</a>
+                        <a href="/pages/countries/rwanda.html">Rwanda</a>
+                        <a href="/pages/countries/burundi.html">Burundi</a>
+                        <a href="/pages/countries/somalia.html">Somalia</a>
+                        <a href="/pages/countries/south-sudan.html">South Sudan</a>
+                        <a href="/pages/countries/ethiopia.html">Ethiopia</a>
+                        <a href="/pages/countries/DRC.html">DR Congo</a>
+                        <a href="/pages/countries/nigeria.html">Nigeria</a>
+                        <a href="/pages/countries/south-africa.html">South Africa</a>
+                        <a href="/pages/countries/ghana.html">Ghana</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">YouTube</a>
+                    </div>
+                    <div class="footer-links">
+                        <a href="/pages/privacy.html">Privacy Policy</a>
+                        <a href="/pages/terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 M-Pesewa. All rights reserved.</p>
+                <p>All loans happen off-platform. We manage trust, not money.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load country statistics
+            if (typeof loadCountryStats === 'function') {
+                loadCountryStats('DRC');
+            }
+
+            // Load groups for DR Congo
+            if (typeof loadCountryGroups === 'function') {
+                loadCountryGroups('DRC');
+            }
+
+            // Calculator
+            const amountInput = document.getElementById('loan-amount');
+            const daysInput = document.getElementById('loan-days');
+            const principalEl = document.getElementById('principal');
+            const interestEl = document.getElementById('interest');
+            const totalEl = document.getElementById('total');
+            const dailyEl = document.getElementById('daily');
+
+            function updateCalculator() {
+                const amount = parseFloat(amountInput.value) || 0;
+                const days = parseInt(daysInput.value) || 7;
+                const interest = amount * 0.10;
+                const total = amount + interest;
+                const daily = total / days;
+
+                principalEl.textContent = amount.toLocaleString('en-CD') + ' CDF';
+                interestEl.textContent = interest.toLocaleString('en-CD') + ' CDF';
+                totalEl.textContent = total.toLocaleString('en-CD') + ' CDF';
+                dailyEl.textContent = daily.toLocaleString('en-CD', {maximumFractionDigits: 0}) + ' CDF';
+            }
+
+            amountInput.addEventListener('input', updateCalculator);
+            daysInput.addEventListener('input', updateCalculator);
+            updateCalculator();
+
+            // Currency converter
+            const cdfInput = document.getElementById('cdf-amount');
+            const usdInput = document.getElementById('usd-amount');
+            const rate = 2750;
+
+            cdfInput.addEventListener('input', function() {
+                const cdf = parseFloat(cdfInput.value) || 0;
+                usdInput.value = (cdf / rate).toFixed(2);
+            });
+
+            // Contact form
+            const contactForm = document.getElementById('drc-contact');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Message sent to DR Congo support. We will respond within 24 hours.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

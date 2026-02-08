@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - M-PESEWA</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="../../assets/css/forms.css">
+    <link rel="stylesheet" href="../../assets/css/tables.css">
+    <link rel="stylesheet" href="../../assets/css/animations.css">
+    <link rel="manifest" href="../../manifest.json">
+    <link rel="icon" href="../../assets/images/icons/icon-72x72.png">
+    <style>
+        .admin-only { display: block; }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-user">
+                    <div class="sidebar-avatar">A</div>
+                    <div class="sidebar-user-info">
+                        <h4>Platform Admin</h4>
+                        <p>System Administrator</p>
+                        <span class="sidebar-role" style="background: #D32F2F; color: white;">Admin</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-nav-item active">
+                    <span class="sidebar-nav-icon">⚙️</span>
+                    <span class="sidebar-nav-text">Admin Dashboard</span>
+                </a>
+                <a href="#blacklist-management" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">⚫</span>
+                    <span class="sidebar-nav-text">Blacklist Management</span>
+                    <span class="sidebar-nav-badge">3</span>
+                </a>
+                <a href="#ledger-override" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">📒</span>
+                    <span class="sidebar-nav-text">Ledger Override</span>
+                </a>
+                <a href="#subscription-enforcement" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">💎</span>
+                    <span class="sidebar-nav-text">Subscriptions</span>
+                </a>
+                <a href="#compliance" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">🌍</span>
+                    <span class="sidebar-nav-text">Country Compliance</span>
+                </a>
+                <a href="#debt-collectors" class="sidebar-nav-item">
+                    <span class="sidebar-nav-icon">🛡️</span>
+                    <span class="sidebar-nav-text">Debt Collectors</span>
+                </a>
+                <a href="../../index.html" class="sidebar-nav-item" style="color: #FF4401;">
+                    <span class="sidebar-nav-icon">🚪</span>
+                    <span class="sidebar-nav-text">Exit Admin</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-stats">
+                    <div class="sidebar-stat">
+                        <span>Total Countries</span>
+                        <span class="sidebar-stat-value">12</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span>Total Groups</span>
+                        <span class="sidebar-stat-value">142</span>
+                    </div>
+                    <div class="sidebar-stat">
+                        <span>Platform Health</span>
+                        <span class="sidebar-stat-value">98%</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="dashboard-content">
+            <header class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Admin Control Panel</h1>
+                    <p class="dashboard-subtitle">Platform management and oversight</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-danger" onclick="logoutAdmin()">
+                        Logout Admin
+                    </button>
+                </div>
+            </header>
+
+            <div class="alert alert-warning admin-only">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <div class="alert-title">Admin Access Only</div>
+                    <p>This dashboard is restricted to platform administrators only.</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section" id="blacklist-management">
+                <div class="section-header">
+                    <h2 class="section-title">Blacklist Management</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-sm btn-danger" onclick="addToBlacklist()">
+                            + Add to Blacklist
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Borrower</th>
+                                <th>Country</th>
+                                <th>Group</th>
+                                <th>Amount Defaulted</th>
+                                <th>Days Overdue</th>
+                                <th>Default Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">RM</div>
+                                        <div>
+                                            <div>Robert Mugo</div>
+                                            <div class="text-sm text-muted">ID: 387462</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Kenya</td>
+                                <td>Nairobi Group</td>
+                                <td>₵ 1,200</td>
+                                <td>75 days</td>
+                                <td>Oct 10, 2024</td>
+                                <td><span class="badge badge-danger">Blacklisted</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-success" onclick="removeBlacklist(1)">
+                                            Remove
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewDetails(1)">
+                                            Details
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">SN</div>
+                                        <div>
+                                            <div>Susan Ndirangu</div>
+                                            <div class="text-sm text-muted">ID: 562819</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Kenya</td>
+                                <td>Kisumu Group</td>
+                                <td>₵ 800</td>
+                                <td>68 days</td>
+                                <td>Oct 17, 2024</td>
+                                <td><span class="badge badge-danger">Blacklisted</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-success" onclick="removeBlacklist(2)">
+                                            Remove
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewDetails(2)">
+                                            Details
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section" id="ledger-override">
+                <div class="section-header">
+                    <h2 class="section-title">Ledger Override Panel</h2>
+                    <p class="section-subtitle">Correct ledger entries and resolve disputes</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Search Ledger</div>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="form-label">Ledger ID or Borrower Name</label>
+                                <input type="text" class="form-control" placeholder="Enter search term">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Ledger ID</th>
+                                <th>Borrower</th>
+                                <th>Lender</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                                <th>Override Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#L-4892</td>
+                                <td>John Kamau</td>
+                                <td>Jane Lender</td>
+                                <td>₵ 1,500</td>
+                                <td><span class="badge badge-warning">Disputed</span></td>
+                                <td>Dec 20, 2024</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="overrideLedger(4892)">
+                                            Override
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLedger(4892)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#L-5321</td>
+                                <td>Mary Wanjiku</td>
+                                <td>Mike Lender</td>
+                                <td>₵ 2,000</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>Dec 18, 2024</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="overrideLedger(5321)">
+                                            Override
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLedger(5321)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section" id="subscription-enforcement">
+                <div class="section-header">
+                    <h2 class="section-title">Subscription Enforcement</h2>
+                    <p class="section-subtitle">Monitor and enforce lender subscription status</p>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Lender</th>
+                                <th>Subscription Tier</th>
+                                <th>Expiry Date</th>
+                                <th>Status</th>
+                                <th>Weekly Limit</th>
+                                <th>Amount Lent</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">JL</div>
+                                        <div>
+                                            <div>Jane Lender</div>
+                                            <div class="text-sm text-muted">Premium</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Premium</td>
+                                <td>Jan 28, 2025</td>
+                                <td><span class="subscription-status active">Active</span></td>
+                                <td>₵ 5,000</td>
+                                <td>₵ 3,250</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-warning" onclick="suspendLender(1)">
+                                            Suspend
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLender(1)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="flex items-center gap-2">
+                                        <div class="avatar">ML</div>
+                                        <div>
+                                            <div>Mike Lender</div>
+                                            <div class="text-sm text-muted">Basic</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>Basic</td>
+                                <td>Dec 28, 2024</td>
+                                <td><span class="subscription-status expired">Expired</span></td>
+                                <td>₵ 1,500</td>
+                                <td>₵ 1,200</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-danger" onclick="blockLender(2)">
+                                            Block Access
+                                        </button>
+                                        <button class="btn btn-sm btn-outline" onclick="viewLender(2)">
+                                            View
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="dashboard-section" id="compliance">
+                <div class="section-header">
+                    <h2 class="section-title">Country & Group Compliance</h2>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Country Isolation Monitoring</div>
+                    </div>
+                    <div class="card-body">
+                        <p>Ensuring no cross-country lending or borrowing.</p>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Country</th>
+                                        <th>Total Groups</th>
+                                        <th>Active Lenders</th>
+                                        <th>Active Borrowers</th>
+                                        <th>Isolation Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Kenya</td>
+                                        <td>45</td>
+                                        <td>320</td>
+                                        <td>1,250</td>
+                                        <td><span class="badge badge-success">Compliant</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uganda</td>
+                                        <td>32</td>
+                                        <td>210</td>
+                                        <td>980</td>
+                                        <td><span class="badge badge-success">Compliant</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanzania</td>
+                                        <td>28</td>
+                                        <td>180</td>
+                                        <td>760</td>
+                                        <td><span class="badge badge-warning">Review Needed</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-section" id="debt-collectors">
+                <div class="section-header">
+                    <h2 class="section-title">Debt Collectors Validation</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-sm btn-primary" onclick="addCollector()">
+                            + Add Collector
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Collector Name</th>
+                                <th>Contact</th>
+                                <th>Location</th>
+                                <th>Country</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alpha Recovery Agency</td>
+                                <td>+254 700 123 456</td>
+                                <td>Nairobi, Kenya</td>
+                                <td>Kenya</td>
+                                <td><span class="badge badge-success">Approved</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-warning" onclick="editCollector(1)">
+                                            Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" onclick="removeCollector(1)">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Swift Collections Ltd</td>
+                                <td>+256 750 987 654</td>
+                                <td>Kampala, Uganda</td>
+                                <td>Uganda</td>
+                                <td><span class="badge badge-success">Approved</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn btn-sm btn-warning" onclick="editCollector(2)">
+                                            Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" onclick="removeCollector(2)">
+                                            Remove
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/utils.js"></script>
+    <script>
+        function logoutAdmin() {
+            if (confirm('Are you sure you want to logout from admin panel?')) {
+                window.location.href = '../../index.html';
+            }
+        }
+
+        function addToBlacklist() {
+            alert('Opening blacklist addition form...');
+        }
+
+        function removeBlacklist(id) {
+            if (confirm('Remove this borrower from blacklist? This should only be done after full repayment.')) {
+                alert('Blacklist entry #' + id + ' removed.');
+            }
+        }
+
+        function viewDetails(id) {
+            alert('Viewing details for blacklist entry #' + id);
+        }
+
+        function overrideLedger(id) {
+            alert('Overriding ledger #' + id);
+        }
+
+        function viewLedger(id) {
+            alert('Viewing ledger #' + id);
+        }
+
+        function suspendLender(id) {
+            if (confirm('Suspend this lender? They will lose lending access.')) {
+                alert('Lender #' + id + ' suspended.');
+            }
+        }
+
+        function blockLender(id) {
+            if (confirm('Block access for this lender? They have an expired subscription.')) {
+                alert('Lender #' + id + ' blocked.');
+            }
+        }
+
+        function viewLender(id) {
+            alert('Viewing lender #' + id + ' details');
+        }
+
+        function addCollector() {
+            alert('Adding new debt collector...');
+        }
+
+        function editCollector(id) {
+            alert('Editing collector #' + id);
+        }
+
+        function removeCollector(id) {
+            if (confirm('Remove this debt collector from the vetted list?')) {
+                alert('Collector #' + id + ' removed.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries - M-Pesewa</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#512DA8">
+    <meta name="description" content="M-Pesewa supported countries. Choose your country to access local groups and dashboards.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa Logo">
+                    <span>M-Pesewa</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/countries/index.html" class="active">Countries</a></li>
+                    <li><a href="/pages/groups.html">Groups</a></li>
+                    <li><a href="/pages/lending.html">Lend</a></li>
+                    <li><a href="/pages/borrowing.html">Borrow</a></li>
+                    <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                    <li><a href="/pages/ledger.html">Ledger</a></li>
+                    <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                    <li><a href="/pages/debt-collectors.html">Collectors</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/pages/qa.html">Q&A</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-outline">Lender Dashboard</a>
+                    <a href="/pages/dashboard/borrower-dashboard.html" class="btn btn-primary">Borrower Dashboard</a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="section section-hero">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="hero-title">Choose Your Country</h1>
+                    <p class="hero-subtitle">Select your country to access local groups, lenders, borrowers, and country-specific dashboard.</p>
+                    <div class="alert alert-info">
+                        <div class="alert-icon">🌍</div>
+                        <div class="alert-content">
+                            <p><strong>Country Isolation:</strong> No cross-country lending or borrowing. All groups and users are locked to their selected country.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Supported Countries (13)</h2>
+                    <p class="section-subtitle">Each country operates independently with its own currency, groups, and local contact.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="countries-grid">
+                    <!-- Country cards will be populated by JavaScript from countries.json -->
+                </div>
+
+                <div class="mt-12">
+                    <div class="card">
+                        <h3 class="card-title">Country-Specific Features</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Dashboard</h4>
+                                <p class="text-sm text-gray-600">Country-level overview of groups, lenders, borrowers, and platform stats.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Groups</h4>
+                                <p class="text-sm text-gray-600">Browse and join groups within your country. Minimum 5, maximum 1,000 members.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Loan Calculator</h4>
+                                <p class="text-sm text-gray-600">Calculate interest (10% weekly), repayments, and penalties in local currency.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Currency</h4>
+                                <p class="text-sm text-gray-600">Local currency display and conversion to USD for transparency.</p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Language</h4>
+                                <p class="text-sm text-gray-600">Toggle between English and French (where applicable).</p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-semibold">Contact</h4>
+                                <p class="text-sm text-gray-600">Country-specific email and contact form for local support.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>M-Pesewa</h4>
+                    <p>Emergency micro‑lending in trusted circles across Africa.</p>
+                    <div class="country-flags">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇧🇮</span><span>🇸🇴</span>
+                        <span>🇸🇸</span><span>🇪🇹</span><span>🇨🇩</span><span>🇳🇬</span><span>🇿🇦</span><span>🇬🇭</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Countries</h4>
+                    <ul>
+                        <li><a href="/pages/countries/kenya.html">Kenya</a></li>
+                        <li><a href="/pages/countries/uganda.html">Uganda</a></li>
+                        <li><a href="/pages/countries/tanzania.html">Tanzania</a></li>
+                        <li><a href="/pages/countries/rwanda.html">Rwanda</a></li>
+                        <li><a href="/pages/countries/burundi.html">Burundi</a></li>
+                        <li><a href="/pages/countries/somalia.html">Somalia</a></li>
+                        <li><a href="/pages/countries/south-sudan.html">South Sudan</a></li>
+                        <li><a href="/pages/countries/ethiopia.html">Ethiopia</a></li>
+                        <li><a href="/pages/countries/DRC.html">DRC</a></li>
+                        <li><a href="/pages/countries/nigeria.html">Nigeria</a></li>
+                        <li><a href="/pages/countries/south-africa.html">South Africa</a></li>
+                        <li><a href="/pages/countries/ghana.html">Ghana</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="/pages/about.html">About Us</a></li>
+                        <li><a href="/pages/qa.html">Q&A</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                        <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                        <li><a href="/pages/debt-collectors.html">Debt Collectors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@mpesewa.com</li>
+                        <li>
+                            <a href="#" aria-label="Facebook">Facebook</a> |
+                            <a href="#" aria-label="Twitter">Twitter</a> |
+                            <a href="#" aria-label="Instagram">Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> M-Pesewa. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/countries.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

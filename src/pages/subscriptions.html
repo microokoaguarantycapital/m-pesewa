@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Tiers - M-Pesewa</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/forms.css">
+    <link rel="stylesheet" href="/assets/css/tables.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#512DA8">
+    <meta name="description" content="M-Pesewa Subscription Tiers for Lenders. Choose your plan and start lending within trusted groups.">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">
+                    <img src="/assets/images/logo.svg" alt="M-Pesewa Logo">
+                    <span>M-Pesewa</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/countries/index.html">Countries</a></li>
+                    <li><a href="/pages/groups.html">Groups</a></li>
+                    <li><a href="/pages/lending.html">Lend</a></li>
+                    <li><a href="/pages/borrowing.html">Borrow</a></li>
+                    <li><a href="/pages/subscriptions.html" class="active">Subscriptions</a></li>
+                    <li><a href="/pages/ledger.html">Ledger</a></li>
+                    <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                    <li><a href="/pages/debt-collectors.html">Collectors</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="/pages/dashboard/lender-dashboard.html" class="btn btn-outline">Lender Dashboard</a>
+                    <a href="/pages/dashboard/borrower-dashboard.html" class="btn btn-primary">Borrower Dashboard</a>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="section section-hero">
+            <div class="container">
+                <div class="hero-content text-center">
+                    <h1 class="hero-title">Lender Subscription Tiers</h1>
+                    <p class="hero-subtitle">Choose your subscription level to start lending within your trusted groups. Borrowers pay no fees.</p>
+                    <div class="alert alert-info">
+                        <div class="alert-icon">ℹ️</div>
+                        <div class="alert-content">
+                            <p><strong>Subscription Expiry:</strong> All subscriptions expire on the 28th of each month. Expired subscriptions block lending access until renewal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Available Tiers</h2>
+                    <p class="section-subtitle">Select the tier that matches your lending capacity. All amounts in local currency.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="subscription-tiers">
+                    <!-- Tiers will be populated by JavaScript from subscriptions.json -->
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-6">Subscription Rules</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card">
+                            <h4 class="card-title">For Lenders</h4>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Must have an active subscription to lend.</li>
+                                <li>Subscription expires on the 28th of each month.</li>
+                                <li>Expired subscriptions block all lending features.</li>
+                                <li>Choose one tier at a time; upgrade/downgrade available.</li>
+                                <li>Payment redirects to M-Pesewa Till (simulated).</li>
+                                <li>No cross-group or cross-country lending.</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title">For Borrowers</h4>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Borrowers pay <strong>no subscription fees</strong> (except higher tiers for larger loans).</li>
+                                <li>Can join up to 4 groups with good rating.</li>
+                                <li>Loan requests are free; only interest applies.</li>
+                                <li>Blacklisted borrowers cannot borrow or join new groups.</li>
+                                <li>All loans are off-platform (M-Pesa, bank, etc.).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <div class="card">
+                        <h3 class="card-title">Subscription Calculator</h3>
+                        <p class="card-subtitle">Estimate your lending limits and costs.</p>
+                        <div class="mt-6">
+                            <form id="subscription-calculator">
+                                <div class="form-group">
+                                    <label for="tier-select" class="form-label">Select Tier</label>
+                                    <select id="tier-select" class="form-control" required>
+                                        <option value="">Choose a tier</option>
+                                        <option value="basic">Basic</option>
+                                        <option value="premium">Premium</option>
+                                        <option value="super">Super</option>
+                                        <option value="lender-of-lenders">Lender of Lenders</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="period-select" class="form-label">Billing Period</label>
+                                    <select id="period-select" class="form-control" required>
+                                        <option value="monthly">Monthly</option>
+                                        <option value="bi-annual">Bi-Annual</option>
+                                        <option value="annual">Annual</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="loan-amount" class="form-label">Loan Amount (within tier limit)</label>
+                                    <input type="number" id="loan-amount" class="form-control" placeholder="e.g., 1000" min="1">
+                                    <div class="form-hint">Enter an amount within the tier's weekly limit.</div>
+                                </div>
+                                <button type="button" id="calculate-btn" class="btn btn-primary">Calculate</button>
+                            </form>
+                            <div id="calculation-result" class="mt-6 hidden">
+                                <h4 class="text-lg font-semibold mb-4">Calculation Result</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>Subscription Fee:</span>
+                                        <strong id="fee-result">-</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Weekly Lending Limit:</span>
+                                        <strong id="limit-result">-</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Loan Interest (10% per week):</span>
+                                        <strong id="interest-result">-</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Total Repayment (7 days):</span>
+                                        <strong id="repayment-result">-</strong>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Daily Partial Repayment:</span>
+                                        <strong id="daily-result">-</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>M-Pesewa</h4>
+                    <p>Emergency micro‑lending in trusted circles across Africa.</p>
+                    <div class="country-flags">
+                        <span>🇰🇪</span><span>🇺🇬</span><span>🇹🇿</span><span>🇷🇼</span><span>🇧🇮</span><span>🇸🇴</span>
+                        <span>🇸🇸</span><span>🇪🇹</span><span>🇨🇩</span><span>🇳🇬</span><span>🇿🇦</span><span>🇬🇭</span>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Countries</h4>
+                    <ul>
+                        <li><a href="/pages/countries/kenya.html">Kenya</a></li>
+                        <li><a href="/pages/countries/uganda.html">Uganda</a></li>
+                        <li><a href="/pages/countries/tanzania.html">Tanzania</a></li>
+                        <li><a href="/pages/countries/rwanda.html">Rwanda</a></li>
+                        <li><a href="/pages/countries/burundi.html">Burundi</a></li>
+                        <li><a href="/pages/countries/somalia.html">Somalia</a></li>
+                        <li><a href="/pages/countries/south-sudan.html">South Sudan</a></li>
+                        <li><a href="/pages/countries/ethiopia.html">Ethiopia</a></li>
+                        <li><a href="/pages/countries/DRC.html">DRC</a></li>
+                        <li><a href="/pages/countries/nigeria.html">Nigeria</a></li>
+                        <li><a href="/pages/countries/south-africa.html">South Africa</a></li>
+                        <li><a href="/pages/countries/ghana.html">Ghana</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="/pages/about.html">About Us</a></li>
+                        <li><a href="/pages/qa.html">Q&A</a></li>
+                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="/pages/subscriptions.html">Subscriptions</a></li>
+                        <li><a href="/pages/blacklist.html">Blacklist</a></li>
+                        <li><a href="/pages/debt-collectors.html">Debt Collectors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@mpesewa.com</li>
+                        <li>Phone: +254 700 000000</li>
+                        <li>WhatsApp: +254 700 000000</li>
+                        <li>
+                            <a href="#" aria-label="Facebook">Facebook</a> |
+                            <a href="#" aria-label="Twitter">Twitter</a> |
+                            <a href="#" aria-label="Instagram">Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> M-Pesewa. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/subscriptions.js"></script>
+    <script src="/assets/js/calculator.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "groups": [
+    {
+      "id": "GRP001",
+      "name": "Family Support Group",
+      "description": "A family-based lending circle for emergencies",
+      "country": "KE",
+      "type": "family",
+      "admin": "USR001",
+      "members": ["USR001", "USR002", "USR003", "USR004", "USR005", "USR006"],
+      "lenders": ["USR001", "USR002"],
+      "borrowers": ["USR003", "USR004", "USR005", "USR006"],
+      "invite_only": true,
+      "invite_code": "FAMILY2024",
+      "created_at": "2024-01-15",
+      "rules": ["Minimum loan: KSh 500", "Maximum loan: KSh 5000", "Repayment within 7 days"],
+      "loans": ["LNG001", "LNG002"],
+      "statistics": {
+        "total_members": 6,
+        "lenders_count": 2,
+        "borrowers_count": 4,
+        "total_loans": 2,
+        "total_amount": 7500,
+        "repayment_rate": 100
+      }
+    },
+    {
+      "id": "GRP002",
+      "name": "Nairobi Professionals",
+      "description": "Professional lending circle for white-collar workers",
+      "country": "KE",
+      "type": "professional",
+      "admin": "USR007",
+      "members": ["USR007", "USR008", "USR009", "USR010", "USR011"],
+      "lenders": ["USR007", "USR008", "USR009"],
+      "borrowers": ["USR010", "USR011"],
+      "invite_only": true,
+      "invite_code": "PROF2024",
+      "created_at": "2024-02-10",
+      "rules": ["CRB check required", "Minimum rating: 4.0", "Business loans only"],
+      "loans": ["LNG003"],
+      "statistics": {
+        "total_members": 5,
+        "lenders_count": 3,
+        "borrowers_count": 2,
+        "total_loans": 1,
+        "total_amount": 15000,
+        "repayment_rate": 100
+      }
+    },
+    {
+      "id": "GRP003",
+      "name": "Kampala Business Network",
+      "description": "Business lending circle in Kampala",
+      "country": "UG",
+      "type": "professional",
+      "admin": "USR012",
+      "members": ["USR012", "USR013", "USR014", "USR015", "USR016", "USR017", "USR018"],
+      "lenders": ["USR012", "USR013"],
+      "borrowers": ["USR014", "USR015", "USR016", "USR017", "USR018"],
+      "invite_only": true,
+      "invite_code": "KLA2024",
+      "created_at": "2024-03-05",
+      "rules": ["Business verification required", "Weekly meetings"],
+      "loans": ["LNG004", "LNG005"],
+      "statistics": {
+        "total_members": 7,
+        "lenders_count": 2,
+        "borrowers_count": 5,
+        "total_loans": 2,
+        "total_amount": 25000,
+        "repayment_rate": 100
+      }
+    }
+  ]
+}

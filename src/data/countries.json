@@ -1,0 +1,352 @@
+{
+  "countries": [
+    {
+      "id": "KE",
+      "name": "Kenya",
+      "code": "KE",
+      "currency": "KSh",
+      "currencySymbol": "KSh",
+      "flag": "🇰🇪",
+      "language": "en",
+      "languages": ["en", "sw"],
+      "timezone": "Africa/Nairobi",
+      "phoneCode": "+254",
+      "contact": {
+        "email": "kenya@mpesewa.com",
+        "phone": "+254 709 219 000",
+        "address": "Nairobi, Kenya"
+      },
+      "limits": {
+        "minLoan": 50,
+        "maxLoan": 50000
+      },
+      "stats": {
+        "totalGroups": 125,
+        "activeLenders": 450,
+        "activeBorrowers": 3200,
+        "activeLoans": 890,
+        "totalAmountLent": 12500000,
+        "repaymentRate": 98.7
+      }
+    },
+    {
+      "id": "UG",
+      "name": "Uganda",
+      "code": "UG",
+      "currency": "UGX",
+      "currencySymbol": "UGX",
+      "flag": "🇺🇬",
+      "language": "en",
+      "languages": ["en", "sw"],
+      "timezone": "Africa/Kampala",
+      "phoneCode": "+256",
+      "contact": {
+        "email": "uganda@mpesewa.com",
+        "phone": "+256 392 175 546",
+        "address": "Kampala, Uganda"
+      },
+      "limits": {
+        "minLoan": 1000,
+        "maxLoan": 50000000
+      },
+      "stats": {
+        "totalGroups": 89,
+        "activeLenders": 310,
+        "activeBorrowers": 2400,
+        "activeLoans": 650,
+        "totalAmountLent": 8900000,
+        "repaymentRate": 97.2
+      }
+    },
+    {
+      "id": "TZ",
+      "name": "Tanzania",
+      "code": "TZ",
+      "currency": "TZS",
+      "currencySymbol": "TZS",
+      "flag": "🇹🇿",
+      "language": "sw",
+      "languages": ["sw", "en"],
+      "timezone": "Africa/Dar_es_Salaam",
+      "phoneCode": "+255",
+      "contact": {
+        "email": "tanzania@mpesewa.com",
+        "phone": "+255 659 073 010",
+        "address": "Dar es Salaam, Tanzania"
+      },
+      "limits": {
+        "minLoan": 1000,
+        "maxLoan": 5000000
+      },
+      "stats": {
+        "totalGroups": 76,
+        "activeLenders": 280,
+        "activeBorrowers": 2100,
+        "activeLoans": 540,
+        "totalAmountLent": 7600000,
+        "repaymentRate": 98.1
+      }
+    },
+    {
+      "id": "RW",
+      "name": "Rwanda",
+      "code": "RW",
+      "currency": "RWF",
+      "currencySymbol": "RWF",
+      "flag": "🇷🇼",
+      "language": "en",
+      "languages": ["en", "fr", "rw"],
+      "timezone": "Africa/Kigali",
+      "phoneCode": "+250",
+      "contact": {
+        "email": "rwanda@mpesewa.com",
+        "phone": "+250 791 590 801",
+        "address": "Kigali, Rwanda"
+      },
+      "limits": {
+        "minLoan": 100,
+        "maxLoan": 500000
+      },
+      "stats": {
+        "totalGroups": 45,
+        "activeLenders": 180,
+        "activeBorrowers": 1300,
+        "activeLoans": 320,
+        "totalAmountLent": 4500000,
+        "repaymentRate": 99.0
+      }
+    },
+    {
+      "id": "BI",
+      "name": "Burundi",
+      "code": "BI",
+      "currency": "BIF",
+      "currencySymbol": "BIF",
+      "flag": "🇧🇮",
+      "language": "fr",
+      "languages": ["fr", "rn"],
+      "timezone": "Africa/Bujumbura",
+      "phoneCode": "+257",
+      "contact": {
+        "email": "burundi@mpesewa.com",
+        "phone": "+257 79 000 000",
+        "address": "Bujumbura, Burundi"
+      },
+      "limits": {
+        "minLoan": 1000,
+        "maxLoan": 1000000
+      },
+      "stats": {
+        "totalGroups": 32,
+        "activeLenders": 110,
+        "activeBorrowers": 850,
+        "activeLoans": 210,
+        "totalAmountLent": 2200000,
+        "repaymentRate": 96.5
+      }
+    },
+    {
+      "id": "SO",
+      "name": "Somalia",
+      "code": "SO",
+      "currency": "SOS",
+      "currencySymbol": "SOS",
+      "flag": "🇸🇴",
+      "language": "so",
+      "languages": ["so", "ar", "en"],
+      "timezone": "Africa/Mogadishu",
+      "phoneCode": "+252",
+      "contact": {
+        "email": "somalia@mpesewa.com",
+        "phone": "+252 63 0000000",
+        "address": "Mogadishu, Somalia"
+      },
+      "limits": {
+        "minLoan": 1000,
+        "maxLoan": 1000000
+      },
+      "stats": {
+        "totalGroups": 28,
+        "activeLenders": 95,
+        "activeBorrowers": 720,
+        "activeLoans": 180,
+        "totalAmountLent": 1900000,
+        "repaymentRate": 95.8
+      }
+    },
+    {
+      "id": "SS",
+      "name": "South Sudan",
+      "code": "SS",
+      "currency": "SSP",
+      "currencySymbol": "SSP",
+      "flag": "🇸🇸",
+      "language": "en",
+      "languages": ["en", "ar"],
+      "timezone": "Africa/Juba",
+      "phoneCode": "+211",
+      "contact": {
+        "email": "southsudan@mpesewa.com",
+        "phone": "+211 977 000000",
+        "address": "Juba, South Sudan"
+      },
+      "limits": {
+        "minLoan": 100,
+        "maxLoan": 500000
+      },
+      "stats": {
+        "totalGroups": 22,
+        "activeLenders": 75,
+        "activeBorrowers": 580,
+        "activeLoans": 140,
+        "totalAmountLent": 1500000,
+        "repaymentRate": 94.3
+      }
+    },
+    {
+      "id": "ET",
+      "name": "Ethiopia",
+      "code": "ET",
+      "currency": "ETB",
+      "currencySymbol": "ETB",
+      "flag": "🇪🇹",
+      "language": "am",
+      "languages": ["am", "en", "om"],
+      "timezone": "Africa/Addis_Ababa",
+      "phoneCode": "+251",
+      "contact": {
+        "email": "ethiopia@mpesewa.com",
+        "phone": "+251 91 000 0000",
+        "address": "Addis Ababa, Ethiopia"
+      },
+      "limits": {
+        "minLoan": 10,
+        "maxLoan": 50000
+      },
+      "stats": {
+        "totalGroups": 68,
+        "activeLenders": 240,
+        "activeBorrowers": 1800,
+        "activeLoans": 470,
+        "totalAmountLent": 6800000,
+        "repaymentRate": 97.9
+      }
+    },
+    {
+      "id": "CD",
+      "name": "DRC",
+      "code": "CD",
+      "currency": "CDF",
+      "currencySymbol": "CDF",
+      "flag": "🇨🇩",
+      "language": "fr",
+      "languages": ["fr", "ln", "sw"],
+      "timezone": "Africa/Kinshasa",
+      "phoneCode": "+243",
+      "contact": {
+        "email": "drc@mpesewa.com",
+        "phone": "+243 81 000 0000",
+        "address": "Kinshasa, DRC"
+      },
+      "limits": {
+        "minLoan": 1000,
+        "maxLoan": 500000
+      },
+      "stats": {
+        "totalGroups": 54,
+        "activeLenders": 190,
+        "activeBorrowers": 1400,
+        "activeLoans": 380,
+        "totalAmountLent": 5400000,
+        "repaymentRate": 96.2
+      }
+    },
+    {
+      "id": "NG",
+      "name": "Nigeria",
+      "code": "NG",
+      "currency": "NGN",
+      "currencySymbol": "₦",
+      "flag": "🇳🇬",
+      "language": "en",
+      "languages": ["en", "ha", "yo", "ig"],
+      "timezone": "Africa/Lagos",
+      "phoneCode": "+234",
+      "contact": {
+        "email": "nigeria@mpesewa.com",
+        "phone": "+234 800 000 0000",
+        "address": "Lagos, Nigeria"
+      },
+      "limits": {
+        "minLoan": 100,
+        "maxLoan": 500000
+      },
+      "stats": {
+        "totalGroups": 142,
+        "activeLenders": 520,
+        "activeBorrowers": 4100,
+        "activeLoans": 1100,
+        "totalAmountLent": 14200000,
+        "repaymentRate": 98.5
+      }
+    },
+    {
+      "id": "ZA",
+      "name": "South Africa",
+      "code": "ZA",
+      "currency": "ZAR",
+      "currencySymbol": "R",
+      "flag": "🇿🇦",
+      "language": "en",
+      "languages": ["en", "af", "zu", "xh"],
+      "timezone": "Africa/Johannesburg",
+      "phoneCode": "+27",
+      "contact": {
+        "email": "southafrica@mpesewa.com",
+        "phone": "+27 11 000 0000",
+        "address": "Johannesburg, South Africa"
+      },
+      "limits": {
+        "minLoan": 10,
+        "maxLoan": 50000
+      },
+      "stats": {
+        "totalGroups": 98,
+        "activeLenders": 360,
+        "activeBorrowers": 2900,
+        "activeLoans": 780,
+        "totalAmountLent": 9800000,
+        "repaymentRate": 99.2
+      }
+    },
+    {
+      "id": "GH",
+      "name": "Ghana",
+      "code": "GH",
+      "currency": "GHS",
+      "currencySymbol": "₵",
+      "flag": "🇬🇭",
+      "language": "en",
+      "languages": ["en", "ak", "ee", "tw"],
+      "timezone": "Africa/Accra",
+      "phoneCode": "+233",
+      "contact": {
+        "email": "ghana@mpesewa.com",
+        "phone": "+233 24 000 0000",
+        "address": "Accra, Ghana"
+      },
+      "limits": {
+        "minLoan": 5,
+        "maxLoan": 50000
+      },
+      "stats": {
+        "totalGroups": 115,
+        "activeLenders": 420,
+        "activeBorrowers": 3300,
+        "activeLoans": 920,
+        "totalAmountLent": 11500000,
+        "repaymentRate": 98.9
+      }
+    }
+  ]
+}
