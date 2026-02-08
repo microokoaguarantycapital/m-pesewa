@@ -1,0 +1,1460 @@
+/* dashboards.css */
+/* M-Pesewa Dashboard System - FinTech Production Grade */
+/* STRICT ROLE-BASED DASHBOARD VIEWS */
+
+/* ===== DASHBOARD LAYOUT SYSTEM ===== */
+.dashboard-container {
+  min-height: calc(100vh - 150px);
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-sidebar {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dashboard-header {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== DASHBOARD SIDEBAR ===== */
+.dashboard-sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #003366;
+  color: #ffffff;
+}
+
+.dashboard-sidebar-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dashboard-sidebar-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #0099ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.dashboard-sidebar-info {
+  flex: 1;
+}
+
+.dashboard-sidebar-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #ffffff;
+}
+
+.dashboard-sidebar-role {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  color: #ffffff;
+}
+
+.dashboard-sidebar-menu {
+  padding: 1rem 0;
+}
+
+.dashboard-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  color: #003366;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  border-left: 3px solid transparent;
+}
+
+.dashboard-sidebar-item:hover {
+  background-color: rgba(0, 153, 255, 0.05);
+  color: #0099ff;
+}
+
+.dashboard-sidebar-item.active {
+  background-color: rgba(0, 153, 255, 0.1);
+  color: #0099ff;
+  border-left-color: #0099ff;
+  font-weight: 600;
+}
+
+.dashboard-sidebar-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.dashboard-sidebar-icon {
+  font-size: 1.125rem;
+  width: 24px;
+  text-align: center;
+}
+
+.dashboard-sidebar-label {
+  flex: 1;
+}
+
+.dashboard-sidebar-badge {
+  background-color: #dc3545;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.375rem;
+}
+
+.dashboard-sidebar-divider {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 0.5rem 1.5rem;
+}
+
+.dashboard-sidebar-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+}
+
+.dashboard-sidebar-switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.dashboard-sidebar-switch-label {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+.dashboard-sidebar-logout {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard-sidebar-logout:hover {
+  background-color: #c82333;
+}
+
+/* ===== DASHBOARD HEADER ===== */
+.dashboard-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header-subtitle {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+.dashboard-header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.dashboard-header-action {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-header-action-primary {
+  background-color: #0099ff;
+  color: #ffffff;
+  border: 1px solid #0099ff;
+}
+
+.dashboard-header-action-primary:hover {
+  background-color: #0088e6;
+  border-color: #0088e6;
+}
+
+.dashboard-header-action-secondary {
+  background-color: #ffffff;
+  color: #003366;
+  border: 1px solid #e0e0e0;
+}
+
+.dashboard-header-action-secondary:hover {
+  background-color: #f8f9fa;
+  border-color: #cccccc;
+}
+
+/* ===== BORROWER DASHBOARD ===== */
+.dashboard-borrower-grid {
+  display: grid;
+  grid-template-areas:
+    "stats stats"
+    "loans activities"
+    "reputation groups";
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-borrower-stats {
+  grid-area: stats;
+}
+
+.dashboard-borrower-active-loans {
+  grid-area: loans;
+}
+
+.dashboard-borrower-recent-activities {
+  grid-area: activities;
+}
+
+.dashboard-borrower-reputation {
+  grid-area: reputation;
+}
+
+.dashboard-borrower-groups {
+  grid-area: groups;
+}
+
+/* Borrower Stats */
+.borrower-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.borrower-stat-card {
+  background: linear-gradient(135deg, #003366, #0099ff);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.borrower-stat-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 1%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.borrower-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.borrower-stat-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.borrower-stat-change {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Active Loans */
+.borrower-loans-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.borrower-loans-table th,
+.borrower-loans-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.borrower-loans-table th {
+  font-weight: 600;
+  color: #003366;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: #f8f9fa;
+}
+
+.borrower-loans-table tr:hover {
+  background-color: rgba(0, 153, 255, 0.05);
+}
+
+.borrower-loan-amount {
+  font-weight: 600;
+  color: #003366;
+}
+
+.borrower-loan-due-date {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+.borrower-loan-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.borrower-loan-status-active {
+  background-color: rgba(243, 112, 33, 0.1);
+  color: #f37021;
+  border: 1px solid rgba(243, 112, 33, 0.3);
+}
+
+.borrower-loan-status-overdue {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  animation: overdue-pulse 2s infinite;
+}
+
+@keyframes overdue-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Reputation Section */
+.borrower-reputation-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.borrower-reputation-stars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.borrower-reputation-rating {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #003366;
+}
+
+.borrower-reputation-stars-display {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.borrower-reputation-star {
+  color: #ffc107;
+  font-size: 1.5rem;
+}
+
+.borrower-reputation-details {
+  flex: 1;
+}
+
+.borrower-reputation-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.borrower-reputation-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.borrower-reputation-label {
+  font-size: 0.875rem;
+  color: #666666;
+  min-width: 120px;
+}
+
+.borrower-reputation-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.borrower-reputation-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0099ff, #003366);
+  border-radius: 4px;
+}
+
+.borrower-reputation-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #003366;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Groups Section */
+.borrower-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.borrower-group-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.borrower-group-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #0099ff;
+}
+
+.borrower-group-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.5rem;
+}
+
+.borrower-group-type {
+  font-size: 0.75rem;
+  color: #666666;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.borrower-group-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #666666;
+}
+
+.borrower-group-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.borrower-group-stat-value {
+  font-weight: 600;
+  color: #003366;
+}
+
+/* ===== LENDER DASHBOARD ===== */
+.dashboard-lender-grid {
+  display: grid;
+  grid-template-areas:
+    "stats subscription"
+    "ledgers portfolio"
+    "requests risk";
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-lender-stats {
+  grid-area: stats;
+}
+
+.dashboard-lender-subscription-status {
+  grid-area: subscription;
+}
+
+.dashboard-lender-active-ledgers {
+  grid-area: ledgers;
+}
+
+.dashboard-lender-portfolio {
+  grid-area: portfolio;
+}
+
+.dashboard-lender-loan-requests {
+  grid-area: requests;
+}
+
+.dashboard-lender-risk-assessment {
+  grid-area: risk;
+}
+
+/* Lender Stats */
+.lender-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.lender-stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.lender-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.lender-stat-icon.amount {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+}
+
+.lender-stat-icon.ledgers {
+  background-color: rgba(0, 153, 255, 0.1);
+  color: #0099ff;
+}
+
+.lender-stat-icon.outstanding {
+  background-color: rgba(243, 112, 33, 0.1);
+  color: #f37021;
+}
+
+.lender-stat-icon.interest {
+  background-color: rgba(153, 0, 255, 0.1);
+  color: #9900ff;
+}
+
+.lender-stat-content {
+  flex: 1;
+}
+
+.lender-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.lender-stat-label {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Subscription Status */
+.lender-subscription-card {
+  background: linear-gradient(135deg, #003366, #0099ff);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.lender-subscription-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1%, transparent 1%);
+  background-size: 20px 20px;
+  opacity: 0.3;
+}
+
+.lender-subscription-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.lender-subscription-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.lender-subscription-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lender-subscription-details {
+  margin-bottom: 1.5rem;
+}
+
+.lender-subscription-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lender-subscription-detail:last-child {
+  border-bottom: none;
+}
+
+.lender-subscription-label {
+  opacity: 0.8;
+}
+
+.lender-subscription-value {
+  font-weight: 600;
+}
+
+.lender-subscription-progress {
+  margin-bottom: 1rem;
+}
+
+.lender-subscription-progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.lender-subscription-bar {
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.lender-subscription-fill {
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.lender-subscription-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.lender-subscription-action {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.875rem;
+}
+
+.lender-subscription-action-renew {
+  background-color: #ffffff;
+  color: #003366;
+}
+
+.lender-subscription-action-renew:hover {
+  background-color: #f8f9fa;
+}
+
+.lender-subscription-action-upgrade {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.lender-subscription-action-upgrade:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Active Ledgers */
+.lender-ledgers-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.lender-ledger-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  transition: all 0.2s ease-in-out;
+}
+
+.lender-ledger-item:hover {
+  background-color: rgba(0, 153, 255, 0.05);
+}
+
+.lender-ledger-info {
+  flex: 1;
+}
+
+.lender-ledger-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.25rem;
+}
+
+.lender-ledger-details {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+.lender-ledger-amount {
+  font-weight: 600;
+  color: #003366;
+}
+
+.lender-ledger-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lender-ledger-status-active {
+  background-color: rgba(243, 112, 33, 0.1);
+  color: #f37021;
+  border: 1px solid rgba(243, 112, 33, 0.3);
+}
+
+.lender-ledger-status-overdue {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* Portfolio Overview */
+.lender-portfolio-chart {
+  height: 200px;
+  margin-bottom: 1.5rem;
+}
+
+.lender-portfolio-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.lender-portfolio-stat {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.lender-portfolio-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.lender-portfolio-stat-label {
+  font-size: 0.75rem;
+  color: #666666;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Risk Assessment */
+.lender-risk-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lender-risk-metric {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.lender-risk-metric-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #003366;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.lender-risk-metric-label {
+  font-size: 0.75rem;
+  color: #666666;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lender-risk-alerts {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.lender-risk-alert-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #721c24;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lender-risk-alert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lender-risk-alert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: #721c24;
+}
+
+.lender-risk-alert-item:last-child {
+  margin-bottom: 0;
+}
+
+.lender-risk-alert-icon {
+  color: #dc3545;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+/* ===== GROUP DASHBOARD ===== */
+.dashboard-group-grid {
+  display: grid;
+  grid-template-areas:
+    "header stats"
+    "members lenders"
+    "borrowers activities"
+    "analytics analytics";
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-group-header {
+  grid-area: header;
+}
+
+.dashboard-group-stats {
+  grid-area: stats;
+}
+
+.dashboard-group-members {
+  grid-area: members;
+}
+
+.dashboard-group-lenders {
+  grid-area: lenders;
+}
+
+.dashboard-group-borrowers {
+  grid-area: borrowers;
+}
+
+.dashboard-group-activities {
+  grid-area: activities;
+}
+
+.dashboard-group-analytics {
+  grid-area: analytics;
+}
+
+/* Group Header */
+.group-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.group-header-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #0099ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.group-header-info {
+  flex: 1;
+}
+
+.group-header-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.group-header-type {
+  font-size: 0.875rem;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.group-header-country {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 51, 102, 0.1);
+  color: #003366;
+  border: 1px solid rgba(0, 51, 102, 0.3);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Group Stats */
+.group-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.group-stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.group-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #003366;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.group-stat-label {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+.group-stat-repayment-rate {
+  color: #28a745;
+}
+
+/* Members List */
+.group-members-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.group-member-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.group-member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0099ff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.group-member-info {
+  flex: 1;
+}
+
+.group-member-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.25rem;
+}
+
+.group-member-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.group-member-role-lender {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.group-member-role-borrower {
+  background-color: rgba(243, 112, 33, 0.1);
+  color: #f37021;
+  border: 1px solid rgba(243, 112, 33, 0.3);
+}
+
+.group-member-role-admin {
+  background-color: rgba(0, 51, 102, 0.1);
+  color: #003366;
+  border: 1px solid rgba(0, 51, 102, 0.3);
+}
+
+/* Group Analytics */
+.group-analytics-charts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.group-analytics-chart {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.group-analytics-chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 1rem;
+}
+
+.group-analytics-chart-container {
+  height: 200px;
+}
+
+/* ===== COUNTRY DASHBOARD ===== */
+.dashboard-country-grid {
+  display: grid;
+  grid-template-areas:
+    "header flag"
+    "stats stats"
+    "groups lenders"
+    "borrowers analytics";
+  grid-template-columns: 1fr 300px;
+  gap: 1.5rem;
+}
+
+.dashboard-country-header {
+  grid-area: header;
+}
+
+.dashboard-country-flag-section {
+  grid-area: flag;
+}
+
+.dashboard-country-stats-overview {
+  grid-area: stats;
+}
+
+.dashboard-country-groups-list {
+  grid-area: groups;
+}
+
+.dashboard-country-lenders-overview {
+  grid-area: lenders;
+}
+
+.dashboard-country-borrowers-overview {
+  grid-area: borrowers;
+}
+
+.dashboard-country-analytics {
+  grid-area: analytics;
+}
+
+/* Country Header */
+.country-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.country-header-flag {
+  font-size: 3rem;
+}
+
+.country-header-info {
+  flex: 1;
+}
+
+.country-header-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 0.5rem;
+}
+
+.country-header-currency {
+  font-size: 1rem;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.country-header-isolation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 51, 102, 0.1);
+  color: #003366;
+  border: 1px solid rgba(0, 51, 102, 0.3);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Country Flag Section */
+.country-flag-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.country-flag-large {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.country-flag-info {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Country Stats */
+.country-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.country-stat-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.country-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #003366;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.country-stat-label {
+  font-size: 0.875rem;
+  color: #666666;
+}
+
+/* Country Groups List */
+.country-groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.country-group-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.country-group-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #0099ff;
+}
+
+.country-group-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.5rem;
+}
+
+.country-group-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #666666;
+}
+
+.country-group-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.country-group-stat-value {
+  font-weight: 600;
+  color: #003366;
+}
+
+/* ===== RESPONSIVE DASHBOARDS ===== */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 220px 1fr;
+  }
+  
+  .dashboard-borrower-grid,
+  .dashboard-lender-grid,
+  .dashboard-group-grid,
+  .dashboard-country-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "stats"
+      "subscription"
+      "loans"
+      "activities"
+      "reputation"
+      "groups"
+      "ledgers"
+      "portfolio"
+      "requests"
+      "risk"
+      "header"
+      "flag"
+      "members"
+      "lenders"
+      "borrowers"
+      "analytics";
+  }
+  
+  .borrower-stats-grid,
+  .lender-stats-grid,
+  .group-stats-grid,
+  .country-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .borrower-groups-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-sidebar {
+    display: none;
+  }
+  
+  .borrower-stats-grid,
+  .lender-stats-grid,
+  .group-stats-grid,
+  .country-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .borrower-groups-grid,
+  .country-groups-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .group-analytics-charts {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-header-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .dashboard-header-actions {
+    flex-direction: column;
+  }
+  
+  .dashboard-header-action {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .lender-subscription-actions {
+    flex-direction: column;
+  }
+  
+  .lender-subscription-action {
+    width: 100%;
+  }
+}
+
+/* ===== PRINT DASHBOARDS ===== */
+@media print {
+  .dashboard-container {
+    background-color: #ffffff;
+    padding: 0;
+  }
+  
+  .dashboard-sidebar {
+    display: none;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-section {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #000000;
+  }
+  
+  .borrower-stats-grid,
+  .lender-stats-grid,
+  .group-stats-grid,
+  .country-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== END OF DASHBOARDS.CSS ===== */

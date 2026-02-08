@@ -1,0 +1,303 @@
+/* assets/css/themes/tz.css */
+/* M-Pesewa Tanzania Theme - Uhuru Teal: Calm, Independence, Balance */
+/* Theme overrides for Tanzania operations maintaining strict hierarchy */
+
+:root {
+  /* Tanzania Theme Colors - Uhuru Teal Palette */
+  --tz-primary-color: #1EB53A;        /* Uhuru Green - Independence */
+  --tz-secondary-color: #00A3DD;      /* Ocean Teal - Balance */
+  --tz-accent-color: #FCD116;         /* Sun Yellow - Prosperity */
+  --tz-success-color: #28a745;        /* Green - Growth */
+  --tz-warning-color: #ffc107;        /* Amber - Caution */
+  --tz-danger-color: #dc3545;         /* Red - Alert */
+  --tz-background-color: #ffffff;     /* Pure White */
+  --tz-surface-color: #f8f9fa;        /* Light Gray */
+  --tz-text-primary: #1a1a1a;         /* Deep Black */
+  --tz-text-secondary: #666666;       /* Medium Gray */
+  --tz-text-tertiary: #999999;        /* Light Gray */
+  --tz-border-color: #e0e0e0;         /* Light Border */
+  
+  /* Tanzania Financial Colors */
+  --tz-vodacom-color: #e60000;        /* Vodacom Red */
+  --tz-airtel-color: #ee1c25;         /* Airtel Red */
+  --tz-tigo-color: #ffcc00;           /* Tigo Yellow */
+  --tz-sacco-color: #006400;          /* SACCO Green */
+  
+  /* Tanzania Typography */
+  --tz-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --tz-font-size-base: 16px;
+  --tz-font-size-scale: 1.2;          /* Minor Third Scale */
+  --tz-line-height-base: 1.6;
+  --tz-letter-spacing-base: -0.005em;
+  
+  /* Tanzania Spacing */
+  --tz-spacing-unit: 8px;
+  --tz-spacing-xs: calc(var(--tz-spacing-unit) * 0.5);    /* 4px */
+  --tz-spacing-sm: calc(var(--tz-spacing-unit) * 1);      /* 8px */
+  --tz-spacing-md: calc(var(--tz-spacing-unit) * 2);      /* 16px */
+  --tz-spacing-lg: calc(var(--tz-spacing-unit) * 3);      /* 24px */
+  --tz-spacing-xl: calc(var(--tz-spacing-unit) * 4);      /* 32px */
+  --tz-spacing-xxl: calc(var(--tz-spacing-unit) * 6);     /* 48px */
+  
+  /* Tanzania Borders */
+  --tz-border-radius-sm: 6px;
+  --tz-border-radius-md: 10px;
+  --tz-border-radius-lg: 14px;
+  --tz-border-radius-xl: 18px;
+  --tz-border-width: 1px;
+  --tz-border-style: solid;
+  
+  /* Tanzania Shadows */
+  --tz-shadow-sm: 0 2px 4px rgba(30, 181, 58, 0.1);
+  --tz-shadow-md: 0 4px 8px rgba(30, 181, 58, 0.12);
+  --tz-shadow-lg: 0 8px 16px rgba(30, 181, 58, 0.15);
+  --tz-shadow-xl: 0 16px 32px rgba(30, 181, 58, 0.2);
+  
+  /* Tanzania Animations */
+  --tz-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --tz-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --tz-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Tanzania Z-Index */
+  --tz-z-base: 1;
+  --tz-z-dropdown: 100;
+  --tz-z-sticky: 200;
+  --tz-z-fixed: 300;
+  --tz-z-modal: 400;
+  --tz-z-popover: 500;
+  --tz-z-tooltip: 600;
+}
+
+/* Tanzania Header Overrides */
+[data-country="tz"] .mp-header {
+  background: linear-gradient(135deg, var(--tz-primary-color) 0%, #16852c 100%);
+  border-bottom: 3px solid var(--tz-accent-color);
+}
+
+[data-country="tz"] .nav-link.active {
+  background: rgba(252, 209, 22, 0.2);
+  color: var(--tz-accent-color);
+}
+
+[data-country="tz"] .nav-link.active::after {
+  background: var(--tz-accent-color);
+}
+
+[data-country="tz"] .signup-btn {
+  background: linear-gradient(135deg, var(--tz-secondary-color) 0%, #0088b8 100%);
+  color: #ffffff;
+}
+
+[data-country="tz"] .signup-btn:hover {
+  background: linear-gradient(135deg, #0088b8 0%, var(--tz-secondary-color) 100%);
+}
+
+/* Tanzania Footer Overrides */
+[data-country="tz"] .mp-footer {
+  background: linear-gradient(135deg, #16852c 0%, var(--tz-primary-color) 100%);
+  border-top: 3px solid var(--tz-accent-color);
+}
+
+[data-country="tz"] .footer-link:hover {
+  color: var(--tz-accent-color);
+}
+
+[data-country="tz"] .footer-link::before {
+  color: var(--tz-accent-color);
+}
+
+[data-country="tz"] .country-ticker {
+  background: linear-gradient(90deg, 
+    rgba(30, 181, 58, 0.9) 0%, 
+    rgba(0, 163, 221, 0.8) 50%, 
+    rgba(30, 181, 58, 0.9) 100%);
+  border-color: var(--tz-secondary-color);
+}
+
+/* Tanzania Sidebar Overrides */
+[data-country="tz"] .mp-sidebar {
+  border-right: 3px solid var(--tz-primary-color);
+}
+
+[data-country="tz"] .sidebar-link.active {
+  background: rgba(30, 181, 58, 0.1);
+  color: var(--tz-primary-color);
+}
+
+[data-country="tz"] .sidebar-link.active::before {
+  background: var(--tz-primary-color);
+}
+
+[data-country="tz"] .profile-card {
+  background: linear-gradient(135deg, rgba(30, 181, 58, 0.1) 0%, rgba(0, 163, 221, 0.05) 100%);
+  border-left: 3px solid var(--tz-primary-color);
+}
+
+/* Tanzania Button Overrides */
+[data-country="tz"] .borrower-btn,
+[data-country="tz"] [data-role="borrower"] .cta-btn {
+  background: linear-gradient(135deg, #f37021 0%, #d45c00 100%);
+  border: 2px solid #f37021;
+}
+
+[data-country="tz"] .lender-btn,
+[data-country="tz"] [data-role="lender"] .cta-btn {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border: 2px solid #28a745;
+}
+
+[data-country="tz"] .secondary-btn {
+  background: transparent;
+  border: 2px solid var(--tz-secondary-color);
+  color: var(--tz-secondary-color);
+}
+
+[data-country="tz"] .secondary-btn:hover {
+  background: var(--tz-secondary-color);
+  color: #ffffff;
+}
+
+/* Tanzania Card Overrides */
+[data-country="tz"] .card {
+  background: var(--tz-background-color);
+  border: var(--tz-border-width) var(--tz-border-style) var(--tz-border-color);
+  border-radius: var(--tz-border-radius-lg);
+  box-shadow: var(--tz-shadow-sm);
+  transition: all var(--tz-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="tz"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tz-primary-color) 0%, var(--tz-secondary-color) 100%);
+}
+
+[data-country="tz"] .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--tz-shadow-lg);
+  border-color: var(--tz-primary-color);
+}
+
+/* Tanzania Form Overrides */
+[data-country="tz"] .form-control:focus {
+  border-color: var(--tz-primary-color);
+  box-shadow: 0 0 0 3px rgba(30, 181, 58, 0.1);
+}
+
+/* Tanzania Table Overrides */
+[data-country="tz"] .table thead {
+  background: linear-gradient(135deg, var(--tz-primary-color) 0%, #16852c 100%);
+}
+
+[data-country="tz"] .table th {
+  border-bottom: 3px solid var(--tz-accent-color);
+}
+
+[data-country="tz"] .table tbody tr:hover {
+  background-color: rgba(30, 181, 58, 0.1);
+}
+
+/* Tanzania Alert Overrides */
+[data-country="tz"] .alert-info {
+  background-color: rgba(30, 181, 58, 0.1);
+  border-color: var(--tz-primary-color);
+  color: #155724;
+}
+
+[data-country="tz"] .alert-info::before {
+  background-color: var(--tz-primary-color);
+}
+
+/* Tanzania Badge Overrides */
+[data-country="tz"] .badge-primary {
+  background: linear-gradient(135deg, var(--tz-primary-color) 0%, #16852c 100%);
+  color: #ffffff;
+}
+
+[data-country="tz"] .badge-secondary {
+  background: linear-gradient(135deg, var(--tz-secondary-color) 0%, #0088b8 100%);
+  color: #ffffff;
+}
+
+[data-country="tz"] .badge-accent {
+  background: linear-gradient(135deg, var(--tz-accent-color) 0%, #e6b800 100%);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Tanzania Progress Overrides */
+[data-country="tz"] .progress-bar {
+  background: linear-gradient(90deg, var(--tz-primary-color) 0%, var(--tz-secondary-color) 100%);
+}
+
+/* Tanzania Hierarchy Visual Indicators */
+[data-country="tz"] [data-hierarchy-level="global"] {
+  border-left: 4px solid var(--tz-primary-color);
+}
+
+[data-country="tz"] [data-hierarchy-level="country"] {
+  border-left: 4px solid var(--tz-secondary-color);
+  background: linear-gradient(135deg, rgba(0, 163, 221, 0.05) 0%, transparent 100%);
+}
+
+[data-country="tz"] [data-hierarchy-level="group"] {
+  border-left: 4px solid var(--tz-accent-color);
+  background: linear-gradient(135deg, rgba(252, 209, 22, 0.05) 0%, transparent 100%);
+}
+
+/* Tanzania Currency Formatting */
+[data-country="tz"] .currency {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+[data-country="tz"] .currency::before {
+  content: 'TZS ';
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Tanzania Balance Indicators */
+[data-country="tz"] .balance-indicator {
+  background: linear-gradient(135deg, var(--tz-secondary-color) 0%, rgba(0, 163, 221, 0.3) 100%);
+  border: 1px solid var(--tz-secondary-color);
+  color: var(--tz-text-primary);
+  padding: var(--tz-spacing-xs) var(--tz-spacing-md);
+  border-radius: var(--tz-border-radius-lg);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tz-spacing-sm);
+}
+
+.balance-indicator::before {
+  content: '⚖️';
+  font-size: 0.875rem;
+}
+
+/* Tanzania Responsive Adjustments */
+@media (max-width: 768px) {
+  [data-country="tz"] {
+    --tz-font-size-base: 14px;
+    --tz-spacing-unit: 6px;
+  }
+}
+
+/* Tanzania Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  [data-country="tz"] {
+    --tz-background-color: #1a1a1a;
+    --tz-surface-color: #2d2d2d;
+    --tz-text-primary: #ffffff;
+    --tz-text-secondary: #cccccc;
+    --tz-border-color: #444444;
+  }
+}
+
+/* Tanzania Theme Complete - Uhuru Teal: Calm, Independence, Balance */

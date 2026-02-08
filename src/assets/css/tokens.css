@@ -1,0 +1,662 @@
+/* assets/css/tokens.css - Design Tokens System */
+/*
+ * M-Pesewa Design Tokens v2.0
+ * Complete token system for FinTech PWA with strict hierarchy
+ * Follows: Global → Country → Groups → Lenders → Borrowers (Ledgers)
+ */
+
+:root {
+  /* ============================================
+   * 1. CORE BRAND TOKENS (STRICT NON-NEGOTIABLE)
+   * ============================================ */
+  
+  /* Primary Brand Colors */
+  --color-primary-50: #e6f0ff;
+  --color-primary-100: #cce0ff;
+  --color-primary-200: #99c2ff;
+  --color-primary-300: #66a3ff;
+  --color-primary-400: #3385ff;
+  --color-primary-500: #0066ff;
+  --color-primary-600: #0052cc;
+  --color-primary-700: #003d99;
+  --color-primary-800: #002966;
+  --color-primary-900: #001433;
+  
+  /* M-Pesewa Brand Colors (Exact Specifications) */
+  --color-brand-blue-primary: #003366;    /* Deep Blue - Headers, Footers */
+  --color-brand-blue-secondary: #0099ff;  /* Sky Blue - Links, Highlights */
+  --color-brand-orange: #f37021;          /* Action Orange - Borrower CTAs */
+  --color-brand-green: #28a745;           /* Trust Green - Lender Sections */
+  --color-brand-neutral-light: #f8f9fa;   /* Section Background */
+  --color-brand-neutral-white: #ffffff;   /* Pure White */
+  
+  /* Neutral Colors */
+  --color-neutral-50: #f8f9fa;
+  --color-neutral-100: #e9ecef;
+  --color-neutral-200: #dee2e6;
+  --color-neutral-300: #ced4da;
+  --color-neutral-400: #adb5bd;
+  --color-neutral-500: #6c757d;
+  --color-neutral-600: #495057;
+  --color-neutral-700: #343a40;
+  --color-neutral-800: #212529;
+  --color-neutral-900: #121416;
+  
+  /* Semantic Colors */
+  --color-success-50: #d4edda;
+  --color-success-100: #c3e6cb;
+  --color-success-200: #b1dfbb;
+  --color-success-300: #8fd19e;
+  --color-success-400: #6ec480;
+  --color-success-500: #4caf50;
+  --color-success-600: #3d8b40;
+  --color-success-700: #2e6c31;
+  --color-success-800: #1f4d21;
+  --color-success-900: #0f2e11;
+  
+  --color-warning-50: #fff3cd;
+  --color-warning-100: #ffeaa0;
+  --color-warning-200: #ffe066;
+  --color-warning-300: #ffd740;
+  --color-warning-400: #ffc107;
+  --color-warning-500: #e0a800;
+  --color-warning-600: #b38c00;
+  --color-warning-700: #866800;
+  --color-warning-800: #594500;
+  --color-warning-900: #2d2300;
+  
+  --color-danger-50: #f8d7da;
+  --color-danger-100: #f1b0b7;
+  --color-danger-200: #ea868f;
+  --color-danger-300: #e35d6e;
+  --color-danger-400: #dc3545;
+  --color-danger-500: #bd2130;
+  --color-danger-600: #9b1b26;
+  --color-danger-700: #7a151d;
+  --color-danger-800: #580f15;
+  --color-danger-900: #36090c;
+  
+  --color-info-50: #d1ecf1;
+  --color-info-100: #a2d9e3;
+  --color-info-200: #74c6d5;
+  --color-info-300: #45b3c7;
+  --color-info-400: #17a2b8;
+  --color-info-500: #138496;
+  --color-info-600: #0f6674;
+  --color-info-700: #0c4853;
+  --color-info-800: #082a31;
+  --color-info-900: #040c10;
+  
+  /* ============================================
+   * 2. HIERARCHY TOKENS (STRICT CORE STRUCTURE)
+   * ============================================ */
+  
+  /* Global Level */
+  --hierarchy-global-bg: var(--color-brand-blue-primary);
+  --hierarchy-global-text: var(--color-brand-neutral-white);
+  --hierarchy-global-border: #0099ff;
+  
+  /* Country Level */
+  --hierarchy-country-bg: var(--color-brand-neutral-light);
+  --hierarchy-country-text: var(--color-brand-blue-primary);
+  --hierarchy-country-flag-size: 24px;
+  --hierarchy-country-currency-color: #28a745;
+  
+  /* Group Level */
+  --hierarchy-group-bg: var(--color-brand-neutral-white);
+  --hierarchy-group-text: var(--color-neutral-700);
+  --hierarchy-group-border: var(--color-neutral-200);
+  --hierarchy-group-shadow: 0 4px 12px rgba(0, 51, 102, 0.1);
+  --hierarchy-group-min-members: 5;
+  --hierarchy-group-max-members: 1000;
+  
+  /* Lender Level */
+  --hierarchy-lender-bg: rgba(40, 167, 69, 0.05);
+  --hierarchy-lender-text: var(--color-brand-green);
+  --hierarchy-lender-border: #28a745;
+  --hierarchy-lender-subscription-expiry: 28; /* 28th of each month */
+  --hierarchy-lender-ledger-count: 999; /* Unlimited */
+  
+  /* Borrower Level */
+  --hierarchy-borrower-bg: rgba(243, 112, 33, 0.05);
+  --hierarchy-borrower-text: var(--color-brand-orange);
+  --hierarchy-borrower-border: #f37021;
+  --hierarchy-borrower-max-groups: 4;
+  --hierarchy-borrower-rating-system: 5; /* 5-star system */
+  
+  /* Ledger Level */
+  --hierarchy-ledger-bg: var(--color-brand-neutral-white);
+  --hierarchy-ledger-text: var(--color-neutral-800);
+  --hierarchy-ledger-border: var(--color-neutral-300);
+  --hierarchy-ledger-interest: 10%; /* 10% interest */
+  --hierarchy-ledger-penalty: 5%; /* 5% daily penalty after 7 days */
+  --hierarchy-ledger-duration: 7; /* 7 days */
+  --hierarchy-ledger-default: 60; /* 60 days to default */
+  
+  /* ============================================
+   * 3. TYPOGRAPHY TOKENS
+   * ============================================ */
+  
+  /* Font Families */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-heading: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Courier New', monospace;
+  --font-family-finance: 'Courier Prime', 'Courier New', Courier, monospace;
+  
+  /* Font Sizes - Scale based on 1rem = 16px */
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;    /* 18px */
+  --font-size-xl: 1.25rem;     /* 20px */
+  --font-size-2xl: 1.5rem;     /* 24px */
+  --font-size-3xl: 1.875rem;   /* 30px */
+  --font-size-4xl: 2.25rem;    /* 36px */
+  --font-size-5xl: 3rem;       /* 48px */
+  --font-size-6xl: 3.75rem;    /* 60px */
+  --font-size-7xl: 4.5rem;     /* 72px */
+  
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  
+  /* ============================================
+   * 4. SPACING TOKENS (8px base unit)
+   * ============================================ */
+  
+  /* Spacing Scale */
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0_5: 0.125rem;   /* 2px */
+  --space-1: 0.25rem;      /* 4px */
+  --space-1_5: 0.375rem;   /* 6px */
+  --space-2: 0.5rem;       /* 8px */
+  --space-2_5: 0.625rem;   /* 10px */
+  --space-3: 0.75rem;      /* 12px */
+  --space-3_5: 0.875rem;   /* 14px */
+  --space-4: 1rem;         /* 16px */
+  --space-5: 1.25rem;      /* 20px */
+  --space-6: 1.5rem;       /* 24px */
+  --space-7: 1.75rem;      /* 28px */
+  --space-8: 2rem;         /* 32px */
+  --space-9: 2.25rem;      /* 36px */
+  --space-10: 2.5rem;      /* 40px */
+  --space-11: 2.75rem;     /* 44px */
+  --space-12: 3rem;        /* 48px */
+  --space-14: 3.5rem;      /* 56px */
+  --space-16: 4rem;        /* 64px */
+  --space-20: 5rem;        /* 80px */
+  --space-24: 6rem;        /* 96px */
+  --space-28: 7rem;        /* 112px */
+  --space-32: 8rem;        /* 128px */
+  --space-36: 9rem;        /* 144px */
+  --space-40: 10rem;       /* 160px */
+  --space-44: 11rem;       /* 176px */
+  --space-48: 12rem;       /* 192px */
+  --space-52: 13rem;       /* 208px */
+  --space-56: 14rem;       /* 224px */
+  --space-60: 15rem;       /* 240px */
+  --space-64: 16rem;       /* 256px */
+  --space-72: 18rem;       /* 288px */
+  --space-80: 20rem;       /* 320px */
+  --space-96: 24rem;       /* 384px */
+  
+  /* Container Max Widths */
+  --container-xs: 20rem;    /* 320px */
+  --container-sm: 24rem;    /* 384px */
+  --container-md: 28rem;    /* 448px */
+  --container-lg: 32rem;    /* 512px */
+  --container-xl: 36rem;    /* 576px */
+  --container-2xl: 42rem;   /* 672px */
+  --container-3xl: 48rem;   /* 768px */
+  --container-4xl: 56rem;   /* 896px */
+  --container-5xl: 64rem;   /* 1024px */
+  --container-6xl: 72rem;   /* 1152px */
+  --container-7xl: 80rem;   /* 1280px */
+  --container-8xl: 88rem;   /* 1408px */
+  --container-9xl: 96rem;   /* 1536px */
+  
+  /* ============================================
+   * 5. BORDER RADIUS TOKENS
+   * ============================================ */
+  
+  --radius-none: 0;
+  --radius-sm: 0.125rem;    /* 2px */
+  --radius-base: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;    /* 6px */
+  --radius-lg: 0.5rem;      /* 8px */
+  --radius-xl: 0.75rem;     /* 12px */
+  --radius-2xl: 1rem;       /* 16px */
+  --radius-3xl: 1.5rem;     /* 24px */
+  --radius-full: 9999px;
+  
+  /* Component Specific */
+  --radius-card: var(--radius-lg);
+  --radius-button: var(--radius-md);
+  --radius-input: var(--radius-base);
+  --radius-modal: var(--radius-xl);
+  --radius-badge: var(--radius-full);
+  
+  /* ============================================
+   * 6. SHADOW TOKENS
+   * ============================================ */
+  
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 12px -2px rgba(0, 0, 0, 0.1), 0 3px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 12px -4px rgba(0, 0, 0, 0.08);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-outline: 0 0 0 3px rgba(0, 153, 255, 0.3);
+  --shadow-none: 0 0 #0000;
+  
+  /* Brand Specific Shadows */
+  --shadow-brand-blue: 0 4px 12px rgba(0, 51, 102, 0.1);
+  --shadow-brand-green: 0 4px 12px rgba(40, 167, 69, 0.1);
+  --shadow-brand-orange: 0 4px 12px rgba(243, 112, 33, 0.1);
+  --shadow-floating-card: 0 10px 25px -5px rgba(0, 153, 255, 0.1), 0 5px 10px -5px rgba(0, 153, 255, 0.04);
+  
+  /* ============================================
+   * 7. OPACITY TOKENS
+   * ============================================ */
+  
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+  
+  /* ============================================
+   * 8. Z-INDEX TOKENS
+   * ============================================ */
+  
+  --z-index-negative: -1;
+  --z-index-0: 0;
+  --z-index-10: 10;
+  --z-index-20: 20;
+  --z-index-30: 30;
+  --z-index-40: 40;
+  --z-index-50: 50;
+  --z-index-auto: auto;
+  
+  /* Component Z-Indices */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  --z-index-toast: 1080;
+  --z-index-pwa-install: 1090;
+  --z-index-offline-banner: 1100;
+  
+  /* Hierarchical Z-Indices */
+  --z-index-global: 100;
+  --z-index-country: 200;
+  --z-index-group: 300;
+  --z-index-lender: 400;
+  --z-index-borrower: 500;
+  --z-index-ledger: 600;
+  
+  /* ============================================
+   * 9. TRANSITION & ANIMATION TOKENS
+   * ============================================ */
+  
+  /* Transition Durations */
+  --duration-75: 75ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+  --duration-500: 500ms;
+  --duration-700: 700ms;
+  --duration-1000: 1000ms;
+  
+  /* Transition Timing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-finance-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Animation Delays */
+  --delay-0: 0s;
+  --delay-75: 75ms;
+  --delay-100: 100ms;
+  --delay-150: 150ms;
+  --delay-200: 200ms;
+  --delay-300: 300ms;
+  --delay-500: 500ms;
+  --delay-1000: 1000ms;
+  
+  /* ============================================
+   * 10. LAYOUT TOKENS
+   * ============================================ */
+  
+  /* Breakpoints */
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  
+  /* Container Padding */
+  --container-padding-mobile: var(--space-4);
+  --container-padding-tablet: var(--space-6);
+  --container-padding-desktop: var(--space-8);
+  
+  /* Grid System */
+  --grid-columns: 12;
+  --grid-gap: var(--space-4);
+  --grid-gap-sm: var(--space-2);
+  --grid-gap-lg: var(--space-6);
+  
+  /* Header */
+  --header-height-mobile: 60px;
+  --header-height-desktop: 72px;
+  --header-padding-x: var(--space-4);
+  
+  /* Footer */
+  --footer-padding-y: var(--space-12);
+  --footer-padding-x: var(--space-6);
+  
+  /* Sidebar */
+  --sidebar-width-collapsed: 64px;
+  --sidebar-width-expanded: 240px;
+  
+  /* ============================================
+   * 11. COMPONENT SPECIFIC TOKENS
+   * ============================================ */
+  
+  /* Button Tokens */
+  --button-height-sm: 36px;
+  --button-height-md: 44px;
+  --button-height-lg: 52px;
+  --button-padding-x-sm: var(--space-3);
+  --button-padding-x-md: var(--space-4);
+  --button-padding-x-lg: var(--space-6);
+  
+  /* Input Tokens */
+  --input-height-sm: 36px;
+  --input-height-md: 44px;
+  --input-height-lg: 52px;
+  --input-padding-x: var(--space-3);
+  --input-padding-y: var(--space-2);
+  
+  /* Card Tokens */
+  --card-padding-sm: var(--space-4);
+  --card-padding-md: var(--space-6);
+  --card-padding-lg: var(--space-8);
+  --card-border-width: 1px;
+  
+  /* Modal Tokens */
+  --modal-width-sm: 400px;
+  --modal-width-md: 560px;
+  --modal-width-lg: 720px;
+  --modal-width-xl: 960px;
+  --modal-padding: var(--space-6);
+  
+  /* Table Tokens */
+  --table-cell-padding: var(--space-3) var(--space-4);
+  --table-header-height: 48px;
+  --table-row-height: 56px;
+  
+  /* ============================================
+   * 12. FINTECH SPECIFIC TOKENS
+   * ============================================ */
+  
+  /* Subscription Tiers */
+  --subscription-basic-color: #3b82f6;
+  --subscription-premium-color: #8b5cf6;
+  --subscription-super-color: #10b981;
+  --subscription-lender-of-lenders-color: #f59e0b;
+  
+  /* Subscription Limits */
+  --subscription-basic-limit: 1500;
+  --subscription-premium-limit: 5000;
+  --subscription-super-limit: 20000;
+  --subscription-lol-limit: 50000;
+  
+  /* Loan Categories */
+  --loan-category-count: 20;
+  --loan-min-amount: 5; /* Minimum loan amount in local currency */
+  --loan-max-groups: 4; /* Maximum groups a borrower can join */
+  
+  /* Interest & Penalties */
+  --interest-rate: 10%; /* 10% interest per loan */
+  --penalty-rate: 5%; /* 5% daily penalty after 7 days */
+  --loan-duration-days: 7; /* Standard loan duration */
+  --default-threshold-days: 60; /* Days before loan goes into default */
+  
+  /* Rating System */
+  --rating-max-stars: 5;
+  --rating-star-size: 20px;
+  --rating-star-spacing: 2px;
+  
+  /* Blacklist System */
+  --blacklist-badge-color: #dc3545;
+  --blacklist-badge-bg: rgba(220, 53, 69, 0.1);
+  --blacklist-removal-admin-only: true;
+  
+  /* Country Specific (Kenya Example) */
+  --country-ke-currency: 'KSh';
+  --country-ke-currency-symbol: 'KSh';
+  --country-ke-phone-prefix: '+254';
+  --country-ke-support-phone: '+254 709 219 000';
+  
+  /* Emergency Categories */
+  --emergency-category-count: 20;
+  --emergency-card-glow: 0 0 20px rgba(0, 153, 255, 0.2);
+  
+  /* ============================================
+   * 13. PWA SPECIFIC TOKENS
+   * ============================================ */
+  
+  --pwa-install-button-bg: var(--color-brand-blue-primary);
+  --pwa-install-button-text: var(--color-brand-neutral-white);
+  --pwa-offline-banner-bg: var(--color-brand-orange);
+  --pwa-update-banner-bg: var(--color-brand-green);
+  
+  /* ============================================
+   * 14. ACCESSIBILITY TOKENS
+   * ============================================ */
+  
+  --focus-ring-width: 2px;
+  --focus-ring-color: var(--color-brand-blue-secondary);
+  --focus-ring-offset: 2px;
+  
+  /* Contrast Ratios (WCAG AA compliant) */
+  --contrast-ratio-primary: 7:1; /* #003366 on #ffffff */
+  --contrast-ratio-secondary: 4.5:1; /* #0099ff on #ffffff */
+  --contrast-ratio-orange: 4.5:1; /* #f37021 on #ffffff */
+  --contrast-ratio-green: 4.5:1; /* #28a745 on #ffffff */
+  
+  /* Reduced Motion */
+  --reduced-motion-duration: 0.01ms;
+  
+  /* ============================================
+   * 15. PERFORMANCE TOKENS
+   * ============================================ */
+  
+  --content-visibility-delay: 100ms;
+  --lazy-load-threshold: 300px;
+  --image-loading-bg: var(--color-neutral-100);
+  
+  /* ============================================
+   * 16. COUNTRY SPECIFIC OVERRIDES
+   * ============================================ */
+  
+  /* Kenya */
+  [data-country="ke"] {
+    --currency-symbol: 'KSh';
+    --phone-prefix: '+254';
+    --support-phone: '+254 709 219 000';
+    --legal-jurisdiction: 'Nairobi, Kenya';
+  }
+  
+  /* Uganda */
+  [data-country="ug"] {
+    --currency-symbol: 'UGX';
+    --phone-prefix: '+256';
+    --support-phone: '+256 392 175 546';
+    --legal-jurisdiction: 'Kampala, Uganda';
+  }
+  
+  /* Tanzania */
+  [data-country="tz"] {
+    --currency-symbol: 'TZS';
+    --phone-prefix: '+255';
+    --support-phone: '+255 659 073 010';
+    --legal-jurisdiction: 'Dar es Salaam, Tanzania';
+  }
+  
+  /* All other countries follow similar pattern... */
+  
+  /* ============================================
+   * 17. DARK MODE TOKENS (Future Proofing)
+   * ============================================ */
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-brand-blue-primary: #004488;
+      --color-brand-blue-secondary: #66b3ff;
+      --color-brand-neutral-light: #1a1a2e;
+      --color-brand-neutral-white: #0f0f1a;
+      --color-neutral-50: #1a1a2e;
+      --color-neutral-100: #16213e;
+      --color-neutral-200: #0f3460;
+      --color-neutral-300: #1e5128;
+      --color-neutral-400: #4e9f3d;
+      --color-neutral-500: #d8d8d8;
+      --color-neutral-600: #e6e6e6;
+      --color-neutral-700: #f0f0f0;
+      --color-neutral-800: #f8f8f8;
+      --color-neutral-900: #ffffff;
+    }
+  }
+  
+  /* ============================================
+   * 18. UTILITY TOKENS
+   * ============================================ */
+  
+  /* Aspect Ratios */
+  --aspect-widescreen: 16 / 9;
+  --aspect-standard: 4 / 3;
+  --aspect-square: 1 / 1;
+  --aspect-portrait: 3 / 4;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-brand-blue-primary) 0%, var(--color-brand-blue-secondary) 100%);
+  --gradient-lender: linear-gradient(135deg, var(--color-brand-green) 0%, #20c997 100%);
+  --gradient-borrower: linear-gradient(135deg, var(--color-brand-orange) 0%, #ff922b 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  --gradient-danger: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  
+  /* Blur Effects */
+  --blur-sm: 4px;
+  --blur-md: 8px;
+  --blur-lg: 12px;
+  --blur-xl: 16px;
+  --blur-2xl: 24px;
+  
+  /* Backdrop Filters */
+  --backdrop-blur-sm: blur(var(--blur-sm));
+  --backdrop-blur-md: blur(var(--blur-md));
+  --backdrop-blur-lg: blur(var(--blur-lg));
+}
+
+/* ============================================
+ * 19. CUSTOM PROPERTY VALIDATION
+ * ============================================ */
+
+/* Define custom properties with type checking */
+@property --hierarchy-level {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --subscription-tier {
+  syntax: 'basic | premium | super | lender-of-lenders';
+  inherits: true;
+  initial-value: basic;
+}
+
+@property --user-role {
+  syntax: 'borrower | lender | admin | guest';
+  inherits: true;
+  initial-value: guest;
+}
+
+@property --loan-status {
+  syntax: 'active | pending | overdue | defaulted | cleared';
+  inherits: true;
+  initial-value: pending;
+}
+
+/* ============================================
+ * 20. EXPORT TOKENS FOR JAVASCRIPT
+ * ============================================ */
+
+:export {
+  /* Brand Colors */
+  brandBluePrimary: var(--color-brand-blue-primary);
+  brandBlueSecondary: var(--color-brand-blue-secondary);
+  brandOrange: var(--color-brand-orange);
+  brandGreen: var(--color-brand-green);
+  
+  /* Hierarchy Constants */
+  minGroupMembers: var(--hierarchy-group-min-members);
+  maxGroupMembers: var(--hierarchy-group-max-members);
+  maxBorrowerGroups: var(--hierarchy-borrower-max-groups);
+  subscriptionExpiryDay: var(--hierarchy-lender-subscription-expiry);
+  
+  /* Financial Constants */
+  interestRate: var(--interest-rate);
+  penaltyRate: var(--penalty-rate);
+  loanDurationDays: var(--loan-duration-days);
+  defaultThresholdDays: var(--default-threshold-days);
+  
+  /* Subscription Limits */
+  basicLimit: var(--subscription-basic-limit);
+  premiumLimit: var(--subscription-premium-limit);
+  superLimit: var(--subscription-super-limit);
+  lolLimit: var(--subscription-lol-limit);
+}
+
+/* End of M-Pesewa Design Tokens */

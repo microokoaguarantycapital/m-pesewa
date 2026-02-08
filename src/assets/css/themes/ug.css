@@ -1,0 +1,470 @@
+/* assets/css/themes/ug.css */
+/* M-Pesewa Uganda Theme - Nile Green: Growth, Community Lending */
+/* Theme overrides for Uganda operations maintaining strict hierarchy */
+
+:root {
+  /* Uganda Theme Colors - Nile Green Palette */
+  --ug-primary-color: #002147;        /* Deep Navy - Stability */
+  --ug-secondary-color: #FFD100;      /* Bright Yellow - Prosperity */
+  --ug-accent-color: #D21034;         /* Red - Energy */
+  --ug-success-color: #28a745;        /* Green - Growth */
+  --ug-warning-color: #ffc107;        /* Amber - Caution */
+  --ug-danger-color: #dc3545;         /* Red - Alert */
+  --ug-background-color: #ffffff;     /* Pure White */
+  --ug-surface-color: #f8f9fa;        /* Light Gray */
+  --ug-text-primary: #002147;         /* Deep Navy */
+  --ug-text-secondary: #666666;       /* Medium Gray */
+  --ug-text-tertiary: #999999;        /* Light Gray */
+  --ug-border-color: #e0e0e0;         /* Light Border */
+  
+  /* Uganda Financial Colors */
+  --ug-mtn-color: #ffcc00;            /* MTN Yellow */
+  --ug-airtel-color: #ee1c25;         /* Airtel Red */
+  --ug-sacco-color: #006400;          /* SACCO Green */
+  --ug-microfinance-color: #8b4513;   /* Microfinance Brown */
+  
+  /* Uganda Typography */
+  --ug-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ug-font-size-base: 16px;
+  --ug-font-size-scale: 1.2;          /* Minor Third Scale */
+  --ug-line-height-base: 1.6;
+  --ug-letter-spacing-base: -0.01em;
+  
+  /* Uganda Spacing */
+  --ug-spacing-unit: 8px;
+  --ug-spacing-xs: calc(var(--ug-spacing-unit) * 0.5);    /* 4px */
+  --ug-spacing-sm: calc(var(--ug-spacing-unit) * 1);      /* 8px */
+  --ug-spacing-md: calc(var(--ug-spacing-unit) * 2);      /* 16px */
+  --ug-spacing-lg: calc(var(--ug-spacing-unit) * 3);      /* 24px */
+  --ug-spacing-xl: calc(var(--ug-spacing-unit) * 4);      /* 32px */
+  --ug-spacing-xxl: calc(var(--ug-spacing-unit) * 6);     /* 48px */
+  
+  /* Uganda Borders */
+  --ug-border-radius-sm: 6px;
+  --ug-border-radius-md: 10px;
+  --ug-border-radius-lg: 14px;
+  --ug-border-radius-xl: 18px;
+  --ug-border-width: 1px;
+  --ug-border-style: solid;
+  
+  /* Uganda Shadows */
+  --ug-shadow-sm: 0 2px 4px rgba(0, 33, 71, 0.1);
+  --ug-shadow-md: 0 4px 8px rgba(0, 33, 71, 0.12);
+  --ug-shadow-lg: 0 8px 16px rgba(0, 33, 71, 0.15);
+  --ug-shadow-xl: 0 16px 32px rgba(0, 33, 71, 0.2);
+  
+  /* Uganda Animations */
+  --ug-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ug-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ug-transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Uganda Z-Index */
+  --ug-z-base: 1;
+  --ug-z-dropdown: 100;
+  --ug-z-sticky: 200;
+  --ug-z-fixed: 300;
+  --ug-z-modal: 400;
+  --ug-z-popover: 500;
+  --ug-z-tooltip: 600;
+}
+
+/* Uganda Header Overrides */
+[data-country="ug"] .mp-header {
+  background: linear-gradient(135deg, var(--ug-primary-color) 0%, #001a36 100%);
+  border-bottom: 3px solid var(--ug-secondary-color);
+}
+
+[data-country="ug"] .nav-link.active {
+  background: rgba(255, 209, 0, 0.2);
+  color: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .nav-link.active::after {
+  background: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .signup-btn {
+  background: linear-gradient(135deg, var(--ug-secondary-color) 0%, #e6b800 100%);
+  color: var(--ug-primary-color);
+}
+
+[data-country="ug"] .signup-btn:hover {
+  background: linear-gradient(135deg, #e6b800 0%, var(--ug-secondary-color) 100%);
+}
+
+/* Uganda Footer Overrides */
+[data-country="ug"] .mp-footer {
+  background: linear-gradient(135deg, #00112b 0%, var(--ug-primary-color) 100%);
+  border-top: 3px solid var(--ug-accent-color);
+}
+
+[data-country="ug"] .footer-link:hover {
+  color: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .footer-link::before {
+  color: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .country-ticker {
+  background: linear-gradient(90deg, 
+    rgba(0, 33, 71, 0.9) 0%, 
+    rgba(210, 16, 52, 0.8) 50%, 
+    rgba(0, 33, 71, 0.9) 100%);
+  border-color: var(--ug-accent-color);
+}
+
+/* Uganda Sidebar Overrides */
+[data-country="ug"] .mp-sidebar {
+  border-right: 3px solid var(--ug-secondary-color);
+}
+
+[data-country="ug"] .sidebar-link.active {
+  background: rgba(255, 209, 0, 0.1);
+  color: var(--ug-primary-color);
+}
+
+[data-country="ug"] .sidebar-link.active::before {
+  background: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .profile-card {
+  background: linear-gradient(135deg, rgba(255, 209, 0, 0.1) 0%, rgba(210, 16, 52, 0.05) 100%);
+  border-left: 3px solid var(--ug-secondary-color);
+}
+
+/* Uganda Button Overrides */
+[data-country="ug"] .borrower-btn,
+[data-country="ug"] [data-role="borrower"] .cta-btn {
+  background: linear-gradient(135deg, #f37021 0%, #d45c00 100%);
+  border: 2px solid #f37021;
+}
+
+[data-country="ug"] .lender-btn,
+[data-country="ug"] [data-role="lender"] .cta-btn {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  border: 2px solid #28a745;
+}
+
+[data-country="ug"] .secondary-btn {
+  background: transparent;
+  border: 2px solid var(--ug-secondary-color);
+  color: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .secondary-btn:hover {
+  background: var(--ug-secondary-color);
+  color: var(--ug-primary-color);
+}
+
+/* Uganda Card Overrides */
+[data-country="ug"] .card {
+  background: var(--ug-background-color);
+  border: var(--ug-border-width) var(--ug-border-style) var(--ug-border-color);
+  border-radius: var(--ug-border-radius-lg);
+  box-shadow: var(--ug-shadow-sm);
+  transition: all var(--ug-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="ug"] .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ug-primary-color) 0%, var(--ug-accent-color) 100%);
+}
+
+[data-country="ug"] .card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--ug-shadow-lg);
+  border-color: var(--ug-secondary-color);
+}
+
+[data-country="ug"] .card-header {
+  background: linear-gradient(135deg, var(--ug-surface-color) 0%, #ffffff 100%);
+  border-bottom: var(--ug-border-width) var(--ug-border-style) var(--ug-border-color);
+  padding: var(--ug-spacing-lg) var(--ug-spacing-xl);
+}
+
+[data-country="ug"] .card-title {
+  color: var(--ug-primary-color);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+[data-country="ug"] .card-body {
+  padding: var(--ug-spacing-xl);
+  color: var(--ug-text-primary);
+}
+
+/* Uganda Form Overrides */
+[data-country="ug"] .form-control {
+  border: var(--ug-border-width) var(--ug-border-style) var(--ug-border-color);
+  border-radius: var(--ug-border-radius-md);
+  padding: var(--ug-spacing-md) var(--ug-spacing-lg);
+  font-family: var(--ug-font-family);
+  font-size: var(--ug-font-size-base);
+  color: var(--ug-text-primary);
+  background: var(--ug-background-color);
+  transition: all var(--ug-transition-fast);
+}
+
+[data-country="ug"] .form-control:focus {
+  outline: none;
+  border-color: var(--ug-secondary-color);
+  box-shadow: 0 0 0 3px rgba(255, 209, 0, 0.1);
+}
+
+[data-country="ug"] .form-label {
+  color: var(--ug-text-primary);
+  font-weight: 500;
+  margin-bottom: var(--ug-spacing-sm);
+  display: block;
+}
+
+/* Uganda Table Overrides */
+[data-country="ug"] .table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: var(--ug-border-width) var(--ug-border-style) var(--ug-border-color);
+  border-radius: var(--ug-border-radius-md);
+  overflow: hidden;
+}
+
+[data-country="ug"] .table thead {
+  background: linear-gradient(135deg, var(--ug-primary-color) 0%, #001a36 100%);
+}
+
+[data-country="ug"] .table th {
+  color: #ffffff;
+  font-weight: 600;
+  padding: var(--ug-spacing-lg);
+  text-align: left;
+  border-bottom: 3px solid var(--ug-secondary-color);
+}
+
+[data-country="ug"] .table tbody tr {
+  transition: background-color var(--ug-transition-fast);
+}
+
+[data-country="ug"] .table tbody tr:nth-child(even) {
+  background-color: var(--ug-surface-color);
+}
+
+[data-country="ug"] .table tbody tr:hover {
+  background-color: rgba(255, 209, 0, 0.1);
+}
+
+[data-country="ug"] .table td {
+  padding: var(--ug-spacing-lg);
+  color: var(--ug-text-primary);
+  border-bottom: var(--ug-border-width) var(--ug-border-style) var(--ug-border-color);
+}
+
+/* Uganda Alert Overrides */
+[data-country="ug"] .alert {
+  padding: var(--ug-spacing-lg);
+  border-radius: var(--ug-border-radius-md);
+  border: var(--ug-border-width) var(--ug-border-style) transparent;
+  margin-bottom: var(--ug-spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-country="ug"] .alert::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+[data-country="ug"] .alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: var(--ug-success-color);
+  color: #155724;
+}
+
+[data-country="ug"] .alert-success::before {
+  background-color: var(--ug-success-color);
+}
+
+[data-country="ug"] .alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: var(--ug-warning-color);
+  color: #856404;
+}
+
+[data-country="ug"] .alert-warning::before {
+  background-color: var(--ug-warning-color);
+}
+
+[data-country="ug"] .alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-color: var(--ug-danger-color);
+  color: #721c24;
+}
+
+[data-country="ug"] .alert-danger::before {
+  background-color: var(--ug-danger-color);
+}
+
+[data-country="ug"] .alert-info {
+  background-color: rgba(255, 209, 0, 0.1);
+  border-color: var(--ug-secondary-color);
+  color: var(--ug-primary-color);
+}
+
+[data-country="ug"] .alert-info::before {
+  background-color: var(--ug-secondary-color);
+}
+
+/* Uganda Badge Overrides */
+[data-country="ug"] .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--ug-spacing-xs) var(--ug-spacing-md);
+  border-radius: var(--ug-border-radius-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-country="ug"] .badge-primary {
+  background: linear-gradient(135deg, var(--ug-primary-color) 0%, #001a36 100%);
+  color: #ffffff;
+}
+
+[data-country="ug"] .badge-secondary {
+  background: linear-gradient(135deg, var(--ug-secondary-color) 0%, #e6b800 100%);
+  color: var(--ug-primary-color);
+}
+
+[data-country="ug"] .badge-success {
+  background: linear-gradient(135deg, var(--ug-success-color) 0%, #1e7e34 100%);
+  color: #ffffff;
+}
+
+[data-country="ug"] .badge-warning {
+  background: linear-gradient(135deg, var(--ug-warning-color) 0%, #e0a800 100%);
+  color: #000000;
+}
+
+[data-country="ug"] .badge-danger {
+  background: linear-gradient(135deg, var(--ug-danger-color) 0%, #c82333 100%);
+  color: #ffffff;
+}
+
+[data-country="ug"] .badge-accent {
+  background: linear-gradient(135deg, var(--ug-accent-color) 0%, #a80d29 100%);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Uganda Progress Overrides */
+[data-country="ug"] .progress {
+  height: 8px;
+  background-color: var(--ug-surface-color);
+  border-radius: var(--ug-border-radius-lg);
+  overflow: hidden;
+}
+
+[data-country="ug"] .progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ug-secondary-color) 0%, var(--ug-primary-color) 100%);
+  border-radius: var(--ug-border-radius-lg);
+  transition: width 1s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Uganda Modal Overrides */
+[data-country="ug"] .modal-content {
+  background: var(--ug-background-color);
+  border-radius: var(--ug-border-radius-lg);
+  box-shadow: var(--ug-shadow-xl);
+  border: 2px solid var(--ug-secondary-color);
+}
+
+[data-country="ug"] .modal-header {
+  background: linear-gradient(135deg, var(--ug-surface-color) 0%, #ffffff 100%);
+  border-bottom: 2px solid var(--ug-secondary-color);
+}
+
+[data-country="ug"] .modal-title {
+  color: var(--ug-primary-color);
+}
+
+/* Uganda Hierarchy Visual Indicators */
+[data-country="ug"] [data-hierarchy-level="global"] {
+  border-left: 4px solid var(--ug-primary-color);
+}
+
+[data-country="ug"] [data-hierarchy-level="country"] {
+  border-left: 4px solid var(--ug-secondary-color);
+  background: linear-gradient(135deg, rgba(255, 209, 0, 0.05) 0%, transparent 100%);
+}
+
+[data-country="ug"] [data-hierarchy-level="group"] {
+  border-left: 4px solid var(--ug-accent-color);
+  background: linear-gradient(135deg, rgba(210, 16, 52, 0.05) 0%, transparent 100%);
+}
+
+/* Uganda Currency Formatting */
+[data-country="ug"] .currency {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+[data-country="ug"] .currency::before {
+  content: 'UGX ';
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Uganda Community Indicators */
+[data-country="ug"] .community-badge {
+  background: linear-gradient(135deg, var(--ug-secondary-color) 0%, rgba(255, 209, 0, 0.3) 100%);
+  border: 1px solid var(--ug-secondary-color);
+  color: var(--ug-primary-color);
+  padding: var(--ug-spacing-xs) var(--ug-spacing-md);
+  border-radius: var(--ug-border-radius-lg);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ug-spacing-sm);
+}
+
+.community-badge::before {
+  content: '👥';
+  font-size: 0.875rem;
+}
+
+/* Uganda Responsive Adjustments */
+@media (max-width: 768px) {
+  [data-country="ug"] {
+    --ug-font-size-base: 14px;
+    --ug-spacing-unit: 6px;
+  }
+}
+
+/* Uganda Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  [data-country="ug"] {
+    --ug-background-color: #1a1a1a;
+    --ug-surface-color: #2d2d2d;
+    --ug-text-primary: #ffffff;
+    --ug-text-secondary: #cccccc;
+    --ug-border-color: #444444;
+  }
+}
+
+/* Uganda Theme Complete - Nile Green: Growth, Community Lending */
