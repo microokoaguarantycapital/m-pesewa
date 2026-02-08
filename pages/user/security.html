@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Settings - M-Pesewa</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="../manifest.json">
+    
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/alerts.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    
+    <!-- Country-specific theme -->
+    <link rel="stylesheet" href="../assets/css/themes/default.css">
+    
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0099ff;
+            --action-orange: #f37021;
+            --trust-green: #28a745;
+            --neutral-light: #f8f9fa;
+            --pure-white: #ffffff;
+            --dark-text: #003366;
+            --medium-text: #555555;
+            --light-text: #ffffff;
+            --danger-red: #dc3545;
+            --warning-yellow: #ffc107;
+        }
+        
+        .security-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .security-header {
+            background: var(--primary-blue);
+            color: var(--pure-white);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .security-sections {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+        
+        .main-section {
+            background: var(--pure-white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-section {
+            background: var(--pure-white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--neutral-light);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .security-card {
+            background: var(--pure-white);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--neutral-light);
+            transition: all 0.3s ease;
+        }
+        
+        .security-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary-blue);
+        }
+        
+        .security-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .security-card-title {
+            color: var(--dark-text);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .security-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .security-status.active {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--trust-green);
+            border: 1px solid var(--trust-green);
+        }
+        
+        .security-status.inactive {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+        }
+        
+        .security-status.warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #856404;
+            border: 1px solid var(--warning-yellow);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+        
+        .password-strength {
+            margin-top: 10px;
+            height: 5px;
+            background: var(--neutral-light);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .password-strength-text {
+            font-size: 12px;
+            color: var(--medium-text);
+            margin-top: 5px;
+        }
+        
+        .password-requirements {
+            background: var(--neutral-light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .requirement-icon {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .requirement.valid .requirement-icon {
+            color: var(--trust-green);
+        }
+        
+        .requirement.invalid .requirement-icon {
+            color: var(--danger-red);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-blue);
+            color: var(--pure-white);
+        }
+        
+        .btn-primary:hover {
+            background: #0088ee;
+        }
+        
+        .btn-secondary {
+            background: var(--neutral-light);
+            color: var(--dark-text);
+            border: 1px solid #ddd;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .btn-danger {
+            background: var(--danger-red);
+            color: var(--pure-white);
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .two-factor-setup {
+            background: var(--neutral-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .qr-code-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .qr-code-placeholder {
+            width: 200px;
+            height: 200px;
+            background: var(--pure-white);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            color: var(--medium-text);
+        }
+        
+        .recovery-codes {
+            background: var(--pure-white);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .backup-option {
+            background: var(--neutral-light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .backup-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .login-activity {
+            margin-top: 30px;
+        }
+        
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--neutral-light);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-device {
+            font-weight: 500;
+            color: var(--dark-text);
+        }
+        
+        .activity-location {
+            color: var(--medium-text);
+            font-size: 14px;
+        }
+        
+        .activity-time {
+            color: var(--medium-text);
+            font-size: 12px;
+        }
+        
+        .activity-status {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 3px;
+        }
+        
+        .activity-status.success {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--trust-green);
+        }
+        
+        .activity-status.failed {
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger-red);
+        }
+        
+        .security-alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .security-alert.warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--warning-yellow);
+            color: #856404;
+        }
+        
+        .security-alert-icon {
+            font-size: 20px;
+            margin-right: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .security-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .security-container {
+                padding: 10px;
+            }
+            
+            .main-section, .sidebar-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be injected by JavaScript -->
+    <div id="header-container"></div>
+    
+    <div class="security-container">
+        <div class="security-header">
+            <h1 style="margin: 0 0 10px 0;">Security Settings</h1>
+            <p style="opacity: 0.9; margin: 0;">Protect your M-Pesewa account with advanced security features</p>
+        </div>
+        
+        <div class="security-sections">
+            <div class="main-section">
+                <!-- Password Change Section -->
+                <div class="security-card">
+                    <div class="security-card-header">
+                        <div class="security-card-title">Change Password</div>
+                        <div class="security-status active" id="password-status">Active</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" class="form-input" id="current-password" placeholder="Enter current password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input type="password" class="form-input" id="new-password" placeholder="Enter new password (8-12 characters)">
+                        <div class="password-strength">
+                            <div class="password-strength-bar" id="password-strength-bar"></div>
+                        </div>
+                        <div class="password-strength-text" id="password-strength-text">Password strength: None</div>
+                        
+                        <div class="password-requirements">
+                            <div class="requirement invalid" id="req-length">
+                                <span class="requirement-icon">⚫</span>
+                                <span>8-12 characters</span>
+                            </div>
+                            <div class="requirement invalid" id="req-uppercase">
+                                <span class="requirement-icon">⚫</span>
+                                <span>At least one uppercase letter</span>
+                            </div>
+                            <div class="requirement invalid" id="req-lowercase">
+                                <span class="requirement-icon">⚫</span>
+                                <span>At least one lowercase letter</span>
+                            </div>
+                            <div class="requirement invalid" id="req-number">
+                                <span class="requirement-icon">⚫</span>
+                                <span>At least one number</span>
+                            </div>
+                            <div class="requirement invalid" id="req-special">
+                                <span class="requirement-icon">⚫</span>
+                                <span>At least one special character (!@#$%^&*)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-input" id="confirm-password" placeholder="Confirm new password">
+                        <div id="password-match" style="font-size: 14px; margin-top: 5px;"></div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="change-password-btn">Change Password</button>
+                </div>
+                
+                <!-- Two-Factor Authentication -->
+                <div class="security-card">
+                    <div class="security-card-header">
+                        <div class="security-card-title">Two-Factor Authentication (2FA)</div>
+                        <div class="security-status warning" id="2fa-status">Not Enabled</div>
+                    </div>
+                    
+                    <p style="color: var(--medium-text); margin-bottom: 20px;">
+                        Add an extra layer of security to your account by requiring a verification code 
+                        in addition to your password when signing in.
+                    </p>
+                    
+                    <div class="two-factor-setup" id="2fa-setup" style="display: none;">
+                        <h3 style="margin-top: 0; color: var(--dark-text);">Setup Instructions</h3>
+                        <ol style="color: var(--medium-text); margin-bottom: 20px;">
+                            <li>Scan the QR code below with your authenticator app (Google Authenticator, Authy, etc.)</li>
+                            <li>Enter the 6-digit code generated by the app</li>
+                            <li>Save your recovery codes in a secure place</li>
+                        </ol>
+                        
+                        <div class="qr-code-container">
+                            <div class="qr-code-placeholder">
+                                <span>QR Code for 2FA Setup</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label class="form-label">Enter 6-digit verification code</label>
+                            <input type="text" class="form-input" id="2fa-code" placeholder="000000" maxlength="6" style="width: 200px; text-align: center;">
+                        </div>
+                        
+                        <button class="btn btn-primary" id="verify-2fa-btn">Verify and Enable 2FA</button>
+                        
+                        <div style="margin-top: 30px;">
+                            <h4 style="color: var(--dark-text);">Recovery Codes</h4>
+                            <p style="color: var(--medium-text); font-size: 14px;">
+                                Save these codes in a secure place. Each code can be used once if you lose access to your authenticator app.
+                            </p>
+                            <div class="recovery-codes">
+                                5X7A-9B2C-8D3E-4F1G<br>
+                                2H9J-6K8L-1M4N-7P3Q<br>
+                                3R6S-8T2U-5V9W-1X4Y<br>
+                                7Z2A-4B6C-9D8E-3F5G<br>
+                                1H3J-5K7L-2M9N-4P6Q
+                            </div>
+                            <button class="btn btn-secondary" style="margin-top: 10px;">Download Recovery Codes</button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="enable-2fa-btn">Enable 2FA</button>
+                    <button class="btn btn-secondary" id="disable-2fa-btn" style="display: none;">Disable 2FA</button>
+                </div>
+                
+                <!-- Login Activity -->
+                <div class="security-card">
+                    <div class="security-card-header">
+                        <div class="security-card-title">Recent Login Activity</div>
+                    </div>
+                    
+                    <div class="login-activity">
+                        <div class="activity-item">
+                            <div class="activity-info">
+                                <div class="activity-device">Chrome on Windows 10</div>
+                                <div class="activity-location">Nairobi, Kenya</div>
+                                <div class="activity-time">Today at 14:30</div>
+                            </div>
+                            <div class="activity-status success">Current Session</div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-info">
+                                <div class="activity-device">Safari on iPhone</div>
+                                <div class="activity-location">Kampala, Uganda</div>
+                                <div class="activity-time">Yesterday at 09:15</div>
+                            </div>
+                            <div class="activity-status success">Successful</div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-info">
+                                <div class="activity-device">Firefox on Android</div>
+                                <div class="activity-location">Dar es Salaam, Tanzania</div>
+                                <div class="activity-time">2 days ago at 16:45</div>
+                            </div>
+                            <div class="activity-status failed">Failed Attempt</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="sessions.html" class="btn btn-secondary">View All Sessions</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="section-title">Security Checklist</h2>
+                
+                <div style="margin-bottom: 20px;">
+                    <div class="requirement valid" style="margin-bottom: 15px;">
+                        <span class="requirement-icon">✓</span>
+                        <span><strong>Strong Password</strong><br>
+                        <span style="font-size: 12px; color: var(--medium-text);">Updated 2 days ago</span></span>
+                    </div>
+                    
+                    <div class="requirement invalid" style="margin-bottom: 15px;">
+                        <span class="requirement-icon">✗</span>
+                        <span><strong>Two-Factor Authentication</strong><br>
+                        <span style="font-size: 12px; color: var(--medium-text);">Not enabled</span></span>
+                    </div>
+                    
+                    <div class="requirement valid" style="margin-bottom: 15px;">
+                        <span class="requirement-icon">✓</span>
+                        <span><strong>Security Questions</strong><br>
+                        <span style="font-size: 12px; color: var(--medium-text);">Set up</span></span>
+                    </div>
+                    
+                    <div class="requirement warning" style="margin-bottom: 15px;">
+                        <span class="requirement-icon">!</span>
+                        <span><strong>Backup Email</strong><br>
+                        <span style="font-size: 12px; color: var(--medium-text);">Not verified</span></span>
+                    </div>
+                    
+                    <div class="requirement valid" style="margin-bottom: 15px;">
+                        <span class="requirement-icon">✓</span>
+                        <span><strong>Phone Number</strong><br>
+                        <span style="font-size: 12px; color: var(--medium-text);">Verified</span></span>
+                    </div>
+                </div>
+                
+                <div class="security-alert warning">
+                    <div class="security-alert-icon">⚠</div>
+                    <div>
+                        <strong>Security Alert</strong><br>
+                        <span style="font-size: 14px;">2FA not enabled. We recommend enabling it for better security.</span>
+                    </div>
+                </div>
+                
+                <h2 class="section-title" style="margin-top: 30px;">Account Recovery</h2>
+                
+                <div class="backup-option">
+                    <div class="backup-option-header">
+                        <span style="font-weight: 500;">Backup Email</span>
+                        <span class="security-status warning">Not Set</span>
+                    </div>
+                    <p style="font-size: 14px; color: var(--medium-text); margin: 10px 0;">
+                        Add a backup email for account recovery.
+                    </p>
+                    <input type="email" class="form-input" placeholder="backup@example.com" style="margin-bottom: 10px;">
+                    <button class="btn btn-primary" style="width: 100%;">Add Backup Email</button>
+                </div>
+                
+                <div class="backup-option">
+                    <div class="backup-option-header">
+                        <span style="font-weight: 500;">Security Questions</span>
+                        <span class="security-status active">Set</span>
+                    </div>
+                    <p style="font-size: 14px; color: var(--medium-text); margin: 10px 0;">
+                        You have 3 security questions set up.
+                    </p>
+                    <button class="btn btn-secondary" style="width: 100%;">Manage Questions</button>
+                </div>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--neutral-light);">
+                    <a href="devices.html" class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                        Manage Trusted Devices
+                    </a>
+                    <a href="../auth/forgot.html" class="btn btn-secondary" style="width: 100%; margin-bottom: 10px;">
+                        Reset Password
+                    </a>
+                    <a href="delete-account.html" class="btn btn-danger" style="width: 100%;">
+                        Delete Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer will be injected by JavaScript -->
+    <div id="footer-container"></div>
+    
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const authToken = localStorage.getItem('mpesewa_token');
+            if (!authToken) {
+                window.location.href = '../auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                return false;
+            }
+            return true;
+        }
+        
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const requirements = {
+                length: password.length >= 8 && password.length <= 12,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*]/.test(password)
+            };
+            
+            // Update requirement indicators
+            Object.keys(requirements).forEach(req => {
+                const element = document.getElementById(`req-${req}`);
+                if (requirements[req]) {
+                    element.classList.remove('invalid');
+                    element.classList.add('valid');
+                    element.querySelector('.requirement-icon').textContent = '✓';
+                    strength++;
+                } else {
+                    element.classList.remove('valid');
+                    element.classList.add('invalid');
+                    element.querySelector('.requirement-icon').textContent = '⚫';
+                }
+            });
+            
+            // Update strength bar
+            const strengthBar = document.getElementById('password-strength-bar');
+            const strengthText = document.getElementById('password-strength-text');
+            
+            let strengthPercent = (strength / 5) * 100;
+            let strengthLabel = '';
+            let barColor = '';
+            
+            if (strength === 0) {
+                strengthLabel = 'None';
+                barColor = '#dc3545';
+            } else if (strength <= 2) {
+                strengthLabel = 'Weak';
+                barColor = '#dc3545';
+            } else if (strength === 3) {
+                strengthLabel = 'Medium';
+                barColor = '#ffc107';
+            } else if (strength === 4) {
+                strengthLabel = 'Strong';
+                barColor = '#28a745';
+            } else {
+                strengthLabel = 'Very Strong';
+                barColor = '#28a745';
+            }
+            
+            strengthBar.style.width = `${strengthPercent}%`;
+            strengthBar.style.backgroundColor = barColor;
+            strengthText.textContent = `Password strength: ${strengthLabel}`;
+            
+            return strength >= 3; // Minimum medium strength required
+        }
+        
+        // Check password match
+        function checkPasswordMatch() {
+            const password = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+            const matchElement = document.getElementById('password-match');
+            
+            if (!password || !confirm) {
+                matchElement.textContent = '';
+                matchElement.style.color = '';
+                return false;
+            }
+            
+            if (password === confirm) {
+                matchElement.textContent = '✓ Passwords match';
+                matchElement.style.color = '#28a745';
+                return true;
+            } else {
+                matchElement.textContent = '✗ Passwords do not match';
+                matchElement.style.color = '#dc3545';
+                return false;
+            }
+        }
+        
+        // Validate password requirements
+        function validatePassword(password) {
+            const requirements = {
+                length: password.length >= 8 && password.length <= 12,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*]/.test(password)
+            };
+            
+            return Object.values(requirements).every(req => req);
+        }
+        
+        // Change password handler
+        function changePassword() {
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Basic validation
+            if (!currentPassword) {
+                alert('Please enter your current password');
+                return;
+            }
+            
+            if (!validatePassword(newPassword)) {
+                alert('New password does not meet all requirements');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // In a real app, this would be an API call
+            // For now, simulate success
+            const userData = JSON.parse(localStorage.getItem('mpesewa_user')) || {};
+            
+            // Check if current password matches (in real app, this would be verified server-side)
+            if (currentPassword === userData.password) {
+                // Update password in local storage
+                userData.password = newPassword;
+                localStorage.setItem('mpesewa_user', JSON.stringify(userData));
+                
+                // Show success message
+                alert('Password changed successfully!');
+                
+                // Clear form
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+                
+                // Update password status
+                document.getElementById('password-status').textContent = 'Updated';
+            } else {
+                alert('Current password is incorrect');
+            }
+        }
+        
+        // 2FA handlers
+        function enable2FA() {
+            document.getElementById('2fa-setup').style.display = 'block';
+            document.getElementById('enable-2fa-btn').style.display = 'none';
+            document.getElementById('disable-2fa-btn').style.display = 'inline-block';
+            document.getElementById('2fa-status').textContent = 'Setting Up';
+            document.getElementById('2fa-status').className = 'security-status warning';
+        }
+        
+        function verify2FA() {
+            const code = document.getElementById('2fa-code').value;
+            
+            if (!code || code.length !== 6 || !/^\d+$/.test(code)) {
+                alert('Please enter a valid 6-digit code');
+                return;
+            }
+            
+            // In real app, verify with server
+            // For demo, accept any 6-digit code
+            document.getElementById('2fa-status').textContent = 'Enabled';
+            document.getElementById('2fa-status').className = 'security-status active';
+            
+            // Update security checklist
+            const checklistItem = document.querySelector('.requirement.invalid:nth-child(2)');
+            if (checklistItem) {
+                checklistItem.classList.remove('invalid');
+                checklistItem.classList.add('valid');
+                checklistItem.querySelector('.requirement-icon').textContent = '✓';
+            }
+            
+            alert('Two-Factor Authentication enabled successfully!');
+            
+            // Hide setup section
+            document.getElementById('2fa-setup').style.display = 'none';
+        }
+        
+        function disable2FA() {
+            if (confirm('Are you sure you want to disable Two-Factor Authentication? This will make your account less secure.')) {
+                document.getElementById('2fa-status').textContent = 'Not Enabled';
+                document.getElementById('2fa-status').className = 'security-status warning';
+                document.getElementById('enable-2fa-btn').style.display = 'inline-block';
+                document.getElementById('disable-2fa-btn').style.display = 'none';
+                document.getElementById('2fa-setup').style.display = 'none';
+                
+                // Update security checklist
+                const checklistItem = document.querySelector('.requirement.valid:nth-child(2)');
+                if (checklistItem) {
+                    checklistItem.classList.remove('valid');
+                    checklistItem.classList.add('invalid');
+                    checklistItem.querySelector('.requirement-icon').textContent = '✗';
+                }
+                
+                alert('Two-Factor Authentication disabled.');
+            }
+        }
+        
+        // Initialize page
+        function initSecurityPage() {
+            if (!checkAuth()) return;
+            
+            // Load header and footer
+            loadHeader();
+            loadFooter();
+            
+            // Set up event listeners
+            document.getElementById('new-password').addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+                checkPasswordMatch();
+            });
+            
+            document.getElementById('confirm-password').addEventListener('input', checkPasswordMatch);
+            
+            document.getElementById('change-password-btn').addEventListener('click', changePassword);
+            
+            document.getElementById('enable-2fa-btn').addEventListener('click', enable2FA);
+            document.getElementById('disable-2fa-btn').addEventListener('click', disable2FA);
+            document.getElementById('verify-2fa-btn').addEventListener('click', verify2FA);
+            
+            // Allow Enter key to submit forms
+            document.getElementById('current-password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') changePassword();
+            });
+            
+            document.getElementById('2fa-code').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') verify2FA();
+            });
+            
+            // Check if 2FA is already enabled (in real app, this would come from server)
+            const userData = JSON.parse(localStorage.getItem('mpesewa_user')) || {};
+            if (userData.twoFactorEnabled) {
+                document.getElementById('2fa-status').textContent = 'Enabled';
+                document.getElementById('2fa-status').className = 'security-status active';
+                document.getElementById('enable-2fa-btn').style.display = 'none';
+                document.getElementById('disable-2fa-btn').style.display = 'inline-block';
+                
+                // Update security checklist
+                const checklistItem = document.querySelector('.requirement.invalid:nth-child(2)');
+                if (checklistItem) {
+                    checklistItem.classList.remove('invalid');
+                    checklistItem.classList.add('valid');
+                    checklistItem.querySelector('.requirement-icon').textContent = '✓';
+                }
+            }
+        }
+        
+        function loadHeader() {
+            fetch('../layout/Header.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('header-container').innerHTML = html;
+                    if (typeof initHeader === 'function') initHeader();
+                })
+                .catch(error => {
+                    console.error('Error loading header:', error);
+                    document.getElementById('header-container').innerHTML = `
+                        <header style="background: #003366; color: white; padding: 20px;">
+                            <a href="../index.html" style="color: white; text-decoration: none; font-weight: bold;">M-PESEWA</a>
+                        </header>
+                    `;
+                });
+        }
+        
+        function loadFooter() {
+            fetch('../layout/Footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error loading footer:', error);
+                    document.getElementById('footer-container').innerHTML = `
+                        <footer style="background: #1f2a37; color: white; padding: 40px; margin-top: 40px;">
+                            <div style="text-align: center;">
+                                <p>© 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+                            </div>
+                        </footer>
+                    `;
+                });
+        }
+        
+        // Service worker registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('../service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initSecurityPage);
+    </script>
+</body>
+</html>

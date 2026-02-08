@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Country - M-Pesewa</title>
+    <link rel="stylesheet" href="../assets/css/countries.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <div id="app">
+        <!-- Header will be injected by JS -->
+        <div id="header-placeholder"></div>
+
+        <main class="countries-container">
+            <div class="countries-header">
+                <h1><i class="icon-globe"></i> Choose Your Country</h1>
+                <p class="subtitle">M-Pesewa operates in 12 Sub-Saharan African countries. Select your country to continue.</p>
+                <p class="country-note"><i class="icon-info"></i> Country selection is permanent and cannot be changed after registration</p>
+            </div>
+
+            <div class="countries-grid">
+                <!-- Kenya -->
+                <div class="country-card" data-country="KE" onclick="selectCountry('KE')">
+                    <div class="country-flag flag-ke"></div>
+                    <h3>Kenya</h3>
+                    <p class="country-currency">Currency: KSh (Kenyan Shilling)</p>
+                    <p class="country-support">Support: +254 709 219 000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 85,432 users</span>
+                        <span><i class="icon-groups"></i> 12,345 groups</span>
+                    </div>
+                    <button class="btn-select">Select Kenya</button>
+                </div>
+
+                <!-- Uganda -->
+                <div class="country-card" data-country="UG" onclick="selectCountry('UG')">
+                    <div class="country-flag flag-ug"></div>
+                    <h3>Uganda</h3>
+                    <p class="country-currency">Currency: UGX (Ugandan Shilling)</p>
+                    <p class="country-support">Support: +256 392 175 546</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 42,156 users</span>
+                        <span><i class="icon-groups"></i> 6,789 groups</span>
+                    </div>
+                    <button class="btn-select">Select Uganda</button>
+                </div>
+
+                <!-- Tanzania -->
+                <div class="country-card" data-country="TZ" onclick="selectCountry('TZ')">
+                    <div class="country-flag flag-tz"></div>
+                    <h3>Tanzania</h3>
+                    <p class="country-currency">Currency: TZS (Tanzanian Shilling)</p>
+                    <p class="country-support">Support: +255 659 073 010</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 38,942 users</span>
+                        <span><i class="icon-groups"></i> 5,432 groups</span>
+                    </div>
+                    <button class="btn-select">Select Tanzania</button>
+                </div>
+
+                <!-- Rwanda -->
+                <div class="country-card" data-country="RW" onclick="selectCountry('RW')">
+                    <div class="country-flag flag-rw"></div>
+                    <h3>Rwanda</h3>
+                    <p class="country-currency">Currency: RWF (Rwandan Franc)</p>
+                    <p class="country-support">Support: +250 791 590 801</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 28,765 users</span>
+                        <span><i class="icon-groups"></i> 3,987 groups</span>
+                    </div>
+                    <button class="btn-select">Select Rwanda</button>
+                </div>
+
+                <!-- Burundi -->
+                <div class="country-card" data-country="BI" onclick="selectCountry('BI')">
+                    <div class="country-flag flag-bi"></div>
+                    <h3>Burundi</h3>
+                    <p class="country-currency">Currency: BIF (Burundi Franc)</p>
+                    <p class="country-support">Support: +257 79 000 000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 15,432 users</span>
+                        <span><i class="icon-groups"></i> 2,145 groups</span>
+                    </div>
+                    <button class="btn-select">Select Burundi</button>
+                </div>
+
+                <!-- DRC -->
+                <div class="country-card" data-country="CD" onclick="selectCountry('CD')">
+                    <div class="country-flag flag-cd"></div>
+                    <h3>DR Congo</h3>
+                    <p class="country-currency">Currency: CDF (Congolese Franc)</p>
+                    <p class="country-support">Support: +243 81 000 0000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 52,189 users</span>
+                        <span><i class="icon-groups"></i> 7,654 groups</span>
+                    </div>
+                    <button class="btn-select">Select DRC</button>
+                </div>
+
+                <!-- South Sudan -->
+                <div class="country-card" data-country="SS" onclick="selectCountry('SS')">
+                    <div class="country-flag flag-ss"></div>
+                    <h3>South Sudan</h3>
+                    <p class="country-currency">Currency: SSP (South Sudanese Pound)</p>
+                    <p class="country-support">Support: +211 955 000 000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 12,345 users</span>
+                        <span><i class="icon-groups"></i> 1,876 groups</span>
+                    </div>
+                    <button class="btn-select">Select South Sudan</button>
+                </div>
+
+                <!-- Nigeria -->
+                <div class="country-card" data-country="NG" onclick="selectCountry('NG')">
+                    <div class="country-flag flag-ng"></div>
+                    <h3>Nigeria</h3>
+                    <p class="country-currency">Currency: NGN (Nigerian Naira)</p>
+                    <p class="country-support">Support: +234 800 000 0000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 128,765 users</span>
+                        <span><i class="icon-groups"></i> 18,543 groups</span>
+                    </div>
+                    <button class="btn-select">Select Nigeria</button>
+                </div>
+
+                <!-- Ghana -->
+                <div class="country-card" data-country="GH" onclick="selectCountry('GH')">
+                    <div class="country-flag flag-gh"></div>
+                    <h3>Ghana</h3>
+                    <p class="country-currency">Currency: GHS (Ghanaian Cedi)</p>
+                    <p class="country-support">Support: +233 24 000 0000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 67,890 users</span>
+                        <span><i class="icon-groups"></i> 9,876 groups</span>
+                    </div>
+                    <button class="btn-select">Select Ghana</button>
+                </div>
+
+                <!-- South Africa -->
+                <div class="country-card" data-country="ZA" onclick="selectCountry('ZA')">
+                    <div class="country-flag flag-za"></div>
+                    <h3>South Africa</h3>
+                    <p class="country-currency">Currency: ZAR (South African Rand)</p>
+                    <p class="country-support">Support: +27 11 000 0000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 45,678 users</span>
+                        <span><i class="icon-groups"></i> 6,543 groups</span>
+                    </div>
+                    <button class="btn-select">Select South Africa</button>
+                </div>
+
+                <!-- Ethiopia -->
+                <div class="country-card" data-country="ET" onclick="selectCountry('ET')">
+                    <div class="country-flag flag-et"></div>
+                    <h3>Ethiopia</h3>
+                    <p class="country-currency">Currency: ETB (Ethiopian Birr)</p>
+                    <p class="country-support">Support: +251 11 000 0000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 34,567 users</span>
+                        <span><i class="icon-groups"></i> 4,987 groups</span>
+                    </div>
+                    <button class="btn-select">Select Ethiopia</button>
+                </div>
+
+                <!-- Somalia -->
+                <div class="country-card" data-country="SO" onclick="selectCountry('SO')">
+                    <div class="country-flag flag-so"></div>
+                    <h3>Somalia</h3>
+                    <p class="country-currency">Currency: SOS (Somali Shilling)</p>
+                    <p class="country-support">Support: +252 63 0000000</p>
+                    <div class="country-stats">
+                        <span><i class="icon-users"></i> 23,456 users</span>
+                        <span><i class="icon-groups"></i> 3,456 groups</span>
+                    </div>
+                    <button class="btn-select">Select Somalia</button>
+                </div>
+            </div>
+
+            <div class="country-rules">
+                <h2><i class="icon-rules"></i> Country Rules & Isolation</h2>
+                <div class="rules-list">
+                    <div class="rule-item">
+                        <i class="icon-lock"></i>
+                        <h4>Strict Country Isolation</h4>
+                        <p>No cross-country lending or borrowing is allowed. All transactions happen within your selected country.</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <i class="icon-currency"></i>
+                        <h4>Currency Lock</h4>
+                        <p>All transactions use the local currency of your selected country. No currency conversion is provided.</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <i class="icon-group-lock"></i>
+                        <h4>Group Country Lock</h4>
+                        <p>Groups are country-specific. You cannot invite members from different countries to the same group.</p>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <i class="icon-permanent"></i>
+                        <h4>Permanent Selection</h4>
+                        <p>Country selection is permanent after registration. To change countries, you must create a new account.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-hierarchy">
+                <h2><i class="icon-hierarchy"></i> Platform Hierarchy Structure</h2>
+                <div class="hierarchy-visual">
+                    <div class="hierarchy-level">
+                        <div class="level-circle global">Global</div>
+                        <div class="level-arrow">↓</div>
+                        <div class="level-desc">Platform Headquarters</div>
+                    </div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle countries">Countries (12)</div>
+                        <div class="level-arrow">↓</div>
+                        <div class="level-desc">Strict country isolation</div>
+                    </div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle groups">Groups (Unlimited)</div>
+                        <div class="level-arrow">↙ ↘</div>
+                        <div class="level-desc">Country-specific groups</div>
+                    </div>
+                    
+                    <div class="hierarchy-branch">
+                        <div class="branch-left">
+                            <div class="level-circle lenders">Lenders</div>
+                            <div class="level-arrow">↓</div>
+                            <div class="level-circle ledgers">Ledgers</div>
+                            <div class="level-desc">Loan records per borrower</div>
+                        </div>
+                        
+                        <div class="branch-right">
+                            <div class="level-circle borrowers">Borrowers</div>
+                            <div class="level-desc">Available for loans</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hierarchy-rules">
+                    <h4>Key Hierarchy Rules:</h4>
+                    <ul>
+                        <li><strong>Country isolation:</strong> No cross-border transactions</li>
+                        <li><strong>Group isolation:</strong> Lenders cannot lend outside their group</li>
+                        <li><strong>Borrower limits:</strong> Maximum of 4 groups (with good rating)</li>
+                        <li><strong>Subscription enforcement:</strong> Lenders blocked when subscription expires</li>
+                        <li><strong>Admin supremacy:</strong> Platform admin can override any blacklist or ledger</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="country-selection-help">
+                <h3><i class="icon-help"></i> Need Help Choosing?</h3>
+                <p>Select the country where you:</p>
+                <ul>
+                    <li>Currently reside and conduct financial activities</li>
+                    <li>Have a valid government-issued ID</li>
+                    <li>Have an active mobile money or bank account</li>
+                    <li>Plan to lend or borrow within</li>
+                </ul>
+                <p class="warning"><i class="icon-warning"></i> <strong>Warning:</strong> Country selection cannot be changed after registration!</p>
+            </div>
+        </main>
+
+        <!-- Footer will be injected by JS -->
+        <div id="footer-placeholder"></div>
+    </div>
+
+    <script src="../assets/js/countries.js"></script>
+    <script src="../assets/js/header-footer.js"></script>
+    <script>
+        function selectCountry(countryCode) {
+            const countryData = {
+                'KE': { name: 'Kenya', currency: 'KSh' },
+                'UG': { name: 'Uganda', currency: 'UGX' },
+                'TZ': { name: 'Tanzania', currency: 'TZS' },
+                'RW': { name: 'Rwanda', currency: 'RWF' },
+                'BI': { name: 'Burundi', currency: 'BIF' },
+                'CD': { name: 'DR Congo', currency: 'CDF' },
+                'SS': { name: 'South Sudan', currency: 'SSP' },
+                'NG': { name: 'Nigeria', currency: 'NGN' },
+                'GH': { name: 'Ghana', currency: 'GHS' },
+                'ZA': { name: 'South Africa', currency: 'ZAR' },
+                'ET': { name: 'Ethiopia', currency: 'ETB' },
+                'SO': { name: 'Somalia', currency: 'SOS' }
+            };
+            
+            const country = countryData[countryCode];
+            
+            // Store country selection in localStorage
+            localStorage.setItem('mpesewa_selected_country', countryCode);
+            localStorage.setItem('mpesewa_country_name', country.name);
+            localStorage.setItem('mpesewa_currency', country.currency);
+            
+            // Show confirmation
+            showCountryConfirmation(country.name);
+            
+            // Redirect to registration after 2 seconds
+            setTimeout(() => {
+                window.location.href = '../auth/register.html';
+            }, 2000);
+        }
+        
+        function showCountryConfirmation(countryName) {
+            const modal = document.createElement('div');
+            modal.className = 'country-confirmation-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <i class="icon-check-circle"></i>
+                    <h3>Country Selected!</h3>
+                    <p>You have selected <strong>${countryName}</strong> as your country.</p>
+                    <p>Redirecting to registration...</p>
+                    <div class="loading-spinner"></div>
+                    <p class="warning-note"><i class="icon-warning"></i> This selection is permanent and cannot be changed.</p>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .country-confirmation-modal {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                }
+                .modal-content {
+                    background: white;
+                    padding: 30px;
+                    border-radius: 10px;
+                    text-align: center;
+                    max-width: 400px;
+                    width: 90%;
+                }
+                .modal-content i {
+                    font-size: 48px;
+                    color: #28a745;
+                    margin-bottom: 15px;
+                }
+                .loading-spinner {
+                    border: 4px solid #f3f3f3;
+                    border-top: 4px solid #003366;
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    animation: spin 1s linear infinite;
+                    margin: 20px auto;
+                }
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Check if country already selected
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedCountry = localStorage.getItem('mpesewa_selected_country');
+            if (selectedCountry) {
+                // Highlight selected country
+                const selectedCard = document.querySelector(`[data-country="${selectedCountry}"]`);
+                if (selectedCard) {
+                    selectedCard.classList.add('selected');
+                    const btn = selectedCard.querySelector('.btn-select');
+                    btn.textContent = 'Selected ✓';
+                    btn.disabled = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

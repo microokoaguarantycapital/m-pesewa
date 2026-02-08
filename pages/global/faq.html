@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - M-Pesewa Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/accordion.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- FAQ Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>Frequently Asked Questions</h1>
+                <p class="hero-subtitle">Find answers to common questions about M-Pesewa emergency lending</p>
+            </div>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="search-section">
+            <div class="section-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Search for questions..." class="search-input">
+                    <button class="search-btn" style="background-color: #0099ff; color: #ffffff;">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Categories -->
+        <section class="faq-categories">
+            <div class="section-container">
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="general">
+                        <span class="tab-icon">🌍</span>
+                        <span class="tab-text">General</span>
+                    </button>
+                    
+                    <button class="category-tab" data-category="borrower">
+                        <span class="tab-icon">👤</span>
+                        <span class="tab-text">Borrowers</span>
+                    </button>
+                    
+                    <button class="category-tab" data-category="lender">
+                        <span class="tab-icon">💼</span>
+                        <span class="tab-text">Lenders</span>
+                    </button>
+                    
+                    <button class="category-tab" data-category="subscription">
+                        <span class="tab-icon">💰</span>
+                        <span class="tab-text">Subscriptions</span>
+                    </button>
+                    
+                    <button class="category-tab" data-category="groups">
+                        <span class="tab-icon">👥</span>
+                        <span class="tab-text">Groups</span>
+                    </button>
+                    
+                    <button class="category-tab" data-category="security">
+                        <span class="tab-icon">🔒</span>
+                        <span class="tab-text">Security</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="faq-content">
+            <div class="section-container">
+                <!-- General FAQs -->
+                <div class="faq-category active" id="general-faq">
+                    <h2 class="category-title" style="color: #003366;">General Questions</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What is M-Pesewa?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    M-Pesewa is a technology platform that enables emergency micro-lending within trusted circles. 
+                                    We are NOT a bank, NOT a lender, NOT a borrower, and do NOT hold user funds. We provide the 
+                                    infrastructure for friends, family, and community members to lend to each other with proper 
+                                    tracking, reputation systems, and structured terms.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How is M-Pesewa different from banks or digital lenders?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul style="color: #555555;">
+                                    <li><strong>Trust-based:</strong> Lending happens within existing trusted relationships, not algorithms</li>
+                                    <li><strong>No fund handling:</strong> We don't hold or transfer money - all transactions happen directly between users</li>
+                                    <li><strong>Emergency-focused:</strong> Specific 20 categories for genuine emergencies only</li>
+                                    <li><strong>Community-driven:</strong> Group accountability instead of collateral requirements</li>
+                                    <li><strong>Fair pricing:</strong> Transparent 10% interest with no hidden fees</li>
+                                    <li><strong>Dual roles:</strong> Users can be both borrowers and lenders</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">In which countries does M-Pesewa operate?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    We currently operate in 12 Sub-Saharan African countries:
+                                </p>
+                                <div class="country-list">
+                                    <span class="country-item">🇰🇪 Kenya (KSh)</span>
+                                    <span class="country-item">🇺🇬 Uganda (UGX)</span>
+                                    <span class="country-item">🇹🇿 Tanzania (TZS)</span>
+                                    <span class="country-item">🇷🇼 Rwanda (RWF)</span>
+                                    <span class="country-item">🇧🇮 Burundi (BIF)</span>
+                                    <span class="country-item">🇨🇩 DRC (USD/CDF)</span>
+                                    <span class="country-item">🇸🇸 South Sudan (SSP)</span>
+                                    <span class="country-item">🇿🇦 South Africa (ZAR)</span>
+                                    <span class="country-item">🇳🇬 Nigeria (NGN)</span>
+                                    <span class="country-item">🇬🇭 Ghana (GHS)</span>
+                                    <span class="country-item">🇪🇹 Ethiopia (ETB)</span>
+                                    <span class="country-item">🇸🇴 Somalia (SOS)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Is M-Pesewa regulated?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    M-Pesewa operates as a technology platform, not a financial institution. Since we don't 
+                                    handle user funds, we don't require banking licenses. However, we comply with all local 
+                                    data protection and consumer protection laws in each country we operate. Our terms and 
+                                    conditions are legally binding and designed to protect all parties involved.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How does M-Pesewa make money?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Only from lender subscriptions.</strong> Borrowers pay nothing to use the platform. 
+                                    Lenders pay a monthly, bi-annual, or annual subscription fee based on their chosen tier 
+                                    (Basic, Premium, Super, or Lender of Lenders). We don't take commissions or percentages 
+                                    from loans - all interest goes directly to lenders.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 6 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What happens if there's a dispute between lender and borrower?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    Our platform provides several dispute resolution mechanisms:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Group Admin mediation:</strong> The group founder/admin can help resolve issues</li>
+                                    <li><strong>Reputation system:</strong> Both parties can rate each other</li>
+                                    <li><strong>Blacklist system:</strong> Serious defaulters get platform-wide visibility</li>
+                                    <li><strong>Debt collectors:</strong> We provide access to vetted debt collection services</li>
+                                    <li><strong>Platform Admin:</strong> Final arbitration for unresolved cases</li>
+                                </ol>
+                                <p style="color: #555555;">
+                                    However, we encourage users to resolve disputes amicably within their trusted circles first.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Borrower FAQs -->
+                <div class="faq-category" id="borrower-faq">
+                    <h2 class="category-title" style="color: #003366;">Borrower Questions</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How much can I borrow as a borrower?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    Borrowing limits depend on your lender's subscription tier:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>From Basic lenders:</strong> Up to 1,500 local currency</li>
+                                    <li><strong>From Premium lenders:</strong> Up to 5,000 local currency</li>
+                                    <li><strong>From Super lenders:</strong> Up to 20,000 local currency</li>
+                                    <li><strong>From Lender of Lenders:</strong> Up to 50,000 local currency</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    Minimum loan amount is as low as 5 KSh (or equivalent in local currency).
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What are the interest rates and repayment terms?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul style="color: #555555;">
+                                    <li><strong>Interest rate:</strong> 10% per loan (fixed)</li>
+                                    <li><strong>Repayment period:</strong> 7 days (1 week)</li>
+                                    <li><strong>Partial repayments:</strong> Allowed (daily if needed)</li>
+                                    <li><strong>Penalty after 7 days:</strong> 5% daily on outstanding balance</li>
+                                    <li><strong>Default:</strong> After 2 months of non-payment</li>
+                                    <li><strong>One active loan:</strong> Only one loan per group at a time</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How do I join a group as a borrower?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    You can join a group through:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Invitation:</strong> Someone in the group must invite you</li>
+                                    <li><strong>Referral:</strong> Two referrers from the same group must vouch for you</li>
+                                    <li><strong>Group search:</strong> Browse public groups and request to join (requires approval)</li>
+                                </ol>
+                                <p style="color: #555555;">
+                                    <strong>Important:</strong> You can join up to 4 groups maximum, and only if you have a good rating (4+ stars).
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What happens if I can't repay on time?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    If you can't repay on time:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Communicate early:</strong> Contact your lender immediately</li>
+                                    <li><strong>Partial payments:</strong> Make whatever payment you can to reduce penalty</li>
+                                    <li><strong>Penalty applies:</strong> 5% daily on outstanding balance after day 7</li>
+                                    <li><strong>Rating impact:</strong> Your borrower rating will be affected</li>
+                                    <li><strong>Group migration:</strong> You can borrow from another group to repay (if you have multiple groups)</li>
+                                    <li><strong>Blacklist risk:</strong> After 2 months, you risk being blacklisted platform-wide</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I be both a borrower and a lender?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes!</strong> This is one of our key innovations. You can:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li>Have separate profiles as borrower and lender</li>
+                                    <li>Borrow in one group and lend in another</li>
+                                    <li>Switch between roles as needed</li>
+                                    <li>Build reputation in both roles independently</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    To change roles, you need to log out and start a new registration for the other role.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 6 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What is the blacklist system?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    The blacklist system protects lenders from chronic defaulters:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Trigger:</strong> 2 months of non-payment</li>
+                                    <li><strong>Consequences:</strong> Cannot borrow, cannot join new groups</li>
+                                    <li><strong>Visibility:</strong> Blacklist badge visible platform-wide</li>
+                                    <li><strong>Removal:</strong> Only by Platform Admin after full repayment (principal + interest + penalties)</li>
+                                    <li><strong>Defaulters Registry:</strong> Public list of blacklisted individuals</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lender FAQs -->
+                <div class="faq-category" id="lender-faq">
+                    <h2 class="category-title" style="color: #003366;">Lender Questions</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What subscription tiers are available for lenders?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="tier-comparison-small">
+                                    <div class="tier-row">
+                                        <div class="tier-name" style="color: #003366;">Basic</div>
+                                        <div class="tier-details" style="color: #555555;">
+                                            ≤ 1,500/week • 50/month • No CRB
+                                        </div>
+                                    </div>
+                                    <div class="tier-row">
+                                        <div class="tier-name" style="color: #003366;">Premium</div>
+                                        <div class="tier-details" style="color: #555555;">
+                                            ≤ 5,000/week • 250/month • No CRB
+                                        </div>
+                                    </div>
+                                    <div class="tier-row">
+                                        <div class="tier-name" style="color: #003366;">Super</div>
+                                        <div class="tier-details" style="color: #555555;">
+                                            ≤ 20,000/week • 1,000/month • CRB required
+                                        </div>
+                                    </div>
+                                    <div class="tier-row">
+                                        <div class="tier-name" style="color: #003366;">Lender of Lenders</div>
+                                        <div class="tier-details" style="color: #555555;">
+                                            ≤ 50,000 • 500/month • CRB required • Custom terms
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How does the subscription expiry work?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Subscription expiry date: 28th of each month</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li>All subscriptions expire on the 28th, regardless of signup date</li>
+                                    <li>You'll see "Days remaining before expiry" on your dashboard</li>
+                                    <li>If subscription expires, lending access is blocked until payment</li>
+                                    <li>You can still view your portfolio and history when expired</li>
+                                    <li>Payment confirmation unlocks platform immediately</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What is the ledger system?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    The ledger is automatically created when you approve a loan:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>One ledger per borrower</strong> (named using borrower name)</li>
+                                    <li><strong>Unlimited ledgers</strong> per lender</li>
+                                    <li><strong>Auto-calculates:</strong> Interest (10%), penalties (5% daily after 7 days)</li>
+                                    <li><strong>Tracks:</strong> Dates, amounts, status (Active/Cleared)</li>
+                                    <li><strong>Manual updates:</strong> You update repayments as they come</li>
+                                    <li><strong>Admin override:</strong> Platform Admin can correct if needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How do I rate borrowers?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    Use our 5-star rating system after loan completion:
+                                </p>
+                                <div class="rating-system">
+                                    <div class="star-rating">
+                                        <span class="star">⭐</span>
+                                        <span class="star">⭐</span>
+                                        <span class="star">⭐</span>
+                                        <span class="star">⭐</span>
+                                        <span class="star">⭐</span>
+                                    </div>
+                                </div>
+                                <ul style="color: #555555;">
+                                    <li><strong>5 stars:</strong> Excellent - repaid early/on time, good communication</li>
+                                    <li><strong>4 stars:</strong> Good - minor delays but good communication</li>
+                                    <li><strong>3 stars:</strong> Average - delays with some communication</li>
+                                    <li><strong>2 stars:</strong> Poor - significant delays, poor communication</li>
+                                    <li><strong>1 star:</strong> Very poor - defaulted, blacklist consideration</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    Good ratings unlock more group access for borrowers (up to 4 groups).
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I lend outside my group?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>No. Strict group isolation rule.</strong> You can only lend to:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li>Borrowers within your own group</li>
+                                    <li>People you invited to your group</li>
+                                    <li>People referred by your group members</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    This ensures trust and accountability. If you want to lend to someone in another group, 
+                                    they must join your group first (if they have capacity - max 4 groups).
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 6 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What happens if a borrower defaults?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    If a borrower defaults (2+ months without payment):
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Blacklist badge:</strong> Automatically applied to borrower profile</li>
+                                    <li><strong>Platform-wide visibility:</strong> All lenders can see the blacklist status</li>
+                                    <li><strong>Debt collectors:</strong> Access to 200+ vetted debt collectors</li>
+                                    <li><strong>Rating impact:</strong> You can give 1-star rating</li>
+                                    <li><strong>Ledger status:</strong> Marked as "Defaulted" in your portfolio</li>
+                                    <li><strong>Admin assistance:</strong> Platform Admin can help with recovery</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Subscription FAQs -->
+                <div class="faq-category" id="subscription-faq">
+                    <h2 class="category-title" style="color: #003366;">Subscription Questions</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How do I pay for my subscription?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    After selecting your subscription tier, you'll be redirected to M-pesewa Till:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>M-Pesa:</strong> Pay via Lipa Na M-Pesa</li>
+                                    <li><strong>Till Number:</strong> Use our dedicated till number</li>
+                                    <li><strong>Paybill:</strong> Use our paybill number</li>
+                                    <li><strong>Bank Transfer:</strong> Direct bank deposit</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    Platform unlocks immediately after payment confirmation.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I upgrade or downgrade my subscription?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, you can upgrade or downgrade at any time:</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Upgrade:</strong> Pay the difference for remaining period</li>
+                                    <li><strong>Downgrade:</strong> Changes apply at next renewal cycle</li>
+                                    <li><strong>CRB requirements:</strong> Upgrading to Super or LOL requires CRB check</li>
+                                    <li><strong>Limits adjust:</strong> New limits apply immediately for upgrades</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What happens if I don't renew my subscription?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    If you don't renew by the 28th:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Lending blocked:</strong> Cannot approve new loans</li>
+                                    <li><strong>Read-only access:</strong> Can view portfolio and history</li>
+                                    <li><strong>Ledger access:</strong> Can still update existing ledgers</li>
+                                    <li><strong>No new borrowers:</strong> Cannot add new borrowers to ledgers</li>
+                                    <li><strong>Automatic renewal:</strong> No auto-renewal - you must manually renew</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Are subscription fees refundable?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>No, subscription fees are non-refundable.</strong> This is clearly stated in our 
+                                    Terms and Conditions. We recommend choosing your tier carefully and starting with 
+                                    Basic if you're new to lending on our platform.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I pay annually instead of monthly?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, we offer three payment options:</strong>
+                                </p>
+                                <div class="payment-options">
+                                    <div class="payment-option">
+                                        <div class="option-name" style="color: #003366;">Monthly</div>
+                                        <div class="option-price" style="color: #555555;">Pay every month</div>
+                                    </div>
+                                    <div class="payment-option">
+                                        <div class="option-name" style="color: #003366;">Bi-Annual</div>
+                                        <div class="option-price" style="color: #555555;">Pay every 6 months (discount)</div>
+                                    </div>
+                                    <div class="payment-option">
+                                        <div class="option-name" style="color: #003366;">Annual</div>
+                                        <div class="option-price" style="color: #555555;">Pay yearly (biggest discount)</div>
+                                    </div>
+                                </div>
+                                <p style="color: #555555;">
+                                    Annual payments offer the best value with significant savings.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Groups FAQs -->
+                <div class="faq-category" id="groups-faq">
+                    <h2 class="category-title" style="color: #003366;">Group Questions</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How do I create a group?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ol style="color: #555555;">
+                                    <li>Register as a lender (subscription required for group creation)</li>
+                                    <li>Go to Groups → Create New Group</li>
+                                    <li>Choose group name, type (Family, Church, Professional, etc.)</li>
+                                    <li>Set group rules and description</li>
+                                    <li>Invite first 5 members (minimum requirement)</li>
+                                    <li>Activate group after members join</li>
+                                </ol>
+                                <p style="color: #555555;">
+                                    <strong>Note:</strong> As Founder/Admin, you moderate the group and invite members.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What are the group size limits?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <ul style="color: #555555;">
+                                    <li><strong>Minimum:</strong> 5 members (to activate group)</li>
+                                    <li><strong>Maximum:</strong> 1,000 members per group</li>
+                                    <li><strong>Unlimited groups:</strong> Per country, per user</li>
+                                    <li><strong>Member mix:</strong> Can have both lenders and borrowers</li>
+                                    <li><strong>Growth:</strong> Members can invite more members</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I join multiple groups?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, with limits:</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Borrowers:</strong> Maximum 4 groups (with good rating)</li>
+                                    <li><strong>Lenders:</strong> Unlimited groups (subscription applies to all)</li>
+                                    <li><strong>Group migration:</strong> Can move between groups with good record</li>
+                                    <li><strong>Cross-group lending:</strong> Not allowed - lend only within each group</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    This allows borrowers to get loans from multiple sources while maintaining trust boundaries.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What happens if group admin leaves?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    If the group Founder/Admin leaves:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Admin transfer:</strong> Can transfer admin rights to another member</li>
+                                    <li><strong>Platform Admin:</strong> Can appoint new admin if needed</li>
+                                    <li><strong>Group continues:</strong> Loans and ledgers remain active</li>
+                                    <li><strong>New invitations:</strong> New admin can invite members</li>
+                                    <li><strong>If no admin:</strong> Group becomes read-only until admin appointed</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can groups set their own rules?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, groups can define internal rules:</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Meeting frequency:</strong> Physical or virtual meetings</li>
+                                    <li><strong>Member requirements:</strong> Additional criteria beyond platform minimums</li>
+                                    <li><strong>Loan approval process:</strong> Group voting or admin decision</li>
+                                    <li><strong>Social rules:</strong> Conduct expectations</li>
+                                    <li><strong>Penalty rules:</strong> Additional consequences for default</li>
+                                </ul>
+                                <p style="color: #555555;">
+                                    These rules must not conflict with platform-wide rules.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security FAQs -->
+                <div class="faq-category" id="security-faq">
+                    <h2 class="category-title" style="color: #003366;">Security & Privacy</h2>
+                    
+                    <div class="accordion">
+                        <!-- Question 1 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Is my personal information safe?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, we take data protection seriously:</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Encryption:</strong> All data encrypted in transit and at rest</li>
+                                    <li><strong>Limited sharing:</strong> Only necessary information shared within groups</li>
+                                    <li><strong>GDPR compliant:</strong> We comply with data protection regulations</li>
+                                    <li><strong>User control:</strong> You control what information is visible</li>
+                                    <li><strong>No selling:</strong> We never sell user data to third parties</li>
+                                    <li><strong>Data deletion:</strong> Right to be forgotten upon request</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">What if someone fraudulently uses my identity?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    If you suspect identity fraud:
+                                </p>
+                                <ol style="color: #555555;">
+                                    <li><strong>Immediate report:</strong> Contact support immediately</li>
+                                    <li><strong>Account freeze:</strong> We'll freeze the affected account</li>
+                                    <li><strong>Investigation:</strong> Our security team will investigate</li>
+                                    <li><strong>Law enforcement:</strong> We'll involve authorities if needed</li>
+                                    <li><strong>Resolution:</strong> Clear your name and restore account</li>
+                                    <li><strong>Prevention:</strong> Two-factor authentication available</li>
+                                </ol>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">How secure are the financial transactions?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Important:</strong> M-Pesewa does NOT handle financial transactions. All money 
+                                    transfers happen directly between users using their preferred payment methods (M-Pesa, 
+                                    bank transfer, etc.). This means:
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>No fund storage:</strong> We don't hold user money</li>
+                                    <li><strong>Bank-level security:</strong> Use your bank's/M-Pesa's security</li>
+                                    <li><strong>Direct control:</strong> You control your own money movements</li>
+                                    <li><strong>No platform risk:</strong> We can't lose or misuse your funds</li>
+                                    <li><strong>Transaction records:</strong> Keep your own payment receipts</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span class="accordion-title">Can I delete my account and data?</span>
+                                <span class="accordion-icon">+</span>
+                            </button>
+                            <div class="accordion-content">
+                                <p style="color: #555555;">
+                                    <strong>Yes, you have the right to delete your account:</strong>
+                                </p>
+                                <ul style="color: #555555;">
+                                    <li><strong>Account deletion:</strong> Available in account settings</li>
+                                    <li><strong>Data retention:</strong> Some data kept for legal requirements (7 years)</li>
+                                    <li><strong>Active loans:</strong> Must clear all loans before deletion</li>
+                                    <li><strong>Ledger preservation:</strong> Loan records preserved for other parties</li>
+                                    <li><strong>Anonymization:</strong> Personal data anonymized where possible</li>
+                                    <li><strong>Export option:</strong> Download your data before deletion</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Still Have Questions -->
+        <section class="contact-cta" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <div class="contact-card" style="background-color: #ffffff;">
+                    <h2 style="color: #003366;">Still have questions?</h2>
+                    <p style="color: #555555;">
+                        Can't find the answer you're looking for? Our support team is here to help.
+                    </p>
+                    
+                    <div class="contact-options">
+                        <div class="contact-option">
+                            <div class="option-icon" style="color: #0099ff;">📧</div>
+                            <h4 style="color: #003366;">Email Support</h4>
+                            <p style="color: #555555;">support@mpesewa.com</p>
+                            <p style="color: #555555;">Response within 24 hours</p>
+                        </div>
+                        
+                        <div class="contact-option">
+                            <div class="option-icon" style="color: #0099ff;">📞</div>
+                            <h4 style="color: #003366;">Phone Support</h4>
+                            <p style="color: #555555;">+254 709 219 000 (Kenya)</p>
+                            <p style="color: #555555;">Mon-Fri, 8AM-6PM local time</p>
+                        </div>
+                        
+                        <div class="contact-option">
+                            <div class="option-icon" style="color: #0099ff;">💬</div>
+                            <h4 style="color: #003366;">Live Chat</h4>
+                            <p style="color: #555555;">Available on dashboard</p>
+                            <p style="color: #555555;">Real-time support during business hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="../global/contact.html" class="btn-primary" style="background-color: #0099ff; color: #ffffff;">
+                            Contact Support
+                        </a>
+                        <a href="../auth/register.html" class="btn-outline" style="border-color: #003366; color: #003366;">
+                            Create Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="#" style="color: #d1d5db;">Grievance Redressal</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/accordion.js"></script>
+    <script src="../assets/js/faq.js"></script>
+</body>
+</html>

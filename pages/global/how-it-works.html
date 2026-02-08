@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How M-Pesewa Works - Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Page Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>How M-Pesewa Works</h1>
+                <p class="hero-subtitle">A step-by-step guide to Africa's most innovative emergency lending platform</p>
+            </div>
+        </section>
+
+        <!-- Platform Role -->
+        <section class="platform-role-section">
+            <div class="section-container">
+                <div class="role-card" style="background-color: #ffffff; border-left: 4px solid #0099ff;">
+                    <h2 style="color: #003366;">📌 Platform Role (Very Important)</h2>
+                    <p style="color: #555555;">
+                        <strong>M-Pesewa is NOT a bank, NOT a lender, NOT a borrower, and does NOT hold user funds.</strong><br>
+                        We are a technology platform that enables verified users to organize into groups and facilitate lending 
+                        within trusted circles. All money transfers happen directly between users using their own chosen payment methods.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5-Step Process -->
+        <section class="process-section" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">5-Step Process</h2>
+                
+                <div class="process-steps">
+                    <!-- Step 1 -->
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #f37021; color: #ffffff;">1</div>
+                        <div class="step-content">
+                            <h3 style="color: #003366;">Join or Create a Group</h3>
+                            <p style="color: #555555;">
+                                Start by joining an existing trusted group (family, church, professional network) 
+                                or create your own. Groups are invitation/referral only and country-locked.
+                            </p>
+                            <ul style="color: #555555;">
+                                <li>Minimum 5 members, maximum 1,000 per group</li>
+                                <li>Each group has one Admin/Founder</li>
+                                <li>Country badge displayed on all groups</li>
+                                <li>No cross-country invitations allowed</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">2</div>
+                        <div class="step-content">
+                            <h3 style="color: #003366;">Choose Your Role</h3>
+                            <div class="role-options">
+                                <div class="role-option" style="border-color: #f37021;">
+                                    <h4 style="color: #f37021;">👤 Borrower</h4>
+                                    <ul style="color: #555555;">
+                                        <li>No subscription fees</li>
+                                        <li>Can join up to 4 groups (with good rating)</li>
+                                        <li>Request emergency loans for specific needs</li>
+                                        <li>Can also be a lender (dual role)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="role-option" style="border-color: #28a745;">
+                                    <h4 style="color: #28a745;">💼 Lender</h4>
+                                    <ul style="color: #555555;">
+                                        <li>Subscription required (Basic, Premium, Super)</li>
+                                        <li>Lend only within your group</li>
+                                        <li>Create unlimited personal ledgers</li>
+                                        <li>Can also be a borrower (dual role)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #28a745; color: #ffffff;">3</div>
+                        <div class="step-content">
+                            <h3 style="color: #003366;">Emergency Loan Request</h3>
+                            <p style="color: #555555;">
+                                Borrowers request loans for specific emergency categories:
+                            </p>
+                            <div class="loan-details">
+                                <div class="detail-card" style="background-color: #ffffff;">
+                                    <div class="detail-icon">⏰</div>
+                                    <h4 style="color: #003366;">7-Day Terms</h4>
+                                    <p style="color: #555555;">All loans have 7-day repayment period</p>
+                                </div>
+                                
+                                <div class="detail-card" style="background-color: #ffffff;">
+                                    <div class="detail-icon">💰</div>
+                                    <h4 style="color: #003366;">10% Interest</h4>
+                                    <p style="color: #555555;">Fixed interest rate for all loans</p>
+                                </div>
+                                
+                                <div class="detail-card" style="background-color: #ffffff;">
+                                    <div class="detail-icon">📋</div>
+                                    <h4 style="color: #003366;">20 Categories</h4>
+                                    <p style="color: #555555;">Specific needs (fare, data, gas, medicine, etc.)</p>
+                                </div>
+                                
+                                <div class="detail-card" style="background-color: #ffffff;">
+                                    <div class="detail-icon">⚖️</div>
+                                    <h4 style="color: #003366;">5% Daily Penalty</h4>
+                                    <p style="color: #555555;">After 7 days on outstanding balance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #003366; color: #ffffff;">4</div>
+                        <div class="step-content">
+                            <h3 style="color: #003366;">Ledger & Repayment System</h3>
+                            <p style="color: #555555;">
+                                When a lender approves a loan, the system automatically creates a ledger:
+                            </p>
+                            <div class="ledger-system">
+                                <div class="ledger-card floating-card">
+                                    <h4 style="color: #003366;">📊 Ledger Fields</h4>
+                                    <ul style="color: #555555;">
+                                        <li>Borrower name & contact</li>
+                                        <li>Two guarantor/referrer contacts</li>
+                                        <li>Loan category & amount</li>
+                                        <li>Dates (borrowed, due, overdue)</li>
+                                        <li>Interest (10%) & Penalties (5% daily)</li>
+                                        <li>Status: Active / Cleared</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="ledger-card floating-card">
+                                    <h4 style="color: #003366;">🔄 Repayment Rules</h4>
+                                    <ul style="color: #555555;">
+                                        <li>Partial daily repayments allowed</li>
+                                        <li>Default after 2 months of non-payment</li>
+                                        <li>Blacklist badge for defaulters</li>
+                                        <li>5-star rating system for borrowers</li>
+                                        <li>Admin can override ledgers if needed</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">5</div>
+                        <div class="step-content">
+                            <h3 style="color: #003366;">Reputation & Community Building</h3>
+                            <p style="color: #555555;">
+                                Your reputation determines your access and opportunities:
+                            </p>
+                            <div class="reputation-system">
+                                <div class="rep-card" style="border-color: #28a745;">
+                                    <h4 style="color: #28a745;">⭐ Good Reputation</h4>
+                                    <ul style="color: #555555;">
+                                        <li>Access to more groups (up to 4)</li>
+                                        <li>Higher borrowing limits</li>
+                                        <li>Faster loan approvals</li>
+                                        <li>Better lending terms</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="rep-card" style="border-color: #f37021;">
+                                    <h4 style="color: #f37021;">⚠️ Blacklist Consequences</h4>
+                                    <ul style="color: #555555;">
+                                        <li>Cannot borrow from any group</li>
+                                        <li>Cannot join new groups</li>
+                                        <li>Visible platform-wide badge</li>
+                                        <li>Removal only by Admin after full repayment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subscription Tiers -->
+        <section class="subscription-section">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Lender Subscription Tiers</h2>
+                <p class="section-description" style="color: #555555;">
+                    Lenders must choose and pay for a subscription to access lending features
+                </p>
+                
+                <div class="tier-comparison">
+                    <div class="tier-card" style="background-color: #ffffff;">
+                        <div class="tier-header" style="background-color: #f8f9fa;">
+                            <h3 style="color: #003366;">Basic</h3>
+                            <div class="tier-price">
+                                <span class="price">50</span>
+                                <span class="currency">/month</span>
+                            </div>
+                        </div>
+                        <div class="tier-features">
+                            <ul style="color: #555555;">
+                                <li>≤ 1,500 local currency per week</li>
+                                <li>No CRB check required</li>
+                                <li>Ledgers cannot exceed 1,500</li>
+                                <li>Bi-annual: 250 | Annual: 500</li>
+                            </ul>
+                        </div>
+                        <div class="tier-cta">
+                            <a href="../subscription/subscribe.html?tier=basic" class="btn-outline" style="border-color: #003366; color: #003366;">
+                                Choose Basic
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card" style="background-color: #ffffff;">
+                        <div class="tier-header" style="background-color: #f8f9fa;">
+                            <h3 style="color: #003366;">Premium</h3>
+                            <div class="tier-price">
+                                <span class="price">250</span>
+                                <span class="currency">/month</span>
+                            </div>
+                        </div>
+                        <div class="tier-features">
+                            <ul style="color: #555555;">
+                                <li>≤ 5,000 per week</li>
+                                <li>No CRB check required</li>
+                                <li>Ledgers cannot exceed 10,000</li>
+                                <li>Bi-annual: 1,500 | Annual: 2,500</li>
+                            </ul>
+                        </div>
+                        <div class="tier-cta">
+                            <a href="../subscription/subscribe.html?tier=premium" class="btn-outline" style="border-color: #003366; color: #003366;">
+                                Choose Premium
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card featured" style="background-color: #ffffff; border: 2px solid #28a745;">
+                        <div class="tier-badge" style="background-color: #28a745; color: #ffffff;">Most Popular</div>
+                        <div class="tier-header" style="background-color: #f8f9fa;">
+                            <h3 style="color: #003366;">Super</h3>
+                            <div class="tier-price">
+                                <span class="price">1,000</span>
+                                <span class="currency">/month</span>
+                            </div>
+                        </div>
+                        <div class="tier-features">
+                            <ul style="color: #555555;">
+                                <li>≤ 20,000 per week</li>
+                                <li>CRB check required</li>
+                                <li>Ledgers cannot exceed 20,000</li>
+                                <li>Bi-annual: 5,000 | Annual: 8,500</li>
+                            </ul>
+                        </div>
+                        <div class="tier-cta">
+                            <a href="../subscription/subscribe.html?tier=super" class="btn-primary" style="background-color: #28a745; color: #ffffff;">
+                                Choose Super
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="tier-card" style="background-color: #ffffff;">
+                        <div class="tier-header" style="background-color: #f8f9fa;">
+                            <h3 style="color: #003366;">Lender of Lenders</h3>
+                            <div class="tier-price">
+                                <span class="price">500</span>
+                                <span class="currency">/month</span>
+                            </div>
+                        </div>
+                        <div class="tier-features">
+                            <ul style="color: #555555;">
+                                <li>≤ 50,000 lending capacity</li>
+                                <li>CRB check required</li>
+                                <li>Interest and period decided by lender</li>
+                                <li>Min repayment: 1 month</li>
+                                <li>Bi-annual: 3,500 | Annual: 6,500</li>
+                            </ul>
+                        </div>
+                        <div class="tier-cta">
+                            <a href="../subscription/subscribe.html?tier=lol" class="btn-outline" style="border-color: #003366; color: #003366;">
+                                Choose LOL
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subscription-note">
+                    <p style="color: #555555;">
+                        <strong>Important:</strong> All subscriptions expire on the 28th of each month. 
+                        Expired subscriptions block lending access until payment is confirmed.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strict Rules -->
+        <section class="rules-section" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #ffffff;">Strict Platform Rules (Non-Negotiable)</h2>
+                
+                <div class="rules-grid">
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">🌍</div>
+                        <h4 style="color: #ffffff;">Country Isolation</h4>
+                        <p>No cross-country lending or borrowing. Each country operates independently with local currency.</p>
+                    </div>
+                    
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">👥</div>
+                        <h4 style="color: #ffffff;">Group Isolation</h4>
+                        <p>Lenders can only lend within their group. No cross-group lending allowed.</p>
+                    </div>
+                    
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">👤</div>
+                        <h4 style="color: #ffffff;">Borrower Limits</h4>
+                        <p>Maximum of 4 groups per borrower, only with good rating (5-star system).</p>
+                    </div>
+                    
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">💰</div>
+                        <h4 style="color: #ffffff;">Subscription Enforcement</h4>
+                        <p>Lenders are blocked when subscription expires (28th of each month).</p>
+                    </div>
+                    
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">👑</div>
+                        <h4 style="color: #ffffff;">Admin Supremacy</h4>
+                        <p>Platform Admin can override any blacklist or ledger entry if needed.</p>
+                    </div>
+                    
+                    <div class="rule-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                        <div class="rule-icon">🛡️</div>
+                        <h4 style="color: #ffffff;">Referral-Only Model</h4>
+                        <p>All users join via referral from someone who knows them well (2 referrers required).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Money Flow -->
+        <section class="money-flow-section">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Money Flow & Platform Revenue</h2>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-circle" style="background-color: #0099ff; color: #ffffff;">1</div>
+                        <h4 style="color: #003366;">Borrower Requests</h4>
+                        <p style="color: #555555;">Borrower posts loan request in group</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-circle" style="background-color: #0099ff; color: #ffffff;">2</div>
+                        <h4 style="color: #003366;">Lender Approves</h4>
+                        <p style="color: #555555;">Lender within same group approves request</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-circle" style="background-color: #0099ff; color: #ffffff;">3</div>
+                        <h4 style="color: #003366;">Direct Transfer</h4>
+                        <p style="color: #555555;">Money sent via M-Pesa, Till, Paybill, Bank (off-platform)</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-circle" style="background-color: #0099ff; color: #ffffff;">4</div>
+                        <h4 style="color: #003366;">Ledger Created</h4>
+                        <p style="color: #555555;">Platform creates ledger to track repayment</p>
+                    </div>
+                    
+                    <div class="flow-arrow">→</div>
+                    
+                    <div class="flow-step">
+                        <div class="flow-circle" style="background-color: #0099ff; color: #ffffff;">5</div>
+                        <h4 style="color: #003366;">Repayment & Rating</h4>
+                        <p style="color: #555555;">Borrower repays, lender updates ledger and rates borrower</p>
+                    </div>
+                </div>
+                
+                <div class="revenue-model">
+                    <div class="revenue-card" style="background-color: #ffffff;">
+                        <h3 style="color: #003366;">💰 Platform Revenue Model</h3>
+                        <ul style="color: #555555;">
+                            <li><strong>Only from lender subscriptions</strong> - No other fees</li>
+                            <li><strong>Borrowers pay nothing</strong> - Completely free for borrowers</li>
+                            <li><strong>No percentage cuts</strong> - We don't take commissions from loans</li>
+                            <li><strong>Subscription expiry:</strong> 28th of every month</li>
+                            <li><strong>Expired subscription:</strong> Platform access blocked until payment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started -->
+        <section class="getting-started-section" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Ready to Get Started?</h2>
+                
+                <div class="start-options">
+                    <div class="start-card" style="background-color: #ffffff;">
+                        <div class="start-icon" style="color: #f37021;">👤</div>
+                        <h3 style="color: #003366;">As a Borrower</h3>
+                        <ol style="color: #555555;">
+                            <li>Get invited to a group by someone you know</li>
+                            <li>Register as a borrower (no subscription needed)</li>
+                            <li>Browse emergency categories and request a loan</li>
+                            <li>Receive offers from lenders in your group</li>
+                            <li>Get funds directly to your phone/bank</li>
+                            <li>Repay within 7 days with 10% interest</li>
+                        </ol>
+                        <a href="../auth/register.html?role=borrower" class="btn-primary" style="background-color: #f37021; color: #ffffff;">
+                            Start Borrowing
+                        </a>
+                    </div>
+                    
+                    <div class="start-card" style="background-color: #ffffff;">
+                        <div class="start-icon" style="color: #28a745;">💼</div>
+                        <h3 style="color: #003366;">As a Lender</h3>
+                        <ol style="color: #555555;">
+                            <li>Create or join a group as Admin/Founder</li>
+                            <li>Register as a lender and choose subscription tier</li>
+                            <li>Pay subscription fee via M-pesewa Till</li>
+                            <li>Browse loan requests in your group</li>
+                            <li>Approve loans and send funds directly</li>
+                            <li>Track repayments and rate borrowers</li>
+                        </ol>
+                        <a href="../auth/register.html?role=lender" class="btn-secondary" style="background-color: #28a745; color: #ffffff;">
+                            Start Lending
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="#" style="color: #d1d5db;">Grievance Redressal</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/how-it-works.js"></script>
+</body>
+</html>

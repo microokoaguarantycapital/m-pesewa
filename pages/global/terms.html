@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - M-Pesewa Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Terms Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>Terms and Conditions</h1>
+                <p class="hero-subtitle">Last Updated: <span id="current-date"></span></p>
+            </div>
+        </section>
+
+        <!-- Terms Content -->
+        <section class="terms-content">
+            <div class="section-container">
+                <div class="terms-notice" style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin-bottom: 30px;">
+                    <h4 style="color: #856404;">⚠️ IMPORTANT LEGAL NOTICE</h4>
+                    <p style="color: #856404;">
+                        These Terms constitute a legally binding agreement between you and M-Pesewa. 
+                        By accessing or using M-Pesewa, you agree to be bound by these Terms. 
+                        If you do not agree, do not use the Platform.
+                    </p>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="toc-container" style="background-color: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 40px;">
+                    <h3 style="color: #003366; margin-bottom: 15px;">Table of Contents</h3>
+                    <ol class="toc-list">
+                        <li><a href="#section1">Platform Role (Very Important)</a></li>
+                        <li><a href="#section2">Country & Group Structure</a></li>
+                        <li><a href="#section3">User Roles</a></li>
+                        <li><a href="#section4">Eligibility</a></li>
+                        <li><a href="#section5">Subscriptions & Fees</a></li>
+                        <li><a href="#section6">Loans & Ledgers</a></li>
+                        <li><a href="#section7">Risk Disclosure</a></li>
+                        <li><a href="#section8">Data & Verification</a></li>
+                        <li><a href="#section9">Prohibited Use</a></li>
+                        <li><a href="#section10">Suspension & Termination</a></li>
+                        <li><a href="#section11">Limitation of Liability</a></li>
+                        <li><a href="#section12">Indemnity</a></li>
+                        <li><a href="#section13">Intellectual Property</a></li>
+                        <li><a href="#section14">Governing Law</a></li>
+                        <li><a href="#section15">Dispute Resolution</a></li>
+                        <li><a href="#section16">Modifications</a></li>
+                        <li><a href="#section17">Contact</a></li>
+                    </ol>
+                </div>
+
+                <!-- Terms Sections -->
+                <div class="terms-sections">
+                    <!-- Section 1 -->
+                    <section id="section1" class="term-section">
+                        <h2 style="color: #003366;">1. PLATFORM ROLE (VERY IMPORTANT)</h2>
+                        <ol style="color: #555555;">
+                            <li>
+                                <strong>M-Pesewa is not a bank, not a lender, not a borrower, and does not hold user funds.</strong>
+                            </li>
+                            <li>
+                                <strong>M-Pesewa is a technology platform that:</strong>
+                                <ul>
+                                    <li>Enables verified users to organize into groups</li>
+                                    <li>Enables lenders and borrowers to interact inside their groups</li>
+                                    <li>Provides ledger tracking, record keeping, and coordination tools</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>All money transfers happen directly between users using their own chosen payment methods.</strong>
+                            </li>
+                            <li>
+                                <strong>M-Pesewa does not guarantee repayment, performance, or behavior of any user.</strong>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <!-- Section 2 -->
+                    <section id="section2" class="term-section">
+                        <h2 style="color: #003366;">2. COUNTRY & GROUP STRUCTURE</h2>
+                        <ol style="color: #555555;">
+                            <li>Every user belongs to one country.</li>
+                            <li>Every group belongs to one country.</li>
+                            <li>No cross-country lending or borrowing is allowed.</li>
+                            <li>All lending and borrowing happens inside groups only.</li>
+                            <li>Group access is by invitation, referral, or admin approval.</li>
+                        </ol>
+                        
+                        <div class="hierarchy-note" style="background-color: #e8f4f8; border-left: 4px solid #0099ff; padding: 15px; margin: 15px 0;">
+                            <h4 style="color: #003366;">📌 STRICT HIERARCHY (NON-NEGOTIABLE)</h4>
+                            <p style="color: #555555;">
+                                Global → Countries → Groups → Lenders → Borrowers (Ledgers)<br>
+                                This hierarchy enforces country isolation, group isolation, and strict access controls.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 3 -->
+                    <section id="section3" class="term-section">
+                        <h2 style="color: #003366;">3. USER ROLES</h2>
+                        <p style="color: #555555;">
+                            A user may act as:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li><strong>Borrower</strong> (requesting loans)</li>
+                            <li><strong>Lender</strong> (offering loans — subscription required)</li>
+                            <li><strong>Group Admin</strong> (moderating group activities)</li>
+                        </ul>
+                        <p style="color: #555555;">
+                            A user may change roles, but cannot be borrower and lender in the same loan at the same time.
+                        </p>
+                        
+                        <div class="role-note" style="background-color: #f0f8ff; padding: 15px; border: 1px solid #0099ff; border-radius: 5px; margin: 15px 0;">
+                            <h4 style="color: #003366;">💡 DUAL ROLE SYSTEM</h4>
+                            <p style="color: #555555;">
+                                Users can have both borrower and lender profiles. To switch roles, user must:
+                                <br>1. Log out
+                                <br>2. Start new registration for the desired role
+                                <br>3. Maintain separate profiles for each role
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4 -->
+                    <section id="section4" class="term-section">
+                        <h2 style="color: #003366;">4. ELIGIBILITY</h2>
+                        <p style="color: #555555;">You must:</p>
+                        <ul style="color: #555555;">
+                            <li>Be at least 18 years old (or legal age in your country)</li>
+                            <li>Have legal capacity to contract</li>
+                            <li>Provide true and accurate identity information</li>
+                            <li>Comply with all laws in your country</li>
+                        </ul>
+                        <p style="color: #555555;">
+                            M-Pesewa may refuse or revoke access at any time.
+                        </p>
+                    </section>
+
+                    <!-- Section 5 -->
+                    <section id="section5" class="term-section">
+                        <h2 style="color: #003366;">5. SUBSCRIPTIONS & FEES</h2>
+                        <ol style="color: #555555;">
+                            <li>Borrowers use the platform for free.</li>
+                            <li>Lenders must pay a subscription fee to qualify to lend.</li>
+                            <li>M-Pesewa does not take commissions from loans.</li>
+                            <li>Subscription fees are non-refundable.</li>
+                            <li>All subscriptions expire on the 28th of each month.</li>
+                            <li>Expired subscriptions block lending access until payment.</li>
+                        </ol>
+                        
+                        <div class="subscription-tiers" style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            <h4 style="color: #003366;">TIERED SUBSCRIPTION SYSTEM</h4>
+                            <div class="tiers-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px;">
+                                <div style="background-color: #ffffff; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #f37021;">Basic</h5>
+                                    <p style="color: #555555; font-size: 14px;">≤ 1,500/week • 50/month • No CRB</p>
+                                </div>
+                                <div style="background-color: #ffffff; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #f37021;">Premium</h5>
+                                    <p style="color: #555555; font-size: 14px;">≤ 5,000/week • 250/month • No CRB</p>
+                                </div>
+                                <div style="background-color: #ffffff; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #f37021;">Super</h5>
+                                    <p style="color: #555555; font-size: 14px;">≤ 20,000/week • 1,000/month • CRB required</p>
+                                </div>
+                                <div style="background-color: #ffffff; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #f37021;">Lender of Lenders</h5>
+                                    <p style="color: #555555; font-size: 14px;">≤ 50,000 • 500/month • CRB required • Custom terms</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 6 -->
+                    <section id="section6" class="term-section">
+                        <h2 style="color: #003366;">6. LOANS & LEDGERS</h2>
+                        <ol style="color: #555555;">
+                            <li>All loans are private agreements between users.</li>
+                            <li>M-Pesewa only records and tracks:
+                                <ul>
+                                    <li>Loan terms</li>
+                                    <li>Repayment status</li>
+                                    <li>Ledger entries</li>
+                                </ul>
+                            </li>
+                            <li>A borrower in an active loan is recorded as an Active Loan Record.</li>
+                            <li>M-Pesewa is not responsible for:
+                                <ul>
+                                    <li>Non-payment</li>
+                                    <li>Disputes</li>
+                                    <li>Fraud</li>
+                                    <li>Losses</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <div class="loan-terms" style="background-color: #fff8e1; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            <h4 style="color: #003366;">STANDARD LOAN TERMS</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 10px;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 24px; color: #f37021;">⏰</div>
+                                    <div style="color: #003366; font-weight: bold;">7 Days</div>
+                                    <div style="color: #555555; font-size: 14px;">Repayment Period</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 24px; color: #f37021;">💰</div>
+                                    <div style="color: #003366; font-weight: bold;">10%</div>
+                                    <div style="color: #555555; font-size: 14px;">Interest Rate</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 24px; color: #f37021;">⚖️</div>
+                                    <div style="color: #003366; font-weight: bold;">5% Daily</div>
+                                    <div style="color: #555555; font-size: 14px;">Penalty After 7 Days</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 24px; color: #f37021;">⏳</div>
+                                    <div style="color: #003366; font-weight: bold;">2 Months</div>
+                                    <div style="color: #555555; font-size: 14px;">Default Period</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 7 -->
+                    <section id="section7" class="term-section">
+                        <h2 style="color: #003366;">7. RISK DISCLOSURE</h2>
+                        <p style="color: #555555;">
+                            You understand and accept that:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Lending involves risk of total loss</li>
+                            <li>Borrowers may default</li>
+                            <li>M-Pesewa offers no guarantees</li>
+                            <li>You participate at your own risk</li>
+                        </ul>
+                        
+                        <div class="risk-warning" style="background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin: 15px 0;">
+                            <h4 style="color: #721c24;">⚠️ HIGH RISK WARNING</h4>
+                            <p style="color: #721c24;">
+                                Emergency micro-lending carries significant risk. Only lend money you can afford to lose. 
+                                Past performance does not guarantee future results.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Section 8 -->
+                    <section id="section8" class="term-section">
+                        <h2 style="color: #003366;">8. DATA & VERIFICATION</h2>
+                        <p style="color: #555555;">
+                            You consent that:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Your data may be verified</li>
+                            <li>Your group members may see relevant profile and reputation information</li>
+                            <li>False information may lead to permanent ban</li>
+                            <li>We may share data with authorities when legally required</li>
+                        </ul>
+                    </section>
+
+                    <!-- Section 9 -->
+                    <section id="section9" class="term-section">
+                        <h2 style="color: #003366;">9. PROHIBITED USE</h2>
+                        <p style="color: #555555;">
+                            You may not:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Commit fraud or misrepresent identity</li>
+                            <li>Harass or threaten other users</li>
+                            <li>Use the platform for illegal purposes</li>
+                            <li>Attempt to bypass group or country rules</li>
+                            <li>Abuse or manipulate the system</li>
+                            <li>Create multiple accounts to circumvent limits</li>
+                            <li>Use automated tools to access the platform</li>
+                        </ul>
+                    </section>
+
+                    <!-- Section 10 -->
+                    <section id="section10" class="term-section">
+                        <h2 style="color: #003366;">10. SUSPENSION & TERMINATION</h2>
+                        <p style="color: #555555;">
+                            M-Pesewa may:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Suspend or terminate any account</li>
+                            <li>Remove any group</li>
+                            <li>Freeze platform access</li>
+                            <li>Remove content or data</li>
+                        </ul>
+                        <p style="color: #555555;">
+                            At its sole discretion and without prior notice.
+                        </p>
+                    </section>
+
+                    <!-- Section 11 -->
+                    <section id="section11" class="term-section">
+                        <h2 style="color: #003366;">11. LIMITATION OF LIABILITY</h2>
+                        <p style="color: #555555;">
+                            To the maximum extent permitted by law:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>M-Pesewa is not liable for:
+                                <ul>
+                                    <li>Financial losses</li>
+                                    <li>Defaults</li>
+                                    <li>Disputes</li>
+                                    <li>Data loss</li>
+                                    <li>Missed opportunities</li>
+                                </ul>
+                            </li>
+                            <li>Use of the platform is at your own risk.</li>
+                            <li>Total liability is limited to subscription fees paid in last 12 months.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Section 12 -->
+                    <section id="section12" class="term-section">
+                        <h2 style="color: #003366;">12. INDEMNITY</h2>
+                        <p style="color: #555555;">
+                            You agree to indemnify and hold harmless M-Pesewa from any claims, losses, damages, 
+                            or disputes arising from:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Your actions</li>
+                            <li>Your loans</li>
+                            <li>Your misuse of the platform</li>
+                            <li>Your violation of these Terms</li>
+                            <li>Any harm caused to other users</li>
+                        </ul>
+                    </section>
+
+                    <!-- Section 13 -->
+                    <section id="section13" class="term-section">
+                        <h2 style="color: #003366;">13. INTELLECTUAL PROPERTY</h2>
+                        <p style="color: #555555;">
+                            All platform software, design, logos, and content belong to M-Pesewa. 
+                            You may not copy or reuse without permission.
+                        </p>
+                    </section>
+
+                    <!-- Section 14 -->
+                    <section id="section14" class="term-section">
+                        <h2 style="color: #003366;">14. GOVERNING LAW</h2>
+                        <p style="color: #555555;">
+                            Each country operates under its local laws. Disputes are subject to the 
+                            jurisdiction specified for your country.
+                        </p>
+                        
+                        <div class="country-jurisdiction" style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                            <h4 style="color: #003366;">🌍 COUNTRY-SPECIFIC JURISDICTION</h4>
+                            <ul style="color: #555555;">
+                                <li><strong>Kenya:</strong> Laws of Kenya, courts of Nairobi</li>
+                                <li><strong>Uganda:</strong> Laws of Uganda, courts of Kampala</li>
+                                <li><strong>Tanzania:</strong> Laws of Tanzania, courts of Dar es Salaam</li>
+                                <li><strong>Other countries:</strong> Respective national laws and courts</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 15 -->
+                    <section id="section15" class="term-section">
+                        <h2 style="color: #003366;">15. DISPUTE RESOLUTION</h2>
+                        <p style="color: #555555;">
+                            M-Pesewa may require disputes to be resolved by:
+                        </p>
+                        <ul style="color: #555555;">
+                            <li>Arbitration (binding)</li>
+                            <li>Local courts</li>
+                            <li>Internal dispute processes</li>
+                        </ul>
+                        <p style="color: #555555;">
+                            You agree to attempt informal resolution for 30 days before formal proceedings.
+                        </p>
+                    </section>
+
+                    <!-- Section 16 -->
+                    <section id="section16" class="term-section">
+                        <h2 style="color: #003366;">16. MODIFICATIONS</h2>
+                        <p style="color: #555555;">
+                            We may update these Terms at any time. Continued use means acceptance.
+                            We will notify users of material changes via email or platform notification.
+                        </p>
+                    </section>
+
+                    <!-- Section 17 -->
+                    <section id="section17" class="term-section">
+                        <h2 style="color: #003366;">17. CONTACT</h2>
+                        <p style="color: #555555;">
+                            <strong>Support:</strong> support@mpesewa.com<br>
+                            <strong>Legal:</strong> legal@mpesewa.com<br>
+                            <strong>Compliance:</strong> compliance@mpesewa.com
+                        </p>
+                    </section>
+
+                    <!-- Acceptance Section -->
+                    <section class="acceptance-section" style="background-color: #003366; color: #ffffff; padding: 30px; border-radius: 8px; margin-top: 40px;">
+                        <h3 style="color: #ffffff;">ACCEPTANCE OF TERMS</h3>
+                        <p>
+                            By clicking "I Agree" during registration or by using the M-Pesewa platform, 
+                            you acknowledge that you have read, understood, and agree to be bound by these 
+                            Terms and Conditions.
+                        </p>
+                        <div class="acceptance-actions" style="margin-top: 20px;">
+                            <a href="../auth/register.html" class="btn-primary" style="background-color: #28a745; color: #ffffff; margin-right: 10px;">
+                                I Agree - Continue to Registration
+                            </a>
+                            <a href="home.html" class="btn-outline" style="border-color: #ffffff; color: #ffffff;">
+                                I Disagree - Return to Home
+                            </a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="terms.html" style="color: #ffffff; font-weight: bold;">Terms & Conditions</a>
+                    <a href="privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="#" style="color: #d1d5db;">Grievance Redressal</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/terms.js"></script>
+    <script>
+        // Set current date
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    </script>
+</body>
+</html>

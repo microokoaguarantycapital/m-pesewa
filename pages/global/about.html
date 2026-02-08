@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About M-Pesewa - Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header (Same as home.html) -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                                <div class="category-group">
+                                    <h4>Logistics & Repairs</h4>
+                                    <a href="#" data-category="fuel">M-pesewa Fuel</a>
+                                    <a href="#" data-category="repair">M-pesewa Repair</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- About Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>About M-Pesewa</h1>
+                <p class="hero-subtitle">Revolutionizing emergency micro-lending in Africa through trusted circles</p>
+            </div>
+        </section>
+
+        <!-- Mission & Vision -->
+        <section class="about-section">
+            <div class="section-container">
+                <div class="about-grid">
+                    <div class="about-card" style="background-color: #ffffff;">
+                        <div class="about-icon">🎯</div>
+                        <h3 style="color: #003366;">Our Mission</h3>
+                        <p style="color: #555555;">
+                            To provide immediate, accessible, and trustworthy emergency micro-lending solutions 
+                            that empower African communities to overcome financial challenges within their trusted networks.
+                        </p>
+                    </div>
+                    
+                    <div class="about-card" style="background-color: #ffffff;">
+                        <div class="about-icon">👁️</div>
+                        <h3 style="color: #003366;">Our Vision</h3>
+                        <p style="color: #555555;">
+                            To become Africa's most trusted emergency lending platform, connecting millions 
+                            through responsible lending circles that foster financial inclusion and community resilience.
+                        </p>
+                    </div>
+                    
+                    <div class="about-card" style="background-color: #ffffff;">
+                        <div class="about-icon">🤝</div>
+                        <h3 style="color: #003366;">Our Values</h3>
+                        <p style="color: #555555;">
+                            Trust, Transparency, Community, Accountability, and Financial Empowerment form 
+                            the core of everything we do at M-Pesewa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Philosophy -->
+        <section class="philosophy-section" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Core Philosophy</h2>
+                
+                <div class="philosophy-content">
+                    <div class="philosophy-point">
+                        <h3 style="color: #003366;">Emergency Consumption Loans Only</h3>
+                        <p style="color: #555555;">
+                            We focus exclusively on emergency consumption needs - not business capital, 
+                            not investment, not luxury. When you need fare to work, data to complete a gig, 
+                            gas to cook dinner, medicine for a sick child.
+                        </p>
+                    </div>
+                    
+                    <div class="philosophy-point">
+                        <h3 style="color: #003366;">Friends Lend to Friends</h3>
+                        <p style="color: #555555;">
+                            All lending happens within trusted groups. Your church members, family network, 
+                            professional colleagues, or local community. People who know you, trust you, 
+                            and want to see you succeed.
+                        </p>
+                    </div>
+                    
+                    <div class="philosophy-point">
+                        <h3 style="color: #003366;">Platform Earns Only from Lender Subscriptions</h3>
+                        <p style="color: #555555;">
+                            Borrowers pay nothing to use M-Pesewa. We earn revenue only from lenders who 
+                            choose to subscribe for enhanced features and higher lending limits. 
+                            No hidden fees, no percentage cuts from loans.
+                        </p>
+                    </div>
+                    
+                    <div class="philosophy-point">
+                        <h3 style="color: #003366;">Strong Reputation & Blacklist Enforcement</h3>
+                        <p style="color: #555555;">
+                            Our 5-star rating system and strict blacklist policies ensure that trustworthy 
+                            borrowers get priority access, while defaulters face platform-wide consequences 
+                            until they make things right.
+                        </p>
+                    </div>
+                    
+                    <div class="philosophy-point">
+                        <h3 style="color: #003366;">No Cross-Country or Cross-Group Lending</h3>
+                        <p style="color: #555555;">
+                            Strict hierarchy enforcement: Global → Country → Groups → Lenders → Borrowers. 
+                            This maintains trust, accountability, and cultural relevance within each community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Innovation Comparison -->
+        <section class="innovation-section">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Why M-Pesewa is More Innovative</h2>
+                
+                <div class="comparison-table" style="background-color: #ffffff;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="color: #003366;">Feature</th>
+                                <th style="color: #003366;">Digital Lenders</th>
+                                <th style="color: #003366;">Traditional Chamas</th>
+                                <th style="color: #003366;">M-PESEWA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: #555555;">Trust Basis</td>
+                                <td style="color: #555555;">Algorithmic scoring</td>
+                                <td style="color: #555555;">Physical meetings only</td>
+                                <td style="color: #28a745;"><strong>Real human trust + digital convenience</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Risk Reduction</td>
+                                <td style="color: #555555;">High default rates</td>
+                                <td style="color: #555555;">Limited to small circles</td>
+                                <td style="color: #28a745;"><strong>Referral chains reduce default dramatically</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Loan Purpose</td>
+                                <td style="color: #555555;">Generic cash loans</td>
+                                <td style="color: #555555;">Group savings & investments</td>
+                                <td style="color: #28a745;"><strong>Specific utility lending prevents misuse</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Flexibility</td>
+                                <td style="color: #555555;">Rigid terms</td>
+                                <td style="color: #555555;">Fixed contribution cycles</td>
+                                <td style="color: #28a745;"><strong>Cross-group flexibility when needed</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Debt Safety</td>
+                                <td style="color: #555555;">Debt traps common</td>
+                                <td style="color: #555555;">Social pressure</td>
+                                <td style="color: #28a745;"><strong>Strict limits, short terms prevent traps</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Role Flexibility</td>
+                                <td style="color: #555555;">Fixed borrower/lender roles</td>
+                                <td style="color: #555555;">Fixed member roles</td>
+                                <td style="color: #28a745;"><strong>Dual borrower/lender role allowed</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="color: #555555;">Scale</td>
+                                <td style="color: #555555;">National only</td>
+                                <td style="color: #555555;">Local only</td>
+                                <td style="color: #28a745;"><strong>Global scalability with local relevance</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="advantages-grid">
+                    <div class="advantage-card floating-card">
+                        <div class="advantage-icon">👥</div>
+                        <h4 style="color: #003366;">Community Empowerment</h4>
+                        <p style="color: #555555;">We empower communities to solve their own financial challenges using existing trust networks.</p>
+                    </div>
+                    
+                    <div class="advantage-card floating-card">
+                        <div class="advantage-icon">🌍</div>
+                        <h4 style="color: #003366;">Pan-African Reach</h4>
+                        <p style="color: #555555;">Operating in 12+ African countries with local currency support and country-specific rules.</p>
+                    </div>
+                    
+                    <div class="advantage-card floating-card">
+                        <div class="advantage-icon">⚖️</div>
+                        <h4 style="color: #003366;">Regulator-Friendly</h4>
+                        <p style="color: #555555;">We don't handle funds, making us compliant with financial regulations across jurisdictions.</p>
+                    </div>
+                    
+                    <div class="advantage-card floating-card">
+                        <div class="advantage-icon">🔄</div>
+                        <h4 style="color: #003366;">Circular Economy</h4>
+                        <p style="color: #555555;">Money circulates within communities, strengthening local economies and trust bonds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strict Hierarchy Display -->
+        <section class="hierarchy-section" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #ffffff;">Our Strict Core Hierarchy</h2>
+                
+                <div class="hierarchy-display">
+                    <div class="hierarchy-level">
+                        <div class="level-circle" style="background-color: #0099ff;">1</div>
+                        <h3 style="color: #ffffff;">Global Platform</h3>
+                        <p>Single technology platform serving all countries</p>
+                    </div>
+                    
+                    <div class="hierarchy-arrow">↓</div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle" style="background-color: #0099ff;">2</div>
+                        <h3 style="color: #ffffff;">12 Countries</h3>
+                        <p>Kenya, Uganda, Tanzania, Rwanda, Burundi, DRC, South Sudan, South Africa, Nigeria, Ghana, Ethiopia, Somalia</p>
+                        <div class="country-flags">
+                            <span class="flag">🇰🇪</span>
+                            <span class="flag">🇺🇬</span>
+                            <span class="flag">🇹🇿</span>
+                            <span class="flag">🇷🇼</span>
+                            <span class="flag">🇧🇮</span>
+                            <span class="flag">🇨🇩</span>
+                            <span class="flag">🇸🇸</span>
+                            <span class="flag">🇿🇦</span>
+                            <span class="flag">🇳🇬</span>
+                            <span class="flag">🇬🇭</span>
+                            <span class="flag">🇪🇹</span>
+                            <span class="flag">🇸🇴</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hierarchy-arrow">↓</div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle" style="background-color: #0099ff;">3</div>
+                        <h3 style="color: #ffffff;">Trusted Groups</h3>
+                        <p>Unlimited groups per country<br>5-1000 members per group<br>Invitation/referral only</p>
+                    </div>
+                    
+                    <div class="hierarchy-arrow">↓</div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle" style="background-color: #0099ff;">4</div>
+                        <h3 style="color: #ffffff;">Lenders & Borrowers</h3>
+                        <p>
+                            <strong>Lenders:</strong> Subscription required, lend within group only<br>
+                            <strong>Borrowers:</strong> No subscription, borrow from group lenders
+                        </p>
+                    </div>
+                    
+                    <div class="hierarchy-arrow">↓</div>
+                    
+                    <div class="hierarchy-level">
+                        <div class="level-circle" style="background-color: #0099ff;">5</div>
+                        <h3 style="color: #ffffff;">Ledgers</h3>
+                        <p>Active loan records<br>One ledger per borrower-lender pair<br>Automatic interest/penalty calculation</p>
+                    </div>
+                </div>
+                
+                <div class="hierarchy-rules">
+                    <h4 style="color: #ffffff;">Non-Negotiable Rules Enforced by This Hierarchy:</h4>
+                    <ul>
+                        <li>✅ Country isolation: No cross-border transactions</li>
+                        <li>✅ Group isolation: Lenders cannot lend outside their group</li>
+                        <li>✅ Borrower limits: Maximum of 4 groups, only with good rating</li>
+                        <li>✅ Subscription enforcement: Lenders blocked when subscription expires</li>
+                        <li>✅ Admin supremacy: Admin can override any blacklist or ledger</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Objectives -->
+        <section class="objectives-section">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Platform Objectives & Impact</h2>
+                
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">🎯</div>
+                        <h4 style="color: #003366;">Solve Emergency Consumer Pain Points</h4>
+                        <p style="color: #555555;">Immediate access to small funds for genuine emergencies without bureaucratic delays.</p>
+                    </div>
+                    
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">🤝</div>
+                        <h4 style="color: #003366;">Enable Friends to Help Friends</h4>
+                        <p style="color: #555555;">Formalize informal lending within trusted circles with proper records and terms.</p>
+                    </div>
+                    
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">💸</div>
+                        <h4 style="color: #003366;">Create Income Opportunities for Lenders</h4>
+                        <p style="color: #555555;">Turn idle money into productive assets earning fair returns within trusted networks.</p>
+                    </div>
+                    
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">🔄</div>
+                        <h4 style="color: #003366;">Put Idle Money to Productive Use</h4>
+                        <p style="color: #555555;">Circulate money within communities instead of sitting in bank accounts.</p>
+                    </div>
+                    
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">🛡️</div>
+                        <h4 style="color: #003366;">Reduce Reliance on Predatory Lending</h4>
+                        <p style="color: #555555;">Provide fair alternative to loan sharks and high-interest digital lenders.</p>
+                    </div>
+                    
+                    <div class="objective-card">
+                        <div class="objective-icon" style="color: #f37021;">🏗️</div>
+                        <h4 style="color: #003366;">Build Trust-Based Financial Ecosystems</h4>
+                        <p style="color: #555555;">Strengthen social capital while providing financial services across Africa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Metrics -->
+        <section class="metrics-section" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Success Metrics We Track</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">99%</div>
+                        <div class="metric-label" style="color: #003366;">Target Repayment Rate</div>
+                        <p style="color: #555555;">Through group accountability and reputation systems</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">50%</div>
+                        <div class="metric-label" style="color: #003366;">Growth in Trusted Groups</div>
+                        <p style="color: #555555;">Annual target for new community formations</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">&lt;1%</div>
+                        <div class="metric-label" style="color: #003366;">Default Rates</div>
+                        <p style="color: #555555;">Through strict blacklist and referral systems</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">100K+</div>
+                        <div class="metric-label" style="color: #003366;">Lender Participation</div>
+                        <p style="color: #555555;">Active lenders across 12 African countries</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">24/7</div>
+                        <div class="metric-label" style="color: #003366;">Emergency Access</div>
+                        <p style="color: #555555;">Round-the-clock availability for urgent needs</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-value" style="color: #28a745;">12</div>
+                        <div class="metric-label" style="color: #003366;">African Countries</div>
+                        <p style="color: #555555;">Serving diverse communities with local relevance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="section-container">
+                <h2 style="color: #003366;">Join the M-Pesewa Revolution</h2>
+                <p style="color: #555555;">Be part of Africa's most innovative emergency lending platform</p>
+                
+                <div class="cta-buttons">
+                    <a href="../auth/register.html?role=borrower" class="btn-primary" style="background-color: #f37021; color: #ffffff;">
+                        Start Borrowing
+                    </a>
+                    <a href="../auth/register.html?role=lender" class="btn-secondary" style="background-color: #28a745; color: #ffffff;">
+                        Start Lending
+                    </a>
+                    <a href="../global/how-it-works.html" class="btn-outline" style="border-color: #003366; color: #003366;">
+                        Learn How It Works
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Same as home.html) -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="#" style="color: #d1d5db;">Grievance Redressal</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/about.js"></script>
+</body>
+</html>

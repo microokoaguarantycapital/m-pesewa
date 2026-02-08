@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - M-Pesewa Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Contact Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>Contact Us</h1>
+                <p class="hero-subtitle">We're here to help. Get in touch with our team</p>
+            </div>
+        </section>
+
+        <!-- Contact Options -->
+        <section class="contact-options">
+            <div class="section-container">
+                <div class="options-grid">
+                    <div class="option-card" style="background-color: #ffffff; border-top: 4px solid #f37021;">
+                        <div class="option-icon" style="color: #f37021;">📞</div>
+                        <h3 style="color: #003366;">Phone Support</h3>
+                        <p style="color: #555555;">Speak directly with our support team</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Kenya:</strong>
+                                <span style="color: #555555;">+254 709 219 000</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Uganda:</strong>
+                                <span style="color: #555555;">+256 392 175 546</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Tanzania:</strong>
+                                <span style="color: #555555;">+255 659 073 010</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Hours:</strong>
+                                <span style="color: #555555;">Mon-Fri, 8AM-6PM (Local Time)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" style="background-color: #ffffff; border-top: 4px solid #28a745;">
+                        <div class="option-icon" style="color: #28a745;">📧</div>
+                        <h3 style="color: #003366;">Email Support</h3>
+                        <p style="color: #555555;">Send us an email for detailed inquiries</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <strong style="color: #003366;">General:</strong>
+                                <span style="color: #555555;">info@mpesewa.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Support:</strong>
+                                <span style="color: #555555;">support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Business:</strong>
+                                <span style="color: #555555;">partnerships@mpesewa.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Response Time:</strong>
+                                <span style="color: #555555;">Within 24 hours</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-card" style="background-color: #ffffff; border-top: 4px solid #0099ff;">
+                        <div class="option-icon" style="color: #0099ff;">💬</div>
+                        <h3 style="color: #003366;">Live Chat</h3>
+                        <p style="color: #555555;">Instant messaging with our team</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Availability:</strong>
+                                <span style="color: #555555;">24/7 for urgent issues</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Access:</strong>
+                                <span style="color: #555555;">From your dashboard</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Languages:</strong>
+                                <span style="color: #555555;">English, Swahili, French</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong style="color: #003366;">Response:</strong>
+                                <span style="color: #555555;">Under 5 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Country-Specific Contacts -->
+        <section class="country-contacts" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Country-Specific Contact Information</h2>
+                <p class="section-description" style="color: #555555;">
+                    Contact our local teams in your country for region-specific support
+                </p>
+                
+                <div class="country-grid">
+                    <!-- Kenya -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇰🇪</div>
+                        <h3 style="color: #003366;">Kenya</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+254 709 219 000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">ke-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa House, Nairobi</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Kenyan Shilling (KSh)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM EAT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Uganda -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇺🇬</div>
+                        <h3 style="color: #003366;">Uganda</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+256 392 175 546</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">ug-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa Plaza, Kampala</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Ugandan Shilling (UGX)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM EAT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tanzania -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇹🇿</div>
+                        <h3 style="color: #003366;">Tanzania</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+255 659 073 010</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">tz-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa Center, Dar es Salaam</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Tanzanian Shilling (TZS)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM EAT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rwanda -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇷🇼</div>
+                        <h3 style="color: #003366;">Rwanda</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+250 791 590 801</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">rw-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa Offices, Kigali</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Rwandan Franc (RWF)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM CAT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DRC -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇨🇩</div>
+                        <h3 style="color: #003366;">DR Congo</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+243 81 000 0000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">cd-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa Building, Kinshasa</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Congolese Franc (CDF)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM WAT</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- South Africa -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇿🇦</div>
+                        <h3 style="color: #003366;">South Africa</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+27 11 000 0000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">za-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Address:</strong>
+                                <span style="color: #555555;">M-Pesewa Tower, Johannesburg</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">South African Rand (ZAR)</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Hours:</strong>
+                                <span style="color: #555555;">8AM-6PM SAST</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-more">
+                    <button id="show-all-countries" class="btn-outline" style="border-color: #003366; color: #003366;">
+                        View All 12 Countries
+                    </button>
+                </div>
+                
+                <!-- Hidden countries -->
+                <div id="more-countries" class="country-grid" style="display: none; margin-top: 30px;">
+                    <!-- Nigeria -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇳🇬</div>
+                        <h3 style="color: #003366;">Nigeria</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+234 800 000 0000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">ng-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Nigerian Naira (NGN)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ghana -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇬🇭</div>
+                        <h3 style="color: #003366;">Ghana</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+233 24 000 0000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">gh-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Ghanaian Cedi (GHS)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ethiopia -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇪🇹</div>
+                        <h3 style="color: #003366;">Ethiopia</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">Coming Soon</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">et-info@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Ethiopian Birr (ETB)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Somalia -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇸🇴</div>
+                        <h3 style="color: #003366;">Somalia</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+252 63 0000000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">so-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Somali Shilling (SOS)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- South Sudan -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇸🇸</div>
+                        <h3 style="color: #003366;">South Sudan</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+211 900 000 000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">ss-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">South Sudanese Pound (SSP)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Burundi -->
+                    <div class="country-card" style="background-color: #ffffff;">
+                        <div class="country-flag">🇧🇮</div>
+                        <h3 style="color: #003366;">Burundi</h3>
+                        <div class="country-details">
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Phone:</strong>
+                                <span style="color: #555555;">+257 79 000 000</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Email:</strong>
+                                <span style="color: #555555;">bi-support@mpesewa.com</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong style="color: #555555;">Currency:</strong>
+                                <span style="color: #555555;">Burundian Franc (BIF)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-form-section">
+            <div class="section-container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2 style="color: #003366;">Send Us a Message</h2>
+                        <p style="color: #555555;">Fill out the form below and we'll get back to you as soon as possible</p>
+                    </div>
+                    
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="full-name" style="color: #003366;">Full Name *</label>
+                                <input type="text" id="full-name" name="full-name" required placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" style="color: #003366;">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" style="color: #003366;">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="country" style="color: #003366;">Country *</label>
+                                <select id="country" name="country" required>
+                                    <option value="">Select your country</option>
+                                    <option value="ke">Kenya</option>
+                                    <option value="ug">Uganda</option>
+                                    <option value="tz">Tanzania</option>
+                                    <option value="rw">Rwanda</option>
+                                    <option value="cd">DR Congo</option>
+                                    <option value="za">South Africa</option>
+                                    <option value="ng">Nigeria</option>
+                                    <option value="gh">Ghana</option>
+                                    <option value="et">Ethiopia</option>
+                                    <option value="so">Somalia</option>
+                                    <option value="ss">South Sudan</option>
+                                    <option value="bi">Burundi</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="subject" style="color: #003366;">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="borrower">Borrower Assistance</option>
+                                    <option value="lender">Lender Support</option>
+                                    <option value="subscription">Subscription Issues</option>
+                                    <option value="blacklist">Blacklist Appeal</option>
+                                    <option value="dispute">Dispute Resolution</option>
+                                    <option value="security">Security Concern</option>
+                                    <option value="partnership">Partnership Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message" style="color: #003366;">Message *</label>
+                                <textarea id="message" name="message" rows="6" required placeholder="Please provide details about your inquiry..."></textarea>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <div class="attachment">
+                                    <label for="attachment" style="color: #003366;">Attachments (Optional)</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="attachment" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                                        <label for="attachment" class="upload-label">
+                                            <span>Choose File</span>
+                                            <span class="file-name">No file chosen</span>
+                                        </label>
+                                    </div>
+                                    <p style="color: #555555; font-size: 12px; margin-top: 5px;">
+                                        Maximum file size: 5MB. Supported formats: PDF, JPG, PNG, DOC, DOCX
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="urgent" name="urgent">
+                                    <label for="urgent" style="color: #555555;">Mark as urgent (Requires immediate attention)</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="consent" name="consent" required>
+                                    <label for="consent" style="color: #555555;">
+                                        I agree to the <a href="terms.html" style="color: #0099ff;">Terms & Conditions</a> and 
+                                        <a href="privacy.html" style="color: #0099ff;">Privacy Policy</a> *
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" style="background-color: #f37021; color: #ffffff; padding: 12px 30px;">
+                                Send Message
+                            </button>
+                            <button type="reset" class="btn-outline" style="border-color: #003366; color: #003366; padding: 12px 30px;">
+                                Clear Form
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="form-success" class="form-success" style="display: none; background-color: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin-top: 20px;">
+                        <h4 style="color: #155724;">✅ Message Sent Successfully!</h4>
+                        <p style="color: #155724;">
+                            Thank you for contacting M-Pesewa. We have received your message and will respond within 
+                            24 hours. For urgent matters, please call our support line.
+                        </p>
+                    </div>
+                    
+                    <div id="form-error" class="form-error" style="display: none; background-color: #f8d7da; border-left: 4px solid #dc3545; padding: 20px; margin-top: 20px;">
+                        <h4 style="color: #721c24;">❌ Error Sending Message</h4>
+                        <p style="color: #721c24;">
+                            There was an error sending your message. Please try again or contact us directly via phone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Preview -->
+        <section class="faq-preview" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <div class="preview-header">
+                    <h2 style="color: #003366;">Frequently Asked Questions</h2>
+                    <p style="color: #555555;">Quick answers to common questions</p>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4 style="color: #003366;">How do I reset my password?</h4>
+                        <p style="color: #555555;">
+                            Go to the login page and click "Forgot Password." Enter your email or phone number, 
+                            and we'll send you a reset link. If you don't receive it, check your spam folder.
+                        </p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 style="color: #003366;">Why is my subscription not working?</h4>
+                        <p style="color: #555555;">
+                            Subscriptions expire on the 28th of each month. If your subscription isn't working, 
+                            check if it has expired and make a new payment. Payments may take up to 15 minutes to process.
+                        </p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 style="color: #003366;">How do I appeal a blacklist?</h4>
+                        <p style="color: #555555;">
+                            Blacklist appeals must be submitted to the Platform Admin. Contact support with your 
+                            username and details of why you should be removed from the blacklist.
+                        </p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4 style="color: #003366;">Can I change my country after registration?</h4>
+                        <p style="color: #555555;">
+                            No, country selection is permanent due to regulatory requirements. To use M-Pesewa in 
+                            another country, you must create a new account with that country's credentials.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-cta">
+                    <a href="faq.html" class="btn-outline" style="border-color: #003366; color: #003366;">
+                        View All FAQs
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Locations -->
+        <section class="office-locations">
+            <div class="section-container">
+                <h2 style="color: #003366;">Our Regional Offices</h2>
+                
+                <div class="office-grid">
+                    <div class="office-card" style="background-color: #ffffff;">
+                        <div class="office-map">
+                            <div style="width: 100%; height: 200px; background-color: #e8f4f8; display: flex; align-items: center; justify-content: center; color: #0099ff; font-size: 48px;">
+                            📍
+                            </div>
+                        </div>
+                        <div class="office-details">
+                            <h3 style="color: #003366;">East Africa Headquarters</h3>
+                            <p style="color: #555555;">
+                                <strong>Address:</strong> M-Pesewa House, 3rd Floor<br>
+                                Westlands, Nairobi, Kenya
+                            </p>
+                            <p style="color: #555555;">
+                                <strong>Phone:</strong> +254 709 219 000<br>
+                                <strong>Email:</strong> eastafrica@mpesewa.com
+                            </p>
+                            <p style="color: #555555;">
+                                <strong>Hours:</strong> Mon-Fri, 8:00 AM - 6:00 PM EAT
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="office-card" style="background-color: #ffffff;">
+                        <div class="office-map">
+                            <div style="width: 100%; height: 200px; background-color: #e8f4f8; display: flex; align-items: center; justify-content: center; color: #0099ff; font-size: 48px;">
+                            📍
+                            </div>
+                        </div>
+                        <div class="office-details">
+                            <h3 style="color: #003366;">Southern Africa Office</h3>
+                            <p style="color: #555555;">
+                                <strong>Address:</strong> M-Pesewa Tower, 7th Floor<br>
+                                Sandton, Johannesburg, South Africa
+                            </p>
+                            <p style="color: #555555;">
+                                <strong>Phone:</strong> +27 11 000 0000<br>
+                                <strong>Email:</strong> southernafrica@mpesewa.com
+                            </p>
+                            <p style="color: #555555;">
+                                <strong>Hours:</strong> Mon-Fri, 8:00 AM - 6:00 PM SAST
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Support -->
+        <section class="emergency-support" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <div class="emergency-content">
+                    <div class="emergency-icon" style="font-size: 48px;">🚨</div>
+                    <h2 style="color: #ffffff;">Emergency Support</h2>
+                    <p>
+                        For urgent security issues, suspected fraud, or platform abuse:
+                    </p>
+                    <div class="emergency-contacts">
+                        <div class="emergency-item">
+                            <strong style="color: #ffffff;">Security Team:</strong>
+                            <span style="color: #d1d5db;">security@mpesewa.com</span>
+                        </div>
+                        <div class="emergency-item">
+                            <strong style="color: #ffffff;">24/7 Hotline:</strong>
+                            <span style="color: #d1d5db;">+254 711 000 000</span>
+                        </div>
+                        <div class="emergency-item">
+                            <strong style="color: #ffffff;">Response Time:</strong>
+                            <span style="color: #d1d5db;">Within 1 hour for critical issues</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px;">
+                        <em>Note: For non-emergency issues, please use regular support channels to ensure 
+                        faster response for critical matters.</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="contact.html" style="color: #ffffff; font-weight: bold;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="../global/cookies.html" style="color: #d1d5db;">Cookies Policy</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/contact.js"></script>
+    <script>
+        // Show all countries functionality
+        document.getElementById('show-all-countries').addEventListener('click', function() {
+            const moreCountries = document.getElementById('more-countries');
+            const button = this;
+            
+            if (moreCountries.style.display === 'none' || moreCountries.style.display === '') {
+                moreCountries.style.display = 'grid';
+                button.textContent = 'Show Less Countries';
+            } else {
+                moreCountries.style.display = 'none';
+                button.textContent = 'View All 12 Countries';
+            }
+        });
+        
+        // File upload functionality
+        const fileInput = document.getElementById('attachment');
+        const fileName = document.querySelector('.file-name');
+        
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+            } else {
+                fileName.textContent = 'No file chosen';
+            }
+        });
+        
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const consent = document.getElementById('consent');
+            if (!consent.checked) {
+                alert('You must agree to the Terms & Conditions and Privacy Policy');
+                return;
+            }
+            
+            // Simulate form submission
+            const formSuccess = document.getElementById('form-success');
+            const formError = document.getElementById('form-error');
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // For demo purposes, always show success
+                // In real implementation, this would be based on actual API response
+                formSuccess.style.display = 'block';
+                formError.style.display = 'none';
+                
+                // Reset form
+                this.reset();
+                fileName.textContent = 'No file chosen';
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Hide success message after 10 seconds
+                setTimeout(() => {
+                    formSuccess.style.display = 'none';
+                }, 10000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

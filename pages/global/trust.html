@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust & Community - M-Pesewa Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Trust Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>Trust & Community</h1>
+                <p class="hero-subtitle">Building Africa's most trusted emergency lending ecosystem through community-powered finance</p>
+            </div>
+        </section>
+
+        <!-- Trust Philosophy -->
+        <section class="trust-philosophy">
+            <div class="section-container">
+                <div class="philosophy-card" style="background-color: #ffffff; border-left: 4px solid #28a745; padding: 30px; margin-bottom: 40px;">
+                    <h2 style="color: #003366;">🤝 Our Trust Philosophy</h2>
+                    <p style="color: #555555;">
+                        At M-Pesewa, we believe that <strong>trust is the foundation of all financial relationships</strong>. 
+                        Unlike traditional banks that rely on algorithms and credit scores, we leverage existing social 
+                        trust within communities to create a safer, more reliable lending environment.
+                    </p>
+                    <p style="color: #555555; margin-top: 15px;">
+                        Our platform doesn't create trust—it amplifies and structures the trust that already exists 
+                        between friends, family, and community members.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Pillars -->
+        <section class="trust-pillars" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">The 5 Pillars of M-Pesewa Trust</h2>
+                
+                <div class="pillars-grid">
+                    <div class="pillar-card floating-card">
+                        <div class="pillar-number" style="background-color: #f37021; color: #ffffff;">1</div>
+                        <h3 style="color: #003366;">Community-Based Verification</h3>
+                        <p style="color: #555555;">
+                            Every member joins through referral from someone who knows them well. 
+                            2 referrers/guarantors required for registration, ensuring genuine identities.
+                        </p>
+                    </div>
+                    
+                    <div class="pillar-card floating-card">
+                        <div class="pillar-number" style="background-color: #28a745; color: #ffffff;">2</div>
+                        <h3 style="color: #003366;">Strict Group Isolation</h3>
+                        <p style="color: #555555;">
+                            Lenders can only lend within their trusted groups. No cross-group lending, 
+                            maintaining clear accountability and social pressure for repayment.
+                        </p>
+                    </div>
+                    
+                    <div class="pillar-card floating-card">
+                        <div class="pillar-number" style="background-color: #0099ff; color: #ffffff;">3</div>
+                        <h3 style="color: #003366;">Transparent Reputation System</h3>
+                        <p style="color: #555555;">
+                            5-star rating system visible to all group members. Good ratings unlock 
+                            access to more groups (up to 4), creating incentives for responsible behavior.
+                        </p>
+                    </div>
+                    
+                    <div class="pillar-card floating-card">
+                        <div class="pillar-number" style="background-color: #003366; color: #ffffff;">4</div>
+                        <h3 style="color: #003366;">Accountability Mechanisms</h3>
+                        <p style="color: #555555;">
+                            Blacklist system with platform-wide visibility. Defaulters cannot borrow 
+                            or join new groups until cleared by Admin after full repayment.
+                        </p>
+                    </div>
+                    
+                    <div class="pillar-card floating-card">
+                        <div class="pillar-number" style="background-color: #6c757d; color: #ffffff;">5</div>
+                        <h3 style="color: #003366;">Human-Centric Design</h3>
+                        <p style="color: #555555;">
+                            Platform designed for human interaction, not algorithmic decision-making. 
+                            Real relationships, real trust, real accountability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Metrics -->
+        <section class="trust-metrics">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Trust by the Numbers</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">⭐</div>
+                        <div class="metric-value" style="color: #28a745;">99.2%</div>
+                        <div class="metric-label" style="color: #003366;">Average Borrower Rating</div>
+                        <p style="color: #555555; font-size: 14px;">Across all successful loans completed</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">🤝</div>
+                        <div class="metric-value" style="color: #28a745;">5,000+</div>
+                        <div class="metric-label" style="color: #003366;">Active Trusted Groups</div>
+                        <p style="color: #555555; font-size: 14px;">Family, church, professional networks</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-value" style="color: #28a745;">&lt;1%</div>
+                        <div class="metric-label" style="color: #003366;">Default Rate</div>
+                        <p style="color: #555555; font-size: 14px;">Significantly lower than industry average</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">👥</div>
+                        <div class="metric-value" style="color: #28a745;">100K+</div>
+                        <div class="metric-label" style="color: #003366;">Trusted Members</div>
+                        <p style="color: #555555; font-size: 14px;">Across 12 African countries</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">🔄</div>
+                        <div class="metric-value" style="color: #28a745;">95%</div>
+                        <div class="metric-label" style="color: #003366;">Repeat Engagement</div>
+                        <p style="color: #555555; font-size: 14px;">Members return for multiple loans/lending</p>
+                    </div>
+                    
+                    <div class="metric-card" style="background-color: #ffffff;">
+                        <div class="metric-icon">🏆</div>
+                        <div class="metric-value" style="color: #28a745;">4.8/5</div>
+                        <div class="metric-label" style="color: #003366;">Platform Trust Score</div>
+                        <p style="color: #555555; font-size: 14px;">Based on user reviews and feedback</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reputation System -->
+        <section class="reputation-system" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #ffffff;">Our 5-Star Reputation System</h2>
+                
+                <div class="reputation-explanation">
+                    <div class="rep-visual">
+                        <div class="stars-display">
+                            <span class="star large">⭐</span>
+                            <span class="star large">⭐</span>
+                            <span class="star large">⭐</span>
+                            <span class="star large">⭐</span>
+                            <span class="star large">⭐</span>
+                        </div>
+                        <div class="rep-score" style="color: #ffffff; font-size: 48px; font-weight: bold;">4.8</div>
+                    </div>
+                    
+                    <div class="rep-details">
+                        <h3 style="color: #ffffff;">How Reputation Works</h3>
+                        <p>
+                            After each loan repayment, lenders rate borrowers on a 5-star scale. This rating 
+                            becomes part of the borrower's permanent profile and is visible to all group members.
+                        </p>
+                        
+                        <div class="rating-criteria">
+                            <div class="criteria-item">
+                                <div class="criteria-stars">
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                                <div class="criteria-desc">
+                                    <strong>5 Stars:</strong> Excellent - repaid early, perfect communication
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-stars">
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                                <div class="criteria-desc">
+                                    <strong>4 Stars:</strong> Good - minor delays with good communication
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-stars">
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                                <div class="criteria-desc">
+                                    <strong>3 Stars:</strong> Average - significant delays but eventual repayment
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-stars">
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                                <div class="criteria-desc">
+                                    <strong>2 Stars:</strong> Poor - required reminders, partial repayment issues
+                                </div>
+                            </div>
+                            
+                            <div class="criteria-item">
+                                <div class="criteria-stars">
+                                    <span class="star">⭐</span>
+                                </div>
+                                <div class="criteria-desc">
+                                    <strong>1 Star:</strong> Very Poor - defaulted, blacklist consideration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reputation-benefits">
+                    <h3 style="color: #ffffff;">Benefits of Good Reputation</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                            <div class="benefit-icon">👥</div>
+                            <h4 style="color: #ffffff;">More Groups</h4>
+                            <p>Access up to 4 groups (vs. 1 for new users)</p>
+                        </div>
+                        
+                        <div class="benefit-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                            <div class="benefit-icon">💰</div>
+                            <h4 style="color: #ffffff;">Higher Limits</h4>
+                            <p>Borrow larger amounts from lenders</p>
+                        </div>
+                        
+                        <div class="benefit-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                            <div class="benefit-icon">⚡</div>
+                            <h4 style="color: #ffffff;">Faster Approval</h4>
+                            <p>Loans approved quicker by trusted lenders</p>
+                        </div>
+                        
+                        <div class="benefit-card" style="background-color: rgba(255, 255, 255, 0.1);">
+                            <div class="benefit-icon">🤝</div>
+                            <h4 style="color: #ffffff;">Better Terms</h4>
+                            <p>Potential for flexible repayment terms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blacklist System -->
+        <section class="blacklist-system">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Accountability: The Blacklist System</h2>
+                
+                <div class="blacklist-explanation">
+                    <div class="blacklist-visual">
+                        <div class="blacklist-badge" style="background-color: #dc3545; color: #ffffff; padding: 20px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 48px;">⚠️</div>
+                            <div style="font-size: 24px; font-weight: bold;">BLACKLISTED</div>
+                            <div style="font-size: 14px;">Cannot Borrow | Cannot Join Groups</div>
+                        </div>
+                    </div>
+                    
+                    <div class="blacklist-details">
+                        <h3 style="color: #003366;">How the Blacklist Works</h3>
+                        
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-number" style="background-color: #f37021; color: #ffffff;">1</div>
+                                <div class="step-content">
+                                    <h4 style="color: #003366;">Default Trigger</h4>
+                                    <p style="color: #555555;">Borrower fails to repay for 2 months (60 days)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number" style="background-color: #f37021; color: #ffffff;">2</div>
+                                <div class="step-content">
+                                    <h4 style="color: #003366;">Automatic Blacklist</h4>
+                                    <p style="color: #555555;">System applies blacklist badge to profile</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number" style="background-color: #f37021; color: #ffffff;">3</div>
+                                <div class="step-content">
+                                    <h4 style="color: #003366;">Platform-Wide Visibility</h4>
+                                    <p style="color: #555555;">All lenders can see blacklist status</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number" style="background-color: #f37021; color: #ffffff;">4</div>
+                                <div class="step-content">
+                                    <h4 style="color: #003366;">Restrictions Applied</h4>
+                                    <p style="color: #555555;">Cannot borrow or join new groups</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-number" style="background-color: #f37021; color: #ffffff;">5</div>
+                                <div class="step-content">
+                                    <h4 style="color: #003366;">Removal Process</h4>
+                                    <p style="color: #555555;">Only by Admin after full repayment + penalties</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="blacklist-purpose" style="background-color: #f8f9fa; padding: 25px; border-radius: 8px; margin-top: 30px;">
+                    <h4 style="color: #003366;">🎯 Purpose of the Blacklist System</h4>
+                    <p style="color: #555555;">
+                        The blacklist isn't punishment—it's protection. It protects lenders from chronic defaulters 
+                        and protects the community trust that makes M-Pesewa work. By making consequences clear and 
+                        visible, we create a self-regulating ecosystem where responsible behavior is rewarded and 
+                        irresponsible behavior has clear consequences.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Stories -->
+        <section class="community-stories" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Community Trust in Action</h2>
+                
+                <div class="stories-grid">
+                    <div class="story-card" style="background-color: #ffffff;">
+                        <div class="story-header">
+                            <div class="story-avatar">👨‍👩‍👧‍👦</div>
+                            <div class="story-meta">
+                                <div class="story-name" style="color: #003366;">Family Trust Circle</div>
+                                <div class="story-location" style="color: #555555;">Nairobi, Kenya</div>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <p style="color: #555555;">
+                                "Our extended family of 45 members has been using M-Pesewa for 2 years. 
+                                We've completed 120 loans with zero defaults. The trust system helped us 
+                                formalize what we were already doing informally."
+                            </p>
+                            <div class="story-stats">
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>120</strong> loans
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>0%</strong> default
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>4.9★</strong> rating
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card" style="background-color: #ffffff;">
+                        <div class="story-header">
+                            <div class="story-avatar">⛪</div>
+                            <div class="story-meta">
+                                <div class="story-name" style="color: #003366;">Church Lending Group</div>
+                                <div class="story-location" style="color: #555555;">Kampala, Uganda</div>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <p style="color: #555555;">
+                                "As a church community of 200 members, M-Pesewa helped us create a structured 
+                                way to help each other in emergencies. The reputation system encourages 
+                                responsibility while maintaining compassion."
+                            </p>
+                            <div class="story-stats">
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>85</strong> active lenders
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>&lt;1%</strong> default
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>4.7★</strong> rating
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="story-card" style="background-color: #ffffff;">
+                        <div class="story-header">
+                            <div class="story-avatar">👔</div>
+                            <div class="story-meta">
+                                <div class="story-name" style="color: #003366;">Professional Network</div>
+                                <div class="story-location" style="color: #555555;">Dar es Salaam, Tanzania</div>
+                            </div>
+                        </div>
+                        <div class="story-content">
+                            <p style="color: #555555;">
+                                "Our 150-member professional association uses M-Pesewa for business 
+                                emergency loans. The dual role system allows members to both borrow 
+                                for emergencies and lend for extra income."
+                            </p>
+                            <div class="story-stats">
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>300+</strong> loans
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>100%</strong> repayment
+                                </div>
+                                <div class="stat" style="color: #28a745;">
+                                    <strong>4.8★</strong> rating
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Building -->
+        <section class="trust-building">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Building Trust Together</h2>
+                
+                <div class="building-grid">
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">🔒</div>
+                        <h3 style="color: #003366;">Security First</h3>
+                        <p style="color: #555555;">
+                            Bank-level encryption, secure authentication, and regular security audits 
+                            ensure your data and transactions are protected.
+                        </p>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">📜</div>
+                        <h3 style="color: #003366;">Transparent Rules</h3>
+                        <p style="color: #555555;">
+                            Clear terms, no hidden fees, and open communication about how the platform works 
+                            and what's expected from everyone.
+                        </p>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">👁️</div>
+                        <h3 style="color: #003366;">Visibility & Control</h3>
+                        <p style="color: #555555;">
+                            You control who sees your information, can view your complete history, 
+                            and manage your privacy settings.
+                        </p>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">⚖️</div>
+                        <h3 style="color: #003366;">Fair Resolution</h3>
+                        <p style="color: #555555;">
+                            Clear dispute resolution processes, Admin oversight, and mediation options 
+                            for when issues arise.
+                        </p>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">🔄</div>
+                        <h3 style="color: #003366;">Continuous Improvement</h3>
+                        <p style="color: #555555;">
+                            Regular platform updates based on community feedback and changing needs 
+                            to serve you better.
+                        </p>
+                    </div>
+                    
+                    <div class="building-card">
+                        <div class="building-icon" style="color: #f37021;">🌍</div>
+                        <h3 style="color: #003366;">Local Relevance</h3>
+                        <p style="color: #555555;">
+                            Country-specific features, local currency support, and understanding of 
+                            cultural contexts across Africa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust CTA -->
+        <section class="trust-cta" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <div class="cta-content">
+                    <h2 style="color: #ffffff;">Join a Trusted Community Today</h2>
+                    <p>
+                        Experience the power of community-based trust. Join thousands of Africans who are 
+                        building financial resilience together through trusted relationships.
+                    </p>
+                    
+                    <div class="cta-buttons">
+                        <a href="../auth/register.html?role=borrower" class="btn-primary" style="background-color: #f37021; color: #ffffff;">
+                            👤 Become a Borrower
+                        </a>
+                        <a href="../auth/register.html?role=lender" class="btn-secondary" style="background-color: #28a745; color: #ffffff;">
+                            💼 Become a Lender
+                        </a>
+                        <a href="how-it-works.html" class="btn-outline" style="border-color: #ffffff; color: #ffffff;">
+                            📖 Learn How It Works
+                        </a>
+                    </div>
+                    
+                    <div class="trust-assurance" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                        <h4 style="color: #ffffff;">🔒 Your Trust is Our Priority</h4>
+                        <p style="color: #d1d5db;">
+                            We are committed to maintaining the highest standards of security, transparency, 
+                            and community protection. Your trust is the foundation of everything we do.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="../global/cookies.html" style="color: #d1d5db;">Cookies Policy</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/trust.js"></script>
+</body>
+</html>

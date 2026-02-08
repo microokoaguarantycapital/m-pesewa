@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Preferences - M-Pesewa</title>
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/forms.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/navigation.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/tables.css">
+    <link rel="stylesheet" href="../assets/css/badges.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <!-- Country Flag CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    
+    <style>
+        .preferences-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .preferences-header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .preferences-header h1 {
+            color: #003366;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .preferences-header p {
+            color: #555;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .preference-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 51, 102, 0.1);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .preference-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .preference-card h3 {
+            color: #003366;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f37021;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preference-card h3 i {
+            color: #0099ff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #003366;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group .hint {
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #28a745;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
+            font-size: 1rem;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .select-wrapper select:focus {
+            border-color: #0099ff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.1);
+        }
+
+        .select-wrapper::after {
+            content: "▼";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #003366;
+            pointer-events: none;
+            font-size: 0.8rem;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            border-color: #0099ff;
+            background-color: #f8f9fa;
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: #28a745;
+        }
+
+        .radio-option input[type="radio"]:checked::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: #28a745;
+            border-radius: 50%;
+        }
+
+        .radio-option label {
+            color: #333;
+            cursor: pointer;
+            flex: 1;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .preference-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn-secondary {
+            background-color: #0099ff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #0080e6;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: #f37021;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05f10;
+            transform: translateY(-2px);
+        }
+
+        .country-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background-color: #f0f9ff;
+            border: 1px solid #0099ff;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #003366;
+            margin: 5px 0;
+        }
+
+        .country-badge .flag-icon {
+            font-size: 1.2rem;
+        }
+
+        .notification-types {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notification-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+
+        .notification-type .type-info h4 {
+            margin: 0 0 5px 0;
+            color: #003366;
+            font-size: 1rem;
+        }
+
+        .notification-type .type-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .currency-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .currency-display .currency-code {
+            font-weight: bold;
+            color: #003366;
+            min-width: 60px;
+        }
+
+        .currency-display .currency-name {
+            color: #666;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .preferences-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .preferences-container {
+                padding: 20px 15px;
+            }
+            
+            .preference-actions {
+                flex-direction: column;
+            }
+            
+            .preference-actions button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .preferences-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .preference-card {
+                padding: 20px;
+            }
+            
+            .notification-type {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="mp-header">
+        <nav class="header-nav">
+            <div class="header-logo">
+                <a href="../index.html">
+                    <h1>M-PESEWA</h1>
+                </a>
+            </div>
+            
+            <div class="header-menu">
+                <a href="../index.html">Home</a>
+                
+                <!-- Lenders Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Lenders ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../lender/pages/lender-dashboard.html">Dashboard</a>
+                        <a href="../lender/pages/lending-portfolio.html">Portfolio</a>
+                        <a href="../lender/pages/lending-history.html">History</a>
+                        <a href="../lender/pages/lending-rules.html">Rules</a>
+                        <a href="../lender/pages/lending-risk.html">Risk</a>
+                    </div>
+                </div>
+                
+                <!-- Borrowers Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Borrowers ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../borrower/pages/borrower-dashboard.html">Dashboard</a>
+                        <a href="../borrower/pages/borrow-request.html">Apply for Loan</a>
+                        <a href="../borrower/pages/borrow-history.html">Borrow History</a>
+                        <a href="../borrower/pages/borrow-repayments.html">Repayments</a>
+                        <a href="../borrower/pages/borrow-disputes.html">Disputes</a>
+                    </div>
+                </div>
+                
+                <!-- Emergency Hub Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Emergency Hub ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../emergency/everyday-essentials.html">Everyday Essentials</a>
+                        <a href="../emergency/logistics-repairs.html">Logistics & Repairs</a>
+                        <a href="../emergency/business-growth.html">Business & Growth</a>
+                        <a href="../emergency/health-education.html">Health & Education</a>
+                    </div>
+                </div>
+                
+                <!-- Subscription Plans Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Subscription Plans ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../subscription/plans.html">Current Plan</a>
+                        <a href="../subscription/subscribe.html">Upgrade</a>
+                        <a href="../subscription/history.html">History</a>
+                        <a href="../subscription/invoices.html">Invoices</a>
+                    </div>
+                </div>
+                
+                <!-- Country Dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Country ▾</a>
+                    <div class="dropdown-content">
+                        <a href="../countries/ke.html">Kenya</a>
+                        <a href="../countries/ug.html">Uganda</a>
+                        <a href="../countries/tz.html">Tanzania</a>
+                        <a href="../countries/rw.html">Rwanda</a>
+                        <a href="../countries/drc.html">DRC</a>
+                        <a href="../countries/bi.html">Burundi</a>
+                        <a href="../countries/ng.html">Nigeria</a>
+                        <a href="../countries/gh.html">Ghana</a>
+                        <a href="../countries/ssd.html">South Sudan</a>
+                        <a href="../countries/so.html">Somalia</a>
+                        <a href="../countries/za.html">South Africa</a>
+                        <a href="../countries/et.html">Ethiopia</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Profile & Actions -->
+            <div class="header-actions">
+                <div class="dropdown">
+                    <a href="#" class="user-profile dropdown-toggle">
+                        <span class="user-name">John Doe</span>
+                        <span class="user-role">Lender</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="profile.html">My Profile</a>
+                        <a href="preferences.html" class="active">Preferences</a>
+                        <a href="security.html">Security</a>
+                        <a href="activity.html">Activity</a>
+                        <a href="devices.html">Devices</a>
+                        <a href="sessions.html">Sessions</a>
+                        <a href="#" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="preferences-container">
+            <!-- Header Section -->
+            <div class="preferences-header">
+                <h1>User Preferences & Settings</h1>
+                <p>Customize your M-Pesewa experience. Manage your notification preferences, display settings, and account preferences here.</p>
+                
+                <!-- Current Country Badge -->
+                <div class="country-badge" id="current-country-badge">
+                    <span class="flag-icon flag-icon-ke"></span>
+                    <span>Kenya (KES)</span>
+                </div>
+            </div>
+
+            <!-- Preferences Grid -->
+            <div class="preferences-grid">
+                <!-- Notification Preferences -->
+                <div class="preference-card">
+                    <h3><i>🔔</i> Notification Settings</h3>
+                    
+                    <div class="notification-types">
+                        <div class="notification-type">
+                            <div class="type-info">
+                                <h4>Loan Requests</h4>
+                                <p>Get notified when borrowers in your groups request loans</p>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notify-loan-requests" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-type">
+                            <div class="type-info">
+                                <h4>Repayment Alerts</h4>
+                                <p>Notifications for upcoming and missed repayments</p>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notify-repayments" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-type">
+                            <div class="type-info">
+                                <h4>Group Activities</h4>
+                                <p>Updates from your groups and new member alerts</p>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notify-group-activities" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-type">
+                            <div class="type-info">
+                                <h4>Subscription Reminders</h4>
+                                <p>Alerts for subscription expiry and renewal notices</p>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notify-subscription" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-type">
+                            <div class="type-info">
+                                <h4>Platform Updates</h4>
+                                <p>Important announcements and feature updates</p>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notify-updates" checked>
+                                <span class="toggle-slider"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Notification Frequency</label>
+                        <div class="select-wrapper">
+                            <select id="notification-frequency">
+                                <option value="realtime">Real-time (Immediate)</option>
+                                <option value="daily" selected>Daily Digest</option>
+                                <option value="weekly">Weekly Summary</option>
+                            </select>
+                        </div>
+                        <p class="hint">Choose how often you want to receive notifications</p>
+                    </div>
+                </div>
+
+                <!-- Display & Language Preferences -->
+                <div class="preference-card">
+                    <h3><i>🌍</i> Display & Language</h3>
+                    
+                    <div class="form-group">
+                        <label>Language Preference</label>
+                        <div class="select-wrapper">
+                            <select id="language-preference">
+                                <option value="en" selected>English</option>
+                                <option value="sw">Swahili</option>
+                                <option value="fr">French</option>
+                                <option value="ar">Arabic</option>
+                            </select>
+                        </div>
+                        <p class="hint">Note: Language change applies to interface only. Loan terms remain in English</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Currency Display</label>
+                        <div class="currency-display">
+                            <div class="currency-code">KES</div>
+                            <div class="currency-name">Kenyan Shilling</div>
+                            <span class="flag-icon flag-icon-ke"></span>
+                        </div>
+                        <p class="hint">Currency is locked to your country selection. Contact support to change country</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Date Format</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="date-dd-mm-yyyy" name="date-format" checked>
+                                <label for="date-dd-mm-yyyy">DD/MM/YYYY (e.g., 24/01/2026)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="date-mm-dd-yyyy" name="date-format">
+                                <label for="date-mm-dd-yyyy">MM/DD/YYYY (e.g., 01/24/2026)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="date-yyyy-mm-dd" name="date-format">
+                                <label for="date-yyyy-mm-dd">YYYY-MM-DD (e.g., 2026-01-24)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Number Format</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="number-1-000-00" name="number-format" checked>
+                                <label for="number-1-000-00">1,000.00 (Comma thousands, decimal point)</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="number-1-000-00-alt" name="number-format">
+                                <label for="number-1-000-00-alt">1.000,00 (Dot thousands, comma decimal)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy & Security Preferences -->
+                <div class="preference-card">
+                    <h3><i>🔒</i> Privacy & Security</h3>
+                    
+                    <div class="form-group">
+                        <label>Profile Visibility</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="visibility-group" name="profile-visibility" checked>
+                                <label for="visibility-group">Visible to Group Members Only</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="visibility-platform" name="profile-visibility">
+                                <label for="visibility-platform">Visible to All Platform Users</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="visibility-private" name="profile-visibility">
+                                <label for="visibility-private">Private (Visible to Admin Only)</label>
+                            </div>
+                        </div>
+                        <p class="hint">Controls who can see your profile and lending/borrowing history</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Two-Factor Authentication</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="2fa-enabled">
+                            <span class="toggle-slider"></span>
+                        </div>
+                        <p class="hint">Adds an extra layer of security to your account (Recommended for lenders)</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Notifications for Security Events</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="security-emails" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                        <p class="hint">Receive emails for login attempts, password changes, and security alerts</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Auto-logout Timer</label>
+                        <div class="select-wrapper">
+                            <select id="auto-logout-timer">
+                                <option value="15">15 minutes</option>
+                                <option value="30" selected>30 minutes</option>
+                                <option value="60">1 hour</option>
+                                <option value="120">2 hours</option>
+                                <option value="0">Never (Not Recommended)</option>
+                            </select>
+                        </div>
+                        <p class="hint">Automatically log out after period of inactivity</p>
+                    </div>
+                </div>
+
+                <!-- Communication Preferences -->
+                <div class="preference-card">
+                    <h3><i>📧</i> Communication Preferences</h3>
+                    
+                    <div class="form-group">
+                        <label>Email Communication</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="email-all" name="email-preference" checked>
+                                <label for="email-all">All Communications</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="email-important" name="email-preference">
+                                <label for="email-important">Important Updates Only</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="email-none" name="email-preference">
+                                <label for="email-none">No Emails (Not Recommended)</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMS Notifications</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="sms-notifications" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                        <p class="hint">Receive important alerts via SMS (Standard carrier rates may apply)</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Marketing Communications</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="marketing-communications">
+                            <span class="toggle-slider"></span>
+                        </div>
+                        <p class="hint">Receive updates about new features, promotions, and partner offers</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Contact Method</label>
+                        <div class="select-wrapper">
+                            <select id="contact-method">
+                                <option value="email" selected>Email</option>
+                                <option value="sms">SMS</option>
+                                <option value="both">Both Email & SMS</option>
+                                <option value="in-app">In-App Only</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="preference-actions">
+                <button type="button" class="btn-secondary" id="reset-btn">Reset to Defaults</button>
+                <button type="button" class="btn-primary" id="save-btn">Save Preferences</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Borrowing</h4>
+                <a href="../borrower/pages/borrow-request.html">Get Emergency Loan</a>
+                <a href="#">Online Personal Loan</a>
+                <a href="#">Business Loan</a>
+                <a href="../how-it-works.html">How to Apply</a>
+                <a href="#">Active Borrowers</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Lending</h4>
+                <a href="../lender/pages/lending-rules.html">Smart Lending</a>
+                <a href="../how-it-works.html">Why Lend at M-Pesewa?</a>
+                <a href="../lender/pages/lending-rules.html">How to Lend</a>
+                <a href="#">Active Lenders</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>How It Works</h4>
+                <a href="../how-it-works.html">P2P Lending Explained</a>
+                <a href="../about.html">Our Role</a>
+                <a href="../subscription/plans.html">Subscriptions</a>
+                <a href="../blacklist/pages/blacklist-public.html">Blacklist</a>
+                <a href="../collectors.html">Debt Collectors</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>About Us</h4>
+                <a href="../about.html">About M-Pesewa</a>
+                <a href="../about.html#team">Team & Advisory Board</a>
+                <a href="../careers.html">News & Careers</a>
+                <a href="../faq.html">Blog / FAQs</a>
+                <a href="../contact.html">Contact Us</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal & Compliance</h4>
+                <a href="../terms.html">Terms & Conditions</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../grievance.html">Grievance Redressal</a>
+                <a href="../fair-practices.html">Fair Practices Code</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Partnerships</h4>
+                <a href="../partners.html">Be a Partner</a>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i>📘</i></a>
+                    <a href="#" aria-label="Twitter"><i>🐦</i></a>
+                    <a href="#" aria-label="YouTube"><i>📺</i></a>
+                    <a href="#" aria-label="Instagram"><i>📸</i></a>
+                    <a href="#" aria-label="LinkedIn"><i>💼</i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Countries Ticker -->
+        <div class="country-ticker">
+            <div class="ticker-track">
+                Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                South Africa • Nigeria • Ghana • Ethiopia •
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved</p>
+            <p class="footer-disclaimer">
+                M-Pesewa is a technology platform. We do not hold funds or guarantee loans. 
+                All lending happens directly between users in trusted groups.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const headerMenu = document.querySelector('.header-menu');
+            
+            mobileMenuToggle?.addEventListener('click', function() {
+                headerMenu?.classList.toggle('active');
+                mobileMenuToggle?.classList.toggle('active');
+            });
+
+            // Initialize user data
+            const userData = JSON.parse(localStorage.getItem('mpesewa_user')) || {
+                country: 'KE',
+                language: 'en',
+                notifications: {
+                    loanRequests: true,
+                    repayments: true,
+                    groupActivities: true,
+                    subscription: true,
+                    updates: true
+                }
+            };
+
+            // Set current country badge
+            const countryBadge = document.getElementById('current-country-badge');
+            const countryData = {
+                'KE': { name: 'Kenya', currency: 'KES', flag: 'ke' },
+                'UG': { name: 'Uganda', currency: 'UGX', flag: 'ug' },
+                'TZ': { name: 'Tanzania', currency: 'TZS', flag: 'tz' },
+                'RW': { name: 'Rwanda', currency: 'RWF', flag: 'rw' },
+                'DRC': { name: 'DR Congo', currency: 'CDF', flag: 'cd' },
+                'BI': { name: 'Burundi', currency: 'BIF', flag: 'bi' },
+                'NG': { name: 'Nigeria', currency: 'NGN', flag: 'ng' },
+                'GH': { name: 'Ghana', currency: 'GHS', flag: 'gh' },
+                'SSD': { name: 'South Sudan', currency: 'SSP', flag: 'ss' },
+                'SO': { name: 'Somalia', currency: 'SOS', flag: 'so' },
+                'ZA': { name: 'South Africa', currency: 'ZAR', flag: 'za' },
+                'ET': { name: 'Ethiopia', currency: 'ETB', flag: 'et' }
+            };
+
+            const currentCountry = countryData[userData.country] || countryData.KE;
+            if (countryBadge) {
+                countryBadge.innerHTML = `
+                    <span class="flag-icon flag-icon-${currentCountry.flag}"></span>
+                    <span>${currentCountry.name} (${currentCountry.currency})</span>
+                `;
+            }
+
+            // Load saved preferences
+            const savedPreferences = JSON.parse(localStorage.getItem('mpesewa_preferences')) || {};
+            
+            // Set notification toggles
+            const notificationIds = [
+                'notify-loan-requests',
+                'notify-repayments', 
+                'notify-group-activities',
+                'notify-subscription',
+                'notify-updates'
+            ];
+            
+            notificationIds.forEach((id, index) => {
+                const toggle = document.getElementById(id);
+                if (toggle) {
+                    const savedValue = savedPreferences[id] !== undefined ? savedPreferences[id] : true;
+                    toggle.checked = savedValue;
+                }
+            });
+
+            // Set other preferences
+            const preferenceElements = {
+                'notification-frequency': 'daily',
+                'language-preference': 'en',
+                'date-dd-mm-yyyy': true,
+                'number-1-000-00': true,
+                'visibility-group': true,
+                '2fa-enabled': false,
+                'security-emails': true,
+                'auto-logout-timer': '30',
+                'email-all': true,
+                'sms-notifications': true,
+                'marketing-communications': false,
+                'contact-method': 'email'
+            };
+
+            // Apply saved preferences
+            Object.keys(preferenceElements).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = savedPreferences[key] !== undefined ? savedPreferences[key] : preferenceElements[key];
+                    } else if (element.type === 'radio') {
+                        element.checked = savedPreferences[key] !== undefined ? savedPreferences[key] === 'true' : preferenceElements[key];
+                    } else {
+                        element.value = savedPreferences[key] || preferenceElements[key];
+                    }
+                }
+            });
+
+            // Save button
+            document.getElementById('save-btn').addEventListener('click', function() {
+                const preferences = {};
+                
+                // Collect toggle states
+                notificationIds.forEach(id => {
+                    const toggle = document.getElementById(id);
+                    preferences[id] = toggle.checked;
+                });
+                
+                // Collect other preferences
+                document.querySelectorAll('input, select').forEach(element => {
+                    if (element.id) {
+                        if (element.type === 'checkbox' || element.type === 'radio') {
+                            preferences[element.id] = element.checked;
+                        } else {
+                            preferences[element.id] = element.value;
+                        }
+                    }
+                });
+                
+                // Save to localStorage
+                localStorage.setItem('mpesewa_preferences', JSON.stringify(preferences));
+                
+                // Show success message
+                alert('Preferences saved successfully!');
+                
+                // Apply preferences
+                if (preferences['language-preference']) {
+                    document.documentElement.lang = preferences['language-preference'];
+                }
+            });
+
+            // Reset button
+            document.getElementById('reset-btn').addEventListener('click', function() {
+                if (confirm('Reset all preferences to default values?')) {
+                    localStorage.removeItem('mpesewa_preferences');
+                    
+                    // Reset all toggles to true
+                    notificationIds.forEach(id => {
+                        const toggle = document.getElementById(id);
+                        if (toggle) toggle.checked = true;
+                    });
+                    
+                    // Reset other elements
+                    document.getElementById('notification-frequency').value = 'daily';
+                    document.getElementById('language-preference').value = 'en';
+                    document.getElementById('date-dd-mm-yyyy').checked = true;
+                    document.getElementById('number-1-000-00').checked = true;
+                    document.getElementById('visibility-group').checked = true;
+                    document.getElementById('2fa-enabled').checked = false;
+                    document.getElementById('security-emails').checked = true;
+                    document.getElementById('auto-logout-timer').value = '30';
+                    document.getElementById('email-all').checked = true;
+                    document.getElementById('sms-notifications').checked = true;
+                    document.getElementById('marketing-communications').checked = false;
+                    document.getElementById('contact-method').value = 'email';
+                    
+                    alert('Preferences reset to defaults.');
+                }
+            });
+
+            // Logout button
+            document.getElementById('logout-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    localStorage.removeItem('mpesewa_auth_token');
+                    window.location.href = '../auth/login.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

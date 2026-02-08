@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Roadmap - M-Pesewa Emergency Micro-Lending Platform</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/colors.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/timeline.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#003366">
+</head>
+<body>
+    <!-- Header -->
+    <header class="mp-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-text">M-PESEWA</span>
+                    <span class="logo-tagline">Trusted Emergency Lending</span>
+                </a>
+            </div>
+
+            <nav class="header-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="home.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Lenders <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../lender/lender-dashboard.html">Dashboard</a>
+                            <a href="../lender/lending-portfolio.html">Portfolio</a>
+                            <a href="../lender/lending-history.html">History</a>
+                            <a href="../lender/lending-rules.html">Rules</a>
+                            <a href="../lender/lending-risk.html">Risk</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Borrowers <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../borrower/borrow-dashboard.html">Dashboard</a>
+                            <a href="../borrower/borrow-request.html">Apply for Loan</a>
+                            <a href="../borrower/borrow-history.html">Borrow History</a>
+                            <a href="../borrower/borrow-repayments.html">Repayments</a>
+                            <a href="../borrower/borrow-disputes.html">Disputes</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Emergency Hub <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu emergency-categories">
+                            <div class="category-grid">
+                                <div class="category-group">
+                                    <h4>Everyday Essentials</h4>
+                                    <a href="#" data-category="fare">M-pesewa Fare</a>
+                                    <a href="#" data-category="data">M-pesewa Data</a>
+                                    <a href="#" data-category="gas">M-pesewa Cooking Gas</a>
+                                    <a href="#" data-category="food">M-pesewa Food</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Subscription Plans <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="../subscription/plans.html">Current Plan</a>
+                            <a href="../subscription/subscribe.html">Upgrade</a>
+                            <a href="../subscription/history.html">History</a>
+                            <a href="../subscription/invoices.html">Invoices</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            Country <span class="dropdown-arrow">▾</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" data-country="ke">Kenya</a>
+                            <a href="#" data-country="ug">Uganda</a>
+                            <a href="#" data-country="tz">Tanzania</a>
+                            <a href="#" data-country="rw">Rwanda</a>
+                            <a href="#" data-country="dr">DRC</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-auth">
+                <a href="../auth/login.html" class="auth-btn signin">Sign In</a>
+                <a href="../auth/register.html" class="auth-btn signup">Sign Up</a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- Roadmap Hero -->
+        <section class="page-hero" style="background-color: #003366; color: #ffffff;">
+            <div class="hero-container">
+                <h1>Platform Roadmap</h1>
+                <p class="hero-subtitle">Our journey and future plans for building Africa's most trusted emergency lending platform</p>
+            </div>
+        </section>
+
+        <!-- Roadmap Introduction -->
+        <section class="roadmap-intro">
+            <div class="section-container">
+                <div class="intro-card" style="background-color: #ffffff; border-left: 4px solid #0099ff; padding: 30px; margin-bottom: 40px;">
+                    <h2 style="color: #003366;">🚀 Our Vision Forward</h2>
+                    <p style="color: #555555;">
+                        M-Pesewa is on a mission to transform emergency lending across Africa. This roadmap outlines 
+                        where we've been, where we are today, and where we're going. We believe in transparency 
+                        and want our community to be part of our journey.
+                    </p>
+                    <p style="color: #555555; margin-top: 15px;">
+                        <strong>Last Updated:</strong> Q1 2024 | <strong>Next Review:</strong> Q2 2024
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Timeline -->
+        <section class="roadmap-timeline" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Our Journey: Past, Present & Future</h2>
+                
+                <div class="timeline">
+                    <!-- Past -->
+                    <div class="timeline-period">
+                        <div class="period-header" style="background-color: #6c757d; color: #ffffff;">
+                            <h3>🎯 The Beginning (2016-2020)</h3>
+                            <div class="period-status">Completed</div>
+                        </div>
+                        
+                        <div class="period-items">
+                            <div class="timeline-item completed">
+                                <div class="item-date">2016</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Platform Foundation</h4>
+                                    <p style="color: #555555;">
+                                        Initial concept development and core architecture design. 
+                                        Focus on trust-based lending model for African communities.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Research</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Architecture</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item completed">
+                                <div class="item-date">2018</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Beta Launch - Kenya</h4>
+                                    <p style="color: #555555;">
+                                        Limited beta launch in Kenya with 50 pilot groups. 
+                                        Tested core features: group creation, lending, reputation system.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Beta</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Kenya</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item completed">
+                                <div class="item-date">2020</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Public Launch & Expansion</h4>
+                                    <p style="color: #555555;">
+                                        Full public launch in Kenya. Introduced subscription tiers, 
+                                        blacklist system, and expanded to Uganda and Tanzania.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Launch</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Expansion</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Present -->
+                    <div class="timeline-period">
+                        <div class="period-header" style="background-color: #0099ff; color: #ffffff;">
+                            <h3>⚡ Current Focus (2021-2024)</h3>
+                            <div class="period-status">In Progress</div>
+                        </div>
+                        
+                        <div class="period-items">
+                            <div class="timeline-item in-progress">
+                                <div class="item-date">2022</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Regional Expansion</h4>
+                                    <p style="color: #555555;">
+                                        Expanded to Rwanda, Burundi, DRC, and South Sudan. 
+                                        Added local currency support and country-specific rules.
+                                    </p>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="background-color: #0099ff; width: 100%;"></div>
+                                        <span style="color: #0099ff;">Completed</span>
+                                    </div>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Expansion</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Multi-Country</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item in-progress">
+                                <div class="item-date">2023</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Platform Enhancement</h4>
+                                    <p style="color: #555555;">
+                                        Major UI/UX overhaul, PWA implementation, offline capabilities, 
+                                        and enhanced security features.
+                                    </p>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="background-color: #0099ff; width: 95%;"></div>
+                                        <span style="color: #0099ff;">95% Complete</span>
+                                    </div>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">UI/UX</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">PWA</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Security</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item in-progress">
+                                <div class="item-date">2024</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">West & Southern Africa Expansion</h4>
+                                    <p style="color: #555555;">
+                                        Launching in Nigeria, Ghana, South Africa, and Ethiopia. 
+                                        Implementing CRB integration for Super tier lenders.
+                                    </p>
+                                    <div class="progress-indicator">
+                                        <div class="progress-bar" style="background-color: #0099ff; width: 60%;"></div>
+                                        <span style="color: #0099ff;">60% Complete</span>
+                                    </div>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Expansion</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">CRB</span>
+                                        <span class="tag" style="background-color: #e8f4f8; color: #0099ff;">Integration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Future -->
+                    <div class="timeline-period">
+                        <div class="period-header" style="background-color: #28a745; color: #ffffff;">
+                            <h3>🚀 Future Vision (2024-2026)</h3>
+                            <div class="period-status">Planned</div>
+                        </div>
+                        
+                        <div class="period-items">
+                            <div class="timeline-item planned">
+                                <div class="item-date">Q4 2024</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Mobile App Launch</h4>
+                                    <p style="color: #555555;">
+                                        Native iOS and Android applications with enhanced features: 
+                                        biometric login, push notifications, offline mode.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Mobile</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Apps</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Biometric</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item planned">
+                                <div class="item-date">Q2 2025</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Advanced Analytics & AI</h4>
+                                    <p style="color: #555555;">
+                                        AI-powered risk assessment, predictive analytics for default prevention, 
+                                        and personalized lending recommendations.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">AI</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Analytics</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Risk</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item planned">
+                                <div class="item-date">2026</div>
+                                <div class="item-content">
+                                    <h4 style="color: #003366;">Pan-African Coverage</h4>
+                                    <p style="color: #555555;">
+                                        Expand to all 54 African countries with localized features, 
+                                        languages, and regulatory compliance for each market.
+                                    </p>
+                                    <div class="item-tags">
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Pan-African</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Expansion</span>
+                                        <span class="tag" style="background-color: #d4edda; color: #28a745;">Localization</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Priorities -->
+        <section class="current-priorities">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Current Development Priorities</h2>
+                
+                <div class="priorities-grid">
+                    <div class="priority-card" style="background-color: #ffffff; border-top: 4px solid #f37021;">
+                        <div class="priority-icon" style="color: #f37021;">🔐</div>
+                        <h3 style="color: #003366;">Enhanced Security</h3>
+                        <p style="color: #555555;">
+                            Implementing two-factor authentication, advanced encryption, 
+                            and real-time fraud detection systems.
+                        </p>
+                        <div class="priority-status">
+                            <div class="status-indicator" style="background-color: #0099ff;"></div>
+                            <span style="color: #0099ff;">In Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-card" style="background-color: #ffffff; border-top: 4px solid #28a745;">
+                        <div class="priority-icon" style="color: #28a745;">📱</div>
+                        <h3 style="color: #003366;">Mobile Experience</h3>
+                        <p style="color: #555555;">
+                            Improving PWA performance and preparing for native app launch 
+                            with enhanced mobile features.
+                        </p>
+                        <div class="priority-status">
+                            <div class="status-indicator" style="background-color: #0099ff;"></div>
+                            <span style="color: #0099ff;">In Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-card" style="background-color: #ffffff; border-top: 4px solid #0099ff;">
+                        <div class="priority-icon" style="color: #0099ff;">🌍</div>
+                        <h3 style="color: #003366;">Country Expansion</h3>
+                        <p style="color: #555555;">
+                            Launching in Nigeria, Ghana, South Africa, and Ethiopia with 
+                            local payment integration and compliance.
+                        </p>
+                        <div class="priority-status">
+                            <div class="status-indicator" style="background-color: #0099ff;"></div>
+                            <span style="color: #0099ff;">In Development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="priority-card" style="background-color: #ffffff; border-top: 4px solid #003366;">
+                        <div class="priority-icon" style="color: #003366;">⚡</div>
+                        <h3 style="color: #003366;">Performance Optimization</h3>
+                        <p style="color: #555555;">
+                            Reducing load times, improving offline capabilities, and 
+                            optimizing for low-bandwidth environments.
+                        </p>
+                        <div class="priority-status">
+                            <div class="status-indicator" style="background-color: #28a745;"></div>
+                            <span style="color: #28a745;">Testing Phase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Requests -->
+        <section class="feature-requests" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <div class="requests-header">
+                    <h2 style="color: #003366;">Community Feature Requests</h2>
+                    <p style="color: #555555;">Features requested by our community and their status</p>
+                </div>
+                
+                <div class="requests-table">
+                    <div class="table-header">
+                        <div class="table-col" style="color: #003366; font-weight: bold;">Feature</div>
+                        <div class="table-col" style="color: #003366; font-weight: bold;">Status</div>
+                        <div class="table-col" style="color: #003366; font-weight: bold;">Votes</div>
+                        <div class="table-col" style="color: #003366; font-weight: bold;">ETA</div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-col">
+                            <h4 style="color: #003366;">Scheduled Repayments</h4>
+                            <p style="color: #555555; font-size: 14px;">Auto-schedule partial repayments over loan period</p>
+                        </div>
+                        <div class="table-col">
+                            <span class="status-badge" style="background-color: #28a745; color: #ffffff;">Approved</span>
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #003366; font-weight: bold;">1,245</span> votes
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #555555;">Q3 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-col">
+                            <h4 style="color: #003366;">Group Analytics Dashboard</h4>
+                            <p style="color: #555555; font-size: 14px;">Detailed insights and reports for group admins</p>
+                        </div>
+                        <div class="table-col">
+                            <span class="status-badge" style="background-color: #0099ff; color: #ffffff;">In Development</span>
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #003366; font-weight: bold;">987</span> votes
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #555555;">Q2 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-col">
+                            <h4 style="color: #003366;">Multi-Language Support</h4>
+                            <p style="color: #555555; font-size: 14px;">Swahili, French, Arabic, and local languages</p>
+                        </div>
+                        <div class="table-col">
+                            <span class="status-badge" style="background-color: #0099ff; color: #ffffff;">In Development</span>
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #003366; font-weight: bold;">1,532</span> votes
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #555555;">Q4 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-col">
+                            <h4 style="color: #003366;">API for Developers</h4>
+                            <p style="color: #555555; font-size: 14px;">Public API for third-party integrations</p>
+                        </div>
+                        <div class="table-col">
+                            <span class="status-badge" style="background-color: #6c757d; color: #ffffff;">Planned</span>
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #003366; font-weight: bold;">456</span> votes
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #555555;">2025</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="table-col">
+                            <h4 style="color: #003366;">Emergency Savings Feature</h4>
+                            <p style="color: #555555; font-size: 14px;">Integrated savings within groups</p>
+                        </div>
+                        <div class="table-col">
+                            <span class="status-badge" style="background-color: #ffc107; color: #000000;">Under Review</span>
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #003366; font-weight: bold;">2,103</span> votes
+                        </div>
+                        <div class="table-col">
+                            <span style="color: #555555;">TBD</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="request-cta">
+                    <a href="#" class="btn-primary" style="background-color: #0099ff; color: #ffffff;">
+                        Submit Feature Request
+                    </a>
+                    <a href="#" class="btn-outline" style="border-color: #003366; color: #003366;">
+                        View All Requests
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Goals -->
+        <section class="platform-goals">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #003366;">Strategic Goals & Metrics</h2>
+                
+                <div class="goals-grid">
+                    <div class="goal-card" style="background-color: #ffffff;">
+                        <div class="goal-header">
+                            <h3 style="color: #003366;">📈 Growth Targets</h3>
+                            <div class="goal-period">By 2025</div>
+                        </div>
+                        <div class="goal-metrics">
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">1 Million</div>
+                                <div class="metric-label" style="color: #555555;">Active Users</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">25 Countries</div>
+                                <div class="metric-label" style="color: #555555;">African Coverage</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">50,000+</div>
+                                <div class="metric-label" style="color: #555555;">Trusted Groups</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" style="background-color: #ffffff;">
+                        <div class="goal-header">
+                            <h3 style="color: #003366;">💰 Financial Inclusion</h3>
+                            <div class="goal-period">By 2026</div>
+                        </div>
+                        <div class="goal-metrics">
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">$100M+</div>
+                                <div class="metric-label" style="color: #555555;">Total Loans Disbursed</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">99.5%</div>
+                                <div class="metric-label" style="color: #555555;">Repayment Rate Target</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">&lt;0.5%</div>
+                                <div class="metric-label" style="color: #555555;">Default Rate Target</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card" style="background-color: #ffffff;">
+                        <div class="goal-header">
+                            <h3 style="color: #003366;">🌍 Impact Goals</h3>
+                            <div class="goal-period">Long-term Vision</div>
+                        </div>
+                        <div class="goal-metrics">
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">10 Million</div>
+                                <div class="metric-label" style="color: #555555;">Lives Impacted</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">$1B+</div>
+                                <div class="metric-label" style="color: #555555;">Economic Value Created</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value" style="color: #28a745;">100%</div>
+                                <div class="metric-label" style="color: #555555;">African Country Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Process -->
+        <section class="dev-process" style="background-color: #003366; color: #ffffff;">
+            <div class="section-container">
+                <h2 class="section-title" style="color: #ffffff;">Our Development Process</h2>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">1</div>
+                        <div class="step-content">
+                            <h4 style="color: #ffffff;">Community Feedback</h4>
+                            <p>Collect feature requests and pain points from users across all countries</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">2</div>
+                        <div class="step-content">
+                            <h4 style="color: #ffffff;">Priority Assessment</h4>
+                            <p>Evaluate based on impact, feasibility, and alignment with platform vision</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">3</div>
+                        <div class="step-content">
+                            <h4 style="color: #ffffff;">Design & Prototyping</h4>
+                            <p>Create wireframes and prototypes for user testing and feedback</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">4</div>
+                        <div class="step-content">
+                            <h4 style="color: #ffffff;">Development & Testing</h4>
+                            <p>Agile development with continuous testing and quality assurance</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-number" style="background-color: #0099ff; color: #ffffff;">5</div>
+                        <div class="step-content">
+                            <h4 style="color: #ffffff;">Rollout & Monitoring</h4>
+                            <p>Gradual rollout with performance monitoring and user support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Involved -->
+        <section class="get-involved">
+            <div class="section-container">
+                <div class="involved-card" style="background-color: #ffffff; border: 2px solid #0099ff; border-radius: 8px; padding: 40px; text-align: center;">
+                    <h2 style="color: #003366;">Get Involved in Our Journey</h2>
+                    <p style="color: #555555; max-width: 700px; margin: 0 auto 30px;">
+                        M-Pesewa is built for and by our community. Your feedback, suggestions, and participation 
+                        help shape the future of emergency lending in Africa.
+                    </p>
+                    
+                    <div class="involved-options">
+                        <div class="option">
+                            <div class="option-icon" style="color: #f37021;">💡</div>
+                            <h4 style="color: #003366;">Submit Ideas</h4>
+                            <p style="color: #555555;">Share your feature requests and suggestions</p>
+                            <a href="#" class="btn-outline" style="border-color: #003366; color: #003366;">Submit Idea</a>
+                        </div>
+                        
+                        <div class="option">
+                            <div class="option-icon" style="color: #28a745;">🧪</div>
+                            <h4 style="color: #003366;">Beta Testing</h4>
+                            <p style="color: #555555;">Join early access programs for new features</p>
+                            <a href="#" class="btn-outline" style="border-color: #003366; color: #003366;">Join Beta</a>
+                        </div>
+                        
+                        <div class="option">
+                            <div class="option-icon" style="color: #0099ff;">📢</div>
+                            <h4 style="color: #003366;">Community Feedback</h4>
+                            <p style="color: #555555;">Participate in surveys and user research</p>
+                            <a href="#" class="btn-outline" style="border-color: #003366; color: #003366;">Give Feedback</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stay Updated -->
+        <section class="stay-updated" style="background-color: #f8f9fa;">
+            <div class="section-container">
+                <div class="updated-content">
+                    <h2 style="color: #003366;">Stay Updated</h2>
+                    <p style="color: #555555;">
+                        Subscribe to our roadmap updates and be the first to know about new features, 
+                        expansions, and platform improvements.
+                    </p>
+                    
+                    <form class="update-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn-primary" style="background-color: #f37021; color: #ffffff;">
+                                Subscribe
+                            </button>
+                        </div>
+                        <p style="color: #555555; font-size: 14px; margin-top: 10px;">
+                            We respect your privacy. Unsubscribe at any time.
+                        </p>
+                    </form>
+                    
+                    <div class="social-updates">
+                        <p style="color: #555555; margin-bottom: 15px;">Also follow us on:</p>
+                        <div class="social-links">
+                            <a href="#" style="color: #0099ff;">Twitter</a>
+                            <a href="#" style="color: #0099ff;">LinkedIn</a>
+                            <a href="#" style="color: #0099ff;">Facebook</a>
+                            <a href="#" style="color: #0099ff;">Blog</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mp-footer" style="background-color: #1f2a37;">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Borrowing</h4>
+                    <a href="../borrower/borrow-request.html" style="color: #d1d5db;">Get Emergency Loan</a>
+                    <a href="#" style="color: #d1d5db;">Online Personal Loan</a>
+                    <a href="#" style="color: #d1d5db;">Business Loan</a>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">How to Apply</a>
+                    <a href="#" style="color: #d1d5db;">Active Borrowers</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Lending</h4>
+                    <a href="#" style="color: #d1d5db;">Smart Lending</a>
+                    <a href="#" style="color: #d1d5db;">Why Lend at M-Pesewa?</a>
+                    <a href="#" style="color: #d1d5db;">How to Lend</a>
+                    <a href="#" style="color: #d1d5db;">Active Lenders</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">How It Works</h4>
+                    <a href="../global/how-it-works.html" style="color: #d1d5db;">P2P Lending Works</a>
+                    <a href="../global/about.html" style="color: #d1d5db;">Our Role</a>
+                    <a href="../subscription/plans.html" style="color: #d1d5db;">Subscriptions</a>
+                    <a href="../blacklist/blacklist-public.html" style="color: #d1d5db;">Blacklist</a>
+                    <a href="#" style="color: #d1d5db;">Debt Collectors</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">About Us</h4>
+                    <a href="../global/about.html" style="color: #d1d5db;">About M-Pesewa</a>
+                    <a href="#" style="color: #d1d5db;">Team / Advisory Board</a>
+                    <a href="#" style="color: #d1d5db;">News / Careers</a>
+                    <a href="../global/faq.html" style="color: #d1d5db;">Blog / FAQs</a>
+                    <a href="../global/contact.html" style="color: #d1d5db;">Contact Us</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Legal & Compliance</h4>
+                    <a href="../global/terms.html" style="color: #d1d5db;">Terms & Conditions</a>
+                    <a href="../global/privacy.html" style="color: #d1d5db;">Privacy Policy</a>
+                    <a href="../global/cookies.html" style="color: #d1d5db;">Cookies Policy</a>
+                    <a href="#" style="color: #d1d5db;">Fair Practices Code</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: #ffffff;">Partnerships</h4>
+                    <a href="#" style="color: #d1d5db;">Be a Partner</a>
+                    <div class="social-icons">
+                        <a href="#" style="color: #d1d5db;">📘</a>
+                        <a href="#" style="color: #d1d5db;">🐦</a>
+                        <a href="#" style="color: #d1d5db;">📺</a>
+                        <a href="#" style="color: #d1d5db;">📸</a>
+                        <a href="#" style="color: #d1d5db;">💼</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="country-ticker">
+                <div class="ticker-track">
+                    Kenya • Uganda • Tanzania • Rwanda • Burundi • DRC • South Sudan • 
+                    South Africa • Nigeria • Ghana • Ethiopia • Somalia •
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright" style="color: #d1d5db;">
+                    © 2016–2026, M-Pesewa.com (Technology Pvt. Ltd.) — All Rights Reserved
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Kenya:</strong> +254 709 219 000 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Uganda:</strong> +256 392 175 546 | info@M-pesewa
+                    </div>
+                    <div class="contact-item" style="color: #d1d5db;">
+                        <strong>Tanzania:</strong> +255 659 073 010 | info@M-pesewa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/roadmap.js"></script>
+</body>
+</html>
