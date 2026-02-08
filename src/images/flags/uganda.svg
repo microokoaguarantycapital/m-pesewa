@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+    <defs>
+        <style>
+            .uganda-black {fill: #000000}
+            .uganda-yellow {fill: #FFD100}
+            .uganda-red {fill: #D90000}
+            .uganda-white {fill: #FFFFFF}
+        </style>
+    </defs>
+    <rect width="900" height="100" y="0" class="uganda-black"/>
+    <rect width="900" height="100" y="100" class="uganda-yellow"/>
+    <rect width="900" height="100" y="200" class="uganda-red"/>
+    <rect width="900" height="100" y="300" class="uganda-black"/>
+    <rect width="900" height="100" y="400" class="uganda-yellow"/>
+    <rect width="900" height="100" y="500" class="uganda-red"/>
+    <circle cx="450" cy="300" r="60" class="uganda-white"/>
+    <circle cx="450" cy="300" r="50" class="uganda-black"/>
+    <circle cx="450" cy="300" r="40" class="uganda-white"/>
+    <circle cx="450" cy="300" r="30" class="uganda-black"/>
+    <circle cx="450" cy="300" r="20" class="uganda-white"/>
+    <circle cx="450" cy="300" r="10" class="uganda-black"/>
+</svg>

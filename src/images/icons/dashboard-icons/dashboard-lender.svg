@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .lender-briefcase {fill: #28a745}
+            .lender-handle {fill: #003366}
+            .lender-money {fill: #f37021}
+            .lender-chart {fill: #0099ff}
+            .lender-line {stroke: #28a745; stroke-width: 3; fill: none}
+        </style>
+    </defs>
+    
+    <!-- Briefcase -->
+    <rect x="25" y="40" width="50" height="40" rx="5" class="lender-briefcase"/>
+    <rect x="30" y="35" width="40" height="5" class="lender-handle"/>
+    <rect x="35" y="45" width="30" height="5" fill="#ffffff" opacity="0.3"/>
+    
+    <!-- Money Stack -->
+    <rect x="40" y="50" width="20" height="25" fill="#ffcc00"/>
+    <rect x="42" y="52" width="16" height="3" fill="#ffffff" opacity="0.5"/>
+    <rect x="42" y="58" width="16" height="3" fill="#ffffff" opacity="0.5"/>
+    <rect x="42" y="64" width="16" height="3" fill="#ffffff" opacity="0.5"/>
+    
+    <!-- Growth Chart -->
+    <g transform="translate(20,20)">
+        <path d="M0,30 L15,20 L30,25 L45,10 L60,15" class="lender-line"/>
+        
+        <!-- Data Points -->
+        <circle cx="0" cy="30" r="3" fill="#28a745"/>
+        <circle cx="15" cy="20" r="3" fill="#28a745"/>
+        <circle cx="30" cy="25" r="3" fill="#28a745"/>
+        <circle cx="45" cy="10" r="3" fill="#28a745"/>
+        <circle cx="60" cy="15" r="3" fill="#28a745"/>
+    </g>
+    
+    <!-- Percentage Indicator -->
+    <text x="80" y="25" font-family="Arial" font-size="12" font-weight="bold" fill="#28a745">+10%</text>
+</svg>

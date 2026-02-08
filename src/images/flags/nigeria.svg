@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600">
+    <defs>
+        <style>
+            .nigeria-green {fill: #008751}
+            .nigeria-white {fill: #FFFFFF}
+        </style>
+    </defs>
+    <rect width="300" height="600" x="0" class="nigeria-green"/>
+    <rect width="300" height="600" x="300" class="nigeria-white"/>
+    <rect width="300" height="600" x="600" class="nigeria-green"/>
+</svg>

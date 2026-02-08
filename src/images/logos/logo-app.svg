@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <defs>
+        <style>
+            .app-bg {fill: #003366}
+            .app-circle {fill: #0099ff}
+            .app-m {fill: #ffffff}
+            .app-p {fill: #f37021}
+            .app-trust {fill: #28a745}
+        </style>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="512" height="512" rx="100" class="app-bg"/>
+    
+    <!-- Trust Circles -->
+    <circle cx="256" cy="256" r="180" fill="none" stroke="#ffffff" stroke-width="8" stroke-opacity="0.3"/>
+    <circle cx="256" cy="256" r="140" fill="none" stroke="#ffffff" stroke-width="6" stroke-opacity="0.5"/>
+    <circle cx="256" cy="256" r="100" fill="none" stroke="#ffffff" stroke-width="4" stroke-opacity="0.7"/>
+    
+    <!-- Main Logo -->
+    <g transform="translate(256,256)">
+        <!-- M-P Symbol -->
+        <g transform="translate(-80,0)">
+            <path d="M-60,60 L-40,20 L-20,40 L0,20 L20,60" class="app-m" stroke-width="10" fill="none"/>
+            <path d="M30,20 L30,60" class="app-p" stroke-width="10" fill="none"/>
+            <path d="M30,20 Q60,20 60,40 Q60,60 30,60" class="app-p" stroke-width="10" fill="none"/>
+        </g>
+        
+        <!-- Money Symbol -->
+        <text x="80" y="20" text-anchor="middle" font-family="Arial" font-size="80" font-weight="bold" fill="#f37021">₵</text>
+    </g>
+    
+    <!-- Trust Indicators -->
+    <circle cx="400" cy="150" r="15" class="app-trust">
+        <animate attributeName="cy" values="150;130;150" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="400" r="12" class="app-trust">
+        <animate attributeName="cx" values="150;130;150" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="400" r="10" class="app-trust">
+        <animate attributeName="r" values="10;15;10" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+</svg>

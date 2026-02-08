@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .nav-globe {fill: #0099ff}
+            .nav-land {fill: #28a745}
+            .nav-grid {stroke: #003366; stroke-width: 1; fill: none; opacity: 0.3}
+            .nav-pin {fill: #f37021}
+        </style>
+    </defs>
+    
+    <!-- Globe -->
+    <circle cx="50" cy="50" r="40" class="nav-globe"/>
+    
+    <!-- Continents -->
+    <!-- Africa -->
+    <path d="M40,40 Q30,30 25,40 Q20,50 25,60 Q30,70 40,65 Q50,60 55,55 Q50,45 45,45 Z" class="nav-land"/>
+    
+    <!-- Grid Lines -->
+    <!-- Longitude -->
+    <path d="M50,10 L50,90" class="nav-grid"/>
+    <path d="M30,10 L30,90" class="nav-grid"/>
+    <path d="M70,10 L70,90" class="nav-grid"/>
+    
+    <!-- Latitude -->
+    <ellipse cx="50" cy="30" rx="20" ry="10" class="nav-grid" transform="rotate(0 50 30)"/>
+    <ellipse cx="50" cy="50" rx="30" ry="15" class="nav-grid" transform="rotate(0 50 50)"/>
+    <ellipse cx="50" cy="70" rx="20" ry="10" class="nav-grid" transform="rotate(0 50 70)"/>
+    
+    <!-- Location Pin -->
+    <g transform="translate(40,45)">
+        <circle cx="0" cy="0" r="8" class="nav-pin"/>
+        <circle cx="0" cy="0" r="4" fill="#ffffff"/>
+        <path d="M0,8 L-4,15 L4,15 Z" class="nav-pin"/>
+    </g>
+    
+    <!-- Rotation Animation -->
+    <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 50 50" to="360 50 50" dur="20s" repeatCount="indefinite"/>
+</svg>

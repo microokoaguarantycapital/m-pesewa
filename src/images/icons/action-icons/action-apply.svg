@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .action-pen {fill: #f37021}
+            .action-form {fill: #ffffff}
+            .action-form-border {stroke: #003366; stroke-width: 3; fill: none}
+            .action-check {stroke: #28a745; stroke-width: 5; fill: none; stroke-linecap: round}
+        </style>
+    </defs>
+    
+    <!-- Form -->
+    <rect x="25" y="25" width="50" height="50" rx="5" class="action-form"/>
+    <rect x="25" y="25" width="50" height="50" rx="5" class="action-form-border"/>
+    
+    <!-- Form Lines -->
+    <line x1="30" y1="40" x2="70" y2="40" stroke="#0099ff" stroke-width="2" stroke-dasharray="5,3"/>
+    <line x1="30" y1="50" x2="70" y2="50" stroke="#0099ff" stroke-width="2" stroke-dasharray="5,3"/>
+    <line x1="30" y1="60" x2="70" y2="60" stroke="#0099ff" stroke-width="2" stroke-dasharray="5,3"/>
+    
+    <!-- Pen -->
+    <g transform="translate(60,35)">
+        <!-- Pen Body -->
+        <rect x="-15" y="-5" width="30" height="10" rx="2" class="action-pen"/>
+        <!-- Pen Tip -->
+        <polygon points="-15,-5 -25,0 -15,5" class="action-pen"/>
+        <!-- Pen Clip -->
+        <rect x="10" y="-8" width="5" height="16" rx="1" class="action-pen"/>
+    </g>
+    
+    <!-- Check Mark -->
+    <path d="M35,70 L45,80 L65,60" class="action-check"/>
+    
+    <!-- Plus Sign for Application -->
+    <circle cx="80" cy="80" r="8" fill="#28a745"/>
+    <line x1="80" y1="75" x2="80" y2="85" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <line x1="75" y1="80" x2="85" y2="80" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+</svg>

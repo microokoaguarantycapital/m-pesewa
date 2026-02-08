@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+        <style>
+            .signal-bars {fill: #0099ff}
+            .signal-weak {opacity: 0.3}
+            .phone-body {fill: #003366}
+            .screen {fill: #f8f9fa}
+        </style>
+    </defs>
+    
+    <!-- Phone Body -->
+    <rect x="20" y="10" width="60" height="80" rx="10" class="phone-body"/>
+    <rect x="25" y="15" width="50" height="70" rx="5" class="screen"/>
+    
+    <!-- Signal Bars -->
+    <g transform="translate(40,30)">
+        <!-- Bar 1 -->
+        <rect x="-15" y="20" width="8" height="10" class="signal-bars"/>
+        <!-- Bar 2 -->
+        <rect x="-5" y="15" width="8" height="15" class="signal-bars"/>
+        <!-- Bar 3 -->
+        <rect x="5" y="10" width="8" height="20" class="signal-bars"/>
+        <!-- Bar 4 -->
+        <rect x="15" y="5" width="8" height="25" class="signal-bars signal-weak"/>
+    </g>
+    
+    <!-- Data Indicator -->
+    <circle cx="50" cy="70" r="5" fill="#28a745">
+        <animate attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <text x="50" y="70" text-anchor="middle" font-family="Arial" font-size="8" fill="#ffffff">4G</text>
+</svg>

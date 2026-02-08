@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+    <defs>
+        <style>
+            .logo-blue {fill: #003366}
+            .logo-orange {fill: #f37021}
+            .logo-green {fill: #28a745}
+            .logo-light-blue {fill: #0099ff}
+        </style>
+    </defs>
+    
+    <!-- Main M-Pesewa Logo -->
+    <g transform="translate(50,50)">
+        <!-- Trust Circle -->
+        <circle cx="75" cy="75" r="70" stroke="#003366" stroke-width="8" fill="none"/>
+        <circle cx="75" cy="75" r="50" stroke="#0099ff" stroke-width="4" fill="none"/>
+        
+        <!-- M Letter -->
+        <path d="M30,100 L50,40 L70,80 L90,40 L110,100" stroke="#f37021" stroke-width="12" fill="none" stroke-linecap="round"/>
+        
+        <!-- P Letter -->
+        <path d="M130,40 L130,100" stroke="#28a745" stroke-width="12" fill="none"/>
+        <path d="M130,40 Q170,40 170,70 Q170,100 130,100" stroke="#28a745" stroke-width="12" fill="none"/>
+        
+        <!-- Money Symbol Integration -->
+        <g transform="translate(200,75)">
+            <circle cx="0" cy="0" r="30" stroke="#003366" stroke-width="4" fill="#f8f9fa"/>
+            <text x="0" y="10" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#003366">₵</text>
+        </g>
+    </g>
+    
+    <!-- Text -->
+    <g transform="translate(280,80)">
+        <text x="0" y="0" font-family="'Poppins', sans-serif" font-size="60" font-weight="700" fill="#003366">M-PESEWA</text>
+        <text x="0" y="45" font-family="'Inter', sans-serif" font-size="24" font-weight="400" fill="#0099ff">Trusted Circles Lending</text>
+    </g>
+    
+    <!-- Status Indicator -->
+    <g transform="translate(680,40)">
+        <circle cx="10" cy="10" r="8" fill="#28a745"/>
+        <circle cx="10" cy="10" r="4" fill="#ffffff"/>
+        <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+    </g>
+</svg>
